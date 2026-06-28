@@ -12,7 +12,7 @@
 --color-accent: #ff3c00;
 --color-muted: #888888;
 
-  --font-display: 'Syne', sans-serif;
+  --font-display: 'Sora', sans-serif;
   --font-body: 'Inter', sans-serif;
 
   --space-xs: 0.5rem;
@@ -37,4 +37,107 @@ body {
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+/* ─── NAV ─── */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-s) var(--space-l);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  background-color: var(--color-bg);
+}
+
+.logo {
+--font-display: 'Sora', sans-serif;
+  font-weight: 800;
+  font-size: 1.2rem;
+  color: var(--color-text);
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-s) var(--space-l);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  background-color: var(--color-bg);
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: var(--space-m);
+}
+
+nav ul a {
+  text-decoration: none;
+  color: var(--color-text);
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  transition: color 0.2s ease;
+}
+
+nav ul a:hover {
+  color: var(--color-accent);
+}
+
+/* ─── HERO ─── */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-end;
+  padding: var(--space-xl) var(--space-xl);
+  padding-bottom: calc(var(--space-xl) * 0.8);
+}
+
+.hero-content {
+  max-width: 700px;
+}
+
+#hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: var(--space-m);
+}
+
+#hero h1 em {
+  font-style: italic;
+  color: var(--color-accent);
+}
+
+.hero-sub {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: var(--color-muted);
+  line-height: 1.7;
+  margin-bottom: var(--space-l);
+}
+
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  color: var(--color-bg);
+  background-color: var(--color-text);
+  padding: var(--space-s) var(--space-m);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn:hover {
+  background-color: var(--color-accent);
+  color: #ffffff;
+}
