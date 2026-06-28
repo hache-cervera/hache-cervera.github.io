@@ -246,3 +246,62 @@ nav ul a:hover {
   color: var(--color-muted);
   line-height: 1.6;
 }
+
+/* ─── CONTACTO ─── */
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-m);
+  max-width: 600px;
+}
+
+.contact-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-decoration: none;
+  color: var(--color-text);
+  padding: var(--space-m) 0;
+  border-bottom: 1px solid #e0e0e0;
+  transition: color 0.2s ease;
+}
+
+.contact-item:first-child {
+  border-top: 1px solid #e0e0e0;
+}
+
+.contact-item:hover {
+  color: var(--color-accent);
+}
+
+.contact-type {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.contact-item:hover .contact-type {
+  color: var(--color-accent);
+}
+
+.contact-value {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+/* ─── FOOTER ─── */
+footer {
+  padding: var(--space-m) var(--space-xl);
+  border-top: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+footer p {
+  font-size: 0.8rem;
+  color: var(--color-muted);
+}
