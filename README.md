@@ -32,3 +32,5 @@ src/
 ```
 
 Deploys itself to GitHub Pages on every push to `main`. The previous version of this site lives in the `old-site` branch.
+
+Designed and built by me, pair-programming with Claude.
