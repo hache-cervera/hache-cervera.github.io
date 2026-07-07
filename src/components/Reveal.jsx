@@ -1,6 +1,7 @@
 import { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { useScene } from '../sceneContext';
+import Words from './Words';
 
 /**
  * Mid-scroll reveal: a framed dark panel grows to full-bleed while the chip
@@ -60,7 +61,7 @@ export default function Reveal() {
 
       <div className="pointer-events-none relative z-20 flex h-full flex-col items-center justify-between px-6 py-16 md:px-12">
         <h2 data-head-top className="text-center font-display text-[clamp(1.8rem,4.5vw,3.6rem)] font-bold tracking-tightest">
-          Everything connects.
+          <Words>Everything connects.</Words>
         </h2>
         <p data-head-bottom className="text-center font-display text-lg font-semibold text-muted md:text-2xl">
           Design <span className="text-accent">→</span> Code <span className="text-accent">→</span> Motion{' '}

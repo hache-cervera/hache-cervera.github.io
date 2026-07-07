@@ -34,6 +34,9 @@ export default class ChipScene {
     };
     this.mouse = { x: 0, y: 0 };
     this.smooth = { x: 0, y: 0 };
+    // rendered pose glides toward state each frame, so overlapping or
+    // restarting scroll tweens can never snap the chip visibly
+    this.pose = { x: this.state.x, y: this.state.y, rx: this.state.rx, ry: this.state.ry, scale: this.state.scale };
 
     this.#build();
     this.resize();
@@ -221,11 +224,17 @@ export default class ChipScene {
     this.smooth.x += (this.mouse.x - this.smooth.x) * 0.06;
     this.smooth.y += (this.mouse.y - this.smooth.y) * 0.06;
 
-    this.group.position.x = s.x;
-    this.group.position.y = s.y + Math.sin(t * 1.2) * 0.07;
-    this.group.scale.setScalar(s.scale);
-    this.group.rotation.x = s.rx + this.smooth.y * 0.16;
-    this.group.rotation.y = s.ry + s.ryExtra + t * s.spin + this.smooth.x * 0.22;
+    // glide the rendered pose toward the scrubbed targets
+    const k = 0.14;
+    for (const p of ['x', 'y', 'rx', 'ry', 'scale']) {
+      this.pose[p] += (s[p] - this.pose[p]) * k;
+    }
+
+    this.group.position.x = this.pose.x;
+    this.group.position.y = this.pose.y + Math.sin(t * 1.2) * 0.07;
+    this.group.scale.setScalar(this.pose.scale);
+    this.group.rotation.x = this.pose.rx + this.smooth.y * 0.16;
+    this.group.rotation.y = this.pose.ry + s.ryExtra + t * s.spin + this.smooth.x * 0.22;
 
     // cursor drives the accent light
     this.mouseLight.position.x = this.smooth.x * 4;

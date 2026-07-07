@@ -2,3 +2,9 @@ node_modules/
 dist/
 .DS_Store
 Thumbs.db
+
+# personal files, not part of the site
+flor_*.glb
+flor_*.py
+mejorar_flor.py
+*.glb
