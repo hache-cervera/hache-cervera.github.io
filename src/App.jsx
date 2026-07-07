@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
 import ChipScene from './three/ChipScene';
 import { SceneContext, useScene } from './sceneContext';
+import { setLenis } from './scroll';
 import Hero from './components/Hero';
 import About from './components/About';
 import Skills from './components/Skills';
@@ -94,10 +95,9 @@ export default function App() {
   useLayoutEffect(() => {
     const chipScene = new ChipScene(canvasRef.current);
     setScene(chipScene);
-    window.__chip = chipScene; // debug handle (pause/resume, state inspection)
 
     const lenis = new Lenis({ duration: 1.15, smoothWheel: true });
-    window.__lenis = lenis;
+    setLenis(lenis);
     lenis.on('scroll', ScrollTrigger.update);
     const tick = (t) => lenis.raf(t * 1000);
     gsap.ticker.add(tick);

@@ -1,7 +1,7 @@
 import { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { motion } from 'framer-motion';
-import { LOGOS } from '../data/skills';
+import { LOGOS } from '../data/content';
 import Words from './Words';
 
 /**

@@ -208,14 +208,6 @@ export default class ChipScene {
     return { x, y, r: Math.abs(ex - x) };
   }
 
-  pause() {
-    this.renderer.setAnimationLoop(null);
-  }
-
-  resume() {
-    this.renderer.setAnimationLoop(() => this.#tick());
-  }
-
   #tick() {
     const t = this.clock.getElapsedTime();
     const s = this.state;

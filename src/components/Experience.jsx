@@ -1,6 +1,6 @@
 import { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
-import { EXPERIENCE } from '../data/skills';
+import { EXPERIENCE } from '../data/content';
 import Words from './Words';
 
 export default function Experience() {

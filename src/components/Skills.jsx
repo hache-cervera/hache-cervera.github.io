@@ -2,7 +2,7 @@ import { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { motion } from 'framer-motion';
 import { useScene } from '../sceneContext';
-import { DISCIPLINES } from '../data/skills';
+import { DISCIPLINES } from '../data/content';
 
 function ToolBadge({ mark, name }) {
   return (
