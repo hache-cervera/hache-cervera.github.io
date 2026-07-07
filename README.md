@@ -33,4 +33,6 @@ src/
 
 Deploys itself to GitHub Pages on every push to `main`. The previous version of this site lives in the `old-site` branch.
 
-Designed and built by me, pair-programming with Claude.
+## About the process
+
+Designed and built by me, pair-programming with Claude. No secret about it: the point is knowing how to work with these tools — directing them, questioning them, and understanding every line that ships — not pretending they don't exist. Same rule as the AI node on the site: a tool, not a crutch.
