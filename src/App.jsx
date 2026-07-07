@@ -38,27 +38,46 @@ function Director() {
       (ctx) => {
         const { isDesktop } = ctx.conditions;
 
-        const pose = (vals, trigger) =>
-          gsap.to(scene.state, {
-            ...vals,
+        // One fully-specified pose per section. Every tween is a fromTo
+        // between consecutive poses, so the chip's position is deterministic
+        // at any scroll offset in either direction (no first-play snapshot
+        // jumps between sections).
+        const poses = isDesktop
+          ? [
+              ['#hero',       { x: 2.3,  y: -0.1,  rx: 0.5,  ry: -0.55, scale: 1.05 }],
+              ['#about',      { x: -2.7, y: 0.2,   rx: 0.7,  ry: 2.4,   scale: 0.8 }],
+              ['#skills',     { x: 1.9,  y: 0,     rx: 0.5,  ry: 4.2,   scale: 1.12 }],
+              ['#works',      { x: 0,    y: 2.7,   rx: 0.4,  ry: 5.6,   scale: 0.45 }],
+              ['#experience', { x: -3.1, y: -0.4,  rx: 0.55, ry: 7,     scale: 0.6 }],
+              ['#reveal',     { x: 0,    y: 0,     rx: 0.85, ry: 8.2,   scale: 1.45 }],
+              ['#contact',    { x: 0,    y: -0.15, rx: 0.5,  ry: 9.4,   scale: 0.7 }],
+            ]
+          : [
+              ['#hero',       { x: 0, y: 1.6,   rx: 0.55, ry: -0.4, scale: 0.6 }],
+              ['#about',      { x: 0, y: 2.1,   rx: 0.55, ry: 2.4,  scale: 0.42 }],
+              ['#skills',     { x: 0, y: 1.35,  rx: 0.5,  ry: 4.2,  scale: 0.58 }],
+              ['#works',      { x: 0, y: 2.6,   rx: 0.4,  ry: 5.6,  scale: 0.38 }],
+              ['#experience', { x: 0, y: 2.4,   rx: 0.55, ry: 7,    scale: 0.4 }],
+              ['#reveal',     { x: 0, y: 0,     rx: 0.85, ry: 8.2,  scale: 0.95 }],
+              ['#contact',    { x: 0, y: -0.15, rx: 0.5,  ry: 9.4,  scale: 0.7 }],
+            ];
+
+        gsap.set(scene.state, { ...poses[0][1], activation: 0.4 });
+
+        for (let i = 1; i < poses.length; i++) {
+          gsap.fromTo(scene.state, poses[i - 1][1], {
+            ...poses[i][1],
             ease: 'none',
             immediateRender: false,
-            scrollTrigger: { trigger, start: 'top bottom', end: 'top top', scrub: 0.6 },
+            scrollTrigger: { trigger: poses[i][0], start: 'top bottom', end: 'top top', scrub: 0.6 },
           });
+        }
 
-        gsap.set(
-          scene.state,
-          isDesktop
-            ? { x: 2.3, y: -0.1, rx: 0.5, ry: -0.55, scale: 1.05, activation: 0.4 }
-            : { x: 0, y: 1.6, rx: 0.55, ry: -0.4, scale: 0.6, activation: 0.4 }
-        );
-
-        pose(isDesktop ? { x: -2.7, y: 0.2, rx: 0.7, ry: 2.4, scale: 0.8 } : { y: 2.1, scale: 0.42 }, '#about');
-        pose(isDesktop ? { x: 1.9, y: 0, rx: 0.5, ry: 4.2, scale: 1.12 } : { x: 0, y: 1.35, ry: 4.2, scale: 0.58 }, '#skills');
-        pose(isDesktop ? { x: 0, y: 2.7, rx: 0.4, scale: 0.45 } : { y: 2.6, scale: 0.38 }, '#works');
-        pose(isDesktop ? { x: -3.1, y: -0.4, rx: 0.55, scale: 0.6 } : { y: 2.4, scale: 0.4 }, '#experience');
-        pose({ x: 0, y: 0, rx: 0.85, scale: isDesktop ? 1.45 : 0.95 }, '#reveal');
-        pose({ x: 0, y: -0.15, rx: 0.5, scale: 0.7, spin: 0.22 }, '#contact');
+        gsap.to(scene.state, {
+          spin: 0.22,
+          immediateRender: false,
+          scrollTrigger: { trigger: '#contact', start: 'top bottom', end: 'top top', scrub: 0.6 },
+        });
       }
     );
 

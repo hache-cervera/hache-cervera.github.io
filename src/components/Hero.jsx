@@ -1,7 +1,6 @@
 import { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
-import Words from './Words';
 
 /** Floating network dots that repel from the cursor. */
 function NodeField() {
@@ -120,11 +119,12 @@ export default function Hero() {
           <span data-line className="inline-block">/ Hache Cervera, Creative Technologist</span>
         </p>
 
-        <h1 className="mt-6 max-w-4xl font-display text-[clamp(2.6rem,6.5vw,5.4rem)] font-bold leading-[1.05] tracking-tightest">
-          <span className="block overflow-hidden"><span data-line className="block"><Words>I don't make pretty things.</Words></span></span>
-          <span className="block overflow-hidden"><span data-line className="block"><Words>I make things that work</Words></span></span>
+        {/* Exactly three lines; kept off the chip-proximity effect on purpose */}
+        <h1 className="mt-6 font-display text-[clamp(2rem,4.6vw,4.3rem)] font-bold leading-[1.08] tracking-tightest">
+          <span className="block overflow-hidden"><span data-line className="block md:whitespace-nowrap">I don't make pretty things.</span></span>
+          <span className="block overflow-hidden"><span data-line className="block md:whitespace-nowrap">I make things that work,</span></span>
           <span className="block overflow-hidden">
-            <span data-line className="shimmer-text block pb-2">and happen to be pretty.</span>
+            <span data-line className="shimmer-text block pb-2 md:whitespace-nowrap">and happen to be pretty.</span>
           </span>
         </h1>
 
@@ -141,13 +141,23 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="absolute bottom-8 left-6 z-20 flex flex-col items-center gap-2 md:left-12" aria-hidden="true">
-        <span className="relative block h-10 w-px overflow-hidden bg-line">
-          <span className="absolute left-0 top-0 h-full w-full animate-[cue_1.8s_ease-in-out_infinite] bg-accent" />
-        </span>
-        <p className="text-[11px] uppercase tracking-[0.12em] text-muted [writing-mode:vertical-rl]">Scroll</p>
-      </div>
-      <style>{'@keyframes cue { 0% { transform: translateY(-100%); } 60%,100% { transform: translateY(100%); } }'}</style>
+      <motion.div
+        className="absolute bottom-6 left-1/2 z-20 flex -translate-x-1/2 flex-col items-center gap-1"
+        aria-hidden="true"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.6, duration: 0.8 }}
+      >
+        <p className="font-display text-[11px] font-semibold uppercase tracking-[0.24em] text-muted">Scroll</p>
+        <motion.svg
+          width="16" height="16" viewBox="0 0 16 16" fill="none"
+          animate={{ y: [0, 6, 0] }}
+          transition={{ repeat: Infinity, duration: 1.5, ease: 'easeInOut' }}
+          className="text-accent"
+        >
+          <path d="M8 3v10M4 9l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </motion.svg>
+      </motion.div>
     </section>
   );
 }
