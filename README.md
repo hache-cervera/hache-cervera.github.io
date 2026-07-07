@@ -1,19 +1,19 @@
-# Hache Cervera — Portfolio
+# Hache Cervera — My website portfolio
 
-One-page portfolio of Hache (Ada Cervera), creative technologist and web developer in Valencia, Spain.
+My personal site. One page, a 3D chip travelling through it, and the stuff I do: design, code, motion and SEO.
 
-The visual anchor is a procedural microchip rendered live with WebGL — no images, no video. Six network nodes light up as you scroll, one per discipline: code, systems, design, motion, search and AI.
+The chip is procedural WebGL, not a video — around 7,000 triangles rendered live, with six nodes that light up as you scroll.
 
 ## Stack
 
-- [React](https://react.dev) + [Vite](https://vitejs.dev)
-- [Tailwind CSS](https://tailwindcss.com) for layout and tokens
-- [GSAP + ScrollTrigger](https://gsap.com) for scroll choreography (pins, scrubs, reveals)
-- [Lenis](https://lenis.darkroom.engineering) for smooth scrolling
-- [Three.js](https://threejs.org) (r128) for the chip scene
-- [Framer Motion](https://www.framer.com/motion) for micro-interactions
+- [React](https://react.dev) + [Vite](https://vitejs.dev).
+- [Tailwind CSS](https://tailwindcss.com) for layout and tokens.
+- [GSAP + ScrollTrigger](https://gsap.com) for scroll choreography (pins, scrubs, reveals).
+- [Lenis](https://lenis.darkroom.engineering) for smooth scrolling.
+- [Three.js](https://threejs.org) (r128) for the chip scene.
+- [Framer Motion](https://www.framer.com/motion) for micro-interactions.
 
-## Development
+## Run it
 
 ```bash
 npm install
@@ -21,14 +21,14 @@ npm run dev      # http://localhost:5173
 npm run build    # production build in dist/
 ```
 
-## Structure
+## Where things live
 
 ```
 src/
-├── App.jsx               # section layout + Lenis + chip choreography
-├── three/ChipScene.js    # the procedural chip (scene, nodes, render loop)
-├── data/content.js       # all copy: skills, experience, client logos
-└── components/           # one file per section + shared pieces
+├── App.jsx               # sections + smooth scroll + chip choreography
+├── three/ChipScene.js    # the chip: geometry, lights, render loop
+├── data/content.js       # all the copy: skills, experience, client logos
+└── components/           # one file per section
 ```
 
-The build uses relative paths (`base: './'`), so `dist/` deploys to GitHub Pages as-is.
+Deploys itself to GitHub Pages on every push to `main`. The previous version of this site lives in the `old-site` branch.
