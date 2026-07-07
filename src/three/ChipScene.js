@@ -28,7 +28,7 @@ export default class ChipScene {
       x: 2.3, y: -0.1,
       rx: 0.5, ry: -0.55, ryExtra: 0,
       scale: 1,
-      activation: 0.4, // 0-5: how many discipline nodes are lit
+      activation: 0.4, // 0-6: how many discipline nodes are lit
       pulse: 0,        // 0-1: reveal-section activation wave
       spin: 0.1,       // idle rotation speed
     };
@@ -108,12 +108,12 @@ export default class ChipScene {
     const traceGeo = new THREE.BufferGeometry().setFromPoints(tracePts);
     group.add(new THREE.LineSegments(traceGeo, traceMat));
 
-    // --- five discipline nodes radiating outward ---
+    // --- six discipline nodes radiating outward ---
     this.nodes = [];
     this.links = [];
-    const heights = [0.7, -0.45, 0.85, -0.7, 0.5];
-    for (let i = 0; i < 5; i++) {
-      const angle = (i / 5) * Math.PI * 2 + 0.45;
+    const heights = [0.7, -0.45, 0.85, -0.7, 0.5, -0.3];
+    for (let i = 0; i < 6; i++) {
+      const angle = (i / 6) * Math.PI * 2 + 0.45;
       const r = 2.9;
       const pos = new THREE.Vector3(Math.cos(angle) * r, heights[i], Math.sin(angle) * r);
 
@@ -187,6 +187,22 @@ export default class ChipScene {
   setMouse(nx, ny) {
     this.mouse.x = nx;
     this.mouse.y = ny;
+  }
+
+  /**
+   * Chip center + approximate radius in screen pixels. Used to tint words
+   * that the chip is currently passing over.
+   */
+  getScreenInfo() {
+    const center = this.group.position.clone().project(this.camera);
+    const x = (center.x * 0.5 + 0.5) * window.innerWidth;
+    const y = (-center.y * 0.5 + 0.5) * window.innerHeight;
+    const edge = this.group.position
+      .clone()
+      .add(new THREE.Vector3(1.7 * this.state.scale, 0, 0))
+      .project(this.camera);
+    const ex = (edge.x * 0.5 + 0.5) * window.innerWidth;
+    return { x, y, r: Math.abs(ex - x) };
   }
 
   pause() {

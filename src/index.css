@@ -21,12 +21,12 @@ body {
   color: #fff;
 }
 
-@media (pointer: fine) {
-  body.custom-cursor,
-  body.custom-cursor a,
-  body.custom-cursor button {
-    cursor: none;
-  }
+/* Words the chip is currently passing over light up in accent orange */
+.pw {
+  transition: color 0.3s ease;
+}
+.pw.is-lit {
+  color: #ff3c00;
 }
 
 /* Shimmering accent line in the hero H1 */

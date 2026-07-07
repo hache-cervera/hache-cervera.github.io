@@ -49,18 +49,18 @@ export default function Skills() {
         scrollTrigger: {
           trigger: section,
           start: 'top top',
-          end: () => '+=' + window.innerHeight * 4,
+          end: () => '+=' + window.innerHeight * 4.8,
           pin: true,
           scrub: 0.6,
           onUpdate: (self) => {
-            // chip: 2.5 turns across the section, one discipline per fifth
-            scene.state.ryExtra = self.progress * Math.PI * 5;
-            scene.state.activation = self.progress * 5;
+            // chip: 3 turns across the section, one node lights per sixth
+            scene.state.ryExtra = self.progress * Math.PI * 6;
+            scene.state.activation = self.progress * 6;
             section.style.backgroundColor = lerpBg(self.progress);
             const fill = section.querySelector('[data-progress]');
             if (fill) fill.style.width = `${self.progress * 100}%`;
             const idx = section.querySelector('[data-index]');
-            if (idx) idx.textContent = String(Math.min(4, Math.floor(self.progress * 5)) + 1).padStart(2, '0');
+            if (idx) idx.textContent = String(Math.min(5, Math.floor(self.progress * 6)) + 1).padStart(2, '0');
           },
         },
       });
@@ -69,7 +69,7 @@ export default function Skills() {
         if (i > 0) tl.to(block, { autoAlpha: 1, y: 0, duration: 0.22 }, i);
         if (i < blocks.length - 1) tl.to(block, { autoAlpha: 0, y: -40, duration: 0.22 }, i + 0.78);
       });
-      tl.to({}, { duration: 0.2 }, 4.8); // pad so the last discipline holds
+      tl.to({}, { duration: 0.2 }, blocks.length - 0.2); // pad so the last discipline holds
 
       return () => {
         section.style.backgroundColor = '';
@@ -82,15 +82,16 @@ export default function Skills() {
   return (
     <section id="skills" ref={rootRef} className="relative h-screen overflow-hidden">
       <div className="relative z-20 mx-auto flex h-full w-full max-w-6xl flex-col justify-center px-6 md:px-12">
-        <p className="font-display text-sm font-semibold uppercase tracking-[0.08em] text-accent">/ 02 — Stack</p>
+        <p className="font-display text-sm font-semibold uppercase tracking-[0.08em] text-accent">/ 02 · Stack</p>
 
-        <div className="relative mt-6 h-[420px] md:h-[380px] md:max-w-[58%]">
+        <div className="relative mt-6 h-[440px] md:h-[400px] md:max-w-[58%]">
           {DISCIPLINES.map((d) => (
             <div key={d.id} data-discipline className="absolute inset-0">
               <p className="font-display text-xs font-semibold uppercase tracking-[0.14em] text-muted">{d.node}</p>
               <h3 className="mt-3 font-display text-[clamp(1.9rem,4vw,3rem)] font-bold tracking-tightest">
                 {d.label}
               </h3>
+              {d.note && <p className="mt-4 max-w-md text-sm leading-relaxed text-muted">{d.note}</p>}
               <ul className="mt-8 flex flex-wrap gap-3">
                 {d.tools.map((t) => (
                   <ToolBadge key={t.name} {...t} />
@@ -106,7 +107,7 @@ export default function Skills() {
         <span className="relative h-px w-40 bg-line">
           <span data-progress className="absolute left-0 top-0 h-full bg-accent" style={{ width: '0%' }} />
         </span>
-        <span className="font-display text-xs text-muted">05</span>
+        <span className="font-display text-xs text-muted">06</span>
       </div>
     </section>
   );

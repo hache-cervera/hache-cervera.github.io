@@ -72,7 +72,7 @@ export default function Reveal() {
         data-caption
         className="absolute bottom-10 left-6 z-20 max-w-xs font-display text-sm text-white/70 md:left-12"
       >
-        Live render — this chip runs in your browser.{' '}
+        Live render: this chip runs in your browser.{' '}
         <span className="text-accent">No video, just code.</span>
       </p>
     </section>

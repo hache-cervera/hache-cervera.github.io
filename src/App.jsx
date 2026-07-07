@@ -4,14 +4,16 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
 import ChipScene from './three/ChipScene';
 import { SceneContext, useScene } from './sceneContext';
-import Cursor from './components/Cursor';
 import Hero from './components/Hero';
 import About from './components/About';
 import Skills from './components/Skills';
 import Works from './components/Works';
+import Experience from './components/Experience';
 import Reveal from './components/Reveal';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import BackToTop from './components/BackToTop';
+import ProximityLight from './components/ProximityLight';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -54,6 +56,7 @@ function Director() {
         pose(isDesktop ? { x: -2.7, y: 0.2, rx: 0.7, ry: 2.4, scale: 0.8 } : { y: 2.1, scale: 0.42 }, '#about');
         pose(isDesktop ? { x: 1.9, y: 0, rx: 0.5, ry: 4.2, scale: 1.12 } : { x: 0, y: 1.35, ry: 4.2, scale: 0.58 }, '#skills');
         pose(isDesktop ? { x: 0, y: 2.7, rx: 0.4, scale: 0.45 } : { y: 2.6, scale: 0.38 }, '#works');
+        pose(isDesktop ? { x: -3.1, y: -0.4, rx: 0.55, scale: 0.6 } : { y: 2.4, scale: 0.4 }, '#experience');
         pose({ x: 0, y: 0, rx: 0.85, scale: isDesktop ? 1.45 : 0.95 }, '#reveal');
         pose({ x: 0, y: -0.15, rx: 0.5, scale: 0.7, spin: 0.22 }, '#contact');
       }
@@ -75,6 +78,7 @@ export default function App() {
     window.__chip = chipScene; // debug handle (pause/resume, state inspection)
 
     const lenis = new Lenis({ duration: 1.15, smoothWheel: true });
+    window.__lenis = lenis;
     lenis.on('scroll', ScrollTrigger.update);
     const tick = (t) => lenis.raf(t * 1000);
     gsap.ticker.add(tick);
@@ -116,17 +120,19 @@ export default function App() {
       {/* The chip floats above section backgrounds (z-0) and below content (z-20) */}
       <canvas ref={canvasRef} className="fixed inset-0 z-10 h-full w-full pointer-events-none" />
       <div className="grain" aria-hidden="true" />
-      <Cursor />
       {scene && (
         <main className="relative">
           <Hero />
           <About />
           <Skills />
           <Works />
+          <Experience />
           <Reveal />
           <Contact />
           <Footer />
           <Director />
+          <ProximityLight />
+          <BackToTop />
         </main>
       )}
     </SceneContext.Provider>

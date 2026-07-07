@@ -1,8 +1,7 @@
 import { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
-
-const LAST_LINE = 'and happen to be pretty.';
+import Words from './Words';
 
 /** Floating network dots that repel from the cursor. */
 function NodeField() {
@@ -108,11 +107,6 @@ export default function Hero() {
         { yPercent: 110, opacity: 0, filter: 'blur(6px)' },
         { yPercent: 0, opacity: 1, filter: 'blur(0px)', duration: 1.1, ease: 'power3.out', stagger: 0.11, delay: 0.25 }
       );
-      gsap.fromTo(
-        '[data-char]',
-        { yPercent: 120, opacity: 0 },
-        { yPercent: 0, opacity: 1, duration: 0.7, ease: 'back.out(1.6)', stagger: 0.022, delay: 0.75 }
-      );
     }, rootRef);
     return () => ctx.revert();
   }, []);
@@ -123,25 +117,21 @@ export default function Hero() {
 
       <div className="relative z-20 mx-auto w-full max-w-6xl">
         <p className="overflow-hidden font-display text-sm font-semibold uppercase tracking-[0.08em] text-accent">
-          <span data-line className="inline-block">/ Hache Cervera — Creative Technologist</span>
+          <span data-line className="inline-block">/ Hache Cervera, Creative Technologist</span>
         </p>
 
         <h1 className="mt-6 max-w-4xl font-display text-[clamp(2.6rem,6.5vw,5.4rem)] font-bold leading-[1.05] tracking-tightest">
-          <span className="block overflow-hidden"><span data-line className="block">I don't make pretty things.</span></span>
-          <span className="block overflow-hidden"><span data-line className="block">I make things that work</span></span>
-          <span className="block overflow-hidden" aria-label={LAST_LINE}>
-            <span className="shimmer-text block" aria-hidden="true">
-              {LAST_LINE.split('').map((c, i) => (
-                <span key={i} data-char className="inline-block whitespace-pre">{c}</span>
-              ))}
-            </span>
+          <span className="block overflow-hidden"><span data-line className="block"><Words>I don't make pretty things.</Words></span></span>
+          <span className="block overflow-hidden"><span data-line className="block"><Words>I make things that work</Words></span></span>
+          <span className="block overflow-hidden">
+            <span data-line className="shimmer-text block pb-2">and happen to be pretty.</span>
           </span>
         </h1>
 
         <p className="mt-10 max-w-md text-lg leading-relaxed text-muted">
           <span className="block overflow-hidden"><span data-line className="block">Creative who builds.</span></span>
           <span className="block overflow-hidden"><span data-line className="block">I design. I develop. I optimise.</span></span>
-          <span className="block overflow-hidden"><span data-line className="block">From identity to live projects — end to end.</span></span>
+          <span className="block overflow-hidden"><span data-line className="block">From identity to live projects, end to end.</span></span>
         </p>
 
         <div className="mt-12 overflow-hidden">

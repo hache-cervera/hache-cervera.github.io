@@ -1,10 +1,10 @@
-// Five disciplines — one per network node on the chip.
+// Six disciplines, one per network node on the chip.
 // `bg` tints the pinned Skills section as each discipline lands.
 export const DISCIPLINES = [
   {
     id: 'dev',
     label: 'Web & Development',
-    node: 'Node 01 — Code',
+    node: 'Node 01 / Code',
     bg: '#ffffff',
     tools: [
       { mark: 'Wp', name: 'WordPress' },
@@ -21,8 +21,8 @@ export const DISCIPLINES = [
   {
     id: 'infra',
     label: 'Technical & Infrastructure',
-    node: 'Node 02 — Systems',
-    bg: '#fff7f3',
+    node: 'Node 02 / Systems',
+    bg: '#fff8f5',
     tools: [
       { mark: 'Sm', name: 'Site Migrations' },
       { mark: 'St', name: 'Staging Environments' },
@@ -39,8 +39,8 @@ export const DISCIPLINES = [
   {
     id: 'design',
     label: 'Design & Branding',
-    node: 'Node 03 — Design',
-    bg: '#ffefe7',
+    node: 'Node 03 / Design',
+    bg: '#fff1eb',
     tools: [
       { mark: 'Ps', name: 'Photoshop' },
       { mark: 'Ai', name: 'Illustrator' },
@@ -52,8 +52,8 @@ export const DISCIPLINES = [
   {
     id: 'motion',
     label: 'Motion & AV',
-    node: 'Node 04 — Motion',
-    bg: '#ffe6da',
+    node: 'Node 04 / Motion',
+    bg: '#ffe9df',
     tools: [
       { mark: 'Ae', name: 'After Effects' },
       { mark: 'Pr', name: 'Premiere Pro' },
@@ -65,8 +65,8 @@ export const DISCIPLINES = [
   {
     id: 'seo',
     label: 'SEO & Analytics',
-    node: 'Node 05 — Search',
-    bg: '#ffddcd',
+    node: 'Node 05 / Search',
+    bg: '#ffe1d3',
     tools: [
       { mark: 'Sr', name: 'Semrush' },
       { mark: 'Ah', name: 'Ahrefs' },
@@ -76,21 +76,48 @@ export const DISCIPLINES = [
       { mark: 'Ga4', name: 'GA4' },
     ],
   },
+  {
+    id: 'ai',
+    label: 'AI & Automation',
+    node: 'Node 06 / Judgment',
+    bg: '#ffd9c8',
+    note: 'AI as a tool, not a crutch: integrated where the project needs it, understanding what it generates. No blind copy-paste.',
+    tools: [
+      { mark: 'Ad', name: 'AI-assisted Dev' },
+      { mark: 'Pd', name: 'Prompt Design' },
+      { mark: 'Cg', name: 'Content Generation' },
+      { mark: 'Wa', name: 'Workflow Automation' },
+    ],
+  },
 ];
 
-export const WORKS = [
+export const LOGOS = [
+  { src: 'logos/cofidis.png', alt: 'Cofidis' },
+  { src: 'logos/benimar.png', alt: 'Benimar' },
+  { src: 'logos/apm-terminals.png', alt: 'APM Terminals' },
+];
+
+export const EXPERIENCE = [
   {
-    index: '01',
-    name: 'Cofidis',
-    tags: 'WordPress · Technical SEO · Performance',
-    copy: 'End-to-end WordPress builds, Core Web Vitals and technical SEO for a European consumer-finance brand.',
-    theme: 'dark',
+    role: 'Creative & Digital Specialist',
+    company: 'Neurona Digital SL',
+    place: 'Valencia',
+    dates: 'Nov 2024 – Present',
+    points: [
+      '+10 WordPress sites built and maintained in under a year: design, migrations, hosting, DNS, SSL and technical troubleshooting.',
+      'Graphic, motion and audiovisual production for brands including Cofidis and Benimar: +300 pieces for organic content and paid social.',
+      'Technical audits, web performance optimisation and on-page SEO.',
+      'Multiple clients and projects in parallel, agency pace.',
+    ],
   },
   {
-    index: '02',
-    name: 'Benimar',
-    tags: 'WordPress · WPML · Motion & AV',
-    copy: 'Multi-market WordPress platform with WPML, plus audiovisual asset production for a motorhome manufacturer.',
-    theme: 'accent',
+    role: 'Media & Content Specialist',
+    company: 'Jump Yard',
+    place: 'Valencia',
+    dates: 'Jan – Jun 2025',
+    points: [
+      'Video creation and editing for organic content and paid ad campaigns.',
+      'Media management, content strategy and sponsorship coordination.',
+    ],
   },
 ];

@@ -43,7 +43,7 @@ export default function Contact() {
 
       <div className="relative z-20 mx-auto flex w-full max-w-4xl flex-col items-center gap-4">
         <p data-rise className="font-display text-sm font-semibold uppercase tracking-[0.08em] text-accent">
-          / 04 — Contact
+          / 05 · Contact
         </p>
         <h2 data-rise className="font-display text-[clamp(2.4rem,5vw,4rem)] font-bold tracking-tightest text-white">
           Let's talk.
