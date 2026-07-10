@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Work — Hache Cervera</title>
+  <meta
+    name="description"
+    content="Selected work by Hache (Ada Cervera) — websites, branding, social-media design systems, video and motion for brands like Cofidis, Benimar and Football School Cañada Blanch."
+  />
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    :root {
+      --ink: #0a0a0a;
+      --muted: #6b6b6b;
+      --line: #e5e5e5;
+      --accent: #ff3c00;
+      --accent-hover: #e63500;
+      --accent-soft: #ffe8e1;
+      --font-display: 'Sora', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: #fff;
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    ::selection { background: var(--accent); color: #fff; }
+
+    /* Film grain, same as the main site */
+    .grain {
+      position: fixed;
+      inset: 0;
+      z-index: 40;
+      pointer-events: none;
+      opacity: 0.028;
+      mix-blend-mode: multiply;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%25" height="100%25" filter="url(%23n)"/></svg>');
+    }
+
+    .wrap { max-width: 72rem; margin: 0 auto; padding: 0 24px; }
+    @media (min-width: 768px) { .wrap { padding: 0 48px; } }
+
+    a { color: inherit; }
+
+    /* ---------- Header ---------- */
+    header {
+      padding: 24px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    header .wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .back {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.875rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s ease;
+    }
+    .back:hover { color: var(--accent); }
+    .back span { color: var(--accent); transition: transform 0.2s ease; display: inline-block; }
+    .back:hover span { transform: translateX(-4px); }
+    header .tag {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ---------- Hero ---------- */
+    .hero { padding: 96px 0 64px; }
+    @media (min-width: 768px) { .hero { padding: 128px 0 96px; } }
+    .kicker {
+      font-family: var(--font-display);
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .hero h1 {
+      margin-top: 24px;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(2.4rem, 6vw, 4.5rem);
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+    }
+    .hero h1 em {
+      font-style: italic;
+      background: linear-gradient(100deg, #ff3c00 0%, #ff8a5c 35%, #ff3c00 65%, #ff5a24 100%);
+      background-size: 220% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: shimmer 4s linear infinite;
+    }
+    @keyframes shimmer { to { background-position: -220% 0; } }
+    .hero p {
+      margin-top: 24px;
+      max-width: 40rem;
+      font-size: 1.125rem;
+      color: var(--muted);
+    }
+
+    /* ---------- Sections ---------- */
+    section { padding: 64px 0 96px; border-top: 1px solid var(--line); }
+    .section-label {
+      font-family: var(--font-display);
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    section h2 {
+      margin-top: 24px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+    }
+    .section-intro {
+      margin-top: 16px;
+      max-width: 44rem;
+      color: var(--muted);
+    }
+
+    /* ---------- Web project cards ---------- */
+    .projects {
+      margin-top: 48px;
+      display: grid;
+      gap: 32px;
+    }
+    @media (min-width: 768px) { .projects { grid-template-columns: 1fr 1fr; } }
+    .project {
+      display: block;
+      text-decoration: none;
+      border: 1px solid var(--line);
+      overflow: hidden;
+      transition: border-color 0.3s ease;
+    }
+    .project:hover { border-color: var(--ink); }
+    .project .shot {
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+      background: #f5f5f5;
+    }
+    .project .shot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+    .project:hover .shot img { transform: scale(1.03); }
+    .project .body { padding: 24px; }
+    .project h3 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.375rem;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .project h3 .arrow { color: var(--accent); font-family: var(--font-body); transition: transform 0.2s ease; }
+    .project:hover h3 .arrow { transform: translate(4px, -2px); }
+    .project p { margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
+    .tags { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .tags li {
+      list-style: none;
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border: 1px solid var(--line);
+      color: var(--muted);
+    }
+
+    /* ---------- Gallery ---------- */
+    .gallery {
+      margin-top: 48px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    @media (min-width: 640px) { .gallery { grid-template-columns: repeat(3, 1fr); } }
+    @media (min-width: 1024px) { .gallery { grid-template-columns: repeat(4, 1fr); gap: 24px; } }
+    .gallery button {
+      border: 1px solid var(--line);
+      padding: 0;
+      background: none;
+      cursor: zoom-in;
+      overflow: hidden;
+      transition: border-color 0.3s ease;
+    }
+    .gallery button:hover { border-color: var(--ink); }
+    .gallery img {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+    .gallery button:hover img { transform: scale(1.04); }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(10, 10, 10, 0.92);
+      padding: 24px;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: min(90vw, 34rem);
+      max-height: 88vh;
+      display: block;
+    }
+    .lightbox .nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #fff;
+      font-size: 1.375rem;
+      line-height: 1;
+      width: 48px;
+      height: 48px;
+      cursor: pointer;
+      transition: border-color 0.2s ease, color 0.2s ease;
+    }
+    .lightbox .nav:hover { border-color: var(--accent); color: var(--accent); }
+    .lightbox .prev { left: 16px; }
+    .lightbox .next { right: 16px; }
+    .lightbox .close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.75rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+    .lightbox .close:hover { color: var(--accent); }
+
+    /* "More design work" strip */
+    .more-card {
+      margin-top: 48px;
+      display: block;
+      text-decoration: none;
+      border: 1px solid var(--line);
+      padding: 32px 24px;
+      transition: border-color 0.3s ease;
+    }
+    @media (min-width: 768px) {
+      .more-card { display: flex; align-items: center; justify-content: space-between; gap: 32px; padding: 32px; }
+    }
+    .more-card:hover { border-color: var(--ink); }
+    .more-card h3 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.375rem;
+      letter-spacing: -0.02em;
+    }
+    .more-card p { margin-top: 8px; font-size: 0.875rem; color: var(--muted); max-width: 36rem; }
+    .more-card .cta {
+      margin-top: 16px;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.875rem;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+    @media (min-width: 768px) { .more-card .cta { margin-top: 0; } }
+    .more-card:hover .cta { color: var(--accent-hover); }
+
+    /* ---------- Video & social ---------- */
+    .feature-video {
+      margin-top: 48px;
+      display: grid;
+      gap: 32px;
+    }
+    @media (min-width: 900px) { .feature-video { grid-template-columns: 3fr 2fr; align-items: center; } }
+    .video-frame {
+      aspect-ratio: 16 / 9;
+      border: 1px solid var(--line);
+      background: #0a0a0a;
+    }
+    .video-frame iframe { width: 100%; height: 100%; display: block; border: 0; }
+    .feature-video h3 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.375rem;
+      letter-spacing: -0.02em;
+    }
+    .feature-video p { margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
+
+    .reels {
+      margin-top: 64px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    @media (min-width: 640px) { .reels { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .reels { grid-template-columns: repeat(4, 1fr); } }
+    .reel .frame {
+      border: 1px solid var(--line);
+      aspect-ratio: 9 / 16;
+      background: #fafafa;
+    }
+    .reel iframe { width: 100%; height: 100%; display: block; border: 0; }
+    .reel figcaption { margin-top: 12px; font-size: 0.875rem; color: var(--muted); }
+    .reel figcaption strong { color: var(--ink); font-weight: 500; }
+    .reel figcaption a { color: var(--accent); text-decoration: none; font-weight: 500; }
+    .reel figcaption a:hover { color: var(--accent-hover); }
+
+    /* ---------- Footer ---------- */
+    footer { background: var(--ink); color: rgba(255, 255, 255, 0.4); margin-top: 96px; }
+    footer .wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding-top: 32px;
+      padding-bottom: 32px;
+      font-size: 0.875rem;
+    }
+    @media (min-width: 768px) { footer .wrap { flex-direction: row; } }
+    footer .path { font-family: var(--font-display); }
+    footer .path span { color: var(--accent); }
+    footer a { color: rgba(255, 255, 255, 0.7); text-decoration: none; }
+    footer a:hover { color: #fff; }
+  </style>
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header>
+    <div class="wrap">
+      <a class="back" href="../"><span>←</span> Hache Cervera</a>
+      <p class="tag">Selected Work</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="hero wrap">
+      <p class="kicker">/ Portfolio</p>
+      <h1>See some of<br />my <em>work</em></h1>
+      <p>
+        Websites, brand systems, social-media design and video — a growing selection of things
+        I've designed, built and produced for real clients. More coming soon.
+      </p>
+    </div>
+
+    <!-- ============ 01 · WEB ============ -->
+    <section id="web">
+      <div class="wrap">
+        <p class="section-label">/ 01 · Web</p>
+        <h2>Websites, end to end</h2>
+        <p class="section-intro">
+          Design, development, hosting, DNS, performance and SEO — delivered as one piece.
+        </p>
+
+        <div class="projects">
+          <a class="project" href="https://footballschoolcanadablanch.com/" target="_blank" rel="noopener">
+            <div class="shot">
+              <img src="img/web-fscb.jpg" alt="Football School Cañada Blanch website — hero section" loading="lazy" />
+            </div>
+            <div class="body">
+              <h3>Football School Cañada Blanch <span class="arrow">↗</span></h3>
+              <p>
+                Full website for a Spanish football academy in London that blends Spanish
+                technical–tactical methodology with British competitiveness. Design, build,
+                content structure and on-page SEO.
+              </p>
+              <ul class="tags">
+                <li>WordPress</li>
+                <li>Web design</li>
+                <li>SEO</li>
+              </ul>
+            </div>
+          </a>
+
+          <a class="project" href="https://neuronadigital.es/portfolio/family-park/" target="_blank" rel="noopener">
+            <div class="shot">
+              <img src="img/web-familypark.jpg" alt="Family Park website — case study mockups" loading="lazy" />
+            </div>
+            <div class="body">
+              <h3>Family Park <span class="arrow">↗</span></h3>
+              <p>
+                New website for a group of family amusement parks in Calpe, Cullera and Moraira:
+                per-park sections, schedules, pricing, events and seasonal theming. Built at
+                Neurona Digital — full case study on their site.
+              </p>
+              <ul class="tags">
+                <li>WordPress</li>
+                <li>Web design</li>
+                <li>UX</li>
+              </ul>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 02 · DESIGN & BRANDING ============ -->
+    <section id="design">
+      <div class="wrap">
+        <p class="section-label">/ 02 · Design &amp; Branding</p>
+        <h2>A social-media design system for a football club</h2>
+        <p class="section-intro">
+          38 editable templates for Football School Cañada Blanch: brand guidelines, kit reveals,
+          schedules, match-day graphics, player stats, tactics boards and educational posts — a
+          complete system the club can run on its own. A few of them:
+        </p>
+
+        <div class="gallery" id="gallery">
+          <button type="button"><img src="img/kit-01.jpg" alt="Kit reveal template — Our New Kit" loading="lazy" /></button>
+          <button type="button"><img src="img/kit-02.jpg" alt="Goalkeeper kit reveal template" loading="lazy" /></button>
+          <button type="button"><img src="img/kit-03.jpg" alt="Monthly training schedules template" loading="lazy" /></button>
+          <button type="button"><img src="img/kit-04.jpg" alt="Club presentation template — We are Football School Cañada Blanch" loading="lazy" /></button>
+          <button type="button"><img src="img/kit-05.jpg" alt="The Spanish Way — methodology template" loading="lazy" /></button>
+          <button type="button"><img src="img/kit-06.jpg" alt="Hybrid Model — methodology template" loading="lazy" /></button>
+          <button type="button"><img src="img/kit-07.jpg" alt="Head coach presentation template" loading="lazy" /></button>
+          <button type="button"><img src="img/kit-08.jpg" alt="Player stats template — Marc Cucurella" loading="lazy" /></button>
+          <button type="button"><img src="img/kit-09.jpg" alt="Match days announcement template" loading="lazy" /></button>
+          <button type="button"><img src="img/kit-10.jpg" alt="Game day template" loading="lazy" /></button>
+          <button type="button"><img src="img/kit-11.jpg" alt="Final whistle result template" loading="lazy" /></button>
+          <button type="button"><img src="img/kit-12.jpg" alt="Position table template" loading="lazy" /></button>
+        </div>
+
+        <a class="more-card" href="https://hachedesign404.wixsite.com/misitio/portfolio" target="_blank" rel="noopener">
+          <div>
+            <h3>More design work</h3>
+            <p>
+              Onboarding materials for APM Terminals, a Mahou ad, the Ford Lightning campaign,
+              The Fitzgerald's 10th anniversary and a full rebranding for a veterinary clinic —
+              collected in my design portfolio.
+            </p>
+          </div>
+          <span class="cta">Open portfolio ↗</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ============ 03 · VIDEO & SOCIAL ============ -->
+    <section id="video">
+      <div class="wrap">
+        <p class="section-label">/ 03 · Video &amp; Social</p>
+        <h2>Motion, podcasts and content that moves</h2>
+        <p class="section-intro">
+          Audiovisual production and social content for brands — from a cycling podcast for
+          Cofidis to campaigns and brand films for Benimar.
+        </p>
+
+        <div class="feature-video">
+          <div class="video-frame">
+            <iframe
+              src="https://www.youtube-nocookie.com/embed/faQdsGfhARE"
+              title="Voces Autorizadas — Entrevista con Juan Mari Guajardo (Cofidis España)"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <div>
+            <h3>Voces Autorizadas — Cofidis España</h3>
+            <p>
+              Episode 12 of Cofidis España's cycling podcast, an interview with Juan Mari
+              Guajardo. Video production and editing for the brand's YouTube channel — plus
+              cycling content for their social channels, like
+              <a href="https://www.linkedin.com/posts/cofidis-espa%C3%B1a_ciclismo-activity-7462163692504375297-fBHZ" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: none; font-weight: 500;">this LinkedIn piece ↗</a>.
+            </p>
+          </div>
+        </div>
+
+        <div class="reels">
+          <figure class="reel">
+            <div class="frame">
+              <iframe src="https://www.instagram.com/reel/DMKv6MPP6m2/embed" title="Benimar brand film" loading="lazy" allowfullscreen></iframe>
+            </div>
+            <figcaption>
+              <strong>Benimar</strong> — brand film: 50+ years designing motorhomes.
+              <a href="https://www.instagram.com/reel/DMKv6MPP6m2/" target="_blank" rel="noopener">Watch ↗</a>
+            </figcaption>
+          </figure>
+          <figure class="reel">
+            <div class="frame">
+              <iframe src="https://www.instagram.com/reel/DQm2QbdAe2h/embed" title="Benimar — Albert Torres interview" loading="lazy" allowfullscreen></iframe>
+            </div>
+            <figcaption>
+              <strong>Benimar</strong> — interview with Albert Torres (Movistar Team), track world champion.
+              <a href="https://www.instagram.com/reel/DQm2QbdAe2h/" target="_blank" rel="noopener">Watch ↗</a>
+            </figcaption>
+          </figure>
+          <figure class="reel">
+            <div class="frame">
+              <iframe src="https://www.instagram.com/reel/DZZ5jHiDJTr/embed" title="Benimar × Central Lechera Asturiana giveaway" loading="lazy" allowfullscreen></iframe>
+            </div>
+            <figcaption>
+              <strong>Benimar × Central Lechera Asturiana</strong> — motorhome giveaway campaign.
+              <a href="https://www.instagram.com/reel/DZZ5jHiDJTr/" target="_blank" rel="noopener">Watch ↗</a>
+            </figcaption>
+          </figure>
+          <figure class="reel">
+            <div class="frame">
+              <iframe src="https://www.instagram.com/reel/DFs8GQcq798/embed" title="Mediterranean Epic Gran Fondo promo" loading="lazy" allowfullscreen></iframe>
+            </div>
+            <figcaption>
+              <strong>Mediterranean Epic Gran Fondo</strong> — event countdown promo.
+              <a href="https://www.instagram.com/reel/DFs8GQcq798/" target="_blank" rel="noopener">Watch ↗</a>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+    <button class="close" type="button" aria-label="Close">×</button>
+    <button class="nav prev" type="button" aria-label="Previous image">←</button>
+    <img src="" alt="" />
+    <button class="nav next" type="button" aria-label="Next image">→</button>
+  </div>
+
+  <footer>
+    <div class="wrap">
+      <p>&copy; 2026 Hache Cervera. Built by hand in Valencia.</p>
+      <p class="path">Design <span>→</span> Code <span>→</span> Motion <span>→</span> SEO</p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var thumbs = Array.prototype.slice.call(document.querySelectorAll('#gallery button'));
+      var box = document.getElementById('lightbox');
+      var img = box.querySelector('img');
+      var current = 0;
+
+      function show(i) {
+        current = (i + thumbs.length) % thumbs.length;
+        var t = thumbs[current].querySelector('img');
+        img.src = t.src;
+        img.alt = t.alt;
+        box.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+      function close() {
+        box.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      thumbs.forEach(function (b, i) {
+        b.addEventListener('click', function () { show(i); });
+      });
+      box.querySelector('.close').addEventListener('click', close);
+      box.querySelector('.prev').addEventListener('click', function (e) { e.stopPropagation(); show(current - 1); });
+      box.querySelector('.next').addEventListener('click', function (e) { e.stopPropagation(); show(current + 1); });
+      box.addEventListener('click', function (e) { if (e.target === box) close(); });
+      document.addEventListener('keydown', function (e) {
+        if (!box.classList.contains('open')) return;
+        if (e.key === 'Escape') close();
+        if (e.key === 'ArrowLeft') show(current - 1);
+        if (e.key === 'ArrowRight') show(current + 1);
+      });
+    })();
+  </script>
+</body>
+</html>
