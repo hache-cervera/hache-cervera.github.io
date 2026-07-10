@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Work — Hache Cervera</title>
+  <title>Work · Hache Cervera</title>
   <meta
     name="description"
-    content="Selected work by Hache (Ada Cervera) — websites, branding, social-media design systems, video and motion for brands like Cofidis, Benimar, Mahou, Ford and Football School Cañada Blanch."
+    content="Selected work by Hache (Ada Cervera): websites, branding, social-media design systems, video and motion for brands like Cofidis, Benimar, Mahou, Ford and Football School Cañada Blanch."
   />
   <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -217,9 +217,27 @@
     }
     .proj-head p { margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
 
+    /* Hint shown above every horizontally scrollable strip */
+    .strip-hint {
+      margin-top: 24px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .strip-hint span { color: var(--accent); animation: nudge 1.6s ease-in-out infinite; }
+    @keyframes nudge { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(6px); } }
+    @media (prefers-reduced-motion: reduce) { .strip-hint span { animation: none; } }
+
     /* Filmstrip of mixed media, compact and horizontally scrollable */
     .strip {
-      margin-top: 24px;
+      margin-top: 8px;
       display: flex;
       gap: 16px;
       overflow-x: auto;
@@ -238,17 +256,17 @@
     }
     .strip button:hover { border-color: var(--ink); }
     .strip img { height: 100%; width: auto; display: block; }
-    .strip video { height: 100%; width: auto; display: block; background: #0a0a0a; border: 1px solid var(--line); }
+    .strip video { width: auto; display: block; background: #0a0a0a; border: 1px solid var(--line); }
 
-    /* ---------- FSCB template gallery ---------- */
+    /* ---------- FSCB template gallery: tight mosaic so the identity reads as one ---------- */
     .gallery {
       margin-top: 24px;
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
     }
-    @media (min-width: 640px) { .gallery { grid-template-columns: repeat(3, 1fr); } }
-    @media (min-width: 1024px) { .gallery { grid-template-columns: repeat(4, 1fr); gap: 24px; } }
+    @media (min-width: 640px) { .gallery { grid-template-columns: repeat(4, 1fr); } }
+    @media (min-width: 1024px) { .gallery { grid-template-columns: repeat(6, 1fr); } }
     .gallery button {
       border: 1px solid var(--line);
       padding: 0;
@@ -320,7 +338,7 @@
       display: grid;
       gap: 32px;
     }
-    @media (min-width: 900px) { .feature-video { grid-template-columns: 3fr 2fr; align-items: center; } }
+    @media (min-width: 900px) { .feature-video { grid-template-columns: 3fr 2fr; align-items: start; } }
     .video-frame {
       aspect-ratio: 16 / 9;
       border: 1px solid var(--line);
@@ -336,6 +354,8 @@
       letter-spacing: -0.02em;
     }
     .feature-video p { margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
+    .feature-video .companion { margin-top: 24px; max-width: 22rem; }
+    .feature-video .companion figcaption { margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
 
     /* Click-to-play YouTube poster */
     .yt {
@@ -370,13 +390,14 @@
     }
     .yt:hover .play { background: var(--accent); border-color: var(--accent); }
 
-    /* Films row: landscape pieces, 3-up */
+    /* Films row: landscape pieces */
     .films {
       margin-top: 64px;
       display: grid;
       gap: 24px;
+      max-width: 56rem;
     }
-    @media (min-width: 768px) { .films { grid-template-columns: repeat(3, 1fr); } }
+    @media (min-width: 768px) { .films { grid-template-columns: repeat(2, 1fr); } }
     .film figcaption, .reel figcaption {
       margin-top: 12px;
       font-size: 0.875rem;
@@ -434,7 +455,7 @@
       <p class="kicker">/ Portfolio</p>
       <h1>See some of<br />my <em>work</em></h1>
       <p>
-        Websites, brand systems, campaigns, social-media design and video — a growing selection
+        Websites, brand systems, campaigns, social-media design and video. A growing selection
         of things I've designed, built and produced. More coming soon.
       </p>
     </div>
@@ -445,19 +466,19 @@
         <p class="section-label">/ 01 · Web</p>
         <h2>Websites, end to end</h2>
         <p class="section-intro">
-          Design, development, hosting, DNS, performance and SEO — delivered as one piece.
+          Design, development, hosting, DNS, performance and SEO, delivered as one piece.
         </p>
 
         <div class="projects">
           <a class="project" href="https://footballschoolcanadablanch.com/" target="_blank" rel="noopener">
             <div class="shot">
-              <img src="img/web-fscb.jpg" alt="Football School Cañada Blanch website — hero section" loading="lazy" />
+              <img src="img/web-fscb.jpg" alt="Football School Cañada Blanch website, hero section" loading="lazy" />
             </div>
             <div class="body">
               <h3>Football School Cañada Blanch <span class="arrow">↗</span></h3>
               <p>
                 Full website for a Spanish football academy in London that blends Spanish
-                technical–tactical methodology with British competitiveness. Design, build,
+                technical-tactical methodology with British competitiveness. Design, build,
                 content structure and on-page SEO.
               </p>
               <ul class="tags">
@@ -470,19 +491,57 @@
 
           <a class="project" href="https://neuronadigital.es/portfolio/family-park/" target="_blank" rel="noopener">
             <div class="shot">
-              <img src="img/web-familypark.jpg" alt="Family Park website — case study mockups" loading="lazy" />
+              <img src="img/web-familypark.jpg" alt="Family Park website, case study mockups" loading="lazy" />
             </div>
             <div class="body">
               <h3>Family Park <span class="arrow">↗</span></h3>
               <p>
                 New website for a group of family amusement parks in Calpe, Cullera and Moraira:
                 per-park sections, schedules, pricing, events and seasonal theming. Built at
-                Neurona Digital — full case study on their site.
+                Neurona Digital, full case study on their site.
               </p>
               <ul class="tags">
                 <li>WordPress</li>
                 <li>Web design</li>
                 <li>UX</li>
+              </ul>
+            </div>
+          </a>
+
+          <a class="project" href="https://neuronadigital.es/portfolio/agv-productions/" target="_blank" rel="noopener">
+            <div class="shot">
+              <img src="img/web-agv.jpg" alt="AGV Productions website, case study mockups" loading="lazy" />
+            </div>
+            <div class="body">
+              <h3>AGV Productions <span class="arrow">↗</span></h3>
+              <p>
+                Website for an audiovisual production company shooting weddings, advertising and
+                corporate content with camera and drone: a portfolio-first site built to bring in
+                new clients. Built at Neurona Digital.
+              </p>
+              <ul class="tags">
+                <li>WordPress</li>
+                <li>Web design</li>
+                <li>Portfolio</li>
+              </ul>
+            </div>
+          </a>
+
+          <a class="project" href="https://neuronadigital.es/portfolio/a-tu-aire-studio/" target="_blank" rel="noopener">
+            <div class="shot">
+              <img src="img/web-atuaire.jpg" alt="A Tu Aire Studio website, case study mockups" loading="lazy" />
+            </div>
+            <div class="body">
+              <h3>A Tu Aire Studio <span class="arrow">↗</span></h3>
+              <p>
+                Website for a wedding photo and video studio that shoots real moments, no scripts
+                and no posing. A clean portfolio that puts their natural style front and center.
+                Built at Neurona Digital.
+              </p>
+              <ul class="tags">
+                <li>WordPress</li>
+                <li>Web design</li>
+                <li>Photography</li>
               </ul>
             </div>
           </a>
@@ -496,18 +555,18 @@
         <p class="section-label">/ 02 · Design &amp; Branding</p>
         <h2>Identity, campaigns and design systems</h2>
         <p class="section-intro">
-          Branding, art direction and graphic systems — from a full rebranding to a template kit
+          Branding, art direction and graphic systems: from a full rebranding to a template kit
           a football club runs its social media on. Click any image to see it big.
         </p>
 
         <!-- FSCB template kit -->
         <article class="proj">
           <div class="proj-head">
-            <h3>Football School Cañada Blanch — social media design system</h3>
+            <h3>Social media identity for Football School Cañada Blanch</h3>
             <p>
               38 editable templates: brand guidelines, kit reveals, schedules, match-day graphics,
-              player stats, tactics boards and educational posts — a complete system the club can
-              run on its own. A few of them:
+              player stats, tactics boards and educational posts. A complete system the club can
+              run on its own.
             </p>
             <ul class="tags">
               <li>Design system</li>
@@ -517,14 +576,14 @@
           </div>
 
           <div class="gallery" data-gallery>
-            <button type="button"><img src="img/kit-01.jpg" alt="Kit reveal template — Our New Kit" loading="lazy" /></button>
+            <button type="button"><img src="img/kit-01.jpg" alt="Kit reveal template, Our New Kit" loading="lazy" /></button>
             <button type="button"><img src="img/kit-02.jpg" alt="Goalkeeper kit reveal template" loading="lazy" /></button>
             <button type="button"><img src="img/kit-03.jpg" alt="Monthly training schedules template" loading="lazy" /></button>
-            <button type="button"><img src="img/kit-04.jpg" alt="Club presentation template — We are Football School Cañada Blanch" loading="lazy" /></button>
-            <button type="button"><img src="img/kit-05.jpg" alt="The Spanish Way — methodology template" loading="lazy" /></button>
-            <button type="button"><img src="img/kit-06.jpg" alt="Hybrid Model — methodology template" loading="lazy" /></button>
+            <button type="button"><img src="img/kit-04.jpg" alt="Club presentation template, We are Football School Cañada Blanch" loading="lazy" /></button>
+            <button type="button"><img src="img/kit-05.jpg" alt="The Spanish Way methodology template" loading="lazy" /></button>
+            <button type="button"><img src="img/kit-06.jpg" alt="Hybrid Model methodology template" loading="lazy" /></button>
             <button type="button"><img src="img/kit-07.jpg" alt="Head coach presentation template" loading="lazy" /></button>
-            <button type="button"><img src="img/kit-08.jpg" alt="Player stats template — Marc Cucurella" loading="lazy" /></button>
+            <button type="button"><img src="img/kit-08.jpg" alt="Player stats template, Marc Cucurella" loading="lazy" /></button>
             <button type="button"><img src="img/kit-09.jpg" alt="Match days announcement template" loading="lazy" /></button>
             <button type="button"><img src="img/kit-10.jpg" alt="Game day template" loading="lazy" /></button>
             <button type="button"><img src="img/kit-11.jpg" alt="Final whistle result template" loading="lazy" /></button>
@@ -535,7 +594,7 @@
         <!-- Canesval rebranding -->
         <article class="proj">
           <div class="proj-head">
-            <h3>Canesval — rebranding for a veterinary clinic</h3>
+            <h3>Canesval: rebranding for a veterinary clinic</h3>
             <p>
               Full identity redesign: concept exploration, new logotype, stationery, packaging and
               an animated brand piece.
@@ -546,21 +605,22 @@
               <li>Motion</li>
             </ul>
           </div>
+          <p class="strip-hint" aria-hidden="true">Scroll for more <span>→</span></p>
           <div class="strip" data-gallery>
-            <button type="button"><img src="img/canesval-logo.jpg" alt="Canesval — final logotype" loading="lazy" /></button>
-            <button type="button"><img src="img/canesval-antes.jpg" alt="Canesval — concept exploration and previous marks" loading="lazy" /></button>
+            <button type="button"><img src="img/canesval-logo.jpg" alt="Canesval final logotype" loading="lazy" /></button>
+            <button type="button"><img src="img/canesval-antes.jpg" alt="Canesval concept exploration and previous marks" loading="lazy" /></button>
             <video src="media/canesval-anim.mp4" poster="media/canesval-anim-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Canesval animated brand piece"></video>
-            <button type="button"><img src="img/canesval-bags.jpg" alt="Canesval — branded paper bags" loading="lazy" /></button>
-            <button type="button"><img src="img/canesval-badges.jpg" alt="Canesval — staff badges and lanyards" loading="lazy" /></button>
-            <button type="button"><img src="img/canesval-tote.jpg" alt="Canesval — tote bag with handwritten note" loading="lazy" /></button>
-            <button type="button"><img src="img/canesval-card.jpg" alt="Canesval — business card" loading="lazy" /></button>
+            <button type="button"><img src="img/canesval-bags.jpg" alt="Canesval branded paper bags" loading="lazy" /></button>
+            <button type="button"><img src="img/canesval-badges.jpg" alt="Canesval staff badges and lanyards" loading="lazy" /></button>
+            <button type="button"><img src="img/canesval-tote.jpg" alt="Canesval tote bag with handwritten note" loading="lazy" /></button>
+            <button type="button"><img src="img/canesval-card.jpg" alt="Canesval business card" loading="lazy" /></button>
           </div>
         </article>
 
         <!-- The Fitzgerald -->
         <article class="proj">
           <div class="proj-head">
-            <h3>The Fitzgerald — 10th anniversary</h3>
+            <h3>The Fitzgerald: 10th anniversary</h3>
             <p>
               Graphics for the burger brand's anniversary: custom illustration, limited-edition
               packaging and short animation loops for social media.
@@ -571,19 +631,20 @@
               <li>Motion</li>
             </ul>
           </div>
+          <p class="strip-hint" aria-hidden="true">Scroll for more <span>→</span></p>
           <div class="strip" data-gallery>
-            <button type="button"><img src="img/fitz-pack.jpg" alt="The Fitzgerald — anniversary packaging with burger" loading="lazy" /></button>
+            <button type="button"><img src="img/fitz-pack.jpg" alt="The Fitzgerald anniversary packaging with burger" loading="lazy" /></button>
             <video src="media/fitz-loop1.mp4" poster="media/fitz-loop1-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="The Fitzgerald animation loop"></video>
-            <button type="button"><img src="img/fitz-cube.jpg" alt="The Fitzgerald — cube packaging mockup" loading="lazy" /></button>
+            <button type="button"><img src="img/fitz-cube.jpg" alt="The Fitzgerald cube packaging mockup" loading="lazy" /></button>
             <video src="media/fitz-loop2.mp4" poster="media/fitz-loop2-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="The Fitzgerald animation loop"></video>
-            <button type="button"><img src="img/fitz-illus.jpg" alt="The Fitzgerald — anniversary illustration" loading="lazy" /></button>
+            <button type="button"><img src="img/fitz-illus.jpg" alt="The Fitzgerald anniversary illustration" loading="lazy" /></button>
           </div>
         </article>
 
         <!-- Ford Lightning -->
         <article class="proj">
           <div class="proj-head">
-            <h3>Ford Lightning — "EVolution rEVolution" campaign</h3>
+            <h3>Ford Lightning: "EVolution rEVolution" campaign</h3>
             <p>
               Concept campaign for the Ford F-150 Lightning: art direction, outdoor and print
               pieces, web design and a 56-second spot.
@@ -594,15 +655,16 @@
               <li>Video</li>
             </ul>
           </div>
+          <p class="strip-hint" aria-hidden="true">Scroll for more <span>→</span></p>
           <div class="strip" data-gallery>
-            <button type="button"><img src="img/ford-metro.jpg" alt="Ford Lightning — metro billboard with dachshund evolution" loading="lazy" /></button>
+            <button type="button"><img src="img/ford-metro.jpg" alt="Ford Lightning metro billboard with dachshund evolution" loading="lazy" /></button>
             <button class="yt" type="button" data-id="xStagHuUZ9k" aria-label="Play the Ford Lightning spot">
-              <img src="img/ford-poster.jpg" alt="Ford Lightning spot — Dynamic Range frame" loading="lazy" />
+              <img src="img/ford-poster.jpg" alt="Ford Lightning spot, Dynamic Range frame" loading="lazy" />
               <span class="play">&#9654;</span>
             </button>
-            <button type="button"><img src="img/ford-billboard.jpg" alt="Ford Lightning — roadside billboard" loading="lazy" /></button>
-            <button type="button"><img src="img/ford-window.jpg" alt="Ford Lightning — street-level posters" loading="lazy" /></button>
-            <button type="button"><img src="img/ford-web.jpg" alt="Ford Lightning — campaign web design screens" loading="lazy" /></button>
+            <button type="button"><img src="img/ford-billboard.jpg" alt="Ford Lightning roadside billboard" loading="lazy" /></button>
+            <button type="button"><img src="img/ford-window.jpg" alt="Ford Lightning street-level posters" loading="lazy" /></button>
+            <button type="button"><img src="img/ford-web.jpg" alt="Ford Lightning campaign web design screens" loading="lazy" /></button>
           </div>
         </article>
       </div>
@@ -614,25 +676,32 @@
         <p class="section-label">/ 03 · Video &amp; Social</p>
         <h2>Motion, podcasts and content that moves</h2>
         <p class="section-intro">
-          Audiovisual production and social content for brands — everything below plays right here.
+          Audiovisual production and social content for brands. Everything below plays right here.
         </p>
 
         <div class="feature-video">
           <div class="video-frame">
             <iframe
               src="https://www.youtube-nocookie.com/embed/faQdsGfhARE"
-              title="Voces Autorizadas — Entrevista con Juan Mari Guajardo (Cofidis España)"
+              title="Voces Autorizadas, entrevista con Juan Mari Guajardo (Cofidis España)"
               loading="lazy"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowfullscreen
             ></iframe>
           </div>
           <div>
-            <h3>Voces Autorizadas — Cofidis España</h3>
+            <h3>Cofidis España</h3>
             <p>
-              Episode 12 of Cofidis España's cycling podcast, an interview with Juan Mari
-              Guajardo. Video production and editing for the brand's YouTube channel.
+              Video production and editing for the cycling sponsor: episode 12 of the Voces
+              Autorizadas podcast, an interview with Juan Mari Guajardo, plus short cycling
+              pieces for their social channels, like this one.
             </p>
+            <figure class="companion">
+              <div class="video-frame">
+                <video src="media/cofidis-linkedin.mp4" poster="media/cofidis-linkedin-poster.jpg" controls preload="none" playsinline></video>
+              </div>
+              <figcaption>Cycling piece for Cofidis España's social media.</figcaption>
+            </figure>
           </div>
         </div>
 
@@ -640,11 +709,11 @@
           <figure class="film">
             <div class="video-frame">
               <button class="yt" type="button" data-id="FePIAekeVgs" aria-label="Play the Mahou spot">
-                <img src="img/mahou-poster.jpg" alt="Mahou 'MIAU' spot — title frame" loading="lazy" />
+                <img src="img/mahou-poster.jpg" alt="Mahou MIAU spot, title frame" loading="lazy" />
                 <span class="play">&#9654;</span>
               </button>
             </div>
-            <figcaption><strong>Mahou — "MIAU"</strong>, independent spot.</figcaption>
+            <figcaption><strong>Mahou "MIAU"</strong>, independent spot.</figcaption>
           </figure>
           <figure class="film">
             <div class="video-frame">
@@ -653,32 +722,26 @@
                 <span class="play">&#9654;</span>
               </button>
             </div>
-            <figcaption><strong>APM Terminals</strong> — corporate onboarding video.</figcaption>
-          </figure>
-          <figure class="film">
-            <div class="video-frame">
-              <video src="media/cofidis-linkedin.mp4" poster="media/cofidis-linkedin-poster.jpg" controls preload="none" playsinline></video>
-            </div>
-            <figcaption><strong>Cofidis España</strong> — cycling piece for social media.</figcaption>
+            <figcaption><strong>APM Terminals</strong>, corporate onboarding video.</figcaption>
           </figure>
         </div>
 
         <div class="reels">
           <figure class="reel">
             <video src="media/reel-benimar-film.mp4" poster="media/reel-benimar-film-poster.jpg" controls preload="none" playsinline></video>
-            <figcaption><strong>Benimar</strong> — brand film.</figcaption>
+            <figcaption><strong>Benimar</strong>, brand film.</figcaption>
           </figure>
           <figure class="reel">
             <video src="media/reel-benimar-torres.mp4" poster="media/reel-benimar-torres-poster.jpg" controls preload="none" playsinline></video>
-            <figcaption><strong>Benimar</strong> — Albert Torres, world champion.</figcaption>
+            <figcaption><strong>Benimar</strong>, interview with Albert Torres, world champion.</figcaption>
           </figure>
           <figure class="reel">
             <video src="media/reel-benimar-sorteo.mp4" poster="media/reel-benimar-sorteo-poster.jpg" controls preload="none" playsinline></video>
-            <figcaption><strong>Benimar × Central Lechera Asturiana</strong> — giveaway.</figcaption>
+            <figcaption><strong>Benimar and Central Lechera Asturiana</strong>, giveaway.</figcaption>
           </figure>
           <figure class="reel">
             <video src="media/reel-mepic.mp4" poster="media/reel-mepic-poster.jpg" controls preload="none" playsinline></video>
-            <figcaption><strong>Mediterranean Epic</strong> — event promo.</figcaption>
+            <figcaption><strong>Mediterranean Epic</strong>, event promo.</figcaption>
           </figure>
         </div>
       </div>
