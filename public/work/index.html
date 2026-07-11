@@ -8,6 +8,7 @@
     name="description"
     content="Selected work by Hache (Ada Cervera): websites, branding, social-media design systems, video and motion for brands like Cofidis, Benimar, Mahou, Ford and Football School Cañada Blanch."
   />
+  <meta name="robots" content="noindex, nofollow" />
   <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -434,6 +435,64 @@
       border: 1px solid var(--line);
     }
 
+    /* ---------- Password gate ---------- */
+    body.locked { overflow: hidden; }
+    body.locked main, body.locked footer { visibility: hidden; }
+    .gate {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      padding: 24px;
+    }
+    body.locked .gate { display: flex; }
+    .gate form { width: 100%; max-width: 24rem; }
+    .gate .kicker { font-size: 0.75rem; }
+    .gate h2 { margin-top: 16px; font-size: 1.75rem; letter-spacing: -0.03em; }
+    .gate p { margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
+    .gate label {
+      display: block;
+      margin-top: 24px;
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .gate .row { margin-top: 8px; display: flex; gap: 8px; }
+    .gate input {
+      flex: 1;
+      min-width: 0;
+      height: 48px;
+      padding: 0 16px;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--ink);
+      background: #fff;
+      border: 1px solid var(--line);
+      outline: none;
+    }
+    .gate input:focus { border-color: var(--ink); }
+    .gate button {
+      height: 48px;
+      padding: 0 24px;
+      font-family: var(--font-display);
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #fff;
+      background: var(--ink);
+      border: 0;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+    .gate button:hover { background: var(--accent); }
+    .gate .error { margin-top: 8px; font-size: 0.875rem; color: var(--accent); visibility: hidden; }
+    .gate .error.on { visibility: visible; }
+
     /* ---------- Footer ---------- */
     footer { background: var(--ink); color: rgba(255, 255, 255, 0.4); margin-top: 96px; }
     footer .wrap {
@@ -451,8 +510,22 @@
     footer .path span { color: var(--accent); }
   </style>
 </head>
-<body>
+<body class="locked">
   <div class="grain" aria-hidden="true"></div>
+
+  <div class="gate" role="dialog" aria-label="Password required">
+    <form id="gateForm">
+      <p class="kicker">/ Private</p>
+      <h2>This page is invite-only</h2>
+      <p>Enter the password to see the work.</p>
+      <label for="gatePass">Password</label>
+      <div class="row">
+        <input id="gatePass" type="password" autocomplete="off" autofocus />
+        <button type="submit">Enter</button>
+      </div>
+      <p class="error" id="gateError">Wrong password. Try again.</p>
+    </form>
+  </div>
 
   <header>
     <div class="wrap">
@@ -828,6 +901,34 @@
 
   <script>
     (function () {
+      /* Password gate: sha-256 of the password, checked in the browser */
+      var HASH = '93ac7c29a92b4a62f8383cb89168be97921e37e9ec8eb5621c7eb46443232bfa';
+      var KEY = 'work-gate-ok';
+      var form = document.getElementById('gateForm');
+      var input = document.getElementById('gatePass');
+      var error = document.getElementById('gateError');
+
+      function unlock() { document.body.classList.remove('locked'); }
+
+      if (sessionStorage.getItem(KEY) === HASH) {
+        unlock();
+      }
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var value = input.value.trim().toLowerCase();
+        crypto.subtle.digest('SHA-256', new TextEncoder().encode(value)).then(function (buf) {
+          var hex = Array.from(new Uint8Array(buf)).map(function (b) { return b.toString(16).padStart(2, '0'); }).join('');
+          if (hex === HASH) {
+            sessionStorage.setItem(KEY, HASH);
+            error.classList.remove('on');
+            unlock();
+          } else {
+            error.classList.add('on');
+            input.select();
+          }
+        });
+      });
+
       /* Lightbox shared across every [data-gallery] group */
       var box = document.getElementById('lightbox');
       var img = box.querySelector('img');
