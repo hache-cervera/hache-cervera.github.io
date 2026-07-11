@@ -211,6 +211,22 @@
     }
     .proj-head p { margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
 
+    /* Label row above a media group: name left, scroll hint right */
+    .media-row {
+      margin-top: 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+    }
+    .sub {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
     /* Hint shown above every horizontally scrollable strip */
     .strip-hint {
       margin-top: 24px;
@@ -225,6 +241,7 @@
       text-transform: uppercase;
       color: var(--muted);
     }
+    .media-row .strip-hint { margin-top: 0; }
     .strip-hint span { color: var(--accent); animation: nudge 1.6s ease-in-out infinite; }
     @keyframes nudge { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(6px); } }
     @media (prefers-reduced-motion: reduce) { .strip-hint span { animation: none; } }
@@ -548,26 +565,42 @@
         <p class="section-label">/ 02 · Design &amp; Branding</p>
         <h2>Identity, campaigns and design systems</h2>
         <p class="section-intro">
-          Branding, art direction and graphic systems: from a full rebranding to a template kit
-          a football club runs its social media on. Click any image to see it big.
+          Branding, art direction and graphic systems: brandbooks, rebrandings and the templates
+          that keep them alive. Click any image to see it big.
         </p>
 
-        <!-- FSCB template kit -->
+        <!-- FSCB brand identity -->
         <article class="proj">
           <div class="proj-head">
-            <h3>Social media identity for Football School Cañada Blanch</h3>
+            <h3>Brand identity for Football School Cañada Blanch</h3>
             <p>
-              38 editable templates: brand guidelines, kit reveals, schedules, match-day graphics,
-              player stats, tactics boards and educational posts. A complete system the club can
-              run on its own.
+              Complete identity for the London football academy: a brandbook that sets the mission,
+              voice, logo concept, colours and typography, plus a template system for schedules,
+              match days, player stats and educational posts that the club runs its social media on.
             </p>
             <ul class="tags">
-              <li>Design system</li>
+              <li>Branding</li>
+              <li>Brandbook</li>
               <li>Social media</li>
-              <li>Brand kit</li>
             </ul>
           </div>
 
+          <div class="media-row">
+            <p class="sub">The brandbook</p>
+            <p class="strip-hint" aria-hidden="true">Scroll for more <span>→</span></p>
+          </div>
+          <div class="strip" data-gallery>
+            <button type="button"><img src="img/fscb-bb-01.jpg" alt="Cañada Blanch Football School brandbook cover" loading="lazy" /></button>
+            <button type="button"><img src="img/fscb-bb-03.jpg" alt="Brandbook page, our mission and purpose" loading="lazy" /></button>
+            <button type="button"><img src="img/fscb-bb-05.jpg" alt="Brandbook page, logo concept" loading="lazy" /></button>
+            <button type="button"><img src="img/fscb-bb-07.jpg" alt="Brandbook page, logo colour variations" loading="lazy" /></button>
+            <button type="button"><img src="img/fscb-bb-08.jpg" alt="Brandbook page, brand typographies" loading="lazy" /></button>
+            <button type="button"><img src="img/fscb-bb-10.jpg" alt="Brandbook page, colour palette" loading="lazy" /></button>
+          </div>
+
+          <div class="media-row">
+            <p class="sub">The templates in action</p>
+          </div>
           <div class="gallery" data-gallery>
             <button type="button"><img src="img/kit-01.jpg" alt="Kit reveal template, Our New Kit" loading="lazy" /></button>
             <button type="button"><img src="img/kit-02.jpg" alt="Goalkeeper kit reveal template" loading="lazy" /></button>
@@ -581,6 +614,39 @@
             <button type="button"><img src="img/kit-10.jpg" alt="Game day template" loading="lazy" /></button>
             <button type="button"><img src="img/kit-11.jpg" alt="Final whistle result template" loading="lazy" /></button>
             <button type="button"><img src="img/kit-12.jpg" alt="Position table template" loading="lazy" /></button>
+          </div>
+        </article>
+
+        <!-- Mapubli brand manual -->
+        <article class="proj">
+          <div class="proj-head">
+            <h3>Mapubli: brand manual and graphic plan</h3>
+            <p>
+              Brand manual and full graphic plan for a visual communication and large-format
+              printing company: values, voice and tone, logo system, colour palette, typography,
+              photo style and the content templates for its social channels. In Spanish, as
+              delivered to the client.
+            </p>
+            <ul class="tags">
+              <li>Branding</li>
+              <li>Brand manual</li>
+              <li>Content plan</li>
+            </ul>
+          </div>
+          <div class="media-row">
+            <p class="sub">The brand manual</p>
+            <p class="strip-hint" aria-hidden="true">Scroll for more <span>→</span></p>
+          </div>
+          <div class="strip" data-gallery>
+            <button type="button"><img src="img/mapubli-01.jpg" alt="Mapubli brand manual cover" loading="lazy" /></button>
+            <button type="button"><img src="img/mapubli-04.jpg" alt="Mapubli brand manual, values" loading="lazy" /></button>
+            <button type="button"><img src="img/mapubli-09.jpg" alt="Mapubli brand manual, logo chapter" loading="lazy" /></button>
+            <button type="button"><img src="img/mapubli-11.jpg" alt="Mapubli brand manual, colour palette" loading="lazy" /></button>
+            <button type="button"><img src="img/mapubli-13.jpg" alt="Mapubli brand manual, logo on colour backgrounds" loading="lazy" /></button>
+            <button type="button"><img src="img/mapubli-14.jpg" alt="Mapubli brand manual, fonts and typography" loading="lazy" /></button>
+            <button type="button"><img src="img/mapubli-20.jpg" alt="Mapubli brand manual, social media system" loading="lazy" /></button>
+            <button type="button"><img src="img/mapubli-24.jpg" alt="Mapubli brand manual, Instagram templates" loading="lazy" /></button>
+            <button type="button"><img src="img/mapubli-30.jpg" alt="Mapubli brand manual, what to do and what to avoid" loading="lazy" /></button>
           </div>
         </article>
 
