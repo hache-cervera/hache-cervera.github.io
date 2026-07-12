@@ -1,0 +1,7 @@
+node_modules/
+data/*.db
+data/*.db-*
+data/cache/
+data/secret.key
+web/dist/
+.env
