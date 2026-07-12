@@ -233,6 +233,8 @@
       letter-spacing: -0.02em;
     }
     .proj-head p { margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
+    .credit { color: var(--accent); text-decoration: none; font-weight: 500; }
+    .credit:hover { color: var(--accent-hover); }
     .head-row {
       margin-top: 16px;
       display: flex;
@@ -502,20 +504,43 @@
       color: var(--muted);
     }
     .gate .row { margin-top: 8px; display: flex; gap: 8px; }
+    .gate .passwrap {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+    .gate .passwrap:focus-within { border-color: var(--ink); }
     .gate input {
       flex: 1;
       min-width: 0;
-      height: 48px;
+      height: 46px;
       padding: 0 16px;
       font-family: var(--font-body);
       font-size: 1rem;
       color: var(--ink);
-      background: #fff;
-      border: 1px solid var(--line);
+      background: none;
+      border: 0;
       outline: none;
     }
-    .gate input:focus { border-color: var(--ink); }
-    .gate button {
+    .gate .peek {
+      width: 44px;
+      height: 46px;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      border: 0;
+      color: var(--muted);
+      cursor: pointer;
+    }
+    .gate .peek:hover { color: var(--accent); }
+    .gate .peek .strike { display: none; }
+    .gate .peek[aria-pressed="true"] .strike { display: block; }
+    .gate button[type="submit"] {
       height: 48px;
       padding: 0 24px;
       font-family: var(--font-display);
@@ -527,7 +552,7 @@
       cursor: pointer;
       transition: background 0.2s ease;
     }
-    .gate button:hover { background: var(--accent); }
+    .gate button[type="submit"]:hover { background: var(--accent); }
     .gate .error { margin-top: 8px; font-size: 0.875rem; color: var(--accent); visibility: hidden; }
     .gate .error.on { visibility: visible; }
     .gate .fine { margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 0.75rem; color: var(--muted); }
@@ -562,7 +587,16 @@
       </p>
       <label for="gatePass">Password</label>
       <div class="row">
-        <input id="gatePass" type="password" autocomplete="off" autofocus />
+        <div class="passwrap">
+          <input id="gatePass" type="password" autocomplete="off" autofocus />
+          <button type="button" class="peek" id="gatePeek" aria-label="Show password" aria-pressed="false">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M2 12s3.5-6.5 10-6.5S22 12 22 12s-3.5 6.5-10 6.5S2 12 2 12Z" />
+              <circle cx="12" cy="12" r="2.8" />
+              <line class="strike" x1="4.5" y1="4.5" x2="19.5" y2="19.5" />
+            </svg>
+          </button>
+        </div>
         <button type="submit">Enter</button>
       </div>
       <p class="error" id="gateError">Wrong password. Try again.</p>
@@ -603,8 +637,9 @@
         <h2>Websites, end to end</h2>
         <p class="section-intro">
           Design and development with premium plugins and multilingual setups, plus everything
-          around it: migrations, hosting, DNS, SSL and security, performance and Core Web Vitals,
-          schema markup and on-page SEO. Delivered as one piece.
+          around it: staging on a subdomain and migration to production, hosting, DNS, SSL and
+          security, performance and Core Web Vitals, schema markup and on-page SEO. Delivered
+          as one piece.
         </p>
 
         <div class="projects">
@@ -621,10 +656,9 @@
               </p>
               <ul class="tags">
                 <li>WordPress</li>
-                <li>Elementor Pro</li>
-                <li>Astra</li>
-                <li>GTranslate</li>
-                <li>Schema Pro</li>
+                <li>Migration</li>
+                <li>Optimization</li>
+                <li>Multilingual</li>
                 <li>SEO</li>
               </ul>
             </div>
@@ -642,10 +676,10 @@
               </p>
               <ul class="tags">
                 <li>WordPress</li>
-                <li>Elementor Pro</li>
-                <li>Ultimate Addons</li>
-                <li>Astra</li>
-                <li>WPForms</li>
+                <li>Migration</li>
+                <li>Optimization</li>
+                <li>CSS</li>
+                <li>JS</li>
               </ul>
             </div>
           </a>
@@ -663,9 +697,10 @@
               </p>
               <ul class="tags">
                 <li>WordPress</li>
-                <li>Elementor Pro</li>
-                <li>Astra Portfolio</li>
-                <li>WPForms</li>
+                <li>Migration</li>
+                <li>Optimization</li>
+                <li>HTML</li>
+                <li>CSS</li>
               </ul>
             </div>
           </a>
@@ -683,9 +718,10 @@
               </p>
               <ul class="tags">
                 <li>WordPress</li>
-                <li>Elementor Pro</li>
-                <li>Ultimate Addons</li>
-                <li>Astra Portfolio</li>
+                <li>Migration</li>
+                <li>Optimization</li>
+                <li>CSS</li>
+                <li>UX</li>
               </ul>
             </div>
           </a>
@@ -713,7 +749,7 @@
               Complete identity for the London football academy: a brandbook that sets the mission,
               voice, logo concept, colours and typography, plus a template system for schedules,
               match days, player stats and educational posts that the club runs its social media on.
-              Made at Neurona Digital.
+              Made at <a class="credit" href="https://neuronadigital.es/" target="_blank" rel="noopener">Neurona Digital</a>.
             </p>
             <div class="head-row">
               <ul class="tags">
@@ -765,7 +801,7 @@
               Brand manual and full graphic plan for a visual communication and large-format
               printing company: values, voice and tone, logo system, colour palette, typography,
               photo style and the content templates for its social channels. In Spanish, as
-              delivered to the client. Made at Neurona Digital.
+              delivered to the client. Made at <a class="credit" href="https://neuronadigital.es/" target="_blank" rel="noopener">Neurona Digital</a>.
             </p>
             <div class="head-row">
               <ul class="tags">
@@ -888,8 +924,8 @@
         <p class="section-label">/ 03 · Video &amp; Social</p>
         <h2>Motion, podcasts and content that moves</h2>
         <p class="section-intro">
-          Audiovisual production and social content for brands, much of it made at Neurona
-          Digital. Everything below plays right here.
+          Audiovisual production and social content for brands, much of it made at <a class="credit" href="https://neuronadigital.es/" target="_blank" rel="noopener">Neurona Digital</a>.
+          Everything below plays right here.
         </p>
 
         <div class="feature-video">
@@ -999,13 +1035,22 @@
       }
 
       /* Password gate: sha-256 of the password, checked in the browser */
-      var HASH = '5ec7dca52987c890eff78aea7184fdbbe66bcfeb0d39e2715700d00baee6277e';
+      var HASH = 'c77e804c6746341d5d1f262abefd86bcbd5dd277ef4113ea4d72b7a82822f9b3';
       var KEY = 'work-gate-ok';
       var form = document.getElementById('gateForm');
       var input = document.getElementById('gatePass');
       var error = document.getElementById('gateError');
 
       function unlock() { document.body.classList.remove('locked'); }
+
+      var peek = document.getElementById('gatePeek');
+      peek.addEventListener('click', function () {
+        var showing = input.type === 'text';
+        input.type = showing ? 'password' : 'text';
+        peek.setAttribute('aria-pressed', String(!showing));
+        peek.setAttribute('aria-label', showing ? 'Show password' : 'Hide password');
+        input.focus();
+      });
 
       if (sessionStorage.getItem(KEY) === HASH) {
         unlock();
