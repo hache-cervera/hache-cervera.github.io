@@ -51,6 +51,26 @@
       background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%25" height="100%25" filter="url(%23n)"/></svg>');
     }
 
+    /* Soft orange glows and floating accent squares, echoing the home page */
+    .glow {
+      position: absolute;
+      width: 480px;
+      height: 480px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 60, 0, 0.09) 0%, rgba(255, 60, 0, 0) 68%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .deco {
+      position: absolute;
+      background: var(--accent);
+      pointer-events: none;
+      z-index: 0;
+    }
+    @keyframes floaty { 0%, 100% { transform: translateY(0) rotate(8deg); } 50% { transform: translateY(-12px) rotate(14deg); } }
+    .deco { animation: floaty 7s ease-in-out infinite; }
+    @media (prefers-reduced-motion: reduce) { .deco { animation: none; } }
+
     .wrap { max-width: 72rem; margin: 0 auto; padding: 0 24px; }
     @media (min-width: 768px) { .wrap { padding: 0 48px; } }
 
@@ -90,7 +110,8 @@
     }
 
     /* ---------- Hero ---------- */
-    .hero { padding: 96px 0 64px; }
+    .hero { position: relative; padding: 96px 0 64px; }
+    .hero > *:not(.glow):not(.deco) { position: relative; z-index: 1; }
     @media (min-width: 768px) { .hero { padding: 128px 0 96px; } }
     .kicker {
       font-family: var(--font-display);
@@ -126,7 +147,8 @@
     }
 
     /* ---------- Sections ---------- */
-    section { padding: 64px 0 96px; border-top: 1px solid var(--line); }
+    section { position: relative; padding: 64px 0 96px; border-top: 1px solid var(--line); }
+    section .wrap { position: relative; z-index: 1; }
     .section-label {
       font-family: var(--font-display);
       font-size: 0.875rem;
@@ -211,6 +233,22 @@
       letter-spacing: -0.02em;
     }
     .proj-head p { margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
+    .head-row {
+      margin-top: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .head-row .tags { margin-top: 0; }
+    .palette { display: flex; gap: 4px; }
+    .palette span {
+      width: 20px;
+      height: 20px;
+      border: 1px solid rgba(10, 10, 10, 0.12);
+      display: block;
+    }
 
     /* Label row above a media group: name left, scroll hint right */
     .media-row {
@@ -492,6 +530,7 @@
     .gate button:hover { background: var(--accent); }
     .gate .error { margin-top: 8px; font-size: 0.875rem; color: var(--accent); visibility: hidden; }
     .gate .error.on { visibility: visible; }
+    .gate .fine { margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 0.75rem; color: var(--muted); }
 
     /* ---------- Footer ---------- */
     footer { background: var(--ink); color: rgba(255, 255, 255, 0.4); margin-top: 96px; }
@@ -515,15 +554,22 @@
 
   <div class="gate" role="dialog" aria-label="Password required">
     <form id="gateForm">
-      <p class="kicker">/ Private</p>
-      <h2>This page is invite-only</h2>
-      <p>Enter the password to see the work.</p>
+      <p class="kicker">/ Private area</p>
+      <h2>Made for recruiters and clients</h2>
+      <p>
+        This page shows a selection of client work, shared for portfolio review only. If you
+        got here from my CV or a message from me, the password came with it.
+      </p>
       <label for="gatePass">Password</label>
       <div class="row">
         <input id="gatePass" type="password" autocomplete="off" autofocus />
         <button type="submit">Enter</button>
       </div>
       <p class="error" id="gateError">Wrong password. Try again.</p>
+      <p class="fine">
+        All projects shown remain the property of their respective clients and agencies.
+        Please do not share or redistribute.
+      </p>
     </form>
   </div>
 
@@ -536,6 +582,11 @@
 
   <main>
     <div class="hero wrap">
+      <span class="glow" style="top: -140px; right: -160px;" aria-hidden="true"></span>
+      <span class="glow" style="bottom: -220px; left: -240px; width: 380px; height: 380px;" aria-hidden="true"></span>
+      <span class="deco" style="top: 120px; right: 14%; width: 14px; height: 14px;" aria-hidden="true"></span>
+      <span class="deco" style="top: 230px; right: 6%; width: 8px; height: 8px; opacity: 0.55; animation-delay: 1.2s;" aria-hidden="true"></span>
+      <span class="deco" style="bottom: 40px; right: 30%; width: 6px; height: 6px; opacity: 0.35; animation-delay: 2.4s;" aria-hidden="true"></span>
       <p class="kicker">/ Portfolio</p>
       <h1>See some of<br />my <em>work</em></h1>
       <p>
@@ -546,6 +597,7 @@
 
     <!-- ============ 01 · WEB ============ -->
     <section id="web">
+      <span class="glow" style="top: 60px; left: -260px;" aria-hidden="true"></span>
       <div class="wrap">
         <p class="section-label">/ 01 · Web</p>
         <h2>Websites, end to end</h2>
@@ -636,6 +688,8 @@
 
     <!-- ============ 02 · DESIGN & BRANDING ============ -->
     <section id="design">
+      <span class="glow" style="top: 120px; right: -260px;" aria-hidden="true"></span>
+      <span class="glow" style="bottom: 300px; left: -280px; width: 420px; height: 420px;" aria-hidden="true"></span>
       <div class="wrap">
         <p class="section-label">/ 02 · Design &amp; Branding</p>
         <h2>Identity, campaigns and design systems</h2>
@@ -654,11 +708,14 @@
               match days, player stats and educational posts that the club runs its social media on.
               Made at Neurona Digital.
             </p>
-            <ul class="tags">
+            <div class="head-row">
+              <ul class="tags">
               <li>Branding</li>
               <li>Brandbook</li>
               <li>Social media</li>
             </ul>
+              <div class="palette" aria-label="Client colours"><span style="background:#00388e;" title="#00388e"></span><span style="background:#0078ff;" title="#0078ff"></span><span style="background:#e63946;" title="#e63946"></span></div>
+            </div>
           </div>
 
           <div class="media-row">
@@ -703,11 +760,14 @@
               photo style and the content templates for its social channels. In Spanish, as
               delivered to the client. Made at Neurona Digital.
             </p>
-            <ul class="tags">
+            <div class="head-row">
+              <ul class="tags">
               <li>Branding</li>
               <li>Brand manual</li>
               <li>Content plan</li>
             </ul>
+              <div class="palette" aria-label="Client colours"><span style="background:#c32232;" title="#c32232"></span><span style="background:#e37171;" title="#e37171"></span><span style="background:#404040;" title="#404040"></span></div>
+            </div>
           </div>
           <div class="media-row">
             <p class="sub">The brand manual</p>
@@ -734,11 +794,14 @@
               Full identity redesign: concept exploration, new logotype, stationery, packaging and
               an animated brand piece.
             </p>
-            <ul class="tags">
+            <div class="head-row">
+              <ul class="tags">
               <li>Branding</li>
               <li>Identity</li>
               <li>Motion</li>
             </ul>
+              <div class="palette" aria-label="Client colours"><span style="background:#0fd5fc;" title="#0fd5fc"></span><span style="background:#0a0a0a;" title="#0a0a0a"></span><span style="background:#f5f5f5;" title="#f5f5f5"></span></div>
+            </div>
           </div>
           <p class="strip-hint" aria-hidden="true">Scroll for more <span>→</span></p>
           <div class="strip" data-gallery>
@@ -760,11 +823,14 @@
               Graphics for the burger brand's anniversary: custom illustration, limited-edition
               packaging and short animation loops for social media.
             </p>
-            <ul class="tags">
+            <div class="head-row">
+              <ul class="tags">
               <li>Illustration</li>
               <li>Packaging</li>
               <li>Motion</li>
             </ul>
+              <div class="palette" aria-label="Client colours"><span style="background:#3d65bc;" title="#3d65bc"></span><span style="background:#181818;" title="#181818"></span><span style="background:#f5f1e8;" title="#f5f1e8"></span></div>
+            </div>
           </div>
           <p class="strip-hint" aria-hidden="true">Scroll for more <span>→</span></p>
           <div class="strip" data-gallery>
@@ -784,11 +850,14 @@
               Concept campaign for the Ford F-150 Lightning: art direction, outdoor and print
               pieces, web design and a 56-second spot.
             </p>
-            <ul class="tags">
+            <div class="head-row">
+              <ul class="tags">
               <li>Art direction</li>
               <li>Campaign</li>
               <li>Video</li>
             </ul>
+              <div class="palette" aria-label="Client colours"><span style="background:#9df01a;" title="#9df01a"></span><span style="background:#42a6e5;" title="#42a6e5"></span><span style="background:#181818;" title="#181818"></span></div>
+            </div>
           </div>
           <p class="strip-hint" aria-hidden="true">Scroll for more <span>→</span></p>
           <div class="strip" data-gallery>
@@ -807,6 +876,7 @@
 
     <!-- ============ 03 · VIDEO & SOCIAL ============ -->
     <section id="video">
+      <span class="glow" style="top: 80px; left: -240px;" aria-hidden="true"></span>
       <div class="wrap">
         <p class="section-label">/ 03 · Video &amp; Social</p>
         <h2>Motion, podcasts and content that moves</h2>
@@ -901,6 +971,26 @@
 
   <script>
     (function () {
+      /* ---------- Analytics ----------
+         Set GA_ID to a GA4 measurement id ('G-XXXXXXXXXX') to turn tracking on.
+         Until then every track() call is a no-op. Events sent: page_view (auto),
+         gate_unlock / gate_fail, section_view, project_click, video_play,
+         image_open, scroll_depth. */
+      var GA_ID = '';
+      if (GA_ID) {
+        var ga = document.createElement('script');
+        ga.async = true;
+        ga.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+        document.head.appendChild(ga);
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function () { window.dataLayer.push(arguments); };
+        gtag('js', new Date());
+        gtag('config', GA_ID);
+      }
+      function track(name, params) {
+        if (window.gtag) window.gtag('event', name, params || {});
+      }
+
       /* Password gate: sha-256 of the password, checked in the browser */
       var HASH = '93ac7c29a92b4a62f8383cb89168be97921e37e9ec8eb5621c7eb46443232bfa';
       var KEY = 'work-gate-ok';
@@ -921,9 +1011,11 @@
           if (hex === HASH) {
             sessionStorage.setItem(KEY, HASH);
             error.classList.remove('on');
+            track('gate_unlock');
             unlock();
           } else {
             error.classList.add('on');
+            track('gate_fail');
             input.select();
           }
         });
@@ -940,6 +1032,7 @@
         var t = group[current].querySelector('img');
         img.src = t.src;
         img.alt = t.alt;
+        track('image_open', { image: t.alt });
         box.classList.add('open');
         document.body.style.overflow = 'hidden';
       }
@@ -971,6 +1064,7 @@
       /* Click-to-play YouTube posters */
       document.querySelectorAll('.yt').forEach(function (b) {
         b.addEventListener('click', function () {
+          track('video_play', { video: b.getAttribute('aria-label') || b.dataset.id });
           var f = document.createElement('iframe');
           f.src = 'https://www.youtube-nocookie.com/embed/' + b.dataset.id + '?autoplay=1';
           f.title = b.getAttribute('aria-label') || 'Video';
@@ -989,13 +1083,52 @@
         });
       });
 
-      /* Only one piece plays at a time */
+      /* Only one piece plays at a time, and each play is counted once */
       var vids = document.querySelectorAll('video[controls]');
       vids.forEach(function (v) {
+        var counted = false;
         v.addEventListener('play', function () {
           vids.forEach(function (o) { if (o !== v) o.pause(); });
+          if (!counted) {
+            counted = true;
+            track('video_play', { video: (v.getAttribute('src') || '').split('/').pop() });
+          }
         });
       });
+
+      /* Outbound project clicks */
+      document.querySelectorAll('a.project').forEach(function (a) {
+        a.addEventListener('click', function () {
+          track('project_click', { project: a.querySelector('h3').textContent.trim(), url: a.href });
+        });
+      });
+
+      /* Which sections get seen */
+      if ('IntersectionObserver' in window) {
+        var seen = {};
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting && !seen[e.target.id]) {
+              seen[e.target.id] = true;
+              track('section_view', { section: e.target.id });
+            }
+          });
+        }, { threshold: 0.25 });
+        document.querySelectorAll('section[id]').forEach(function (sec) { io.observe(sec); });
+      }
+
+      /* Scroll depth: 50% and 90% */
+      var marks = { 50: false, 90: false };
+      window.addEventListener('scroll', function () {
+        var h = document.documentElement;
+        var pct = (h.scrollTop + window.innerHeight) / h.scrollHeight * 100;
+        [50, 90].forEach(function (m) {
+          if (!marks[m] && pct >= m) {
+            marks[m] = true;
+            track('scroll_depth', { percent: m });
+          }
+        });
+      }, { passive: true });
     })();
   </script>
 </body>
