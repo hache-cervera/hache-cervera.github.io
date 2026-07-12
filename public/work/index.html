@@ -9,6 +9,11 @@
     content="Selected work by Hache (Ada Cervera): websites, branding, social-media design systems, video and motion for brands like Cofidis, Benimar, Mahou, Ford and Football School Cañada Blanch."
   />
   <meta name="robots" content="noindex, nofollow" />
+  <meta property="og:title" content="Hache Cervera · Selected Work" />
+  <meta property="og:description" content="Websites, branding, campaigns and video. A private selection of client work." />
+  <meta property="og:image" content="https://hache-cervera.github.io/work/img/og.jpg" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -145,6 +150,31 @@
       font-size: 1.125rem;
       color: var(--muted);
     }
+
+    /* ---------- Filters ---------- */
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding-bottom: 48px;
+    }
+    .chip {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 8px 16px;
+      background: #fff;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      cursor: pointer;
+      transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+    .chip:hover { border-color: var(--ink); color: var(--ink); }
+    .chip.is-on { background: var(--ink); border-color: var(--ink); color: #fff; }
+    .chip.is-on:hover { background: var(--accent); border-color: var(--accent); }
+    section.filtered-out { display: none; }
 
     /* ---------- Sections ---------- */
     section { position: relative; padding: 64px 0 96px; border-top: 1px solid var(--line); }
@@ -557,6 +587,49 @@
     .gate .error.on { visibility: visible; }
     .gate .fine { margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 0.75rem; color: var(--muted); }
 
+    /* Reveal on scroll */
+    .rv { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .rv.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { .rv { opacity: 1; transform: none; transition: none; } }
+
+    /* ---------- CTA ---------- */
+    .cta { background: var(--ink); color: #fff; margin-top: 96px; position: relative; overflow: hidden; }
+    .cta .glow { background: radial-gradient(circle, rgba(255, 60, 0, 0.22) 0%, rgba(255, 60, 0, 0) 68%); }
+    .cta .wrap { position: relative; z-index: 1; padding-top: 96px; padding-bottom: 96px; }
+    .cta .kicker { color: var(--accent); }
+    .cta h2 {
+      margin-top: 24px;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(1.9rem, 4.5vw, 3rem);
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      max-width: 40rem;
+    }
+    .cta p { margin-top: 16px; max-width: 36rem; color: rgba(255, 255, 255, 0.6); }
+    .cta .actions { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+    .cta .btn {
+      display: inline-block;
+      padding: 14px 32px;
+      font-family: var(--font-display);
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: #fff;
+      background: var(--accent);
+      transition: background 0.2s ease;
+    }
+    .cta .btn:hover { background: var(--accent-hover); }
+    .cta .alt {
+      font-family: var(--font-display);
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.7);
+      transition: color 0.2s ease;
+    }
+    .cta .alt:hover { color: #fff; }
+
     /* ---------- Footer ---------- */
     footer { background: var(--ink); color: rgba(255, 255, 255, 0.4); margin-top: 96px; }
     footer .wrap {
@@ -627,6 +700,13 @@
         Websites, brand systems, campaigns, social-media design and video. A growing selection
         of things I've designed, built and produced. More coming soon.
       </p>
+    </div>
+
+    <div class="filters wrap" role="tablist" aria-label="Filter the work">
+      <button class="chip is-on" data-filter="all" type="button">All work</button>
+      <button class="chip" data-filter="web" type="button">Websites</button>
+      <button class="chip" data-filter="design" type="button">Design &amp; Branding</button>
+      <button class="chip" data-filter="video" type="button">Video &amp; Social</button>
     </div>
 
     <!-- ============ 01 · WEB ============ -->
@@ -740,6 +820,36 @@
           Branding, art direction and graphic systems: brandbooks, rebrandings and the templates
           that keep them alive. Click any image to see it big.
         </p>
+
+        <!-- Ford Lightning -->
+        <article class="proj">
+          <div class="proj-head">
+            <h3>Ford Lightning: "EVolution rEVolution" campaign</h3>
+            <p>
+              Concept campaign for the Ford F-150 Lightning: art direction, outdoor and print
+              pieces, web design and a 56-second spot.
+            </p>
+            <div class="head-row">
+              <ul class="tags">
+              <li>Art direction</li>
+              <li>Campaign</li>
+              <li>Video</li>
+            </ul>
+              <div class="palette" aria-label="Client colours"><span style="background:#9df01a;" title="#9df01a"></span><span style="background:#42a6e5;" title="#42a6e5"></span><span style="background:#181818;" title="#181818"></span></div>
+            </div>
+          </div>
+          <p class="strip-hint" aria-hidden="true">Scroll for more <span>→</span></p>
+          <div class="strip" data-gallery>
+            <button type="button"><img src="img/ford-metro.jpg" alt="Ford Lightning metro billboard with dachshund evolution" loading="lazy" /></button>
+            <button class="yt" type="button" data-id="xStagHuUZ9k" aria-label="Play the Ford Lightning spot">
+              <img src="img/ford-poster.jpg" alt="Ford Lightning spot, Dynamic Range frame" loading="lazy" />
+              <span class="play">&#9654;</span>
+            </button>
+            <button type="button"><img src="img/ford-billboard.jpg" alt="Ford Lightning roadside billboard" loading="lazy" /></button>
+            <button type="button"><img src="img/ford-window.jpg" alt="Ford Lightning street-level posters" loading="lazy" /></button>
+            <button type="button"><img src="img/ford-web.jpg" alt="Ford Lightning campaign web design screens" loading="lazy" /></button>
+          </div>
+        </article>
 
         <!-- FSCB brand identity -->
         <article class="proj">
@@ -885,35 +995,6 @@
           </div>
         </article>
 
-        <!-- Ford Lightning -->
-        <article class="proj">
-          <div class="proj-head">
-            <h3>Ford Lightning: "EVolution rEVolution" campaign</h3>
-            <p>
-              Concept campaign for the Ford F-150 Lightning: art direction, outdoor and print
-              pieces, web design and a 56-second spot.
-            </p>
-            <div class="head-row">
-              <ul class="tags">
-              <li>Art direction</li>
-              <li>Campaign</li>
-              <li>Video</li>
-            </ul>
-              <div class="palette" aria-label="Client colours"><span style="background:#9df01a;" title="#9df01a"></span><span style="background:#42a6e5;" title="#42a6e5"></span><span style="background:#181818;" title="#181818"></span></div>
-            </div>
-          </div>
-          <p class="strip-hint" aria-hidden="true">Scroll for more <span>→</span></p>
-          <div class="strip" data-gallery>
-            <button type="button"><img src="img/ford-metro.jpg" alt="Ford Lightning metro billboard with dachshund evolution" loading="lazy" /></button>
-            <button class="yt" type="button" data-id="xStagHuUZ9k" aria-label="Play the Ford Lightning spot">
-              <img src="img/ford-poster.jpg" alt="Ford Lightning spot, Dynamic Range frame" loading="lazy" />
-              <span class="play">&#9654;</span>
-            </button>
-            <button type="button"><img src="img/ford-billboard.jpg" alt="Ford Lightning roadside billboard" loading="lazy" /></button>
-            <button type="button"><img src="img/ford-window.jpg" alt="Ford Lightning street-level posters" loading="lazy" /></button>
-            <button type="button"><img src="img/ford-web.jpg" alt="Ford Lightning campaign web design screens" loading="lazy" /></button>
-          </div>
-        </article>
       </div>
     </section>
 
@@ -1004,6 +1085,22 @@
     <img src="" alt="" />
     <button class="nav next" type="button" aria-label="Next image">→</button>
   </div>
+
+  <section class="cta" id="contact">
+    <span class="glow" style="top: -160px; right: -160px;" aria-hidden="true"></span>
+    <div class="wrap">
+      <p class="kicker">/ Next</p>
+      <h2>Need someone who designs it, builds it and films it?</h2>
+      <p>
+        I do the whole chain: brand, web, motion and the content that keeps it alive.
+        Tell me what you are working on.
+      </p>
+      <div class="actions">
+        <a class="btn" href="mailto:hachedesign404@gmail.com?subject=Saw%20your%20work">Get in touch</a>
+        <a class="alt" href="../">More about me &rarr;</a>
+      </div>
+    </div>
+  </section>
 
   <footer>
     <div class="wrap">
@@ -1134,6 +1231,34 @@
           }
         });
       });
+
+      /* Section filters */
+      var chips = document.querySelectorAll('.chip');
+      var sections = { web: document.getElementById('web'), design: document.getElementById('design'), video: document.getElementById('video') };
+      chips.forEach(function (chip) {
+        chip.addEventListener('click', function () {
+          chips.forEach(function (c) { c.classList.toggle('is-on', c === chip); });
+          var f = chip.dataset.filter;
+          Object.keys(sections).forEach(function (k) {
+            sections[k].classList.toggle('filtered-out', f !== 'all' && f !== k);
+          });
+          track('filter', { value: f });
+        });
+      });
+
+      /* Reveal on scroll */
+      var rvTargets = document.querySelectorAll('.project, .proj, .feature-video, .film, .reel');
+      rvTargets.forEach(function (el) { el.classList.add('rv'); });
+      if ('IntersectionObserver' in window) {
+        var rvIO = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) { e.target.classList.add('in'); rvIO.unobserve(e.target); }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+        rvTargets.forEach(function (el) { rvIO.observe(el); });
+      } else {
+        rvTargets.forEach(function (el) { el.classList.add('in'); });
+      }
 
       /* Only one piece plays at a time, and each play is counted once */
       var vids = document.querySelectorAll('video[controls]');
