@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Work · Hache Cervera</title>
+  <meta
+    name="description"
+    content="Selected work by Hache (Ada Cervera): websites, branding, social-media design systems, video and motion for brands like Cofidis, Benimar, Mahou, Ford and Football School Cañada Blanch."
+  />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    :root {
+      --ink: #0a0a0a;
+      --muted: #6b6b6b;
+      --line: #e5e5e5;
+      --accent: #ff3c00;
+      --accent-hover: #e63500;
+      --accent-soft: #ffe8e1;
+      --font-display: 'Sora', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: #fff;
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    ::selection { background: var(--accent); color: #fff; }
+
+    /* Film grain, same as the main site */
+    .grain {
+      position: fixed;
+      inset: 0;
+      z-index: 40;
+      pointer-events: none;
+      opacity: 0.028;
+      mix-blend-mode: multiply;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%25" height="100%25" filter="url(%23n)"/></svg>');
+    }
+
+    /* Soft orange glows and floating accent squares, echoing the home page */
+    .glow {
+      position: absolute;
+      width: 480px;
+      height: 480px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 60, 0, 0.09) 0%, rgba(255, 60, 0, 0) 68%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .deco {
+      position: absolute;
+      background: var(--accent);
+      pointer-events: none;
+      z-index: 0;
+    }
+    @keyframes floaty { 0%, 100% { transform: translateY(0) rotate(8deg); } 50% { transform: translateY(-12px) rotate(14deg); } }
+    .deco { animation: floaty 7s ease-in-out infinite; }
+    @media (prefers-reduced-motion: reduce) { .deco { animation: none; } }
+
+    .wrap { max-width: 72rem; margin: 0 auto; padding: 0 24px; }
+    @media (min-width: 768px) { .wrap { padding: 0 48px; } }
+
+    a { color: inherit; }
+
+    /* ---------- Header ---------- */
+    header {
+      padding: 24px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    header .wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .back {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.875rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s ease;
+    }
+    .back:hover { color: var(--accent); }
+    .back span { color: var(--accent); transition: transform 0.2s ease; display: inline-block; }
+    .back:hover span { transform: translateX(-4px); }
+    header .tag {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ---------- Hero ---------- */
+    .hero { position: relative; padding: 96px 0 64px; }
+    .hero > *:not(.glow):not(.deco) { position: relative; z-index: 1; }
+    @media (min-width: 768px) { .hero { padding: 128px 0 96px; } }
+    .kicker {
+      font-family: var(--font-display);
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .hero h1 {
+      margin-top: 24px;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(2.4rem, 6vw, 4.5rem);
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+    }
+    .hero h1 em {
+      font-style: italic;
+      background: linear-gradient(100deg, #ff3c00 0%, #ff8a5c 35%, #ff3c00 65%, #ff5a24 100%);
+      background-size: 220% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: shimmer 4s linear infinite;
+    }
+    @keyframes shimmer { to { background-position: -220% 0; } }
+    .hero p {
+      margin-top: 24px;
+      max-width: 40rem;
+      font-size: 1.125rem;
+      color: var(--muted);
+    }
+
+    /* ---------- Sections ---------- */
+    section { position: relative; padding: 64px 0 96px; border-top: 1px solid var(--line); }
+    section .wrap { position: relative; z-index: 1; }
+    .section-label {
+      font-family: var(--font-display);
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    section h2 {
+      margin-top: 24px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+    }
+    .section-intro {
+      margin-top: 16px;
+      max-width: 44rem;
+      color: var(--muted);
+    }
+
+    /* ---------- Web project cards ---------- */
+    .projects {
+      margin-top: 48px;
+      display: grid;
+      gap: 32px;
+    }
+    @media (min-width: 768px) { .projects { grid-template-columns: 1fr 1fr; } }
+    .project {
+      display: block;
+      text-decoration: none;
+      border: 1px solid var(--line);
+      overflow: hidden;
+      transition: border-color 0.3s ease;
+    }
+    .project:hover { border-color: var(--ink); }
+    .project .shot {
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+      background: #f5f5f5;
+    }
+    .project .shot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+    .project:hover .shot img { transform: scale(1.03); }
+    .project .body { padding: 24px; }
+    .project h3 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.375rem;
+      letter-spacing: -0.02em;
+    }
+    .project p { margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
+    .tags { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .tags li {
+      list-style: none;
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border: 1px solid var(--line);
+      color: var(--muted);
+    }
+
+    /* ---------- Design project blocks ---------- */
+    .proj { margin-top: 64px; padding-top: 48px; border-top: 1px solid var(--line); }
+    .proj:first-of-type { margin-top: 48px; padding-top: 0; border-top: 0; }
+    .proj-head { max-width: 44rem; }
+    .proj h3 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.375rem;
+      letter-spacing: -0.02em;
+    }
+    .proj-head p { margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
+    .head-row {
+      margin-top: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .head-row .tags { margin-top: 0; }
+    .palette { display: flex; gap: 4px; }
+    .palette span {
+      width: 20px;
+      height: 20px;
+      border: 1px solid rgba(10, 10, 10, 0.12);
+      display: block;
+    }
+
+    /* Label row above a media group: name left, scroll hint right */
+    .media-row {
+      margin-top: 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+    }
+    .sub {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+    /* Hint shown above every horizontally scrollable strip */
+    .strip-hint {
+      margin-top: 24px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .media-row .strip-hint { margin-top: 0; }
+    .strip-hint span { color: var(--accent); animation: nudge 1.6s ease-in-out infinite; }
+    @keyframes nudge { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(6px); } }
+    @media (prefers-reduced-motion: reduce) { .strip-hint span { animation: none; } }
+
+    /* Filmstrip of mixed media, compact and horizontally scrollable */
+    .strip {
+      margin-top: 8px;
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      scrollbar-width: thin;
+    }
+    .strip > * { flex: 0 0 auto; height: 240px; }
+    @media (min-width: 768px) { .strip > * { height: 280px; } }
+    .strip button {
+      border: 1px solid var(--line);
+      padding: 0;
+      background: none;
+      cursor: zoom-in;
+      overflow: hidden;
+      transition: border-color 0.3s ease;
+    }
+    .strip button:hover { border-color: var(--ink); }
+    .strip img { height: 100%; width: auto; display: block; }
+    .strip video { width: auto; display: block; background: #0a0a0a; border: 1px solid var(--line); }
+
+    /* ---------- FSCB template gallery: tight mosaic so the identity reads as one ---------- */
+    .gallery {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+    @media (min-width: 640px) { .gallery { grid-template-columns: repeat(4, 1fr); } }
+    @media (min-width: 1024px) { .gallery { grid-template-columns: repeat(6, 1fr); } }
+    .gallery button {
+      border: 1px solid var(--line);
+      padding: 0;
+      background: none;
+      cursor: zoom-in;
+      overflow: hidden;
+      transition: border-color 0.3s ease;
+    }
+    .gallery button:hover { border-color: var(--ink); }
+    .gallery img {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+    .gallery button:hover img { transform: scale(1.04); }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(10, 10, 10, 0.92);
+      padding: 24px;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: min(90vw, 60rem);
+      max-height: 88vh;
+      display: block;
+    }
+    .lightbox .nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #fff;
+      font-size: 1.375rem;
+      line-height: 1;
+      width: 48px;
+      height: 48px;
+      cursor: pointer;
+      transition: border-color 0.2s ease, color 0.2s ease;
+    }
+    .lightbox .nav:hover { border-color: var(--accent); color: var(--accent); }
+    .lightbox .prev { left: 16px; }
+    .lightbox .next { right: 16px; }
+    .lightbox .close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.75rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+    .lightbox .close:hover { color: var(--accent); }
+
+    /* ---------- Video & social ---------- */
+    .feature-video {
+      margin-top: 48px;
+      display: grid;
+      gap: 32px;
+    }
+    @media (min-width: 900px) { .feature-video { grid-template-columns: 3fr 2fr; align-items: start; } }
+    .video-frame {
+      aspect-ratio: 16 / 9;
+      border: 1px solid var(--line);
+      background: #0a0a0a;
+      position: relative;
+      overflow: hidden;
+    }
+    .video-frame iframe, .video-frame video { width: 100%; height: 100%; display: block; border: 0; }
+    .feature-video h3 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.375rem;
+      letter-spacing: -0.02em;
+    }
+    .feature-video p { margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
+    .feature-video .companion { margin-top: 24px; max-width: 22rem; }
+    .feature-video .companion figcaption { margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
+
+    /* Click-to-play YouTube poster */
+    .yt {
+      display: block;
+      width: 100%;
+      height: 100%;
+      padding: 0;
+      border: 0;
+      background: #0a0a0a;
+      cursor: pointer;
+      position: relative;
+    }
+    .yt img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0.92; transition: opacity 0.3s ease; }
+    .yt:hover img { opacity: 1; }
+    .yt .play {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: rgba(10, 10, 10, 0.72);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.125rem;
+      padding-left: 4px;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+    .yt:hover .play { background: var(--accent); border-color: var(--accent); }
+
+    /* Films row: landscape pieces */
+    .films {
+      margin-top: 64px;
+      display: grid;
+      gap: 24px;
+      max-width: 56rem;
+    }
+    @media (min-width: 768px) { .films { grid-template-columns: repeat(2, 1fr); } }
+    .film figcaption, .reel figcaption {
+      margin-top: 12px;
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+    .film figcaption strong, .reel figcaption strong { color: var(--ink); font-weight: 500; }
+
+    /* Reels: compact vertical videos */
+    .reels {
+      margin-top: 64px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    @media (min-width: 768px) { .reels { grid-template-columns: repeat(4, 1fr); gap: 24px; } }
+    .reel { max-width: 240px; }
+    .reel video {
+      width: 100%;
+      aspect-ratio: 9 / 16;
+      object-fit: cover;
+      display: block;
+      background: #0a0a0a;
+      border: 1px solid var(--line);
+    }
+
+    /* ---------- Password gate ---------- */
+    body.locked { overflow: hidden; }
+    body.locked main, body.locked footer { visibility: hidden; }
+    .gate {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      padding: 24px;
+    }
+    body.locked .gate { display: flex; }
+    .gate form { width: 100%; max-width: 24rem; }
+    .gate .kicker { font-size: 0.75rem; }
+    .gate h2 { margin-top: 16px; font-size: 1.75rem; letter-spacing: -0.03em; }
+    .gate p { margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
+    .gate label {
+      display: block;
+      margin-top: 24px;
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .gate .row { margin-top: 8px; display: flex; gap: 8px; }
+    .gate input {
+      flex: 1;
+      min-width: 0;
+      height: 48px;
+      padding: 0 16px;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--ink);
+      background: #fff;
+      border: 1px solid var(--line);
+      outline: none;
+    }
+    .gate input:focus { border-color: var(--ink); }
+    .gate button {
+      height: 48px;
+      padding: 0 24px;
+      font-family: var(--font-display);
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #fff;
+      background: var(--ink);
+      border: 0;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+    .gate button:hover { background: var(--accent); }
+    .gate .error { margin-top: 8px; font-size: 0.875rem; color: var(--accent); visibility: hidden; }
+    .gate .error.on { visibility: visible; }
+    .gate .fine { margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 0.75rem; color: var(--muted); }
+
+    /* ---------- Footer ---------- */
+    footer { background: var(--ink); color: rgba(255, 255, 255, 0.4); margin-top: 96px; }
+    footer .wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding-top: 32px;
+      padding-bottom: 32px;
+      font-size: 0.875rem;
+    }
+    @media (min-width: 768px) { footer .wrap { flex-direction: row; } }
+    footer .path { font-family: var(--font-display); }
+    footer .path span { color: var(--accent); }
+  </style>
+</head>
+<body class="locked">
+  <div class="grain" aria-hidden="true"></div>
+
+  <div class="gate" role="dialog" aria-label="Password required">
+    <form id="gateForm">
+      <p class="kicker">/ Private area</p>
+      <h2>Made for recruiters and clients</h2>
+      <p>
+        This page shows a selection of client work, shared for portfolio review only. If you
+        got here from my CV or a message from me, the password came with it.
+      </p>
+      <label for="gatePass">Password</label>
+      <div class="row">
+        <input id="gatePass" type="password" autocomplete="off" autofocus />
+        <button type="submit">Enter</button>
+      </div>
+      <p class="error" id="gateError">Wrong password. Try again.</p>
+      <p class="fine">
+        All projects shown remain the property of their respective clients and agencies.
+        Please do not share or redistribute.
+      </p>
+    </form>
+  </div>
+
+  <header>
+    <div class="wrap">
+      <a class="back" href="../"><span>←</span> Hache Cervera</a>
+      <p class="tag">Selected Work</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="hero wrap">
+      <span class="glow" style="top: -140px; right: -160px;" aria-hidden="true"></span>
+      <span class="glow" style="bottom: -220px; left: -240px; width: 380px; height: 380px;" aria-hidden="true"></span>
+      <span class="deco" style="top: 120px; right: 14%; width: 14px; height: 14px;" aria-hidden="true"></span>
+      <span class="deco" style="top: 230px; right: 6%; width: 8px; height: 8px; opacity: 0.55; animation-delay: 1.2s;" aria-hidden="true"></span>
+      <span class="deco" style="bottom: 40px; right: 30%; width: 6px; height: 6px; opacity: 0.35; animation-delay: 2.4s;" aria-hidden="true"></span>
+      <p class="kicker">/ Portfolio</p>
+      <h1>See some of<br />my <em>work</em></h1>
+      <p>
+        Websites, brand systems, campaigns, social-media design and video. A growing selection
+        of things I've designed, built and produced. More coming soon.
+      </p>
+    </div>
+
+    <!-- ============ 01 · WEB ============ -->
+    <section id="web">
+      <span class="glow" style="top: 60px; left: -260px;" aria-hidden="true"></span>
+      <div class="wrap">
+        <p class="section-label">/ 01 · Web</p>
+        <h2>Websites, end to end</h2>
+        <p class="section-intro">
+          Design and development with premium plugins and multilingual setups, plus everything
+          around it: migrations, hosting, DNS, SSL and security, performance and Core Web Vitals,
+          schema markup and on-page SEO. Delivered as one piece.
+        </p>
+
+        <div class="projects">
+          <a class="project" href="https://footballschoolcanadablanch.com/" target="_blank" rel="noopener">
+            <div class="shot">
+              <img src="img/web-fscb.jpg" alt="Football School Cañada Blanch website, hero section" loading="lazy" />
+            </div>
+            <div class="body">
+              <h3>Football School Cañada Blanch</h3>
+              <p>
+                Full website for a Spanish football academy in London that blends Spanish
+                technical-tactical methodology with British competitiveness. Design, build,
+                content structure and on-page SEO.
+              </p>
+              <ul class="tags">
+                <li>WordPress</li>
+                <li>Web design</li>
+                <li>SEO</li>
+              </ul>
+            </div>
+          </a>
+
+          <a class="project" href="https://www.grupofamilypark.es/" target="_blank" rel="noopener">
+            <div class="shot">
+              <img src="img/web-familypark.jpg" alt="Family Park website, case study mockups" loading="lazy" />
+            </div>
+            <div class="body">
+              <h3>Family Park</h3>
+              <p>
+                New website for a group of family amusement parks in Calpe, Cullera and Moraira:
+                per-park sections, schedules, pricing, events and seasonal theming. Built at Neurona Digital.
+              </p>
+              <ul class="tags">
+                <li>WordPress</li>
+                <li>Web design</li>
+                <li>UX</li>
+              </ul>
+            </div>
+          </a>
+
+          <a class="project" href="https://agvproductions.com/" target="_blank" rel="noopener">
+            <div class="shot">
+              <img src="img/web-agv.jpg" alt="AGV Productions website, case study mockups" loading="lazy" />
+            </div>
+            <div class="body">
+              <h3>AGV Productions</h3>
+              <p>
+                Website for an audiovisual production company shooting weddings, advertising and
+                corporate content with camera and drone: a portfolio-first site built to bring in
+                new clients. Built at Neurona Digital.
+              </p>
+              <ul class="tags">
+                <li>WordPress</li>
+                <li>Web design</li>
+                <li>Portfolio</li>
+              </ul>
+            </div>
+          </a>
+
+          <a class="project" href="https://atuairestudio.com/" target="_blank" rel="noopener">
+            <div class="shot">
+              <img src="img/web-atuaire.jpg" alt="A Tu Aire Studio website, case study mockups" loading="lazy" />
+            </div>
+            <div class="body">
+              <h3>A Tu Aire Studio</h3>
+              <p>
+                Website for a wedding photo and video studio that shoots real moments, no scripts
+                and no posing. A clean portfolio that puts their natural style front and center.
+                Built at Neurona Digital.
+              </p>
+              <ul class="tags">
+                <li>WordPress</li>
+                <li>Web design</li>
+                <li>Photography</li>
+              </ul>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 02 · DESIGN & BRANDING ============ -->
+    <section id="design">
+      <span class="glow" style="top: 120px; right: -260px;" aria-hidden="true"></span>
+      <span class="glow" style="bottom: 300px; left: -280px; width: 420px; height: 420px;" aria-hidden="true"></span>
+      <div class="wrap">
+        <p class="section-label">/ 02 · Design &amp; Branding</p>
+        <h2>Identity, campaigns and design systems</h2>
+        <p class="section-intro">
+          Branding, art direction and graphic systems: brandbooks, rebrandings and the templates
+          that keep them alive. Click any image to see it big.
+        </p>
+
+        <!-- FSCB brand identity -->
+        <article class="proj">
+          <div class="proj-head">
+            <h3>Brand identity for Football School Cañada Blanch</h3>
+            <p>
+              Complete identity for the London football academy: a brandbook that sets the mission,
+              voice, logo concept, colours and typography, plus a template system for schedules,
+              match days, player stats and educational posts that the club runs its social media on.
+              Made at Neurona Digital.
+            </p>
+            <div class="head-row">
+              <ul class="tags">
+              <li>Branding</li>
+              <li>Brandbook</li>
+              <li>Social media</li>
+            </ul>
+              <div class="palette" aria-label="Client colours"><span style="background:#00388e;" title="#00388e"></span><span style="background:#0078ff;" title="#0078ff"></span><span style="background:#e63946;" title="#e63946"></span></div>
+            </div>
+          </div>
+
+          <div class="media-row">
+            <p class="sub">The brandbook</p>
+            <p class="strip-hint" aria-hidden="true">Scroll for more <span>→</span></p>
+          </div>
+          <div class="strip" data-gallery>
+            <button type="button"><img src="img/fscb-bb-01.jpg" alt="Cañada Blanch Football School brandbook cover" loading="lazy" /></button>
+            <button type="button"><img src="img/fscb-bb-03.jpg" alt="Brandbook page, our mission and purpose" loading="lazy" /></button>
+            <button type="button"><img src="img/fscb-bb-05.jpg" alt="Brandbook page, logo concept" loading="lazy" /></button>
+            <button type="button"><img src="img/fscb-bb-07.jpg" alt="Brandbook page, logo colour variations" loading="lazy" /></button>
+            <button type="button"><img src="img/fscb-bb-08.jpg" alt="Brandbook page, brand typographies" loading="lazy" /></button>
+            <button type="button"><img src="img/fscb-bb-10.jpg" alt="Brandbook page, colour palette" loading="lazy" /></button>
+          </div>
+
+          <div class="media-row">
+            <p class="sub">The templates in action</p>
+          </div>
+          <div class="gallery" data-gallery>
+            <button type="button"><img src="img/kit-01.jpg" alt="Kit reveal template, Our New Kit" loading="lazy" /></button>
+            <button type="button"><img src="img/kit-02.jpg" alt="Goalkeeper kit reveal template" loading="lazy" /></button>
+            <button type="button"><img src="img/kit-03.jpg" alt="Monthly training schedules template" loading="lazy" /></button>
+            <button type="button"><img src="img/kit-04.jpg" alt="Club presentation template, We are Football School Cañada Blanch" loading="lazy" /></button>
+            <button type="button"><img src="img/kit-05.jpg" alt="The Spanish Way methodology template" loading="lazy" /></button>
+            <button type="button"><img src="img/kit-06.jpg" alt="Hybrid Model methodology template" loading="lazy" /></button>
+            <button type="button"><img src="img/kit-07.jpg" alt="Head coach presentation template" loading="lazy" /></button>
+            <button type="button"><img src="img/kit-08.jpg" alt="Player stats template, Marc Cucurella" loading="lazy" /></button>
+            <button type="button"><img src="img/kit-09.jpg" alt="Match days announcement template" loading="lazy" /></button>
+            <button type="button"><img src="img/kit-10.jpg" alt="Game day template" loading="lazy" /></button>
+            <button type="button"><img src="img/kit-11.jpg" alt="Final whistle result template" loading="lazy" /></button>
+            <button type="button"><img src="img/kit-12.jpg" alt="Position table template" loading="lazy" /></button>
+          </div>
+        </article>
+
+        <!-- Mapubli brand manual -->
+        <article class="proj">
+          <div class="proj-head">
+            <h3>Mapubli: brand manual and graphic plan</h3>
+            <p>
+              Brand manual and full graphic plan for a visual communication and large-format
+              printing company: values, voice and tone, logo system, colour palette, typography,
+              photo style and the content templates for its social channels. In Spanish, as
+              delivered to the client. Made at Neurona Digital.
+            </p>
+            <div class="head-row">
+              <ul class="tags">
+              <li>Branding</li>
+              <li>Brand manual</li>
+              <li>Content plan</li>
+            </ul>
+              <div class="palette" aria-label="Client colours"><span style="background:#c32232;" title="#c32232"></span><span style="background:#e37171;" title="#e37171"></span><span style="background:#404040;" title="#404040"></span></div>
+            </div>
+          </div>
+          <div class="media-row">
+            <p class="sub">The brand manual</p>
+            <p class="strip-hint" aria-hidden="true">Scroll for more <span>→</span></p>
+          </div>
+          <div class="strip" data-gallery>
+            <button type="button"><img src="img/mapubli-01.jpg" alt="Mapubli brand manual cover" loading="lazy" /></button>
+            <button type="button"><img src="img/mapubli-04.jpg" alt="Mapubli brand manual, values" loading="lazy" /></button>
+            <button type="button"><img src="img/mapubli-09.jpg" alt="Mapubli brand manual, logo chapter" loading="lazy" /></button>
+            <button type="button"><img src="img/mapubli-11.jpg" alt="Mapubli brand manual, colour palette" loading="lazy" /></button>
+            <button type="button"><img src="img/mapubli-13.jpg" alt="Mapubli brand manual, logo on colour backgrounds" loading="lazy" /></button>
+            <button type="button"><img src="img/mapubli-14.jpg" alt="Mapubli brand manual, fonts and typography" loading="lazy" /></button>
+            <button type="button"><img src="img/mapubli-20.jpg" alt="Mapubli brand manual, social media system" loading="lazy" /></button>
+            <button type="button"><img src="img/mapubli-24.jpg" alt="Mapubli brand manual, Instagram templates" loading="lazy" /></button>
+            <button type="button"><img src="img/mapubli-30.jpg" alt="Mapubli brand manual, what to do and what to avoid" loading="lazy" /></button>
+          </div>
+        </article>
+
+        <!-- Canesval rebranding -->
+        <article class="proj">
+          <div class="proj-head">
+            <h3>Canesval: rebranding for a veterinary clinic</h3>
+            <p>
+              Full identity redesign: concept exploration, new logotype, stationery, packaging and
+              an animated brand piece.
+            </p>
+            <div class="head-row">
+              <ul class="tags">
+              <li>Branding</li>
+              <li>Identity</li>
+              <li>Motion</li>
+            </ul>
+              <div class="palette" aria-label="Client colours"><span style="background:#0fd5fc;" title="#0fd5fc"></span><span style="background:#0a0a0a;" title="#0a0a0a"></span><span style="background:#f5f5f5;" title="#f5f5f5"></span></div>
+            </div>
+          </div>
+          <p class="strip-hint" aria-hidden="true">Scroll for more <span>→</span></p>
+          <div class="strip" data-gallery>
+            <button type="button"><img src="img/canesval-logo.jpg" alt="Canesval final logotype" loading="lazy" /></button>
+            <button type="button"><img src="img/canesval-antes.jpg" alt="Canesval concept exploration and previous marks" loading="lazy" /></button>
+            <video src="media/canesval-anim.mp4" poster="media/canesval-anim-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Canesval animated brand piece"></video>
+            <button type="button"><img src="img/canesval-bags.jpg" alt="Canesval branded paper bags" loading="lazy" /></button>
+            <button type="button"><img src="img/canesval-badges.jpg" alt="Canesval staff badges and lanyards" loading="lazy" /></button>
+            <button type="button"><img src="img/canesval-tote.jpg" alt="Canesval tote bag with handwritten note" loading="lazy" /></button>
+            <button type="button"><img src="img/canesval-card.jpg" alt="Canesval business card" loading="lazy" /></button>
+          </div>
+        </article>
+
+        <!-- The Fitzgerald -->
+        <article class="proj">
+          <div class="proj-head">
+            <h3>The Fitzgerald: 10th anniversary</h3>
+            <p>
+              Graphics for the burger brand's anniversary: custom illustration, limited-edition
+              packaging and short animation loops for social media.
+            </p>
+            <div class="head-row">
+              <ul class="tags">
+              <li>Illustration</li>
+              <li>Packaging</li>
+              <li>Motion</li>
+            </ul>
+              <div class="palette" aria-label="Client colours"><span style="background:#3d65bc;" title="#3d65bc"></span><span style="background:#181818;" title="#181818"></span><span style="background:#f5f1e8;" title="#f5f1e8"></span></div>
+            </div>
+          </div>
+          <p class="strip-hint" aria-hidden="true">Scroll for more <span>→</span></p>
+          <div class="strip" data-gallery>
+            <button type="button"><img src="img/fitz-pack.jpg" alt="The Fitzgerald anniversary packaging with burger" loading="lazy" /></button>
+            <video src="media/fitz-loop1.mp4" poster="media/fitz-loop1-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="The Fitzgerald animation loop"></video>
+            <button type="button"><img src="img/fitz-cube.jpg" alt="The Fitzgerald cube packaging mockup" loading="lazy" /></button>
+            <video src="media/fitz-loop2.mp4" poster="media/fitz-loop2-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="The Fitzgerald animation loop"></video>
+            <button type="button"><img src="img/fitz-illus.jpg" alt="The Fitzgerald anniversary illustration" loading="lazy" /></button>
+          </div>
+        </article>
+
+        <!-- Ford Lightning -->
+        <article class="proj">
+          <div class="proj-head">
+            <h3>Ford Lightning: "EVolution rEVolution" campaign</h3>
+            <p>
+              Concept campaign for the Ford F-150 Lightning: art direction, outdoor and print
+              pieces, web design and a 56-second spot.
+            </p>
+            <div class="head-row">
+              <ul class="tags">
+              <li>Art direction</li>
+              <li>Campaign</li>
+              <li>Video</li>
+            </ul>
+              <div class="palette" aria-label="Client colours"><span style="background:#9df01a;" title="#9df01a"></span><span style="background:#42a6e5;" title="#42a6e5"></span><span style="background:#181818;" title="#181818"></span></div>
+            </div>
+          </div>
+          <p class="strip-hint" aria-hidden="true">Scroll for more <span>→</span></p>
+          <div class="strip" data-gallery>
+            <button type="button"><img src="img/ford-metro.jpg" alt="Ford Lightning metro billboard with dachshund evolution" loading="lazy" /></button>
+            <button class="yt" type="button" data-id="xStagHuUZ9k" aria-label="Play the Ford Lightning spot">
+              <img src="img/ford-poster.jpg" alt="Ford Lightning spot, Dynamic Range frame" loading="lazy" />
+              <span class="play">&#9654;</span>
+            </button>
+            <button type="button"><img src="img/ford-billboard.jpg" alt="Ford Lightning roadside billboard" loading="lazy" /></button>
+            <button type="button"><img src="img/ford-window.jpg" alt="Ford Lightning street-level posters" loading="lazy" /></button>
+            <button type="button"><img src="img/ford-web.jpg" alt="Ford Lightning campaign web design screens" loading="lazy" /></button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ 03 · VIDEO & SOCIAL ============ -->
+    <section id="video">
+      <span class="glow" style="top: 80px; left: -240px;" aria-hidden="true"></span>
+      <div class="wrap">
+        <p class="section-label">/ 03 · Video &amp; Social</p>
+        <h2>Motion, podcasts and content that moves</h2>
+        <p class="section-intro">
+          Audiovisual production and social content for brands, much of it made at Neurona
+          Digital. Everything below plays right here.
+        </p>
+
+        <div class="feature-video">
+          <div class="video-frame">
+            <iframe
+              src="https://www.youtube-nocookie.com/embed/faQdsGfhARE"
+              title="Voces Autorizadas, entrevista con Juan Mari Guajardo (Cofidis España)"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <div>
+            <h3>Cofidis España</h3>
+            <p>
+              Video production and editing for the cycling sponsor: episode 12 of the Voces
+              Autorizadas podcast, an interview with Juan Mari Guajardo, plus short cycling
+              pieces for their social channels, like this one.
+            </p>
+            <figure class="companion">
+              <div class="video-frame">
+                <video src="media/cofidis-linkedin.mp4" poster="media/cofidis-linkedin-poster.jpg" controls preload="none" playsinline></video>
+              </div>
+              <figcaption>Cycling piece for Cofidis España's social media.</figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <div class="films">
+          <figure class="film">
+            <div class="video-frame">
+              <button class="yt" type="button" data-id="FePIAekeVgs" aria-label="Play the Mahou spot">
+                <img src="img/mahou-poster.jpg" alt="Mahou MIAU spot, title frame" loading="lazy" />
+                <span class="play">&#9654;</span>
+              </button>
+            </div>
+            <figcaption><strong>Mahou "MIAU"</strong>, independent spot.</figcaption>
+          </figure>
+          <figure class="film">
+            <div class="video-frame">
+              <button class="yt" type="button" data-id="Wt89mqDriGM" aria-label="Play the APM Terminals onboarding video">
+                <img src="img/apm-poster.jpg" alt="APM Terminals onboarding video frame" loading="lazy" />
+                <span class="play">&#9654;</span>
+              </button>
+            </div>
+            <figcaption><strong>APM Terminals</strong>, corporate onboarding video.</figcaption>
+          </figure>
+        </div>
+
+        <div class="reels">
+          <figure class="reel">
+            <video src="media/reel-benimar-film.mp4" poster="media/reel-benimar-film-poster.jpg" controls preload="none" playsinline></video>
+            <figcaption><strong>Benimar</strong>, brand film.</figcaption>
+          </figure>
+          <figure class="reel">
+            <video src="media/reel-benimar-torres.mp4" poster="media/reel-benimar-torres-poster.jpg" controls preload="none" playsinline></video>
+            <figcaption><strong>Benimar</strong>, interview with Albert Torres, world champion.</figcaption>
+          </figure>
+          <figure class="reel">
+            <video src="media/reel-benimar-sorteo.mp4" poster="media/reel-benimar-sorteo-poster.jpg" controls preload="none" playsinline></video>
+            <figcaption><strong>Benimar and Central Lechera Asturiana</strong>, giveaway.</figcaption>
+          </figure>
+          <figure class="reel">
+            <video src="media/reel-mepic.mp4" poster="media/reel-mepic-poster.jpg" controls preload="none" playsinline></video>
+            <figcaption><strong>Mediterranean Epic</strong>, event promo.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+    <button class="close" type="button" aria-label="Close">×</button>
+    <button class="nav prev" type="button" aria-label="Previous image">←</button>
+    <img src="" alt="" />
+    <button class="nav next" type="button" aria-label="Next image">→</button>
+  </div>
+
+  <footer>
+    <div class="wrap">
+      <p>&copy; 2026 Hache Cervera. Built by hand in Valencia.</p>
+      <p class="path">Design <span>→</span> Code <span>→</span> Motion <span>→</span> SEO</p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      /* ---------- Analytics ----------
+         Set GA_ID to a GA4 measurement id ('G-XXXXXXXXXX') to turn tracking on.
+         Until then every track() call is a no-op. Events sent: page_view (auto),
+         gate_unlock / gate_fail, section_view, project_click, video_play,
+         image_open, scroll_depth. */
+      var GA_ID = '';
+      if (GA_ID) {
+        var ga = document.createElement('script');
+        ga.async = true;
+        ga.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+        document.head.appendChild(ga);
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function () { window.dataLayer.push(arguments); };
+        gtag('js', new Date());
+        gtag('config', GA_ID);
+      }
+      function track(name, params) {
+        if (window.gtag) window.gtag('event', name, params || {});
+      }
+
+      /* Password gate: sha-256 of the password, checked in the browser */
+      var HASH = '5ec7dca52987c890eff78aea7184fdbbe66bcfeb0d39e2715700d00baee6277e';
+      var KEY = 'work-gate-ok';
+      var form = document.getElementById('gateForm');
+      var input = document.getElementById('gatePass');
+      var error = document.getElementById('gateError');
+
+      function unlock() { document.body.classList.remove('locked'); }
+
+      if (sessionStorage.getItem(KEY) === HASH) {
+        unlock();
+      }
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var value = input.value.trim().toLowerCase();
+        crypto.subtle.digest('SHA-256', new TextEncoder().encode(value)).then(function (buf) {
+          var hex = Array.from(new Uint8Array(buf)).map(function (b) { return b.toString(16).padStart(2, '0'); }).join('');
+          if (hex === HASH) {
+            sessionStorage.setItem(KEY, HASH);
+            error.classList.remove('on');
+            track('gate_unlock');
+            unlock();
+          } else {
+            error.classList.add('on');
+            track('gate_fail');
+            input.select();
+          }
+        });
+      });
+
+      /* Lightbox shared across every [data-gallery] group */
+      var box = document.getElementById('lightbox');
+      var img = box.querySelector('img');
+      var group = [];
+      var current = 0;
+
+      function show(i) {
+        current = (i + group.length) % group.length;
+        var t = group[current].querySelector('img');
+        img.src = t.src;
+        img.alt = t.alt;
+        track('image_open', { image: t.alt });
+        box.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+      function close() {
+        box.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      document.querySelectorAll('[data-gallery]').forEach(function (g) {
+        var btns = Array.prototype.slice.call(g.querySelectorAll('button:not(.yt)'));
+        btns.forEach(function (b, i) {
+          b.addEventListener('click', function () {
+            group = btns;
+            show(i);
+          });
+        });
+      });
+      box.querySelector('.close').addEventListener('click', close);
+      box.querySelector('.prev').addEventListener('click', function (e) { e.stopPropagation(); show(current - 1); });
+      box.querySelector('.next').addEventListener('click', function (e) { e.stopPropagation(); show(current + 1); });
+      box.addEventListener('click', function (e) { if (e.target === box) close(); });
+      document.addEventListener('keydown', function (e) {
+        if (!box.classList.contains('open')) return;
+        if (e.key === 'Escape') close();
+        if (e.key === 'ArrowLeft') show(current - 1);
+        if (e.key === 'ArrowRight') show(current + 1);
+      });
+
+      /* Click-to-play YouTube posters */
+      document.querySelectorAll('.yt').forEach(function (b) {
+        b.addEventListener('click', function () {
+          track('video_play', { video: b.getAttribute('aria-label') || b.dataset.id });
+          var f = document.createElement('iframe');
+          f.src = 'https://www.youtube-nocookie.com/embed/' + b.dataset.id + '?autoplay=1';
+          f.title = b.getAttribute('aria-label') || 'Video';
+          f.allow = 'autoplay; encrypted-media; picture-in-picture; web-share';
+          f.allowFullscreen = true;
+          f.style.cssText = 'width:100%;height:100%;display:block;border:0;';
+          if (b.parentElement.classList.contains('video-frame')) {
+            b.replaceWith(f);
+          } else {
+            /* inside a filmstrip: keep the item's footprint */
+            var holder = document.createElement('div');
+            holder.style.cssText = 'height:100%;aspect-ratio:16/9;background:#0a0a0a;';
+            holder.appendChild(f);
+            b.replaceWith(holder);
+          }
+        });
+      });
+
+      /* Only one piece plays at a time, and each play is counted once */
+      var vids = document.querySelectorAll('video[controls]');
+      vids.forEach(function (v) {
+        var counted = false;
+        v.addEventListener('play', function () {
+          vids.forEach(function (o) { if (o !== v) o.pause(); });
+          if (!counted) {
+            counted = true;
+            track('video_play', { video: (v.getAttribute('src') || '').split('/').pop() });
+          }
+        });
+      });
+
+      /* Outbound project clicks */
+      document.querySelectorAll('a.project').forEach(function (a) {
+        a.addEventListener('click', function () {
+          track('project_click', { project: a.querySelector('h3').textContent.trim(), url: a.href });
+        });
+      });
+
+      /* Which sections get seen */
+      if ('IntersectionObserver' in window) {
+        var seen = {};
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting && !seen[e.target.id]) {
+              seen[e.target.id] = true;
+              track('section_view', { section: e.target.id });
+            }
+          });
+        }, { threshold: 0.25 });
+        document.querySelectorAll('section[id]').forEach(function (sec) { io.observe(sec); });
+      }
+
+      /* Scroll depth: 50% and 90% */
+      var marks = { 50: false, 90: false };
+      window.addEventListener('scroll', function () {
+        var h = document.documentElement;
+        var pct = (h.scrollTop + window.innerHeight) / h.scrollHeight * 100;
+        [50, 90].forEach(function (m) {
+          if (!marks[m] && pct >= m) {
+            marks[m] = true;
+            track('scroll_depth', { percent: m });
+          }
+        });
+      }, { passive: true });
+    })();
+  </script>
+</body>
+</html>
