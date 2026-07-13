@@ -39,7 +39,6 @@ const DISCIPLINES_RAW = [
       { mark: 'Sc', name: L('Schema Markup', 'Marcado Schema') },
       { mark: 'Xml', name: L('Sitemaps', 'Sitemaps') },
       { mark: 'Hl', name: L('Hreflang', 'Hreflang') },
-      { mark: 'Gtm', name: L('GTM', 'GTM') },
     ],
   },
   {
@@ -83,6 +82,7 @@ const DISCIPLINES_RAW = [
       { mark: 'Rm', name: L('Rank Math', 'Rank Math') },
       { mark: 'Gsc', name: L('Search Console', 'Search Console') },
       { mark: 'Ga4', name: L('GA4', 'GA4') },
+      { mark: 'Gtm', name: L('Google Tag Manager', 'Google Tag Manager') },
     ],
   },
   {
@@ -100,6 +100,7 @@ const DISCIPLINES_RAW = [
       { mark: 'Pd', name: L('Prompt Design', 'Diseño de prompts') },
       { mark: 'Cg', name: L('Content Generation', 'Generación de contenido') },
       { mark: 'Wa', name: L('Workflow Automation', 'Automatización de flujos') },
+      { mark: 'Geo', name: L('AI Search Visibility', 'Aparición en buscadores de IA') },
     ],
   },
 ];
