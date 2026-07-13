@@ -24,7 +24,7 @@ export default function TopControls() {
     }`;
 
   return (
-    <div className="fixed right-4 top-4 z-40 flex gap-2 md:right-6 md:top-6">
+    <div className="absolute right-4 top-4 z-40 flex gap-2 md:fixed md:right-6 md:top-6">
       <div className="flex">
         <button type="button" onClick={() => setLang('en')} aria-pressed={lang === 'en'} className={langChip('en')}>
           EN
