@@ -4,9 +4,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        ink: '#0a0a0a',
-        muted: '#6b6b6b',
-        line: '#e5e5e5',
+        page: 'var(--c-bg)',
+        panel: '#0a0a0a',
+        ink: 'var(--c-ink)',
+        muted: 'var(--c-muted)',
+        line: 'var(--c-line)',
         accent: {
           DEFAULT: '#ff3c00',
           hover: '#e63500',

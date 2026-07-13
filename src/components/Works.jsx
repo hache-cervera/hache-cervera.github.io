@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import { motion } from 'framer-motion';
 import { LOGOS } from '../data/content';
 import Words from './Words';
+import { useLang } from '../i18n';
 
 /**
  * Clean logo wall: no cards, no copy. Logos sit greyscale and come to full
@@ -10,6 +11,7 @@ import Words from './Words';
  */
 export default function Works() {
   const rootRef = useRef(null);
+  const { t } = useLang();
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -34,9 +36,9 @@ export default function Works() {
     <section id="works" ref={rootRef} className="relative px-6 py-32 md:px-12 md:py-44">
       <div className="relative z-20 mx-auto w-full max-w-6xl">
         <div data-heading>
-          <p className="font-display text-sm font-semibold uppercase tracking-[0.08em] text-accent">/ 03 · Works</p>
+          <p className="font-display text-sm font-semibold uppercase tracking-[0.08em] text-accent">{t.works.label}</p>
           <h2 className="mt-6 font-display text-[clamp(1.9rem,3.5vw,2.8rem)] font-bold tracking-tightest">
-            <Words>I produced for brands such as</Words>
+            <Words>{t.works.h2}</Words>
           </h2>
         </div>
 
