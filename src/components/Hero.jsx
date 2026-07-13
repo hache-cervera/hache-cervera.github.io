@@ -70,7 +70,7 @@ function NodeField() {
 }
 
 /** Magnetic CTA built on Framer Motion springs. */
-function MagneticLink({ href, children }) {
+function MagneticLink({ href, children, accent, external }) {
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
   const x = useSpring(mx, { stiffness: 200, damping: 16 });
@@ -87,19 +87,29 @@ function MagneticLink({ href, children }) {
         my.set((e.clientY - r.top - r.height / 2) * 0.35);
       }}
       onMouseLeave={() => { mx.set(0); my.set(0); }}
-      className="group inline-flex items-center gap-2 rounded bg-ink px-8 py-4 font-display font-semibold text-page transition-colors duration-300 hover:bg-accent hover:text-white"
+      className={
+        accent
+          ? 'group inline-flex items-center gap-2 rounded bg-accent px-8 py-4 font-display font-semibold text-white transition-colors duration-300 hover:bg-accent-hover'
+          : 'group inline-flex items-center gap-2 rounded bg-ink px-8 py-4 font-display font-semibold text-page transition-colors duration-300 hover:bg-accent hover:text-white'
+      }
     >
       {children}
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" className="transition-transform duration-300 group-hover:translate-y-0.5">
-        <path d="M8 3v10M4 9l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
+      {external ? (
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-0.5">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      ) : (
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" className="transition-transform duration-300 group-hover:translate-y-0.5">
+          <path d="M8 3v10M4 9l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      )}
     </motion.a>
   );
 }
 
 export default function Hero() {
   const rootRef = useRef(null);
-  const { t } = useLang();
+  const { lang, t } = useLang();
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -136,7 +146,12 @@ export default function Hero() {
           <span className="block overflow-hidden"><span data-line className="block">{t.hero.sub3}</span></span>
         </p>
 
-        <div className="mt-12 overflow-hidden">
+        <div className="mt-12 flex flex-wrap gap-4 overflow-hidden">
+          <span data-line className="inline-block">
+            <MagneticLink href={lang === 'es' ? 'work/es/' : 'work/'} accent external>
+              {t.hero.portfolio}
+            </MagneticLink>
+          </span>
           <span data-line className="inline-block">
             <MagneticLink href="#skills">{t.hero.cta}</MagneticLink>
           </span>

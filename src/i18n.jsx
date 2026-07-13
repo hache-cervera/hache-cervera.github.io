@@ -12,6 +12,7 @@ export const translations = {
       sub2: 'I design. I develop. I optimise.',
       sub3: 'From identity to live projects, end to end.',
       cta: 'My stack',
+      portfolio: 'Portfolio',
       scroll: 'Scroll',
     },
     about: {
@@ -52,6 +53,7 @@ export const translations = {
       sub2: 'Diseño. Desarrollo. Optimizo.',
       sub3: 'De la identidad al proyecto en producción, de principio a fin.',
       cta: 'Mi stack',
+      portfolio: 'Portfolio',
       scroll: 'Scroll',
     },
     about: {
