@@ -6,6 +6,7 @@ export default function AiModule({ project }) {
   const [readiness, setReadiness] = useState(null);
   const [prompts, setPrompts] = useState([]);
   const [results, setResults] = useState([]);
+  const [bench, setBench] = useState(null);
   const [busy, setBusy] = useState('');
   const [newPrompt, setNewPrompt] = useState({ kind: 'recommendation', text: '' });
 
@@ -83,6 +84,27 @@ export default function AiModule({ project }) {
             )}
           </div>
         ) : <Empty>Añade preguntas abajo y pulsa «Sondear modelos» (requiere una clave de IA en .env).</Empty>}
+      </Card>
+
+      <Card title="Comparativa con la competencia" className="lg:col-span-3"
+        action={<Button onClick={() => run('b', async () => setBench(await api.aiBenchmark(project.id)))} disabled={busy === 'b'}>
+          {busy === 'b' ? 'Comparando…' : 'Comparar'}</Button>}>
+        {bench ? (
+          <ul className="space-y-2">
+            {bench.map((r) => (
+              <li key={r.url} className="flex items-center gap-3">
+                <span className={`w-40 shrink-0 text-sm truncate ${r.isProject ? 'font-semibold text-primary' : ''}`}>
+                  {r.name}{r.isProject && ' (tú)'}
+                </span>
+                <div className="flex-1 h-5 bg-surface-2 rounded overflow-hidden">
+                  <div className="h-full rounded"
+                    style={{ width: `${r.score ?? 0}%`, background: r.isProject ? '#2f81f7' : '#8b949e' }} />
+                </div>
+                <span className="w-10 text-right tabular-nums text-sm">{r.score ?? 'n/d'}</span>
+              </li>
+            ))}
+          </ul>
+        ) : <Empty>Compara tu preparación para la IA con la de los competidores del proyecto. Añade competidores con URL al crear el proyecto.</Empty>}
       </Card>
 
       <Card title="Preguntas del sondeo" className="lg:col-span-3">

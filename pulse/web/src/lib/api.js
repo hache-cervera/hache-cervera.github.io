@@ -1,7 +1,9 @@
 async function req(path, opts = {}) {
   const res = await fetch(`/api${path}`, {
-    headers: { 'content-type': 'application/json' },
     ...opts,
+    // Solo declaramos content-type JSON cuando de verdad enviamos cuerpo:
+    // si no, Fastify rechaza la petición (FST_ERR_CTP_EMPTY_JSON_BODY).
+    headers: opts.body ? { 'content-type': 'application/json' } : {},
     body: opts.body ? JSON.stringify(opts.body) : undefined,
   });
   if (!res.ok) throw new Error((await res.json().catch(() => ({}))).error || `HTTP ${res.status}`);
@@ -27,6 +29,7 @@ export const api = {
   addAiPrompt: (id, data) => req(`/projects/${id}/ai-prompts`, { method: 'POST', body: data }),
   aiResults: (id) => req(`/projects/${id}/ai-results`),
   runAiProbe: (id) => req(`/projects/${id}/ai-probe`, { method: 'POST' }),
+  aiBenchmark: (id) => req(`/projects/${id}/ai-benchmark`, { method: 'POST' }),
 
   alerts: () => req('/alerts'),
 };

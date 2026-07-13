@@ -9,7 +9,7 @@ import { existsSync } from 'node:fs';
 import { db, migrate } from './db/index.js';
 import { runSiteScan, runUptimeCheck } from './collectors/site-health.js';
 import { runWpHealth } from './collectors/wp-health.js';
-import { runAiReadiness } from './collectors/ai-readiness.js';
+import { runAiReadiness, computeAiReadiness } from './collectors/ai-readiness.js';
 import { runAiProbe } from './collectors/ai-probe.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -65,6 +65,23 @@ app.get('/api/projects/:id/ai-readiness', async (req) => {
   return row ? parseJson(row, 'checks') : null;
 });
 app.post('/api/projects/:id/ai-readiness', async (req) => runAiReadiness(Number(req.params.id)));
+
+// Comparativa de preparación para la IA: tu sitio frente a tus competidores.
+app.post('/api/projects/:id/ai-benchmark', async (req) => {
+  const project = db.prepare('SELECT * FROM projects WHERE id = ?').get(req.params.id);
+  if (!project) return { error: 'proyecto no encontrado' };
+  const competitors = JSON.parse(project.competitors || '[]').filter((c) => c.url);
+  const targets = [{ name: project.name, url: project.url, isProject: true }, ...competitors];
+  const results = await Promise.all(targets.map(async (t) => {
+    try {
+      const { score } = await computeAiReadiness(t.url);
+      return { name: t.name, url: t.url, isProject: !!t.isProject, score };
+    } catch {
+      return { name: t.name, url: t.url, isProject: !!t.isProject, score: null };
+    }
+  }));
+  return results.sort((a, b) => (b.score ?? -1) - (a.score ?? -1));
+});
 
 app.get('/api/projects/:id/ai-prompts', async (req) => db.prepare('SELECT * FROM ai_prompts WHERE project_id = ?').all(req.params.id));
 app.post('/api/projects/:id/ai-prompts', async (req) => {

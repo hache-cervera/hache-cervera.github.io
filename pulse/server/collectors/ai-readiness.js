@@ -8,7 +8,15 @@ const AI_BOTS = ['GPTBot', 'ClaudeBot', 'PerplexityBot', 'Google-Extended', 'CCB
 export async function runAiReadiness(projectId) {
   const project = db.prepare('SELECT * FROM projects WHERE id = ?').get(projectId);
   if (!project) throw new Error(`Proyecto ${projectId} no existe`);
-  const base = new URL(project.url);
+  const result = await computeAiReadiness(project.url);
+  db.prepare('INSERT INTO ai_readiness (project_id, score, checks) VALUES (?, ?, ?)')
+    .run(projectId, result.score, JSON.stringify(result.checks));
+  return result;
+}
+
+// Calcula la preparación para la IA de cualquier URL, sin tocar la base de datos.
+export async function computeAiReadiness(url) {
+  const base = new URL(url);
   const checks = [];
   const add = (id, label, ok, weight, detail = null) => checks.push({ id, label, ok, weight, detail });
 
@@ -79,9 +87,6 @@ export async function runAiReadiness(projectId) {
   const totalWeight = checks.reduce((sum, c) => sum + c.weight, 0);
   const earned = checks.reduce((sum, c) => sum + (c.ok ? c.weight : 0), 0);
   const score = Math.round((earned / totalWeight) * 100);
-
-  db.prepare('INSERT INTO ai_readiness (project_id, score, checks) VALUES (?, ?, ?)')
-    .run(projectId, score, JSON.stringify(checks));
   return { score, checks };
 }
 
