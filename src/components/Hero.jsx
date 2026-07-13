@@ -1,6 +1,7 @@
 import { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
+import { useLang } from '../i18n';
 
 /** Floating network dots that repel from the cursor. */
 function NodeField() {
@@ -86,7 +87,7 @@ function MagneticLink({ href, children }) {
         my.set((e.clientY - r.top - r.height / 2) * 0.35);
       }}
       onMouseLeave={() => { mx.set(0); my.set(0); }}
-      className="group inline-flex items-center gap-2 rounded bg-ink px-8 py-4 font-display font-semibold text-white transition-colors duration-300 hover:bg-accent"
+      className="group inline-flex items-center gap-2 rounded bg-ink px-8 py-4 font-display font-semibold text-page transition-colors duration-300 hover:bg-accent hover:text-white"
     >
       {children}
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" className="transition-transform duration-300 group-hover:translate-y-0.5">
@@ -98,6 +99,7 @@ function MagneticLink({ href, children }) {
 
 export default function Hero() {
   const rootRef = useRef(null);
+  const { t } = useLang();
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -116,27 +118,27 @@ export default function Hero() {
 
       <div className="relative z-20 mx-auto w-full max-w-6xl">
         <p className="overflow-hidden font-display text-sm font-semibold uppercase tracking-[0.08em] text-accent">
-          <span data-line className="inline-block">/ Hache Cervera, Creative Technologist</span>
+          <span data-line className="inline-block">{t.hero.kicker}</span>
         </p>
 
         {/* Exactly three lines; kept off the chip-proximity effect on purpose */}
         <h1 className="mt-6 font-display text-[clamp(2rem,4.6vw,4.3rem)] font-bold leading-[1.08] tracking-tightest">
-          <span className="block overflow-hidden"><span data-line className="block md:whitespace-nowrap">I don't make pretty things.</span></span>
-          <span className="block overflow-hidden"><span data-line className="block md:whitespace-nowrap">I make things that work,</span></span>
+          <span className="block overflow-hidden"><span data-line className="block md:whitespace-nowrap">{t.hero.h1a}</span></span>
+          <span className="block overflow-hidden"><span data-line className="block md:whitespace-nowrap">{t.hero.h1b}</span></span>
           <span className="block overflow-hidden">
-            <span data-line className="shimmer-text block pb-2 md:whitespace-nowrap">and happen to be pretty.</span>
+            <span data-line className="shimmer-text block pb-2 md:whitespace-nowrap">{t.hero.h1c}</span>
           </span>
         </h1>
 
         <p className="mt-10 max-w-md text-lg leading-relaxed text-muted">
-          <span className="block overflow-hidden"><span data-line className="block">Creative who builds.</span></span>
-          <span className="block overflow-hidden"><span data-line className="block">I design. I develop. I optimise.</span></span>
-          <span className="block overflow-hidden"><span data-line className="block">From identity to live projects, end to end.</span></span>
+          <span className="block overflow-hidden"><span data-line className="block">{t.hero.sub1}</span></span>
+          <span className="block overflow-hidden"><span data-line className="block">{t.hero.sub2}</span></span>
+          <span className="block overflow-hidden"><span data-line className="block">{t.hero.sub3}</span></span>
         </p>
 
         <div className="mt-12 overflow-hidden">
           <span data-line className="inline-block">
-            <MagneticLink href="#skills">My stack</MagneticLink>
+            <MagneticLink href="#skills">{t.hero.cta}</MagneticLink>
           </span>
         </div>
       </div>
@@ -148,7 +150,7 @@ export default function Hero() {
         animate={{ opacity: 1 }}
         transition={{ delay: 1.6, duration: 0.8 }}
       >
-        <p className="font-display text-[11px] font-semibold uppercase tracking-[0.24em] text-muted">Scroll</p>
+        <p className="font-display text-[11px] font-semibold uppercase tracking-[0.24em] text-muted">{t.hero.scroll}</p>
         <motion.svg
           width="16" height="16" viewBox="0 0 16 16" fill="none"
           animate={{ y: [0, 6, 0] }}

@@ -1,10 +1,13 @@
 import { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
-import { EXPERIENCE } from '../data/content';
+import { getExperience } from '../data/content';
+import { useLang } from '../i18n';
 import Words from './Words';
 
 export default function Experience() {
   const rootRef = useRef(null);
+  const { lang, t } = useLang();
+  const experience = getExperience(lang);
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -36,9 +39,9 @@ export default function Experience() {
     <section id="experience" ref={rootRef} className="relative px-6 py-32 md:px-12 md:py-48">
       <div className="relative z-20 mx-auto w-full max-w-6xl">
         <div data-heading>
-          <p className="font-display text-sm font-semibold uppercase tracking-[0.08em] text-accent">/ 04 · Experience</p>
+          <p className="font-display text-sm font-semibold uppercase tracking-[0.08em] text-accent">{t.experience.label}</p>
           <h2 className="mt-6 font-display text-[clamp(1.9rem,3.5vw,2.8rem)] font-bold tracking-tightest">
-            <Words>Where I've been building</Words>
+            <Words>{t.experience.h2}</Words>
           </h2>
         </div>
 
@@ -51,7 +54,7 @@ export default function Experience() {
           />
 
           <ol className="flex flex-col gap-16 md:gap-20">
-            {EXPERIENCE.map((job) => (
+            {experience.map((job) => (
               <li key={job.company} data-entry className="relative grid gap-4 pl-8 md:grid-cols-[220px_1fr] md:gap-0 md:pl-0">
                 <span
                   className="absolute left-[-5px] top-2 h-[11px] w-[11px] rounded-full bg-accent md:left-[215px]"

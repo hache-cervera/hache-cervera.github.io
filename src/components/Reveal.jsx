@@ -2,6 +2,7 @@ import { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { useScene } from '../sceneContext';
 import Words from './Words';
+import { useLang } from '../i18n';
 
 /**
  * Mid-scroll reveal: a framed dark panel grows to full-bleed while the chip
@@ -12,6 +13,7 @@ import Words from './Words';
 export default function Reveal() {
   const rootRef = useRef(null);
   const scene = useScene();
+  const { t } = useLang();
 
   useLayoutEffect(() => {
     if (!scene) return;
@@ -49,7 +51,7 @@ export default function Reveal() {
       {/* dark panel that grows to full-bleed (z-0: the chip canvas floats above it) */}
       <div
         data-panel
-        className="absolute inset-0 z-0 bg-ink"
+        className="absolute inset-0 z-0 bg-panel"
         style={{ clipPath: 'inset(24% 14% 24% 14% round 20px)' }}
       >
         <div className="circuit-grid absolute inset-0" aria-hidden="true" />
@@ -61,11 +63,11 @@ export default function Reveal() {
 
       <div className="pointer-events-none relative z-20 flex h-full flex-col items-center justify-between px-6 py-16 md:px-12">
         <h2 data-head-top className="text-center font-display text-[clamp(1.8rem,4.5vw,3.6rem)] font-bold tracking-tightest">
-          <Words>Everything connects.</Words>
+          <Words>{t.reveal.h2}</Words>
         </h2>
         <p data-head-bottom className="text-center font-display text-lg font-semibold text-muted md:text-2xl">
-          Design <span className="text-accent">→</span> Code <span className="text-accent">→</span> Motion{' '}
-          <span className="text-accent">→</span> SEO. One loop, end to end.
+          {t.path[0]} <span className="text-accent">→</span> {t.path[1]} <span className="text-accent">→</span> {t.path[2]}{' '}
+          <span className="text-accent">→</span> {t.path[3]}. {t.reveal.pathTail}
         </p>
       </div>
 
@@ -73,8 +75,8 @@ export default function Reveal() {
         data-caption
         className="absolute bottom-10 left-6 z-20 max-w-xs font-display text-sm text-white/70 md:left-12"
       >
-        Live render: this chip runs in your browser.{' '}
-        <span className="text-accent">No video, just code.</span>
+        {t.reveal.caption1}{' '}
+        <span className="text-accent">{t.reveal.caption2}</span>
       </p>
     </section>
   );

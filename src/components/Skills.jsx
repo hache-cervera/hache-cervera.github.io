@@ -2,7 +2,8 @@ import { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { motion } from 'framer-motion';
 import { useScene } from '../sceneContext';
-import { DISCIPLINES } from '../data/content';
+import { DISCIPLINES, getDisciplines } from '../data/content';
+import { useLang } from '../i18n';
 
 function ToolBadge({ mark, name }) {
   return (
@@ -12,7 +13,7 @@ function ToolBadge({ mark, name }) {
       transition={{ type: 'spring', stiffness: 400, damping: 18 }}
       className="flex items-center gap-3 rounded border border-ink py-2 pl-2 pr-4 font-display text-sm md:text-base"
     >
-      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded bg-ink text-xs font-bold text-white">
+      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded bg-ink text-xs font-bold text-page">
         {mark}
       </span>
       {name}
@@ -28,6 +29,8 @@ function ToolBadge({ mark, name }) {
 export default function Skills() {
   const rootRef = useRef(null);
   const scene = useScene();
+  const { lang, t } = useLang();
+  const disciplines = getDisciplines(lang);
 
   useLayoutEffect(() => {
     if (!scene) return;
@@ -36,11 +39,15 @@ export default function Skills() {
     const ctx = gsap.context(() => {
       const section = rootRef.current;
       const blocks = gsap.utils.toArray('[data-discipline]');
-      const bgColors = DISCIPLINES.map((d) => d.bg);
-      const lerpBg = gsap.utils.pipe(
-        gsap.utils.clamp(0, 1),
-        gsap.utils.interpolate(bgColors)
-      );
+      const lerpLight = gsap.utils.pipe(gsap.utils.clamp(0, 1), gsap.utils.interpolate(DISCIPLINES.map((d) => d.bg)));
+      const lerpDark = gsap.utils.pipe(gsap.utils.clamp(0, 1), gsap.utils.interpolate(DISCIPLINES.map((d) => d.bgDark)));
+      const lerpBg = (p) =>
+        (document.documentElement.dataset.theme === 'dark' ? lerpDark : lerpLight)(p);
+      let lastP = 0;
+      const onTheme = () => {
+        section.style.backgroundColor = lerpBg(lastP);
+      };
+      window.addEventListener('themechange', onTheme);
 
       gsap.set(blocks, { autoAlpha: 0, y: 40 });
       gsap.set(blocks[0], { autoAlpha: 1, y: 0 });
@@ -54,6 +61,7 @@ export default function Skills() {
           scrub: 0.6,
           onUpdate: (self) => {
             // chip: 3 turns across the section, one node lights per sixth
+            lastP = self.progress;
             scene.state.ryExtra = self.progress * Math.PI * 6;
             scene.state.activation = self.progress * 6;
             section.style.backgroundColor = lerpBg(self.progress);
@@ -72,6 +80,7 @@ export default function Skills() {
       tl.to({}, { duration: 0.2 }, blocks.length - 0.2); // pad so the last discipline holds
 
       return () => {
+        window.removeEventListener('themechange', onTheme);
         section.style.backgroundColor = '';
       };
     }, rootRef);
@@ -82,10 +91,10 @@ export default function Skills() {
   return (
     <section id="skills" ref={rootRef} className="relative h-screen overflow-hidden">
       <div className="relative z-20 mx-auto flex h-full w-full max-w-6xl flex-col justify-center px-6 md:px-12">
-        <p className="font-display text-sm font-semibold uppercase tracking-[0.08em] text-accent">/ 02 · Stack</p>
+        <p className="font-display text-sm font-semibold uppercase tracking-[0.08em] text-accent">{t.skills.label}</p>
 
         <div className="relative mt-6 h-[440px] md:h-[400px] md:max-w-[58%]">
-          {DISCIPLINES.map((d) => (
+          {disciplines.map((d) => (
             <div key={d.id} data-discipline className="absolute inset-0">
               <p className="font-display text-xs font-semibold uppercase tracking-[0.14em] text-muted">{d.node}</p>
               <h3 className="mt-3 font-display text-[clamp(1.9rem,4vw,3rem)] font-bold tracking-tightest">
