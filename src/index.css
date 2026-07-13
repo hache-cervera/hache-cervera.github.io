@@ -2,6 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Theme tokens: light by default, remapped when data-theme="dark" is set on <html> */
+:root {
+  --c-bg: #ffffff;
+  --c-ink: #0a0a0a;
+  --c-muted: #6b6b6b;
+  --c-line: #e5e5e5;
+}
+[data-theme='dark'] {
+  --c-bg: #0d0d0d;
+  --c-ink: #f2f2f2;
+  --c-muted: #9a9a9a;
+  --c-line: #2a2a2a;
+}
+
 html.lenis {
   height: auto;
 }
@@ -13,7 +27,7 @@ html.lenis {
 }
 
 body {
-  @apply bg-white text-ink font-body antialiased overflow-x-hidden;
+  @apply bg-page text-ink font-body antialiased overflow-x-hidden;
 }
 
 ::selection {
@@ -53,6 +67,12 @@ body {
   pointer-events: none;
   opacity: 0.028;
   mix-blend-mode: multiply;
+}
+[data-theme='dark'] .grain {
+  mix-blend-mode: screen;
+  opacity: 0.045;
+}
+.grain {
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%25" height="100%25" filter="url(%23n)"/></svg>');
 }
 
@@ -63,4 +83,78 @@ body {
     linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
   mask-image: radial-gradient(ellipse at center, black 0%, transparent 75%);
   -webkit-mask-image: radial-gradient(ellipse at center, black 0%, transparent 75%);
+}
+
+/* Client logos: light versions on dark backgrounds */
+[data-theme='dark'] img[data-logo] {
+  filter: grayscale(1) invert(1) !important;
+}
+[data-theme='dark'] img[data-logo]:hover {
+  filter: none !important;
+}
+
+/* Eclipse theme toggle: an orange sun that slides into a crescent moon */
+.tbtn {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--c-line);
+  cursor: pointer;
+  overflow: hidden;
+  transition: border-color 0.25s ease;
+}
+.tbtn:hover { border-color: #ff3c00; }
+.tbtn .sky {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.6s cubic-bezier(0.6, 0, 0.25, 1.3);
+}
+[data-theme='dark'] .tbtn .sky { transform: rotate(-45deg); }
+.tbtn .core {
+  position: relative;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ff3c00;
+  transition: transform 0.5s cubic-bezier(0.6, 0, 0.25, 1.3), box-shadow 0.4s ease;
+}
+[data-theme='dark'] .tbtn .core {
+  transform: scale(1.35);
+  box-shadow: 0 0 12px rgba(255, 60, 0, 0.55);
+}
+.tbtn .veil {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  height: 12px;
+  margin: -6px 0 0 -6px;
+  border-radius: 50%;
+  background: var(--c-bg);
+  transform: translate(15px, -15px);
+  transition: transform 0.5s cubic-bezier(0.6, 0, 0.25, 1.3), background 0.25s ease;
+  z-index: 2;
+}
+[data-theme='dark'] .tbtn .veil { transform: translate(4px, -4px) scale(1.35); }
+.tbtn .ray {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2px;
+  height: 5px;
+  margin: -2.5px 0 0 -1px;
+  border-radius: 1px;
+  background: #ff3c00;
+  transform: rotate(var(--r)) translateY(-10px);
+  transition: transform 0.45s ease, opacity 0.35s ease;
+}
+[data-theme='dark'] .tbtn .ray {
+  transform: rotate(var(--r)) translateY(-4px) scale(0.2);
+  opacity: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .tbtn .sky, .tbtn .core, .tbtn .veil, .tbtn .ray { transition: none; }
 }

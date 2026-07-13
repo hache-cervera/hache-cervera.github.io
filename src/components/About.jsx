@@ -1,6 +1,7 @@
 import { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import Words from './Words';
+import { useLang } from '../i18n';
 
 function Stat({ value, suffix, label }) {
   return (
@@ -16,6 +17,7 @@ function Stat({ value, suffix, label }) {
 
 export default function About() {
   const rootRef = useRef(null);
+  const { t } = useLang();
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -51,29 +53,26 @@ export default function About() {
     <section id="about" ref={rootRef} className="relative px-6 py-32 md:px-12 md:py-48">
       <div className="relative z-20 mx-auto grid w-full max-w-6xl gap-14 md:grid-cols-[1.1fr_1fr] md:gap-24">
         <div data-rise>
-          <p className="font-display text-sm font-semibold uppercase tracking-[0.08em] text-accent">/ 01 · About</p>
+          <p className="font-display text-sm font-semibold uppercase tracking-[0.08em] text-accent">{t.about.label}</p>
           <h2 className="mt-6 font-display text-[clamp(2rem,4vw,3rem)] font-bold leading-[1.12] tracking-tightest">
-            <span className="block"><Words>I'm Hache.</Words></span>
-            <span className="block"><Words>Developer, builder,</Words></span>
-            <span className="block"><Words>creative technologist.</Words></span>
+            <span className="block"><Words>{t.about.h2a}</Words></span>
+            <span className="block"><Words>{t.about.h2b}</Words></span>
+            <span className="block"><Words>{t.about.h2c}</Words></span>
           </h2>
         </div>
 
         <div className="flex flex-col gap-6 self-center">
           <p data-rise className="max-w-md text-lg leading-relaxed">
-            <Words>
-              I work at the intersection of design and technology: crafting brands, building
-              websites, and making things that look good and actually work.
-            </Words>
+            <Words>{t.about.p1}</Words>
           </p>
-          <p data-rise className="text-muted">Valencia-based. Building things worth building.</p>
+          <p data-rise className="text-muted">{t.about.p2}</p>
 
-          <div data-rise className="mt-4 flex flex-wrap gap-12 rounded bg-ink p-8 text-white">
-            <Stat value={10} suffix="+" label="Websites delivered" />
-            <Stat value={300} suffix="+" label="Digital assets produced" />
+          <div data-rise className="mt-4 flex flex-wrap gap-12 rounded bg-panel p-8 text-white">
+            <Stat value={10} suffix="+" label={t.about.stat1} />
+            <Stat value={300} suffix="+" label={t.about.stat2} />
           </div>
           <p data-rise className="text-sm text-muted">
-            Wide range of clients and industries, incl. Cofidis, Benimar and APM Terminals.
+            {t.about.p3}
           </p>
         </div>
       </div>

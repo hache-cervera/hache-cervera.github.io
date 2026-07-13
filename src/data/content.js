@@ -1,95 +1,121 @@
 // Six disciplines, one per network node on the chip.
-// `bg` tints the pinned Skills section as each discipline lands.
-export const DISCIPLINES = [
+// `bg` tints the pinned Skills section as each discipline lands (light theme);
+// `bgDark` is the same journey remapped for dark mode.
+// Translatable fields hold { en, es } pairs; resolve them with getDisciplines(lang).
+const L = (en, es) => ({ en, es });
+
+const DISCIPLINES_RAW = [
   {
     id: 'dev',
-    label: 'Web & Development',
-    node: 'Node 01 / Code',
+    label: L('Web & Development', 'Web y Desarrollo'),
+    node: L('Node 01 / Code', 'Nodo 01 / Código'),
     bg: '#ffffff',
+    bgDark: '#0d0d0d',
     tools: [
-      { mark: 'Wp', name: 'WordPress' },
-      { mark: 'El', name: 'Elementor' },
-      { mark: 'Dv', name: 'Divi' },
-      { mark: 'Wb', name: 'WP Bakery' },
-      { mark: 'Ml', name: 'WPML' },
-      { mark: 'Wc', name: 'WooCommerce' },
-      { mark: 'H5', name: 'HTML' },
-      { mark: 'C3', name: 'CSS' },
-      { mark: 'Js', name: 'JavaScript' },
+      { mark: 'Wp', name: L('WordPress', 'WordPress') },
+      { mark: 'El', name: L('Elementor', 'Elementor') },
+      { mark: 'Dv', name: L('Divi', 'Divi') },
+      { mark: 'Wb', name: L('WP Bakery', 'WP Bakery') },
+      { mark: 'Ml', name: L('WPML', 'WPML') },
+      { mark: 'Wc', name: L('WooCommerce', 'WooCommerce') },
+      { mark: 'H5', name: L('HTML', 'HTML') },
+      { mark: 'C3', name: L('CSS', 'CSS') },
+      { mark: 'Js', name: L('JavaScript', 'JavaScript') },
     ],
   },
   {
     id: 'infra',
-    label: 'Technical & Infrastructure',
-    node: 'Node 02 / Systems',
+    label: L('Technical & Infrastructure', 'Técnico e Infraestructura'),
+    node: L('Node 02 / Systems', 'Nodo 02 / Sistemas'),
     bg: '#fff8f5',
+    bgDark: '#151009',
     tools: [
-      { mark: 'Sm', name: 'Site Migrations' },
-      { mark: 'St', name: 'Staging Environments' },
-      { mark: 'Dns', name: 'DNS & Hosting' },
-      { mark: 'Ssl', name: 'SSL Setup' },
-      { mark: 'Pf', name: 'Performance' },
-      { mark: 'Cwv', name: 'Core Web Vitals' },
-      { mark: 'Sc', name: 'Schema Markup' },
-      { mark: 'Xml', name: 'Sitemaps' },
-      { mark: 'Hl', name: 'Hreflang' },
-      { mark: 'Gtm', name: 'GTM' },
+      { mark: 'Sm', name: L('Site Migrations', 'Migraciones') },
+      { mark: 'St', name: L('Staging Environments', 'Entornos de staging') },
+      { mark: 'Dns', name: L('DNS & Hosting', 'DNS y Hosting') },
+      { mark: 'Ssl', name: L('SSL Setup', 'Configuración SSL') },
+      { mark: 'Pf', name: L('Performance', 'Rendimiento') },
+      { mark: 'Cwv', name: L('Core Web Vitals', 'Core Web Vitals') },
+      { mark: 'Sc', name: L('Schema Markup', 'Marcado Schema') },
+      { mark: 'Xml', name: L('Sitemaps', 'Sitemaps') },
+      { mark: 'Hl', name: L('Hreflang', 'Hreflang') },
+      { mark: 'Gtm', name: L('GTM', 'GTM') },
     ],
   },
   {
     id: 'design',
-    label: 'Design & Branding',
-    node: 'Node 03 / Design',
+    label: L('Design & Branding', 'Diseño y Branding'),
+    node: L('Node 03 / Design', 'Nodo 03 / Diseño'),
     bg: '#fff1eb',
+    bgDark: '#1a110b',
     tools: [
-      { mark: 'Ps', name: 'Photoshop' },
-      { mark: 'Ai', name: 'Illustrator' },
-      { mark: 'Id', name: 'InDesign' },
-      { mark: 'Fi', name: 'Figma' },
-      { mark: 'Xd', name: 'Adobe XD' },
+      { mark: 'Ps', name: L('Photoshop', 'Photoshop') },
+      { mark: 'Ai', name: L('Illustrator', 'Illustrator') },
+      { mark: 'Id', name: L('InDesign', 'InDesign') },
+      { mark: 'Fi', name: L('Figma', 'Figma') },
+      { mark: 'Xd', name: L('Adobe XD', 'Adobe XD') },
     ],
   },
   {
     id: 'motion',
-    label: 'Motion & AV',
-    node: 'Node 04 / Motion',
+    label: L('Motion & AV', 'Motion y Audiovisual'),
+    node: L('Node 04 / Motion', 'Nodo 04 / Motion'),
     bg: '#ffe9df',
+    bgDark: '#20130b',
     tools: [
-      { mark: 'Ae', name: 'After Effects' },
-      { mark: 'Pr', name: 'Premiere Pro' },
-      { mark: 'Dr', name: 'DaVinci Resolve' },
-      { mark: 'Bl', name: 'Blender' },
-      { mark: 'Lp', name: 'Logic Pro X' },
+      { mark: 'Ae', name: L('After Effects', 'After Effects') },
+      { mark: 'Pr', name: L('Premiere Pro', 'Premiere Pro') },
+      { mark: 'Dr', name: L('DaVinci Resolve', 'DaVinci Resolve') },
+      { mark: 'Bl', name: L('Blender', 'Blender') },
+      { mark: 'Lp', name: L('Logic Pro X', 'Logic Pro X') },
     ],
   },
   {
     id: 'seo',
-    label: 'SEO & Analytics',
-    node: 'Node 05 / Search',
+    label: L('SEO & Analytics', 'SEO y Analítica'),
+    node: L('Node 05 / Search', 'Nodo 05 / Búsqueda'),
     bg: '#ffe1d3',
+    bgDark: '#26140a',
     tools: [
-      { mark: 'Sr', name: 'Semrush' },
-      { mark: 'Ah', name: 'Ahrefs' },
-      { mark: 'Yo', name: 'Yoast' },
-      { mark: 'Rm', name: 'Rank Math' },
-      { mark: 'Gsc', name: 'Search Console' },
-      { mark: 'Ga4', name: 'GA4' },
+      { mark: 'Sr', name: L('Semrush', 'Semrush') },
+      { mark: 'Ah', name: L('Ahrefs', 'Ahrefs') },
+      { mark: 'Yo', name: L('Yoast', 'Yoast') },
+      { mark: 'Rm', name: L('Rank Math', 'Rank Math') },
+      { mark: 'Gsc', name: L('Search Console', 'Search Console') },
+      { mark: 'Ga4', name: L('GA4', 'GA4') },
     ],
   },
   {
     id: 'ai',
-    label: 'AI & Automation',
-    node: 'Node 06 / Judgment',
+    label: L('AI & Automation', 'IA y Automatización'),
+    node: L('Node 06 / Judgment', 'Nodo 06 / Criterio'),
     bg: '#ffd9c8',
-    note: 'AI as a tool, not a crutch: integrated where the project needs it, understanding what it generates. No blind copy-paste.',
+    bgDark: '#2c1509',
+    note: L(
+      'AI as a tool, not a crutch: integrated where the project needs it, understanding what it generates. No blind copy-paste.',
+      'La IA como herramienta, no como muleta: integrada donde el proyecto lo necesita, entendiendo lo que genera. Nada de copiar y pegar a ciegas.'
+    ),
     tools: [
-      { mark: 'Ad', name: 'AI-assisted Dev' },
-      { mark: 'Pd', name: 'Prompt Design' },
-      { mark: 'Cg', name: 'Content Generation' },
-      { mark: 'Wa', name: 'Workflow Automation' },
+      { mark: 'Ad', name: L('AI-assisted Dev', 'Desarrollo asistido por IA') },
+      { mark: 'Pd', name: L('Prompt Design', 'Diseño de prompts') },
+      { mark: 'Cg', name: L('Content Generation', 'Generación de contenido') },
+      { mark: 'Wa', name: L('Workflow Automation', 'Automatización de flujos') },
     ],
   },
 ];
+
+export function getDisciplines(lang) {
+  return DISCIPLINES_RAW.map((d) => ({
+    ...d,
+    label: d.label[lang],
+    node: d.node[lang],
+    note: d.note ? d.note[lang] : undefined,
+    tools: d.tools.map((t) => ({ mark: t.mark, name: t.name[lang] })),
+  }));
+}
+
+// Kept for anything that only needs language-independent fields (bg tints).
+export const DISCIPLINES = getDisciplines('en');
 
 export const LOGOS = [
   { src: 'logos/cofidis.png', alt: 'Cofidis' },
@@ -97,27 +123,56 @@ export const LOGOS = [
   { src: 'logos/apm-terminals.png', alt: 'APM Terminals' },
 ];
 
-export const EXPERIENCE = [
+const EXPERIENCE_RAW = [
   {
-    role: 'Creative & Digital Specialist',
+    role: L('Creative & Digital Specialist', 'Especialista Creativa y Digital'),
     company: 'Neurona Digital SL',
     place: 'Valencia',
-    dates: 'Nov 2024 – Present',
+    dates: L('Nov 2024 – Present', 'Nov 2024 – Actualidad'),
     points: [
-      '+10 WordPress sites built and maintained in under a year: design, migrations, hosting, DNS, SSL and technical troubleshooting.',
-      'Graphic, motion and audiovisual production for brands including Cofidis and Benimar: +300 pieces for organic content and paid social.',
-      'Technical audits, web performance optimisation and on-page SEO.',
-      'Multiple clients and projects in parallel, agency pace.',
+      L(
+        '+10 WordPress sites built and maintained in under a year: design, migrations, hosting, DNS, SSL and technical troubleshooting.',
+        '+10 webs WordPress construidas y mantenidas en menos de un año: diseño, migraciones, hosting, DNS, SSL y resolución técnica.'
+      ),
+      L(
+        'Graphic, motion and audiovisual production for brands including Cofidis and Benimar: +300 pieces for organic content and paid social.',
+        'Producción gráfica, motion y audiovisual para marcas como Cofidis y Benimar: +300 piezas para contenido orgánico y paid social.'
+      ),
+      L(
+        'Technical audits, web performance optimisation and on-page SEO.',
+        'Auditorías técnicas, optimización de rendimiento web y SEO on-page.'
+      ),
+      L(
+        'Multiple clients and projects in parallel, agency pace.',
+        'Varios clientes y proyectos en paralelo, a ritmo de agencia.'
+      ),
     ],
   },
   {
-    role: 'Media & Content Specialist',
+    role: L('Media & Content Specialist', 'Especialista en Medios y Contenido'),
     company: 'Jump Yard',
     place: 'Valencia',
-    dates: 'Jan – Jun 2025',
+    dates: L('Jan – Jun 2025', 'Ene – Jun 2025'),
     points: [
-      'Video creation and editing for organic content and paid ad campaigns.',
-      'Media management, content strategy and sponsorship coordination.',
+      L(
+        'Video creation and editing for organic content and paid ad campaigns.',
+        'Creación y edición de vídeo para contenido orgánico y campañas de pago.'
+      ),
+      L(
+        'Media management, content strategy and sponsorship coordination.',
+        'Gestión de medios, estrategia de contenidos y coordinación de patrocinios.'
+      ),
     ],
   },
 ];
+
+export function getExperience(lang) {
+  return EXPERIENCE_RAW.map((j) => ({
+    ...j,
+    role: j.role[lang],
+    dates: j.dates[lang],
+    points: j.points.map((p) => p[lang]),
+  }));
+}
+
+export const EXPERIENCE = getExperience('en');

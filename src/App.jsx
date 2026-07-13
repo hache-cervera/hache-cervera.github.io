@@ -15,6 +15,7 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import BackToTop from './components/BackToTop';
 import ProximityLight from './components/ProximityLight';
+import TopControls from './components/TopControls';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -139,6 +140,7 @@ export default function App() {
       {/* The chip floats above section backgrounds (z-0) and below content (z-20) */}
       <canvas ref={canvasRef} className="fixed inset-0 z-10 h-full w-full pointer-events-none" />
       <div className="grain" aria-hidden="true" />
+      <TopControls />
       {scene && (
         <main className="relative">
           <Hero />
