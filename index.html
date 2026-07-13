@@ -8,6 +8,13 @@
       name="description"
       content="Hache (Ada Cervera) — creative technologist and web developer in Valencia. 10+ websites delivered, 300+ digital assets produced. Design, code, motion and SEO — end to end."
     />
+    <script>
+      (function () {
+        try {
+          document.documentElement.dataset.theme = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light';
+        } catch (e) {}
+      })();
+    </script>
     <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

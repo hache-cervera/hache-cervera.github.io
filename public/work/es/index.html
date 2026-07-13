@@ -24,9 +24,7 @@
   <script>
     (function () {
       try {
-        var t = localStorage.getItem('theme');
-        if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-        document.documentElement.dataset.theme = t;
+        document.documentElement.dataset.theme = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light';
       } catch (e) {}
     })();
   </script>
@@ -138,21 +136,63 @@
     .lang a { text-decoration: none; color: var(--muted); padding: 4px 2px; border-bottom: 2px solid transparent; }
     .lang a:hover { color: var(--accent); }
     .lang a.on { color: var(--ink); border-bottom-color: var(--accent); }
-    .mode {
-      width: 36px;
-      height: 36px;
+    .tbtn {
+      position: relative;
+      width: 40px;
+      height: 40px;
+      background: none;
+      border: 1px solid var(--line);
+      cursor: pointer;
+      overflow: hidden;
+      transition: border-color 0.25s ease;
+    }
+    .tbtn:hover { border-color: var(--accent); }
+    .tbtn .sky {
+      position: absolute;
+      inset: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: none;
-      border: 1px solid var(--line);
-      color: var(--muted);
-      cursor: pointer;
-      transition: color 0.2s ease, border-color 0.2s ease;
+      transition: transform 0.6s cubic-bezier(0.6, 0, 0.25, 1.3);
     }
-    .mode:hover { color: var(--accent); border-color: var(--ink); }
-    :root[data-theme="dark"] .ic-moon { display: none; }
-    :root:not([data-theme="dark"]) .ic-sun { display: none; }
+    :root[data-theme="dark"] .tbtn .sky { transform: rotate(-45deg); }
+    .tbtn .core {
+      position: relative;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      transition: transform 0.5s cubic-bezier(0.6, 0, 0.25, 1.3), box-shadow 0.4s ease;
+    }
+    :root[data-theme="dark"] .tbtn .core { transform: scale(1.35); box-shadow: 0 0 12px rgba(255, 60, 0, 0.55); }
+    .tbtn .veil {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 12px;
+      height: 12px;
+      margin: -6px 0 0 -6px;
+      border-radius: 50%;
+      background: var(--bg);
+      transform: translate(15px, -15px);
+      transition: transform 0.5s cubic-bezier(0.6, 0, 0.25, 1.3), background 0.25s ease;
+      z-index: 2;
+    }
+    :root[data-theme="dark"] .tbtn .veil { transform: translate(4px, -4px) scale(1.35); }
+    .tbtn .ray {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 2px;
+      height: 5px;
+      margin: -2.5px 0 0 -1px;
+      border-radius: 1px;
+      background: var(--accent);
+      transform: rotate(var(--r)) translateY(-10px);
+      transition: transform 0.45s ease, opacity 0.35s ease;
+    }
+    :root[data-theme="dark"] .tbtn .ray { transform: rotate(var(--r)) translateY(-4px) scale(0.2); opacity: 0; }
+    @media (prefers-reduced-motion: reduce) { .tbtn .sky, .tbtn .core, .tbtn .veil, .tbtn .ray { transition: none; } }
 
     /* ---------- Hero ---------- */
     .hero { position: relative; padding: 96px 24px 64px; }
@@ -728,9 +768,12 @@
           <a href="../">EN</a>
           <a class="on" href="./" aria-current="page">ES</a>
         </nav>
-        <button class="mode" id="modeToggle" type="button" aria-label="Cambiar entre modo claro y oscuro">
-          <svg class="ic-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
-          <svg class="ic-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <button class="tbtn" id="modeToggle" type="button" aria-label="Switch between light and dark mode">
+          <span class="sky" aria-hidden="true">
+            <span class="ray" style="--r:0deg"></span><span class="ray" style="--r:45deg"></span><span class="ray" style="--r:90deg"></span><span class="ray" style="--r:135deg"></span><span class="ray" style="--r:180deg"></span><span class="ray" style="--r:225deg"></span><span class="ray" style="--r:270deg"></span><span class="ray" style="--r:315deg"></span>
+            <span class="core"></span>
+            <span class="veil"></span>
+          </span>
         </button>
       </div>
     </div>
@@ -1167,7 +1210,7 @@
          Until then every track() call is a no-op. Events sent: page_view (auto),
          gate_unlock / gate_fail, section_view, project_click, video_play,
          image_open, scroll_depth. */
-      var GA_ID = '';
+      var GA_ID = 'G-6JCDHFSJ4M';
       if (GA_ID) {
         var ga = document.createElement('script');
         ga.async = true;
