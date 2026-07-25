@@ -1237,7 +1237,9 @@
         if (window.gtag) window.gtag('event', name, params || {});
       }
 
-      /* Password gate: sha-256 of the password, checked in the browser */
+      /* Password gate: sha-256 of the password, checked in the browser.
+         Set GATE_ENABLED to true to turn the gate back on. */
+      var GATE_ENABLED = false;
       var HASH = 'c77e804c6746341d5d1f262abefd86bcbd5dd277ef4113ea4d72b7a82822f9b3';
       var KEY = 'work-gate-ok';
       var form = document.getElementById('gateForm');
@@ -1246,35 +1248,39 @@
 
       function unlock() { document.body.classList.remove('locked'); }
 
-      var peek = document.getElementById('gatePeek');
-      peek.addEventListener('click', function () {
-        var showing = input.type === 'text';
-        input.type = showing ? 'password' : 'text';
-        peek.setAttribute('aria-pressed', String(!showing));
-        peek.setAttribute('aria-label', showing ? 'Show password' : 'Hide password');
-        input.focus();
-      });
-
-      if (sessionStorage.getItem(KEY) === HASH) {
+      if (!GATE_ENABLED) {
         unlock();
-      }
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        var value = input.value.trim().toLowerCase();
-        crypto.subtle.digest('SHA-256', new TextEncoder().encode(value)).then(function (buf) {
-          var hex = Array.from(new Uint8Array(buf)).map(function (b) { return b.toString(16).padStart(2, '0'); }).join('');
-          if (hex === HASH) {
-            sessionStorage.setItem(KEY, HASH);
-            error.classList.remove('on');
-            track('gate_unlock');
-            unlock();
-          } else {
-            error.classList.add('on');
-            track('gate_fail');
-            input.select();
-          }
+      } else {
+        var peek = document.getElementById('gatePeek');
+        peek.addEventListener('click', function () {
+          var showing = input.type === 'text';
+          input.type = showing ? 'password' : 'text';
+          peek.setAttribute('aria-pressed', String(!showing));
+          peek.setAttribute('aria-label', showing ? 'Show password' : 'Hide password');
+          input.focus();
         });
-      });
+
+        if (sessionStorage.getItem(KEY) === HASH) {
+          unlock();
+        }
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          var value = input.value.trim().toLowerCase();
+          crypto.subtle.digest('SHA-256', new TextEncoder().encode(value)).then(function (buf) {
+            var hex = Array.from(new Uint8Array(buf)).map(function (b) { return b.toString(16).padStart(2, '0'); }).join('');
+            if (hex === HASH) {
+              sessionStorage.setItem(KEY, HASH);
+              error.classList.remove('on');
+              track('gate_unlock');
+              unlock();
+            } else {
+              error.classList.add('on');
+              track('gate_fail');
+              input.select();
+            }
+          });
+        });
+      }
 
       /* Lightbox shared across every [data-gallery] group */
       var box = document.getElementById('lightbox');
