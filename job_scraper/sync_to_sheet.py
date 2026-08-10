@@ -28,9 +28,12 @@ except AttributeError:
 
 JOB_SCRAPER_DIR = Path(__file__).parent
 SEEN_JOBS_PATH = JOB_SCRAPER_DIR / "seen_jobs.json"
+SHEET_TAB = "Hoja 1"
 
 SYNCABLE_STATUSES = {"new", "auto-nueva"}
 SYNCABLE_FITS = {"high", "medium"}
+
+FIT_TO_SCORE = {"high": 80, "medium": 60}
 
 
 def main():
@@ -69,11 +72,7 @@ def main():
         print("\nDRY RUN: not writing to Sheet.")
         return
 
-    from google.auth import default
-    from googleapiclient.discovery import build
-
-    creds, _ = default(scopes=['https://www.googleapis.com/auth/spreadsheets'])
-    sheets = build('sheets', 'v4', credentials=creds)
+    from sheet_writer import append_job_rows
 
     today = datetime.now().strftime("%Y-%m-%d")
     rows = []
@@ -81,26 +80,22 @@ def main():
 
     for key, job in to_sync:
         status_label = job.get("status", "auto-nueva")
-        url = job.get("url", "")
-        rows.append([
-            job.get("first_seen", today),
-            job.get("title", ""),
-            job.get("company", ""),
-            "Remoto",
-            "",
-            f'=HYPERLINK("{url}", "Ver oferta")' if url else "",
-            job.get("portal", "").replace("-search", ""),
-            status_label,
-            "Synced from seen_jobs.json" if status_label == "new" else "AUTO - revisar",
-        ])
+        fit = job.get("fit", "medium")
+        score = job.get("score", FIT_TO_SCORE.get(fit, ""))
+        rows.append({
+            "date": job.get("first_seen", today),
+            "title": job.get("title", ""),
+            "company": job.get("company", ""),
+            "location": job.get("location") or "Remoto",
+            "score": score,
+            "url": job.get("url", ""),
+            "portal": job.get("portal", "").replace("-search", ""),
+            "status": status_label,
+            "notes": "Synced from seen_jobs.json" if status_label == "new" else "AUTO - revisar",
+        })
         synced_keys.append(key)
 
-    sheets.spreadsheets().values().append(
-        spreadsheetId=sheet_id,
-        range="Hoja 1!A2",
-        valueInputOption="USER_ENTERED",
-        body={"values": rows}
-    ).execute()
+    append_job_rows(sheet_id, rows, tab=SHEET_TAB)
 
     for key in synced_keys:
         seen[key]["status"] = "synced"

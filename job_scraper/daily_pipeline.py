@@ -7,7 +7,10 @@ Scoring is rule-based but tuned to approximate Claude's evaluation criteria:
 - Deal-breakers (senior, hybrid, language reqs) are hard rejects
 - Experience-years detection via regex (>4 years = reject)
 - Remote verification (positive + negative signals)
-- Weighted keyword matching by category (core role vs supporting skill)
+- Weighted keyword matching by category (core role vs supporting skill),
+  matched on word boundaries to avoid substring false positives
+- Language requirement detection is contextual (only rejects when the
+  language appears near requirement wording, not as a company nationality)
 - Rows are marked "auto-nueva" and get an "AUTO - revisar" note so they
   are visibly distinct from Claude-vetted rows.
 
@@ -42,6 +45,7 @@ JOB_SCRAPER_DIR = Path(__file__).parent
 SEEN_JOBS_PATH = JOB_SCRAPER_DIR / "seen_jobs.json"
 TRACKER_PATH = BASE_DIR / "job_search_tracker.csv"
 LOG_PATH = JOB_SCRAPER_DIR / "pipeline_log.txt"
+SHEET_TAB = "Hoja 1"
 
 # --- Search plan: (portal_key, cli_relpath, args) ---------------------------
 SEARCHES = [
@@ -85,10 +89,13 @@ SUPPORTING_KEYWORDS = [
     "html", "css", "content", "contenido",
     "marca", "brand", "motion", "video",
 ]
+# Core keyword matches in description are capped like the other categories
+# to avoid a single skill mentioned many times inflating the score.
+CORE_DESC_MATCH_CAP = 32  # 4 matches x 8 pts
 
 # Deal-breaker patterns
 SENIORITY_TITLE_REJECT = [
-    "senior", "sr.", "lead", "head of", "director", "principal", "staff",
+    "senior", "sr.", "lead", "head of", "director", "principal",
     "jefe de", "responsable de equipo", "manager", "architect",
     "team lead", "tech lead",
 ]
@@ -97,12 +104,26 @@ NON_REMOTE_REJECT = [
     "presencial", "oficina obligatoria", "commutable", "relocation",
     "relocat", "in-office", "in office",
 ]
-LANGUAGE_REJECT = [
+
+# Languages that would disqualify (Spanish/English are always fine and
+# not included). Matched with word boundaries.
+LANGUAGE_TERMS = [
     "french", "français", "francés", "german", "deutsch", "alemán",
     "dutch", "nederlands", "holandés", "italian", "italiano",
     "portuguese", "portugués", "mandarin", "chinese", "japanese",
     "korean", "arabic", "russian",
 ]
+# Only treat a language mention as a requirement if it appears near one
+# of these requirement-context words within REQ_CONTEXT_WINDOW chars.
+REQ_CONTEXT_WORDS = [
+    "required", "requirement", "requisito", "imprescindible", "must",
+    "fluent", "fluente", "fluido", "native", "nativo", "nativa",
+    "proficien", "speaking", "hablar", "idioma", "language skills",
+    "knowledge of", "conocimiento de", "nice to have", "plus",
+    "valorable", "deseable", "a favor", "b1", "b2", "c1", "c2",
+]
+REQ_CONTEXT_WINDOW = 60
+
 EXPERIENCE_YEARS_PATTERN = re.compile(
     r'(?:'
     r'(\d+)\+?\s*(?:years?|años?|yrs?)\s*(?:of\s+)?(?:experience|experiencia|exp\.?)'
@@ -126,6 +147,25 @@ WATCHLIST_COMPANIES = [
     "leadtech", "experience it", "wpmu dev", "wpmudev",
     "cloudlinux", "automattic", "iubenda",
 ]
+
+
+def _kw_pattern(kw):
+    """Build a word-boundary-safe regex for a keyword/phrase."""
+    escaped = re.escape(kw)
+    # Use lookaround word boundaries so multi-word phrases and terms with
+    # punctuation (e.g. "on-page", "sr.") still match correctly.
+    return re.compile(r'(?<![a-z0-9áéíóúñ])' + escaped + r'(?![a-z0-9áéíóúñ])', re.IGNORECASE)
+
+
+_KW_PATTERN_CACHE = {}
+
+
+def kw_in(kw, text):
+    pat = _KW_PATTERN_CACHE.get(kw)
+    if pat is None:
+        pat = _kw_pattern(kw)
+        _KW_PATTERN_CACHE[kw] = pat
+    return pat.search(text) is not None
 
 
 def log(msg):
@@ -168,6 +208,22 @@ def detect_required_years(text):
     return max(years) if years else 0
 
 
+def check_language_requirement(text):
+    """Return the first disqualifying language term found in a requirement
+    context, or None. Avoids false positives like 'iubenda is an Italian
+    company' by requiring requirement-context wording nearby."""
+    text_l = text.lower()
+    for term in LANGUAGE_TERMS:
+        pat = _kw_pattern(term)
+        for m in pat.finditer(text_l):
+            start = max(0, m.start() - REQ_CONTEXT_WINDOW)
+            end = min(len(text_l), m.end() + REQ_CONTEXT_WINDOW)
+            window = text_l[start:end]
+            if any(kw_in(ctx, window) for ctx in REQ_CONTEXT_WORDS):
+                return term
+    return None
+
+
 def score_job(title, company, location, description):
     title_l = (title or "").lower()
     company_l = (company or "").lower()
@@ -179,21 +235,27 @@ def score_job(title, company, location, description):
 
     # --- Core role keyword in title: strong positive ---
     for kw in CORE_ROLE_KEYWORDS:
-        if kw in title_l:
+        if kw_in(kw, title_l):
             score += 25
             reasons.append(f"+25 core '{kw}' in title")
             break  # only count once for title match
 
-    # --- Core role keyword in description (not in title) ---
+    # --- Core role keyword in description (not in title), capped ---
+    desc_bonus = 0
+    desc_hits = []
     for kw in CORE_ROLE_KEYWORDS:
-        if kw not in title_l and kw in all_text:
-            score += 8
-            reasons.append(f"+8 core '{kw}' in desc")
+        if not kw_in(kw, title_l) and kw_in(kw, all_text):
+            desc_bonus += 8
+            desc_hits.append(kw)
+    if desc_bonus:
+        capped = min(desc_bonus, CORE_DESC_MATCH_CAP)
+        score += capped
+        reasons.append(f"+{capped} core in desc ({len(desc_hits)} matches)")
 
     # --- Strong skill keywords ---
     strong_hits = 0
     for kw in STRONG_SKILL_KEYWORDS:
-        if kw in all_text:
+        if kw_in(kw, all_text):
             strong_hits += 1
     if strong_hits:
         bonus = min(strong_hits * 6, 30)
@@ -203,7 +265,7 @@ def score_job(title, company, location, description):
     # --- Supporting keywords ---
     support_hits = 0
     for kw in SUPPORTING_KEYWORDS:
-        if kw in all_text:
+        if kw_in(kw, all_text):
             support_hits += 1
     if support_hits:
         bonus = min(support_hits * 3, 15)
@@ -212,14 +274,14 @@ def score_job(title, company, location, description):
 
     # --- Remote positive signals ---
     for kw in REMOTE_POSITIVE:
-        if kw in all_text:
+        if kw_in(kw, all_text):
             score += 10
             reasons.append(f"+10 remote signal '{kw}'")
             break
 
     # --- Watchlist company ---
     for wl in WATCHLIST_COMPANIES:
-        if wl in company_l:
+        if kw_in(wl, company_l):
             score += 15
             reasons.append(f"+15 watchlist company")
             break
@@ -228,24 +290,23 @@ def score_job(title, company, location, description):
 
     # Seniority in title
     for kw in SENIORITY_TITLE_REJECT:
-        if kw in title_l:
+        if kw_in(kw, title_l):
             score -= 100
             reasons.append(f"-100 seniority '{kw}' in title")
             break
 
     # Non-remote signals
     for kw in NON_REMOTE_REJECT:
-        if kw in all_text:
+        if kw_in(kw, all_text):
             score -= 100
             reasons.append(f"-100 non-remote '{kw}'")
             break
 
-    # Language requirements
-    for kw in LANGUAGE_REJECT:
-        if kw in all_text:
-            score -= 100
-            reasons.append(f"-100 language req '{kw}'")
-            break
+    # Language requirements (contextual, avoids "Italian company" false hits)
+    lang_hit = check_language_requirement(all_text)
+    if lang_hit:
+        score -= 100
+        reasons.append(f"-100 language req '{lang_hit}'")
 
     # Experience years >4
     req_years = detect_required_years(all_text)
@@ -286,10 +347,16 @@ def load_tracker_keys():
     return keys
 
 
-def fetch_detail(portal, cli_relpath, job_id_or_url):
+def fetch_detail(portal, cli_relpath, job_id, url):
+    """Fetch full job detail. Tecnoempleo and InfoJobs CLIs require the
+    full URL (not the bare rf-/of-i ID) to build the detail request."""
     if portal == "freehire-search":
         return None
-    result = run_cli(cli_relpath, ["detail", job_id_or_url, "--format", "json"])
+    if portal in ("tecnoempleo-search", "infojobs-search"):
+        target = url or job_id
+    else:
+        target = job_id
+    result = run_cli(cli_relpath, ["detail", target, "--format", "json"])
     if not result:
         return None
     return json.dumps(result)
@@ -358,7 +425,7 @@ def main():
 
     final_rows = []
     for c in candidates[:25]:
-        detail_text = fetch_detail(c["portal"], c["cli_relpath"], c["job_id"]) or c["description"]
+        detail_text = fetch_detail(c["portal"], c["cli_relpath"], c["job_id"], c["url"]) or c["description"]
         final_score, reasons = score_job(c["title"], c["company"], c["location"], detail_text)
 
         fit_label = "high" if final_score >= 70 else "medium" if final_score >= args.fit_threshold else "low"
@@ -368,8 +435,10 @@ def main():
             "title": c["title"],
             "company": c["company"],
             "url": c["url"],
+            "location": c["location"],
             "first_seen": datetime.now().strftime("%Y-%m-%d"),
             "fit": fit_label,
+            "score": final_score,
             "status": status,
             "portal": c["portal"],
             "score_reasons": reasons[:5],
@@ -393,32 +462,23 @@ def main():
         log("No new jobs above threshold. Done.")
         return
 
-    from google.auth import default
-    from googleapiclient.discovery import build
-
-    creds, _ = default(scopes=['https://www.googleapis.com/auth/spreadsheets'])
-    sheets = build('sheets', 'v4', credentials=creds)
+    from sheet_writer import append_job_rows
 
     today = datetime.now().strftime("%Y-%m-%d")
-    rows = [[
-        today,
-        r["title"],
-        r["company"],
-        r["location"] or "Remoto",
-        r["final_score"],
-        f'=HYPERLINK("{r["url"]}", "Ver oferta")',
-        r["portal"].replace("-search", ""),
-        "auto-nueva",
-        "AUTO - revisar (confirmar remoto/senioridad antes de aplicar)",
-    ] for r in final_rows]
+    row_data = [{
+        "date": today,
+        "title": r["title"],
+        "company": r["company"],
+        "location": r["location"] or "Remoto",
+        "score": r["final_score"],
+        "url": r["url"],
+        "portal": r["portal"].replace("-search", ""),
+        "status": "auto-nueva",
+        "notes": "AUTO - revisar (confirmar remoto/senioridad antes de aplicar)",
+    } for r in final_rows]
 
-    sheets.spreadsheets().values().append(
-        spreadsheetId=sheet_id,
-        range="Hoja 1!A2",
-        valueInputOption="USER_ENTERED",
-        body={"values": rows}
-    ).execute()
-    log(f"Wrote {len(rows)} rows to Sheet.")
+    append_job_rows(sheet_id, row_data, tab=SHEET_TAB)
+    log(f"Wrote {len(row_data)} rows to Sheet.")
 
     if args.send_email:
         send_email_summary(final_rows)
