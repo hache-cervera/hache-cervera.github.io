@@ -16,7 +16,24 @@
       "Bash(python job_scraper/daily_pipeline.py:*)",
       "Bash(python job_scraper/gmail_auth_setup.py:*)",
       "Bash(python job_scraper/sync_to_sheet.py:*)",
-      "Bash(python3 job_scraper/sync_to_sheet.py:*)"
+      "Bash(python3 job_scraper/sync_to_sheet.py:*)",
+      "mcp__JobDataLake__search_jobs",
+      "mcp__JobDataLake__get_job",
+      "mcp__JobDataLake__get_company",
+      "mcp__JobDataLake__find_similar_jobs",
+      "mcp__JobDataLake__get_filter_options",
+      "mcp__Indeed__search_jobs",
+      "mcp__Indeed__get_job_details",
+      "mcp__Indeed__get_company_data",
+      "mcp__Dice__search_jobs",
+      "mcp__Dice__get_job_details",
+      "mcp__Dice__get_company",
+      "mcp__Composio__COMPOSIO_SEARCH_TOOLS",
+      "mcp__Composio__COMPOSIO_MULTI_EXECUTE_TOOL",
+      "mcp__Composio__COMPOSIO_GET_TOOL_SCHEMAS",
+      "WebFetch",
+      "ListConnectors",
+      "SearchMcpRegistry"
     ]
   }
 }
