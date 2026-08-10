@@ -9,3 +9,37 @@ flor_*.py
 mejorar_flor.py
 *.glb
 *.docx
+
+# Dependencies
+bun.lock
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Agent skills: ignore deps and locks, source is tracked separately
+.agents/**/node_modules/
+.agents/**/bun.lock
+.agents/**/*.log
+
+# Job scraper personal data (never commit)
+**/job_scraper/seen_jobs.json
+**/job_scraper/*.md
+**/job_scraper/google-credentials.json
+**/job_scraper/oauth-client.json
+**/job_scraper/token.json
+**/job_scraper/pipeline_log.txt
+
+# Personal documents
+documents/cv/
+documents/linkedin/
+documents/diplomas/
+documents/references/
+documents/applications/
+documents/postings/
+documents/interview/
+
+# Secrets
+.env
+.env.*
