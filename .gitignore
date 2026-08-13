@@ -43,3 +43,8 @@ documents/interview/
 # Secrets
 .env
 .env.*
+
+# Radar: base de datos local con ofertas y decisiones
+radar/radar.db
+radar/__pycache__/
+radar/**/__pycache__/
