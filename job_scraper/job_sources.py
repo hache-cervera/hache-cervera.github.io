@@ -9,11 +9,15 @@ API key, ni conector, ni que ningun servicio externo este "conectado".
 
 Cada fetcher devuelve la misma estructura normalizada:
     {source, id, title, company, url, location, description, date,
-     seniority, salary}
+     seniority, salary, employment_type}
 
-La funcion clave es `geo_allows_spain()`: la mayoria de ofertas "remotas"
-de estos agregadores son remotas *solo dentro de EEUU*. Sin este filtro,
-el 80% de los resultados son inaplicables desde Espana.
+Dos filtros hacen que los resultados sean utiles:
+  - `geo_allows_spain()`: la mayoria de ofertas "remotas" de estos
+    agregadores son remotas *solo dentro de EEUU*. Sin esto, el 80% de
+    los resultados son inaplicables desde Espana.
+  - `employment_is_full_time()`: solo empleo por cuenta ajena a jornada
+    completa. Estos tablones mezclan mucho encargo freelance y trabajo
+    por proyecto, que no es lo que se busca.
 """
 
 import json
@@ -117,6 +121,65 @@ def matches_role(title, description="", tags=""):
     return False
 
 
+# --- Tipo de contrato: solo jornada completa en empresa ---------------------
+
+# Hache busca empleo por cuenta ajena a jornada completa. Nada de freelance,
+# encargos por proyecto, ni media jornada.
+NOT_EMPLOYMENT_TYPES = [
+    "freelance", "freelancer", "contract", "contractor", "contracting",
+    "temporary", "temp", "part-time", "part time", "parttime",
+    "internship", "intern", "volunteer", "commission", "gig",
+    "self-employed", "autonomo", "autónomo", "por proyecto",
+    "media jornada", "practicas", "prácticas", "becario", "beca",
+]
+FULL_TIME_TYPES = [
+    "full-time", "full time", "fulltime", "permanent", "indefinido",
+    "jornada completa", "employee", "cdi",
+]
+# Senales en el texto de que es un encargo puntual, no un puesto.
+PROJECT_SIGNALS = [
+    "this project", "the project", "per project", "project-based",
+    "one-off", "one time", "fixed price", "fixed-price", "budget for this",
+    "milestone", "deliverable", "scope of work", "quote", "bid",
+    "presupuesto", "encargo", "por horas", "hourly rate", "per hour",
+    "i'm launching", "i am launching", "i need", "my website", "my site",
+    "looking for someone to build", "need someone to build",
+]
+
+
+def employment_is_full_time(declared_type, title="", description=""):
+    """True si la oferta es empleo a jornada completa (no freelance/gig).
+
+    `declared_type` viene del campo de la fuente cuando existe; si no,
+    se deduce del titulo y del texto. Ante la duda con encargos puntuales
+    (tipico del tablon de WordPress), se descarta.
+    """
+    declared = (declared_type or "").lower()
+    title_l = (title or "").lower()
+
+    # El campo declarado por la fuente manda cuando existe.
+    if declared:
+        if any(t in declared for t in NOT_EMPLOYMENT_TYPES):
+            return False
+        if any(t in declared for t in FULL_TIME_TYPES):
+            return True
+
+    # El titulo suele delatar el freelance aunque el campo diga otra cosa.
+    if any(_wb(t, title_l) for t in NOT_EMPLOYMENT_TYPES):
+        return False
+
+    # Sin tipo declarado, buscar senales de encargo puntual en el texto.
+    if not declared:
+        body = (description or "")[:2500].lower()
+        hits = sum(1 for s in PROJECT_SIGNALS if s in body)
+        if hits >= 2:
+            return False
+        if any(_wb(t, body) for t in ("freelance", "freelancer", "autonomo")):
+            return False
+
+    return True
+
+
 # --- utilidades -------------------------------------------------------------
 
 _TAG_RE = re.compile(r"<[^>]+>")
@@ -193,6 +256,7 @@ def fetch_remoteok(keywords):
             "date": _epoch_to_date(job.get("epoch")) or _iso_to_date(job.get("date")),
             "seniority": "",
             "salary": salary,
+            "employment_type": tags,
         })
     return out, None
 
@@ -221,6 +285,7 @@ def fetch_remotive(query):
             "date": _iso_to_date(job.get("publication_date")),
             "seniority": "",
             "salary": job.get("salary") or "",
+            "employment_type": job.get("job_type") or "",
         })
     return out, None
 
@@ -257,6 +322,7 @@ def fetch_jobicy(query, geo="europe"):
             "date": _iso_to_date(job.get("pubDate")),
             "seniority": seniority,
             "salary": salary,
+            "employment_type": ", ".join(job.get("jobType") or []) if isinstance(job.get("jobType"), list) else (job.get("jobType") or ""),
         })
     return out, None
 
@@ -301,6 +367,7 @@ def fetch_himalayas(keywords, pages=25):
             "date": _epoch_to_date(job.get("pubDate")),
             "seniority": ", ".join(sen) if isinstance(sen, list) else str(sen),
             "salary": salary,
+            "employment_type": job.get("employmentType") or "",
         })
     return out, None
 
@@ -331,6 +398,7 @@ def fetch_arbeitnow(keywords):
             "date": _epoch_to_date(job.get("created_at")),
             "seniority": "",
             "salary": "",
+            "employment_type": ", ".join(job.get("job_types") or []),
         })
     return out, None
 
@@ -406,6 +474,7 @@ def fetch_weworkremotely():
                 "date": _rss_date(field("pubDate")),
                 "seniority": "",
                 "salary": "",
+                "employment_type": field("type"),
             })
     return out, problems
 
@@ -496,6 +565,7 @@ def fetch_wordpress_jobs(fetch_details=True):
             "date": _rss_date(field("pubDate")),
             "seniority": "",
             "salary": "",
+            "employment_type": "",
             # Tablon oficial: aunque no logremos extraer la empresa, la
             # oferta no es "anonima" en el sentido que penaliza el scoring.
             "trusted_board": True,
@@ -518,7 +588,8 @@ REMOTIVE_QUERIES = ["wordpress", "seo", "web design", "graphic design"]
 JOBICY_TAGS = ["wordpress", "seo", "design", "marketing"]
 
 
-def fetch_all(keywords=None, max_age_days=21, require_spain_eligible=True):
+def fetch_all(keywords=None, max_age_days=21, require_spain_eligible=True,
+              full_time_only=True):
     """Consulta las cinco fuentes y devuelve (ofertas, incidencias).
 
     Deduplica por (empresa, titulo) normalizados, ya que la misma oferta
@@ -571,6 +642,10 @@ def fetch_all(keywords=None, max_age_days=21, require_spain_eligible=True):
         if _days_old(job.get("date")) > max_age_days:
             continue
         if require_spain_eligible and not geo_allows_spain(job.get("location")):
+            continue
+        if full_time_only and not employment_is_full_time(
+                job.get("employment_type"), job.get("title"),
+                job.get("description")):
             continue
         key = (
             re.sub(r"[^a-z0-9]", "", (job.get("company") or "").lower()),
