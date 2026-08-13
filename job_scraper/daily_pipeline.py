@@ -124,6 +124,76 @@ REQ_CONTEXT_WORDS = [
 ]
 REQ_CONTEXT_WINDOW = 60
 
+# --- Skills fuera del perfil real de Hache ---------------------------------
+# CLAUDE.md es explicito: nunca atribuirle JavaScript mas alla de lo basico,
+# frameworks JS, PHP a nivel desarrollador, backend/Python, Gutenberg FSE a
+# nivel desarrollador ni certificaciones AWS. Si la oferta EXIGE esto, no
+# puede aplicar de forma honesta, por muy "WordPress" que suene el titulo.
+BEYOND_PROFILE_HARD = [
+    "react", "reactjs", "react.js", "vue", "vuejs", "vue.js", "angular",
+    "svelte", "next.js", "nextjs", "nuxt", "typescript",
+    "node.js", "nodejs", "express.js",
+    "laravel", "symfony", "codeigniter", "django", "flask", "rails",
+    "python", "java", "c#", ".net", "golang", "rust", "kotlin", "swift",
+    "custom plugin development", "plugin development",
+    "custom theme development", "theme development",
+    "headless wordpress", "gutenberg block development", "react-based blocks",
+    "rest api development", "graphql", "docker", "kubernetes",
+    "aws certified", "terraform", "ci/cd pipelines",
+]
+# Terminos que solo cuentan si aparecen como exigencia dura.
+BEYOND_PROFILE_SOFT = [
+    "php", "mysql", "sql", "javascript", "api development", "backend",
+    "back-end", "full stack", "fullstack",
+]
+# Contexto que convierte una mencion en requisito real.
+REQUIREMENT_CONTEXT = [
+    "required", "requirement", "must have", "must be", "strong knowledge",
+    "strong understanding", "proficiency", "proficient", "expertise",
+    "experience with", "experience in", "solid knowledge", "advanced",
+    "imprescindible", "requisito", "se requiere", "dominio", "necesario",
+    "obligatorio", "indispensable",
+]
+# Contexto que la degrada a "deseable" (no bloquea).
+NICE_TO_HAVE_CONTEXT = [
+    "nice to have", "plus", "bonus", "desirable", "preferred", "valorable",
+    "deseable", "se valorara", "opcional", "a plus", "would be great",
+]
+BEYOND_CONTEXT_WINDOW = 90
+
+
+def detect_beyond_profile(text):
+    """Devuelve el primer skill exigido que queda fuera del perfil real.
+
+    Distingue exigencia ("strong knowledge of PHP") de deseable ("PHP is a
+    plus"), para no descartar ofertas de diseno que mencionan tecnologia
+    de pasada.
+    """
+    text_l = (text or "").lower()
+    if not text_l:
+        return None
+
+    def _demanded(term):
+        pat = _kw_pattern(term)
+        for m in pat.finditer(text_l):
+            start = max(0, m.start() - BEYOND_CONTEXT_WINDOW)
+            end = min(len(text_l), m.end() + BEYOND_CONTEXT_WINDOW)
+            window = text_l[start:end]
+            if any(kw_in(n, window) for n in NICE_TO_HAVE_CONTEXT):
+                continue  # es un "se valorara", no bloquea
+            if any(kw_in(c, window) for c in REQUIREMENT_CONTEXT):
+                return True
+        return False
+
+    for term in BEYOND_PROFILE_HARD:
+        if _demanded(term):
+            return term
+    for term in BEYOND_PROFILE_SOFT:
+        if _demanded(term):
+            return term
+    return None
+
+
 EXPERIENCE_YEARS_PATTERN = re.compile(
     r'(?:'
     r'(\d+)\+?\s*(?:years?|años?|yrs?)\s*(?:of\s+)?(?:experience|experiencia|exp\.?)'
@@ -224,7 +294,7 @@ def check_language_requirement(text):
     return None
 
 
-def score_job(title, company, location, description):
+def score_job(title, company, location, description, trusted_board=False):
     title_l = (title or "").lower()
     company_l = (company or "").lower()
     location_l = (location or "").lower()
@@ -314,8 +384,19 @@ def score_job(title, company, location, description):
         score -= 100
         reasons.append(f"-100 requires {req_years}+ years")
 
-    # Anonymous company (no identifiable name)
-    if not company or company.lower() in ["", "unknown", "confidential", "confidencial", "empresa confidencial"]:
+    # Skills exigidos que Hache no puede reclamar honestamente
+    beyond = detect_beyond_profile(all_text)
+    if beyond:
+        score -= 100
+        reasons.append(f"-100 exige '{beyond}' (fuera del perfil)")
+
+    # Anonymous company (no identifiable name). Trusted job boards (e.g. the
+    # official WordPress jobs board) don't expose a company field in their
+    # feed, which isn't the same thing as an anonymous posting.
+    if not trusted_board and (
+            not company
+            or company.lower() in ["", "unknown", "confidential", "confidencial",
+                                   "empresa confidencial"]):
         score -= 30
         reasons.append(f"-30 anonymous company")
 
