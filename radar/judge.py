@@ -177,10 +177,18 @@ def judge_with_rules(job):
         score += min(len(good) * 4, 20)
         highlights.append(f"Herramientas que manejas: {', '.join(good[:4])}")
 
-    # Anios de experiencia
+    # Anios de EXPERIENCIA (no "80 años de trayectoria de la empresa" ni
+    # "fundada hace 30 años"): exige que "experiencia"/"experience" este
+    # cerca, y descarta cifras absurdas que delatan un falso positivo.
     years = 0
-    for m in re.finditer(r"(\d+)\s*\+?\s*(?:años|years|anos)", text):
-        years = max(years, int(m.group(1)))
+    EXP_WORDS = ("experiencia", "experience", "exp.", "trabajando", "working")
+    for m in re.finditer(r"(\d{1,2})\s*\+?\s*(?:años|year|anos)", text):
+        n = int(m.group(1))
+        if n > 15:
+            continue
+        window = text[max(0, m.start() - 40): m.end() + 40]
+        if any(w in window for w in EXP_WORDS):
+            years = max(years, n)
     if years >= 7:
         score -= 35
         concerns.append(f"Pide {years} años de experiencia")
