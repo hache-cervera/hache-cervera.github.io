@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>devilfruittcg.com · SEO, GEO &amp; AEO case study · Hache Cervera</title>
+  <meta
+    name="description"
+    content="Case study: devilfruittcg.com, a Spanish-language One Piece Card Game niche site built end to end as a live testbed for SEO, AEO and generative engine optimisation, on self-hosted infrastructure."
+  />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta property="og:title" content="devilfruittcg.com · SEO / GEO / AEO case study" />
+  <meta property="og:description" content="A niche site built end to end as a live testbed for organic visibility: SEO, AEO and GEO, on self-hosted infrastructure." />
+  <meta property="og:image" content="https://hache-cervera.github.io/work/img/og.jpg" />
+  <meta property="og:type" content="article" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500&display=swap"
+    rel="stylesheet"
+  />
+  <script>
+    (function () {
+      try {
+        document.documentElement.dataset.theme = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light';
+      } catch (e) {}
+    })();
+  </script>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --surface: #f5f5f5;
+      --panel: #0a0a0a;
+      --ink: #0a0a0a;
+      --muted: #6b6b6b;
+      --line: #e5e5e5;
+      --accent: #ff3c00;
+      --accent-hover: #e63500;
+      --accent-soft: #ffe8e1;
+      --seo: #2d5f8a;
+      --seo-w: #e9f0f6;
+      --aeo: #2f7d4f;
+      --aeo-w: #e8f3ec;
+      --geo: #7d4f9e;
+      --geo-w: #f2ebf7;
+      --font-display: 'Sora', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+    :root[data-theme="dark"] {
+      --bg: #0d0d0d;
+      --surface: #1c1c1c;
+      --ink: #f2f2f2;
+      --muted: #9a9a9a;
+      --line: #2a2a2a;
+      --accent-soft: #3a1608;
+      --seo: #7fb3dd;
+      --seo-w: #12202c;
+      --aeo: #7fc79b;
+      --aeo-w: #112318;
+      --geo: #bb96d6;
+      --geo-w: #1e1526;
+    }
+    :root[data-theme="dark"] .grain { mix-blend-mode: screen; opacity: 0.045; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    ::selection { background: var(--accent); color: #fff; }
+
+    .grain {
+      position: fixed;
+      inset: 0;
+      z-index: 40;
+      pointer-events: none;
+      opacity: 0.028;
+      mix-blend-mode: multiply;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%25" height="100%25" filter="url(%23n)"/></svg>');
+    }
+
+    .glow {
+      position: absolute;
+      width: 480px;
+      height: 480px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 60, 0, 0.09) 0%, rgba(255, 60, 0, 0) 68%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .deco { position: absolute; background: var(--accent); pointer-events: none; z-index: 0; }
+    @keyframes floaty { 0%, 100% { transform: translateY(0) rotate(8deg); } 50% { transform: translateY(-12px) rotate(14deg); } }
+    .deco { animation: floaty 7s ease-in-out infinite; }
+    @media (prefers-reduced-motion: reduce) { .deco { animation: none; } }
+
+    .wrap { max-width: 72rem; margin: 0 auto; padding: 0 24px; }
+    @media (min-width: 768px) { .wrap { padding: 0 48px; } }
+    a { color: inherit; }
+
+    /* ---------- Header ---------- */
+    header { padding: 24px 0; border-bottom: 1px solid var(--line); }
+    header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .back {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.875rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s ease;
+    }
+    .back:hover { color: var(--accent); }
+    .back span { color: var(--accent); transition: transform 0.2s ease; display: inline-block; }
+    .back:hover span { transform: translateX(-4px); }
+    .hctrl { display: flex; align-items: center; gap: 16px; }
+    .lang {
+      display: flex;
+      gap: 8px;
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+    .lang a { text-decoration: none; color: var(--muted); padding: 4px 2px; border-bottom: 2px solid transparent; }
+    .lang a:hover { color: var(--accent); }
+    .lang a.on { color: var(--ink); border-bottom-color: var(--accent); }
+    .tbtn {
+      position: relative;
+      width: 40px;
+      height: 40px;
+      background: none;
+      border: 1px solid var(--line);
+      cursor: pointer;
+      overflow: hidden;
+      transition: border-color 0.25s ease;
+    }
+    .tbtn:hover { border-color: var(--accent); }
+    .tbtn .sky {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.6s cubic-bezier(0.6, 0, 0.25, 1.3);
+    }
+    :root[data-theme="dark"] .tbtn .sky { transform: rotate(-45deg); }
+    .tbtn .core {
+      position: relative;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      transition: transform 0.5s cubic-bezier(0.6, 0, 0.25, 1.3), box-shadow 0.4s ease;
+    }
+    :root[data-theme="dark"] .tbtn .core { transform: scale(1.35); box-shadow: 0 0 12px rgba(255, 60, 0, 0.55); }
+    .tbtn .veil {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 12px;
+      height: 12px;
+      margin: -6px 0 0 -6px;
+      border-radius: 50%;
+      background: var(--bg);
+      transform: translate(15px, -15px);
+      transition: transform 0.5s cubic-bezier(0.6, 0, 0.25, 1.3), background 0.25s ease;
+      z-index: 2;
+    }
+    :root[data-theme="dark"] .tbtn .veil { transform: translate(4px, -4px) scale(1.35); }
+    .tbtn .ray {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 2px;
+      height: 5px;
+      margin: -2.5px 0 0 -1px;
+      border-radius: 1px;
+      background: var(--accent);
+      transform: rotate(var(--r)) translateY(-10px);
+      transition: transform 0.45s ease, opacity 0.35s ease;
+    }
+    :root[data-theme="dark"] .tbtn .ray { transform: rotate(var(--r)) translateY(-4px) scale(0.2); opacity: 0; }
+    @media (prefers-reduced-motion: reduce) { .tbtn .sky, .tbtn .core, .tbtn .veil, .tbtn .ray { transition: none; } }
+
+    /* ---------- Hero ---------- */
+    .hero { position: relative; padding: 80px 24px 56px; }
+    .hero > *:not(.glow):not(.deco) { position: relative; z-index: 1; }
+    @media (min-width: 768px) { .hero { padding: 112px 48px 72px; } }
+    .kicker {
+      font-family: var(--font-display);
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .hero h1 {
+      margin-top: 24px;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(2.2rem, 5.6vw, 4.2rem);
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      word-break: break-word;
+    }
+    .hero h1 em {
+      font-style: italic;
+      background: linear-gradient(100deg, #ff3c00 0%, #ff8a5c 35%, #ff3c00 65%, #ff5a24 100%);
+      background-size: 220% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: shimmer 4s linear infinite;
+    }
+    @keyframes shimmer { to { background-position: -220% 0; } }
+    .hero .lede { margin-top: 24px; max-width: 44rem; font-size: 1.125rem; color: var(--muted); }
+    .hero .actions { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+    .btn {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.875rem;
+      text-decoration: none;
+      padding: 14px 28px;
+      background: var(--accent);
+      color: #fff;
+      transition: background 0.2s ease;
+    }
+    .btn:hover { background: var(--accent-hover); }
+    .alt {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.875rem;
+      text-decoration: none;
+      color: var(--muted);
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 2px;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+    .alt:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* ---------- Meta grid ---------- */
+    .meta {
+      margin-top: 48px;
+      display: grid;
+      grid-template-columns: 1fr;
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+    }
+    @media (min-width: 560px) { .meta { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 900px) { .meta { grid-template-columns: repeat(3, 1fr); } }
+    .meta div { padding: 16px 20px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .meta dt {
+      font-family: var(--font-display);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .meta dd { margin-top: 4px; font-size: 0.9375rem; font-weight: 500; }
+
+    /* ---------- Sections ---------- */
+    /* overflow:hidden keeps the bleeding .glow circles from widening the page */
+    section, .hero { overflow: hidden; }
+    section { position: relative; padding: 64px 0 80px; border-top: 1px solid var(--line); }
+    section .wrap { position: relative; z-index: 1; }
+    .section-label {
+      font-family: var(--font-display);
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    section h2 {
+      margin-top: 24px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+    }
+    .section-intro { margin-top: 16px; max-width: 46rem; color: var(--muted); }
+    section p + p { margin-top: 12px; }
+    .note {
+      margin-top: 24px;
+      max-width: 46rem;
+      padding: 12px 16px;
+      border-left: 2px solid var(--accent);
+      background: var(--surface);
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+    .note strong { color: var(--ink); font-weight: 600; }
+    code {
+      font-family: ui-monospace, 'SF Mono', Consolas, monospace;
+      font-size: 0.8125em;
+      background: var(--surface);
+      padding: 2px 6px;
+      color: var(--accent);
+    }
+
+    /* ---------- Panel quote ---------- */
+    .quote {
+      margin-top: 40px;
+      background: var(--panel);
+      color: #f2f2f2;
+      padding: 32px 28px;
+      border-left: 3px solid var(--accent);
+    }
+    @media (min-width: 768px) { .quote { padding: 40px 44px; } }
+    .quote p { color: rgba(242, 242, 242, 0.82); font-size: 1.0625rem; max-width: 48rem; }
+    .quote strong { color: #fff; font-weight: 600; }
+
+    /* ---------- Stats ---------- */
+    .stats {
+      margin-top: 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+    }
+    @media (min-width: 768px) { .stats { grid-template-columns: repeat(4, 1fr); } }
+    .stats div { padding: 24px 20px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .stats b {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(1.9rem, 4vw, 2.6rem);
+      letter-spacing: -0.04em;
+      line-height: 1;
+      color: var(--accent);
+    }
+    .stats span { display: block; margin-top: 8px; font-size: 0.8125rem; color: var(--muted); }
+
+    /* ---------- Sitemap ---------- */
+    .sitemap { margin-top: 40px; display: grid; gap: 12px; grid-template-columns: 1fr; }
+    @media (min-width: 640px) { .sitemap { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 1000px) { .sitemap { grid-template-columns: repeat(4, 1fr); } }
+    .smap { display: flex; flex-direction: column; gap: 6px; }
+    .smap .top {
+      background: var(--panel);
+      color: #fff;
+      padding: 12px 14px;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.8125rem;
+    }
+    .smap .top i { display: block; margin-top: 3px; font-style: normal; font-size: 0.6875rem; font-weight: 400; color: rgba(255, 255, 255, 0.55); }
+    .smap .kid { border: 1px solid var(--line); background: var(--surface); padding: 9px 14px; font-size: 0.8125rem; color: var(--muted); }
+
+    /* ---------- Layers ---------- */
+    .layers { margin-top: 40px; display: flex; flex-direction: column; gap: 16px; }
+    .layer { padding: 24px 26px; border-left: 3px solid; }
+    .layer.l-seo { background: var(--seo-w); border-color: var(--seo); }
+    .layer.l-aeo { background: var(--aeo-w); border-color: var(--aeo); }
+    .layer.l-geo { background: var(--geo-w); border-color: var(--geo); }
+    .layer .tag {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      color: #fff;
+    }
+    .l-seo .tag { background: var(--seo); }
+    .l-aeo .tag { background: var(--aeo); }
+    .l-geo .tag { background: var(--geo); }
+    :root[data-theme="dark"] .layer .tag { color: #0d0d0d; }
+    .layer h3 {
+      margin-top: 12px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.0625rem;
+      letter-spacing: -0.02em;
+    }
+    .layer ul { margin-top: 12px; padding-left: 18px; }
+    .layer li { font-size: 0.875rem; color: var(--muted); margin-bottom: 8px; }
+    .layer li:last-child { margin-bottom: 0; }
+    .layer li strong { color: var(--ink); font-weight: 600; }
+
+    /* ---------- Component cards ---------- */
+    .cards { margin-top: 40px; display: grid; gap: 24px; grid-template-columns: 1fr; }
+    @media (min-width: 768px) { .cards { grid-template-columns: 1fr 1fr; } }
+    .card { border: 1px solid var(--line); overflow: hidden; transition: border-color 0.3s ease; }
+    .card:hover { border-color: var(--ink); }
+    .card figure { margin: 0; aspect-ratio: 16 / 10; overflow: hidden; background: var(--surface); border-bottom: 1px solid var(--line); cursor: zoom-in; }
+    .card figure img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; transition: transform 0.6s ease; }
+    .card:hover figure img { transform: scale(1.03); }
+    .card .body { padding: 22px 24px; }
+    .card h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.125rem; letter-spacing: -0.02em; }
+    .card p { margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
+
+    /* ---------- Stack ---------- */
+    .group { margin-top: 32px; }
+    .group h3 {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .tags { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .tags li {
+      list-style: none;
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      padding: 5px 12px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--muted);
+    }
+    .tags li.key { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+
+    /* ---------- Tables ---------- */
+    .tbl { margin-top: 40px; border: 1px solid var(--line); overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.875rem; min-width: 34rem; }
+    th {
+      background: var(--surface);
+      padding: 12px 18px;
+      text-align: left;
+      font-family: var(--font-display);
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border-bottom: 1px solid var(--line);
+    }
+    td { padding: 14px 18px; border-bottom: 1px solid var(--line); color: var(--muted); vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    td strong { color: var(--ink); font-weight: 600; }
+    td:first-child { white-space: nowrap; }
+
+    /* ---------- CTA + footer ---------- */
+    .cta { position: relative; background: var(--panel); color: #f2f2f2; border-top: none; overflow: hidden; }
+    .cta .kicker { color: var(--accent); }
+    .cta h2 { color: #fff; }
+    .cta p { margin-top: 16px; max-width: 40rem; color: rgba(242, 242, 242, 0.7); }
+    .cta .actions { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+    .cta .alt { color: rgba(242, 242, 242, 0.7); border-color: rgba(242, 242, 242, 0.25); }
+    .cta .alt:hover { color: var(--accent); border-color: var(--accent); }
+    footer { padding: 40px 0; border-top: 1px solid var(--line); }
+    footer .wrap { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; font-size: 0.8125rem; color: var(--muted); }
+    footer .path { font-family: var(--font-display); }
+    footer .path span { color: var(--accent); }
+
+    /* ---------- Reveal + lightbox ---------- */
+    .rv { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .rv.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { .rv { opacity: 1; transform: none; transition: none; } }
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(8, 8, 8, 0.94);
+      padding: 32px 16px;
+    }
+    .lightbox.on { display: flex; }
+    .lightbox img { max-width: 100%; max-height: 100%; object-fit: contain; }
+    .lightbox .close {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 2rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+    .lightbox .close:hover { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header>
+    <div class="wrap">
+      <a class="back" href="../"><span>&larr;</span> Back to work</a>
+      <div class="hctrl">
+        <nav class="lang" aria-label="Language">
+          <a class="on" href="./" aria-current="page">EN</a>
+          <a href="../es/devilfruittcg/">ES</a>
+        </nav>
+        <button class="tbtn" id="modeToggle" type="button" aria-label="Switch between light and dark mode">
+          <span class="sky" aria-hidden="true">
+            <span class="ray" style="--r:0deg"></span><span class="ray" style="--r:45deg"></span><span class="ray" style="--r:90deg"></span><span class="ray" style="--r:135deg"></span><span class="ray" style="--r:180deg"></span><span class="ray" style="--r:225deg"></span><span class="ray" style="--r:270deg"></span><span class="ray" style="--r:315deg"></span>
+            <span class="core"></span>
+            <span class="veil"></span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="hero wrap">
+      <span class="glow" style="top: -140px; right: -160px;" aria-hidden="true"></span>
+      <span class="glow" style="bottom: -220px; left: -240px; width: 380px; height: 380px;" aria-hidden="true"></span>
+      <span class="deco" style="top: 110px; right: 12%; width: 14px; height: 14px;" aria-hidden="true"></span>
+      <span class="deco" style="top: 220px; right: 5%; width: 8px; height: 8px; opacity: 0.55; animation-delay: 1.2s;" aria-hidden="true"></span>
+      <p class="kicker">/ Case study &middot; SEO, GEO &amp; AEO</p>
+      <h1>devilfruittcg<em>.com</em></h1>
+      <p class="lede">
+        A Spanish-language niche site about the One Piece Card Game, built end to end as a live
+        testbed for a complete organic visibility strategy: classic SEO, answer engine
+        optimisation and generative engine optimisation. Self-hosted infrastructure, a
+        methodology documented before the first article, and affiliate monetisation designed in
+        from the start.
+      </p>
+      <div class="actions">
+        <a class="btn" href="https://devilfruittcg.com/" target="_blank" rel="noopener">Visit the site</a>
+        <a class="alt" href="../">See the rest of the work</a>
+      </div>
+
+      <dl class="meta">
+        <div><dt>URL</dt><dd>devilfruittcg.com</dd></div>
+        <div><dt>Market</dt><dd>Spain, then LATAM</dd></div>
+        <div><dt>Live since</dt><dd>September 2026</dd></div>
+        <div><dt>Niche</dt><dd>One Piece TCG</dd></div>
+        <div><dt>Model</dt><dd>Niche affiliate</dd></div>
+        <div><dt>Role</dt><dd>Strategy and full execution</dd></div>
+      </dl>
+
+      <p class="note">
+        <strong>Where it stands:</strong> the site is live and technically finished, with
+        indexing deliberately held back (<code>noindex</code>) until the content library is
+        complete. Everything below describes the system and its day zero baseline. There are no
+        traffic or ranking claims here, because measuring them honestly from the first day is
+        the whole point of the project.
+      </p>
+    </div>
+
+    <!-- ============ 01 · THE PROJECT ============ -->
+    <section id="project">
+      <span class="glow" style="top: 40px; left: -280px;" aria-hidden="true"></span>
+      <div class="wrap">
+        <p class="section-label">/ 01 &middot; The project</p>
+        <h2>A real niche, built like a product</h2>
+        <p class="section-intro">
+          devilfruittcg.com is not an unstructured blog or a training exercise. It is designed as
+          an editorial product: intentional content architecture, a custom child theme with
+          interactive components, and a positioning strategy meant to work both in Google and in
+          the generative answer engines that are reshaping how people find information.
+        </p>
+        <p class="section-intro">
+          It runs as a real affiliate project and as a living case study at the same time,
+          which is exactly the kind of work I offer as a service.
+        </p>
+
+        <div class="stats">
+          <div><b>3</b><span>positioning layers: SEO, AEO and GEO</span></div>
+          <div><b>4</b><span>content hubs, one search intent each</span></div>
+          <div><b>0&euro;</b><span>in paid SaaS tools, the stack is my own</span></div>
+          <div><b>D-0</b><span>tracking running before the first indexation</span></div>
+        </div>
+
+        <div class="quote">
+          <p>
+            An SEO, GEO and AEO architecture case for a collecting niche: content that an LLM can
+            cite (direct answers, schema generated from the DOM), interactive components used as
+            link assets, and a design system built to stand out in a market full of generic
+            templates. <strong>All of it verifiable in production, with no invented data left
+            unmarked.</strong>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 02 · ARCHITECTURE ============ -->
+    <section id="architecture">
+      <div class="wrap">
+        <p class="section-label">/ 02 &middot; Content architecture</p>
+        <h2>Structure by intent, not by topic</h2>
+        <p class="section-intro">
+          Every section attacks a different type of search and answers a different stage of the
+          customer journey. It is not a blog, it is a site laid out with product logic.
+        </p>
+
+        <div class="sitemap">
+          <div class="smap">
+            <div class="top">/como-jugar/<i>Informational</i></div>
+            <div class="kid">Basic rules</div>
+            <div class="kid">Reading a card</div>
+            <div class="kid">Interactive playmat</div>
+          </div>
+          <div class="smap">
+            <div class="top">/decks-y-meta/<i>Informational and commercial</i></div>
+            <div class="kid">Tier list</div>
+            <div class="kid">Recommended starters</div>
+            <div class="kid">Meta by set</div>
+          </div>
+          <div class="smap">
+            <div class="top">/coleccionismo/<i>Navigational and transactional</i></div>
+            <div class="kid">Rarities and prices</div>
+            <div class="kid">Active sets</div>
+            <div class="kid">Cardmarket and TCGplayer</div>
+          </div>
+          <div class="smap">
+            <div class="top">/articulos/<i>Editorial hub</i></div>
+            <div class="kid">Accessories</div>
+            <div class="kid">Card value</div>
+            <div class="kid">Buying and selling</div>
+          </div>
+        </div>
+
+        <p class="note">
+          Editorial interlinking, not forced: each article links to the next logical piece in the
+          journey (basic rules, how to play, reading a card, collecting, decks) cited in running
+          text instead of generic "related posts" boxes. Clean permalinks
+          (<code>/%postname%/</code>, no dates) so the content does not look stale in the SERP.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ 03 · THREE LAYERS ============ -->
+    <section id="layers">
+      <span class="glow" style="top: 120px; right: -280px;" aria-hidden="true"></span>
+      <div class="wrap">
+        <p class="section-label">/ 03 &middot; Strategy</p>
+        <h2>SEO, AEO and GEO: three layers, one piece of content</h2>
+        <p class="section-intro">
+          Most niche sites optimise for Google only. This one is built to rank on three fronts
+          with the same article, without duplicated work.
+        </p>
+
+        <div class="layers">
+          <div class="layer l-seo">
+            <span class="tag">SEO</span>
+            <h3>Silo architecture and keywords with a filter</h3>
+            <ul>
+              <li>Audit of four competitors with Screaming Frog before publishing a single line.</li>
+              <li>
+                Every keyword passes three filters: <strong>transactional intent</strong>,
+                <strong>weak Spanish-language competition</strong> and <strong>an experience
+                advantage of my own</strong>. Anything that fails one is dropped, with the reason
+                written down.
+              </li>
+              <li>Audit finding: Reddit ranks top 5 for all six core keywords, which is a direct signal to work the GEO layer.</li>
+              <li><code>noindex</code> during the build, so the site is not indexed until the content is complete. A deliberate decision, not an oversight.</li>
+            </ul>
+          </div>
+
+          <div class="layer l-aeo">
+            <span class="tag">AEO</span>
+            <h3>Extractable structure for answer engines</h3>
+            <ul>
+              <li><strong>A "quick answer" block</strong> at the top of every article: 40 to 60 self-contained words answering the question in the title, the format ChatGPT, Perplexity and Google AI Overviews actually quote.</li>
+              <li><strong>FAQPage schema generated automatically</strong> from the visible HTML, parsing <code>&lt;details&gt;&lt;summary&gt;</code> in functions.php. No cloaking, and a single source of truth between what the user sees and what the bot reads.</li>
+              <li>Semantic comparison tables (rarities, set prefixes, card types), the format an LLM extracts best for questions like "what does OP17-046 mean".</li>
+              <li>Deliberate bold density over concrete data points rather than whole sentences, as an extraction signal for snippets.</li>
+              <li>H2s written as natural questions, matching how people actually ask an AI.</li>
+            </ul>
+          </div>
+
+          <div class="layer l-geo">
+            <span class="tag">GEO</span>
+            <h3>Measuring visibility inside generative engines</h3>
+            <ul>
+              <li><strong>Monthly tracking protocol:</strong> a battery of 20 prompts run against ChatGPT, Perplexity Pro, Google AI and Claude on the first of each month, logged in Google Sheets.</li>
+              <li><strong>Day zero on the record:</strong> the "zero mentions" result from before anything was published exists as data. Most projects never have that baseline because they start measuring too late. Here the history starts before the first indexation.</li>
+              <li>Community presence (Reddit, forums, Spanish TCG groups) as a GEO pillar, since those are the same sources the AI cites.</li>
+              <li>EXIF authorship metadata on every original image plus <code>ImageObject</code> schema, so the domain travels with the picture when it gets shared.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 04 · COMPONENTS ============ -->
+    <section id="components">
+      <div class="wrap">
+        <p class="section-label">/ 04 &middot; Editorial components</p>
+        <h2>Link assets, not just content</h2>
+        <p class="section-intro">
+          To stand apart from the generic affiliate sites in the niche, the site ships interactive
+          components that teach instead of listing. That is the kind of content that earns natural
+          links and that an LLM can cite as an authority on the mechanism, not just on the fact.
+        </p>
+
+        <div class="cards">
+          <div class="card">
+            <figure>
+              <img src="../img/dftcg-tapete.jpg" alt="Interactive playmat with nine clickable zones and an explanation panel" loading="lazy" data-zoom />
+            </figure>
+            <div class="body">
+              <h3>Interactive playmat</h3>
+              <p>
+                Nine clickable board zones, each with its own explanation. Content a new player
+                cannot get anywhere else in Spanish, built as a component rather than a paragraph.
+              </p>
+            </div>
+          </div>
+
+          <div class="card">
+            <figure>
+              <img src="../img/dftcg-turno.jpg" alt="Turn phases component with five selectable tabs" loading="lazy" data-zoom />
+            </figure>
+            <div class="body">
+              <h3>Turn phases, step by step</h3>
+              <p>
+                The five phases of a turn as a selectable sequence. Each state is a short, direct
+                answer, which is exactly the shape Google can lift into a featured snippet.
+              </p>
+            </div>
+          </div>
+
+          <div class="card">
+            <figure>
+              <img src="../img/dftcg-combate.jpg" alt="Combat resolution explained in four ordered steps" loading="lazy" data-zoom />
+            </figure>
+            <div class="body">
+              <h3>Combat, broken into steps</h3>
+              <p>
+                The part everyone gets wrong, split into ordered steps with the counterplay for
+                each one. Numbered structure reads well for a human and parses cleanly for a model.
+              </p>
+            </div>
+          </div>
+
+          <div class="card">
+            <figure>
+              <img src="../img/dftcg-faq.jpg" alt="Accordion of rules questions grouped by topic" loading="lazy" data-zoom />
+            </figure>
+            <div class="body">
+              <h3>Rules FAQ that feeds the schema</h3>
+              <p>
+                Grouped questions built with native <code>&lt;details&gt;</code> elements. The same
+                markup the reader opens is what generates the FAQPage schema, so the two can never
+                drift apart.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <p class="note">
+          Also in production: an annotated card with real hotspots (cost, power, code, rarity), a
+          visual pack simulator with pull rates cited with source and date, and a colour system
+          explaining the six archetypes in one line each.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ 05 · STACK ============ -->
+    <section id="stack">
+      <span class="glow" style="bottom: 0; left: -300px;" aria-hidden="true"></span>
+      <div class="wrap">
+        <p class="section-label">/ 05 &middot; Technical stack</p>
+        <h2>Own infrastructure, SaaS cost near zero</h2>
+        <p class="section-intro">
+          The whole stack is self-hosted or free. The only recurring cost is the domain, around
+          10&euro; a year. No Ahrefs, no Semrush, no paid rank tracker.
+        </p>
+
+        <div class="group">
+          <h3>Infrastructure</h3>
+          <ul class="tags">
+            <li class="key">HP EliteDesk G4, physical server</li>
+            <li class="key">Ubuntu Server LTS</li>
+            <li class="key">Docker and Docker Compose</li>
+            <li class="key">Nginx Proxy Manager</li>
+            <li class="key">Cloudflare Zero Trust Tunnel</li>
+            <li class="key">Tailscale, private access</li>
+            <li>SSL via DNS challenge, Cloudflare API</li>
+          </ul>
+        </div>
+
+        <div class="group">
+          <h3>CMS and theme</h3>
+          <ul class="tags">
+            <li class="key">WordPress</li>
+            <li class="key">Custom child theme</li>
+            <li>Gutenberg, native blocks, no page builder</li>
+            <li>Rank Math</li>
+            <li>WP-CLI, publishing from the terminal</li>
+            <li>Custom functions.php, automatic schema</li>
+          </ul>
+        </div>
+
+        <div class="group">
+          <h3>Measurement and tracking</h3>
+          <ul class="tags">
+            <li class="key">SerpBear, self-hosted rank tracking</li>
+            <li class="key">OneGlanse, self-hosted GEO tracker</li>
+            <li>Google Search Console</li>
+            <li>Google Sheets, monthly GEO protocol</li>
+            <li>Screaming Frog, competitor audit</li>
+          </ul>
+        </div>
+
+        <div class="group">
+          <h3>Content production</h3>
+          <ul class="tags">
+            <li>ExifTool, authorship metadata on images</li>
+            <li>WebP and automated compression</li>
+            <li>Writing skill with SEO, GEO and AEO structure</li>
+            <li>PowerShell script: rename, upload, WP-CLI</li>
+            <li>PHP and GD, automatic product background cutout</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 06 · E-E-A-T ============ -->
+    <section id="eeat">
+      <div class="wrap">
+        <p class="section-label">/ 06 &middot; Editorial rigour</p>
+        <h2>Real experience, verifiable data</h2>
+        <p class="section-intro">
+          Google weighs Experience, Expertise, Authoritativeness and Trustworthiness. Each of the
+          four has a concrete answer in this project.
+        </p>
+
+        <div class="tbl">
+          <table>
+            <thead>
+              <tr><th scope="col">E-E-A-T signal</th><th scope="col">How it is implemented</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Experience</strong></td>
+                <td>My own collection, tracked in an app. Photos of real cards I own, no stock and no official Bandai art. First-hand data: pull rates and real purchase prices.</td>
+              </tr>
+              <tr>
+                <td><strong>Expertise</strong></td>
+                <td>Pull rates and tournament meta figures cited with source and date. An explicit note whenever two sources disagree, editorial honesty instead of inventing consensus. No invented data left unmarked.</td>
+              </tr>
+              <tr>
+                <td><strong>Authoritativeness</strong></td>
+                <td>Interactive components that demonstrate deep knowledge of the object itself: the card, the playmat, the mechanics. Linkable assets that earn natural references.</td>
+              </tr>
+              <tr>
+                <td><strong>Trustworthiness</strong></td>
+                <td>Affiliate disclosure in the footer from day one. <code>rel="sponsored nofollow"</code> on every commercial link. Prices flagged as approximate. Explicit placeholders wherever a verified figure is still missing.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 07 · WHAT IT PROVES ============ -->
+    <section id="value">
+      <div class="wrap">
+        <p class="section-label">/ 07 &middot; Why it matters</p>
+        <h2>What this project demonstrates</h2>
+
+        <div class="tbl">
+          <table>
+            <thead>
+              <tr><th scope="col">Dimension</th><th scope="col">What it shows</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Technical</strong></td>
+                <td>Standing up complete self-hosted infrastructure (Docker, Nginx, Cloudflare Tunnel, SSL) without depending on SaaS hosting, plus an editorial pipeline that goes from my desktop to WordPress in one command.</td>
+              </tr>
+              <tr>
+                <td><strong>SEO</strong></td>
+                <td>Content architecture by intent, competitive audit with real data (Screaming Frog and manual SERPs), and keyword research documented with the reasoning behind every choice, the ones taken and the ones dropped.</td>
+              </tr>
+              <tr>
+                <td><strong>AEO</strong></td>
+                <td>FAQPage schema generated from the DOM instead of hand-injected. Direct answer blocks. Tables and H2s designed for LLM extraction. Interactive components as citable assets.</td>
+              </tr>
+              <tr>
+                <td><strong>GEO</strong></td>
+                <td>A visibility measurement protocol across ChatGPT, Perplexity, Google AI and Claude, with history starting before the first article. Equivalent commercial tools run 100 to 300&euro; a month, this one runs on my own server.</td>
+              </tr>
+              <tr>
+                <td><strong>Design</strong></td>
+                <td>An identity of its own, well away from generic template aesthetics. Colour tokens, typography and reusable components, with automatic background cutout in PHP and GD.</td>
+              </tr>
+              <tr>
+                <td><strong>Business</strong></td>
+                <td>A real niche, a real community and monetisation designed in from the start. Tracking exists from before the first publication, so the day zero state is verifiable.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SHOWCASE ============ -->
+    <section id="shots">
+      <div class="wrap">
+        <p class="section-label">/ 08 &middot; The site</p>
+        <h2>How it looks in production</h2>
+        <p class="section-intro">
+          A visual system built around the niche, not around a stock theme. Same tokens across
+          every hub, so the site reads as one product.
+        </p>
+
+        <div class="cards">
+          <div class="card">
+            <figure>
+              <img src="../img/dftcg-home.jpg" alt="devilfruittcg.com home page" loading="lazy" data-zoom />
+            </figure>
+            <div class="body">
+              <h3>Home</h3>
+              <p>Positioning above the fold and a single entry point into the how-to-play hub.</p>
+            </div>
+          </div>
+          <div class="card">
+            <figure>
+              <img src="../img/dftcg-decks.jpg" alt="Decks and meta hub page" loading="lazy" data-zoom />
+            </figure>
+            <div class="body">
+              <h3>Decks and meta</h3>
+              <p>The commercial hub, where informational intent turns into a buying decision.</p>
+            </div>
+          </div>
+          <div class="card">
+            <figure>
+              <img src="../img/dftcg-coleccionismo.jpg" alt="Collecting hub page" loading="lazy" data-zoom />
+            </figure>
+            <div class="body">
+              <h3>Collecting</h3>
+              <p>Rarities, active sets and marketplaces, the transactional end of the journey.</p>
+            </div>
+          </div>
+          <div class="card">
+            <figure>
+              <img src="../img/dftcg-faq.jpg" alt="Rules FAQ accordion" loading="lazy" data-zoom />
+            </figure>
+            <div class="body">
+              <h3>Rules FAQ</h3>
+              <p>The block that doubles as reader content and as the source of the FAQPage schema.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+    <button class="close" type="button" aria-label="Close">&times;</button>
+    <img src="" alt="" />
+  </div>
+
+  <section class="cta" id="contact">
+    <span class="glow" style="top: -160px; right: -160px;" aria-hidden="true"></span>
+    <div class="wrap">
+      <p class="kicker">/ Next</p>
+      <h2>Everything connects.</h2>
+      <p>
+        This project is the clearest version of how I like to work: one system, built deep instead
+        of wide, where the design, the code and the search strategy are the same decision. If that
+        is the kind of work you need, say hi.
+      </p>
+      <div class="actions">
+        <a class="btn" href="mailto:hachedesign404@gmail.com?subject=devilfruittcg%20case%20study">Get in touch</a>
+        <a class="alt" href="../">See the rest of the work</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <p>&copy; 2026 Hache Cervera. Built by hand in Valencia.</p>
+      <p class="path">Design <span>&rarr;</span> Code <span>&rarr;</span> Motion <span>&rarr;</span> SEO</p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var GA_ID = 'G-6JCDHFSJ4M';
+      if (GA_ID) {
+        var ga = document.createElement('script');
+        ga.async = true;
+        ga.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+        document.head.appendChild(ga);
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function () { window.dataLayer.push(arguments); };
+        gtag('js', new Date());
+        gtag('config', GA_ID);
+      }
+      function track(name, params) {
+        if (window.gtag) window.gtag('event', name, params || {});
+      }
+
+      /* Theme toggle, shares its storage key with the rest of the site */
+      document.getElementById('modeToggle').addEventListener('click', function () {
+        var t = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+        document.documentElement.dataset.theme = t;
+        try { localStorage.setItem('theme', t); } catch (e) {}
+        track('theme', { value: t });
+      });
+
+      /* Lightbox */
+      var box = document.getElementById('lightbox');
+      var boxImg = box.querySelector('img');
+      document.querySelectorAll('[data-zoom]').forEach(function (img) {
+        img.parentElement.addEventListener('click', function () {
+          boxImg.src = img.src;
+          boxImg.alt = img.alt;
+          box.classList.add('on');
+          track('image_open', { project: 'devilfruittcg', image: img.getAttribute('src') });
+        });
+      });
+      function closeBox() { box.classList.remove('on'); boxImg.src = ''; }
+      box.querySelector('.close').addEventListener('click', closeBox);
+      box.addEventListener('click', function (e) { if (e.target === box) closeBox(); });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && box.classList.contains('on')) closeBox();
+      });
+
+      /* Reveal on scroll */
+      var rv = document.querySelectorAll('.card, .layer, .smap, .quote, .tbl');
+      rv.forEach(function (el) { el.classList.add('rv'); });
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+        rv.forEach(function (el) { io.observe(el); });
+      } else {
+        rv.forEach(function (el) { el.classList.add('in'); });
+      }
+
+      /* Section views and scroll depth */
+      if ('IntersectionObserver' in window) {
+        var seen = {};
+        var sIO = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting && !seen[e.target.id]) {
+              seen[e.target.id] = 1;
+              track('section_view', { section: e.target.id, page: 'devilfruittcg' });
+            }
+          });
+        }, { threshold: 0.3 });
+        document.querySelectorAll('section[id]').forEach(function (s) { sIO.observe(s); });
+      }
+      var depth = {};
+      window.addEventListener('scroll', function () {
+        var h = document.documentElement.scrollHeight - window.innerHeight;
+        if (h <= 0) return;
+        var pct = Math.round((window.scrollY / h) * 100);
+        [50, 90].forEach(function (m) {
+          if (pct >= m && !depth[m]) { depth[m] = 1; track('scroll_depth', { percent: m, page: 'devilfruittcg' }); }
+        });
+      }, { passive: true });
+    })();
+  </script>
+</body>
+</html>

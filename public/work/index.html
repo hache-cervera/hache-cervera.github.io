@@ -257,6 +257,8 @@
     section.filtered-out { display: none; }
 
     /* ---------- Sections ---------- */
+    /* overflow:hidden keeps the bleeding .glow circles from widening the page */
+    section, .hero { overflow: hidden; }
     section { position: relative; padding: 64px 0 96px; border-top: 1px solid var(--line); }
     section .wrap { position: relative; z-index: 1; }
     .section-label {
@@ -329,6 +331,22 @@
       letter-spacing: -0.02em;
     }
     .project p { margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
+    /* Single wide card, used by the SEO case study */
+    .projects.solo { grid-template-columns: 1fr; }
+    @media (min-width: 900px) {
+      .projects.solo .project { display: grid; grid-template-columns: 1.15fr 1fr; }
+      .projects.solo .project .shot { aspect-ratio: auto; height: 100%; border-bottom: none; border-right: 1px solid var(--line); }
+      .projects.solo .project .body { padding: 36px; align-self: center; }
+    }
+    .project .more {
+      margin-top: 20px;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.875rem;
+      color: var(--accent);
+    }
+    .project .more span { display: inline-block; transition: transform 0.2s ease; }
+    .project:hover .more span { transform: translateX(4px); }
     .tags { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px; }
     .tags li {
       list-style: none;
@@ -799,23 +817,65 @@
       <p class="kicker">/ Portfolio</p>
       <h1>See some of<br />my <em>work</em></h1>
       <p>
-        Websites, brand systems, campaigns, social-media design and video. A growing selection
-        of things I've designed, built and produced. More coming soon.
+        Search strategy, websites, brand systems, campaigns, social-media design and video. A
+        growing selection of things I've designed, built and produced. More coming soon.
       </p>
     </div>
 
     <div class="filters wrap" role="tablist" aria-label="Filter the work">
       <button class="chip is-on" data-filter="all" type="button">All work</button>
+      <button class="chip" data-filter="seo" type="button">SEO / GEO / AEO</button>
       <button class="chip" data-filter="web" type="button">Websites</button>
       <button class="chip" data-filter="design" type="button">Design &amp; Branding</button>
       <button class="chip" data-filter="video" type="button">Video &amp; Social</button>
     </div>
 
-    <!-- ============ 01 · WEB ============ -->
+    <!-- ============ 01 · SEO / GEO / AEO ============ -->
+    <section id="seo">
+      <span class="glow" style="top: 40px; left: -260px;" aria-hidden="true"></span>
+      <div class="wrap">
+        <p class="section-label">/ 01 · SEO, GEO &amp; AEO</p>
+        <h2>Organic visibility, built as a system</h2>
+        <p class="section-intro">
+          Search is not only Google any more. I work three layers at once: classic SEO, AEO
+          (structuring content so answer engines can quote it) and GEO (earning and measuring
+          visibility inside ChatGPT, Perplexity and AI Overviews). Below is that whole method
+          applied end to end, on a project of my own where every decision is documented.
+        </p>
+
+        <div class="projects solo">
+          <a class="project" href="devilfruittcg/">
+            <div class="shot">
+              <img src="img/dftcg-home.jpg" alt="devilfruittcg.com, home page of the One Piece Card Game niche site" loading="lazy" />
+            </div>
+            <div class="body">
+              <h3>devilfruittcg.com</h3>
+              <p>
+                A Spanish-language niche site about the One Piece Card Game, built end to end as a
+                live testbed: content architecture by search intent, FAQPage schema generated from
+                the visible DOM, interactive components used as link assets, and a GEO tracking
+                protocol running since before the first indexation. Self-hosted infrastructure on
+                my own server, with the SaaS bill at zero.
+              </p>
+              <ul class="tags">
+                <li>SEO</li>
+                <li>AEO</li>
+                <li>GEO</li>
+                <li>WordPress</li>
+                <li>Self-hosted</li>
+              </ul>
+              <p class="more">Read the full case study <span>&rarr;</span></p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 02 · WEB ============ -->
     <section id="web">
       <span class="glow" style="top: 60px; left: -260px;" aria-hidden="true"></span>
       <div class="wrap">
-        <p class="section-label">/ 01 · Web</p>
+        <p class="section-label">/ 02 · Web</p>
         <h2>Websites, end to end</h2>
         <p class="section-intro">
           Design and development with premium plugins and multilingual setups, plus everything
@@ -920,7 +980,7 @@
       <span class="glow" style="top: 120px; right: -260px;" aria-hidden="true"></span>
       <span class="glow" style="bottom: 300px; left: -280px; width: 420px; height: 420px;" aria-hidden="true"></span>
       <div class="wrap">
-        <p class="section-label">/ 02 · Design &amp; Branding</p>
+        <p class="section-label">/ 03 · Design &amp; Branding</p>
         <h2>Identity, campaigns and design systems</h2>
         <p class="section-intro">
           Branding, art direction and graphic systems: brandbooks, rebrandings and the templates
@@ -1108,7 +1168,7 @@
     <section id="video">
       <span class="glow" style="top: 80px; left: -240px;" aria-hidden="true"></span>
       <div class="wrap">
-        <p class="section-label">/ 03 · Video &amp; Social</p>
+        <p class="section-label">/ 04 · Video &amp; Social</p>
         <h2>Motion, podcasts and content that moves</h2>
         <p class="section-intro">
           Audiovisual production and social content for brands, much of it made at <a class="credit" href="https://neuronadigital.es/" target="_blank" rel="noopener">Neurona Digital</a>.
@@ -1355,17 +1415,37 @@
 
       /* Section filters */
       var chips = document.querySelectorAll('.chip');
-      var sections = { web: document.getElementById('web'), design: document.getElementById('design'), video: document.getElementById('video') };
+      var sections = {
+        seo: document.getElementById('seo'),
+        web: document.getElementById('web'),
+        design: document.getElementById('design'),
+        video: document.getElementById('video'),
+      };
+      function applyFilter(f) {
+        chips.forEach(function (c) { c.classList.toggle('is-on', c.dataset.filter === f); });
+        Object.keys(sections).forEach(function (k) {
+          sections[k].classList.toggle('filtered-out', f !== 'all' && f !== k);
+        });
+      }
       chips.forEach(function (chip) {
         chip.addEventListener('click', function () {
-          chips.forEach(function (c) { c.classList.toggle('is-on', c === chip); });
-          var f = chip.dataset.filter;
-          Object.keys(sections).forEach(function (k) {
-            sections[k].classList.toggle('filtered-out', f !== 'all' && f !== k);
-          });
-          track('filter', { value: f });
+          applyFilter(chip.dataset.filter);
+          track('filter', { value: chip.dataset.filter });
         });
       });
+
+      /* Deep link from the home menu: /work/?f=seo (a #seo hash works too) */
+      var wanted = (location.search.match(/[?&]f=([a-z]+)/) || [])[1] || location.hash.replace('#', '');
+      if (wanted && sections[wanted]) {
+        applyFilter(wanted);
+        track('filter', { value: wanted, source: 'deeplink' });
+        var bar = document.querySelector('.filters');
+        if (bar) {
+          requestAnimationFrame(function () {
+            bar.scrollIntoView({ behavior: 'auto', block: 'start' });
+          });
+        }
+      }
 
       /* Reveal on scroll */
       var rvTargets = document.querySelectorAll('.project, .proj, .feature-video, .film, .reel');
