@@ -14,6 +14,8 @@ export const translations = {
       cta: 'My stack',
       portfolio: 'Portfolio',
       scroll: 'Scroll',
+      menu: 'Jump straight to',
+      cats: { seo: 'SEO / GEO / AEO', web: 'Websites', design: 'Design', video: 'Video' },
     },
     about: {
       label: '/ 01 · About',
@@ -55,6 +57,8 @@ export const translations = {
       cta: 'Mi stack',
       portfolio: 'Portfolio',
       scroll: 'Scroll',
+      menu: 'Ir directamente a',
+      cats: { seo: 'SEO / GEO / AEO', web: 'Webs', design: 'Diseño', video: 'Vídeo' },
     },
     about: {
       label: '/ 01 · Sobre mí',

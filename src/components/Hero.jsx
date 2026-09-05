@@ -110,6 +110,7 @@ function MagneticLink({ href, children, accent, external }) {
 export default function Hero() {
   const rootRef = useRef(null);
   const { lang, t } = useLang();
+  const workBase = lang === 'es' ? 'work/es/' : 'work/';
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -123,7 +124,12 @@ export default function Hero() {
   }, []);
 
   return (
-    <section id="hero" ref={rootRef} className="relative flex min-h-screen flex-col justify-center overflow-hidden px-6 py-24 md:px-12">
+    <section
+      id="hero"
+      ref={rootRef}
+      /* short-viewport padding lives in index.css so the cascade order is explicit */
+      className="relative flex min-h-screen flex-col justify-center overflow-hidden px-6 py-24 md:px-12"
+    >
       <NodeField />
 
       <div className="relative z-20 mx-auto w-full max-w-6xl">
@@ -148,7 +154,7 @@ export default function Hero() {
 
         <div className="mt-12 flex flex-wrap gap-4 overflow-hidden">
           <span data-line className="inline-block">
-            <MagneticLink href={lang === 'es' ? 'work/es/' : 'work/'} accent external>
+            <MagneticLink href={workBase} accent external>
               {t.hero.portfolio}
             </MagneticLink>
           </span>
@@ -156,6 +162,27 @@ export default function Hero() {
             <MagneticLink href="#skills">{t.hero.cta}</MagneticLink>
           </span>
         </div>
+
+        {/* Category shortcuts into /work, so the range of the work is visible
+            without scrolling. Each one lands on /work with that filter applied. */}
+        <nav className="mt-10 overflow-hidden" aria-label={t.hero.menu}>
+          <span data-line className="block">
+            <span className="font-display text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">
+              {t.hero.menu}
+            </span>
+            <span className="mt-3 flex flex-wrap gap-2">
+              {['seo', 'web', 'design', 'video'].map((f) => (
+                <a
+                  key={f}
+                  href={`${workBase}?f=${f}`}
+                  className="inline-flex items-center border border-line px-3 py-1.5 font-display text-[11px] font-semibold uppercase tracking-[0.06em] text-muted transition-colors duration-200 hover:border-accent hover:text-accent"
+                >
+                  {t.hero.cats[f]}
+                </a>
+              ))}
+            </span>
+          </span>
+        </nav>
       </div>
 
       <motion.div
