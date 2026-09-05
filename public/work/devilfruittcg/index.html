@@ -358,6 +358,64 @@
     .smap .top i { display: block; margin-top: 3px; font-style: normal; font-size: 0.6875rem; font-weight: 400; color: rgba(255, 255, 255, 0.55); }
     .smap .kid { border: 1px solid var(--line); background: var(--surface); padding: 9px 14px; font-size: 0.8125rem; color: var(--muted); }
 
+    /* ---------- Highlights ---------- */
+    .hl { margin-top: 40px; display: grid; gap: 16px; grid-template-columns: 1fr; }
+    @media (min-width: 640px) { .hl { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 1000px) { .hl { grid-template-columns: repeat(3, 1fr); } }
+    .hl-item { border: 1px solid var(--line); padding: 24px; transition: border-color 0.3s ease; }
+    .hl-item:hover { border-color: var(--ink); }
+    .hl-item svg { display: block; color: var(--accent); }
+    .hl-item h3 {
+      margin-top: 16px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.125rem;
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+    }
+    .hl-item p { margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
+
+    /* ---------- Timeline ---------- */
+    .tl { margin-top: 48px; display: grid; gap: 24px; grid-template-columns: 1fr; list-style: none; }
+    @media (min-width: 900px) { .tl { grid-template-columns: repeat(4, 1fr); } }
+    .tl-step { border-top: 2px solid var(--line); padding-top: 16px; }
+    .tl-step.now { border-top-color: var(--accent); }
+    .tl-step b {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .tl-step.now b { color: var(--accent); }
+    .tl-step p { margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
+
+    /* ---------- One article, three surfaces ---------- */
+    .flow { margin-top: 40px; }
+    .flow-src {
+      border: 1px solid var(--ink);
+      background: var(--surface);
+      padding: 16px 24px;
+      text-align: center;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--ink);
+    }
+    .flow-fan { display: grid; grid-template-columns: repeat(3, 1fr); height: 24px; }
+    .flow-fan span { justify-self: center; width: 1px; background: var(--line); }
+    .flow-outs { display: grid; gap: 16px; grid-template-columns: 1fr; }
+    @media (max-width: 699px) { .flow-fan { display: none; } .flow-outs { margin-top: 16px; } }
+    @media (min-width: 700px) { .flow-outs { grid-template-columns: repeat(3, 1fr); } }
+    .flow-out { border: 1px solid var(--line); border-top: 3px solid; padding: 16px; }
+    .flow-out.o-seo { border-top-color: var(--seo); }
+    .flow-out.o-aeo { border-top-color: var(--aeo); }
+    .flow-out.o-geo { border-top-color: var(--geo); }
+    .flow-out b { display: block; font-family: var(--font-display); font-weight: 700; font-size: 1rem; }
+    .flow-out span { display: block; margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
+
     /* ---------- Layers ---------- */
     .layers { margin-top: 40px; display: flex; flex-direction: column; gap: 16px; }
     .layer { padding: 24px 26px; border-left: 3px solid; }
@@ -399,6 +457,11 @@
     .card figure img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; transition: transform 0.6s ease; }
     .card:hover figure img { transform: scale(1.03); }
     .card .body { padding: 22px 24px; }
+    /* Component gallery: let each shot keep its own height instead of cropping it */
+    .cards.gallery { align-items: start; }
+    .cards.gallery figure { aspect-ratio: auto; }
+    .cards.gallery figure img { height: auto; object-fit: contain; }
+    @media (min-width: 900px) { .cards.three { grid-template-columns: repeat(3, 1fr); } }
     .card h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.125rem; letter-spacing: -0.02em; }
     .card p { margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
 
@@ -534,20 +597,163 @@
       <dl class="meta">
         <div><dt>URL</dt><dd>devilfruittcg.com</dd></div>
         <div><dt>Market</dt><dd>Spain, then LATAM</dd></div>
-        <div><dt>Live since</dt><dd>September 2026</dd></div>
+        <div><dt>Launch</dt><dd>15 September 2026</dd></div>
         <div><dt>Niche</dt><dd>One Piece TCG</dd></div>
         <div><dt>Model</dt><dd>Niche affiliate</dd></div>
         <div><dt>Role</dt><dd>Strategy and full execution</dd></div>
       </dl>
 
       <p class="note">
-        <strong>Where it stands:</strong> the site is live and technically finished, with
-        indexing deliberately held back (<code>noindex</code>) until the content library is
-        complete. Everything below describes the system and its day zero baseline. There are no
-        traffic or ranking claims here, because measuring them honestly from the first day is
-        the whole point of the project.
+        <strong>Where it stands:</strong> the build is finished and the site launches on
+        <strong>15 September 2026</strong>. Indexing is held back on purpose
+        (<code>noindex</code>) until that day, so everything below describes the system and its
+        day zero baseline. No traffic or ranking claims here: measuring them honestly from the
+        first day is the whole point.
       </p>
     </div>
+
+    <!-- ============ HIGHLIGHTS ============ -->
+    <section id="highlights">
+      <span class="glow" style="top: -80px; right: -280px;" aria-hidden="true"></span>
+      <div class="wrap">
+        <p class="section-label">/ In short</p>
+        <h2>What makes it different</h2>
+
+        <div class="hl">
+          <article class="hl-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 3 3 8l9 5 9-5-9-5Z" /><path d="M3 13l9 5 9-5" /><path d="M3 18l9 5 9-5" />
+            </svg>
+            <h3>Three layers, one article</h3>
+            <p>
+              SEO, AEO and GEO worked at the same time on the same piece of content, with no
+              duplicated writing and no separate "AI version" of anything.
+            </p>
+          </article>
+
+          <article class="hl-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="9" y="3" width="6" height="4" /><rect x="2.5" y="17" width="6" height="4" /><rect x="15.5" y="17" width="6" height="4" />
+              <path d="M12 7v5M5.5 17v-3h13v3M12 12v2" />
+            </svg>
+            <h3>Architecture by search intent</h3>
+            <p>
+              Four hubs, each answering a different stage of the journey, from learning the rules
+              to deciding what to buy. Product logic, not blog logic.
+            </p>
+          </article>
+
+          <article class="hl-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M9 6 4 12l5 6" /><path d="M15 6l5 6-5 6" />
+            </svg>
+            <h3>Schema generated from the DOM</h3>
+            <p>
+              FAQPage markup is built by parsing the visible <code>&lt;details&gt;</code> blocks,
+              so what the reader sees and what the bot reads can never drift apart. No cloaking.
+            </p>
+          </article>
+
+          <article class="hl-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="8.5" /><circle cx="12" cy="12" r="3.5" /><path d="M12 1.5v3M12 19.5v3M1.5 12h3M19.5 12h3" />
+            </svg>
+            <h3>Day zero on the record</h3>
+            <p>
+              The "zero mentions" measurement from before publishing anything exists as data.
+              Most projects never have that baseline because they start measuring too late.
+            </p>
+          </article>
+
+          <article class="hl-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 20h18" /><path d="M5 16l4-5 3 3 6-8" />
+            </svg>
+            <h3>20 prompts, four engines, monthly</h3>
+            <p>
+              ChatGPT, Perplexity Pro, Google AI and Claude, run on the first of every month and
+              logged against the baseline. Visibility inside AI treated as a metric, not a hunch.
+            </p>
+          </article>
+
+          <article class="hl-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="4.5" width="18" height="6" /><rect x="3" y="13.5" width="18" height="6" /><path d="M7 7.5h.01M7 16.5h.01" />
+            </svg>
+            <h3>Self-hosted, zero SaaS bill</h3>
+            <p>
+              Docker, Nginx Proxy Manager and a Cloudflare Tunnel on my own server. The rank
+              tracker and the GEO tracker run there too. The only recurring cost is the domain.
+            </p>
+          </article>
+
+          <article class="hl-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 3l14 8-6.2 1.6L11 19 5 3Z" />
+            </svg>
+            <h3>Interactive components, already live</h3>
+            <p>
+              Annotated card, playmat, pack simulator and colour system. All built and running,
+              teaching the mechanism instead of describing it.
+            </p>
+          </article>
+
+          <article class="hl-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 20a8 8 0 1 1 8-8" /><path d="M12 12l4.5-3.5" /><path d="M3.5 12h2M18.5 12h2M12 3.5v2" />
+            </svg>
+            <h3>Fast and responsive by construction</h3>
+            <p>
+              Blocksy as a base, then overridden with my own child theme. Native Gutenberg blocks
+              instead of a page builder, WebP and automated compression. Quick on a phone, not
+              just on my desk.
+            </p>
+          </article>
+
+          <article class="hl-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 3v7" /><path d="M8.5 5.2a6 6 0 1 0 7 0" />
+            </svg>
+            <h3>No paid tools, on purpose</h3>
+            <p>
+              A rule I set myself: zero SaaS subscriptions. Every tracker runs on hardware I own.
+              Slower than renting the answer, and that is exactly the point.
+            </p>
+          </article>
+        </div>
+
+        <ol class="tl">
+          <li class="tl-step">
+            <b>Before publishing</b>
+            <p>
+              Competitor audit with Screaming Frog, keyword filtering with the reasons written
+              down, and the day zero GEO baseline captured.
+            </p>
+          </li>
+          <li class="tl-step">
+            <b>Build</b>
+            <p>
+              Architecture by search intent, custom child theme, interactive components and the
+              automatic schema. <code>noindex</code> on the whole time.
+            </p>
+          </li>
+          <li class="tl-step now">
+            <b>15 September 2026</b>
+            <p>
+              Launch. Indexing opens and the first wave of content goes live, with tracking
+              already running rather than set up afterwards.
+            </p>
+          </li>
+          <li class="tl-step">
+            <b>From month one</b>
+            <p>
+              The 20-prompt battery across four engines every month, plus rank tracking, measured
+              against a baseline that already exists.
+            </p>
+          </li>
+        </ol>
+      </div>
+    </section>
 
     <!-- ============ 01 · THE PROJECT ============ -->
     <section id="project">
@@ -564,6 +770,12 @@
         <p class="section-intro">
           It runs as a real affiliate project and as a living case study at the same time,
           which is exactly the kind of work I offer as a service.
+        </p>
+        <p class="section-intro">
+          I set myself one rule before starting: no paid tools. Rank tracking, GEO tracking,
+          audits and automation all run on hardware I own. Buying a subscription would have been
+          faster, and that is precisely why I did not. The goal was to learn the technical side
+          from the root, understanding what every piece does instead of renting the answer.
         </p>
 
         <div class="stats">
@@ -642,6 +854,25 @@
           with the same article, without duplicated work.
         </p>
 
+        <div class="flow">
+          <p class="flow-src">One article</p>
+          <div class="flow-fan" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div class="flow-outs">
+            <div class="flow-out o-seo">
+              <b>Google results</b>
+              <span>Has to rank for the query in the first place.</span>
+            </div>
+            <div class="flow-out o-aeo">
+              <b>Answer boxes</b>
+              <span>Has to be quotable in 40 to 60 self-contained words.</span>
+            </div>
+            <div class="flow-out o-geo">
+              <b>AI answers</b>
+              <span>Has to be worth citing as the source of the mechanism.</span>
+            </div>
+          </div>
+        </div>
+
         <div class="layers">
           <div class="layer l-seo">
             <span class="tag">SEO</span>
@@ -691,15 +922,58 @@
         <p class="section-label">/ 04 &middot; Editorial components</p>
         <h2>Link assets, not just content</h2>
         <p class="section-intro">
-          To stand apart from the generic affiliate sites in the niche, the site ships interactive
-          components that teach instead of listing. That is the kind of content that earns natural
-          links and that an LLM can cite as an authority on the mechanism, not just on the fact.
+          All of these are built and running on the live site. To stand apart from the generic
+          affiliate sites in the niche, they teach the mechanism instead of listing facts, which
+          is what earns natural links and what an LLM can cite as an authority on how something
+          works, not just on the number.
         </p>
 
-        <div class="cards">
+        <div class="cards gallery">
           <div class="card">
             <figure>
-              <img src="../img/dftcg-tapete.jpg" alt="Interactive playmat with nine clickable zones and an explanation panel" loading="lazy" data-zoom />
+              <img src="../img/dftcg-carta.jpg" alt="Annotated card component with numbered hotspots over a real card" width="1440" height="1447" loading="lazy" data-zoom />
+            </figure>
+            <div class="body">
+              <h3>Annotated card, with real hotspots</h3>
+              <p>
+                Tap any number to zoom into that part of an actual card: cost, power, name, code
+                and rarity. It teaches you to read the physical object rather than describing it
+                in a paragraph.
+              </p>
+            </div>
+          </div>
+
+          <div class="card">
+            <figure>
+              <img src="../img/dftcg-sobre.jpg" alt="Pack simulator showing twelve cards and the real pull rate odds" width="1440" height="1508" loading="lazy" data-zoom />
+            </figure>
+            <div class="body">
+              <h3>Pack simulator with real odds</h3>
+              <p>
+                What a pack actually contains, with pull rates cited with source and date, and an
+                explicit note that Bandai does not publish official probabilities. Verifiable and
+                linkable, which is what answer engines reward.
+              </p>
+            </div>
+          </div>
+
+          <div class="card">
+            <figure>
+              <img src="../img/dftcg-colores.jpg" alt="The six colours of the game, each with its play archetype" width="1440" height="1172" loading="lazy" data-zoom />
+            </figure>
+            <div class="body">
+              <h3>Colour system</h3>
+              <p>
+                The six colours with their archetype in one line each, tagged rush, tempo,
+                control, ramp, removal and trigger. Direct-answer format, the shape Google turns
+                into a featured snippet.
+              </p>
+            </div>
+          </div>
+
+          <div class="card">
+            <figure>
+              <img src="../img/dftcg-tapete.jpg" alt="Interactive playmat with nine clickable zones and an explanation panel" width="1440" height="875" loading="lazy" data-zoom />
             </figure>
             <div class="body">
               <h3>Interactive playmat</h3>
@@ -712,7 +986,7 @@
 
           <div class="card">
             <figure>
-              <img src="../img/dftcg-turno.jpg" alt="Turn phases component with five selectable tabs" loading="lazy" data-zoom />
+              <img src="../img/dftcg-turno.jpg" alt="Turn phases component with five selectable tabs" width="1440" height="720" loading="lazy" data-zoom />
             </figure>
             <div class="body">
               <h3>Turn phases, step by step</h3>
@@ -725,20 +999,7 @@
 
           <div class="card">
             <figure>
-              <img src="../img/dftcg-combate.jpg" alt="Combat resolution explained in four ordered steps" loading="lazy" data-zoom />
-            </figure>
-            <div class="body">
-              <h3>Combat, broken into steps</h3>
-              <p>
-                The part everyone gets wrong, split into ordered steps with the counterplay for
-                each one. Numbered structure reads well for a human and parses cleanly for a model.
-              </p>
-            </div>
-          </div>
-
-          <div class="card">
-            <figure>
-              <img src="../img/dftcg-faq.jpg" alt="Accordion of rules questions grouped by topic" loading="lazy" data-zoom />
+              <img src="../img/dftcg-faq.jpg" alt="Accordion of rules questions grouped by topic" width="1440" height="765" loading="lazy" data-zoom />
             </figure>
             <div class="body">
               <h3>Rules FAQ that feeds the schema</h3>
@@ -750,13 +1011,6 @@
             </div>
           </div>
         </div>
-
-        <p class="note">
-          Also in production: an annotated card with real hotspots (cost, power, code, rarity), a
-          visual pack simulator with pull rates cited with source and date, and a colour system
-          explaining the six archetypes in one line each.
-        </p>
-      </div>
     </section>
 
     <!-- ============ 05 · STACK ============ -->
@@ -787,6 +1041,7 @@
           <h3>CMS and theme</h3>
           <ul class="tags">
             <li class="key">WordPress</li>
+            <li class="key">Blocksy base, overridden</li>
             <li class="key">Custom child theme</li>
             <li>Gutenberg, native blocks, no page builder</li>
             <li>Rank Math</li>
@@ -803,6 +1058,18 @@
             <li>Google Search Console</li>
             <li>Google Sheets, monthly GEO protocol</li>
             <li>Screaming Frog, competitor audit</li>
+          </ul>
+        </div>
+
+        <div class="group">
+          <h3>Performance and front end</h3>
+          <ul class="tags">
+            <li class="key">Core Web Vitals</li>
+            <li class="key">Responsive, mobile first</li>
+            <li>No page builder overhead</li>
+            <li>WebP and automated compression</li>
+            <li>Lazy loading and asset trimming</li>
+            <li>Custom CSS over theme defaults</li>
           </ul>
         </div>
 
@@ -909,10 +1176,10 @@
           every hub, so the site reads as one product.
         </p>
 
-        <div class="cards">
+        <div class="cards three">
           <div class="card">
             <figure>
-              <img src="../img/dftcg-home.jpg" alt="devilfruittcg.com home page" loading="lazy" data-zoom />
+              <img src="../img/dftcg-home.jpg" alt="devilfruittcg.com home page" width="1440" height="900" loading="lazy" data-zoom />
             </figure>
             <div class="body">
               <h3>Home</h3>
@@ -921,7 +1188,7 @@
           </div>
           <div class="card">
             <figure>
-              <img src="../img/dftcg-decks.jpg" alt="Decks and meta hub page" loading="lazy" data-zoom />
+              <img src="../img/dftcg-decks.jpg" alt="Decks and meta hub page" width="1440" height="900" loading="lazy" data-zoom />
             </figure>
             <div class="body">
               <h3>Decks and meta</h3>
@@ -930,24 +1197,14 @@
           </div>
           <div class="card">
             <figure>
-              <img src="../img/dftcg-coleccionismo.jpg" alt="Collecting hub page" loading="lazy" data-zoom />
+              <img src="../img/dftcg-coleccionismo.jpg" alt="Collecting hub page" width="1440" height="900" loading="lazy" data-zoom />
             </figure>
             <div class="body">
               <h3>Collecting</h3>
               <p>Rarities, active sets and marketplaces, the transactional end of the journey.</p>
             </div>
           </div>
-          <div class="card">
-            <figure>
-              <img src="../img/dftcg-faq.jpg" alt="Rules FAQ accordion" loading="lazy" data-zoom />
-            </figure>
-            <div class="body">
-              <h3>Rules FAQ</h3>
-              <p>The block that doubles as reader content and as the source of the FAQPage schema.</p>
-            </div>
-          </div>
         </div>
-      </div>
     </section>
   </main>
 
@@ -1024,7 +1281,7 @@
       });
 
       /* Reveal on scroll */
-      var rv = document.querySelectorAll('.card, .layer, .smap, .quote, .tbl');
+      var rv = document.querySelectorAll('.card, .layer, .smap, .quote, .tbl, .hl-item, .tl-step, .flow-out');
       rv.forEach(function (el) { el.classList.add('rv'); });
       if ('IntersectionObserver' in window) {
         var io = new IntersectionObserver(function (entries) {
