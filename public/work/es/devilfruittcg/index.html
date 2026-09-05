@@ -358,6 +358,64 @@
     .smap .top i { display: block; margin-top: 3px; font-style: normal; font-size: 0.6875rem; font-weight: 400; color: rgba(255, 255, 255, 0.55); }
     .smap .kid { border: 1px solid var(--line); background: var(--surface); padding: 9px 14px; font-size: 0.8125rem; color: var(--muted); }
 
+    /* ---------- Highlights ---------- */
+    .hl { margin-top: 40px; display: grid; gap: 16px; grid-template-columns: 1fr; }
+    @media (min-width: 640px) { .hl { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 1000px) { .hl { grid-template-columns: repeat(3, 1fr); } }
+    .hl-item { border: 1px solid var(--line); padding: 24px; transition: border-color 0.3s ease; }
+    .hl-item:hover { border-color: var(--ink); }
+    .hl-item svg { display: block; color: var(--accent); }
+    .hl-item h3 {
+      margin-top: 16px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.125rem;
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+    }
+    .hl-item p { margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
+
+    /* ---------- Timeline ---------- */
+    .tl { margin-top: 48px; display: grid; gap: 24px; grid-template-columns: 1fr; list-style: none; }
+    @media (min-width: 900px) { .tl { grid-template-columns: repeat(4, 1fr); } }
+    .tl-step { border-top: 2px solid var(--line); padding-top: 16px; }
+    .tl-step.now { border-top-color: var(--accent); }
+    .tl-step b {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .tl-step.now b { color: var(--accent); }
+    .tl-step p { margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
+
+    /* ---------- One article, three surfaces ---------- */
+    .flow { margin-top: 40px; }
+    .flow-src {
+      border: 1px solid var(--ink);
+      background: var(--surface);
+      padding: 16px 24px;
+      text-align: center;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--ink);
+    }
+    .flow-fan { display: grid; grid-template-columns: repeat(3, 1fr); height: 24px; }
+    .flow-fan span { justify-self: center; width: 1px; background: var(--line); }
+    .flow-outs { display: grid; gap: 16px; grid-template-columns: 1fr; }
+    @media (max-width: 699px) { .flow-fan { display: none; } .flow-outs { margin-top: 16px; } }
+    @media (min-width: 700px) { .flow-outs { grid-template-columns: repeat(3, 1fr); } }
+    .flow-out { border: 1px solid var(--line); border-top: 3px solid; padding: 16px; }
+    .flow-out.o-seo { border-top-color: var(--seo); }
+    .flow-out.o-aeo { border-top-color: var(--aeo); }
+    .flow-out.o-geo { border-top-color: var(--geo); }
+    .flow-out b { display: block; font-family: var(--font-display); font-weight: 700; font-size: 1rem; }
+    .flow-out span { display: block; margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
+
     /* ---------- Layers ---------- */
     .layers { margin-top: 40px; display: flex; flex-direction: column; gap: 16px; }
     .layer { padding: 24px 26px; border-left: 3px solid; }
@@ -399,6 +457,11 @@
     .card figure img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; transition: transform 0.6s ease; }
     .card:hover figure img { transform: scale(1.03); }
     .card .body { padding: 22px 24px; }
+    /* Component gallery: let each shot keep its own height instead of cropping it */
+    .cards.gallery { align-items: start; }
+    .cards.gallery figure { aspect-ratio: auto; }
+    .cards.gallery figure img { height: auto; object-fit: contain; }
+    @media (min-width: 900px) { .cards.three { grid-template-columns: repeat(3, 1fr); } }
     .card h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.125rem; letter-spacing: -0.02em; }
     .card p { margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
 
@@ -534,20 +597,166 @@
       <dl class="meta">
         <div><dt>URL</dt><dd>devilfruittcg.com</dd></div>
         <div><dt>Mercado</dt><dd>España, luego LATAM</dd></div>
-        <div><dt>En producción desde</dt><dd>Septiembre 2026</dd></div>
+        <div><dt>Lanzamiento</dt><dd>15 de septiembre de 2026</dd></div>
         <div><dt>Nicho</dt><dd>One Piece TCG</dd></div>
         <div><dt>Modelo</dt><dd>Afiliación de nicho</dd></div>
         <div><dt>Rol</dt><dd>Estrategia y ejecución completa</dd></div>
       </dl>
 
       <p class="note">
-        <strong>Punto en el que está:</strong> la web está en producción y terminada a nivel
-        técnico, con la indexación frenada a propósito (<code>noindex</code>) hasta que la
-        biblioteca de contenido esté completa. Todo lo que hay debajo describe el sistema y su
-        línea base de día cero. Aquí no hay promesas de tráfico ni de posiciones, porque medirlas
-        con honestidad desde el primer día es justo el sentido del proyecto.
+        <strong>Punto en el que está:</strong> la construcción está terminada y la web se lanza
+        el <strong>15 de septiembre de 2026</strong>. La indexación está frenada a propósito
+        (<code>noindex</code>) hasta ese día, así que todo lo que hay debajo describe el sistema y
+        su línea base de día cero. Aquí no hay promesas de tráfico ni de posiciones: medirlas con
+        honestidad desde el primer día es justo el sentido del proyecto.
       </p>
     </div>
+
+    <!-- ============ HIGHLIGHTS ============ -->
+    <section id="highlights">
+      <span class="glow" style="top: -80px; right: -280px;" aria-hidden="true"></span>
+      <div class="wrap">
+        <p class="section-label">/ En corto</p>
+        <h2>Qué la hace diferente</h2>
+
+        <div class="hl">
+          <article class="hl-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 3 3 8l9 5 9-5-9-5Z" /><path d="M3 13l9 5 9-5" /><path d="M3 18l9 5 9-5" />
+            </svg>
+            <h3>Tres capas, un solo artículo</h3>
+            <p>
+              SEO, AEO y GEO trabajados a la vez sobre el mismo contenido, sin escribir dos veces
+              y sin ninguna «versión para IA» aparte.
+            </p>
+          </article>
+
+          <article class="hl-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="9" y="3" width="6" height="4" /><rect x="2.5" y="17" width="6" height="4" /><rect x="15.5" y="17" width="6" height="4" />
+              <path d="M12 7v5M5.5 17v-3h13v3M12 12v2" />
+            </svg>
+            <h3>Arquitectura por intención de búsqueda</h3>
+            <p>
+              Cuatro hubs, cada uno para una fase distinta del recorrido, desde aprender las
+              reglas hasta decidir qué comprar. Lógica de producto, no de blog.
+            </p>
+          </article>
+
+          <article class="hl-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M9 6 4 12l5 6" /><path d="M15 6l5 6-5 6" />
+            </svg>
+            <h3>Schema generado desde el DOM</h3>
+            <p>
+              El marcado FAQPage se construye parseando los bloques <code>&lt;details&gt;</code>
+              visibles, así lo que ve el lector y lo que lee el bot nunca se desincronizan. Sin
+              cloaking.
+            </p>
+          </article>
+
+          <article class="hl-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="8.5" /><circle cx="12" cy="12" r="3.5" /><path d="M12 1.5v3M12 19.5v3M1.5 12h3M19.5 12h3" />
+            </svg>
+            <h3>Día cero documentado</h3>
+            <p>
+              La medición de «cero menciones» de antes de publicar nada existe como dato. La
+              mayoría de proyectos no tiene esa línea base porque empieza a medir tarde.
+            </p>
+          </article>
+
+          <article class="hl-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 20h18" /><path d="M5 16l4-5 3 3 6-8" />
+            </svg>
+            <h3>20 prompts, cuatro motores, cada mes</h3>
+            <p>
+              ChatGPT, Perplexity Pro, Google AI y Claude, ejecutados el día 1 de cada mes y
+              registrados contra la línea base. La visibilidad en IA tratada como métrica, no como
+              intuición.
+            </p>
+          </article>
+
+          <article class="hl-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="4.5" width="18" height="6" /><rect x="3" y="13.5" width="18" height="6" /><path d="M7 7.5h.01M7 16.5h.01" />
+            </svg>
+            <h3>Self-hosted, factura de SaaS a cero</h3>
+            <p>
+              Docker, Nginx Proxy Manager y un túnel de Cloudflare en mi propio servidor. El rank
+              tracker y el tracker de GEO también corren ahí. El único coste recurrente es el
+              dominio.
+            </p>
+          </article>
+
+          <article class="hl-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 3l14 8-6.2 1.6L11 19 5 3Z" />
+            </svg>
+            <h3>Componentes interactivos, ya funcionando</h3>
+            <p>
+              Carta anotada, tapete, simulador de sobre y sistema de colores. Todos construidos y
+              en marcha, enseñando el mecanismo en vez de describirlo.
+            </p>
+          </article>
+
+          <article class="hl-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 20a8 8 0 1 1 8-8" /><path d="M12 12l4.5-3.5" /><path d="M3.5 12h2M18.5 12h2M12 3.5v2" />
+            </svg>
+            <h3>Rápida y responsive por construcción</h3>
+            <p>
+              Blocksy como base, pisada con mi propio tema hijo. Bloques nativos de Gutenberg en
+              vez de page builder, WebP y compresión automatizada. Rápida en el móvil, no solo en
+              mi escritorio.
+            </p>
+          </article>
+
+          <article class="hl-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 3v7" /><path d="M8.5 5.2a6 6 0 1 0 7 0" />
+            </svg>
+            <h3>Sin herramientas de pago, a propósito</h3>
+            <p>
+              Una norma que me puse: cero suscripciones SaaS. Todos los trackers corren en
+              hardware propio. Más lento que alquilar la respuesta, y eso es justo lo que buscaba.
+            </p>
+          </article>
+        </div>
+
+        <ol class="tl">
+          <li class="tl-step">
+            <b>Antes de publicar</b>
+            <p>
+              Auditoría de competidores con Screaming Frog, filtrado de keywords con los motivos
+              documentados y la línea base GEO de día cero capturada.
+            </p>
+          </li>
+          <li class="tl-step">
+            <b>Construcción</b>
+            <p>
+              Arquitectura por intención de búsqueda, tema hijo propio, componentes interactivos y
+              el schema automático. Con <code>noindex</code> puesto todo el tiempo.
+            </p>
+          </li>
+          <li class="tl-step now">
+            <b>15 de septiembre de 2026</b>
+            <p>
+              Lanzamiento. Se abre la indexación y sale la primera oleada de contenido, con el
+              tracking ya en marcha en vez de montado después.
+            </p>
+          </li>
+          <li class="tl-step">
+            <b>Desde el primer mes</b>
+            <p>
+              La batería de 20 prompts en cuatro motores cada mes, más el rank tracking, medido
+              contra una línea base que ya existe.
+            </p>
+          </li>
+        </ol>
+      </div>
+    </section>
 
     <!-- ============ 01 · THE PROJECT ============ -->
     <section id="project">
@@ -565,6 +774,13 @@
         <p class="section-intro">
           Funciona a la vez como proyecto real de afiliación y como caso de estudio vivo, que es
           exactamente el tipo de trabajo que ofrezco como servicio.
+        </p>
+        <p class="section-intro">
+          Me puse una norma antes de empezar: sin herramientas de pago. El rank tracking, el
+          tracking de GEO, las auditorías y la automatización corren en hardware propio. Pagar una
+          suscripción habría sido más rápido, y justo por eso no lo hice. El objetivo era aprender
+          la parte técnica desde la raíz, entendiendo qué hace cada pieza en vez de alquilar la
+          respuesta.
         </p>
 
         <div class="stats">
@@ -644,6 +860,25 @@
           posicionar en tres frentes con el mismo artículo, sin trabajo duplicado.
         </p>
 
+        <div class="flow">
+          <p class="flow-src">Un artículo</p>
+          <div class="flow-fan" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div class="flow-outs">
+            <div class="flow-out o-seo">
+              <b>Resultados de Google</b>
+              <span>Primero tiene que posicionar para la búsqueda.</span>
+            </div>
+            <div class="flow-out o-aeo">
+              <b>Cajas de respuesta</b>
+              <span>Tiene que ser citable en 40 o 60 palabras autocontenidas.</span>
+            </div>
+            <div class="flow-out o-geo">
+              <b>Respuestas de IA</b>
+              <span>Tiene que merecer la cita como fuente del mecanismo.</span>
+            </div>
+          </div>
+        </div>
+
         <div class="layers">
           <div class="layer l-seo">
             <span class="tag">SEO</span>
@@ -692,16 +927,58 @@
         <p class="section-label">/ 04 &middot; Componentes editoriales</p>
         <h2>Activos de enlace, no solo contenido</h2>
         <p class="section-intro">
-          Para diferenciarse de las webs de afiliados genéricas del nicho, la web incluye
-          componentes interactivos que enseñan en vez de solo listar. Es el tipo de contenido que
-          genera enlaces naturales y que un LLM puede citar como fuente autorizada del mecanismo,
-          no solo del dato.
+          Todos estos están construidos y funcionando en la web. Para diferenciarse de las webs de
+          afiliados genéricas del nicho, enseñan el mecanismo en vez de listar datos, que es lo que
+          genera enlaces naturales y lo que un LLM puede citar como fuente autorizada de cómo
+          funciona algo, no solo del número.
         </p>
 
-        <div class="cards">
+        <div class="cards gallery">
           <div class="card">
             <figure>
-              <img src="../../img/dftcg-tapete.jpg" alt="Tapete interactivo con nueve zonas clicables y panel explicativo" loading="lazy" data-zoom />
+              <img src="../../img/dftcg-carta.jpg" alt="Componente de carta anotada con hotspots numerados sobre una carta real" width="1440" height="1447" loading="lazy" data-zoom />
+            </figure>
+            <div class="body">
+              <h3>Carta anotada, con hotspots reales</h3>
+              <p>
+                Toca cualquier número para acercarte a esa parte de una carta real: coste, poder,
+                nombre, código y rareza. Enseña a leer el objeto físico en vez de describirlo en un
+                párrafo.
+              </p>
+            </div>
+          </div>
+
+          <div class="card">
+            <figure>
+              <img src="../../img/dftcg-sobre.jpg" alt="Simulador de sobre con doce cartas y las probabilidades reales de pull rate" width="1440" height="1508" loading="lazy" data-zoom />
+            </figure>
+            <div class="body">
+              <h3>Simulador de sobre con probabilidades reales</h3>
+              <p>
+                Lo que trae de verdad un sobre, con los pull rates citados con fuente y fecha y una
+                nota explícita de que Bandai no publica probabilidades oficiales. Verificable y
+                enlazable, que es lo que premian los motores de respuesta.
+              </p>
+            </div>
+          </div>
+
+          <div class="card">
+            <figure>
+              <img src="../../img/dftcg-colores.jpg" alt="Los seis colores del juego, cada uno con su arquetipo de juego" width="1440" height="1172" loading="lazy" data-zoom />
+            </figure>
+            <div class="body">
+              <h3>Sistema de colores</h3>
+              <p>
+                Los seis colores con su arquetipo en una línea cada uno, etiquetados como rush,
+                tempo, control, ramp, removal y trigger. Formato de respuesta directa, la forma que
+                Google convierte en fragmento destacado.
+              </p>
+            </div>
+          </div>
+
+          <div class="card">
+            <figure>
+              <img src="../../img/dftcg-tapete.jpg" alt="Tapete interactivo con nueve zonas clicables y panel explicativo" width="1440" height="875" loading="lazy" data-zoom />
             </figure>
             <div class="body">
               <h3>Tapete interactivo</h3>
@@ -715,7 +992,7 @@
 
           <div class="card">
             <figure>
-              <img src="../../img/dftcg-turno.jpg" alt="Componente de fases del turno con cinco pestañas seleccionables" loading="lazy" data-zoom />
+              <img src="../../img/dftcg-turno.jpg" alt="Componente de fases del turno con cinco pestañas seleccionables" width="1440" height="720" loading="lazy" data-zoom />
             </figure>
             <div class="body">
               <h3>Las fases del turno, paso a paso</h3>
@@ -729,21 +1006,7 @@
 
           <div class="card">
             <figure>
-              <img src="../../img/dftcg-combate.jpg" alt="Resolución del combate explicada en cuatro pasos ordenados" loading="lazy" data-zoom />
-            </figure>
-            <div class="body">
-              <h3>El combate, desglosado en pasos</h3>
-              <p>
-                La parte que todo el mundo se equivoca, partida en pasos ordenados y con la
-                respuesta a cada uno. La estructura numerada se lee bien para una persona y se
-                parsea limpia para un modelo.
-              </p>
-            </div>
-          </div>
-
-          <div class="card">
-            <figure>
-              <img src="../../img/dftcg-faq.jpg" alt="Acordeón de dudas de reglas agrupadas por tema" loading="lazy" data-zoom />
+              <img src="../../img/dftcg-faq.jpg" alt="Acordeón de dudas de reglas agrupadas por tema" width="1440" height="765" loading="lazy" data-zoom />
             </figure>
             <div class="body">
               <h3>FAQ de reglas que alimenta el schema</h3>
@@ -755,13 +1018,6 @@
             </div>
           </div>
         </div>
-
-        <p class="note">
-          También en producción: una carta anotada con hotspots reales (coste, poder, código,
-          rareza), un simulador visual de sobre con pull rates citados con fuente y fecha, y un
-          sistema de colores que explica los seis arquetipos en una línea cada uno.
-        </p>
-      </div>
     </section>
 
     <!-- ============ 05 · STACK ============ -->
@@ -792,6 +1048,7 @@
           <h3>CMS y tema</h3>
           <ul class="tags">
             <li class="key">WordPress</li>
+            <li class="key">Base Blocksy, pisada</li>
             <li class="key">Tema hijo propio</li>
             <li>Gutenberg, bloques nativos, sin page builder</li>
             <li>Rank Math</li>
@@ -808,6 +1065,18 @@
             <li>Google Search Console</li>
             <li>Google Sheets, protocolo GEO mensual</li>
             <li>Screaming Frog, auditoría de competidores</li>
+          </ul>
+        </div>
+
+        <div class="group">
+          <h3>Rendimiento y front end</h3>
+          <ul class="tags">
+            <li class="key">Core Web Vitals</li>
+            <li class="key">Responsive, mobile first</li>
+            <li>Sin sobrecarga de page builder</li>
+            <li>WebP y compresión automatizada</li>
+            <li>Lazy loading y recorte de assets</li>
+            <li>CSS propio por encima del tema</li>
           </ul>
         </div>
 
@@ -914,10 +1183,10 @@
           mismos tokens en todos los hubs, para que la web se lea como un solo producto.
         </p>
 
-        <div class="cards">
+        <div class="cards three">
           <div class="card">
             <figure>
-              <img src="../../img/dftcg-home.jpg" alt="Portada de devilfruittcg.com" loading="lazy" data-zoom />
+              <img src="../../img/dftcg-home.jpg" alt="Portada de devilfruittcg.com" width="1440" height="900" loading="lazy" data-zoom />
             </figure>
             <div class="body">
               <h3>Portada</h3>
@@ -926,7 +1195,7 @@
           </div>
           <div class="card">
             <figure>
-              <img src="../../img/dftcg-decks.jpg" alt="Página hub de decks y meta" loading="lazy" data-zoom />
+              <img src="../../img/dftcg-decks.jpg" alt="Página hub de decks y meta" width="1440" height="900" loading="lazy" data-zoom />
             </figure>
             <div class="body">
               <h3>Decks y meta</h3>
@@ -935,24 +1204,14 @@
           </div>
           <div class="card">
             <figure>
-              <img src="../../img/dftcg-coleccionismo.jpg" alt="Página hub de coleccionismo" loading="lazy" data-zoom />
+              <img src="../../img/dftcg-coleccionismo.jpg" alt="Página hub de coleccionismo" width="1440" height="900" loading="lazy" data-zoom />
             </figure>
             <div class="body">
               <h3>Coleccionismo</h3>
               <p>Rarezas, sets activos y marketplaces, el extremo transaccional del recorrido.</p>
             </div>
           </div>
-          <div class="card">
-            <figure>
-              <img src="../../img/dftcg-faq.jpg" alt="Acordeón de FAQ de reglas" loading="lazy" data-zoom />
-            </figure>
-            <div class="body">
-              <h3>FAQ de reglas</h3>
-              <p>El bloque que sirve a la vez como contenido para el lector y como fuente del schema FAQPage.</p>
-            </div>
-          </div>
         </div>
-      </div>
     </section>
   </main>
 
@@ -1029,7 +1288,7 @@
       });
 
       /* Reveal on scroll */
-      var rv = document.querySelectorAll('.card, .layer, .smap, .quote, .tbl');
+      var rv = document.querySelectorAll('.card, .layer, .smap, .quote, .tbl, .hl-item, .tl-step, .flow-out');
       rv.forEach(function (el) { el.classList.add('rv'); });
       if ('IntersectionObserver' in window) {
         var io = new IntersectionObserver(function (entries) {
