@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>devilfruittcg.com · Caso SEO, GEO y AEO · Hache Cervera</title>
+  <meta
+    name="description"
+    content="Caso de estudio: devilfruittcg.com, web de nicho en español sobre One Piece Card Game construida de principio a fin como campo de pruebas de SEO, AEO y optimización para motores generativos, sobre infraestructura self-hosted."
+  />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta property="og:title" content="devilfruittcg.com · Caso SEO / GEO / AEO" />
+  <meta property="og:description" content="Web de nicho construida de principio a fin como campo de pruebas de visibilidad orgánica: SEO, AEO y GEO, sobre infraestructura propia." />
+  <meta property="og:image" content="https://hache-cervera.github.io/work/img/og.jpg" />
+  <meta property="og:type" content="article" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" type="image/svg+xml" href="../../../favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500&display=swap"
+    rel="stylesheet"
+  />
+  <script>
+    (function () {
+      try {
+        document.documentElement.dataset.theme = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light';
+      } catch (e) {}
+    })();
+  </script>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --surface: #f5f5f5;
+      --panel: #0a0a0a;
+      --ink: #0a0a0a;
+      --muted: #6b6b6b;
+      --line: #e5e5e5;
+      --accent: #ff3c00;
+      --accent-hover: #e63500;
+      --accent-soft: #ffe8e1;
+      --seo: #2d5f8a;
+      --seo-w: #e9f0f6;
+      --aeo: #2f7d4f;
+      --aeo-w: #e8f3ec;
+      --geo: #7d4f9e;
+      --geo-w: #f2ebf7;
+      --font-display: 'Sora', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+    :root[data-theme="dark"] {
+      --bg: #0d0d0d;
+      --surface: #1c1c1c;
+      --ink: #f2f2f2;
+      --muted: #9a9a9a;
+      --line: #2a2a2a;
+      --accent-soft: #3a1608;
+      --seo: #7fb3dd;
+      --seo-w: #12202c;
+      --aeo: #7fc79b;
+      --aeo-w: #112318;
+      --geo: #bb96d6;
+      --geo-w: #1e1526;
+    }
+    :root[data-theme="dark"] .grain { mix-blend-mode: screen; opacity: 0.045; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    ::selection { background: var(--accent); color: #fff; }
+
+    .grain {
+      position: fixed;
+      inset: 0;
+      z-index: 40;
+      pointer-events: none;
+      opacity: 0.028;
+      mix-blend-mode: multiply;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%25" height="100%25" filter="url(%23n)"/></svg>');
+    }
+
+    .glow {
+      position: absolute;
+      width: 480px;
+      height: 480px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 60, 0, 0.09) 0%, rgba(255, 60, 0, 0) 68%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .deco { position: absolute; background: var(--accent); pointer-events: none; z-index: 0; }
+    @keyframes floaty { 0%, 100% { transform: translateY(0) rotate(8deg); } 50% { transform: translateY(-12px) rotate(14deg); } }
+    .deco { animation: floaty 7s ease-in-out infinite; }
+    @media (prefers-reduced-motion: reduce) { .deco { animation: none; } }
+
+    .wrap { max-width: 72rem; margin: 0 auto; padding: 0 24px; }
+    @media (min-width: 768px) { .wrap { padding: 0 48px; } }
+    a { color: inherit; }
+
+    /* ---------- Header ---------- */
+    header { padding: 24px 0; border-bottom: 1px solid var(--line); }
+    header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .back {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.875rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s ease;
+    }
+    .back:hover { color: var(--accent); }
+    .back span { color: var(--accent); transition: transform 0.2s ease; display: inline-block; }
+    .back:hover span { transform: translateX(-4px); }
+    .hctrl { display: flex; align-items: center; gap: 16px; }
+    .lang {
+      display: flex;
+      gap: 8px;
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+    .lang a { text-decoration: none; color: var(--muted); padding: 4px 2px; border-bottom: 2px solid transparent; }
+    .lang a:hover { color: var(--accent); }
+    .lang a.on { color: var(--ink); border-bottom-color: var(--accent); }
+    .tbtn {
+      position: relative;
+      width: 40px;
+      height: 40px;
+      background: none;
+      border: 1px solid var(--line);
+      cursor: pointer;
+      overflow: hidden;
+      transition: border-color 0.25s ease;
+    }
+    .tbtn:hover { border-color: var(--accent); }
+    .tbtn .sky {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.6s cubic-bezier(0.6, 0, 0.25, 1.3);
+    }
+    :root[data-theme="dark"] .tbtn .sky { transform: rotate(-45deg); }
+    .tbtn .core {
+      position: relative;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      transition: transform 0.5s cubic-bezier(0.6, 0, 0.25, 1.3), box-shadow 0.4s ease;
+    }
+    :root[data-theme="dark"] .tbtn .core { transform: scale(1.35); box-shadow: 0 0 12px rgba(255, 60, 0, 0.55); }
+    .tbtn .veil {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 12px;
+      height: 12px;
+      margin: -6px 0 0 -6px;
+      border-radius: 50%;
+      background: var(--bg);
+      transform: translate(15px, -15px);
+      transition: transform 0.5s cubic-bezier(0.6, 0, 0.25, 1.3), background 0.25s ease;
+      z-index: 2;
+    }
+    :root[data-theme="dark"] .tbtn .veil { transform: translate(4px, -4px) scale(1.35); }
+    .tbtn .ray {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 2px;
+      height: 5px;
+      margin: -2.5px 0 0 -1px;
+      border-radius: 1px;
+      background: var(--accent);
+      transform: rotate(var(--r)) translateY(-10px);
+      transition: transform 0.45s ease, opacity 0.35s ease;
+    }
+    :root[data-theme="dark"] .tbtn .ray { transform: rotate(var(--r)) translateY(-4px) scale(0.2); opacity: 0; }
+    @media (prefers-reduced-motion: reduce) { .tbtn .sky, .tbtn .core, .tbtn .veil, .tbtn .ray { transition: none; } }
+
+    /* ---------- Hero ---------- */
+    .hero { position: relative; padding: 80px 24px 56px; }
+    .hero > *:not(.glow):not(.deco) { position: relative; z-index: 1; }
+    @media (min-width: 768px) { .hero { padding: 112px 48px 72px; } }
+    .kicker {
+      font-family: var(--font-display);
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .hero h1 {
+      margin-top: 24px;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(2.2rem, 5.6vw, 4.2rem);
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      word-break: break-word;
+    }
+    .hero h1 em {
+      font-style: italic;
+      background: linear-gradient(100deg, #ff3c00 0%, #ff8a5c 35%, #ff3c00 65%, #ff5a24 100%);
+      background-size: 220% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: shimmer 4s linear infinite;
+    }
+    @keyframes shimmer { to { background-position: -220% 0; } }
+    .hero .lede { margin-top: 24px; max-width: 44rem; font-size: 1.125rem; color: var(--muted); }
+    .hero .actions { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+    .btn {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.875rem;
+      text-decoration: none;
+      padding: 14px 28px;
+      background: var(--accent);
+      color: #fff;
+      transition: background 0.2s ease;
+    }
+    .btn:hover { background: var(--accent-hover); }
+    .alt {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.875rem;
+      text-decoration: none;
+      color: var(--muted);
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 2px;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+    .alt:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* ---------- Meta grid ---------- */
+    .meta {
+      margin-top: 48px;
+      display: grid;
+      grid-template-columns: 1fr;
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+    }
+    @media (min-width: 560px) { .meta { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 900px) { .meta { grid-template-columns: repeat(3, 1fr); } }
+    .meta div { padding: 16px 20px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .meta dt {
+      font-family: var(--font-display);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .meta dd { margin-top: 4px; font-size: 0.9375rem; font-weight: 500; }
+
+    /* ---------- Sections ---------- */
+    /* overflow:hidden keeps the bleeding .glow circles from widening the page */
+    section, .hero { overflow: hidden; }
+    section { position: relative; padding: 64px 0 80px; border-top: 1px solid var(--line); }
+    section .wrap { position: relative; z-index: 1; }
+    .section-label {
+      font-family: var(--font-display);
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    section h2 {
+      margin-top: 24px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+    }
+    .section-intro { margin-top: 16px; max-width: 46rem; color: var(--muted); }
+    section p + p { margin-top: 12px; }
+    .note {
+      margin-top: 24px;
+      max-width: 46rem;
+      padding: 12px 16px;
+      border-left: 2px solid var(--accent);
+      background: var(--surface);
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+    .note strong { color: var(--ink); font-weight: 600; }
+    code {
+      font-family: ui-monospace, 'SF Mono', Consolas, monospace;
+      font-size: 0.8125em;
+      background: var(--surface);
+      padding: 2px 6px;
+      color: var(--accent);
+    }
+
+    /* ---------- Panel quote ---------- */
+    .quote {
+      margin-top: 40px;
+      background: var(--panel);
+      color: #f2f2f2;
+      padding: 32px 28px;
+      border-left: 3px solid var(--accent);
+    }
+    @media (min-width: 768px) { .quote { padding: 40px 44px; } }
+    .quote p { color: rgba(242, 242, 242, 0.82); font-size: 1.0625rem; max-width: 48rem; }
+    .quote strong { color: #fff; font-weight: 600; }
+
+    /* ---------- Stats ---------- */
+    .stats {
+      margin-top: 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+    }
+    @media (min-width: 768px) { .stats { grid-template-columns: repeat(4, 1fr); } }
+    .stats div { padding: 24px 20px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .stats b {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(1.9rem, 4vw, 2.6rem);
+      letter-spacing: -0.04em;
+      line-height: 1;
+      color: var(--accent);
+    }
+    .stats span { display: block; margin-top: 8px; font-size: 0.8125rem; color: var(--muted); }
+
+    /* ---------- Sitemap ---------- */
+    .sitemap { margin-top: 40px; display: grid; gap: 12px; grid-template-columns: 1fr; }
+    @media (min-width: 640px) { .sitemap { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 1000px) { .sitemap { grid-template-columns: repeat(4, 1fr); } }
+    .smap { display: flex; flex-direction: column; gap: 6px; }
+    .smap .top {
+      background: var(--panel);
+      color: #fff;
+      padding: 12px 14px;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.8125rem;
+    }
+    .smap .top i { display: block; margin-top: 3px; font-style: normal; font-size: 0.6875rem; font-weight: 400; color: rgba(255, 255, 255, 0.55); }
+    .smap .kid { border: 1px solid var(--line); background: var(--surface); padding: 9px 14px; font-size: 0.8125rem; color: var(--muted); }
+
+    /* ---------- Layers ---------- */
+    .layers { margin-top: 40px; display: flex; flex-direction: column; gap: 16px; }
+    .layer { padding: 24px 26px; border-left: 3px solid; }
+    .layer.l-seo { background: var(--seo-w); border-color: var(--seo); }
+    .layer.l-aeo { background: var(--aeo-w); border-color: var(--aeo); }
+    .layer.l-geo { background: var(--geo-w); border-color: var(--geo); }
+    .layer .tag {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      color: #fff;
+    }
+    .l-seo .tag { background: var(--seo); }
+    .l-aeo .tag { background: var(--aeo); }
+    .l-geo .tag { background: var(--geo); }
+    :root[data-theme="dark"] .layer .tag { color: #0d0d0d; }
+    .layer h3 {
+      margin-top: 12px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.0625rem;
+      letter-spacing: -0.02em;
+    }
+    .layer ul { margin-top: 12px; padding-left: 18px; }
+    .layer li { font-size: 0.875rem; color: var(--muted); margin-bottom: 8px; }
+    .layer li:last-child { margin-bottom: 0; }
+    .layer li strong { color: var(--ink); font-weight: 600; }
+
+    /* ---------- Component cards ---------- */
+    .cards { margin-top: 40px; display: grid; gap: 24px; grid-template-columns: 1fr; }
+    @media (min-width: 768px) { .cards { grid-template-columns: 1fr 1fr; } }
+    .card { border: 1px solid var(--line); overflow: hidden; transition: border-color 0.3s ease; }
+    .card:hover { border-color: var(--ink); }
+    .card figure { margin: 0; aspect-ratio: 16 / 10; overflow: hidden; background: var(--surface); border-bottom: 1px solid var(--line); cursor: zoom-in; }
+    .card figure img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; transition: transform 0.6s ease; }
+    .card:hover figure img { transform: scale(1.03); }
+    .card .body { padding: 22px 24px; }
+    .card h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.125rem; letter-spacing: -0.02em; }
+    .card p { margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
+
+    /* ---------- Stack ---------- */
+    .group { margin-top: 32px; }
+    .group h3 {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .tags { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .tags li {
+      list-style: none;
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      padding: 5px 12px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--muted);
+    }
+    .tags li.key { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+
+    /* ---------- Tables ---------- */
+    .tbl { margin-top: 40px; border: 1px solid var(--line); overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.875rem; min-width: 34rem; }
+    th {
+      background: var(--surface);
+      padding: 12px 18px;
+      text-align: left;
+      font-family: var(--font-display);
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border-bottom: 1px solid var(--line);
+    }
+    td { padding: 14px 18px; border-bottom: 1px solid var(--line); color: var(--muted); vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    td strong { color: var(--ink); font-weight: 600; }
+    td:first-child { white-space: nowrap; }
+
+    /* ---------- CTA + footer ---------- */
+    .cta { position: relative; background: var(--panel); color: #f2f2f2; border-top: none; overflow: hidden; }
+    .cta .kicker { color: var(--accent); }
+    .cta h2 { color: #fff; }
+    .cta p { margin-top: 16px; max-width: 40rem; color: rgba(242, 242, 242, 0.7); }
+    .cta .actions { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+    .cta .alt { color: rgba(242, 242, 242, 0.7); border-color: rgba(242, 242, 242, 0.25); }
+    .cta .alt:hover { color: var(--accent); border-color: var(--accent); }
+    footer { padding: 40px 0; border-top: 1px solid var(--line); }
+    footer .wrap { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; font-size: 0.8125rem; color: var(--muted); }
+    footer .path { font-family: var(--font-display); }
+    footer .path span { color: var(--accent); }
+
+    /* ---------- Reveal + lightbox ---------- */
+    .rv { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .rv.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { .rv { opacity: 1; transform: none; transition: none; } }
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(8, 8, 8, 0.94);
+      padding: 32px 16px;
+    }
+    .lightbox.on { display: flex; }
+    .lightbox img { max-width: 100%; max-height: 100%; object-fit: contain; }
+    .lightbox .close {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 2rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+    .lightbox .close:hover { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header>
+    <div class="wrap">
+      <a class="back" href="../"><span>&larr;</span> Volver al trabajo</a>
+      <div class="hctrl">
+        <nav class="lang" aria-label="Idioma">
+          <a href="../../devilfruittcg/">EN</a>
+          <a class="on" href="./" aria-current="page">ES</a>
+        </nav>
+        <button class="tbtn" id="modeToggle" type="button" aria-label="Cambiar entre modo claro y oscuro">
+          <span class="sky" aria-hidden="true">
+            <span class="ray" style="--r:0deg"></span><span class="ray" style="--r:45deg"></span><span class="ray" style="--r:90deg"></span><span class="ray" style="--r:135deg"></span><span class="ray" style="--r:180deg"></span><span class="ray" style="--r:225deg"></span><span class="ray" style="--r:270deg"></span><span class="ray" style="--r:315deg"></span>
+            <span class="core"></span>
+            <span class="veil"></span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="hero wrap">
+      <span class="glow" style="top: -140px; right: -160px;" aria-hidden="true"></span>
+      <span class="glow" style="bottom: -220px; left: -240px; width: 380px; height: 380px;" aria-hidden="true"></span>
+      <span class="deco" style="top: 110px; right: 12%; width: 14px; height: 14px;" aria-hidden="true"></span>
+      <span class="deco" style="top: 220px; right: 5%; width: 8px; height: 8px; opacity: 0.55; animation-delay: 1.2s;" aria-hidden="true"></span>
+      <p class="kicker">/ Caso de estudio &middot; SEO, GEO y AEO</p>
+      <h1>devilfruittcg<em>.com</em></h1>
+      <p class="lede">
+        Web de nicho en español sobre One Piece Card Game, construida de principio a fin como
+        campo de pruebas real de una estrategia integral de visibilidad orgánica: SEO clásico,
+        AEO y optimización para motores generativos. Infraestructura self-hosted, metodología
+        documentada desde antes del primer artículo y monetización por afiliación integrada
+        desde el diseño.
+      </p>
+      <div class="actions">
+        <a class="btn" href="https://devilfruittcg.com/" target="_blank" rel="noopener">Ver la web</a>
+        <a class="alt" href="../">Ver el resto del trabajo</a>
+      </div>
+
+      <dl class="meta">
+        <div><dt>URL</dt><dd>devilfruittcg.com</dd></div>
+        <div><dt>Mercado</dt><dd>España, luego LATAM</dd></div>
+        <div><dt>En producción desde</dt><dd>Septiembre 2026</dd></div>
+        <div><dt>Nicho</dt><dd>One Piece TCG</dd></div>
+        <div><dt>Modelo</dt><dd>Afiliación de nicho</dd></div>
+        <div><dt>Rol</dt><dd>Estrategia y ejecución completa</dd></div>
+      </dl>
+
+      <p class="note">
+        <strong>Punto en el que está:</strong> la web está en producción y terminada a nivel
+        técnico, con la indexación frenada a propósito (<code>noindex</code>) hasta que la
+        biblioteca de contenido esté completa. Todo lo que hay debajo describe el sistema y su
+        línea base de día cero. Aquí no hay promesas de tráfico ni de posiciones, porque medirlas
+        con honestidad desde el primer día es justo el sentido del proyecto.
+      </p>
+    </div>
+
+    <!-- ============ 01 · THE PROJECT ============ -->
+    <section id="project">
+      <span class="glow" style="top: 40px; left: -280px;" aria-hidden="true"></span>
+      <div class="wrap">
+        <p class="section-label">/ 01 &middot; El proyecto</p>
+        <h2>Un nicho real, construido como producto</h2>
+        <p class="section-intro">
+          devilfruittcg.com no es un blog sin estructura ni un ejercicio de prácticas. Está
+          diseñada como producto editorial: arquitectura de contenido intencionada, tema hijo
+          propio con componentes interactivos y una estrategia de posicionamiento pensada para
+          funcionar tanto en Google como en los motores de respuesta generativa que están
+          cambiando la forma de buscar información.
+        </p>
+        <p class="section-intro">
+          Funciona a la vez como proyecto real de afiliación y como caso de estudio vivo, que es
+          exactamente el tipo de trabajo que ofrezco como servicio.
+        </p>
+
+        <div class="stats">
+          <div><b>3</b><span>capas de posicionamiento: SEO, AEO y GEO</span></div>
+          <div><b>4</b><span>hubs de contenido, una intención de búsqueda cada uno</span></div>
+          <div><b>0&euro;</b><span>en herramientas SaaS de pago, el stack es propio</span></div>
+          <div><b>D-0</b><span>tracking activo antes de la primera indexación</span></div>
+        </div>
+
+        <div class="quote">
+          <p>
+            Caso de arquitectura SEO, GEO y AEO para un nicho de coleccionismo: contenido citable
+            por LLMs (respuestas directas, schema generado desde el DOM), componentes interactivos
+            como activos de enlace y un sistema de diseño propio para diferenciarse en un mercado
+            saturado de plantillas genéricas. <strong>Todo verificable en producción, sin ningún
+            dato inventado sin marcar.</strong>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 02 · ARCHITECTURE ============ -->
+    <section id="architecture">
+      <div class="wrap">
+        <p class="section-label">/ 02 &middot; Arquitectura de contenido</p>
+        <h2>Estructura por intención, no por tema</h2>
+        <p class="section-intro">
+          Cada sección ataca un tipo de búsqueda distinto y responde a una fase diferente del
+          customer journey. No es un blog, es un sitio montado con lógica de producto.
+        </p>
+
+        <div class="sitemap">
+          <div class="smap">
+            <div class="top">/como-jugar/<i>Informacional</i></div>
+            <div class="kid">Reglas básicas</div>
+            <div class="kid">Identificar cartas</div>
+            <div class="kid">Tapete interactivo</div>
+          </div>
+          <div class="smap">
+            <div class="top">/decks-y-meta/<i>Informacional y comercial</i></div>
+            <div class="kid">Tier list</div>
+            <div class="kid">Starters recomendados</div>
+            <div class="kid">Meta por set</div>
+          </div>
+          <div class="smap">
+            <div class="top">/coleccionismo/<i>Navegacional y transaccional</i></div>
+            <div class="kid">Rarezas y precios</div>
+            <div class="kid">Sets activos</div>
+            <div class="kid">Cardmarket y TCGplayer</div>
+          </div>
+          <div class="smap">
+            <div class="top">/articulos/<i>Hub editorial</i></div>
+            <div class="kid">Accesorios</div>
+            <div class="kid">Valor de cartas</div>
+            <div class="kid">Compraventa</div>
+          </div>
+        </div>
+
+        <p class="note">
+          Interlinking editorial, no forzado: cada artículo enlaza a la siguiente pieza lógica del
+          recorrido (reglas básicas, cómo jugar, identificar cartas, coleccionismo, decks) citada
+          en texto corrido y no en cajas genéricas de «artículos relacionados». Permalinks limpios
+          (<code>/%postname%/</code>, sin fecha) para que el contenido no caduque visualmente en la
+          SERP.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ 03 · THREE LAYERS ============ -->
+    <section id="layers">
+      <span class="glow" style="top: 120px; right: -280px;" aria-hidden="true"></span>
+      <div class="wrap">
+        <p class="section-label">/ 03 &middot; Estrategia</p>
+        <h2>SEO, AEO y GEO: tres capas, un solo contenido</h2>
+        <p class="section-intro">
+          La mayoría de webs de nicho optimizan solo para Google. Esta está construida para
+          posicionar en tres frentes con el mismo artículo, sin trabajo duplicado.
+        </p>
+
+        <div class="layers">
+          <div class="layer l-seo">
+            <span class="tag">SEO</span>
+            <h3>Arquitectura de silos y keywords con criterio</h3>
+            <ul>
+              <li>Auditoría de cuatro competidores con Screaming Frog antes de publicar una sola línea.</li>
+              <li>
+                Cada keyword pasa tres filtros: <strong>intención transaccional</strong>,
+                <strong>competencia española débil</strong> y <strong>ventaja de experiencia
+                propia</strong>. La que no pasa alguno se descarta, con el motivo documentado.
+              </li>
+              <li>Hallazgo de la auditoría: Reddit aparece en el top 5 de las seis keywords clave, señal directa para trabajar la capa GEO.</li>
+              <li><code>noindex</code> durante la construcción, para que la web no se indexe hasta que el contenido esté completo. Decisión deliberada, no un descuido.</li>
+            </ul>
+          </div>
+
+          <div class="layer l-aeo">
+            <span class="tag">AEO</span>
+            <h3>Estructura extraíble para motores de respuesta</h3>
+            <ul>
+              <li><strong>Bloque de «respuesta rápida»</strong> al inicio de cada artículo: entre 40 y 60 palabras autocontenidas que responden a la pregunta del título, el formato que citan ChatGPT, Perplexity y las AI Overviews de Google.</li>
+              <li><strong>Schema FAQPage generado automáticamente</strong> desde el HTML visible, parseando <code>&lt;details&gt;&lt;summary&gt;</code> en functions.php. Sin cloaking y con una sola fuente de verdad entre lo que ve el usuario y lo que lee el bot.</li>
+              <li>Tablas comparativas semánticas (rarezas, prefijos de set, tipos de carta), el formato que mejor extrae un LLM para preguntas del tipo «qué significa OP17-046».</li>
+              <li>Densidad de negrita deliberada sobre datos concretos y no sobre frases enteras, como señal de extracción para los snippets.</li>
+              <li>H2 formulados como preguntas naturales, igual que la gente pregunta de verdad a una IA.</li>
+            </ul>
+          </div>
+
+          <div class="layer l-geo">
+            <span class="tag">GEO</span>
+            <h3>Medición de visibilidad en motores generativos</h3>
+            <ul>
+              <li><strong>Protocolo de seguimiento mensual:</strong> una batería de 20 prompts ejecutada en ChatGPT, Perplexity Pro, Google AI y Claude el día 1 de cada mes, registrada en Google Sheets.</li>
+              <li><strong>Día cero documentado:</strong> el resultado de «cero menciones» de antes de publicar nada existe como dato. La mayoría de proyectos no tiene esa línea base porque empieza a medir tarde. Aquí el histórico arranca antes de la primera indexación.</li>
+              <li>Presencia en comunidad (Reddit, foros, grupos españoles de TCG) como pilar del GEO, porque son las mismas fuentes que cita la IA.</li>
+              <li>Metadatos EXIF de autoría en todas las imágenes propias más schema <code>ImageObject</code>, para que el dominio viaje con la imagen cuando se comparte.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 04 · COMPONENTS ============ -->
+    <section id="components">
+      <div class="wrap">
+        <p class="section-label">/ 04 &middot; Componentes editoriales</p>
+        <h2>Activos de enlace, no solo contenido</h2>
+        <p class="section-intro">
+          Para diferenciarse de las webs de afiliados genéricas del nicho, la web incluye
+          componentes interactivos que enseñan en vez de solo listar. Es el tipo de contenido que
+          genera enlaces naturales y que un LLM puede citar como fuente autorizada del mecanismo,
+          no solo del dato.
+        </p>
+
+        <div class="cards">
+          <div class="card">
+            <figure>
+              <img src="../../img/dftcg-tapete.jpg" alt="Tapete interactivo con nueve zonas clicables y panel explicativo" loading="lazy" data-zoom />
+            </figure>
+            <div class="body">
+              <h3>Tapete interactivo</h3>
+              <p>
+                Nueve zonas del tablero clicables, cada una con su explicación. Contenido que un
+                jugador nuevo no encuentra en ningún otro sitio en español, montado como componente
+                y no como párrafo.
+              </p>
+            </div>
+          </div>
+
+          <div class="card">
+            <figure>
+              <img src="../../img/dftcg-turno.jpg" alt="Componente de fases del turno con cinco pestañas seleccionables" loading="lazy" data-zoom />
+            </figure>
+            <div class="body">
+              <h3>Las fases del turno, paso a paso</h3>
+              <p>
+                Las cinco fases del turno como secuencia seleccionable. Cada estado es una
+                respuesta corta y directa, que es justo la forma que Google puede convertir en
+                fragmento destacado.
+              </p>
+            </div>
+          </div>
+
+          <div class="card">
+            <figure>
+              <img src="../../img/dftcg-combate.jpg" alt="Resolución del combate explicada en cuatro pasos ordenados" loading="lazy" data-zoom />
+            </figure>
+            <div class="body">
+              <h3>El combate, desglosado en pasos</h3>
+              <p>
+                La parte que todo el mundo se equivoca, partida en pasos ordenados y con la
+                respuesta a cada uno. La estructura numerada se lee bien para una persona y se
+                parsea limpia para un modelo.
+              </p>
+            </div>
+          </div>
+
+          <div class="card">
+            <figure>
+              <img src="../../img/dftcg-faq.jpg" alt="Acordeón de dudas de reglas agrupadas por tema" loading="lazy" data-zoom />
+            </figure>
+            <div class="body">
+              <h3>FAQ de reglas que alimenta el schema</h3>
+              <p>
+                Preguntas agrupadas construidas con elementos <code>&lt;details&gt;</code> nativos.
+                El mismo marcado que abre el lector es el que genera el schema FAQPage, así que los
+                dos nunca se pueden desincronizar.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <p class="note">
+          También en producción: una carta anotada con hotspots reales (coste, poder, código,
+          rareza), un simulador visual de sobre con pull rates citados con fuente y fecha, y un
+          sistema de colores que explica los seis arquetipos en una línea cada uno.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ 05 · STACK ============ -->
+    <section id="stack">
+      <span class="glow" style="bottom: 0; left: -300px;" aria-hidden="true"></span>
+      <div class="wrap">
+        <p class="section-label">/ 05 &middot; Stack técnico</p>
+        <h2>Infraestructura propia, coste de SaaS casi cero</h2>
+        <p class="section-intro">
+          Todo el stack es self-hosted o gratuito. El único coste recurrente es el dominio, unos
+          10&euro; al año. Sin Ahrefs, sin Semrush, sin rank tracker de pago.
+        </p>
+
+        <div class="group">
+          <h3>Infraestructura</h3>
+          <ul class="tags">
+            <li class="key">HP EliteDesk G4, servidor físico</li>
+            <li class="key">Ubuntu Server LTS</li>
+            <li class="key">Docker y Docker Compose</li>
+            <li class="key">Nginx Proxy Manager</li>
+            <li class="key">Cloudflare Zero Trust Tunnel</li>
+            <li class="key">Tailscale, acceso privado</li>
+            <li>SSL vía DNS challenge, API de Cloudflare</li>
+          </ul>
+        </div>
+
+        <div class="group">
+          <h3>CMS y tema</h3>
+          <ul class="tags">
+            <li class="key">WordPress</li>
+            <li class="key">Tema hijo propio</li>
+            <li>Gutenberg, bloques nativos, sin page builder</li>
+            <li>Rank Math</li>
+            <li>WP-CLI, publicación desde terminal</li>
+            <li>functions.php propio, schema automático</li>
+          </ul>
+        </div>
+
+        <div class="group">
+          <h3>Medición y tracking</h3>
+          <ul class="tags">
+            <li class="key">SerpBear, rank tracking self-hosted</li>
+            <li class="key">OneGlanse, tracker GEO self-hosted</li>
+            <li>Google Search Console</li>
+            <li>Google Sheets, protocolo GEO mensual</li>
+            <li>Screaming Frog, auditoría de competidores</li>
+          </ul>
+        </div>
+
+        <div class="group">
+          <h3>Producción de contenido</h3>
+          <ul class="tags">
+            <li>ExifTool, metadatos de autoría en imágenes</li>
+            <li>WebP y compresión automatizada</li>
+            <li>Skill de redacción con estructura SEO, GEO y AEO</li>
+            <li>Script de PowerShell: renombrado, subida y WP-CLI</li>
+            <li>PHP y GD, recorte automático de fondo de producto</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 06 · E-E-A-T ============ -->
+    <section id="eeat">
+      <div class="wrap">
+        <p class="section-label">/ 06 &middot; Rigor editorial</p>
+        <h2>Experiencia real, datos verificables</h2>
+        <p class="section-intro">
+          Google valora Experience, Expertise, Authoritativeness y Trustworthiness. Cada uno de
+          los cuatro tiene una respuesta concreta en este proyecto.
+        </p>
+
+        <div class="tbl">
+          <table>
+            <thead>
+              <tr><th scope="col">Señal E-E-A-T</th><th scope="col">Cómo se implementa</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Experience</strong></td>
+                <td>Colección propia, trackeada en app. Fotos de cartas reales que tengo, sin stock y sin arte oficial de Bandai. Datos de primera mano: pull rates y precios de compra reales.</td>
+              </tr>
+              <tr>
+                <td><strong>Expertise</strong></td>
+                <td>Pull rates y cifras del meta de torneo citadas con fuente y fecha. Nota explícita cuando dos fuentes discrepan, honestidad editorial en vez de inventar consenso. Ningún dato inventado sin marcar.</td>
+              </tr>
+              <tr>
+                <td><strong>Authoritativeness</strong></td>
+                <td>Componentes interactivos que demuestran conocimiento profundo del objeto: la carta, el tapete, las mecánicas. Activos enlazables que generan referencias naturales.</td>
+              </tr>
+              <tr>
+                <td><strong>Trustworthiness</strong></td>
+                <td>Disclosure de afiliados en el footer desde el día uno. <code>rel="sponsored nofollow"</code> en todos los enlaces comerciales. Precios marcados como aproximados. Placeholders explícitos donde todavía falta un dato verificado.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 07 · WHAT IT PROVES ============ -->
+    <section id="value">
+      <div class="wrap">
+        <p class="section-label">/ 07 &middot; Por qué importa</p>
+        <h2>Qué demuestra este proyecto</h2>
+
+        <div class="tbl">
+          <table>
+            <thead>
+              <tr><th scope="col">Dimensión</th><th scope="col">Lo que demuestra</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Técnica</strong></td>
+                <td>Levantar infraestructura self-hosted completa (Docker, Nginx, Cloudflare Tunnel, SSL) sin depender de hosting SaaS, más un flujo editorial que va de mi escritorio a WordPress en un solo comando.</td>
+              </tr>
+              <tr>
+                <td><strong>SEO</strong></td>
+                <td>Arquitectura de contenido por intención, auditoría competitiva con datos reales (Screaming Frog y SERPs manuales) y keyword research documentado con el razonamiento de cada decisión, las elegidas y las descartadas.</td>
+              </tr>
+              <tr>
+                <td><strong>AEO</strong></td>
+                <td>Schema FAQPage generado desde el DOM en vez de inyectado a mano. Bloques de respuesta directa. Tablas y H2 diseñados para extracción por LLM. Componentes interactivos como activos citables.</td>
+              </tr>
+              <tr>
+                <td><strong>GEO</strong></td>
+                <td>Un protocolo de medición de visibilidad en ChatGPT, Perplexity, Google AI y Claude, con histórico desde antes del primer artículo. Las herramientas comerciales equivalentes cuestan entre 100 y 300&euro; al mes, esta corre en servidor propio.</td>
+              </tr>
+              <tr>
+                <td><strong>Diseño</strong></td>
+                <td>Identidad propia, lejos de la estética de plantilla genérica. Tokens de color, tipografía y componentes reutilizables, con recorte de fondo automático en PHP y GD.</td>
+              </tr>
+              <tr>
+                <td><strong>Negocio</strong></td>
+                <td>Un nicho real, una comunidad real y monetización pensada desde el diseño. El tracking existe desde antes de la primera publicación, así que el estado de día cero es verificable.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SHOWCASE ============ -->
+    <section id="shots">
+      <div class="wrap">
+        <p class="section-label">/ 08 &middot; La web</p>
+        <h2>Cómo se ve en producción</h2>
+        <p class="section-intro">
+          Un sistema visual construido alrededor del nicho, no alrededor de una plantilla. Los
+          mismos tokens en todos los hubs, para que la web se lea como un solo producto.
+        </p>
+
+        <div class="cards">
+          <div class="card">
+            <figure>
+              <img src="../../img/dftcg-home.jpg" alt="Portada de devilfruittcg.com" loading="lazy" data-zoom />
+            </figure>
+            <div class="body">
+              <h3>Portada</h3>
+              <p>Posicionamiento arriba del todo y una única puerta de entrada al hub de cómo jugar.</p>
+            </div>
+          </div>
+          <div class="card">
+            <figure>
+              <img src="../../img/dftcg-decks.jpg" alt="Página hub de decks y meta" loading="lazy" data-zoom />
+            </figure>
+            <div class="body">
+              <h3>Decks y meta</h3>
+              <p>El hub comercial, donde la intención informacional se convierte en decisión de compra.</p>
+            </div>
+          </div>
+          <div class="card">
+            <figure>
+              <img src="../../img/dftcg-coleccionismo.jpg" alt="Página hub de coleccionismo" loading="lazy" data-zoom />
+            </figure>
+            <div class="body">
+              <h3>Coleccionismo</h3>
+              <p>Rarezas, sets activos y marketplaces, el extremo transaccional del recorrido.</p>
+            </div>
+          </div>
+          <div class="card">
+            <figure>
+              <img src="../../img/dftcg-faq.jpg" alt="Acordeón de FAQ de reglas" loading="lazy" data-zoom />
+            </figure>
+            <div class="body">
+              <h3>FAQ de reglas</h3>
+              <p>El bloque que sirve a la vez como contenido para el lector y como fuente del schema FAQPage.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Visor de imágenes">
+    <button class="close" type="button" aria-label="Cerrar">&times;</button>
+    <img src="" alt="" />
+  </div>
+
+  <section class="cta" id="contact">
+    <span class="glow" style="top: -160px; right: -160px;" aria-hidden="true"></span>
+    <div class="wrap">
+      <p class="kicker">/ Siguiente</p>
+      <h2>Todo conecta.</h2>
+      <p>
+        Este proyecto es la versión más clara de cómo me gusta trabajar: un solo sistema, con
+        profundidad en vez de volumen, donde el diseño, el código y la estrategia de búsqueda son
+        la misma decisión. Si es el tipo de trabajo que necesitas, escríbeme.
+      </p>
+      <div class="actions">
+        <a class="btn" href="mailto:hachedesign404@gmail.com?subject=Caso%20devilfruittcg">Hablamos</a>
+        <a class="alt" href="../">Ver el resto del trabajo</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <p>&copy; 2026 Hache Cervera. Hecho a mano en Valencia.</p>
+      <p class="path">Diseño <span>&rarr;</span> Código <span>&rarr;</span> Motion <span>&rarr;</span> SEO</p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var GA_ID = 'G-6JCDHFSJ4M';
+      if (GA_ID) {
+        var ga = document.createElement('script');
+        ga.async = true;
+        ga.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+        document.head.appendChild(ga);
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function () { window.dataLayer.push(arguments); };
+        gtag('js', new Date());
+        gtag('config', GA_ID);
+      }
+      function track(name, params) {
+        if (window.gtag) window.gtag('event', name, params || {});
+      }
+
+      /* Theme toggle, shares its storage key with the rest of the site */
+      document.getElementById('modeToggle').addEventListener('click', function () {
+        var t = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+        document.documentElement.dataset.theme = t;
+        try { localStorage.setItem('theme', t); } catch (e) {}
+        track('theme', { value: t });
+      });
+
+      /* Lightbox */
+      var box = document.getElementById('lightbox');
+      var boxImg = box.querySelector('img');
+      document.querySelectorAll('[data-zoom]').forEach(function (img) {
+        img.parentElement.addEventListener('click', function () {
+          boxImg.src = img.src;
+          boxImg.alt = img.alt;
+          box.classList.add('on');
+          track('image_open', { project: 'devilfruittcg', image: img.getAttribute('src') });
+        });
+      });
+      function closeBox() { box.classList.remove('on'); boxImg.src = ''; }
+      box.querySelector('.close').addEventListener('click', closeBox);
+      box.addEventListener('click', function (e) { if (e.target === box) closeBox(); });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && box.classList.contains('on')) closeBox();
+      });
+
+      /* Reveal on scroll */
+      var rv = document.querySelectorAll('.card, .layer, .smap, .quote, .tbl');
+      rv.forEach(function (el) { el.classList.add('rv'); });
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+        rv.forEach(function (el) { io.observe(el); });
+      } else {
+        rv.forEach(function (el) { el.classList.add('in'); });
+      }
+
+      /* Section views and scroll depth */
+      if ('IntersectionObserver' in window) {
+        var seen = {};
+        var sIO = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting && !seen[e.target.id]) {
+              seen[e.target.id] = 1;
+              track('section_view', { section: e.target.id, page: 'devilfruittcg' });
+            }
+          });
+        }, { threshold: 0.3 });
+        document.querySelectorAll('section[id]').forEach(function (s) { sIO.observe(s); });
+      }
+      var depth = {};
+      window.addEventListener('scroll', function () {
+        var h = document.documentElement.scrollHeight - window.innerHeight;
+        if (h <= 0) return;
+        var pct = Math.round((window.scrollY / h) * 100);
+        [50, 90].forEach(function (m) {
+          if (pct >= m && !depth[m]) { depth[m] = 1; track('scroll_depth', { percent: m, page: 'devilfruittcg' }); }
+        });
+      }, { passive: true });
+    })();
+  </script>
+</body>
+</html>

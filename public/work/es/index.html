@@ -257,6 +257,8 @@
     section.filtered-out { display: none; }
 
     /* ---------- Sections ---------- */
+    /* overflow:hidden keeps the bleeding .glow circles from widening the page */
+    section, .hero { overflow: hidden; }
     section { position: relative; padding: 64px 0 96px; border-top: 1px solid var(--line); }
     section .wrap { position: relative; z-index: 1; }
     .section-label {
@@ -329,6 +331,22 @@
       letter-spacing: -0.02em;
     }
     .project p { margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
+    /* Single wide card, used by the SEO case study */
+    .projects.solo { grid-template-columns: 1fr; }
+    @media (min-width: 900px) {
+      .projects.solo .project { display: grid; grid-template-columns: 1.15fr 1fr; }
+      .projects.solo .project .shot { aspect-ratio: auto; height: 100%; border-bottom: none; border-right: 1px solid var(--line); }
+      .projects.solo .project .body { padding: 36px; align-self: center; }
+    }
+    .project .more {
+      margin-top: 20px;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.875rem;
+      color: var(--accent);
+    }
+    .project .more span { display: inline-block; transition: transform 0.2s ease; }
+    .project:hover .more span { transform: translateX(4px); }
     .tags { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px; }
     .tags li {
       list-style: none;
@@ -799,23 +817,67 @@
       <p class="kicker">/ Portfolio</p>
       <h1>Una muestra de<br />mi <em>trabajo</em></h1>
       <p>
-        Webs, sistemas de marca, campañas, diseño para redes y vídeo. Una selección creciente
-        de cosas que he diseñado, construido y producido. Pronto habrá más.
+        Estrategia de búsqueda, webs, sistemas de marca, campañas, diseño para redes y vídeo. Una
+        selección creciente de cosas que he diseñado, construido y producido. Pronto habrá más.
       </p>
     </div>
 
     <div class="filters wrap" role="tablist" aria-label="Filter the work">
       <button class="chip is-on" data-filter="all" type="button">Todo</button>
+      <button class="chip" data-filter="seo" type="button">SEO / GEO / AEO</button>
       <button class="chip" data-filter="web" type="button">Webs</button>
       <button class="chip" data-filter="design" type="button">Diseño y Branding</button>
       <button class="chip" data-filter="video" type="button">Vídeo y Social</button>
     </div>
 
-    <!-- ============ 01 · WEB ============ -->
+    <!-- ============ 01 · SEO / GEO / AEO ============ -->
+    <section id="seo">
+      <span class="glow" style="top: 40px; left: -260px;" aria-hidden="true"></span>
+      <div class="wrap">
+        <p class="section-label">/ 01 &middot; SEO, GEO y AEO</p>
+        <h2>Visibilidad org&aacute;nica, montada como sistema</h2>
+        <p class="section-intro">
+          Buscar ya no es solo Google. Trabajo tres capas a la vez: SEO cl&aacute;sico, AEO
+          (estructurar el contenido para que los motores de respuesta puedan citarlo) y GEO
+          (conseguir y medir visibilidad dentro de ChatGPT, Perplexity y las AI Overviews).
+          Aqu&iacute; est&aacute; ese m&eacute;todo aplicado de principio a fin, en un proyecto
+          propio donde cada decisi&oacute;n est&aacute; documentada.
+        </p>
+
+        <div class="projects solo">
+          <a class="project" href="devilfruittcg/">
+            <div class="shot">
+              <img src="../img/dftcg-home.jpg" alt="devilfruittcg.com, portada de la web de nicho sobre One Piece Card Game" loading="lazy" />
+            </div>
+            <div class="body">
+              <h3>devilfruittcg.com</h3>
+              <p>
+                Web de nicho en espa&ntilde;ol sobre One Piece Card Game, construida de principio a
+                fin como campo de pruebas real: arquitectura de contenido por intenci&oacute;n de
+                b&uacute;squeda, schema FAQPage generado desde el DOM visible, componentes
+                interactivos como activos de enlace y un protocolo de medici&oacute;n GEO en marcha
+                desde antes de la primera indexaci&oacute;n. Infraestructura self-hosted en
+                servidor propio, con la factura de SaaS a cero.
+              </p>
+              <ul class="tags">
+                <li>SEO</li>
+                <li>AEO</li>
+                <li>GEO</li>
+                <li>WordPress</li>
+                <li>Self-hosted</li>
+              </ul>
+              <p class="more">Ver el caso completo <span>&rarr;</span></p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 02 · WEB ============ -->
     <section id="web">
       <span class="glow" style="top: 60px; left: -260px;" aria-hidden="true"></span>
       <div class="wrap">
-        <p class="section-label">/ 01 · Web</p>
+        <p class="section-label">/ 02 · Web</p>
         <h2>Webs, de principio a fin</h2>
         <p class="section-intro">
           Diseño y desarrollo con plugins premium y configuración multiidioma, más todo lo de
@@ -921,7 +983,7 @@
       <span class="glow" style="top: 120px; right: -260px;" aria-hidden="true"></span>
       <span class="glow" style="bottom: 300px; left: -280px; width: 420px; height: 420px;" aria-hidden="true"></span>
       <div class="wrap">
-        <p class="section-label">/ 02 · Diseño y Branding</p>
+        <p class="section-label">/ 03 · Diseño y Branding</p>
         <h2>Identidad, campañas y sistemas de diseño</h2>
         <p class="section-intro">
           Branding, dirección de arte y sistemas gráficos: brandbooks, rebrandings y las
@@ -1109,7 +1171,7 @@
     <section id="video">
       <span class="glow" style="top: 80px; left: -240px;" aria-hidden="true"></span>
       <div class="wrap">
-        <p class="section-label">/ 03 · Vídeo y Social</p>
+        <p class="section-label">/ 04 · Vídeo y Social</p>
         <h2>Motion, podcasts y contenido que se mueve</h2>
         <p class="section-intro">
           Producción audiovisual y contenido social para marcas, gran parte hecho en <a class="credit" href="https://neuronadigital.es/" target="_blank" rel="noopener">Neurona Digital</a>.
@@ -1357,17 +1419,37 @@
 
       /* Section filters */
       var chips = document.querySelectorAll('.chip');
-      var sections = { web: document.getElementById('web'), design: document.getElementById('design'), video: document.getElementById('video') };
+      var sections = {
+        seo: document.getElementById('seo'),
+        web: document.getElementById('web'),
+        design: document.getElementById('design'),
+        video: document.getElementById('video'),
+      };
+      function applyFilter(f) {
+        chips.forEach(function (c) { c.classList.toggle('is-on', c.dataset.filter === f); });
+        Object.keys(sections).forEach(function (k) {
+          sections[k].classList.toggle('filtered-out', f !== 'all' && f !== k);
+        });
+      }
       chips.forEach(function (chip) {
         chip.addEventListener('click', function () {
-          chips.forEach(function (c) { c.classList.toggle('is-on', c === chip); });
-          var f = chip.dataset.filter;
-          Object.keys(sections).forEach(function (k) {
-            sections[k].classList.toggle('filtered-out', f !== 'all' && f !== k);
-          });
-          track('filter', { value: f });
+          applyFilter(chip.dataset.filter);
+          track('filter', { value: chip.dataset.filter });
         });
       });
+
+      /* Deep link from the home menu: /work/es/?f=seo (a #seo hash works too) */
+      var wanted = (location.search.match(/[?&]f=([a-z]+)/) || [])[1] || location.hash.replace('#', '');
+      if (wanted && sections[wanted]) {
+        applyFilter(wanted);
+        track('filter', { value: wanted, source: 'deeplink' });
+        var bar = document.querySelector('.filters');
+        if (bar) {
+          requestAnimationFrame(function () {
+            bar.scrollIntoView({ behavior: 'auto', block: 'start' });
+          });
+        }
+      }
 
       /* Reveal on scroll */
       var rvTargets = document.querySelectorAll('.project, .proj, .feature-video, .film, .reel');
