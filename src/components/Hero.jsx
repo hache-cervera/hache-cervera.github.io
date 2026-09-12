@@ -171,7 +171,7 @@ export default function Hero() {
               {t.hero.menu}
             </span>
             <span className="mt-3 flex flex-wrap gap-2">
-              {['seo', 'web', 'design', 'video'].map((f) => (
+              {['infra', 'seo', 'web', 'design', 'video'].map((f) => (
                 <a
                   key={f}
                   href={`${workBase}?f=${f}`}

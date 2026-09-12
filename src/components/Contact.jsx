@@ -55,6 +55,7 @@ export default function Contact() {
         <div data-rise className="mt-10 flex flex-col items-center gap-6">
           <BigLink href="mailto:hi.hache.cervera@gmail.com">hi.hache.cervera@gmail.com</BigLink>
           <BigLink href="https://linkedin.com/in/hache-cervera" external>LinkedIn</BigLink>
+          <BigLink href="cv/ada-hache-cervera-2026.pdf" external>{t.contact.cv}</BigLink>
         </div>
       </div>
     </section>
