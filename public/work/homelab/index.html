@@ -1,20 +1,20 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>decopam.es &middot; Caso de migraci&oacute;n PrestaShop a WooCommerce &middot; Ada (hache) Cervera</title>
+  <title>hacheserver &middot; Self-hosted infrastructure case study &middot; Ada (hache) Cervera</title>
   <meta
     name="description"
-    content="Caso: decopam.es, tienda de decoraci&oacute;n de dormitorios migrada de PrestaShop a WordPress y WooCommerce. Reconstrucci&oacute;n de la relaci&oacute;n entre imagen, producto y variaci&oacute;n que la migraci&oacute;n hab&iacute;a perdido, y el trabajo de cat&aacute;logo y variaciones posterior."
+    content="Case study: a mini PC running eight self-hosted services behind a Cloudflare Tunnel and a Tailscale network, with no ports open on the router. It hosts devilfruittcg.com."
   />
   <meta name="robots" content="noindex, nofollow" />
-  <meta property="og:title" content="decopam.es &middot; Migraci&oacute;n de PrestaShop a WooCommerce" />
-  <meta property="og:description" content="773 im&aacute;genes cruzadas contra una exportaci&oacute;n de solo lectura de PrestaShop, y el trabajo de cat&aacute;logo y variaciones posterior." />
+  <meta property="og:title" content="hacheserver &middot; Self-hosted infrastructure" />
+  <meta property="og:description" content="Eight services, two access paths, zero open ports, and nine incidents written down." />
   <meta property="og:image" content="https://hache-cervera.github.io/work/img/og.jpg" />
   <meta property="og:type" content="article" />
   <meta name="twitter:card" content="summary_large_image" />
-  <link rel="icon" type="image/svg+xml" href="../../../favicon.svg" />
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -573,13 +573,13 @@
 
   <header>
     <div class="wrap">
-      <a class="back" href="../"><span>&larr;</span> Volver al trabajo</a>
+      <a class="back" href="../"><span>&larr;</span> Back to work</a>
       <div class="hctrl">
-        <nav class="lang" aria-label="Idioma">
-          <a href="../../decopam/">EN</a>
-          <a class="on" href="./" aria-current="page">ES</a>
+        <nav class="lang" aria-label="Language">
+          <a class="on" href="./" aria-current="page">EN</a>
+          <a href="../es/homelab/">ES</a>
         </nav>
-        <button class="tbtn" id="modeToggle" type="button" aria-label="Cambiar entre modo claro y oscuro">
+        <button class="tbtn" id="modeToggle" type="button" aria-label="Switch between light and dark mode">
           <span class="sky" aria-hidden="true">
             <span class="ray" style="--r:0deg"></span><span class="ray" style="--r:45deg"></span><span class="ray" style="--r:90deg"></span><span class="ray" style="--r:135deg"></span><span class="ray" style="--r:180deg"></span><span class="ray" style="--r:225deg"></span><span class="ray" style="--r:270deg"></span><span class="ray" style="--r:315deg"></span>
             <span class="core"></span>
@@ -596,34 +596,33 @@
       <span class="glow" style="bottom: -220px; left: -240px; width: 380px; height: 380px;" aria-hidden="true"></span>
       <span class="deco" style="top: 110px; right: 12%; width: 14px; height: 14px;" aria-hidden="true"></span>
       <span class="deco" style="top: 220px; right: 5%; width: 8px; height: 8px; opacity: 0.55; animation-delay: 1.2s;" aria-hidden="true"></span>
-      <p class="kicker">/ Caso &middot; Migraci&oacute;n y operativa de ecommerce</p>
-      <h1>decopam<em>.es</em></h1>
+      <p class="kicker">/ Case study &middot; Self-hosted infrastructure</p>
+      <h1>hache<em>server</em></h1>
       <p class="lede">
-        Tienda de decoraci&oacute;n de dormitorios movida de PrestaShop a WordPress y WooCommerce.
-        Los archivos llegaron. El significado no: qu&eacute; imagen pertenec&iacute;a a qu&eacute;
-        producto, y a qu&eacute; color o acabado, se hab&iacute;a perdido. Esto es c&oacute;mo se
-        reconstruy&oacute; esa relaci&oacute;n desde la base de datos antigua, y todo lo que el
-        cat&aacute;logo necesit&oacute; despu&eacute;s.
+        A second-hand mini PC in my living room running eight services in Docker, reachable from
+        the internet through an outbound Cloudflare Tunnel and from my own devices through
+        Tailscale, with not one port open on the router. It hosts devilfruittcg.com. It is also
+        where I learned this layer, which mostly meant breaking it and writing down why.
       </p>
       <div class="actions">
-        <a class="btn" href="https://decopam.es/" target="_blank" rel="noopener">Visitar decopam.es</a>
-        <a class="alt" href="../">Ver el resto del trabajo</a>
+        <a class="btn" href="../devilfruittcg/">See what it hosts</a>
+        <a class="alt" href="../">See the rest of the work</a>
       </div>
 
       <dl class="meta">
-        <div><dt>URL</dt><dd>decopam.es</dd></div>
-        <div><dt>Sector</dt><dd>Decoraci&oacute;n de dormitorios, made in Spain</dd></div>
-        <div><dt>Plataforma</dt><dd>WordPress y WooCommerce</dd></div>
-        <div><dt>Migrada desde</dt><dd>PrestaShop</dd></div>
-        <div><dt>Rol</dt><dd>Migraci&oacute;n, cat&aacute;logo y operativa</dd></div>
-        <div><dt>Contexto</dt><dd>Hecho en Neurona Digital</dd></div>
+        <div><dt>Machine</dt><dd>HP EliteDesk 800 G4 Mini, bought used</dd></div>
+        <div><dt>CPU and RAM</dt><dd>Intel i5-8500T, 6 cores, 16 GB</dd></div>
+        <div><dt>OS</dt><dd>Ubuntu Server 26.04 LTS</dd></div>
+        <div><dt>Draw</dt><dd>65 W</dd></div>
+        <div><dt>Public access</dt><dd>Cloudflare Tunnel</dd></div>
+        <div><dt>Private access</dt><dd>Tailscale</dd></div>
       </dl>
 
       <p class="note">
-        <strong>Qu&eacute; es esta p&aacute;gina:</strong> el trabajo est&aacute; resumido a partir
-        de dos procedimientos internos escritos mientras se hac&iacute;a, para poder repetir los
-        mismos pasos en el siguiente cat&aacute;logo en vez de recordarlos. Los datos de cliente se
-        quedan fuera; aqu&iacute; hay m&eacute;todo, cifras y la tienda p&uacute;blica.
+        <strong>What is not on this page:</strong> addresses, tunnel and device identifiers,
+        subdomains of private panels and anything token-shaped. The architecture and the
+        decisions are the interesting part; the coordinates are not, and publishing them would
+        be the opposite of the point.
       </p>
     </div>
 
@@ -631,139 +630,149 @@
     <section id="highlights">
       <span class="glow" style="top: -80px; right: -280px;" aria-hidden="true"></span>
       <div class="wrap">
-        <p class="section-label">/ En corto</p>
-        <h2>En qu&eacute; consisti&oacute; de verdad</h2>
+        <p class="section-label">/ In short</p>
+        <h2>How it is put together</h2>
 
         <div class="figs">
-          <div><b>20</b><span>productos en alcance</span></div>
-          <div><b>773</b><span>im&aacute;genes cruzadas</span></div>
-          <div><b>740</b><span>con correspondencia clara</span></div>
-          <div><b>33</b><span>marcadas para revisi&oacute;n</span></div>
-          <div><b>0</b><span>sin correspondencia</span></div>
+          <div><b>8</b><span>services running</span></div>
+          <div><b>0</b><span>ports open on the router</span></div>
+          <div><b>2</b><span>separate access paths</span></div>
+          <div><b>65 W</b><span>total draw</span></div>
+          <div><b>9</b><span>incidents written up</span></div>
         </div>
 
         <div class="hl">
           <article class="hl-item">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M4 7h16M4 12h16M4 17h16" /><path d="M8 3v18M16 3v18" />
+              <rect x="4.5" y="10.5" width="15" height="10" rx="1" /><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" />
             </svg>
-            <h3>Cruce por dos claves</h3>
-            <p>El SKU del producto de PrestaShop contra el de WooCommerce, y el ID de imagen de PrestaShop que segu&iacute;a al principio del nombre de cada archivo migrado. <code>1835-scaled.jpg</code> es la imagen 1835.</p>
+            <h3>Nothing is port forwarded</h3>
+            <p>The tunnel daemon holds outbound connections to Cloudflare, so traffic arrives without anything listening on the router and the home IP is never published.</p>
           </article>
           <article class="hl-item">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <ellipse cx="12" cy="5.5" rx="7.5" ry="3" /><path d="M4.5 5.5v13c0 1.66 3.36 3 7.5 3s7.5-1.34 7.5-3v-13" /><path d="M4.5 12c0 1.66 3.36 3 7.5 3s7.5-1.34 7.5-3" />
+              <rect x="3" y="3" width="7.5" height="18" /><rect x="13.5" y="3" width="7.5" height="18" /><path d="M8.2 12v.01M16.3 12v.01" />
             </svg>
-            <h3>Una consulta de solo lectura</h3>
-            <p>Un &uacute;nico <code>SELECT</code> contra la base de datos de PrestaShop recuper&oacute; la relaci&oacute;n hist&oacute;rica entre imagen, producto y combinaci&oacute;n. Sin <code>UPDATE</code>, <code>DELETE</code>, <code>INSERT</code>, <code>ALTER</code> ni <code>DROP</code>.</p>
+            <h3>Two doors, different jobs</h3>
+            <p>The tunnel is for visitors and carries only the public sites. Tailscale is for me and carries SSH and the admin panels. Neither one can do the other's job by accident.</p>
           </article>
           <article class="hl-item">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M12 2.5 4.5 5.5v6c0 5 3.2 8.6 7.5 10 4.3-1.4 7.5-5 7.5-10v-6L12 2.5Z" /><path d="m9 12 2.2 2.2L15.5 10" />
+              <path d="M3 12.5V4a1 1 0 0 1 1-1h8.5L21 11.5 12.5 20 3 12.5Z" /><circle cx="7.5" cy="7.5" r="1.3" />
             </svg>
-            <h3>Copia antes de cada pasada</h3>
-            <p>Base de datos completa y <code>/wp-content/uploads</code> antes de cualquier importaci&oacute;n masiva, y luego un CSV de prueba de dos productos revisado a mano antes de lanzar el archivo entero.</p>
+            <h3>Container names, not IPs</h3>
+            <p>Every proxy and tunnel route points at a container name. Container IPs change the moment you recreate something; names do not. Two of the nine incidents were exactly this.</p>
           </article>
           <article class="hl-item">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <rect x="2.5" y="5" width="19" height="14" rx="1" /><circle cx="8" cy="11" r="2" /><path d="M4.8 16.2c.6-1.5 1.8-2.3 3.2-2.3s2.6.8 3.2 2.3M14 10h5M14 13.5h5" />
+              <circle cx="12" cy="12" r="9" /><circle cx="12" cy="12" r="3" /><path d="m14.2 14.2 4 4" />
             </svg>
-            <h3>Identificaci&oacute;n por Product ID</h3>
-            <p>No por SKU. Un cat&aacute;logo migrado arrastra SKU vac&iacute;os y duplicados, y una importaci&oacute;n que se apoye en ellos escribe el dato correcto en el producto equivocado.</p>
+            <h3>Mounted by UUID</h3>
+            <p>The data disk is mounted by filesystem UUID rather than by device path, because adding a second disk can reorder what <code>/dev/sda</code> means.</p>
           </article>
           <article class="hl-item">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <rect x="3" y="3" width="7" height="7" /><rect x="14" y="3" width="7" height="7" /><rect x="3" y="14" width="7" height="7" /><rect x="14" y="14" width="7" height="7" />
+              <path d="M12 3 3 8l9 5 9-5-9-5Z" /><path d="M3 13l9 5 9-5" /><path d="M3 18l9 5 9-5" />
             </svg>
-            <h3>242 variaciones en un producto</h3>
-            <p>El plugin de swatches deja de funcionar pasado un umbral. Ese umbral se subi&oacute; solo para ese producto y no de forma global, as&iacute; que el resto del cat&aacute;logo conserva el valor seguro.</p>
+            <h3>Rebuildable from files</h3>
+            <p>Every service is a Docker Compose file, and the reasoning lives in a runbook on the machine. A rebuild is a checkout and a compose up, not an archaeology project.</p>
           </article>
           <article class="hl-item">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="m8 7-5 5 5 5M16 7l5 5-5 5M13.5 4l-3 16" />
+              <path d="M4 4.5A1.5 1.5 0 0 1 5.5 3H19v18H5.5A1.5 1.5 0 0 1 4 19.5v-15Z" /><path d="M4 17.5h15M8 7h7M8 10.5h7" />
             </svg>
-            <h3>Code Snippets, nunca el tema</h3>
-            <p>Cada cambio masivo vivi&oacute; en un fragmento: acotado, reversible y desactivado en cuanto la pasada &uacute;nica termin&oacute;. El tema no se toc&oacute;.</p>
+            <h3>Nine incidents, written up</h3>
+            <p>Symptom, cause, fix, lesson. Written at the time, not reconstructed afterwards, because the lesson is the part that survives.</p>
           </article>
         </div>
       </div>
     </section>
 
     <!-- ============ 01 ============ -->
-    <section id="problem">
+    <section id="doors">
       <span class="glow" style="top: 40px; left: -280px;" aria-hidden="true"></span>
       <div class="wrap">
-        <p class="section-label">/ 01 &middot; El problema</p>
-        <h2>La migraci&oacute;n movi&oacute; archivos, no significado</h2>
+        <p class="section-label">/ 01 &middot; Access</p>
+        <h2>Two doors instead of one hole</h2>
         <p class="section-intro">
-          Los productos y las im&aacute;genes ya estaban en WordPress y ya estaban asociados a
-          WooCommerce. Lo que no hab&iacute;a sobrevivido era la relaci&oacute;n: PrestaShop
-          sab&iacute;a que una imagen concreta pertenec&iacute;a a una combinaci&oacute;n concreta
-          de talla, color y acabado, y WooCommerce solo sab&iacute;a que exist&iacute;a un archivo.
-          Los t&iacute;tulos y los ALT eran gen&eacute;ricos o estaban vac&iacute;os, los nombres de
-          archivo eran n&uacute;meros pelados, y varios productos demo anteriores a la
-          migraci&oacute;n segu&iacute;an en el cat&aacute;logo contaminando cualquier
-          operaci&oacute;n masiva.
+          The obvious way to reach a home server from outside is to forward ports on the router.
+          I did not, for three reasons: the fibre line may be behind CGNAT, so it might not even
+          be possible; an open port is a permanent invitation; and splitting public traffic from
+          my own access means a mistake on one side cannot expose the other.
         </p>
-        <p class="section-intro">
-          As&iacute; que el trabajo no era volver a migrar. Era recuperar el significado antiguo y
-          reescribirlo sobre la tienda nueva, sin tocar ni un precio, ni un stock, ni un atributo,
-          ni una variaci&oacute;n.
+        <div class="tbl">
+          <table>
+            <thead><tr><th></th><th>Cloudflare Tunnel</th><th>Tailscale</th></tr></thead>
+            <tbody>
+            <tr><td><strong>Who it is for</strong></td><td>Anyone visiting the public sites</td><td>Only my own devices</td></tr>
+            <tr><td><strong>What it carries</strong></td><td>The WordPress site and a rank tracker</td><td>SSH and every admin panel</td></tr>
+            <tr><td><strong>How it connects</strong></td><td>Outbound connections from the server to Cloudflare</td><td>A private mesh between authorised devices</td></tr>
+            <tr><td><strong>What it adds</strong></td><td>CDN, WAF and DDoS protection in front</td><td>Nothing is published at all</td></tr>
+            <tr><td><strong>Router config</strong></td><td>None</td><td>None</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">
+          <strong>The rule that made it work:</strong> the tunnel container has to be attached to
+          the Docker network of every service it exposes. Miss that and the service answers
+          perfectly on the machine while the public URL returns 502, which is how two of the nine
+          incidents below started.
         </p>
       </div>
     </section>
 
     <!-- ============ 02 ============ -->
-    <section id="crossref">
+    <section id="stack">
       <div class="wrap">
-        <p class="section-label">/ 02 &middot; El cruce</p>
-        <h2>Cuatro fuentes, una sola tabla</h2>
+        <p class="section-label">/ 02 &middot; What runs on it</p>
+        <h2>Eight services, one mini PC</h2>
         <p class="section-intro">
-          Cada sistema ten&iacute;a una parte de la respuesta. El trabajo fue juntarlas en un
-          &uacute;nico archivo de importaci&oacute;n que una persona pudiera auditar antes de que
-          se escribiera nada.
+          All of it in Docker, behind a reverse proxy that handles routing and certificates.
+          Public and private are separated at the network level, not by hoping nobody guesses a
+          URL.
         </p>
         <div class="tbl">
           <table>
-            <thead><tr><th>Fuente</th><th>Qu&eacute; aporta</th></tr></thead>
+            <thead><tr><th>Service</th><th>What it does</th><th>Reachable from</th></tr></thead>
             <tbody>
-            <tr><td><strong>WP All Export</strong></td><td>La estructura actual en WordPress: ID de producto, SKU, tipo, padre, y de cada imagen su ID, URL, nombre de archivo, ruta, t&iacute;tulo, ALT y leyenda.</td></tr>
-            <tr><td><strong>Exportador de WooCommerce</strong></td><td>Datos de producto y atributos, para confirmar la identidad del producto antes de cruzar nada.</td></tr>
-            <tr><td><strong>SQL de PrestaShop</strong></td><td>La relaci&oacute;n hist&oacute;rica: ID de imagen, posici&oacute;n, portada, leyenda, ID de combinaci&oacute;n y los pares de atributos que hay detr&aacute;s.</td></tr>
-            <tr><td><strong>Prefijo del archivo</strong></td><td>El ID de imagen de PrestaShop sobrevivi&oacute; a la migraci&oacute;n dentro del nombre del archivo, que es lo que hace posible cruzar a nivel de imagen.</td></tr>
+            <tr><td><strong>WordPress</strong></td><td>Runs devilfruittcg.com, the niche site the SEO case study is about.</td><td>Public</td></tr>
+            <tr><td><strong>MySQL</strong></td><td>Its database. Never exposed, reachable only inside the Docker network.</td><td>Internal only</td></tr>
+            <tr><td><strong>Reverse proxy</strong></td><td>Routing and TLS certificates for everything behind it.</td><td>Private panel</td></tr>
+            <tr><td><strong>Rank tracker</strong></td><td>Self-hosted keyword tracking for the niche site, on its own subdomain.</td><td>Public</td></tr>
+            <tr><td><strong>Photo server</strong></td><td>Personal photo and video library on the 1 TB data disk.</td><td>Private</td></tr>
+            <tr><td><strong>Dashboard</strong></td><td>One page listing every service and its state.</td><td>Private</td></tr>
+            <tr><td><strong>DNS filter</strong></td><td>Network-wide DNS and ad filtering for the house.</td><td>Private</td></tr>
+            <tr><td><strong>Uptime monitor</strong></td><td>Checks each service and sends an alert when one stops answering.</td><td>Private</td></tr>
             </tbody>
           </table>
         </div>
-        <p class="note">
-          <strong>Resultado del cruce:</strong> 773 im&aacute;genes cruzadas, 740 con
-          correspondencia clara, 33 marcadas para revisi&oacute;n manual y ninguna sin
-          correspondencia. Veintitr&eacute;s registros demo y duplicados anteriores a la
-          migraci&oacute;n quedaron excluidos por una regla, no a mano: sin SKU, fuera de alcance.
-        </p>
       </div>
     </section>
 
     <!-- ============ 03 ============ -->
-    <section id="safety">
+    <section id="incidents">
       <span class="glow" style="top: 0; right: -280px;" aria-hidden="true"></span>
       <div class="wrap">
-        <p class="section-label">/ 03 &middot; Protocolo de seguridad</p>
-        <h2>Reglas escritas antes de la primera importaci&oacute;n</h2>
+        <p class="section-label">/ 03 &middot; Incidents</p>
+        <h2>Nine things that broke</h2>
         <p class="section-intro">
-          Una importaci&oacute;n masiva sobre una tienda en producci&oacute;n es una puerta de un
-          solo sentido si sale mal. Estas quedaron fijadas de antemano para no tener que decidir
-          nada con prisa.
+          This is the part I would want to read about someone else. Anyone can follow a tutorial
+          until it works. What is worth showing is what happened when it did not, and whether the
+          cause was actually understood or just worked around.
         </p>
         <div class="tbl">
           <table>
-            <thead><tr><th>Regla</th><th>Por qu&eacute;</th></tr></thead>
+            <thead><tr><th>Symptom</th><th>Cause</th><th>Lesson</th></tr></thead>
             <tbody>
-            <tr><td><strong>Copia primero</strong></td><td>Base de datos completa y <code>/wp-content/uploads</code> antes de cualquier operaci&oacute;n masiva.</td></tr>
-            <tr><td><strong>Dos productos primero</strong></td><td>Lanzar la importaci&oacute;n con un CSV de dos productos, revisar el resultado a mano y solo entonces ejecutar el archivo completo.</td></tr>
-            <tr><td><strong>Clave por Product ID</strong></td><td>Los SKU de un cat&aacute;logo migrado pueden estar vac&iacute;os o duplicados. El ID de producto de WordPress no.</td></tr>
-            <tr><td><strong>Solo im&aacute;genes</strong></td><td>Actualizar t&iacute;tulo y ALT de imagen. Nunca t&iacute;tulo de producto, contenido, precio, stock, atributos, variaciones, taxonom&iacute;as ni campos personalizados.</td></tr>
-            <tr><td><strong>Nunca borrar</strong></td><td>Cualquier opci&oacute;n que elimine o modifique productos ausentes del CSV se queda desactivada.</td></tr>
-            <tr><td><strong>Renombrar al final</strong></td><td>El nombre f&iacute;sico del archivo solo se cambia una vez confirmados los t&iacute;tulos y los ALT.</td></tr>
+            <tr><td><strong>Server shut down on boot</strong></td><td>A SATA connector was not seated properly after fitting the 1 TB data disk.</td><td>Instant shutdown seconds after power-on is a connector or a short. Leave the case open and watch the first seconds.</td></tr>
+            <tr><td><strong>502 on the public site</strong></td><td>WordPress and the reverse proxy were on different Docker networks and could not see each other.</td><td>Containers from separate compose files are invisible to each other. Declare the other network as external and join it.</td></tr>
+            <tr><td><strong>502 on the rank tracker</strong></td><td>The tunnel daemon was not attached to that service's Docker network, so it could not resolve the container name.</td><td>The tunnel container has to sit on the network of every service it exposes.</td></tr>
+            <tr><td><strong>Too many redirects in Safari</strong></td><td>Cloudflare was set to Flexible SSL while the proxy forced HTTPS, which loops forever.</td><td>Flexible plus forced SSL is a loop. Full plus forced SSL is correct.</td></tr>
+            <tr><td><strong>Certificate request failed</strong></td><td>The Cloudflare proxy blocks the Let's Encrypt HTTP challenge.</td><td>With the orange cloud on, always use the DNS challenge, with a scoped API token.</td></tr>
+            <tr><td><strong>Database connection error</strong></td><td>A placeholder password was left in the compose file, and MySQL had already stored the first one it booted with.</td><td>Changing the password in compose does not change it in the volume. Recreate the volume, and only while it is safe to.</td></tr>
+            <tr><td><strong>Admin panel vanished</strong></td><td>The DNS filter switches its internal port once its setup wizard finishes.</td><td>A panel that disappears exactly when setup ends usually moved port. Read the logs before re-creating anything.</td></tr>
+            <tr><td><strong>Host validation failed</strong></td><td>The dashboard now requires its allowed hosts to be declared explicitly.</td><td>A host or origin error on first access is a security check, not a bug. Declare the addresses you actually use.</td></tr>
+            <tr><td><strong>Database file unopenable</strong></td><td>A bind-mounted folder was created by root, so the container could not write to it.</td><td>A container that cannot write to its volume is almost always a permissions problem on the host folder.</td></tr>
             </tbody>
           </table>
         </div>
@@ -771,91 +780,54 @@
     </section>
 
     <!-- ============ 04 ============ -->
-    <section id="catalogue">
-      <div class="wrap">
-        <p class="section-label">/ 04 &middot; Despu&eacute;s de la migraci&oacute;n</p>
-        <h2>El cat&aacute;logo que ve el cliente</h2>
-        <p class="section-intro">
-          Con los metadatos correctos, lo que quedaba era la tienda: que un cat&aacute;logo de
-          productos variables se comportara como una tienda y no como una exportaci&oacute;n de
-          base de datos.
-        </p>
-        <div class="tbl">
-          <table>
-            <thead><tr><th>Cambio</th><th>Qu&eacute; implic&oacute;</th></tr></thead>
-            <tbody>
-            <tr><td><strong>Renombrado masivo</strong></td><td>Media File Renamer genera el nombre f&iacute;sico desde el t&iacute;tulo del adjunto, sin tocar t&iacute;tulos ni ALT. Verificado en galer&iacute;as de producto, miniaturas y p&aacute;ginas de Elementor.</td></tr>
-            <tr><td><strong>Stock simplificado</strong></td><td>Cantidad exacta oculta en la tienda y 20 unidades escritas en cada variaci&oacute;n, no solo en el producto padre.</td></tr>
-            <tr><td><strong>Medida antes que color</strong></td><td>Orden de atributos invertido en todo el cat&aacute;logo con un snippet de ejecuci&oacute;n &uacute;nica, por lotes desde el listado de productos, y desactivado despu&eacute;s.</td></tr>
-            <tr><td><strong>Una medida por defecto</strong></td><td>Medida predeterminada en todos los productos variables compatibles, para que la ficha abra en un estado comprable.</td></tr>
-            <tr><td><strong>242 variaciones</strong></td><td>Un producto superaba el umbral del plugin de swatches. El l&iacute;mite se subi&oacute; solo para ese ID, se borraron transitorios y se comprob&oacute; otro producto variable para confirmar que el filtro no se hab&iacute;a escapado.</td></tr>
-            <tr><td><strong>Swatches etiquetados</strong></td><td>Label position activado para que cada grupo se lea como Tama&ntilde;o, Color frontal y Color reverso en vez de tres filas an&oacute;nimas de cuadrados.</td></tr>
-            <tr><td><strong>Higiene de cat&aacute;logo</strong></td><td>Registros duplicados de la migraci&oacute;n eliminados, productos reasignados a su categor&iacute;a correcta, colores de muestra completados y enlaces sociales apuntando a los perfiles reales.</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="cards gallery">
-          <figure>
-            <img src="../../img/decopam-home.webp" width="1901" height="912" alt="Portada de DECOPAM: la marca sobre un dormitorio ambientado" loading="lazy" />
-            <figcaption>La tienda para la que se reconstruy&oacute; la migraci&oacute;n.</figcaption>
-          </figure>
-          <figure>
-            <img src="../../img/decopam-catalogo.png" width="1920" height="1500" alt="Categor&iacute;a de cabeceros de DECOPAM: parrilla de productos con filtro por color en la barra lateral" loading="lazy" />
-            <figcaption>P&aacute;gina de categor&iacute;a: productos en su categor&iacute;a correcta y el filtro por color alimentado por los atributos de las muestras.</figcaption>
-          </figure>
-          <figure>
-            <img src="../../img/decopam-variaciones.png" width="540" height="338" alt="Ficha de producto de DECOPAM: botones de talla sobre muestras de color etiquetadas" loading="lazy" />
-            <figcaption>Primero la medida, despu&eacute;s el color, cada grupo etiquetado y una opci&oacute;n ya seleccionada.</figcaption>
-          </figure>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ 05 ============ -->
     <section id="value">
       <span class="glow" style="bottom: 0; left: -280px;" aria-hidden="true"></span>
       <div class="wrap">
-        <p class="section-label">/ 05 &middot; Qu&eacute; demuestra</p>
-        <h2>Por qu&eacute; merece la pena leerlo</h2>
+        <p class="section-label">/ 04 &middot; What it proves</p>
+        <h2>Why a home server belongs in a portfolio</h2>
         <div class="tbl">
           <table>
-            <thead><tr><th>Afirmaci&oacute;n</th><th>Evidencia</th></tr></thead>
+            <thead><tr><th>Claim</th><th>Evidence</th></tr></thead>
             <tbody>
-            <tr><td><strong>Recuperaci&oacute;n de datos, no intuici&oacute;n</strong></td><td>La relaci&oacute;n de im&aacute;genes se reconstruy&oacute; desde la base de datos de origen con una consulta de solo lectura, y la tasa de acierto est&aacute; declarada: 740 claras, 33 marcadas, 0 sin correspondencia.</td></tr>
-            <tr><td><strong>Seguro sobre una tienda viva</strong></td><td>Copias, ensayo con dos productos, identificaci&oacute;n por ID y alcance limitado a im&aacute;genes. No se escribi&oacute; en precio, stock ni variaciones.</td></tr>
-            <tr><td><strong>Arreglos acotados</strong></td><td>El umbral de swatches se subi&oacute; para un producto, no de forma global. Los snippets de ejecuci&oacute;n &uacute;nica se desactivaron tras su &uacute;nica pasada.</td></tr>
-            <tr><td><strong>Repetible</strong></td><td>Los dos procedimientos est&aacute;n escritos, incluidos el SQL, el mapeo de campos y un checklist operativo, as&iacute; que el siguiente cat&aacute;logo no empieza de cero.</td></tr>
-            <tr><td><strong>Responsabilidad, no tickets</strong></td><td>Migraci&oacute;n, metadatos, cat&aacute;logo, variaciones y comportamiento de la tienda fueron un trabajo continuo y no una cola de peticiones sueltas.</td></tr>
+            <tr><td><strong>The layer under the CMS</strong></td><td>Operating system, disks and fstab, Docker networking, reverse proxy, TLS, DNS and remote access. Not a managed panel pretending to be infrastructure.</td></tr>
+            <tr><td><strong>Security by architecture</strong></td><td>No forwarded ports, public and private traffic on separate paths, admin panels never published, database never exposed.</td></tr>
+            <tr><td><strong>Diagnosis, not workarounds</strong></td><td>Nine incidents with the cause identified in each. The 502s were Docker networking, the redirect loop was an SSL mode, the write failure was host permissions.</td></tr>
+            <tr><td><strong>It is documented</strong></td><td>A runbook on the machine and a linked vault of notes, which is why this page could be written from records rather than memory.</td></tr>
+            <tr><td><strong>It is real</strong></td><td>devilfruittcg.com is served from it, in public, with its own case study.</td></tr>
             </tbody>
           </table>
         </div>
+        <p class="note">
+          <strong>Still open:</strong> confirming whether the line is behind CGNAT, moving an old
+          photo copy off the system SSD, and finishing the search console connection on the rank
+          tracker. A homelab with no open items is a homelab nobody is using.
+        </p>
       </div>
     </section>
   </main>
 
-  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Visor de im&aacute;genes">
-    <button class="close" type="button" aria-label="Cerrar">&times;</button>
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+    <button class="close" type="button" aria-label="Close">&times;</button>
     <img src="" alt="" />
   </div>
 
   <section class="cta" id="contact">
     <span class="glow" style="top: -160px; right: -160px;" aria-hidden="true"></span>
     <div class="wrap">
-      <p class="kicker">/ Siguiente</p>
-      <h2>Todo conecta.</h2>
-      <p>Las migraciones son el momento en el que una web se rompe por dentro sin avisar, y el da&ntilde;o aparece meses despu&eacute;s. Esta queda documentada para poder repetirla, no para recordarla. Si es el tipo de trabajo que necesitas, escr&iacute;beme.</p>
+      <p class="kicker">/ Next</p>
+      <h2>Everything connects.</h2>
+      <p>This is the layer I went looking for when design stopped being enough, and the one I want to keep working in. If you need someone who owns the machine as well as the site, say hi.</p>
       <div class="actions">
-        <a class="btn" href="mailto:hi.hache.cervera@gmail.com?subject=Caso%20decopam">Hablamos</a>
-        <a class="alt" href="../">Ver el resto del trabajo</a>
+        <a class="btn" href="mailto:hi.hache.cervera@gmail.com?subject=homelab%20case%20study">Get in touch</a>
+        <a class="alt" href="../">See the rest of the work</a>
       </div>
     </div>
   </section>
 
   <footer>
     <div class="wrap">
-      <p>&copy; 2026 Ada (hache) Cervera. Hecho a mano en Valencia.</p>
-      <p class="path">Infraestructura <span>&rarr;</span> CMS <span>&rarr;</span> B&uacute;squeda <span>&rarr;</span> Operativa</p>
+      <p>&copy; 2026 Ada (hache) Cervera. Built by hand in Valencia.</p>
+      <p class="path">Infrastructure <span>&rarr;</span> CMS <span>&rarr;</span> Search <span>&rarr;</span> Operations</p>
     </div>
   </footer>
 
@@ -892,7 +864,7 @@
           boxImg.src = img.src;
           boxImg.alt = img.alt;
           box.classList.add('on');
-          track('image_open', { project: 'decopam', image: img.getAttribute('src') });
+          track('image_open', { project: 'homelab', image: img.getAttribute('src') });
         });
       });
       function closeBox() { box.classList.remove('on'); boxImg.src = ''; }
@@ -923,7 +895,7 @@
           entries.forEach(function (e) {
             if (e.isIntersecting && !seen[e.target.id]) {
               seen[e.target.id] = 1;
-              track('section_view', { section: e.target.id, page: 'decopam' });
+              track('section_view', { section: e.target.id, page: 'homelab' });
             }
           });
         }, { threshold: 0.3 });
@@ -935,7 +907,7 @@
         if (h <= 0) return;
         var pct = Math.round((window.scrollY / h) * 100);
         [50, 90].forEach(function (m) {
-          if (pct >= m && !depth[m]) { depth[m] = 1; track('scroll_depth', { percent: m, page: 'decopam' }); }
+          if (pct >= m && !depth[m]) { depth[m] = 1; track('scroll_depth', { percent: m, page: 'homelab' }); }
         });
       }, { passive: true });
     })();
