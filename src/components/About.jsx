@@ -66,6 +66,8 @@ export default function About() {
             <Words>{t.about.p1}</Words>
           </p>
           <p data-rise className="text-muted">{t.about.p2}</p>
+          <p data-rise className="max-w-md leading-relaxed">{t.about.p1b}</p>
+          <p data-rise className="max-w-md leading-relaxed">{t.about.p1c}</p>
 
           <div data-rise className="mt-4 flex flex-wrap gap-12 rounded bg-panel p-8 text-white">
             <Stat value={15} suffix="+" label={t.about.stat1} />
@@ -74,6 +76,41 @@ export default function About() {
           <p data-rise className="text-sm text-muted">
             {t.about.p3}
           </p>
+          <p data-rise className="text-sm text-muted">
+            {t.about.p4}
+          </p>
+
+          {/* Certifications and languages: cheap, verifiable signal that the CV
+              carries and the site was missing. */}
+          <div data-rise className="mt-2 grid gap-8 border-t border-line pt-6 sm:grid-cols-2">
+            <div>
+              <p className="font-display text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">
+                {t.about.certsLabel}
+              </p>
+              <ul className="mt-3 flex flex-col gap-1.5 text-sm">
+                {t.about.certs.map((c) => (
+                  <li key={c.name} className="flex gap-3">
+                    <span className="font-display font-semibold text-accent">{c.year}</span>
+                    <span>{c.name}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <p className="font-display text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">
+                {t.about.langsLabel}
+              </p>
+              <ul className="mt-3 flex flex-col gap-1.5 text-sm">
+                {t.about.langs.map((l) => (
+                  <li key={l.name} className="flex flex-wrap gap-x-2">
+                    <span className="font-display font-semibold">{l.name}</span>
+                    <span className="text-muted">{l.level}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-3 text-xs leading-relaxed text-muted">{t.about.langsNote}</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>

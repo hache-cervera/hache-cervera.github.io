@@ -294,6 +294,20 @@
     .note strong { color: var(--ink); font-weight: 600; }
 
     /* ---------- Web project cards ---------- */
+    /* Infrastructure work does not photograph: this grid states it instead. */
+    .ops { margin-top: 40px; display: grid; gap: 16px; grid-template-columns: 1fr; }
+    @media (min-width: 640px) { .ops { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 1000px) { .ops { grid-template-columns: repeat(3, 1fr); } }
+    .ops li {
+      list-style: none;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      padding: 24px;
+      transition: border-color 0.2s ease;
+    }
+    .ops li:hover { border-color: var(--ink); }
+    .ops h3 { font-family: var(--font-display); font-size: 1rem; font-weight: 700; line-height: 1.3; }
+    .ops p { margin-top: 8px; font-size: 0.875rem; line-height: 1.65; color: var(--muted); }
     .projects {
       margin-top: 48px;
       display: grid;
@@ -824,17 +838,55 @@
 
     <div class="filters wrap" role="tablist" aria-label="Filter the work">
       <button class="chip is-on" data-filter="all" type="button">All work</button>
+      <button class="chip" data-filter="infra" type="button">Infrastructure</button>
       <button class="chip" data-filter="seo" type="button">SEO / GEO / AEO</button>
       <button class="chip" data-filter="web" type="button">Websites</button>
       <button class="chip" data-filter="design" type="button">Design &amp; Branding</button>
       <button class="chip" data-filter="video" type="button">Video &amp; Social</button>
     </div>
 
+    <!-- ============ 01 · Infrastructure & Operations ============ -->
+    <section id="infra">
+      <span class="glow" style="top: 40px; right: -260px;" aria-hidden="true"></span>
+      <div class="wrap">
+        <p class="section-label">/ 01 &middot; Infrastructure &amp; Operations</p>
+        <h2>The part nobody sees until it breaks</h2>
+        <p class="section-intro">Client infrastructure does not photograph well, so here it is in words. This is the day-to-day of keeping 15+ live properties running across WordPress, Shopify, Wix and PrestaShop, and it is the work I want more of.</p>
+        <ul class="ops">
+          <li>
+            <h3>Hosting and servers</h3>
+            <p>Shared, VPS and self-hosted, through cPanel, Plesk and SSH. Provisioning, staging environments and deploys.</p>
+          </li>
+          <li>
+            <h3>DNS and Cloudflare</h3>
+            <p>Records, propagation, proxying, page rules and SSL end to end. Cutovers planned so the site never goes dark.</p>
+          </li>
+          <li>
+            <h3>Migrations</h3>
+            <p>15+ live properties moved between hosts and domains with redirects, hreflang and search equity kept intact.</p>
+          </li>
+          <li>
+            <h3>Backups and security</h3>
+            <p>Scheduled backups with restores actually tested, hardening, update discipline and malware cleanup as routine rather than emergency.</p>
+          </li>
+          <li>
+            <h3>Performance</h3>
+            <p>Core Web Vitals as continuous work: caching, image pipeline, render path, and no page builder weight where it can be avoided.</p>
+          </li>
+          <li>
+            <h3>Monitoring and troubleshooting</h3>
+            <p>Crawl health, redirect chains, canonical and schema errors, tracked with Screaming Frog, Search Console and Ahrefs.</p>
+          </li>
+        </ul>
+        <p class="note"><strong>Self-hosted lab:</strong> I run a Linux server at home with Docker and Nginx. devilfruittcg.com lives on it, which is why that case study can show the infrastructure decisions in full rather than describe them.</p>
+      </div>
+    </section>
+
     <!-- ============ 01 · SEO / GEO / AEO ============ -->
     <section id="seo">
       <span class="glow" style="top: 40px; left: -260px;" aria-hidden="true"></span>
       <div class="wrap">
-        <p class="section-label">/ 01 · SEO, GEO &amp; AEO</p>
+        <p class="section-label">/ 02 &middot; SEO, GEO &amp; AEO</p>
         <h2>Organic visibility, built as a system</h2>
         <p class="section-intro">
           Search is not only Google any more. I work three layers at once: classic SEO, AEO
@@ -876,7 +928,7 @@
     <section id="web">
       <span class="glow" style="top: 60px; left: -260px;" aria-hidden="true"></span>
       <div class="wrap">
-        <p class="section-label">/ 02 · Web</p>
+        <p class="section-label">/ 03 &middot; Web</p>
         <h2>Websites, end to end</h2>
         <p class="section-intro">
           Design and development with premium plugins and multilingual setups, plus everything
@@ -981,7 +1033,7 @@
       <span class="glow" style="top: 120px; right: -260px;" aria-hidden="true"></span>
       <span class="glow" style="bottom: 300px; left: -280px; width: 420px; height: 420px;" aria-hidden="true"></span>
       <div class="wrap">
-        <p class="section-label">/ 03 · Design &amp; Branding</p>
+        <p class="section-label">/ 04 &middot; Design &amp; Branding</p>
         <h2>Identity, campaigns and design systems</h2>
         <p class="section-intro">
           Branding, art direction and graphic systems: brandbooks, rebrandings and the templates
@@ -1169,7 +1221,7 @@
     <section id="video">
       <span class="glow" style="top: 80px; left: -240px;" aria-hidden="true"></span>
       <div class="wrap">
-        <p class="section-label">/ 04 · Video &amp; Social</p>
+        <p class="section-label">/ 05 &middot; Video &amp; Social</p>
         <h2>Motion, podcasts and content that moves</h2>
         <p class="section-intro">
           Audiovisual production and social content for brands, much of it made at <a class="credit" href="https://neuronadigital.es/" target="_blank" rel="noopener">Neurona Digital</a>.
@@ -1417,6 +1469,7 @@
       /* Section filters */
       var chips = document.querySelectorAll('.chip');
       var sections = {
+        infra: document.getElementById('infra'),
         seo: document.getElementById('seo'),
         web: document.getElementById('web'),
         design: document.getElementById('design'),

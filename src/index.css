@@ -163,7 +163,7 @@ body {
    vertical padding so the Scroll hint stays visible, and on very short ones we
    reserve room at the bottom so the menu never runs into it. */
 @media (max-height: 820px) {
-  #hero { padding-top: 3rem; padding-bottom: 3rem; }
+  #hero { padding-top: 3rem; padding-bottom: 5rem; }
 }
 @media (max-height: 700px) {
   #hero { padding-bottom: 7rem; }
