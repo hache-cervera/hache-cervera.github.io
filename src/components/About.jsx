@@ -65,21 +65,46 @@ export default function About() {
 
   return (
     <section id="about" ref={rootRef} className="relative px-6 py-32 md:px-12 md:py-48">
-      <div className="relative z-20 mx-auto grid w-full max-w-6xl gap-14 md:grid-cols-[1.1fr_1fr] md:gap-24">
-        <div data-rise>
-          <p className="font-display text-sm font-semibold uppercase tracking-[0.08em] text-accent">{t.about.label}</p>
-          <h2 className="mt-6 font-display text-[clamp(2rem,4vw,3rem)] font-bold leading-[1.12] tracking-tightest">
-            <span className="block"><Words>{t.about.h2a}</Words></span>
-            <span className="block"><Words>{t.about.h2b}</Words></span>
-            <span className="block"><Words>{t.about.h2c}</Words></span>
-          </h2>
+      <div className="relative z-20 mx-auto grid w-full max-w-6xl items-start gap-14 md:grid-cols-[1.1fr_1fr] md:gap-24">
+        {/* Sticky on desktop: a recruiter reading for twenty seconds gets the
+            headline and the hard facts without scrolling past the story. */}
+        <div className="md:sticky md:top-24">
+          <div data-rise>
+            <p className="font-display text-sm font-semibold uppercase tracking-[0.08em] text-accent">{t.about.label}</p>
+            <h2 className="mt-6 font-display text-[clamp(2rem,4vw,3rem)] font-bold leading-[1.12] tracking-tightest">
+              <span className="block"><Words>{t.about.h2a}</Words></span>
+              <span className="block"><Words>{t.about.h2b}</Words></span>
+              <span className="block"><Words>{t.about.h2c}</Words></span>
+            </h2>
+          </div>
+
+          <div data-rise className="mt-10 max-w-md">
+            <p className="font-display text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">
+              {t.about.factsLabel}
+            </p>
+            <dl className="mt-4 divide-y divide-line border border-line bg-page">
+              {t.about.facts.map((f) => (
+                <div key={f.k} className="px-5 py-3 sm:grid sm:grid-cols-[108px_1fr] sm:gap-4">
+                  <dt className="font-display text-[10px] font-semibold uppercase tracking-[0.12em] text-muted sm:pt-1">
+                    {f.k}
+                  </dt>
+                  <dd className="mt-1 text-sm leading-snug sm:mt-0">{f.v}</dd>
+                </div>
+              ))}
+            </dl>
+            <p className="mt-3 text-xs leading-relaxed text-muted">{t.about.langsNote}</p>
+          </div>
         </div>
 
-        <div className="flex flex-col gap-6 self-center">
+        <div className="flex flex-col gap-6">
+          <div data-rise className="flex flex-wrap gap-12 rounded bg-panel p-8 text-white">
+            <Stat value={15} suffix="+" label={t.about.stat1} />
+            <Stat value={4} suffix="" label={t.about.stat2} />
+          </div>
+
           <p data-rise className="max-w-md text-lg leading-relaxed">
             <Words>{t.about.p1}</Words>
           </p>
-          <p data-rise className="text-muted">{t.about.p2}</p>
 
           {/* The stack the way she describes it: search on top, the machine
               underneath. Revealed bottom up so the layers build, not fall. */}
@@ -87,7 +112,7 @@ export default function About() {
             <p data-rise className="font-display text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">
               {t.about.layersLabel}
             </p>
-            <ol className="mt-4 divide-y divide-line border border-line">
+            <ol className="mt-4 divide-y divide-line border border-line bg-page">
               {t.about.layers.map((l) => (
                 <li key={l.n} data-layer className="group relative p-5">
                   <span className="absolute left-0 top-0 h-full w-0.5 origin-top scale-y-0 bg-accent transition-transform duration-300 group-hover:scale-y-100" />
@@ -117,52 +142,16 @@ export default function About() {
             {t.about.geoNote}
           </p>
 
-          <div data-rise className="mt-4 flex flex-wrap gap-12 rounded bg-panel p-8 text-white">
-            <Stat value={15} suffix="+" label={t.about.stat1} />
-            <Stat value={4} suffix="" label={t.about.stat2} />
-          </div>
-          <p data-rise className="text-sm text-muted">
-            {t.about.p3}
-          </p>
-
-          <div data-rise className="border border-line p-5">
+          <div data-rise className="border border-line bg-page p-5">
             <p className="font-display text-[11px] font-semibold uppercase tracking-[0.16em] text-accent">
               {t.about.labLabel}
             </p>
             <p className="mt-2 text-sm leading-relaxed text-muted">{t.about.p4}</p>
           </div>
 
-          {/* Certifications and languages: cheap, verifiable signal that the CV
-              carries and the site was missing. */}
-          <div data-rise className="mt-2 grid gap-8 border-t border-line pt-6 sm:grid-cols-2">
-            <div>
-              <p className="font-display text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">
-                {t.about.certsLabel}
-              </p>
-              <ul className="mt-3 flex flex-col gap-1.5 text-sm">
-                {t.about.certs.map((c) => (
-                  <li key={c.name} className="flex gap-3">
-                    <span className="font-display font-semibold text-accent">{c.year}</span>
-                    <span>{c.name}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <p className="font-display text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">
-                {t.about.langsLabel}
-              </p>
-              <ul className="mt-3 flex flex-col gap-1.5 text-sm">
-                {t.about.langs.map((l) => (
-                  <li key={l.name} className="flex flex-wrap gap-x-2">
-                    <span className="font-display font-semibold">{l.name}</span>
-                    <span className="text-muted">{l.level}</span>
-                  </li>
-                ))}
-              </ul>
-              <p className="mt-3 text-xs leading-relaxed text-muted">{t.about.langsNote}</p>
-            </div>
-          </div>
+          <p data-rise className="border-t border-line pt-6 text-sm text-muted">
+            {t.about.p3}
+          </p>
         </div>
       </div>
     </section>
