@@ -109,6 +109,10 @@ export default function Skills() {
             </div>
           ))}
         </div>
+
+        <p className="mt-6 max-w-md border-l-2 border-accent pl-4 text-sm leading-relaxed text-muted md:max-w-[58%]">
+          {t.skills.note}
+        </p>
       </div>
 
       <div className="absolute bottom-10 left-1/2 z-20 flex -translate-x-1/2 items-center gap-4" aria-hidden="true">

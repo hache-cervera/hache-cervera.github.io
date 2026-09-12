@@ -4,7 +4,7 @@ import { createContext, useContext, useEffect, useState } from 'react';
 export const translations = {
   en: {
     hero: {
-      kicker: '/ Ada (hache) Cervera, Web Platform & WordPress Specialist',
+      kicker: '/ Ada (hache) Cervera, Web Platform, Operations & WordPress Specialist',
       h1a: "I don't make pretty things.",
       h1b: 'I make things that work,',
       h1c: 'and happen to be pretty.',
@@ -23,8 +23,29 @@ export const translations = {
       h2b: 'I started in design.',
       h2c: 'I stayed for the stack.',
       p1: 'Graphic design and marketing came first. Then I got hooked on how sites work underneath: hosting, DNS, server config, migrations. I liked that more than the pixels, so I kept going down instead of back up.',
-      p1b: 'WordPress end to end: custom child themes, WooCommerce, WPML, cPanel, Plesk, SSH, DNS, SSL and migrations. I want the whole stack, not only the CMS.',
-      p1c: 'SEO sits on top of that. Technical audits with Screaming Frog, Semrush and Ahrefs, hreflang, schema markup, internal linking, GA4 and GTM from scratch, across 15+ multilingual sites. Since 2025 also AEO and GEO in production: structured data, crawler access for LLMs and citation tracking in generative search. Few people are measuring it yet. I started because I wanted to know whether it works.',
+      layersLabel: 'Three layers, bottom up',
+      layers: [
+        {
+          n: '03',
+          name: 'Search',
+          line: 'Technical audits, hreflang, schema and internal linking across 15+ multilingual sites.',
+          tools: ['Screaming Frog', 'Ahrefs', 'Semrush', 'GA4', 'GTM', 'Search Console'],
+        },
+        {
+          n: '02',
+          name: 'CMS',
+          line: 'WordPress end to end, written rather than dragged. Four platforms in production.',
+          tools: ['Custom child themes', 'WooCommerce', 'WPML', 'Elementor Pro', 'Shopify', 'PrestaShop'],
+        },
+        {
+          n: '01',
+          name: 'Infrastructure',
+          line: 'The machine underneath. This is the layer most people skip, and the one I went looking for.',
+          tools: ['Hosting', 'cPanel', 'Plesk', 'SSH', 'DNS', 'Cloudflare', 'SSL', 'Backups'],
+        },
+      ],
+      geoNote: 'Since 2025 also AEO and GEO in production: structured data, crawler access for LLMs and citation tracking in generative search. Few people are measuring it yet. I started because I wanted to know whether it works.',
+      labLabel: 'The lab',
       p2: 'Valencia-based, working remote and async.',
       stat1: 'Live web properties',
       stat2: 'CMS platforms in production',
@@ -44,7 +65,10 @@ export const translations = {
       ],
       langsNote: 'B2 Cambridge on paper, plus a year living and working in English in Prague.',
     },
-    skills: { label: '/ 02 · Stack' },
+    skills: {
+      label: '/ 02 · Stack',
+      note: 'Not a tool list. Everything here is in production on sites I maintain.',
+    },
     works: { label: '/ 03 · Works', h2: 'I produced for brands such as' },
     experience: { label: '/ 04 · Experience', h2: "Where I've been building" },
     reveal: {
@@ -64,7 +88,7 @@ export const translations = {
   },
   es: {
     hero: {
-      kicker: '/ Ada (hache) Cervera, Especialista en Plataforma Web y WordPress',
+      kicker: '/ Ada (hache) Cervera, Especialista en Plataforma Web, Operativa y WordPress',
       h1a: 'No hago cosas bonitas.',
       h1b: 'Hago cosas que funcionan,',
       h1c: 'y de paso son bonitas.',
@@ -83,8 +107,29 @@ export const translations = {
       h2b: 'Empecé en diseño.',
       h2c: 'Me quedé por el stack.',
       p1: 'Primero fueron el diseño gráfico y el marketing. Luego me enganché a entender cómo funcionan las webs por dentro: hosting, DNS, configuración de servidor, migraciones. Me gustó más que los píxeles, así que seguí bajando capas en vez de volver a subir.',
-      p1b: 'WordPress de principio a fin: child themes propios, WooCommerce, WPML, cPanel, Plesk, SSH, DNS, SSL y migraciones. Quiero el stack completo, no solo el CMS.',
-      p1c: 'El SEO va encima de eso. Auditorías técnicas con Screaming Frog, Semrush y Ahrefs, hreflang, schema markup, enlazado interno, GA4 y GTM desde cero, en más de quince sitios multiidioma. Desde 2025 también AEO y GEO en producción: datos estructurados, acceso para crawlers de LLMs y seguimiento de citaciones en búsqueda generativa. Todavía lo mide poca gente. Empecé porque quería saber si funciona.',
+      layersLabel: 'Tres capas, de abajo arriba',
+      layers: [
+        {
+          n: '03',
+          name: 'Búsqueda',
+          line: 'Auditorías técnicas, hreflang, schema y enlazado interno en más de quince sitios multiidioma.',
+          tools: ['Screaming Frog', 'Ahrefs', 'Semrush', 'GA4', 'GTM', 'Search Console'],
+        },
+        {
+          n: '02',
+          name: 'CMS',
+          line: 'WordPress de principio a fin, escrito y no arrastrado. Cuatro plataformas en producción.',
+          tools: ['Child themes propios', 'WooCommerce', 'WPML', 'Elementor Pro', 'Shopify', 'PrestaShop'],
+        },
+        {
+          n: '01',
+          name: 'Infraestructura',
+          line: 'La máquina de debajo. Es la capa que casi todo el mundo se salta, y la que yo fui a buscar.',
+          tools: ['Hosting', 'cPanel', 'Plesk', 'SSH', 'DNS', 'Cloudflare', 'SSL', 'Backups'],
+        },
+      ],
+      geoNote: 'Desde 2025 también AEO y GEO en producción: datos estructurados, acceso para crawlers de LLMs y seguimiento de citaciones en búsqueda generativa. Todavía lo mide poca gente. Empecé porque quería saber si funciona.',
+      labLabel: 'El laboratorio',
       p2: 'Desde Valencia, en remoto y en asíncrono.',
       stat1: 'Webs en producción',
       stat2: 'CMS en producción',
@@ -104,7 +149,10 @@ export const translations = {
       ],
       langsNote: 'B2 Cambridge sobre el papel, más un año viviendo y trabajando en inglés en Praga.',
     },
-    skills: { label: '/ 02 · Stack' },
+    skills: {
+      label: '/ 02 · Stack',
+      note: 'No es una lista de herramientas. Todo esto está en producción en webs que mantengo.',
+    },
     works: { label: '/ 03 · Trabajos', h2: 'He producido para marcas como' },
     experience: { label: '/ 04 · Experiencia', h2: 'Dónde he estado construyendo' },
     reveal: {

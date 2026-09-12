@@ -168,3 +168,12 @@ body {
 @media (max-height: 700px) {
   #hero { padding-bottom: 7rem; }
 }
+
+/* The colour tokens hold full hex values inside a var, so Tailwind cannot
+   apply an alpha to them: bg-page/80 compiled to nothing and the floating
+   controls turned transparent, which made them unreadable over the dark
+   contact and footer sections in light mode. */
+.ctl-surface { background: var(--c-bg); }
+@supports (background: color-mix(in srgb, red 50%, transparent)) {
+  .ctl-surface { background: color-mix(in srgb, var(--c-bg) 85%, transparent); }
+}
