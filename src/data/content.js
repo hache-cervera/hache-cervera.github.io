@@ -126,42 +126,50 @@ export const LOGOS = [
 
 const EXPERIENCE_RAW = [
   {
-    role: L('Creative & Digital Specialist', 'Especialista Creativa y Digital'),
+    role: L('Web Platform & WordPress Specialist', 'Especialista en Plataforma Web y WordPress'),
     company: 'Neurona Digital SL',
     place: 'Valencia',
-    dates: L('Nov 2024 – Present', 'Nov 2024 – Actualidad'),
+    dates: L('Nov 2024 – Sep 2026', 'Nov 2024 – Sep 2026'),
     points: [
       L(
-        '+10 WordPress sites built and maintained in under a year: design, migrations, hosting, DNS, SSL and technical troubleshooting.',
-        '+10 webs WordPress construidas y mantenidas en menos de un año: diseño, migraciones, hosting, DNS, SSL y resolución técnica.'
+        'End-to-end ownership of 15+ live web properties: hosting, DNS, Cloudflare, SSL, backups, migrations and daily technical troubleshooting across WordPress, Shopify, Wix and PrestaShop.',
+        'Responsabilidad completa sobre 15+ webs en producción: hosting, DNS, Cloudflare, SSL, backups, migraciones y resolución técnica diaria en WordPress, Shopify, Wix y PrestaShop.'
       ),
       L(
-        'Graphic, motion and audiovisual production for brands including Cofidis and Benimar: +300 pieces for organic content and paid social.',
-        'Producción gráfica, motion y audiovisual para marcas como Cofidis y Benimar: +300 piezas para contenido orgánico y paid social.'
+        'Multilingual multi-site operations with WPML, including hreflang across Spanish, Valencian and English, on shared templates.',
+        'Operativa multisite y multiidioma con WPML, incluyendo hreflang en castellano, valenciano e inglés, sobre plantillas compartidas.'
       ),
       L(
-        'Technical audits, web performance optimisation and on-page SEO.',
-        'Auditorías técnicas, optimización de rendimiento web y SEO on-page.'
+        'Technical performance audits with Screaming Frog and Ahrefs: crawl health, Core Web Vitals, redirect chains and canonical issues, tracked as continuous work rather than one-off reports.',
+        'Auditorías técnicas de rendimiento con Screaming Frog y Ahrefs: salud de rastreo, Core Web Vitals, cadenas de redirecciones y canonicals, como trabajo continuo y no como informe puntual.'
       ),
       L(
-        'Multiple clients and projects in parallel, agency pace.',
-        'Varios clientes y proyectos en paralelo, a ritmo de agencia.'
+        'GA4 and GTM set up from scratch with conversion goals, GSC monitoring and structured data validation. Figma to Elementor Pro implementation with no handoff in between.',
+        'GA4 y GTM montados desde cero con objetivos de conversión, seguimiento en GSC y validación de datos estructurados. Implementación de Figma a Elementor Pro sin traspaso intermedio.'
+      ),
+      L(
+        'Graphic, motion and audiovisual production for brands including Cofidis and Benimar: 300+ pieces for organic content and paid social.',
+        'Producción gráfica, motion y audiovisual para marcas como Cofidis y Benimar: 300+ piezas para contenido orgánico y paid social.'
       ),
     ],
   },
   {
-    role: L('Media & Content Specialist', 'Especialista en Medios y Contenido'),
+    role: L('Marketing Strategy & Sponsorships', 'Estrategia de Marketing y Patrocinios'),
     company: 'Jump Yard',
     place: 'Valencia',
     dates: L('Jan – Jun 2025', 'Ene – Jun 2025'),
     points: [
       L(
-        'Video creation and editing for organic content and paid ad campaigns.',
-        'Creación y edición de vídeo para contenido orgánico y campañas de pago.'
+        "Coordinated the brand's Valencia opening day: €7,000 in revenue, 56% above the previous store record of €4,500 in Bilbao.",
+        'Coordinación del día de apertura de la marca en Valencia: 7.000 € de facturación, un 56% por encima del récord anterior de 4.500 € en Bilbao.'
       ),
       L(
-        'Media management, content strategy and sponsorship coordination.',
-        'Gestión de medios, estrategia de contenidos y coordinación de patrocinios.'
+        'Grew Instagram following by 30k+ around the launch, plus sponsorships and collaborations with major brands.',
+        'Crecimiento de 30k+ seguidores en Instagram alrededor del lanzamiento, además de patrocinios y colaboraciones con marcas grandes.'
+      ),
+      L(
+        'Video creation and editing for organic content and paid ad campaigns.',
+        'Creación y edición de vídeo para contenido orgánico y campañas de pago.'
       ),
     ],
   },
