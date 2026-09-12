@@ -4,7 +4,7 @@ import { createContext, useContext, useEffect, useState } from 'react';
 export const translations = {
   en: {
     hero: {
-      kicker: '/ Ada (hache) Cervera, Web Platform & WordPress Specialist',
+      kicker: '/ Ada (hache) Cervera, Web Platform, Operations & WordPress Specialist',
       h1a: "I don't make pretty things.",
       h1b: 'I make things that work,',
       h1c: 'and happen to be pretty.',
@@ -64,7 +64,7 @@ export const translations = {
   },
   es: {
     hero: {
-      kicker: '/ Ada (hache) Cervera, Especialista en Plataforma Web y WordPress',
+      kicker: '/ Ada (hache) Cervera, Especialista en Plataforma Web, Operativa y WordPress',
       h1a: 'No hago cosas bonitas.',
       h1b: 'Hago cosas que funcionan,',
       h1c: 'y de paso son bonitas.',
