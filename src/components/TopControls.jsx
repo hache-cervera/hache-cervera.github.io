@@ -19,7 +19,7 @@ export default function TopControls() {
   }, [theme]);
 
   const langChip = (code) =>
-    `flex h-10 w-10 items-center justify-center border border-line bg-page/80 font-display text-xs font-semibold uppercase tracking-[0.04em] backdrop-blur transition-colors duration-200 ${
+    `flex h-10 w-10 items-center justify-center border border-line ctl-surface font-display text-xs font-semibold uppercase tracking-[0.04em] backdrop-blur transition-colors duration-200 ${
       lang === code ? 'text-ink border-b-2 !border-b-accent' : 'text-muted hover:text-ink hover:border-ink'
     }`;
 
@@ -38,7 +38,7 @@ export default function TopControls() {
         type="button"
         onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
         aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-        className="tbtn bg-page/80 backdrop-blur"
+        className="tbtn ctl-surface backdrop-blur"
       >
         <span className="sky" aria-hidden="true">
           {[0, 45, 90, 135, 180, 225, 270, 315].map((r) => (

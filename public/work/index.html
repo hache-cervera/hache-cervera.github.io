@@ -308,6 +308,9 @@
     .ops li:hover { border-color: var(--ink); }
     .ops h3 { font-family: var(--font-display); font-size: 1rem; font-weight: 700; line-height: 1.3; }
     .ops p { margin-top: 8px; font-size: 0.875rem; line-height: 1.65; color: var(--muted); }
+    /* The note sits above the filters so it shows whichever category is on. */
+    .note.confidential { margin-top: 32px; margin-bottom: 8px; }
+    .note.colophon { margin-top: 8px; margin-bottom: 56px; }
     .projects {
       margin-top: 48px;
       display: grid;
@@ -836,6 +839,12 @@
       </p>
     </div>
 
+
+    <p class="note wrap confidential">
+      <strong>Not everything is here.</strong> A good part of what I build sits behind NDAs, on
+      client intranets or on staging that never becomes public, so this page shows what I am
+      allowed to show. The rest I can walk through in a conversation.
+    </p>
     <div class="filters wrap" role="tablist" aria-label="Filter the work">
       <button class="chip is-on" data-filter="all" type="button">All work</button>
       <button class="chip" data-filter="infra" type="button">Infrastructure</button>
@@ -908,7 +917,7 @@
                 the visible DOM, interactive components used as link assets, and a GEO tracking
                 protocol running since before the first indexation. Self-hosted infrastructure on
                 my own server, built with no paid tools on purpose, to learn the technical side
-                from the root. Launches on 15 September 2026.
+                from the root. Live since September 2026.
               </p>
               <ul class="tags">
                 <li>SEO</li>
@@ -1304,6 +1313,12 @@
     <img src="" alt="" />
     <button class="nav next" type="button" aria-label="Next image">→</button>
   </div>
+
+    <p class="note wrap colophon">
+      <strong>About this page:</strong> static HTML and CSS, written by hand. No framework, no
+      page builder, one analytics tag. The home page is the React and WebGL one; here it did not
+      need to be, so it is not.
+    </p>
 
   <section class="cta" id="contact">
     <span class="glow" style="top: -160px; right: -160px;" aria-hidden="true"></span>
