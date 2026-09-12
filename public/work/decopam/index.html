@@ -461,6 +461,8 @@
     .cards.gallery { align-items: start; }
     .cards.gallery figure { aspect-ratio: auto; }
     .cards.gallery figure img { height: auto; object-fit: contain; }
+    /* An establishing shot that runs the full width of the grid. */
+    .cards.gallery .card.wide { grid-column: 1 / -1; }
     @media (min-width: 900px) { .cards.three { grid-template-columns: repeat(3, 1fr); } }
     .card h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.125rem; letter-spacing: -0.02em; }
     .card p { margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
@@ -789,18 +791,39 @@
         </div>
 
         <div class="cards gallery">
-          <figure>
-            <img src="../img/decopam-home.webp" width="1901" height="912" alt="DECOPAM home page: the brand mark over a styled bedroom" loading="lazy" />
-            <figcaption>The storefront the migration was rebuilt for.</figcaption>
-          </figure>
-          <figure>
-            <img src="../img/decopam-catalogo.png" width="1920" height="1500" alt="DECOPAM headboard category: product grid with a colour filter in the sidebar" loading="lazy" />
-            <figcaption>Category page: products in their correct category, and the colour filter fed by the swatch attributes.</figcaption>
-          </figure>
-          <figure>
-            <img src="../img/decopam-variaciones.png" width="540" height="338" alt="DECOPAM product page: size buttons above labelled colour swatches" loading="lazy" />
-            <figcaption>Size first, colour second, each group labelled, a default already selected.</figcaption>
-          </figure>
+          <div class="card wide">
+            <figure>
+              <img src="../img/decopam-home.webp" width="1901" height="912" alt="DECOPAM home page: the brand mark over a styled bedroom" loading="lazy" data-zoom />
+            </figure>
+            <div class="body">
+              <h3>The storefront</h3>
+              <p>The shop the whole migration was rebuilt for, on WordPress and WooCommerce.</p>
+            </div>
+          </div>
+          <div class="card">
+            <figure>
+              <img src="../img/decopam-catalogo.png" width="1920" height="1500" alt="DECOPAM headboard category: product grid with a colour filter in the sidebar" loading="lazy" data-zoom />
+            </figure>
+            <div class="body">
+              <h3>Category and colour filter</h3>
+              <p>
+                Products sitting in their correct category after the cleanup, and a colour filter
+                fed by the same swatch attributes that were rebuilt on the product pages.
+              </p>
+            </div>
+          </div>
+          <div class="card">
+            <figure>
+              <img src="../img/decopam-variaciones.png" width="540" height="338" alt="DECOPAM product page: size buttons above labelled colour swatches" loading="lazy" data-zoom />
+            </figure>
+            <div class="body">
+              <h3>Size before colour</h3>
+              <p>
+                Each attribute group labelled, the measurement first, and a default already
+                selected so the page opens on something you can actually buy.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
