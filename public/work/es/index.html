@@ -322,6 +322,24 @@
     .kpis li:last-child { border-right: none; }
     .kpis b { display: block; font-family: var(--font-display); font-size: 1.0625rem; font-weight: 700; color: var(--ink); }
     .kpis i { display: block; margin-top: 2px; font-size: 0.6875rem; font-style: normal; line-height: 1.3; color: var(--muted); }
+    /* Link out of a section into its full case study. */
+    .caselink {
+      margin-top: 24px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--ink);
+      padding: 12px 20px;
+      font-family: var(--font-display);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--ink);
+      text-decoration: none;
+      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    }
+    .caselink:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .caselink span { transition: transform 0.2s ease; }
+    .caselink:hover span { transform: translateX(3px); }
     .projects {
       margin-top: 48px;
       display: grid;
@@ -900,6 +918,7 @@
           </li>
         </ul>
         <p class="note"><strong>Laboratorio propio:</strong> tengo un servidor Linux en casa con Docker y Nginx. devilfruittcg.com vive ahí, y por eso ese caso puede enseñar las decisiones de infraestructura enteras en vez de contarlas.</p>
+        <a class="caselink" href="homelab/">Ver el caso del homelab <span>&rarr;</span></a>
       </div>
     </section>
 
@@ -967,7 +986,7 @@
         <div class="projects">
           <a class="project" href="decopam/">
             <div class="shot">
-              <img src="../img/decopam-variaciones.png" width="540" height="338" alt="Ficha de producto de DECOPAM: botones de talla sobre muestras de color etiquetadas en un producto variable de WooCommerce" loading="lazy" />
+              <img src="../img/decopam-home.webp" width="1901" height="912" alt="Portada de la tienda DECOPAM" loading="lazy" />
             </div>
             <div class="body">
               <h3>DECOPAM</h3>
