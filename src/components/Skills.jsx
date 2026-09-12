@@ -11,9 +11,9 @@ function ToolBadge({ mark, name }) {
       data-hover
       whileHover={{ y: -3 }}
       transition={{ type: 'spring', stiffness: 400, damping: 18 }}
-      className="flex items-center gap-3 rounded border border-ink py-2 pl-2 pr-4 font-display text-sm md:text-base"
+      className="flex items-center gap-2 rounded border border-ink py-1.5 pl-1.5 pr-3 font-display text-xs sm:gap-3 sm:py-2 sm:pl-2 sm:pr-4 sm:text-sm md:text-base"
     >
-      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded bg-ink text-xs font-bold text-page">
+      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded bg-ink text-[10px] font-bold text-page sm:h-8 sm:w-8 sm:text-xs">
         {mark}
       </span>
       {name}
@@ -93,7 +93,7 @@ export default function Skills() {
       <div className="relative z-20 mx-auto flex h-full w-full max-w-6xl flex-col justify-center px-6 md:px-12">
         <p className="font-display text-sm font-semibold uppercase tracking-[0.08em] text-accent">{t.skills.label}</p>
 
-        <div className="relative mt-6 h-[440px] md:h-[400px] md:max-w-[58%]">
+        <div className="relative mt-6 h-[480px] sm:h-[460px] md:max-w-[58%]">
           {disciplines.map((d) => (
             <div key={d.id} data-discipline className="absolute inset-0">
               <p className="font-display text-xs font-semibold uppercase tracking-[0.14em] text-muted">{d.node}</p>
@@ -101,7 +101,7 @@ export default function Skills() {
                 {d.label}
               </h3>
               {d.note && <p className="mt-4 max-w-md text-sm leading-relaxed text-muted">{d.note}</p>}
-              <ul className="mt-8 flex flex-wrap gap-3">
+              <ul className="mt-6 flex flex-wrap gap-2 sm:mt-8 sm:gap-3">
                 {d.tools.map((t) => (
                   <ToolBadge key={t.name} {...t} />
                 ))}
