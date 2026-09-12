@@ -311,6 +311,17 @@
     /* The note sits above the filters so it shows whichever category is on. */
     .note.confidential { margin-top: 32px; margin-bottom: 8px; }
     .note.colophon { margin-top: 8px; margin-bottom: 56px; }
+    /* Migration numbers, stated as numbers rather than buried in the prose. */
+    .kpis { margin-top: 16px; display: flex; flex-wrap: wrap; border: 1px solid var(--line); }
+    .kpis li {
+      list-style: none;
+      flex: 1 1 84px;
+      padding: 10px 12px;
+      border-right: 1px solid var(--line);
+    }
+    .kpis li:last-child { border-right: none; }
+    .kpis b { display: block; font-family: var(--font-display); font-size: 1.0625rem; font-weight: 700; color: var(--ink); }
+    .kpis i { display: block; margin-top: 2px; font-size: 0.6875rem; font-style: normal; line-height: 1.3; color: var(--muted); }
     .projects {
       margin-top: 48px;
       display: grid;
@@ -951,28 +962,38 @@
         </p>
 
         <div class="projects">
-          <a class="project" href="https://decopam.es/" target="_blank" rel="noopener">
+          <a class="project" href="decopam/">
             <div class="shot">
               <img src="img/decopam-variaciones.png" width="540" height="338" alt="DECOPAM product page: size buttons above labelled colour swatches on a variable WooCommerce product" loading="lazy" />
             </div>
             <div class="body">
               <h3>DECOPAM</h3>
               <p>
-                Bedroom decor store migrated from PrestaShop to WordPress and WooCommerce, then
-                cleaned up afterwards: duplicate products removed, catalogue recategorised, bulk
-                media renamed, stock simplified, and the variable products rebuilt so size comes
-                before colour with a default already selected. One product carries 242 variations
-                and needed its swatch threshold raised for that product only. Every change went
-                through Code Snippets rather than the theme, and the procedure is documented so
-                it can be repeated. Built at Neurona Digital.
+                Bedroom decor store migrated from PrestaShop to WordPress and WooCommerce. The
+                migration moved the files but lost the relationship between image, product and
+                variation, so I rebuilt it: a read-only SQL export out of PrestaShop, cross-checked
+                against the WooCommerce catalogue by SKU and by the PrestaShop image ID still
+                embedded in each migrated filename.
+              </p>
+              <ul class="kpis">
+                <li><b>20</b><i>products</i></li>
+                <li><b>773</b><i>images cross-checked</i></li>
+                <li><b>740</b><i>matched outright</i></li>
+                <li><b>33</b><i>flagged for review</i></li>
+                <li><b>0</b><i>left unmatched</i></li>
+              </ul>
+              <p>
+                Then the catalogue itself, from duplicates and categories to variable products
+                rebuilt so size comes before colour. Built at Neurona Digital.
               </p>
               <ul class="tags">
                 <li>WooCommerce</li>
                 <li>PrestaShop migration</li>
-                <li>Catalogue cleanup</li>
+                <li>SQL</li>
+                <li>WP All Import</li>
                 <li>Variations</li>
-                <li>WordPress</li>
               </ul>
+              <p class="more">Read the full case study <span>&rarr;</span></p>
             </div>
           </a>
 

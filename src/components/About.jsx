@@ -3,6 +3,32 @@ import gsap from 'gsap';
 import Words from './Words';
 import { useLang } from '../i18n';
 
+/* Inline stroke icons, 16px grid, currentColor. No emoji anywhere on the site. */
+const ICONS = {
+  role: 'M3 6h10v7H3zM6 6V4h4v2',
+  based: 'M8 14s4.5-4 4.5-7A4.5 4.5 0 0 0 3.5 7c0 3 4.5 7 4.5 7zM8 7.8a1 1 0 1 0 0-2 1 1 0 0 0 0 2z',
+  works: 'M4.2 4.2a5.4 5.4 0 0 0 0 7.6M11.8 4.2a5.4 5.4 0 0 1 0 7.6M6 6a2.8 2.8 0 0 0 0 4M10 6a2.8 2.8 0 0 1 0 4M8 8.2v.01',
+  owns: 'M8 2.6 14 6l-6 3.4L2 6zM2 9.6l6 3.4 6-3.4',
+  languages: 'M8 2.5a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11zM2.8 8h10.4M8 2.5c1.4 1.5 2.2 3.4 2.2 5.5S9.4 12 8 13.5C6.6 12 5.8 10.1 5.8 8S6.6 4 8 2.5z',
+  certified: 'M8 2.5 9.7 6l3.8.5-2.8 2.6.7 3.8L8 11.1l-3.4 1.8.7-3.8L2.5 6.5 6.3 6z',
+  server: 'M2.5 3.5h11v3.2h-11zM2.5 9.3h11v3.2h-11zM4.6 5.1v.01M4.6 10.9v.01',
+  lora: 'M3 5h10M3 8h10M3 11h10M6 3.6v2.8M10.5 6.6v2.8M5 9.6v2.8',
+  esp32: 'M5 5h6v6H5zM6.5 2.5v2.5M9.5 2.5v2.5M6.5 11v2.5M9.5 11v2.5M2.5 6.5H5M2.5 9.5H5M11 6.5h2.5M11 9.5h2.5',
+};
+
+function Icon({ name, className = '' }) {
+  return (
+    <svg
+      width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"
+      className={className}
+    >
+      <path d={ICONS[name]} stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+const FACT_ICONS = ['role', 'based', 'works', 'owns', 'languages', 'certified'];
+
 function Stat({ value, suffix, label }) {
   return (
     <div className="flex flex-col gap-1">
@@ -83,9 +109,10 @@ export default function About() {
               {t.about.factsLabel}
             </p>
             <dl className="mt-4 divide-y divide-line border border-line bg-page">
-              {t.about.facts.map((f) => (
-                <div key={f.k} className="px-5 py-3 sm:grid sm:grid-cols-[108px_1fr] sm:gap-4">
-                  <dt className="font-display text-[10px] font-semibold uppercase tracking-[0.12em] text-muted sm:pt-1">
+              {t.about.facts.map((f, i) => (
+                <div key={f.k} className="px-5 py-3 sm:grid sm:grid-cols-[128px_1fr] sm:gap-4">
+                  <dt className="flex items-center gap-2 font-display text-[10px] font-semibold uppercase tracking-[0.12em] text-muted sm:pt-0.5">
+                    <Icon name={FACT_ICONS[i]} className="shrink-0 text-accent" />
                     {f.k}
                   </dt>
                   <dd className="mt-1 text-sm leading-snug sm:mt-0">{f.v}</dd>
@@ -143,10 +170,26 @@ export default function About() {
           </p>
 
           <div data-rise className="border border-line bg-page p-5">
-            <p className="font-display text-[11px] font-semibold uppercase tracking-[0.16em] text-accent">
+            <p className="flex items-center gap-2 font-display text-[11px] font-semibold uppercase tracking-[0.16em] text-accent">
+              <Icon name="server" />
               {t.about.labLabel}
             </p>
             <p className="mt-2 text-sm leading-relaxed text-muted">{t.about.p4}</p>
+            <ul className="mt-4 flex flex-wrap gap-2">
+              {[
+                ['server', t.about.labKit[0]],
+                ['lora', t.about.labKit[1]],
+                ['esp32', t.about.labKit[2]],
+              ].map(([icon, label]) => (
+                <li
+                  key={label}
+                  className="flex items-center gap-2 border border-line px-2.5 py-1 font-display text-[10px] font-semibold uppercase tracking-[0.06em] text-muted"
+                >
+                  <Icon name={icon} className="shrink-0 text-accent" />
+                  {label}
+                </li>
+              ))}
+            </ul>
           </div>
 
           <p data-rise className="border-t border-line pt-6 text-sm text-muted">
