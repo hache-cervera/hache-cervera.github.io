@@ -68,8 +68,8 @@ export default function About() {
           <p data-rise className="text-muted">{t.about.p2}</p>
 
           <div data-rise className="mt-4 flex flex-wrap gap-12 rounded bg-panel p-8 text-white">
-            <Stat value={10} suffix="+" label={t.about.stat1} />
-            <Stat value={300} suffix="+" label={t.about.stat2} />
+            <Stat value={15} suffix="+" label={t.about.stat1} />
+            <Stat value={4} suffix="" label={t.about.stat2} />
           </div>
           <p data-rise className="text-sm text-muted">
             {t.about.p3}
