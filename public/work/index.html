@@ -310,6 +310,7 @@
     .ops p { margin-top: 8px; font-size: 0.875rem; line-height: 1.65; color: var(--muted); }
     /* The note sits above the filters so it shows whichever category is on. */
     .note.confidential { margin-top: 32px; margin-bottom: 8px; }
+    .note.colophon { margin-top: 8px; margin-bottom: 56px; }
     .projects {
       margin-top: 48px;
       display: grid;
@@ -1312,6 +1313,12 @@
     <img src="" alt="" />
     <button class="nav next" type="button" aria-label="Next image">→</button>
   </div>
+
+    <p class="note wrap colophon">
+      <strong>About this page:</strong> static HTML and CSS, written by hand. No framework, no
+      page builder, one analytics tag. The home page is the React and WebGL one; here it did not
+      need to be, so it is not.
+    </p>
 
   <section class="cta" id="contact">
     <span class="glow" style="top: -160px; right: -160px;" aria-hidden="true"></span>

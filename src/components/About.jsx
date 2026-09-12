@@ -32,6 +32,20 @@ export default function About() {
         );
       });
 
+      /* Reversed so the infrastructure layer lands first and the rest stack
+         on top of it, which is the point the block is making. */
+      const layers = gsap.utils.toArray('[data-layer]').reverse();
+      if (layers.length) {
+        gsap.fromTo(
+          layers,
+          { y: 26, opacity: 0 },
+          {
+            y: 0, opacity: 1, duration: 0.6, ease: 'power3.out', stagger: 0.13,
+            scrollTrigger: { trigger: layers[0], start: 'top 90%' },
+          }
+        );
+      }
+
       gsap.utils.toArray('[data-count]').forEach((el) => {
         gsap.fromTo(
           el,
@@ -66,8 +80,42 @@ export default function About() {
             <Words>{t.about.p1}</Words>
           </p>
           <p data-rise className="text-muted">{t.about.p2}</p>
-          <p data-rise className="max-w-md leading-relaxed">{t.about.p1b}</p>
-          <p data-rise className="max-w-md leading-relaxed">{t.about.p1c}</p>
+
+          {/* The stack the way she describes it: search on top, the machine
+              underneath. Revealed bottom up so the layers build, not fall. */}
+          <div className="mt-2">
+            <p data-rise className="font-display text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">
+              {t.about.layersLabel}
+            </p>
+            <ol className="mt-4 divide-y divide-line border border-line">
+              {t.about.layers.map((l) => (
+                <li key={l.n} data-layer className="group relative p-5">
+                  <span className="absolute left-0 top-0 h-full w-0.5 origin-top scale-y-0 bg-accent transition-transform duration-300 group-hover:scale-y-100" />
+                  <div className="flex items-baseline gap-3">
+                    <span className="font-display text-xs font-bold text-accent">{l.n}</span>
+                    <span className="font-display text-base font-bold transition-colors duration-300 group-hover:text-accent">
+                      {l.name}
+                    </span>
+                  </div>
+                  <p className="mt-1.5 text-sm leading-relaxed text-muted">{l.line}</p>
+                  <ul className="mt-3 flex flex-wrap gap-1.5">
+                    {l.tools.map((tool) => (
+                      <li
+                        key={tool}
+                        className="border border-line px-2 py-0.5 font-display text-[10px] font-semibold uppercase tracking-[0.06em] text-muted"
+                      >
+                        {tool}
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              ))}
+            </ol>
+          </div>
+
+          <p data-rise className="border-l-2 border-accent pl-4 text-sm leading-relaxed text-muted">
+            {t.about.geoNote}
+          </p>
 
           <div data-rise className="mt-4 flex flex-wrap gap-12 rounded bg-panel p-8 text-white">
             <Stat value={15} suffix="+" label={t.about.stat1} />
@@ -76,9 +124,13 @@ export default function About() {
           <p data-rise className="text-sm text-muted">
             {t.about.p3}
           </p>
-          <p data-rise className="text-sm text-muted">
-            {t.about.p4}
-          </p>
+
+          <div data-rise className="border border-line p-5">
+            <p className="font-display text-[11px] font-semibold uppercase tracking-[0.16em] text-accent">
+              {t.about.labLabel}
+            </p>
+            <p className="mt-2 text-sm leading-relaxed text-muted">{t.about.p4}</p>
+          </div>
 
           {/* Certifications and languages: cheap, verifiable signal that the CV
               carries and the site was missing. */}
