@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>hacheserver &middot; Self-hosted infrastructure case study &middot; Ada (hache) Cervera</title>
+  <meta
+    name="description"
+    content="Case study: a mini PC running eight self-hosted services behind a Cloudflare Tunnel and a Tailscale network, with no ports open on the router. It hosts devilfruittcg.com."
+  />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta property="og:title" content="hacheserver &middot; Self-hosted infrastructure" />
+  <meta property="og:description" content="Eight services, two access paths, zero open ports, and nine incidents written down." />
+  <meta property="og:image" content="https://hache-cervera.github.io/work/img/og.jpg" />
+  <meta property="og:type" content="article" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500&display=swap"
+    rel="stylesheet"
+  />
+  <script>
+    (function () {
+      try {
+        document.documentElement.dataset.theme = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light';
+      } catch (e) {}
+    })();
+  </script>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --surface: #f5f5f5;
+      --panel: #0a0a0a;
+      --ink: #0a0a0a;
+      --muted: #6b6b6b;
+      --line: #e5e5e5;
+      --accent: #ff3c00;
+      --accent-hover: #e63500;
+      --accent-soft: #ffe8e1;
+      --seo: #2d5f8a;
+      --seo-w: #e9f0f6;
+      --aeo: #2f7d4f;
+      --aeo-w: #e8f3ec;
+      --geo: #7d4f9e;
+      --geo-w: #f2ebf7;
+      --font-display: 'Sora', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+    :root[data-theme="dark"] {
+      --bg: #0d0d0d;
+      --surface: #1c1c1c;
+      --ink: #f2f2f2;
+      --muted: #9a9a9a;
+      --line: #2a2a2a;
+      --accent-soft: #3a1608;
+      --seo: #7fb3dd;
+      --seo-w: #12202c;
+      --aeo: #7fc79b;
+      --aeo-w: #112318;
+      --geo: #bb96d6;
+      --geo-w: #1e1526;
+    }
+    :root[data-theme="dark"] .grain { mix-blend-mode: screen; opacity: 0.045; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    ::selection { background: var(--accent); color: #fff; }
+
+    .grain {
+      position: fixed;
+      inset: 0;
+      z-index: 40;
+      pointer-events: none;
+      opacity: 0.028;
+      mix-blend-mode: multiply;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%25" height="100%25" filter="url(%23n)"/></svg>');
+    }
+
+    .glow {
+      position: absolute;
+      width: 480px;
+      height: 480px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 60, 0, 0.09) 0%, rgba(255, 60, 0, 0) 68%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .deco { position: absolute; background: var(--accent); pointer-events: none; z-index: 0; }
+    @keyframes floaty { 0%, 100% { transform: translateY(0) rotate(8deg); } 50% { transform: translateY(-12px) rotate(14deg); } }
+    .deco { animation: floaty 7s ease-in-out infinite; }
+    @media (prefers-reduced-motion: reduce) { .deco { animation: none; } }
+
+    .wrap { max-width: 72rem; margin: 0 auto; padding: 0 24px; }
+    @media (min-width: 768px) { .wrap { padding: 0 48px; } }
+    a { color: inherit; }
+
+    /* ---------- Header ---------- */
+    header { padding: 24px 0; border-bottom: 1px solid var(--line); }
+    header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .back {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.875rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s ease;
+    }
+    .back:hover { color: var(--accent); }
+    .back span { color: var(--accent); transition: transform 0.2s ease; display: inline-block; }
+    .back:hover span { transform: translateX(-4px); }
+    .hctrl { display: flex; align-items: center; gap: 16px; }
+    .lang {
+      display: flex;
+      gap: 8px;
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+    .lang a { text-decoration: none; color: var(--muted); padding: 4px 2px; border-bottom: 2px solid transparent; }
+    .lang a:hover { color: var(--accent); }
+    .lang a.on { color: var(--ink); border-bottom-color: var(--accent); }
+    .tbtn {
+      position: relative;
+      width: 40px;
+      height: 40px;
+      background: none;
+      border: 1px solid var(--line);
+      cursor: pointer;
+      overflow: hidden;
+      transition: border-color 0.25s ease;
+    }
+    .tbtn:hover { border-color: var(--accent); }
+    .tbtn .sky {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.6s cubic-bezier(0.6, 0, 0.25, 1.3);
+    }
+    :root[data-theme="dark"] .tbtn .sky { transform: rotate(-45deg); }
+    .tbtn .core {
+      position: relative;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      transition: transform 0.5s cubic-bezier(0.6, 0, 0.25, 1.3), box-shadow 0.4s ease;
+    }
+    :root[data-theme="dark"] .tbtn .core { transform: scale(1.35); box-shadow: 0 0 12px rgba(255, 60, 0, 0.55); }
+    .tbtn .veil {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 12px;
+      height: 12px;
+      margin: -6px 0 0 -6px;
+      border-radius: 50%;
+      background: var(--bg);
+      transform: translate(15px, -15px);
+      transition: transform 0.5s cubic-bezier(0.6, 0, 0.25, 1.3), background 0.25s ease;
+      z-index: 2;
+    }
+    :root[data-theme="dark"] .tbtn .veil { transform: translate(4px, -4px) scale(1.35); }
+    .tbtn .ray {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 2px;
+      height: 5px;
+      margin: -2.5px 0 0 -1px;
+      border-radius: 1px;
+      background: var(--accent);
+      transform: rotate(var(--r)) translateY(-10px);
+      transition: transform 0.45s ease, opacity 0.35s ease;
+    }
+    :root[data-theme="dark"] .tbtn .ray { transform: rotate(var(--r)) translateY(-4px) scale(0.2); opacity: 0; }
+    @media (prefers-reduced-motion: reduce) { .tbtn .sky, .tbtn .core, .tbtn .veil, .tbtn .ray { transition: none; } }
+
+    /* ---------- Hero ---------- */
+    .hero { position: relative; padding: 80px 24px 56px; }
+    .hero > *:not(.glow):not(.deco) { position: relative; z-index: 1; }
+    @media (min-width: 768px) { .hero { padding: 112px 48px 72px; } }
+    .kicker {
+      font-family: var(--font-display);
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .hero h1 {
+      margin-top: 24px;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(2.2rem, 5.6vw, 4.2rem);
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      word-break: break-word;
+    }
+    .hero h1 em {
+      font-style: italic;
+      background: linear-gradient(100deg, #ff3c00 0%, #ff8a5c 35%, #ff3c00 65%, #ff5a24 100%);
+      background-size: 220% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: shimmer 4s linear infinite;
+    }
+    @keyframes shimmer { to { background-position: -220% 0; } }
+    .hero .lede { margin-top: 24px; max-width: 44rem; font-size: 1.125rem; color: var(--muted); }
+    .hero .actions { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+    .btn {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.875rem;
+      text-decoration: none;
+      padding: 14px 28px;
+      background: var(--accent);
+      color: #fff;
+      transition: background 0.2s ease;
+    }
+    .btn:hover { background: var(--accent-hover); }
+    .alt {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.875rem;
+      text-decoration: none;
+      color: var(--muted);
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 2px;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+    .alt:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* ---------- Meta grid ---------- */
+    .meta {
+      margin-top: 48px;
+      display: grid;
+      grid-template-columns: 1fr;
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+    }
+    @media (min-width: 560px) { .meta { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 900px) { .meta { grid-template-columns: repeat(3, 1fr); } }
+    .meta div { padding: 16px 20px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .meta dt {
+      font-family: var(--font-display);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .meta dd { margin-top: 4px; font-size: 0.9375rem; font-weight: 500; }
+
+    /* ---------- Sections ---------- */
+    /* overflow:hidden keeps the bleeding .glow circles from widening the page */
+    section, .hero { overflow: hidden; }
+    section { position: relative; padding: 64px 0 80px; border-top: 1px solid var(--line); }
+    section .wrap { position: relative; z-index: 1; }
+    .section-label {
+      font-family: var(--font-display);
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    section h2 {
+      margin-top: 24px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+    }
+    .section-intro { margin-top: 16px; max-width: 46rem; color: var(--muted); }
+    section p + p { margin-top: 12px; }
+    .note {
+      margin-top: 24px;
+      max-width: 46rem;
+      padding: 12px 16px;
+      border-left: 2px solid var(--accent);
+      background: var(--surface);
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+    .note strong { color: var(--ink); font-weight: 600; }
+    code {
+      font-family: ui-monospace, 'SF Mono', Consolas, monospace;
+      font-size: 0.8125em;
+      background: var(--surface);
+      padding: 2px 6px;
+      color: var(--accent);
+    }
+
+    /* ---------- Panel quote ---------- */
+    .quote {
+      margin-top: 40px;
+      background: var(--panel);
+      color: #f2f2f2;
+      padding: 32px 28px;
+      border-left: 3px solid var(--accent);
+    }
+    @media (min-width: 768px) { .quote { padding: 40px 44px; } }
+    .quote p { color: rgba(242, 242, 242, 0.82); font-size: 1.0625rem; max-width: 48rem; }
+    .quote strong { color: #fff; font-weight: 600; }
+
+    /* ---------- Stats ---------- */
+    .stats {
+      margin-top: 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+    }
+    @media (min-width: 768px) { .stats { grid-template-columns: repeat(4, 1fr); } }
+    .stats div { padding: 24px 20px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .stats b {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(1.9rem, 4vw, 2.6rem);
+      letter-spacing: -0.04em;
+      line-height: 1;
+      color: var(--accent);
+    }
+    .stats span { display: block; margin-top: 8px; font-size: 0.8125rem; color: var(--muted); }
+
+    /* ---------- Sitemap ---------- */
+    .sitemap { margin-top: 40px; display: grid; gap: 12px; grid-template-columns: 1fr; }
+    @media (min-width: 640px) { .sitemap { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 1000px) { .sitemap { grid-template-columns: repeat(4, 1fr); } }
+    .smap { display: flex; flex-direction: column; gap: 6px; }
+    .smap .top {
+      background: var(--panel);
+      color: #fff;
+      padding: 12px 14px;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.8125rem;
+    }
+    .smap .top i { display: block; margin-top: 3px; font-style: normal; font-size: 0.6875rem; font-weight: 400; color: rgba(255, 255, 255, 0.55); }
+    .smap .kid { border: 1px solid var(--line); background: var(--surface); padding: 9px 14px; font-size: 0.8125rem; color: var(--muted); }
+
+    /* ---------- Highlights ---------- */
+    .hl { margin-top: 40px; display: grid; gap: 16px; grid-template-columns: 1fr; }
+    @media (min-width: 640px) { .hl { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 1000px) { .hl { grid-template-columns: repeat(3, 1fr); } }
+    .hl-item { border: 1px solid var(--line); padding: 24px; transition: border-color 0.3s ease; }
+    .hl-item:hover { border-color: var(--ink); }
+    .hl-item svg { display: block; color: var(--accent); }
+    .hl-item h3 {
+      margin-top: 16px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.125rem;
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+    }
+    .hl-item p { margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
+
+    /* ---------- Timeline ---------- */
+    .tl { margin-top: 48px; display: grid; gap: 24px; grid-template-columns: 1fr; list-style: none; }
+    @media (min-width: 900px) { .tl { grid-template-columns: repeat(4, 1fr); } }
+    .tl-step { border-top: 2px solid var(--line); padding-top: 16px; }
+    .tl-step.now { border-top-color: var(--accent); }
+    .tl-step b {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .tl-step.now b { color: var(--accent); }
+    .tl-step p { margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
+
+    /* ---------- One article, three surfaces ---------- */
+    .flow { margin-top: 40px; }
+    .flow-src {
+      border: 1px solid var(--ink);
+      background: var(--surface);
+      padding: 16px 24px;
+      text-align: center;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--ink);
+    }
+    .flow-fan { display: grid; grid-template-columns: repeat(3, 1fr); height: 24px; }
+    .flow-fan span { justify-self: center; width: 1px; background: var(--line); }
+    .flow-outs { display: grid; gap: 16px; grid-template-columns: 1fr; }
+    @media (max-width: 699px) { .flow-fan { display: none; } .flow-outs { margin-top: 16px; } }
+    @media (min-width: 700px) { .flow-outs { grid-template-columns: repeat(3, 1fr); } }
+    .flow-out { border: 1px solid var(--line); border-top: 3px solid; padding: 16px; }
+    .flow-out.o-seo { border-top-color: var(--seo); }
+    .flow-out.o-aeo { border-top-color: var(--aeo); }
+    .flow-out.o-geo { border-top-color: var(--geo); }
+    .flow-out b { display: block; font-family: var(--font-display); font-weight: 700; font-size: 1rem; }
+    .flow-out span { display: block; margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
+
+    /* ---------- Layers ---------- */
+    .layers { margin-top: 40px; display: flex; flex-direction: column; gap: 16px; }
+    .layer { padding: 24px 26px; border-left: 3px solid; }
+    .layer.l-seo { background: var(--seo-w); border-color: var(--seo); }
+    .layer.l-aeo { background: var(--aeo-w); border-color: var(--aeo); }
+    .layer.l-geo { background: var(--geo-w); border-color: var(--geo); }
+    .layer .tag {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      color: #fff;
+    }
+    .l-seo .tag { background: var(--seo); }
+    .l-aeo .tag { background: var(--aeo); }
+    .l-geo .tag { background: var(--geo); }
+    :root[data-theme="dark"] .layer .tag { color: #0d0d0d; }
+    .layer h3 {
+      margin-top: 12px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.0625rem;
+      letter-spacing: -0.02em;
+    }
+    .layer ul { margin-top: 12px; padding-left: 18px; }
+    .layer li { font-size: 0.875rem; color: var(--muted); margin-bottom: 8px; }
+    .layer li:last-child { margin-bottom: 0; }
+    .layer li strong { color: var(--ink); font-weight: 600; }
+
+    /* ---------- Component cards ---------- */
+    .cards { margin-top: 40px; display: grid; gap: 24px; grid-template-columns: 1fr; }
+    @media (min-width: 768px) { .cards { grid-template-columns: 1fr 1fr; } }
+    .card { border: 1px solid var(--line); overflow: hidden; transition: border-color 0.3s ease; }
+    .card:hover { border-color: var(--ink); }
+    .card figure { margin: 0; aspect-ratio: 16 / 10; overflow: hidden; background: var(--surface); border-bottom: 1px solid var(--line); cursor: zoom-in; }
+    .card figure img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; transition: transform 0.6s ease; }
+    .card:hover figure img { transform: scale(1.03); }
+    .card .body { padding: 22px 24px; }
+    /* Component gallery: let each shot keep its own height instead of cropping it */
+    .cards.gallery { align-items: start; }
+    .cards.gallery figure { aspect-ratio: auto; }
+    .cards.gallery figure img { height: auto; object-fit: contain; }
+    @media (min-width: 900px) { .cards.three { grid-template-columns: repeat(3, 1fr); } }
+    .card h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.125rem; letter-spacing: -0.02em; }
+    .card p { margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
+
+    /* ---------- Stack ---------- */
+    .group { margin-top: 32px; }
+    .group h3 {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .tags { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .tags li {
+      list-style: none;
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      padding: 5px 12px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--muted);
+    }
+    .tags li.key { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+
+    /* ---------- Tables ---------- */
+    /* Migration figures, stated as figures. */
+    .figs { margin-top: 40px; display: grid; grid-template-columns: repeat(2, 1fr); border: 1px solid var(--line); }
+    @media (min-width: 760px) { .figs { grid-template-columns: repeat(5, 1fr); } }
+    .figs div { padding: 20px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .figs b {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.75rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      color: var(--ink);
+    }
+    .figs span { display: block; margin-top: 8px; font-size: 0.75rem; line-height: 1.35; color: var(--muted); }
+
+    .tbl { margin-top: 40px; border: 1px solid var(--line); overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.875rem; min-width: 34rem; }
+    th {
+      background: var(--surface);
+      padding: 12px 18px;
+      text-align: left;
+      font-family: var(--font-display);
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border-bottom: 1px solid var(--line);
+    }
+    td { padding: 14px 18px; border-bottom: 1px solid var(--line); color: var(--muted); vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    td strong { color: var(--ink); font-weight: 600; }
+    td:first-child { white-space: nowrap; }
+
+    /* ---------- CTA + footer ---------- */
+    .cta { position: relative; background: var(--panel); color: #f2f2f2; border-top: none; overflow: hidden; }
+    .cta .kicker { color: var(--accent); }
+    .cta h2 { color: #fff; }
+    .cta p { margin-top: 16px; max-width: 40rem; color: rgba(242, 242, 242, 0.7); }
+    .cta .actions { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+    .cta .alt { color: rgba(242, 242, 242, 0.7); border-color: rgba(242, 242, 242, 0.25); }
+    .cta .alt:hover { color: var(--accent); border-color: var(--accent); }
+    footer { padding: 40px 0; border-top: 1px solid var(--line); }
+    footer .wrap { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; font-size: 0.8125rem; color: var(--muted); }
+    footer .path { font-family: var(--font-display); }
+    footer .path span { color: var(--accent); }
+
+    /* ---------- Reveal + lightbox ---------- */
+    .rv { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .rv.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { .rv { opacity: 1; transform: none; transition: none; } }
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(8, 8, 8, 0.94);
+      padding: 32px 16px;
+    }
+    .lightbox.on { display: flex; }
+    .lightbox img { max-width: 100%; max-height: 100%; object-fit: contain; }
+    .lightbox .close {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 2rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+    .lightbox .close:hover { color: var(--accent); }
+  </style>
+</head>
+
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header>
+    <div class="wrap">
+      <a class="back" href="../"><span>&larr;</span> Back to work</a>
+      <div class="hctrl">
+        <nav class="lang" aria-label="Language">
+          <a class="on" href="./" aria-current="page">EN</a>
+          <a href="../es/homelab/">ES</a>
+        </nav>
+        <button class="tbtn" id="modeToggle" type="button" aria-label="Switch between light and dark mode">
+          <span class="sky" aria-hidden="true">
+            <span class="ray" style="--r:0deg"></span><span class="ray" style="--r:45deg"></span><span class="ray" style="--r:90deg"></span><span class="ray" style="--r:135deg"></span><span class="ray" style="--r:180deg"></span><span class="ray" style="--r:225deg"></span><span class="ray" style="--r:270deg"></span><span class="ray" style="--r:315deg"></span>
+            <span class="core"></span>
+            <span class="veil"></span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="hero wrap">
+      <span class="glow" style="top: -140px; right: -160px;" aria-hidden="true"></span>
+      <span class="glow" style="bottom: -220px; left: -240px; width: 380px; height: 380px;" aria-hidden="true"></span>
+      <span class="deco" style="top: 110px; right: 12%; width: 14px; height: 14px;" aria-hidden="true"></span>
+      <span class="deco" style="top: 220px; right: 5%; width: 8px; height: 8px; opacity: 0.55; animation-delay: 1.2s;" aria-hidden="true"></span>
+      <p class="kicker">/ Case study &middot; Self-hosted infrastructure</p>
+      <h1>hache<em>server</em></h1>
+      <p class="lede">
+        A second-hand mini PC in my living room running eight services in Docker, reachable from
+        the internet through an outbound Cloudflare Tunnel and from my own devices through
+        Tailscale, with not one port open on the router. It hosts devilfruittcg.com. It is also
+        where I learned this layer, which mostly meant breaking it and writing down why.
+      </p>
+      <div class="actions">
+        <a class="btn" href="../devilfruittcg/">See what it hosts</a>
+        <a class="alt" href="../">See the rest of the work</a>
+      </div>
+
+      <dl class="meta">
+        <div><dt>Machine</dt><dd>HP EliteDesk 800 G4 Mini, bought used</dd></div>
+        <div><dt>CPU and RAM</dt><dd>Intel i5-8500T, 6 cores, 16 GB</dd></div>
+        <div><dt>OS</dt><dd>Ubuntu Server 26.04 LTS</dd></div>
+        <div><dt>Draw</dt><dd>65 W</dd></div>
+        <div><dt>Public access</dt><dd>Cloudflare Tunnel</dd></div>
+        <div><dt>Private access</dt><dd>Tailscale</dd></div>
+      </dl>
+
+      <p class="note">
+        <strong>What is not on this page:</strong> addresses, tunnel and device identifiers,
+        subdomains of private panels and anything token-shaped. The architecture and the
+        decisions are the interesting part; the coordinates are not, and publishing them would
+        be the opposite of the point.
+      </p>
+    </div>
+
+    <!-- ============ HIGHLIGHTS ============ -->
+    <section id="highlights">
+      <span class="glow" style="top: -80px; right: -280px;" aria-hidden="true"></span>
+      <div class="wrap">
+        <p class="section-label">/ In short</p>
+        <h2>How it is put together</h2>
+
+        <div class="figs">
+          <div><b>8</b><span>services running</span></div>
+          <div><b>0</b><span>ports open on the router</span></div>
+          <div><b>2</b><span>separate access paths</span></div>
+          <div><b>65 W</b><span>total draw</span></div>
+          <div><b>9</b><span>incidents written up</span></div>
+        </div>
+
+        <div class="hl">
+          <article class="hl-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="4.5" y="10.5" width="15" height="10" rx="1" /><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" />
+            </svg>
+            <h3>Nothing is port forwarded</h3>
+            <p>The tunnel daemon holds outbound connections to Cloudflare, so traffic arrives without anything listening on the router and the home IP is never published.</p>
+          </article>
+          <article class="hl-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="3" width="7.5" height="18" /><rect x="13.5" y="3" width="7.5" height="18" /><path d="M8.2 12v.01M16.3 12v.01" />
+            </svg>
+            <h3>Two doors, different jobs</h3>
+            <p>The tunnel is for visitors and carries only the public sites. Tailscale is for me and carries SSH and the admin panels. Neither one can do the other's job by accident.</p>
+          </article>
+          <article class="hl-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 12.5V4a1 1 0 0 1 1-1h8.5L21 11.5 12.5 20 3 12.5Z" /><circle cx="7.5" cy="7.5" r="1.3" />
+            </svg>
+            <h3>Container names, not IPs</h3>
+            <p>Every proxy and tunnel route points at a container name. Container IPs change the moment you recreate something; names do not. Two of the nine incidents were exactly this.</p>
+          </article>
+          <article class="hl-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="9" /><circle cx="12" cy="12" r="3" /><path d="m14.2 14.2 4 4" />
+            </svg>
+            <h3>Mounted by UUID</h3>
+            <p>The data disk is mounted by filesystem UUID rather than by device path, because adding a second disk can reorder what <code>/dev/sda</code> means.</p>
+          </article>
+          <article class="hl-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 3 3 8l9 5 9-5-9-5Z" /><path d="M3 13l9 5 9-5" /><path d="M3 18l9 5 9-5" />
+            </svg>
+            <h3>Rebuildable from files</h3>
+            <p>Every service is a Docker Compose file, and the reasoning lives in a runbook on the machine. A rebuild is a checkout and a compose up, not an archaeology project.</p>
+          </article>
+          <article class="hl-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 4.5A1.5 1.5 0 0 1 5.5 3H19v18H5.5A1.5 1.5 0 0 1 4 19.5v-15Z" /><path d="M4 17.5h15M8 7h7M8 10.5h7" />
+            </svg>
+            <h3>Nine incidents, written up</h3>
+            <p>Symptom, cause, fix, lesson. Written at the time, not reconstructed afterwards, because the lesson is the part that survives.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 01 ============ -->
+    <section id="doors">
+      <span class="glow" style="top: 40px; left: -280px;" aria-hidden="true"></span>
+      <div class="wrap">
+        <p class="section-label">/ 01 &middot; Access</p>
+        <h2>Two doors instead of one hole</h2>
+        <p class="section-intro">
+          The obvious way to reach a home server from outside is to forward ports on the router.
+          I did not, for three reasons: the fibre line may be behind CGNAT, so it might not even
+          be possible; an open port is a permanent invitation; and splitting public traffic from
+          my own access means a mistake on one side cannot expose the other.
+        </p>
+        <div class="tbl">
+          <table>
+            <thead><tr><th></th><th>Cloudflare Tunnel</th><th>Tailscale</th></tr></thead>
+            <tbody>
+            <tr><td><strong>Who it is for</strong></td><td>Anyone visiting the public sites</td><td>Only my own devices</td></tr>
+            <tr><td><strong>What it carries</strong></td><td>The WordPress site and a rank tracker</td><td>SSH and every admin panel</td></tr>
+            <tr><td><strong>How it connects</strong></td><td>Outbound connections from the server to Cloudflare</td><td>A private mesh between authorised devices</td></tr>
+            <tr><td><strong>What it adds</strong></td><td>CDN, WAF and DDoS protection in front</td><td>Nothing is published at all</td></tr>
+            <tr><td><strong>Router config</strong></td><td>None</td><td>None</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">
+          <strong>The rule that made it work:</strong> the tunnel container has to be attached to
+          the Docker network of every service it exposes. Miss that and the service answers
+          perfectly on the machine while the public URL returns 502, which is how two of the nine
+          incidents below started.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ 02 ============ -->
+    <section id="stack">
+      <div class="wrap">
+        <p class="section-label">/ 02 &middot; What runs on it</p>
+        <h2>Eight services, one mini PC</h2>
+        <p class="section-intro">
+          All of it in Docker, behind a reverse proxy that handles routing and certificates.
+          Public and private are separated at the network level, not by hoping nobody guesses a
+          URL.
+        </p>
+        <div class="tbl">
+          <table>
+            <thead><tr><th>Service</th><th>What it does</th><th>Reachable from</th></tr></thead>
+            <tbody>
+            <tr><td><strong>WordPress</strong></td><td>Runs devilfruittcg.com, the niche site the SEO case study is about.</td><td>Public</td></tr>
+            <tr><td><strong>MySQL</strong></td><td>Its database. Never exposed, reachable only inside the Docker network.</td><td>Internal only</td></tr>
+            <tr><td><strong>Reverse proxy</strong></td><td>Routing and TLS certificates for everything behind it.</td><td>Private panel</td></tr>
+            <tr><td><strong>Rank tracker</strong></td><td>Self-hosted keyword tracking for the niche site, on its own subdomain.</td><td>Public</td></tr>
+            <tr><td><strong>Photo server</strong></td><td>Personal photo and video library on the 1 TB data disk.</td><td>Private</td></tr>
+            <tr><td><strong>Dashboard</strong></td><td>One page listing every service and its state.</td><td>Private</td></tr>
+            <tr><td><strong>DNS filter</strong></td><td>Network-wide DNS and ad filtering for the house.</td><td>Private</td></tr>
+            <tr><td><strong>Uptime monitor</strong></td><td>Checks each service and sends an alert when one stops answering.</td><td>Private</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 03 ============ -->
+    <section id="incidents">
+      <span class="glow" style="top: 0; right: -280px;" aria-hidden="true"></span>
+      <div class="wrap">
+        <p class="section-label">/ 03 &middot; Incidents</p>
+        <h2>Nine things that broke</h2>
+        <p class="section-intro">
+          This is the part I would want to read about someone else. Anyone can follow a tutorial
+          until it works. What is worth showing is what happened when it did not, and whether the
+          cause was actually understood or just worked around.
+        </p>
+        <div class="tbl">
+          <table>
+            <thead><tr><th>Symptom</th><th>Cause</th><th>Lesson</th></tr></thead>
+            <tbody>
+            <tr><td><strong>Server shut down on boot</strong></td><td>A SATA connector was not seated properly after fitting the 1 TB data disk.</td><td>Instant shutdown seconds after power-on is a connector or a short. Leave the case open and watch the first seconds.</td></tr>
+            <tr><td><strong>502 on the public site</strong></td><td>WordPress and the reverse proxy were on different Docker networks and could not see each other.</td><td>Containers from separate compose files are invisible to each other. Declare the other network as external and join it.</td></tr>
+            <tr><td><strong>502 on the rank tracker</strong></td><td>The tunnel daemon was not attached to that service's Docker network, so it could not resolve the container name.</td><td>The tunnel container has to sit on the network of every service it exposes.</td></tr>
+            <tr><td><strong>Too many redirects in Safari</strong></td><td>Cloudflare was set to Flexible SSL while the proxy forced HTTPS, which loops forever.</td><td>Flexible plus forced SSL is a loop. Full plus forced SSL is correct.</td></tr>
+            <tr><td><strong>Certificate request failed</strong></td><td>The Cloudflare proxy blocks the Let's Encrypt HTTP challenge.</td><td>With the orange cloud on, always use the DNS challenge, with a scoped API token.</td></tr>
+            <tr><td><strong>Database connection error</strong></td><td>A placeholder password was left in the compose file, and MySQL had already stored the first one it booted with.</td><td>Changing the password in compose does not change it in the volume. Recreate the volume, and only while it is safe to.</td></tr>
+            <tr><td><strong>Admin panel vanished</strong></td><td>The DNS filter switches its internal port once its setup wizard finishes.</td><td>A panel that disappears exactly when setup ends usually moved port. Read the logs before re-creating anything.</td></tr>
+            <tr><td><strong>Host validation failed</strong></td><td>The dashboard now requires its allowed hosts to be declared explicitly.</td><td>A host or origin error on first access is a security check, not a bug. Declare the addresses you actually use.</td></tr>
+            <tr><td><strong>Database file unopenable</strong></td><td>A bind-mounted folder was created by root, so the container could not write to it.</td><td>A container that cannot write to its volume is almost always a permissions problem on the host folder.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 04 ============ -->
+    <section id="value">
+      <span class="glow" style="bottom: 0; left: -280px;" aria-hidden="true"></span>
+      <div class="wrap">
+        <p class="section-label">/ 04 &middot; What it proves</p>
+        <h2>Why a home server belongs in a portfolio</h2>
+        <div class="tbl">
+          <table>
+            <thead><tr><th>Claim</th><th>Evidence</th></tr></thead>
+            <tbody>
+            <tr><td><strong>The layer under the CMS</strong></td><td>Operating system, disks and fstab, Docker networking, reverse proxy, TLS, DNS and remote access. Not a managed panel pretending to be infrastructure.</td></tr>
+            <tr><td><strong>Security by architecture</strong></td><td>No forwarded ports, public and private traffic on separate paths, admin panels never published, database never exposed.</td></tr>
+            <tr><td><strong>Diagnosis, not workarounds</strong></td><td>Nine incidents with the cause identified in each. The 502s were Docker networking, the redirect loop was an SSL mode, the write failure was host permissions.</td></tr>
+            <tr><td><strong>It is documented</strong></td><td>A runbook on the machine and a linked vault of notes, which is why this page could be written from records rather than memory.</td></tr>
+            <tr><td><strong>It is real</strong></td><td>devilfruittcg.com is served from it, in public, with its own case study.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">
+          <strong>Still open:</strong> confirming whether the line is behind CGNAT, moving an old
+          photo copy off the system SSD, and finishing the search console connection on the rank
+          tracker. A homelab with no open items is a homelab nobody is using.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+    <button class="close" type="button" aria-label="Close">&times;</button>
+    <img src="" alt="" />
+  </div>
+
+  <section class="cta" id="contact">
+    <span class="glow" style="top: -160px; right: -160px;" aria-hidden="true"></span>
+    <div class="wrap">
+      <p class="kicker">/ Next</p>
+      <h2>Everything connects.</h2>
+      <p>This is the layer I went looking for when design stopped being enough, and the one I want to keep working in. If you need someone who owns the machine as well as the site, say hi.</p>
+      <div class="actions">
+        <a class="btn" href="mailto:hi.hache.cervera@gmail.com?subject=homelab%20case%20study">Get in touch</a>
+        <a class="alt" href="../">See the rest of the work</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <p>&copy; 2026 Ada (hache) Cervera. Built by hand in Valencia.</p>
+      <p class="path">Infrastructure <span>&rarr;</span> CMS <span>&rarr;</span> Search <span>&rarr;</span> Operations</p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var GA_ID = 'G-6JCDHFSJ4M';
+      if (GA_ID) {
+        var ga = document.createElement('script');
+        ga.async = true;
+        ga.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+        document.head.appendChild(ga);
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function () { window.dataLayer.push(arguments); };
+        gtag('js', new Date());
+        gtag('config', GA_ID);
+      }
+      function track(name, params) {
+        if (window.gtag) window.gtag('event', name, params || {});
+      }
+
+      /* Theme toggle, shares its storage key with the rest of the site */
+      document.getElementById('modeToggle').addEventListener('click', function () {
+        var t = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+        document.documentElement.dataset.theme = t;
+        try { localStorage.setItem('theme', t); } catch (e) {}
+        track('theme', { value: t });
+      });
+
+      /* Lightbox */
+      var box = document.getElementById('lightbox');
+      var boxImg = box.querySelector('img');
+      document.querySelectorAll('[data-zoom]').forEach(function (img) {
+        img.parentElement.addEventListener('click', function () {
+          boxImg.src = img.src;
+          boxImg.alt = img.alt;
+          box.classList.add('on');
+          track('image_open', { project: 'homelab', image: img.getAttribute('src') });
+        });
+      });
+      function closeBox() { box.classList.remove('on'); boxImg.src = ''; }
+      box.querySelector('.close').addEventListener('click', closeBox);
+      box.addEventListener('click', function (e) { if (e.target === box) closeBox(); });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && box.classList.contains('on')) closeBox();
+      });
+
+      /* Reveal on scroll */
+      var rv = document.querySelectorAll('.card, .layer, .smap, .quote, .tbl, .hl-item, .tl-step, .flow-out');
+      rv.forEach(function (el) { el.classList.add('rv'); });
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+        rv.forEach(function (el) { io.observe(el); });
+      } else {
+        rv.forEach(function (el) { el.classList.add('in'); });
+      }
+
+      /* Section views and scroll depth */
+      if ('IntersectionObserver' in window) {
+        var seen = {};
+        var sIO = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting && !seen[e.target.id]) {
+              seen[e.target.id] = 1;
+              track('section_view', { section: e.target.id, page: 'homelab' });
+            }
+          });
+        }, { threshold: 0.3 });
+        document.querySelectorAll('section[id]').forEach(function (s) { sIO.observe(s); });
+      }
+      var depth = {};
+      window.addEventListener('scroll', function () {
+        var h = document.documentElement.scrollHeight - window.innerHeight;
+        if (h <= 0) return;
+        var pct = Math.round((window.scrollY / h) * 100);
+        [50, 90].forEach(function (m) {
+          if (pct >= m && !depth[m]) { depth[m] = 1; track('scroll_depth', { percent: m, page: 'homelab' }); }
+        });
+      }, { passive: true });
+    })();
+  </script>
+</body>
+</html>
