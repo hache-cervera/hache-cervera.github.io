@@ -461,6 +461,8 @@
     .cards.gallery { align-items: start; }
     .cards.gallery figure { aspect-ratio: auto; }
     .cards.gallery figure img { height: auto; object-fit: contain; }
+    /* An establishing shot that runs the full width of the grid. */
+    .cards.gallery .card.wide { grid-column: 1 / -1; }
     @media (min-width: 900px) { .cards.three { grid-template-columns: repeat(3, 1fr); } }
     .card h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.125rem; letter-spacing: -0.02em; }
     .card p { margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
@@ -796,18 +798,40 @@
         </div>
 
         <div class="cards gallery">
-          <figure>
-            <img src="../../img/decopam-home.webp" width="1901" height="912" alt="Portada de DECOPAM: la marca sobre un dormitorio ambientado" loading="lazy" />
-            <figcaption>La tienda para la que se reconstruy&oacute; la migraci&oacute;n.</figcaption>
-          </figure>
-          <figure>
-            <img src="../../img/decopam-catalogo.png" width="1920" height="1500" alt="Categor&iacute;a de cabeceros de DECOPAM: parrilla de productos con filtro por color en la barra lateral" loading="lazy" />
-            <figcaption>P&aacute;gina de categor&iacute;a: productos en su categor&iacute;a correcta y el filtro por color alimentado por los atributos de las muestras.</figcaption>
-          </figure>
-          <figure>
-            <img src="../../img/decopam-variaciones.png" width="540" height="338" alt="Ficha de producto de DECOPAM: botones de talla sobre muestras de color etiquetadas" loading="lazy" />
-            <figcaption>Primero la medida, despu&eacute;s el color, cada grupo etiquetado y una opci&oacute;n ya seleccionada.</figcaption>
-          </figure>
+          <div class="card wide">
+            <figure>
+              <img src="../../img/decopam-home.webp" width="1901" height="912" alt="Portada de DECOPAM: la marca sobre un dormitorio ambientado" loading="lazy" data-zoom />
+            </figure>
+            <div class="body">
+              <h3>La tienda</h3>
+              <p>La tienda para la que se reconstruy&oacute; toda la migraci&oacute;n, en WordPress y WooCommerce.</p>
+            </div>
+          </div>
+          <div class="card">
+            <figure>
+              <img src="../../img/decopam-catalogo.png" width="1920" height="1500" alt="Categor&iacute;a de cabeceros de DECOPAM: parrilla de productos con filtro por color en la barra lateral" loading="lazy" data-zoom />
+            </figure>
+            <div class="body">
+              <h3>Categor&iacute;a y filtro por color</h3>
+              <p>
+                Los productos en su categor&iacute;a correcta despu&eacute;s del saneado, y un filtro
+                por color alimentado por los mismos atributos de muestra que se reconstruyeron en las
+                fichas.
+              </p>
+            </div>
+          </div>
+          <div class="card">
+            <figure>
+              <img src="../../img/decopam-variaciones.png" width="540" height="338" alt="Ficha de producto de DECOPAM: botones de talla sobre muestras de color etiquetadas" loading="lazy" data-zoom />
+            </figure>
+            <div class="body">
+              <h3>La medida antes que el color</h3>
+              <p>
+                Cada grupo de atributos etiquetado, la medida primero y una opci&oacute;n ya
+                seleccionada para que la ficha abra en algo que se pueda comprar.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
