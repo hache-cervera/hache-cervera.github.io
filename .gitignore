@@ -9,3 +9,6 @@ flor_*.py
 mejorar_flor.py
 *.glb
 *.docx
+
+# code-review-graph: local analysis db, contains absolute paths
+.code-review-graph/
