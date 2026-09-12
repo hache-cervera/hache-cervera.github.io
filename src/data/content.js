@@ -141,7 +141,7 @@ export const LOGOS = [
 
 const EXPERIENCE_RAW = [
   {
-    role: L('Web Platform & WordPress Specialist', 'Especialista en Plataforma Web y WordPress'),
+    role: L('Web Platform, Operations & WordPress Specialist', 'Especialista en Plataforma Web, Operativa y WordPress'),
     company: 'Neurona Digital SL',
     place: 'Valencia',
     dates: L('Nov 2024 – Sep 2026', 'Nov 2024 – Sep 2026'),
