@@ -1,0 +1,36 @@
+﻿company,site,robots_txt,ai_bots_named,blocks_ai_bot_in_robots,llms_txt,json_ld_blocks,words_without_js,words_with_js,cdn_seen,door_Chrome,door_Googlebot,door_Bingbot,door_GPTBot,door_ClaudeBot,door_OAI-SearchBot,door_ChatGPT-User,door_PerplexityBot,door_PlaceBot
+Banco Santander,www.santander.com,true,,,false,0,1326,986,Akamai + Imperva,ok,ok,,ok,ok,ok,ok,ok,ok
+Inditex,www.inditex.com,false,,,false,0,371,339,Akamai,ok,ok,,ok,ok,ok,ok,ok,ok
+Iberdrola,www.iberdrola.com,true,,,true,0,0,819,Akamai,challenge,403,403,403,403,403,403,403,403
+BBVA,www.bbva.com,true,,,false,4,1640,1030,Akamai,ok,ok,,ok,ok,ok,ok,ok,ok
+CaixaBank,www.caixabank.com,true,,,false,2,820,883,Cloudflare,ok,403,403,ok,ok,ok,ok,ok,ok
+ArcelorMittal,corporate.arcelormittal.com,true,,,false,0,992,729,Cloudflare,403,403,,403,403,403,403,403,403
+Endesa,www.endesa.com,true,,,true,0,3566,1534,Imperva,ok,ok,,ok,ok,ok,ok,ok,ok
+Aena,www.aena.es,true,,,false,0,1491,678,Akamai,ok,ok,,ok,ok,ok,ok,ok,ok
+Ferrovial,www.ferrovial.com,true,,,false,1,754,158,,ok,ok,ok,403,ok,ok,403,ok,ok
+Repsol,www.repsol.com,true,,,true,3,1640,796,,ok,ok,,ok,ok,ok,ok,ok,ok
+Naturgy,www.naturgy.com,true,,,false,6,1428,787,Radware,challenge,challenge,challenge,challenge,challenge,challenge,challenge,challenge,challenge
+ACS,www.grupoacs.com,true,,,false,0,1098,853,,ok,ok,,ok,ok,ok,ok,ok,ok
+IAG,www.iairgroup.com,true,,,false,0,452,381,Cloudflare,ok,ok,,ok,ok,ok,ok,ok,ok
+Amadeus,amadeus.com,true,,,true,0,1595,1164,Imperva,ok,ok,,ok,ok,ok,ok,ok,challenge
+Telefónica,www.telefonica.com,true,,,false,4,944,723,Cloudflare,ok,ok,,ok,ok,ok,ok,ok,ok
+Banco Sabadell,www.grupbancsabadell.com,true,,,false,0,1112,399,Akamai,ok,ok,403,403,403,403,ok,403,403
+Cellnex,www.cellnex.com,true,,,false,6,2993,1310,Imperva,ok,ok,,ok,ok,ok,ok,ok,ok
+Bankinter,www.bankinter.com,true,ChatGPT-User GPTBot,,true,4,8963,747,Cloudflare,403,403,,403,403,403,403,403,ok
+Mapfre,www.mapfre.com,true,,,false,4,2512,943,,ok,ok,,ok,ok,ok,ok,ok,ok
+Acciona,www.acciona.com,true,,,true,0,2178,410,,ok,403,403,403,403,403,403,403,ok
+Indra,www.indragroup.com,true,Bytespider ClaudeBot ChatGPT-User,Bytespider,false,3,823,780,Cloudflare,ok,ok,,ok,ok,ok,ok,ok,ok
+Puig,www.puig.com,true,,,false,27,256,313,Cloudflare,403,403,,403,403,403,403,403,ok
+Unicaja,www.unicajabanco.es,true,,,false,1,1431,1361,Akamai,ok,403,403,403,403,403,403,403,ok
+Redeia,www.redeia.com,true,,,false,0,1785,733,Imperva,ok,ok,,ok,ok,ok,ok,ok,ok
+Merlin Properties,www.merlinproperties.com,true,,,true,5,341,218,,ok,ok,,ok,ok,ok,ok,ok,ok
+Acciona Energía,www.acciona-energia.com,true,,,false,0,509,260,,ok,403,403,403,403,403,403,403,ok
+Grifols,www.grifols.com,true,,,false,0,1616,1061,F5,ok,ok,,ok,ok,ok,ok,ok,ok
+Logista,www.logista.com,true,ChatGPT-User GPTBot Google-Extended ClaudeBot PerplexityBot,,true,0,543,483,,ok,ok,,ok,ok,ok,ok,ok,ok
+Enagás,www.enagas.es,true,,,true,3,1243,398,,ok,ok,,ok,ok,ok,ok,ok,ok
+Acerinox,acerinox.com,true,,,false,0,859,112,Radware,challenge,ok,,ok,ok,ok,ok,ok,ok
+Fluidra,www.fluidra.com,true,,,false,0,0,1543,Imperva,challenge,challenge,,challenge,challenge,challenge,challenge,challenge,challenge
+Sacyr,sacyr.com,true,,,false,1,1310,854,,ok,403,ok,403,ok,ok,ok,ok,ok
+Colonial,www.colonial-sfl.com,true,,,false,0,385,303,Cloudflare,ok,ok,ok,403,403,ok,ok,ok,ok
+Rovi,rovi.es,true,,,false,0,5866,583,,ok,ok,,ok,ok,ok,ok,ok,ok
+Solaria,solariaenergia.com,true,,,false,0,917,908,,ok,429,429,429,429,429,429,429,ok

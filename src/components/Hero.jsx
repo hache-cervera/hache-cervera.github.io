@@ -111,6 +111,7 @@ export default function Hero() {
   const rootRef = useRef(null);
   const { lang, t } = useLang();
   const workBase = lang === 'es' ? 'work/es/' : 'work/';
+  const researchHref = lang === 'es' ? 'research/es/ibex-35-ia/' : 'research/ibex-35-ai/';
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -157,6 +158,9 @@ export default function Hero() {
             <MagneticLink href={workBase} accent external>
               {t.hero.portfolio}
             </MagneticLink>
+          </span>
+          <span data-line className="inline-block">
+            <MagneticLink href={researchHref} external>{t.hero.research}</MagneticLink>
           </span>
           <span data-line className="inline-block">
             <MagneticLink href="#skills">{t.hero.cta}</MagneticLink>
