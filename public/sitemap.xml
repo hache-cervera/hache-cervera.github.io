@@ -13,4 +13,24 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://hache-cervera.github.io/research/ibex-35-ai/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://hache-cervera.github.io/research/es/ibex-35-ia/"/>
   </url>
+  <url>
+    <loc>https://hache-cervera.github.io/work/devilfruittcg/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hache-cervera.github.io/work/devilfruittcg/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hache-cervera.github.io/work/es/devilfruittcg/"/>
+  </url>
+  <url>
+    <loc>https://hache-cervera.github.io/work/es/devilfruittcg/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hache-cervera.github.io/work/devilfruittcg/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hache-cervera.github.io/work/es/devilfruittcg/"/>
+  </url>
+  <url>
+    <loc>https://hache-cervera.github.io/work/homelab/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hache-cervera.github.io/work/homelab/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hache-cervera.github.io/work/es/homelab/"/>
+  </url>
+  <url>
+    <loc>https://hache-cervera.github.io/work/es/homelab/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hache-cervera.github.io/work/homelab/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hache-cervera.github.io/work/es/homelab/"/>
+  </url>
 </urlset>

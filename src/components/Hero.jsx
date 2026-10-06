@@ -153,6 +153,15 @@ export default function Hero() {
           <span className="block overflow-hidden"><span data-line className="block">{t.hero.sub3}</span></span>
         </p>
 
+        <p className="mt-6 max-w-md overflow-hidden text-sm font-semibold text-ink">
+          <span data-line className="block">
+            {t.hero.status}{' '}
+            <a href="cv/ada-hache-cervera-2026.pdf" className="whitespace-nowrap underline decoration-accent decoration-2 underline-offset-4 hover:text-accent-ink">
+              {t.hero.cv}
+            </a>
+          </span>
+        </p>
+
         <div className="mt-12 flex flex-wrap gap-4 overflow-hidden">
           <span data-line className="inline-block">
             <MagneticLink href={workBase} accent external>
