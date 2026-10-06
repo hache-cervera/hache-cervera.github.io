@@ -7,13 +7,18 @@
   --c-bg: #ffffff;
   --c-ink: #0a0a0a;
   --c-muted: #6b6b6b;
+  --c-muted-strong: #4f4f4f;
   --c-line: #e5e5e5;
+  /* small accent text needs 4.5:1; brand #ff3c00 only reaches 3.56 on white */
+  --c-accent-ink: #b32a00;
 }
 [data-theme='dark'] {
   --c-bg: #0d0d0d;
   --c-ink: #f2f2f2;
   --c-muted: #9a9a9a;
+  --c-muted-strong: #b5b5b5;
   --c-line: #2a2a2a;
+  --c-accent-ink: #ff3c00;
 }
 
 html.lenis {
