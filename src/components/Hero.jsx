@@ -111,7 +111,7 @@ export default function Hero() {
   const rootRef = useRef(null);
   const { lang, t } = useLang();
   const workBase = lang === 'es' ? 'work/es/' : 'work/';
-  const researchHref = lang === 'es' ? 'research/es/ibex-35-ia/' : 'research/ibex-35-ai/';
+  const researchHref = lang === 'es' ? 'research/es/' : 'research/';
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
