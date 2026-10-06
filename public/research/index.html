@@ -12,6 +12,7 @@
   <meta property="og:description" content="Original studies on how websites work underneath: AI crawlers, performance and accessibility, with the method and the data on every page." />
   <meta property="og:image" content="https://hache-cervera.github.io/og-home.jpg" />
   <meta property="og:type" content="website" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
   <link rel="preload" href="/fonts/sora-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
@@ -558,6 +559,11 @@
       cursor: pointer;
     }
     .lightbox .close:hover { color: var(--accent); }
+  
+    /* brand orange #ff3c00 reaches 3.56:1 on white; small text and buttons use a darker shade in light theme */
+    html:not([data-theme='dark']) .kicker, html:not([data-theme='dark']) .section-label, html:not([data-theme='dark']) main a:not(.btn):not(.alt), html:not([data-theme='dark']) code { color: #c22e00; }
+    html:not([data-theme='dark']) .btn { background: #c22e00; border-color: #c22e00; }
+    html .cta .kicker { color: var(--accent); }
   
     /* research index */
     .studies { margin-top: 48px; display: grid; gap: 16px; }

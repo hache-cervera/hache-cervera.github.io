@@ -15,6 +15,7 @@
   <meta property="og:url" content="https://hache-cervera.github.io/research/es/ibex-35-ia/" />
   <meta property="og:type" content="article" />
   <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/svg+xml" href="../../../favicon.svg" />
   <link rel="preload" href="/fonts/sora-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
@@ -563,6 +564,11 @@
       cursor: pointer;
     }
     .lightbox .close:hover { color: var(--accent); }
+  
+    /* brand orange #ff3c00 reaches 3.56:1 on white; small text and buttons use a darker shade in light theme */
+    html:not([data-theme='dark']) .kicker, html:not([data-theme='dark']) .section-label, html:not([data-theme='dark']) main a:not(.btn):not(.alt), html:not([data-theme='dark']) code { color: #c22e00; }
+    html:not([data-theme='dark']) .btn { background: #c22e00; border-color: #c22e00; }
+    html .cta .kicker { color: var(--accent); }
   
     /* research extras */
     .slides { margin-top: 40px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
