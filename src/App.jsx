@@ -9,6 +9,7 @@ import Hero from './components/Hero';
 import About from './components/About';
 import Skills from './components/Skills';
 import Works from './components/Works';
+import Research from './components/Research';
 import Experience from './components/Experience';
 import Reveal from './components/Reveal';
 import Contact from './components/Contact';
@@ -94,8 +95,15 @@ export default function App() {
   const [scene, setScene] = useState(null);
 
   useLayoutEffect(() => {
-    const chipScene = new ChipScene(canvasRef.current);
-    setScene(chipScene);
+    // Three.js loads after the content: the page is readable before the chip exists.
+    let chipScene = null;
+    let disposed = false;
+    import('./three/ChipScene').then(({ default: ChipScene }) => {
+      if (disposed) return;
+      chipScene = new ChipScene(canvasRef.current);
+      setScene(chipScene);
+      requestAnimationFrame(() => ScrollTrigger.refresh());
+    });
 
     const lenis = new Lenis({ duration: 1.15, smoothWheel: true });
     setLenis(lenis);
@@ -105,11 +113,11 @@ export default function App() {
     gsap.ticker.lagSmoothing(0);
 
     const onMove = (e) =>
-      chipScene.setMouse(
+      chipScene?.setMouse(
         (e.clientX / window.innerWidth) * 2 - 1,
         -(e.clientY / window.innerHeight) * 2 + 1
       );
-    const onResize = () => chipScene.resize();
+    const onResize = () => chipScene?.resize();
     window.addEventListener('mousemove', onMove);
     window.addEventListener('resize', onResize);
 
@@ -130,7 +138,8 @@ export default function App() {
       window.removeEventListener('resize', onResize);
       gsap.ticker.remove(tick);
       lenis.destroy();
-      chipScene.dispose();
+      disposed = true;
+      chipScene?.dispose();
       ScrollTrigger.getAll().forEach((st) => st.kill());
     };
   }, []);
@@ -141,12 +150,12 @@ export default function App() {
       <canvas ref={canvasRef} className="fixed inset-0 z-10 h-full w-full pointer-events-none" />
       <div className="grain" aria-hidden="true" />
       <TopControls />
-      {scene && (
-        <main className="relative">
+      <main className="relative">
           <Hero />
           <About />
           <Skills />
           <Works />
+          <Research />
           <Experience />
           <Reveal />
           <Contact />
@@ -154,8 +163,7 @@ export default function App() {
           <Director />
           <ProximityLight />
           <BackToTop />
-        </main>
-      )}
+      </main>
     </SceneContext.Provider>
   );
 }

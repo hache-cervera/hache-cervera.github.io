@@ -32,11 +32,12 @@ const FACT_ICONS = ['role', 'based', 'works', 'owns', 'languages', 'certified'];
 function Stat({ value, suffix, label }) {
   return (
     <div className="flex flex-col gap-1">
-      <span className="font-display text-5xl font-extrabold leading-none">
-        <span data-count={value}>0</span>
+      {/* the real number is in the HTML; the count-up is decoration only */}
+      <span className="font-display text-5xl font-extrabold leading-none" aria-hidden="true">
+        <span data-count={value}>{value}</span>
         <span className="text-accent">{suffix}</span>
       </span>
-      <span className="text-sm text-white/60">{label}</span>
+      <span className="text-sm text-white/60"><span className="sr-only">{value}{suffix} </span>{label}</span>
     </div>
   );
 }
@@ -72,7 +73,7 @@ export default function About() {
         );
       }
 
-      gsap.utils.toArray('[data-count]').forEach((el) => {
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) gsap.utils.toArray('[data-count]').forEach((el) => {
         gsap.fromTo(
           el,
           { innerText: 0 },

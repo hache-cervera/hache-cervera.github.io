@@ -167,8 +167,14 @@ const EXPERIENCE_RAW = [
         'Producción gráfica, motion y audiovisual para marcas como Cofidis y Benimar: 300+ piezas para contenido orgánico y paid social.'
       ),
     ],
+    proof: [
+      { label: L('devilfruittcg case study', 'Caso devilfruittcg'), href: L('work/devilfruittcg/', 'work/es/devilfruittcg/') },
+      { label: L('Homelab case study', 'Caso homelab'), href: L('work/homelab/', 'work/es/homelab/') },
+      { label: L('IBEX 35 research', 'Investigación IBEX 35'), href: L('research/ibex-35-ai/', 'research/es/ibex-35-ia/') },
+    ],
   },
   {
+    compact: true,
     role: L('Marketing Strategy & Sponsorships', 'Estrategia de Marketing y Patrocinios'),
     company: 'Jump Yard',
     place: 'Valencia',
@@ -182,10 +188,6 @@ const EXPERIENCE_RAW = [
         'Grew Instagram following by 30k+ around the launch, plus sponsorships and collaborations with major brands.',
         'Crecimiento de 30k+ seguidores en Instagram alrededor del lanzamiento, además de patrocinios y colaboraciones con marcas grandes.'
       ),
-      L(
-        'Video creation and editing for organic content and paid ad campaigns.',
-        'Creación y edición de vídeo para contenido orgánico y campañas de pago.'
-      ),
     ],
   },
 ];
@@ -196,6 +198,7 @@ export function getExperience(lang) {
     role: j.role[lang],
     dates: j.dates[lang],
     points: j.points.map((p) => p[lang]),
+    proof: (j.proof || []).map((p) => ({ label: p.label[lang], href: p.href[lang] })),
   }));
 }
 

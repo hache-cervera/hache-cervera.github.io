@@ -65,7 +65,7 @@ export default function Experience() {
                   <p className="mt-1 text-sm text-muted">{job.place}</p>
                 </div>
                 <div className="md:pl-12">
-                  <h3 className="font-display text-2xl font-bold tracking-tightest">
+                  <h3 className={`font-display font-bold tracking-tightest ${job.compact ? 'text-lg' : 'text-2xl'}`}>
                     <Words>{job.role}</Words>
                   </h3>
                   <p className="mt-1 font-display font-semibold text-muted">{job.company}</p>
@@ -77,6 +77,16 @@ export default function Experience() {
                       </li>
                     ))}
                   </ul>
+                  {job.proof.length > 0 && (
+                    <p className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm">
+                      <span className="text-muted">{t.experience.proof}</span>
+                      {job.proof.map((p) => (
+                        <a key={p.href} href={p.href} className="font-semibold text-ink underline decoration-accent decoration-2 underline-offset-4 hover:text-accent-ink">
+                          {p.label}
+                        </a>
+                      ))}
+                    </p>
+                  )}
                 </div>
               </li>
             ))}

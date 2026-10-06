@@ -11,6 +11,8 @@ export const translations = {
       sub1: '15+ live web properties, end to end.',
       sub2: 'Hosting, DNS, migrations, performance.',
       sub3: 'Technical SEO. Remote and async.',
+      status: 'Open to remote roles in web operations, WordPress platform and technical SEO.',
+      cv: 'CV (PDF)',
       cta: 'My stack',
       portfolio: 'Portfolio',
       research: 'Research',
@@ -66,10 +68,26 @@ export const translations = {
     },
     skills: {
       label: '/ 02 · Stack',
-      note: 'Not a tool list. Everything here is in production on sites I maintain.',
+      note: 'Everything here runs in production on sites I maintain.',
     },
     works: { label: '/ 03 · Works', h2: 'I produced for brands such as' },
-    experience: { label: '/ 04 · Experience', h2: "Where I've been building" },
+    research: {
+      label: '/ 04 · Research',
+      h2: 'Research I ran myself',
+      intro: 'Studies with public data, the method on the page and the data downloadable.',
+      items: [
+        {
+          kicker: 'October 2026 · AI search',
+          title: 'Is the IBEX 35 ready for AI search?',
+          stat: '0/35',
+          statLabel: 'block AI search bots in robots.txt',
+          text: 'robots.txt, firewall rules and llms.txt of Spain’s 35 largest listed companies, tested with a placebo bot as the control group.',
+          href: 'research/ibex-35-ai/',
+          cta: 'Read the research',
+        },
+      ],
+    },
+    experience: { label: '/ 05 · Experience', h2: "Where I've been building", proof: 'Check it:' },
     reveal: {
       h2: 'Everything connects.',
       pathTail: 'One loop, end to end.',
@@ -77,7 +95,7 @@ export const translations = {
       caption2: 'No video, just code.',
     },
     contact: {
-      label: '/ 05 · Contact',
+      label: '/ 06 · Contact',
       h2: "Let's talk.",
       p: 'No forms. Just write to me.',
       cv: 'Download CV (PDF)',
@@ -94,6 +112,8 @@ export const translations = {
       sub1: '15+ webs en producción, de principio a fin.',
       sub2: 'Hosting, DNS, migraciones, rendimiento.',
       sub3: 'SEO técnico. En remoto y en asíncrono.',
+      status: 'Abierta a puestos en remoto de operaciones web, plataforma WordPress y SEO técnico.',
+      cv: 'CV (PDF)',
       cta: 'Mi stack',
       portfolio: 'Portfolio',
       research: 'Investigación',
@@ -149,10 +169,26 @@ export const translations = {
     },
     skills: {
       label: '/ 02 · Stack',
-      note: 'No es una lista de herramientas. Todo esto está en producción en webs que mantengo.',
+      note: 'Todo esto está en producción en webs que mantengo.',
     },
     works: { label: '/ 03 · Trabajos', h2: 'He producido para marcas como' },
-    experience: { label: '/ 04 · Experiencia', h2: 'Dónde he estado construyendo' },
+    research: {
+      label: '/ 04 · Investigación',
+      h2: 'Investigaciones propias',
+      intro: 'Estudios con datos públicos, el método explicado y los datos para descargar.',
+      items: [
+        {
+          kicker: 'Octubre 2026 · Búsqueda con IA',
+          title: '¿Está el IBEX 35 preparado para la búsqueda con IA?',
+          stat: '0/35',
+          statLabel: 'cierran su robots.txt a los bots de búsqueda con IA',
+          text: 'robots.txt, reglas de cortafuegos y llms.txt de las 35 empresas del IBEX, con un bot placebo como grupo de control.',
+          href: 'research/es/ibex-35-ia/',
+          cta: 'Leer la investigación',
+        },
+      ],
+    },
+    experience: { label: '/ 05 · Experiencia', h2: 'Dónde he estado construyendo', proof: 'Compruébalo:' },
     reveal: {
       h2: 'Todo conecta.',
       pathTail: 'Un solo ciclo, de principio a fin.',
@@ -160,7 +196,7 @@ export const translations = {
       caption2: 'Sin vídeo, solo código.',
     },
     contact: {
-      label: '/ 05 · Contacto',
+      label: '/ 06 · Contacto',
       h2: 'Hablamos.',
       p: 'Sin formularios. Escríbeme y ya.',
       cv: 'Descargar CV (PDF)',
