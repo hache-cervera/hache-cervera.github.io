@@ -23,8 +23,8 @@ export const translations = {
     about: {
       label: '/ 01 · About',
       h2a: "I'm Hache.",
-      h2b: 'I started in design.',
-      h2c: 'I stayed for the stack.',
+      h2b: 'I keep websites running,',
+      h2c: 'from the server to the search results.',
       p1: 'Graphic design and marketing came first. Then I got hooked on how sites work underneath: hosting, DNS, server config, migrations. I liked that more than the pixels, so I kept going down instead of back up.',
       layersLabel: 'Three layers, bottom up',
       layers: [
@@ -100,6 +100,7 @@ export const translations = {
       p: 'No forms. Just write to me.',
       cv: 'Download CV (PDF)',
     },
+    cvHref: 'cv/Ada-Cervera-WebPlatform-CV-ENG.pdf',
     path: ['Infrastructure', 'CMS', 'Search', 'Operations'],
     footer: { copy: '© 2026 Ada (hache) Cervera. Built by hand in Valencia.' },
   },
@@ -124,8 +125,8 @@ export const translations = {
     about: {
       label: '/ 01 · Sobre mí',
       h2a: 'Soy Hache.',
-      h2b: 'Empecé en diseño.',
-      h2c: 'Me quedé por el stack.',
+      h2b: 'Me encargo de que las webs funcionen,',
+      h2c: 'del servidor al buscador.',
       p1: 'Primero fueron el diseño gráfico y el marketing. Luego me enganché a entender cómo funcionan las webs por dentro: hosting, DNS, configuración de servidor, migraciones. Me gustó más que los píxeles, así que seguí bajando capas en vez de volver a subir.',
       layersLabel: 'Tres capas, de abajo arriba',
       layers: [
@@ -201,6 +202,7 @@ export const translations = {
       p: 'Sin formularios. Escríbeme y ya.',
       cv: 'Descargar CV (PDF)',
     },
+    cvHref: 'cv/Ada-Cervera-WebPlatform-CV-ESP.pdf',
     path: ['Infraestructura', 'CMS', 'Búsqueda', 'Operativa'],
     footer: { copy: '© 2026 Ada (hache) Cervera. Hecho a mano en Valencia.' },
   },
