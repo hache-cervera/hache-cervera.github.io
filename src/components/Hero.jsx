@@ -156,7 +156,7 @@ export default function Hero() {
         <p className="mt-6 max-w-md overflow-hidden text-sm font-semibold text-ink">
           <span data-line className="block">
             {t.hero.status}{' '}
-            <a href="cv/ada-hache-cervera-2026.pdf" className="whitespace-nowrap underline decoration-accent decoration-2 underline-offset-4 hover:text-accent-ink">
+            <a href={t.cvHref} className="whitespace-nowrap underline decoration-accent decoration-2 underline-offset-4 hover:text-accent-ink">
               {t.hero.cv}
             </a>
           </span>

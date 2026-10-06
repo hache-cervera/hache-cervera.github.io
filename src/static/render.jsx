@@ -23,7 +23,7 @@ function StaticHome() {
             {t.hero.sub1} {t.hero.sub2} {t.hero.sub3}
           </p>
           <p className="mt-6 max-w-md text-sm font-semibold text-ink">
-            {t.hero.status} <a href="cv/ada-hache-cervera-2026.pdf">{t.hero.cv}</a>
+            {t.hero.status} <a href={t.cvHref}>{t.hero.cv}</a>
           </p>
           <p className="mt-10 flex flex-wrap gap-4 font-display font-semibold">
             <a href="work/">{t.hero.portfolio}</a>
@@ -125,7 +125,7 @@ function StaticHome() {
           <p className="mt-4">
             <a href="mailto:hi.hache.cervera@gmail.com">hi.hache.cervera@gmail.com</a> ·{' '}
             <a href="https://www.linkedin.com/in/hache-cervera">LinkedIn</a> ·{' '}
-            <a href="cv/ada-hache-cervera-2026.pdf">{t.contact.cv}</a>
+            <a href={t.cvHref}>{t.contact.cv}</a>
           </p>
         </div>
       </section>
