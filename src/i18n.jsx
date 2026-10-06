@@ -11,7 +11,7 @@ export const translations = {
       sub1: '15+ live web properties, end to end.',
       sub2: 'Hosting, DNS, migrations, performance.',
       sub3: 'Technical SEO. Remote and async.',
-      status: 'Open to remote roles in web operations, WordPress platform and technical SEO.',
+      status: 'Open to remote roles: Webmaster, WordPress Specialist, Web Operations, CMS Specialist, web performance and accessibility.',
       cv: 'CV (PDF)',
       cta: 'My stack',
       portfolio: 'Portfolio',
@@ -75,6 +75,8 @@ export const translations = {
       label: '/ 04 · Research',
       h2: 'Research I ran myself',
       intro: 'Studies with public data, the method on the page and the data downloadable.',
+      all: 'All research',
+      allHref: 'research/',
       items: [
         {
           kicker: 'October 2026 · AI search',
@@ -113,7 +115,7 @@ export const translations = {
       sub1: '15+ webs en producción, de principio a fin.',
       sub2: 'Hosting, DNS, migraciones, rendimiento.',
       sub3: 'SEO técnico. En remoto y en asíncrono.',
-      status: 'Abierta a puestos en remoto de operaciones web, plataforma WordPress y SEO técnico.',
+      status: 'Abierta a puestos en remoto: Webmaster, WordPress Specialist, Web Operations, CMS Specialist, rendimiento y accesibilidad web.',
       cv: 'CV (PDF)',
       cta: 'Mi stack',
       portfolio: 'Portfolio',
@@ -177,6 +179,8 @@ export const translations = {
       label: '/ 04 · Investigación',
       h2: 'Investigaciones propias',
       intro: 'Estudios con datos públicos, el método explicado y los datos para descargar.',
+      all: 'Todas las investigaciones',
+      allHref: 'research/es/',
       items: [
         {
           kicker: 'Octubre 2026 · Búsqueda con IA',

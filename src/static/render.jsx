@@ -27,7 +27,7 @@ function StaticHome() {
           </p>
           <p className="mt-10 flex flex-wrap gap-4 font-display font-semibold">
             <a href="work/">{t.hero.portfolio}</a>
-            <a href="research/ibex-35-ai/">{t.hero.research}</a>
+            <a href="research/">{t.hero.research}</a>
           </p>
         </div>
       </section>

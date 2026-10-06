@@ -39,6 +39,9 @@ export default function Research() {
             </li>
           ))}
         </ul>
+        <a href={t.research.allHref} className="mt-8 inline-flex font-display text-sm font-semibold text-ink underline decoration-accent decoration-2 underline-offset-4 hover:text-accent-ink">
+          {t.research.all}
+        </a>
       </div>
     </section>
   );
