@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How slow and how accessible are Spain’s city council websites? · Research · Ada (hache) Cervera</title>
+  <meta name="description" content="Original research: speed (Lighthouse, mobile) and accessibility (axe, WCAG 2.1 AA) of the city council websites of Spain’s 50 provincial capitals, with the data downloadable." />
+  <link rel="canonical" href="https://hache-cervera.github.io/research/city-councils/" />
+  <link rel="alternate" hreflang="en" href="https://hache-cervera.github.io/research/city-councils/" />
+  <link rel="alternate" hreflang="es" href="https://hache-cervera.github.io/research/es/ayuntamientos/" />
+  <meta property="og:title" content="How slow and how accessible are city council websites?" />
+  <meta property="og:description" content="Original research: speed (Lighthouse, mobile) and accessibility (axe, WCAG 2.1 AA) of the city council websites of Spain’s 50 provincial capitals, with the data downloadable." />
+  <meta property="og:image" content="https://hache-cervera.github.io/research/img/aytos-og.jpg" />
+  <meta property="og:url" content="https://hache-cervera.github.io/research/city-councils/" />
+  <meta property="og:type" content="article" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <script>(function () { try { document.documentElement.dataset.theme = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light'; } catch (e) {} })();</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"How slow and how accessible are city council websites?","description":"Original research: speed (Lighthouse, mobile) and accessibility (axe, WCAG 2.1 AA) of the city council websites of Spain’s 50 provincial capitals, with the data downloadable.","inLanguage":"en","datePublished":"2026-10-06","url":"https://hache-cervera.github.io/research/city-councils/","image":"https://hache-cervera.github.io/research/img/aytos-og.jpg","author":{"@type":"Person","name":"Ada (hache) Cervera","url":"https://hache-cervera.github.io/"}},{"@type":"Dataset","name":"Spanish city council websites: speed and accessibility (October 2026)","description":"Original research: speed (Lighthouse, mobile) and accessibility (axe, WCAG 2.1 AA) of the city council websites of Spain’s 50 provincial capitals, with the data downloadable.","inLanguage":"en","creator":{"@type":"Person","name":"Ada (hache) Cervera"},"temporalCoverage":"2026-10-04/2026-10-06","license":"https://creativecommons.org/licenses/by/4.0/","isAccessibleForFree":true,"distribution":[{"@type":"DataDownload","encodingFormat":"text/csv","contentUrl":"https://hache-cervera.github.io/research/data/city-councils-2026-10.csv"},{"@type":"DataDownload","encodingFormat":"application/json","contentUrl":"https://hache-cervera.github.io/research/data/city-councils-2026-10.json"}]}]}</script>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --surface: #f5f5f5;
+      --panel: #0a0a0a;
+      --ink: #0a0a0a;
+      --muted: #6b6b6b;
+      --line: #e5e5e5;
+      --accent: #ff3c00;
+      --accent-hover: #e63500;
+      --accent-soft: #ffe8e1;
+      --seo: #2d5f8a;
+      --seo-w: #e9f0f6;
+      --aeo: #2f7d4f;
+      --aeo-w: #e8f3ec;
+      --geo: #7d4f9e;
+      --geo-w: #f2ebf7;
+      --font-display: 'Sora', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+    :root[data-theme="dark"] {
+      --bg: #0d0d0d;
+      --surface: #1c1c1c;
+      --ink: #f2f2f2;
+      --muted: #9a9a9a;
+      --line: #2a2a2a;
+      --accent-soft: #3a1608;
+      --seo: #7fb3dd;
+      --seo-w: #12202c;
+      --aeo: #7fc79b;
+      --aeo-w: #112318;
+      --geo: #bb96d6;
+      --geo-w: #1e1526;
+    }
+    :root[data-theme="dark"] .grain { mix-blend-mode: screen; opacity: 0.045; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    ::selection { background: var(--accent); color: #fff; }
+
+    .grain {
+      position: fixed;
+      inset: 0;
+      z-index: 40;
+      pointer-events: none;
+      opacity: 0.028;
+      mix-blend-mode: multiply;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%25" height="100%25" filter="url(%23n)"/></svg>');
+    }
+
+    .glow {
+      position: absolute;
+      width: 480px;
+      height: 480px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 60, 0, 0.09) 0%, rgba(255, 60, 0, 0) 68%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .deco { position: absolute; background: var(--accent); pointer-events: none; z-index: 0; }
+    @keyframes floaty { 0%, 100% { transform: translateY(0) rotate(8deg); } 50% { transform: translateY(-12px) rotate(14deg); } }
+    .deco { animation: floaty 7s ease-in-out infinite; }
+    @media (prefers-reduced-motion: reduce) { .deco { animation: none; } }
+
+    .wrap { max-width: 72rem; margin: 0 auto; padding: 0 24px; }
+    @media (min-width: 768px) { .wrap { padding: 0 48px; } }
+    a { color: inherit; }
+
+    /* ---------- Header ---------- */
+    header { padding: 24px 0; border-bottom: 1px solid var(--line); }
+    header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .back {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.875rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s ease;
+    }
+    .back:hover { color: var(--accent); }
+    .back span { color: var(--accent); transition: transform 0.2s ease; display: inline-block; }
+    .back:hover span { transform: translateX(-4px); }
+    .hctrl { display: flex; align-items: center; gap: 16px; }
+    .lang {
+      display: flex;
+      gap: 8px;
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+    .lang a { text-decoration: none; color: var(--muted); padding: 4px 2px; border-bottom: 2px solid transparent; }
+    .lang a:hover { color: var(--accent); }
+    .lang a.on { color: var(--ink); border-bottom-color: var(--accent); }
+    .tbtn {
+      position: relative;
+      width: 40px;
+      height: 40px;
+      background: none;
+      border: 1px solid var(--line);
+      cursor: pointer;
+      overflow: hidden;
+      transition: border-color 0.25s ease;
+    }
+    .tbtn:hover { border-color: var(--accent); }
+    .tbtn .sky {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.6s cubic-bezier(0.6, 0, 0.25, 1.3);
+    }
+    :root[data-theme="dark"] .tbtn .sky { transform: rotate(-45deg); }
+    .tbtn .core {
+      position: relative;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      transition: transform 0.5s cubic-bezier(0.6, 0, 0.25, 1.3), box-shadow 0.4s ease;
+    }
+    :root[data-theme="dark"] .tbtn .core { transform: scale(1.35); box-shadow: 0 0 12px rgba(255, 60, 0, 0.55); }
+    .tbtn .veil {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 12px;
+      height: 12px;
+      margin: -6px 0 0 -6px;
+      border-radius: 50%;
+      background: var(--bg);
+      transform: translate(15px, -15px);
+      transition: transform 0.5s cubic-bezier(0.6, 0, 0.25, 1.3), background 0.25s ease;
+      z-index: 2;
+    }
+    :root[data-theme="dark"] .tbtn .veil { transform: translate(4px, -4px) scale(1.35); }
+    .tbtn .ray {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 2px;
+      height: 5px;
+      margin: -2.5px 0 0 -1px;
+      border-radius: 1px;
+      background: var(--accent);
+      transform: rotate(var(--r)) translateY(-10px);
+      transition: transform 0.45s ease, opacity 0.35s ease;
+    }
+    :root[data-theme="dark"] .tbtn .ray { transform: rotate(var(--r)) translateY(-4px) scale(0.2); opacity: 0; }
+    @media (prefers-reduced-motion: reduce) { .tbtn .sky, .tbtn .core, .tbtn .veil, .tbtn .ray { transition: none; } }
+
+    /* ---------- Hero ---------- */
+    .hero { position: relative; padding: 80px 24px 56px; }
+    .hero > *:not(.glow):not(.deco) { position: relative; z-index: 1; }
+    @media (min-width: 768px) { .hero { padding: 112px 48px 72px; } }
+    .kicker {
+      font-family: var(--font-display);
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .hero h1 {
+      margin-top: 24px;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(2.2rem, 5.6vw, 4.2rem);
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      word-break: break-word;
+    }
+    .hero h1 em {
+      font-style: italic;
+      background: linear-gradient(100deg, #ff3c00 0%, #ff8a5c 35%, #ff3c00 65%, #ff5a24 100%);
+      background-size: 220% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: shimmer 4s linear infinite;
+    }
+    @keyframes shimmer { to { background-position: -220% 0; } }
+    .hero .lede { margin-top: 24px; max-width: 44rem; font-size: 1.125rem; color: var(--muted); }
+    .hero .actions { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+    .btn {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.875rem;
+      text-decoration: none;
+      padding: 14px 28px;
+      background: var(--accent);
+      color: #fff;
+      transition: background 0.2s ease;
+    }
+    .btn:hover { background: var(--accent-hover); }
+    .alt {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.875rem;
+      text-decoration: none;
+      color: var(--muted);
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 2px;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+    .alt:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* ---------- Meta grid ---------- */
+    .meta {
+      margin-top: 48px;
+      display: grid;
+      grid-template-columns: 1fr;
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+    }
+    @media (min-width: 560px) { .meta { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 900px) { .meta { grid-template-columns: repeat(3, 1fr); } }
+    .meta div { padding: 16px 20px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .meta dt {
+      font-family: var(--font-display);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .meta dd { margin-top: 4px; font-size: 0.9375rem; font-weight: 500; }
+
+    /* ---------- Sections ---------- */
+    /* overflow:hidden keeps the bleeding .glow circles from widening the page */
+    section, .hero { overflow: hidden; }
+    section { position: relative; padding: 64px 0 80px; border-top: 1px solid var(--line); }
+    section .wrap { position: relative; z-index: 1; }
+    .section-label {
+      font-family: var(--font-display);
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    section h2 {
+      margin-top: 24px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+    }
+    .section-intro { margin-top: 16px; max-width: 46rem; color: var(--muted); }
+    section p + p { margin-top: 12px; }
+    .note {
+      margin-top: 24px;
+      max-width: 46rem;
+      padding: 12px 16px;
+      border-left: 2px solid var(--accent);
+      background: var(--surface);
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+    .note strong { color: var(--ink); font-weight: 600; }
+    code {
+      font-family: ui-monospace, 'SF Mono', Consolas, monospace;
+      font-size: 0.8125em;
+      background: var(--surface);
+      padding: 2px 6px;
+      color: var(--accent);
+    }
+
+    /* ---------- Panel quote ---------- */
+    .quote {
+      margin-top: 40px;
+      background: var(--panel);
+      color: #f2f2f2;
+      padding: 32px 28px;
+      border-left: 3px solid var(--accent);
+    }
+    @media (min-width: 768px) { .quote { padding: 40px 44px; } }
+    .quote p { color: rgba(242, 242, 242, 0.82); font-size: 1.0625rem; max-width: 48rem; }
+    .quote strong { color: #fff; font-weight: 600; }
+
+    /* ---------- Stats ---------- */
+    .stats {
+      margin-top: 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+    }
+    @media (min-width: 768px) { .stats { grid-template-columns: repeat(4, 1fr); } }
+    .stats div { padding: 24px 20px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .stats b {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(1.9rem, 4vw, 2.6rem);
+      letter-spacing: -0.04em;
+      line-height: 1;
+      color: var(--accent);
+    }
+    .stats span { display: block; margin-top: 8px; font-size: 0.8125rem; color: var(--muted); }
+
+    /* ---------- Sitemap ---------- */
+    .sitemap { margin-top: 40px; display: grid; gap: 12px; grid-template-columns: 1fr; }
+    @media (min-width: 640px) { .sitemap { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 1000px) { .sitemap { grid-template-columns: repeat(4, 1fr); } }
+    .smap { display: flex; flex-direction: column; gap: 6px; }
+    .smap .top {
+      background: var(--panel);
+      color: #fff;
+      padding: 12px 14px;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.8125rem;
+    }
+    .smap .top i { display: block; margin-top: 3px; font-style: normal; font-size: 0.6875rem; font-weight: 400; color: rgba(255, 255, 255, 0.55); }
+    .smap .kid { border: 1px solid var(--line); background: var(--surface); padding: 9px 14px; font-size: 0.8125rem; color: var(--muted); }
+
+    /* ---------- Highlights ---------- */
+    .hl { margin-top: 40px; display: grid; gap: 16px; grid-template-columns: 1fr; }
+    @media (min-width: 640px) { .hl { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 1000px) { .hl { grid-template-columns: repeat(3, 1fr); } }
+    .hl-item { border: 1px solid var(--line); padding: 24px; transition: border-color 0.3s ease; }
+    .hl-item:hover { border-color: var(--ink); }
+    .hl-item svg { display: block; color: var(--accent); }
+    .hl-item h3 {
+      margin-top: 16px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.125rem;
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+    }
+    .hl-item p { margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
+
+    /* ---------- Timeline ---------- */
+    .tl { margin-top: 48px; display: grid; gap: 24px; grid-template-columns: 1fr; list-style: none; }
+    @media (min-width: 900px) { .tl { grid-template-columns: repeat(4, 1fr); } }
+    .tl-step { border-top: 2px solid var(--line); padding-top: 16px; }
+    .tl-step.now { border-top-color: var(--accent); }
+    .tl-step b {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .tl-step.now b { color: var(--accent); }
+    .tl-step p { margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
+
+    /* ---------- One article, three surfaces ---------- */
+    .flow { margin-top: 40px; }
+    .flow-src {
+      border: 1px solid var(--ink);
+      background: var(--surface);
+      padding: 16px 24px;
+      text-align: center;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--ink);
+    }
+    .flow-fan { display: grid; grid-template-columns: repeat(3, 1fr); height: 24px; }
+    .flow-fan span { justify-self: center; width: 1px; background: var(--line); }
+    .flow-outs { display: grid; gap: 16px; grid-template-columns: 1fr; }
+    @media (max-width: 699px) { .flow-fan { display: none; } .flow-outs { margin-top: 16px; } }
+    @media (min-width: 700px) { .flow-outs { grid-template-columns: repeat(3, 1fr); } }
+    .flow-out { border: 1px solid var(--line); border-top: 3px solid; padding: 16px; }
+    .flow-out.o-seo { border-top-color: var(--seo); }
+    .flow-out.o-aeo { border-top-color: var(--aeo); }
+    .flow-out.o-geo { border-top-color: var(--geo); }
+    .flow-out b { display: block; font-family: var(--font-display); font-weight: 700; font-size: 1rem; }
+    .flow-out span { display: block; margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
+
+    /* ---------- Layers ---------- */
+    .layers { margin-top: 40px; display: flex; flex-direction: column; gap: 16px; }
+    .layer { padding: 24px 26px; border-left: 3px solid; }
+    .layer.l-seo { background: var(--seo-w); border-color: var(--seo); }
+    .layer.l-aeo { background: var(--aeo-w); border-color: var(--aeo); }
+    .layer.l-geo { background: var(--geo-w); border-color: var(--geo); }
+    .layer .tag {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      color: #fff;
+    }
+    .l-seo .tag { background: var(--seo); }
+    .l-aeo .tag { background: var(--aeo); }
+    .l-geo .tag { background: var(--geo); }
+    :root[data-theme="dark"] .layer .tag { color: #0d0d0d; }
+    .layer h3 {
+      margin-top: 12px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.0625rem;
+      letter-spacing: -0.02em;
+    }
+    .layer ul { margin-top: 12px; padding-left: 18px; }
+    .layer li { font-size: 0.875rem; color: var(--muted); margin-bottom: 8px; }
+    .layer li:last-child { margin-bottom: 0; }
+    .layer li strong { color: var(--ink); font-weight: 600; }
+
+    /* ---------- Component cards ---------- */
+    .cards { margin-top: 40px; display: grid; gap: 24px; grid-template-columns: 1fr; }
+    @media (min-width: 768px) { .cards { grid-template-columns: 1fr 1fr; } }
+    .card { border: 1px solid var(--line); overflow: hidden; transition: border-color 0.3s ease; }
+    .card:hover { border-color: var(--ink); }
+    .card figure { margin: 0; aspect-ratio: 16 / 10; overflow: hidden; background: var(--surface); border-bottom: 1px solid var(--line); cursor: zoom-in; }
+    .card figure img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; transition: transform 0.6s ease; }
+    .card:hover figure img { transform: scale(1.03); }
+    .card .body { padding: 22px 24px; }
+    /* Component gallery: let each shot keep its own height instead of cropping it */
+    .cards.gallery { align-items: start; }
+    .cards.gallery figure { aspect-ratio: auto; }
+    .cards.gallery figure img { height: auto; object-fit: contain; }
+    @media (min-width: 900px) { .cards.three { grid-template-columns: repeat(3, 1fr); } }
+    .card h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.125rem; letter-spacing: -0.02em; }
+    .card p { margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
+
+    /* ---------- Stack ---------- */
+    .group { margin-top: 32px; }
+    .group h3 {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .tags { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .tags li {
+      list-style: none;
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      padding: 5px 12px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--muted);
+    }
+    .tags li.key { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+
+    /* ---------- Tables ---------- */
+    /* Migration figures, stated as figures. */
+    .figs { margin-top: 40px; display: grid; grid-template-columns: repeat(2, 1fr); border: 1px solid var(--line); }
+    @media (min-width: 760px) { .figs { grid-template-columns: repeat(5, 1fr); } }
+    .figs div { padding: 20px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .figs b {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.75rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      color: var(--ink);
+    }
+    .figs span { display: block; margin-top: 8px; font-size: 0.75rem; line-height: 1.35; color: var(--muted); }
+
+    .tbl { margin-top: 40px; border: 1px solid var(--line); overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.875rem; min-width: 34rem; }
+    th {
+      background: var(--surface);
+      padding: 12px 18px;
+      text-align: left;
+      font-family: var(--font-display);
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border-bottom: 1px solid var(--line);
+    }
+    td { padding: 14px 18px; border-bottom: 1px solid var(--line); color: var(--muted); vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    td strong { color: var(--ink); font-weight: 600; }
+    td:first-child { white-space: nowrap; }
+
+    /* ---------- CTA + footer ---------- */
+    .cta { position: relative; background: var(--panel); color: #f2f2f2; border-top: none; overflow: hidden; }
+    .cta .kicker { color: var(--accent); }
+    .cta h2 { color: #fff; }
+    .cta p { margin-top: 16px; max-width: 40rem; color: rgba(242, 242, 242, 0.7); }
+    .cta .actions { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+    .cta .alt { color: rgba(242, 242, 242, 0.7); border-color: rgba(242, 242, 242, 0.25); }
+    .cta .alt:hover { color: var(--accent); border-color: var(--accent); }
+    footer { padding: 40px 0; border-top: 1px solid var(--line); }
+    footer .wrap { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; font-size: 0.8125rem; color: var(--muted); }
+    footer .path { font-family: var(--font-display); }
+    footer .path span { color: var(--accent); }
+
+    /* ---------- Reveal + lightbox ---------- */
+    .rv { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .rv.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { .rv { opacity: 1; transform: none; transition: none; } }
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(8, 8, 8, 0.94);
+      padding: 32px 16px;
+    }
+    .lightbox.on { display: flex; }
+    .lightbox img { max-width: 100%; max-height: 100%; object-fit: contain; }
+    .lightbox .close {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 2rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+    .lightbox .close:hover { color: var(--accent); }
+  
+    .slides { margin-top: 40px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    @media (min-width: 760px) { .slides { grid-template-columns: repeat(4, 1fr); } }
+    .slides button { padding: 0; border: 1px solid var(--line); background: none; cursor: zoom-in; display: block; }
+    .slides img { display: block; width: 100%; height: auto; }
+    .tbl table { font-size: 0.8125rem; }
+    .tbl caption { text-align: left; padding: 12px 16px; font-size: 0.8125rem; color: var(--muted); caption-side: bottom; }
+    .tbl td.n { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+    .tbl td.bad { color: #c22e00; font-weight: 600; }
+    [data-theme='dark'] .tbl td.bad { color: var(--accent); }
+    .list { margin-top: 24px; max-width: 46rem; padding-left: 1.2rem; }
+    .list li { margin-top: 12px; color: var(--muted); }
+    .prose { margin-top: 16px; max-width: 46rem; color: var(--muted); }
+    code { font-size: 0.875em; }
+    html:not([data-theme='dark']) .kicker, html:not([data-theme='dark']) .section-label, html:not([data-theme='dark']) code { color: #c22e00; }
+    html:not([data-theme='dark']) .btn { background: #c22e00; border-color: #c22e00; }
+    html .cta .kicker { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <header>
+    <div class="wrap">
+      <a class="back" href="../"><span>&larr;</span> All research</a>
+      <div class="hctrl">
+        <nav class="lang" aria-label="Language">
+          <a class="on" aria-current="page" href="./">EN</a>
+          <a href="../es/ayuntamientos/">ES</a>
+        </nav>
+        <button class="tbtn" id="modeToggle" type="button" aria-label="Switch between light and dark mode">
+          <span class="sky" aria-hidden="true"><span class="ray" style="--r:0deg"></span><span class="ray" style="--r:45deg"></span><span class="ray" style="--r:90deg"></span><span class="ray" style="--r:135deg"></span><span class="ray" style="--r:180deg"></span><span class="ray" style="--r:225deg"></span><span class="ray" style="--r:270deg"></span><span class="ray" style="--r:315deg"></span><span class="core"></span><span class="veil"></span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+  <main>
+    <div class="hero wrap">
+      <span class="glow" style="top: -140px; right: -160px;" aria-hidden="true"></span>
+      <p class="kicker">/ Research · Public websites · October 2026</p>
+      <h1>How slow and how <em>accessible</em> are city council websites?</h1>
+      <p class="lede">I measured the home pages of the city councils of Spain’s 50 provincial capitals: how long they take on an average phone, how much they weigh, and how they work for someone who cannot see the screen. These are public websites; people need them to book appointments and get certificates.</p>
+      <dl class="meta"><div><dt>Websites</dt><dd>50, one per provincial capital</dd></div><div><dt>Speed</dt><dd>Lighthouse, simulated phone on slow 4G, 3 runs, median. 4 Oct 2026</dd></div><div><dt>Accessibility</dt><dd>axe-core against WCAG 2.1 A and AA, desktop on 4 Oct, mobile on 5 Oct</dd></div><div><dt>Checked by hand</dt><dd>Buttons, declarations and 320 px reflow, 6 Oct</dd></div><div><dt>Scope</dt><dd>Official home page only</dd></div><div><dt>Data</dt><dd><a href="../data/city-councils-2026-10.csv">CSV</a> · <a href="../data/city-councils-2026-10.json">JSON</a></dd></div></dl>
+      <p class="note"><strong>Not on this page:</strong> blame. I have no data on who built each site or what was asked for, so I do not guess.</p>
+    </div>
+
+    <section id="highlights">
+      <div class="wrap">
+        <p class="section-label">/ In short</p>
+        <h2>The numbers</h2>
+        <div class="figs"><div><b>56</b><span>median mobile speed score out of 100</span></div><div><b>17 s</b><span>median time to show the main content</span></div><div><b>5.9 MB</b><span>median home page weight</span></div><div><b>42/49</b><span>home pages with WCAG errors on desktop</span></div><div><b>0</b><span>declarations claiming full compliance</span></div></div>
+      </div>
+    </section>
+
+    <section id="carousel">
+      <div class="wrap">
+        <p class="section-label">/ The carousels</p>
+        <h2>Both LinkedIn carousels</h2>
+        <p class="section-intro">Speed first, then accessibility. Click to enlarge.</p><div class="slides"><button type="button"><img data-zoom src="../img/aytos-v-1.webp" alt="Median time to show a city council home page: 17 seconds. The longest is Murcia, 124 seconds. Median score 56 out of 100; 11 capitals below 50." width="1080" height="1350" loading="lazy" /></button><button type="button"><img data-zoom src="../img/aytos-v-2.webp" alt="Table of the 50 capitals by mobile speed score, with seconds and megabytes." width="1080" height="1350" loading="lazy" /></button><button type="button"><img data-zoom src="../img/aytos-v-3.webp" alt="Map of Spain by province with each capital’s mobile speed score; in red, the 11 below 50." width="1080" height="1350" loading="lazy" /></button><button type="button"><img data-zoom src="../img/aytos-v-4.webp" alt="Method: real Chrome, Lighthouse on mobile, three runs per site, median, and a manual re-check in PageSpeed Insights." width="1080" height="1350" loading="lazy" /></button></div><div class="slides"><button type="button"><img data-zoom src="../img/aytos-a-1.webp" alt="City council websites that fail accessibility: 42 of 49 home pages with WCAG errors; 0 claim full compliance; 46 of 49 fail on mobile." width="1080" height="1350" loading="lazy" /></button><button type="button"><img data-zoom src="../img/aytos-a-2.webp" alt="Table of the 50 capitals with WCAG errors on desktop and mobile and the state of their accessibility declaration." width="1080" height="1350" loading="lazy" /></button><button type="button"><img data-zoom src="../img/aytos-a-3.webp" alt="Map of Spain by province: red, critical errors; black, errors; grey, none detected; white, site down." width="1080" height="1350" loading="lazy" /></button><button type="button"><img data-zoom src="../img/aytos-a-4.webp" alt="What the law requires: WCAG 2.1 AA through EN 301 549, with ten example criteria and the accessibility declaration." width="1080" height="1350" loading="lazy" /></button><button type="button"><img data-zoom src="../img/aytos-a-5.webp" alt="Method: axe-core against WCAG 2.1 A and AA on desktop and a simulated iPhone, 320 px reflow, and a manual review." width="1080" height="1350" loading="lazy" /></button><button type="button"><img data-zoom src="../img/aytos-a-6.webp" alt="What fails most: low contrast 32, ARIA 22, links without text 21, nameless buttons 8, images without alt 7, unlabelled forms 5." width="1080" height="1350" loading="lazy" /></button><button type="button"><img data-zoom src="../img/aytos-a-7.webp" alt="Proof: axe in the Chrome console on Palma’s home page, 6 October, 146 elements failing WCAG 2.1 AA." width="1080" height="1350" loading="lazy" /></button><button type="button"><img data-zoom src="../img/aytos-a-8.webp" alt="The mute button: Huelva’s mobile menu button, whose screen-reader text is hidden by a CSS rule, leaving it without a name." width="1080" height="1350" loading="lazy" /></button></div>
+      </div>
+    </section>
+
+    <section id="speed">
+      <div class="wrap">
+        <p class="section-label">/ 01 · Speed</p>
+        <h2>A national experience, measured</h2>
+        <p class="prose">The median mobile score is 56 out of 100 and 11 capitals score under 50. The median home page needs 17 seconds to show its main content; Google calls anything over 4 seconds slow. The median page weighs almost 6 MB and 12 weigh more than 10 MB. Bilbao and Vitoria-Gasteiz were the fastest in this run.</p><p class="prose">The heaviest home page is Valladolid’s, 34 MB, and it still scores 57: 32 of those megabytes are two videos that download on their own, but the page appears in 13 seconds. Murcia weighs 30 MB, scores 4 and, in the simulation, takes over two minutes. The score measures when you can see and use the page, not how much it weighs.</p><p class="prose">In Salamanca a single photo of an electric car weighs 21.8 MB, more than 46 of the 50 home pages. In Murcia a press-release photo weighs 5.9 MB. Images uploaded without anyone checking their size.</p>
+      </div>
+    </section>
+
+    <section id="accessibility">
+      <div class="wrap">
+        <p class="section-label">/ 02 · Accessibility</p>
+        <h2>Using them without seeing the screen</h2>
+        <p class="prose">axe found WCAG 2.1 errors on 42 of 49 home pages on desktop (23 with critical errors) and on 46 of 49 on mobile (28 critical). Toledo was down during the desktop run and Huesca during the mobile one. Automated tests only find part of the problems: Deque measured about 57% of issues by volume, so the real picture is worse, not better.</p><p class="prose">The clearest case: on mobile, the menu button in Donostia, Huelva and Toledo has no name, so a screen reader just says “button”. In Huelva the button does include the text “Toggle navigation” for screen readers, but a mobile CSS rule, <code>.navbar-toggle span { display: none !important }</code>, hides it, and the accessible name ends up empty. In Palma axe flags 146 elements, most of them links without text: service icons whose label sits outside the link.</p><div class="tbl" tabindex="0" role="region" aria-label="What fails most (sites with at least one error of each kind, out of 49)"><table><thead><tr><th scope="col">What fails most (sites with at least one error of each kind, out of 49)</th><th scope="col">/49</th></tr></thead><tbody><tr><th scope="row">Low-contrast text</th><td class="n">32</td></tr><tr><th scope="row">Broken ARIA code</th><td class="n">22</td></tr><tr><th scope="row">Links without text</th><td class="n">21</td></tr><tr><th scope="row">Buttons without a name</th><td class="n">8</td></tr><tr><th scope="row">Images without alt text</th><td class="n">7</td></tr><tr><th scope="row">Form fields without a label</th><td class="n">5</td></tr></tbody></table></div><p class="prose">At 320 px wide (WCAG 1.4.10, the same as zooming to 400%), 12 sites force horizontal scrolling and 5 do not adapt to mobile at all: Ávila, Granada, Jaén, Soria and Bilbao. Accessibility declarations: 24 say “partially compliant”, none claims full compliance, 6 still cite standards that have been replaced, 13 could not be found from the home page and 7 do not state their level.</p>
+      </div>
+    </section>
+
+    <section id="cities">
+      <div class="wrap">
+        <p class="section-label">/ 03 · The 50 capitals</p>
+        <h2>Every city, both studies</h2>
+        <div class="tbl" tabindex="0" role="region" aria-label="City"><table><caption>Score and seconds: Lighthouse mobile, 4 Oct 2026. WCAG: elements failing WCAG 2.1 A/AA according to axe; in red, at least one critical. Empty: not measured (León and Toledo had server errors during the speed run; Toledo and Huesca were down for one of the accessibility runs).</caption><thead><tr><th scope="col">City</th><th scope="col">Score</th><th scope="col">Seconds</th><th scope="col">MB</th><th scope="col">WCAG desktop</th><th scope="col">WCAG mobile</th><th scope="col">Declaration</th></tr></thead><tbody><tr><th scope="row">A Coruña</th><td class="n bad">38</td><td class="n">17.2</td><td class="n">2.7</td><td class="n">5</td><td class="n">4</td><td>cites replaced standards</td></tr><tr><th scope="row">Albacete</th><td class="n bad">28</td><td class="n">21.3</td><td class="n">3.8</td><td class="n bad">100</td><td class="n bad">53</td><td>cites replaced standards</td></tr><tr><th scope="row">Alicante</th><td class="n">62</td><td class="n">8.2</td><td class="n">1.4</td><td class="n">0</td><td class="n">0</td><td>partially compliant</td></tr><tr><th scope="row">Almería</th><td class="n bad">46</td><td class="n">12.1</td><td class="n">4.7</td><td class="n bad">10</td><td class="n bad">13</td><td>not found from the home page</td></tr><tr><th scope="row">Ávila</th><td class="n">65</td><td class="n">6.9</td><td class="n">1.0</td><td class="n">28</td><td class="n">28</td><td>not found from the home page</td></tr><tr><th scope="row">Badajoz</th><td class="n bad">49</td><td class="n">6.7</td><td class="n">6.8</td><td class="n">17</td><td class="n">8</td><td>partially compliant</td></tr><tr><th scope="row">Barcelona</th><td class="n">56</td><td class="n">19.4</td><td class="n">5.9</td><td class="n bad">17</td><td class="n bad">19</td><td>partially compliant</td></tr><tr><th scope="row">Bilbao</th><td class="n">81</td><td class="n">3.5</td><td class="n">2.2</td><td class="n bad">4</td><td class="n bad">4</td><td>does not say</td></tr><tr><th scope="row">Burgos</th><td class="n">55</td><td class="n">21.2</td><td class="n">7.2</td><td class="n bad">14</td><td class="n bad">7</td><td>cites replaced standards</td></tr><tr><th scope="row">Cáceres</th><td class="n">55</td><td class="n">19.4</td><td class="n">22.4</td><td class="n">38</td><td class="n bad">48</td><td>not found from the home page</td></tr><tr><th scope="row">Cádiz</th><td class="n">64</td><td class="n">7.1</td><td class="n">1.9</td><td class="n">11</td><td class="n">11</td><td>partially compliant</td></tr><tr><th scope="row">Castellón de la Plana</th><td class="n">55</td><td class="n">17.2</td><td class="n">3.1</td><td class="n">14</td><td class="n">16</td><td>partially compliant</td></tr><tr><th scope="row">Ciudad Real</th><td class="n">53</td><td class="n">23.5</td><td class="n">9.0</td><td class="n">7</td><td class="n">7</td><td>does not say</td></tr><tr><th scope="row">Córdoba</th><td class="n">51</td><td class="n">12.6</td><td class="n">14.6</td><td class="n">3</td><td class="n">2</td><td>partially compliant</td></tr><tr><th scope="row">Cuenca</th><td class="n">61</td><td class="n">12.1</td><td class="n">1.8</td><td class="n bad">15</td><td class="n bad">16</td><td>partially compliant</td></tr><tr><th scope="row">Donostia-San Sebastián</th><td class="n bad">45</td><td class="n">8.8</td><td class="n">2.4</td><td class="n bad">12</td><td class="n bad">4</td><td>does not say</td></tr><tr><th scope="row">Girona</th><td class="n">58</td><td class="n">13.4</td><td class="n">2.4</td><td class="n bad">31</td><td class="n bad">35</td><td>not found from the home page</td></tr><tr><th scope="row">Granada</th><td class="n">62</td><td class="n">8.5</td><td class="n">1.1</td><td class="n bad">4</td><td class="n bad">4</td><td>does not say</td></tr><tr><th scope="row">Guadalajara</th><td class="n">59</td><td class="n">16.7</td><td class="n">2.8</td><td class="n bad">31</td><td class="n">26</td><td>does not say</td></tr><tr><th scope="row">Huelva</th><td class="n bad">46</td><td class="n">23.3</td><td class="n">7.3</td><td class="n">0</td><td class="n bad">1</td><td>not found from the home page</td></tr><tr><th scope="row">Huesca</th><td class="n">52</td><td class="n">53.8</td><td class="n">14.8</td><td class="n bad">18</td><td class="n"></td><td>not found from the home page</td></tr><tr><th scope="row">Jaén</th><td class="n">64</td><td class="n">46.2</td><td class="n">8.4</td><td class="n bad">9</td><td class="n bad">9</td><td>not found from the home page</td></tr><tr><th scope="row">Las Palmas de Gran Canaria</th><td class="n bad">26</td><td class="n">40.9</td><td class="n">15.9</td><td class="n">27</td><td class="n">24</td><td>partially compliant</td></tr><tr><th scope="row">León</th><td class="n"></td><td class="n"></td><td class="n"></td><td class="n">5</td><td class="n bad">12</td><td>not found from the home page</td></tr><tr><th scope="row">Lleida</th><td class="n">55</td><td class="n">39.8</td><td class="n">11.1</td><td class="n">2</td><td class="n bad">2</td><td>partially compliant</td></tr><tr><th scope="row">Logroño</th><td class="n bad">42</td><td class="n">35.9</td><td class="n">19.0</td><td class="n">0</td><td class="n">0</td><td>does not say</td></tr><tr><th scope="row">Lugo</th><td class="n">56</td><td class="n">19.3</td><td class="n">4.1</td><td class="n">44</td><td class="n">38</td><td>not found from the home page</td></tr><tr><th scope="row">Madrid</th><td class="n">63</td><td class="n">14.1</td><td class="n">3.3</td><td class="n bad">12</td><td class="n bad">15</td><td>partially compliant</td></tr><tr><th scope="row">Málaga</th><td class="n bad">28</td><td class="n">39.4</td><td class="n">9.3</td><td class="n bad">11</td><td class="n bad">7</td><td>partially compliant</td></tr><tr><th scope="row">Murcia</th><td class="n bad">4</td><td class="n">124.2</td><td class="n">30.5</td><td class="n">14</td><td class="n">12</td><td>does not say</td></tr><tr><th scope="row">Ourense</th><td class="n">62</td><td class="n">6.5</td><td class="n">8.9</td><td class="n">21</td><td class="n">4</td><td>partially compliant</td></tr><tr><th scope="row">Oviedo</th><td class="n">58</td><td class="n">14.6</td><td class="n">3.7</td><td class="n bad">52</td><td class="n bad">42</td><td>not found from the home page</td></tr><tr><th scope="row">Palencia</th><td class="n">58</td><td class="n">6.8</td><td class="n">20.9</td><td class="n">0</td><td class="n">1</td><td>partially compliant</td></tr><tr><th scope="row">Palma</th><td class="n">53</td><td class="n">14.8</td><td class="n">5.6</td><td class="n bad">146</td><td class="n bad">133</td><td>cites replaced standards</td></tr><tr><th scope="row">Pamplona</th><td class="n">58</td><td class="n">32.6</td><td class="n">7.8</td><td class="n bad">7</td><td class="n bad">15</td><td>partially compliant</td></tr><tr><th scope="row">Pontevedra</th><td class="n">54</td><td class="n">10.7</td><td class="n">1.5</td><td class="n bad">3</td><td class="n">3</td><td>partially compliant</td></tr><tr><th scope="row">Salamanca</th><td class="n">54</td><td class="n">89.2</td><td class="n">30.4</td><td class="n">1</td><td class="n">1</td><td>partially compliant</td></tr><tr><th scope="row">Santa Cruz de Tenerife</th><td class="n">53</td><td class="n">38.4</td><td class="n">13.3</td><td class="n">43</td><td class="n">39</td><td>partially compliant</td></tr><tr><th scope="row">Santander</th><td class="n">56</td><td class="n">19.1</td><td class="n">3.2</td><td class="n bad">14</td><td class="n bad">17</td><td>not found from the home page</td></tr><tr><th scope="row">Segovia</th><td class="n">59</td><td class="n">11.3</td><td class="n">1.3</td><td class="n bad">2</td><td class="n bad">1</td><td>partially compliant</td></tr><tr><th scope="row">Sevilla</th><td class="n">56</td><td class="n">26.9</td><td class="n">4.7</td><td class="n">7</td><td class="n">11</td><td>partially compliant</td></tr><tr><th scope="row">Soria</th><td class="n">69</td><td class="n">7.3</td><td class="n">0.8</td><td class="n bad">3</td><td class="n bad">3</td><td>not found from the home page</td></tr><tr><th scope="row">Tarragona</th><td class="n">51</td><td class="n">32.6</td><td class="n">6.6</td><td class="n">0</td><td class="n bad">1</td><td>partially compliant</td></tr><tr><th scope="row">Teruel</th><td class="n">64</td><td class="n">34.5</td><td class="n">9.6</td><td class="n bad">17</td><td class="n bad">17</td><td>cites replaced standards</td></tr><tr><th scope="row">Toledo</th><td class="n"></td><td class="n"></td><td class="n"></td><td class="n"></td><td class="n bad">24</td><td>cites replaced standards</td></tr><tr><th scope="row">Valencia</th><td class="n bad">49</td><td class="n">27.0</td><td class="n">14.1</td><td class="n">0</td><td class="n bad">2</td><td>partially compliant</td></tr><tr><th scope="row">Valladolid</th><td class="n">57</td><td class="n">13.2</td><td class="n">34.2</td><td class="n">3</td><td class="n bad">4</td><td>partially compliant</td></tr><tr><th scope="row">Vitoria-Gasteiz</th><td class="n">92</td><td class="n">3.1</td><td class="n">1.0</td><td class="n">0</td><td class="n">0</td><td>partially compliant</td></tr><tr><th scope="row">Zamora</th><td class="n">55</td><td class="n">25.3</td><td class="n">9.0</td><td class="n bad">35</td><td class="n bad">30</td><td>not found from the home page</td></tr><tr><th scope="row">Zaragoza</th><td class="n">63</td><td class="n">16.6</td><td class="n">5.3</td><td class="n">4</td><td class="n">4</td><td>partially compliant</td></tr></tbody></table></div>
+      </div>
+    </section>
+
+    <section id="law">
+      <div class="wrap">
+        <p class="section-label">/ 04 · The law</p>
+        <h2>What public websites must do</h2>
+        <p class="prose">Royal Decree 1112/2018 requires public-sector websites in Spain to meet WCAG 2.1 level AA, through the European standard EN 301 549, to publish an accessibility declaration saying what is not accessible and why, and to link it as “Accessibility” from every page. WCAG 2.2 arrives with EN 301 549 v4.1.1 (published 2 September 2026) once it is cited in the Official Journal of the EU. WCAG is the floor, not the ceiling, and many of these sites do not reach the floor.</p>
+      </div>
+    </section>
+
+    <section id="method">
+      <div class="wrap">
+        <p class="section-label">/ 05 · Method</p>
+        <h2>How it was measured, and its limits</h2>
+        <ul class="list"><li>Speed: Lighthouse, the engine behind PageSpeed Insights, on a simulated mid-range phone with slow 4G. Each site three times, median kept, about 150 runs. Re-checked by hand in PageSpeed: most moved less than 10 points; Vitoria moved most, from 92 to 65. Trust the order more than the exact number.</li><li>Weight is the most stable figure: 30 MB is 30 MB whoever measures it.</li><li>It is a lab test with a simulated phone, not real-user data, and only the home page.</li><li>almeria.es belongs to the provincial council, not the city: the right site had to be found by hand.</li><li>Accessibility: axe-core 4.13 against WCAG 2.1 A and AA. Two detectors were discarded for not being reliable enough: invisible focus and “skip to content”.</li></ul>
+      </div>
+    </section>
+  </main>
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+    <button class="close" type="button" aria-label="Close">&times;</button>
+    <img src="" alt="" />
+  </div>
+  <section class="cta" id="contact">
+    <div class="wrap">
+      <p class="kicker">/ Next</p>
+      <h2>I check before I publish.</h2>
+      <p>I wrote the scripts with help from Claude. What to measure, the manual checks and the numbers I threw away were my call. If your team needs that kind of checking, email me.</p>
+      <div class="actions">
+        <a class="btn" href="mailto:hi.hache.cervera@gmail.com?subject=City%20council%20research">Email me</a>
+        <a class="alt" href="../data/city-councils-2026-10.csv">Download the data</a>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <div class="wrap">
+      <p>&copy; 2026 Ada (hache) Cervera. Built by hand in Valencia.</p>
+      <p class="path">Infrastructure <span>&rarr;</span> CMS <span>&rarr;</span> Search <span>&rarr;</span> Operations</p>
+    </div>
+  </footer>
+  <script>
+    (function () {
+      var GA_ID = 'G-6JCDHFSJ4M';
+      var ga = document.createElement('script'); ga.async = true; ga.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID; document.head.appendChild(ga);
+      window.dataLayer = window.dataLayer || []; window.gtag = function () { window.dataLayer.push(arguments); };
+      gtag('js', new Date()); gtag('config', GA_ID);
+      function track(n, p) { if (window.gtag) window.gtag('event', n, p || {}); }
+      document.getElementById('modeToggle').addEventListener('click', function () {
+        var t = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+        document.documentElement.dataset.theme = t; try { localStorage.setItem('theme', t); } catch (e) {}
+      });
+      var box = document.getElementById('lightbox'), boxImg = box.querySelector('img'), last = null;
+      document.querySelectorAll('[data-zoom]').forEach(function (img) {
+        img.parentElement.addEventListener('click', function () {
+          last = img.parentElement; boxImg.src = img.src; boxImg.alt = img.alt; box.classList.add('on'); box.querySelector('.close').focus();
+          track('image_open', { page: 'city-councils', image: img.getAttribute('src') });
+        });
+      });
+      function closeBox() { box.classList.remove('on'); boxImg.src = ''; if (last) last.focus(); }
+      box.querySelector('.close').addEventListener('click', closeBox);
+      box.addEventListener('click', function (e) { if (e.target === box) closeBox(); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && box.classList.contains('on')) closeBox(); });
+      document.querySelectorAll('a[href$=".csv"], a[href$=".json"]').forEach(function (a) { a.addEventListener('click', function () { track('data_download', { file: a.getAttribute('href') }); }); });
+    })();
+  </script>
+</body>
+</html>
