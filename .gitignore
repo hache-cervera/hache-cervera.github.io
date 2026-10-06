@@ -12,3 +12,12 @@ mejorar_flor.py
 
 # code-review-graph: local analysis db, contains absolute paths
 .code-review-graph/
+
+# Local agent tooling
+.agents/
+.claude/settings.json.bak
+skills-lock.json
+dist-ssr/
+
+# design tool local config (contains local paths)
+.impeccable/
