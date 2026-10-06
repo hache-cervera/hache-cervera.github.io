@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url><loc>https://hache-cervera.github.io/</loc></url>
+  <url>
+    <loc>https://hache-cervera.github.io/research/ibex-35-ai/</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hache-cervera.github.io/research/ibex-35-ai/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hache-cervera.github.io/research/es/ibex-35-ia/"/>
+  </url>
+  <url>
+    <loc>https://hache-cervera.github.io/research/es/ibex-35-ia/</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hache-cervera.github.io/research/ibex-35-ai/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hache-cervera.github.io/research/es/ibex-35-ia/"/>
+  </url>
+</urlset>

@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Is the IBEX 35 ready for AI search? · Research · Ada (hache) Cervera</title>
+  <meta name="description" content="Original research: robots.txt, llms.txt and firewall rules of Spain’s 35 largest listed companies, tested against AI crawlers with a placebo bot as control group." />
+  <link rel="canonical" href="https://hache-cervera.github.io/research/ibex-35-ai/" />
+  <link rel="alternate" hreflang="en" href="https://hache-cervera.github.io/research/ibex-35-ai/" />
+  <link rel="alternate" hreflang="es" href="https://hache-cervera.github.io/research/es/ibex-35-ia/" />
+  <link rel="alternate" hreflang="x-default" href="https://hache-cervera.github.io/research/ibex-35-ai/" />
+  <meta property="og:title" content="Is the IBEX 35 ready for AI search?" />
+  <meta property="og:description" content="Original research: robots.txt, llms.txt and firewall rules of Spain’s 35 largest listed companies, tested against AI crawlers with a placebo bot as control group." />
+  <meta property="og:image" content="https://hache-cervera.github.io/research/img/ibex-og.jpg" />
+  <meta property="og:url" content="https://hache-cervera.github.io/research/ibex-35-ai/" />
+  <meta property="og:type" content="article" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <script>
+    (function () { try { document.documentElement.dataset.theme = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light'; } catch (e) {} })();
+  </script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"Is the IBEX 35 ready for AI search?","description":"Original research: robots.txt, llms.txt and firewall rules of Spain’s 35 largest listed companies, tested against AI crawlers with a placebo bot as control group.","inLanguage":"en","datePublished":"2026-10-06","dateModified":"2026-10-06","url":"https://hache-cervera.github.io/research/ibex-35-ai/","image":"https://hache-cervera.github.io/research/img/ibex-og.jpg","author":{"@type":"Person","name":"Ada (hache) Cervera","url":"https://hache-cervera.github.io/"}},{"@type":"Dataset","name":"IBEX 35 and AI crawlers (October 2026)","description":"Original research: robots.txt, llms.txt and firewall rules of Spain’s 35 largest listed companies, tested against AI crawlers with a placebo bot as control group.","inLanguage":"en","creator":{"@type":"Person","name":"Ada (hache) Cervera"},"temporalCoverage":"2026-10-04/2026-10-06","license":"https://creativecommons.org/licenses/by/4.0/","isAccessibleForFree":true,"distribution":[{"@type":"DataDownload","encodingFormat":"text/csv","contentUrl":"https://hache-cervera.github.io/research/data/ibex-35-ai-2026-10.csv"},{"@type":"DataDownload","encodingFormat":"application/json","contentUrl":"https://hache-cervera.github.io/research/data/ibex-35-ai-2026-10.json"}]}]}</script>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --surface: #f5f5f5;
+      --panel: #0a0a0a;
+      --ink: #0a0a0a;
+      --muted: #6b6b6b;
+      --line: #e5e5e5;
+      --accent: #ff3c00;
+      --accent-hover: #e63500;
+      --accent-soft: #ffe8e1;
+      --seo: #2d5f8a;
+      --seo-w: #e9f0f6;
+      --aeo: #2f7d4f;
+      --aeo-w: #e8f3ec;
+      --geo: #7d4f9e;
+      --geo-w: #f2ebf7;
+      --font-display: 'Sora', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+    :root[data-theme="dark"] {
+      --bg: #0d0d0d;
+      --surface: #1c1c1c;
+      --ink: #f2f2f2;
+      --muted: #9a9a9a;
+      --line: #2a2a2a;
+      --accent-soft: #3a1608;
+      --seo: #7fb3dd;
+      --seo-w: #12202c;
+      --aeo: #7fc79b;
+      --aeo-w: #112318;
+      --geo: #bb96d6;
+      --geo-w: #1e1526;
+    }
+    :root[data-theme="dark"] .grain { mix-blend-mode: screen; opacity: 0.045; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    ::selection { background: var(--accent); color: #fff; }
+
+    .grain {
+      position: fixed;
+      inset: 0;
+      z-index: 40;
+      pointer-events: none;
+      opacity: 0.028;
+      mix-blend-mode: multiply;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%25" height="100%25" filter="url(%23n)"/></svg>');
+    }
+
+    .glow {
+      position: absolute;
+      width: 480px;
+      height: 480px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 60, 0, 0.09) 0%, rgba(255, 60, 0, 0) 68%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .deco { position: absolute; background: var(--accent); pointer-events: none; z-index: 0; }
+    @keyframes floaty { 0%, 100% { transform: translateY(0) rotate(8deg); } 50% { transform: translateY(-12px) rotate(14deg); } }
+    .deco { animation: floaty 7s ease-in-out infinite; }
+    @media (prefers-reduced-motion: reduce) { .deco { animation: none; } }
+
+    .wrap { max-width: 72rem; margin: 0 auto; padding: 0 24px; }
+    @media (min-width: 768px) { .wrap { padding: 0 48px; } }
+    a { color: inherit; }
+
+    /* ---------- Header ---------- */
+    header { padding: 24px 0; border-bottom: 1px solid var(--line); }
+    header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .back {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.875rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s ease;
+    }
+    .back:hover { color: var(--accent); }
+    .back span { color: var(--accent); transition: transform 0.2s ease; display: inline-block; }
+    .back:hover span { transform: translateX(-4px); }
+    .hctrl { display: flex; align-items: center; gap: 16px; }
+    .lang {
+      display: flex;
+      gap: 8px;
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+    .lang a { text-decoration: none; color: var(--muted); padding: 4px 2px; border-bottom: 2px solid transparent; }
+    .lang a:hover { color: var(--accent); }
+    .lang a.on { color: var(--ink); border-bottom-color: var(--accent); }
+    .tbtn {
+      position: relative;
+      width: 40px;
+      height: 40px;
+      background: none;
+      border: 1px solid var(--line);
+      cursor: pointer;
+      overflow: hidden;
+      transition: border-color 0.25s ease;
+    }
+    .tbtn:hover { border-color: var(--accent); }
+    .tbtn .sky {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.6s cubic-bezier(0.6, 0, 0.25, 1.3);
+    }
+    :root[data-theme="dark"] .tbtn .sky { transform: rotate(-45deg); }
+    .tbtn .core {
+      position: relative;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      transition: transform 0.5s cubic-bezier(0.6, 0, 0.25, 1.3), box-shadow 0.4s ease;
+    }
+    :root[data-theme="dark"] .tbtn .core { transform: scale(1.35); box-shadow: 0 0 12px rgba(255, 60, 0, 0.55); }
+    .tbtn .veil {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 12px;
+      height: 12px;
+      margin: -6px 0 0 -6px;
+      border-radius: 50%;
+      background: var(--bg);
+      transform: translate(15px, -15px);
+      transition: transform 0.5s cubic-bezier(0.6, 0, 0.25, 1.3), background 0.25s ease;
+      z-index: 2;
+    }
+    :root[data-theme="dark"] .tbtn .veil { transform: translate(4px, -4px) scale(1.35); }
+    .tbtn .ray {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 2px;
+      height: 5px;
+      margin: -2.5px 0 0 -1px;
+      border-radius: 1px;
+      background: var(--accent);
+      transform: rotate(var(--r)) translateY(-10px);
+      transition: transform 0.45s ease, opacity 0.35s ease;
+    }
+    :root[data-theme="dark"] .tbtn .ray { transform: rotate(var(--r)) translateY(-4px) scale(0.2); opacity: 0; }
+    @media (prefers-reduced-motion: reduce) { .tbtn .sky, .tbtn .core, .tbtn .veil, .tbtn .ray { transition: none; } }
+
+    /* ---------- Hero ---------- */
+    .hero { position: relative; padding: 80px 24px 56px; }
+    .hero > *:not(.glow):not(.deco) { position: relative; z-index: 1; }
+    @media (min-width: 768px) { .hero { padding: 112px 48px 72px; } }
+    .kicker {
+      font-family: var(--font-display);
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .hero h1 {
+      margin-top: 24px;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(2.2rem, 5.6vw, 4.2rem);
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      word-break: break-word;
+    }
+    .hero h1 em {
+      font-style: italic;
+      background: linear-gradient(100deg, #ff3c00 0%, #ff8a5c 35%, #ff3c00 65%, #ff5a24 100%);
+      background-size: 220% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: shimmer 4s linear infinite;
+    }
+    @keyframes shimmer { to { background-position: -220% 0; } }
+    .hero .lede { margin-top: 24px; max-width: 44rem; font-size: 1.125rem; color: var(--muted); }
+    .hero .actions { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+    .btn {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.875rem;
+      text-decoration: none;
+      padding: 14px 28px;
+      background: var(--accent);
+      color: #fff;
+      transition: background 0.2s ease;
+    }
+    .btn:hover { background: var(--accent-hover); }
+    .alt {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.875rem;
+      text-decoration: none;
+      color: var(--muted);
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 2px;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+    .alt:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* ---------- Meta grid ---------- */
+    .meta {
+      margin-top: 48px;
+      display: grid;
+      grid-template-columns: 1fr;
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+    }
+    @media (min-width: 560px) { .meta { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 900px) { .meta { grid-template-columns: repeat(3, 1fr); } }
+    .meta div { padding: 16px 20px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .meta dt {
+      font-family: var(--font-display);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .meta dd { margin-top: 4px; font-size: 0.9375rem; font-weight: 500; }
+
+    /* ---------- Sections ---------- */
+    /* overflow:hidden keeps the bleeding .glow circles from widening the page */
+    section, .hero { overflow: hidden; }
+    section { position: relative; padding: 64px 0 80px; border-top: 1px solid var(--line); }
+    section .wrap { position: relative; z-index: 1; }
+    .section-label {
+      font-family: var(--font-display);
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    section h2 {
+      margin-top: 24px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+    }
+    .section-intro { margin-top: 16px; max-width: 46rem; color: var(--muted); }
+    section p + p { margin-top: 12px; }
+    .note {
+      margin-top: 24px;
+      max-width: 46rem;
+      padding: 12px 16px;
+      border-left: 2px solid var(--accent);
+      background: var(--surface);
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+    .note strong { color: var(--ink); font-weight: 600; }
+    code {
+      font-family: ui-monospace, 'SF Mono', Consolas, monospace;
+      font-size: 0.8125em;
+      background: var(--surface);
+      padding: 2px 6px;
+      color: var(--accent);
+    }
+
+    /* ---------- Panel quote ---------- */
+    .quote {
+      margin-top: 40px;
+      background: var(--panel);
+      color: #f2f2f2;
+      padding: 32px 28px;
+      border-left: 3px solid var(--accent);
+    }
+    @media (min-width: 768px) { .quote { padding: 40px 44px; } }
+    .quote p { color: rgba(242, 242, 242, 0.82); font-size: 1.0625rem; max-width: 48rem; }
+    .quote strong { color: #fff; font-weight: 600; }
+
+    /* ---------- Stats ---------- */
+    .stats {
+      margin-top: 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+    }
+    @media (min-width: 768px) { .stats { grid-template-columns: repeat(4, 1fr); } }
+    .stats div { padding: 24px 20px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .stats b {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(1.9rem, 4vw, 2.6rem);
+      letter-spacing: -0.04em;
+      line-height: 1;
+      color: var(--accent);
+    }
+    .stats span { display: block; margin-top: 8px; font-size: 0.8125rem; color: var(--muted); }
+
+    /* ---------- Sitemap ---------- */
+    .sitemap { margin-top: 40px; display: grid; gap: 12px; grid-template-columns: 1fr; }
+    @media (min-width: 640px) { .sitemap { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 1000px) { .sitemap { grid-template-columns: repeat(4, 1fr); } }
+    .smap { display: flex; flex-direction: column; gap: 6px; }
+    .smap .top {
+      background: var(--panel);
+      color: #fff;
+      padding: 12px 14px;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.8125rem;
+    }
+    .smap .top i { display: block; margin-top: 3px; font-style: normal; font-size: 0.6875rem; font-weight: 400; color: rgba(255, 255, 255, 0.55); }
+    .smap .kid { border: 1px solid var(--line); background: var(--surface); padding: 9px 14px; font-size: 0.8125rem; color: var(--muted); }
+
+    /* ---------- Highlights ---------- */
+    .hl { margin-top: 40px; display: grid; gap: 16px; grid-template-columns: 1fr; }
+    @media (min-width: 640px) { .hl { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 1000px) { .hl { grid-template-columns: repeat(3, 1fr); } }
+    .hl-item { border: 1px solid var(--line); padding: 24px; transition: border-color 0.3s ease; }
+    .hl-item:hover { border-color: var(--ink); }
+    .hl-item svg { display: block; color: var(--accent); }
+    .hl-item h3 {
+      margin-top: 16px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.125rem;
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+    }
+    .hl-item p { margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
+
+    /* ---------- Timeline ---------- */
+    .tl { margin-top: 48px; display: grid; gap: 24px; grid-template-columns: 1fr; list-style: none; }
+    @media (min-width: 900px) { .tl { grid-template-columns: repeat(4, 1fr); } }
+    .tl-step { border-top: 2px solid var(--line); padding-top: 16px; }
+    .tl-step.now { border-top-color: var(--accent); }
+    .tl-step b {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .tl-step.now b { color: var(--accent); }
+    .tl-step p { margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
+
+    /* ---------- One article, three surfaces ---------- */
+    .flow { margin-top: 40px; }
+    .flow-src {
+      border: 1px solid var(--ink);
+      background: var(--surface);
+      padding: 16px 24px;
+      text-align: center;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--ink);
+    }
+    .flow-fan { display: grid; grid-template-columns: repeat(3, 1fr); height: 24px; }
+    .flow-fan span { justify-self: center; width: 1px; background: var(--line); }
+    .flow-outs { display: grid; gap: 16px; grid-template-columns: 1fr; }
+    @media (max-width: 699px) { .flow-fan { display: none; } .flow-outs { margin-top: 16px; } }
+    @media (min-width: 700px) { .flow-outs { grid-template-columns: repeat(3, 1fr); } }
+    .flow-out { border: 1px solid var(--line); border-top: 3px solid; padding: 16px; }
+    .flow-out.o-seo { border-top-color: var(--seo); }
+    .flow-out.o-aeo { border-top-color: var(--aeo); }
+    .flow-out.o-geo { border-top-color: var(--geo); }
+    .flow-out b { display: block; font-family: var(--font-display); font-weight: 700; font-size: 1rem; }
+    .flow-out span { display: block; margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
+
+    /* ---------- Layers ---------- */
+    .layers { margin-top: 40px; display: flex; flex-direction: column; gap: 16px; }
+    .layer { padding: 24px 26px; border-left: 3px solid; }
+    .layer.l-seo { background: var(--seo-w); border-color: var(--seo); }
+    .layer.l-aeo { background: var(--aeo-w); border-color: var(--aeo); }
+    .layer.l-geo { background: var(--geo-w); border-color: var(--geo); }
+    .layer .tag {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      color: #fff;
+    }
+    .l-seo .tag { background: var(--seo); }
+    .l-aeo .tag { background: var(--aeo); }
+    .l-geo .tag { background: var(--geo); }
+    :root[data-theme="dark"] .layer .tag { color: #0d0d0d; }
+    .layer h3 {
+      margin-top: 12px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.0625rem;
+      letter-spacing: -0.02em;
+    }
+    .layer ul { margin-top: 12px; padding-left: 18px; }
+    .layer li { font-size: 0.875rem; color: var(--muted); margin-bottom: 8px; }
+    .layer li:last-child { margin-bottom: 0; }
+    .layer li strong { color: var(--ink); font-weight: 600; }
+
+    /* ---------- Component cards ---------- */
+    .cards { margin-top: 40px; display: grid; gap: 24px; grid-template-columns: 1fr; }
+    @media (min-width: 768px) { .cards { grid-template-columns: 1fr 1fr; } }
+    .card { border: 1px solid var(--line); overflow: hidden; transition: border-color 0.3s ease; }
+    .card:hover { border-color: var(--ink); }
+    .card figure { margin: 0; aspect-ratio: 16 / 10; overflow: hidden; background: var(--surface); border-bottom: 1px solid var(--line); cursor: zoom-in; }
+    .card figure img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; transition: transform 0.6s ease; }
+    .card:hover figure img { transform: scale(1.03); }
+    .card .body { padding: 22px 24px; }
+    /* Component gallery: let each shot keep its own height instead of cropping it */
+    .cards.gallery { align-items: start; }
+    .cards.gallery figure { aspect-ratio: auto; }
+    .cards.gallery figure img { height: auto; object-fit: contain; }
+    @media (min-width: 900px) { .cards.three { grid-template-columns: repeat(3, 1fr); } }
+    .card h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.125rem; letter-spacing: -0.02em; }
+    .card p { margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
+
+    /* ---------- Stack ---------- */
+    .group { margin-top: 32px; }
+    .group h3 {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .tags { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .tags li {
+      list-style: none;
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      padding: 5px 12px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--muted);
+    }
+    .tags li.key { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+
+    /* ---------- Tables ---------- */
+    /* Migration figures, stated as figures. */
+    .figs { margin-top: 40px; display: grid; grid-template-columns: repeat(2, 1fr); border: 1px solid var(--line); }
+    @media (min-width: 760px) { .figs { grid-template-columns: repeat(5, 1fr); } }
+    .figs div { padding: 20px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .figs b {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.75rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      color: var(--ink);
+    }
+    .figs span { display: block; margin-top: 8px; font-size: 0.75rem; line-height: 1.35; color: var(--muted); }
+
+    .tbl { margin-top: 40px; border: 1px solid var(--line); overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.875rem; min-width: 34rem; }
+    th {
+      background: var(--surface);
+      padding: 12px 18px;
+      text-align: left;
+      font-family: var(--font-display);
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border-bottom: 1px solid var(--line);
+    }
+    td { padding: 14px 18px; border-bottom: 1px solid var(--line); color: var(--muted); vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    td strong { color: var(--ink); font-weight: 600; }
+    td:first-child { white-space: nowrap; }
+
+    /* ---------- CTA + footer ---------- */
+    .cta { position: relative; background: var(--panel); color: #f2f2f2; border-top: none; overflow: hidden; }
+    .cta .kicker { color: var(--accent); }
+    .cta h2 { color: #fff; }
+    .cta p { margin-top: 16px; max-width: 40rem; color: rgba(242, 242, 242, 0.7); }
+    .cta .actions { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+    .cta .alt { color: rgba(242, 242, 242, 0.7); border-color: rgba(242, 242, 242, 0.25); }
+    .cta .alt:hover { color: var(--accent); border-color: var(--accent); }
+    footer { padding: 40px 0; border-top: 1px solid var(--line); }
+    footer .wrap { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; font-size: 0.8125rem; color: var(--muted); }
+    footer .path { font-family: var(--font-display); }
+    footer .path span { color: var(--accent); }
+
+    /* ---------- Reveal + lightbox ---------- */
+    .rv { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .rv.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { .rv { opacity: 1; transform: none; transition: none; } }
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(8, 8, 8, 0.94);
+      padding: 32px 16px;
+    }
+    .lightbox.on { display: flex; }
+    .lightbox img { max-width: 100%; max-height: 100%; object-fit: contain; }
+    .lightbox .close {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 2rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+    .lightbox .close:hover { color: var(--accent); }
+  
+    /* research extras */
+    .slides { margin-top: 40px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    @media (min-width: 760px) { .slides { grid-template-columns: repeat(3, 1fr); } }
+    .slides button { padding: 0; border: 1px solid var(--line); background: none; cursor: zoom-in; display: block; }
+    .slides img { display: block; width: 100%; height: auto; }
+    .tbl table { font-size: 0.8125rem; }
+    .tbl caption { text-align: left; padding: 12px 16px; font-size: 0.8125rem; color: var(--muted); caption-side: bottom; }
+    .mx td.c { text-align: center; font-family: var(--font-display); font-weight: 600; font-size: 0.75rem; white-space: nowrap; }
+    .mx td.x { background: #c22e00; color: #fff; }
+    .mx td.v { background: var(--line); color: var(--ink); }
+    /* brand orange fails 4.5:1 on white for small text: darker shade in light theme only */
+    html:not([data-theme='dark']) .kicker, html:not([data-theme='dark']) .section-label, html:not([data-theme='dark']) code { color: #c22e00; }
+    html:not([data-theme='dark']) .btn { background: #c22e00; border-color: #c22e00; }
+    html .cta .kicker { color: var(--accent); }
+    .mx th.v { writing-mode: vertical-rl; transform: rotate(180deg); white-space: nowrap; }
+    .list { margin-top: 24px; max-width: 46rem; padding-left: 1.2rem; }
+    .list li { margin-top: 12px; color: var(--muted); }
+    .list li strong { color: var(--ink); }
+    .prose { margin-top: 16px; max-width: 46rem; color: var(--muted); }
+    .prose + .prose { margin-top: 12px; }
+    code { font-size: 0.875em; }
+  </style>
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <header>
+    <div class="wrap">
+      <a class="back" href="../../"><span>&larr;</span> Back to home</a>
+      <div class="hctrl">
+        <nav class="lang" aria-label="Language">
+          <a class="on" aria-current="page" href="./">EN</a>
+          <a href="../es/ibex-35-ia/">ES</a>
+        </nav>
+        <button class="tbtn" id="modeToggle" type="button" aria-label="Switch between light and dark mode">
+          <span class="sky" aria-hidden="true"><span class="ray" style="--r:0deg"></span><span class="ray" style="--r:45deg"></span><span class="ray" style="--r:90deg"></span><span class="ray" style="--r:135deg"></span><span class="ray" style="--r:180deg"></span><span class="ray" style="--r:225deg"></span><span class="ray" style="--r:270deg"></span><span class="ray" style="--r:315deg"></span><span class="core"></span><span class="veil"></span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="hero wrap">
+      <span class="glow" style="top: -140px; right: -160px;" aria-hidden="true"></span>
+      <p class="kicker">/ Research · AI search · October 2026</p>
+      <h1>Is the IBEX 35 ready for <em>AI search</em>?</h1>
+      <p class="lede">I read the robots.txt of Spain’s 35 largest listed companies, then knocked on every front door pretending to be Chrome, Googlebot, GPTBot, ClaudeBot and friends. Same machine, same IP, only the name changes. To tell an AI block from a generic bot block, I invented a control group: PlaceBot, the placebo bot.</p>
+      <dl class="meta"><div><dt>Companies</dt><dd>35, IBEX 35 on 2 Oct 2026</dd></div><div><dt>Measured</dt><dd>robots.txt and llms.txt on 4 Oct, doors on 6 Oct</dd></div><div><dt>Scope</dt><dd>Corporate site, home page only</dd></div><div><dt>Identities tested</dt><dd>9 User-Agents, incl. a placebo</dd></div><div><dt>Tools</dt><dd>Node, real Chrome via playwright-core, curl</dd></div><div><dt>Data</dt><dd><a href="../data/ibex-35-ai-2026-10.csv">CSV</a> · <a href="../data/ibex-35-ai-2026-10.json">JSON</a></dd></div></dl>
+      <p class="note"><strong>What is not on this page:</strong> nothing exploitable. Which bots a public page lets in is visible to any visitor. A certificate-chain finding from 4 October did not reproduce on 6 October, so it was dropped.</p>
+    </div>
+
+    <section id="highlights">
+      <div class="wrap">
+        <p class="section-label">/ In short</p>
+        <h2>The numbers</h2>
+        <div class="figs"><div><b>0/35</b><span>block AI search bots in robots.txt</span></div><div><b>31/34</b><span>robots.txt files that do not name a single AI bot</span></div><div><b>9/35</b><span>have an llms.txt</span></div><div><b>3</b><span>block AI bots by name at the firewall</span></div><div><b>29/35</b><span>let PlaceBot in with full content</span></div></div>
+      </div>
+    </section>
+
+    <section id="carousel">
+      <div class="wrap">
+        <p class="section-label">/ The carousel</p>
+        <h2>Nine slides, one story</h2>
+        <p class="section-intro">The LinkedIn version. Click to enlarge.</p><div class="slides"><button type="button"><img data-zoom src="../img/ibex-1.webp" alt="Is the IBEX 35 ready for AI? 0 of 35 close robots.txt to AI search bots; 31 of 34 do not name any AI bot; 9 of 35 have llms.txt." width="1080" height="1350" loading="eager" /></button><button type="button"><img data-zoom src="../img/ibex-2.webp" alt="Two kinds of bots: training bots read to learn, search bots read to cite you." width="1080" height="1350" loading="eager" /></button><button type="button"><img data-zoom src="../img/ibex-3.webp" alt="What they say in robots.txt: 0 of 35 block search bots, 1 blocks a training bot, 3 name AI bots, 9 have llms.txt." width="1080" height="1350" loading="eager" /></button><button type="button"><img data-zoom src="../img/ibex-4.webp" alt="What they do at the door: 17 companies by 8 bot names, grouped by the kind of rule." width="1080" height="1350" loading="lazy" /></button><button type="button"><img data-zoom src="../img/ibex-5.webp" alt="PlaceBot, the placebo bot. At Acciona, Acciona Energía and Unicaja, Googlebot and GPTBot get 403 and PlaceBot gets 200." width="1080" height="1350" loading="lazy" /></button><button type="button"><img data-zoom src="../img/ibex-6.webp" alt="Flowchart: if GPTBot gets 403, check PlaceBot, then a fake Googlebot, to tell the three kinds of rules apart." width="1080" height="1350" loading="lazy" /></button><button type="button"><img data-zoom src="../img/ibex-7.webp" alt="Proof from my terminal, Colonial, 6 October 12:31: GPTBot and ClaudeBot 403, OAI-SearchBot and PlaceBot 200." width="1080" height="1350" loading="lazy" /></button><button type="button"><img data-zoom src="../img/ibex-8.webp" alt="Iberdrola’s llms.txt: 7,291 links drawn as squares, 2.4 MB, 15,893 lines." width="1080" height="1350" loading="lazy" /></button><button type="button"><img data-zoom src="../img/ibex-9.webp" alt="Method and limits: dates, control group, and a home IP." width="1080" height="1350" loading="lazy" /></button></div>
+      </div>
+    </section>
+
+    <section id="basics">
+      <div class="wrap">
+        <p class="section-label">/ 01 · The basics</p>
+        <h2>What “ready for AI” means</h2>
+        <p class="prose">It is not having an llms.txt. It is classic SEO: a bot can <strong>get in</strong>, <strong>read</strong> the page without JavaScript, <strong>understand</strong> it and <strong>find</strong> it. Plus a conscious decision about AI bots, which come in two kinds:</p><div class="tbl"><table class=""><thead><tr><th scope="col">Kind</th><th scope="col">Reads your site to</th><th scope="col">Examples</th><th scope="col">If you block it</th></tr></thead><tbody><tr><th scope="row">Training</th><td>learn (train models)</td><td>GPTBot, ClaudeBot, Google-Extended, CCBot, Bytespider</td><td>Not used for training. A legitimate choice.</td></tr><tr><th scope="row">Search</th><td>cite you when someone asks</td><td>OAI-SearchBot, Claude-SearchBot, PerplexityBot</td><td>You disappear from those answers.</td></tr><tr><th scope="row">User</th><td>open a page a person asked for</td><td>ChatGPT-User, Claude-User, Perplexity-User</td><td>That person cannot read you from the chat. OpenAI notes robots.txt may not apply.</td></tr></tbody></table></div><p class="note"><code>Google-Extended</code> is not a crawler: it is a robots.txt token for Gemini training and does not affect Google Search or AI Overviews, which use regular Googlebot. Block Googlebot or Bingbot and you also leave the AI features built on them.</p>
+      </div>
+    </section>
+
+    <section id="say">
+      <div class="wrap">
+        <p class="section-label">/ 02 · What they say</p>
+        <h2>robots.txt: the sign on the door</h2>
+        <p class="section-intro">robots.txt is a polite note, read with the RFC 9309 rules: if a bot has no group of its own, the <code>User-agent: *</code> group applies. Inditex has none (it redirects to the home page), so 34 files.</p><div class="tbl"><table class=""><caption>Measured 4 October 2026, confirmed 6 October. “Words no JS” counts the raw HTML; 0 means a bot that does not run JavaScript sees an empty page.</caption><thead><tr><th scope="col">Company</th><th scope="col">Site</th><th scope="col">Names AI bots</th><th scope="col">Blocks</th><th scope="col">llms.txt</th><th scope="col">JSON-LD</th><th scope="col">Words no JS / JS</th></tr></thead><tbody><tr><th scope="row">Banco Santander</th><td>www.santander.com</td><td>·</td><td>·</td><td>no</td><td>·</td><td>1,326 / 986</td></tr><tr><th scope="row">Inditex</th><td>www.inditex.com</td><td>no robots.txt</td><td>·</td><td>no</td><td>·</td><td>371 / 339</td></tr><tr><th scope="row">Iberdrola</th><td>www.iberdrola.com</td><td>·</td><td>·</td><td>yes</td><td>·</td><td>0 / 819</td></tr><tr><th scope="row">BBVA</th><td>www.bbva.com</td><td>·</td><td>·</td><td>no</td><td>4</td><td>1,640 / 1,030</td></tr><tr><th scope="row">CaixaBank</th><td>www.caixabank.com</td><td>·</td><td>·</td><td>no</td><td>2</td><td>820 / 883</td></tr><tr><th scope="row">ArcelorMittal</th><td>corporate.arcelormittal.com</td><td>·</td><td>·</td><td>no</td><td>·</td><td>992 / 729</td></tr><tr><th scope="row">Endesa</th><td>www.endesa.com</td><td>·</td><td>·</td><td>yes</td><td>·</td><td>3,566 / 1,534</td></tr><tr><th scope="row">Aena</th><td>www.aena.es</td><td>·</td><td>·</td><td>no</td><td>·</td><td>1,491 / 678</td></tr><tr><th scope="row">Ferrovial</th><td>www.ferrovial.com</td><td>·</td><td>·</td><td>no</td><td>1</td><td>754 / 158</td></tr><tr><th scope="row">Repsol</th><td>www.repsol.com</td><td>·</td><td>·</td><td>yes</td><td>3</td><td>1,640 / 796</td></tr><tr><th scope="row">Naturgy</th><td>www.naturgy.com</td><td>·</td><td>·</td><td>no</td><td>6</td><td>1,428 / 787</td></tr><tr><th scope="row">ACS</th><td>www.grupoacs.com</td><td>·</td><td>·</td><td>no</td><td>·</td><td>1,098 / 853</td></tr><tr><th scope="row">IAG</th><td>www.iairgroup.com</td><td>·</td><td>·</td><td>no</td><td>·</td><td>452 / 381</td></tr><tr><th scope="row">Amadeus</th><td>amadeus.com</td><td>·</td><td>·</td><td>yes</td><td>·</td><td>1,595 / 1,164</td></tr><tr><th scope="row">Telefónica</th><td>www.telefonica.com</td><td>·</td><td>·</td><td>no</td><td>4</td><td>944 / 723</td></tr><tr><th scope="row">Banco Sabadell</th><td>www.grupbancsabadell.com</td><td>·</td><td>·</td><td>no</td><td>·</td><td>1,112 / 399</td></tr><tr><th scope="row">Cellnex</th><td>www.cellnex.com</td><td>·</td><td>·</td><td>no</td><td>6</td><td>2,993 / 1,310</td></tr><tr><th scope="row">Bankinter</th><td>www.bankinter.com</td><td>ChatGPT-User GPTBot</td><td>·</td><td>yes</td><td>4</td><td>8,963 / 747</td></tr><tr><th scope="row">Mapfre</th><td>www.mapfre.com</td><td>·</td><td>·</td><td>no</td><td>4</td><td>2,512 / 943</td></tr><tr><th scope="row">Acciona</th><td>www.acciona.com</td><td>·</td><td>·</td><td>yes</td><td>·</td><td>2,178 / 410</td></tr><tr><th scope="row">Indra</th><td>www.indragroup.com</td><td>Bytespider ClaudeBot ChatGPT-User</td><td>Bytespider</td><td>no</td><td>3</td><td>823 / 780</td></tr><tr><th scope="row">Puig</th><td>www.puig.com</td><td>·</td><td>·</td><td>no</td><td>27</td><td>256 / 313</td></tr><tr><th scope="row">Unicaja</th><td>www.unicajabanco.es</td><td>·</td><td>·</td><td>no</td><td>1</td><td>1,431 / 1,361</td></tr><tr><th scope="row">Redeia</th><td>www.redeia.com</td><td>·</td><td>·</td><td>no</td><td>·</td><td>1,785 / 733</td></tr><tr><th scope="row">Merlin Properties</th><td>www.merlinproperties.com</td><td>·</td><td>·</td><td>yes</td><td>5</td><td>341 / 218</td></tr><tr><th scope="row">Acciona Energía</th><td>www.acciona-energia.com</td><td>·</td><td>·</td><td>no</td><td>·</td><td>509 / 260</td></tr><tr><th scope="row">Grifols</th><td>www.grifols.com</td><td>·</td><td>·</td><td>no</td><td>·</td><td>1,616 / 1,061</td></tr><tr><th scope="row">Logista</th><td>www.logista.com</td><td>ChatGPT-User GPTBot Google-Extended ClaudeBot PerplexityBot</td><td>·</td><td>yes</td><td>·</td><td>543 / 483</td></tr><tr><th scope="row">Enagás</th><td>www.enagas.es</td><td>·</td><td>·</td><td>yes</td><td>3</td><td>1,243 / 398</td></tr><tr><th scope="row">Acerinox</th><td>acerinox.com</td><td>·</td><td>·</td><td>no</td><td>·</td><td>859 / 112</td></tr><tr><th scope="row">Fluidra</th><td>www.fluidra.com</td><td>·</td><td>·</td><td>no</td><td>·</td><td>0 / 1,543</td></tr><tr><th scope="row">Sacyr</th><td>sacyr.com</td><td>·</td><td>·</td><td>no</td><td>1</td><td>1,310 / 854</td></tr><tr><th scope="row">Colonial</th><td>www.colonial-sfl.com</td><td>·</td><td>·</td><td>no</td><td>·</td><td>385 / 303</td></tr><tr><th scope="row">Rovi</th><td>rovi.es</td><td>·</td><td>·</td><td>no</td><td>·</td><td>5,866 / 583</td></tr><tr><th scope="row">Solaria</th><td>solariaenergia.com</td><td>·</td><td>·</td><td>no</td><td>·</td><td>917 / 908</td></tr></tbody></table></div>
+      </div>
+    </section>
+
+    <section id="do">
+      <div class="wrap">
+        <p class="section-label">/ 03 · What they do</p>
+        <h2>The door: same client, nine names</h2>
+        <p class="section-intro">Robots.txt says, the firewall decides. Each site was requested with the same client and IP, changing only the User-Agent. Doubtful cases ran twice in random order with 5-second pauses.</p><p class="prose"><strong>ok</strong> 200 with content · <strong>verif.</strong> 200 but a verification or near-empty page · <strong>403</strong> forbidden · <strong>429</strong> too many requests · empty: not tested. “Chrome” is the same client claiming to be Chrome, not a real browser.</p><div class="tbl"><table class="mx"><caption>Measured 6 October 2026 from a home IP. CDN detected from response headers; “none seen” does not mean there is none.</caption><thead><tr><th scope="col">Company</th><th scope="col">CDN</th><th scope="col" class="v">Chrome</th><th scope="col" class="v">Googlebot</th><th scope="col" class="v">Bingbot</th><th scope="col" class="v">GPTBot</th><th scope="col" class="v">ClaudeBot</th><th scope="col" class="v">OAI-SearchBot</th><th scope="col" class="v">ChatGPT-User</th><th scope="col" class="v">PerplexityBot</th><th scope="col" class="v">PlaceBot</th></tr></thead><tbody><tr><th scope="row">Banco Santander</th><td>Akamai + Imperva</td><td class="c">ok</td><td class="c">ok</td><td class="c"></td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td></tr><tr><th scope="row">Inditex</th><td>Akamai</td><td class="c">ok</td><td class="c">ok</td><td class="c"></td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td></tr><tr><th scope="row">Iberdrola</th><td>Akamai</td><td class="c v">verif.</td><td class="c x">403</td><td class="c x">403</td><td class="c x">403</td><td class="c x">403</td><td class="c x">403</td><td class="c x">403</td><td class="c x">403</td><td class="c x">403</td></tr><tr><th scope="row">BBVA</th><td>Akamai</td><td class="c">ok</td><td class="c">ok</td><td class="c"></td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td></tr><tr><th scope="row">CaixaBank</th><td>Cloudflare</td><td class="c">ok</td><td class="c x">403</td><td class="c x">403</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td></tr><tr><th scope="row">ArcelorMittal</th><td>Cloudflare</td><td class="c x">403</td><td class="c x">403</td><td class="c"></td><td class="c x">403</td><td class="c x">403</td><td class="c x">403</td><td class="c x">403</td><td class="c x">403</td><td class="c x">403</td></tr><tr><th scope="row">Endesa</th><td>Imperva</td><td class="c">ok</td><td class="c">ok</td><td class="c"></td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td></tr><tr><th scope="row">Aena</th><td>Akamai</td><td class="c">ok</td><td class="c">ok</td><td class="c"></td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td></tr><tr><th scope="row">Ferrovial</th><td>none seen</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c x">403</td><td class="c">ok</td><td class="c">ok</td><td class="c x">403</td><td class="c">ok</td><td class="c">ok</td></tr><tr><th scope="row">Repsol</th><td>none seen</td><td class="c">ok</td><td class="c">ok</td><td class="c"></td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td></tr><tr><th scope="row">Naturgy</th><td>Radware</td><td class="c v">verif.</td><td class="c v">verif.</td><td class="c v">verif.</td><td class="c v">verif.</td><td class="c v">verif.</td><td class="c v">verif.</td><td class="c v">verif.</td><td class="c v">verif.</td><td class="c v">verif.</td></tr><tr><th scope="row">ACS</th><td>none seen</td><td class="c">ok</td><td class="c">ok</td><td class="c"></td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td></tr><tr><th scope="row">IAG</th><td>Cloudflare</td><td class="c">ok</td><td class="c">ok</td><td class="c"></td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td></tr><tr><th scope="row">Amadeus</th><td>Imperva</td><td class="c">ok</td><td class="c">ok</td><td class="c"></td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c v">verif.</td></tr><tr><th scope="row">Telefónica</th><td>Cloudflare</td><td class="c">ok</td><td class="c">ok</td><td class="c"></td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td></tr><tr><th scope="row">Banco Sabadell</th><td>Akamai</td><td class="c">ok</td><td class="c">ok</td><td class="c x">403</td><td class="c x">403</td><td class="c x">403</td><td class="c x">403</td><td class="c">ok</td><td class="c x">403</td><td class="c x">403</td></tr><tr><th scope="row">Cellnex</th><td>Imperva</td><td class="c">ok</td><td class="c">ok</td><td class="c"></td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td></tr><tr><th scope="row">Bankinter</th><td>Cloudflare</td><td class="c x">403</td><td class="c x">403</td><td class="c"></td><td class="c x">403</td><td class="c x">403</td><td class="c x">403</td><td class="c x">403</td><td class="c x">403</td><td class="c">ok</td></tr><tr><th scope="row">Mapfre</th><td>none seen</td><td class="c">ok</td><td class="c">ok</td><td class="c"></td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td></tr><tr><th scope="row">Acciona</th><td>none seen</td><td class="c">ok</td><td class="c x">403</td><td class="c x">403</td><td class="c x">403</td><td class="c x">403</td><td class="c x">403</td><td class="c x">403</td><td class="c x">403</td><td class="c">ok</td></tr><tr><th scope="row">Indra</th><td>Cloudflare</td><td class="c">ok</td><td class="c">ok</td><td class="c"></td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td></tr><tr><th scope="row">Puig</th><td>Cloudflare</td><td class="c x">403</td><td class="c x">403</td><td class="c"></td><td class="c x">403</td><td class="c x">403</td><td class="c x">403</td><td class="c x">403</td><td class="c x">403</td><td class="c">ok</td></tr><tr><th scope="row">Unicaja</th><td>Akamai</td><td class="c">ok</td><td class="c x">403</td><td class="c x">403</td><td class="c x">403</td><td class="c x">403</td><td class="c x">403</td><td class="c x">403</td><td class="c x">403</td><td class="c">ok</td></tr><tr><th scope="row">Redeia</th><td>Imperva</td><td class="c">ok</td><td class="c">ok</td><td class="c"></td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td></tr><tr><th scope="row">Merlin Properties</th><td>none seen</td><td class="c">ok</td><td class="c">ok</td><td class="c"></td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td></tr><tr><th scope="row">Acciona Energía</th><td>none seen</td><td class="c">ok</td><td class="c x">403</td><td class="c x">403</td><td class="c x">403</td><td class="c x">403</td><td class="c x">403</td><td class="c x">403</td><td class="c x">403</td><td class="c">ok</td></tr><tr><th scope="row">Grifols</th><td>F5</td><td class="c">ok</td><td class="c">ok</td><td class="c"></td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td></tr><tr><th scope="row">Logista</th><td>none seen</td><td class="c">ok</td><td class="c">ok</td><td class="c"></td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td></tr><tr><th scope="row">Enagás</th><td>none seen</td><td class="c">ok</td><td class="c">ok</td><td class="c"></td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td></tr><tr><th scope="row">Acerinox</th><td>Radware</td><td class="c v">verif.</td><td class="c">ok</td><td class="c"></td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td></tr><tr><th scope="row">Fluidra</th><td>Imperva</td><td class="c v">verif.</td><td class="c v">verif.</td><td class="c"></td><td class="c v">verif.</td><td class="c v">verif.</td><td class="c v">verif.</td><td class="c v">verif.</td><td class="c v">verif.</td><td class="c v">verif.</td></tr><tr><th scope="row">Sacyr</th><td>none seen</td><td class="c">ok</td><td class="c x">403</td><td class="c">ok</td><td class="c x">403</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td></tr><tr><th scope="row">Colonial</th><td>Cloudflare</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c x">403</td><td class="c x">403</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td></tr><tr><th scope="row">Rovi</th><td>none seen</td><td class="c">ok</td><td class="c">ok</td><td class="c"></td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td><td class="c">ok</td></tr><tr><th scope="row">Solaria</th><td>none seen</td><td class="c">ok</td><td class="c x">429</td><td class="c x">429</td><td class="c x">429</td><td class="c x">429</td><td class="c x">429</td><td class="c x">429</td><td class="c x">429</td><td class="c">ok</td></tr></tbody></table></div>
+      </div>
+    </section>
+
+    <section id="placebo">
+      <div class="wrap">
+        <p class="section-label">/ 04 · The placebo</p>
+        <h2>PlaceBot, the control group</h2>
+        <p class="prose">In medicine the control group takes a sugar pill. Here the drug is the bot’s <em>name</em>. PlaceBot is an honest, unknown bot: <code>Mozilla/5.0 (compatible; PlaceBot/1.0; +https://www.linkedin.com/in/hache-cervera)</code>. Nobody has a rule for it.</p><p class="prose">If GPTBot is blocked and PlaceBot too, the site blocks any bot. If PlaceBot gets in but a fake Googlebot does not, the site blocks impersonators. Only if both get in is the rule really about that AI. Without the placebo, all three look like “they block AI”.</p><p class="prose">The twist: Bankinter and Puig block the fake Chrome and let PlaceBot in with full content. Lying about who you are closes more doors than being a nobody.</p><div class="slides"><button type="button"><img data-zoom src="../img/ibex-6.webp" alt="Flowchart: if GPTBot gets 403, check PlaceBot, then a fake Googlebot, to tell the three kinds of rules apart." width="1080" height="1350" loading="lazy" /></button><button type="button"><img data-zoom src="../img/ibex-7.webp" alt="Proof from my terminal, Colonial, 6 October 12:31: GPTBot and ClaudeBot 403, OAI-SearchBot and PlaceBot 200." width="1080" height="1350" loading="lazy" /></button></div><p class="note">The rules look at the exact User-Agent: at Colonial, a bare “GPTBot” gets in; the full official string gets 403.</p>
+      </div>
+    </section>
+
+    <section id="findings">
+      <div class="wrap">
+        <p class="section-label">/ 05 · Findings</p>
+        <h2>Cases worth a second look</h2>
+        <ul class="list"><li><strong>Iberdrola, the paradox.</strong> The biggest llms.txt in the index (2.4 MB, 7,291 links), and a door that returns 403 to every bot name, placebo included. Without JavaScript its home page has 0 words. Generic anti-bot, not anti-AI, but it says one thing with the file and another with the guard.</li><li><strong>Colonial does it by the book, silently.</strong> Blocks training bots (GPTBot, ClaudeBot), lets search bots in (OAI-SearchBot, ChatGPT-User, PerplexityBot). All in Cloudflare; robots.txt says nothing.</li><li><strong>Ferrovial probably filters “GPT”.</strong> GPTBot and ChatGPT-User fall; OAI-SearchBot passes. A hypothesis.</li><li><strong>Acciona, Acciona Energía, Unicaja.</strong> Every famous bot is blocked, the fake Googlebot too, and PlaceBot gets in: anti-impersonation, not anti-AI.</li><li><strong>Sabadell and Solaria.</strong> Sabadell blocks Bingbot and most “…Bot/” strings. Solaria answers 429 to any known bot from the first request.</li><li><strong>Bankinter’s llms.txt describes bankintercard,</strong> its consumer-credit subsidiary, not Bankinter.</li><li><strong>Indra is the only one blocking a bot in robots.txt:</strong> Bytespider (ByteDance). Logista names five AI bots to invite them.</li></ul>
+      </div>
+    </section>
+
+    <section id="llms">
+      <div class="wrap">
+        <p class="section-label">/ 06 · llms.txt</p>
+        <h2>A proposal, not a standard</h2>
+        <p class="prose">Proposed by Jeremy Howard in September 2024: a short Markdown file at <code>/llms.txt</code> with a title, a summary and key links, meant to fit in a model’s context. Google says you do not need “new machine readable files, AI text files, or markup” to appear in AI Overviews or AI Mode, and John Mueller has said Google does not use it. In a corporate site it is a curiosity, not a score.</p>
+      </div>
+    </section>
+
+    <section id="checklist">
+      <div class="wrap">
+        <p class="section-label">/ 07 · Checklist</p>
+        <h2>Is a site ready for AI search?</h2>
+        <div class="tbl"><table class=""><thead><tr><th scope="col">Check</th><th scope="col">How</th></tr></thead><tbody><tr><th scope="row">Get in (sign)</th><td>robots.txt does not block Googlebot, Bingbot or OAI-SearchBot, Claude-SearchBot, PerplexityBot.</td></tr><tr><th scope="row">Get in (guard)</th><td><code>curl.exe -s -o NUL -w "%{http_code}" -A "&lt;full bot User-Agent&gt;" https://site/</code>, then the same with an invented bot. 403 versus 200 means a rule by name.</td></tr><tr><th scope="row">Read</th><td>DevTools, Disable JavaScript, reload. The content must still be there.</td></tr><tr><th scope="row">Understand</th><td>Clear titles and headings, answers in text, JSON-LD.</td></tr><tr><th scope="row">Find</th><td>Sitemap, internal links, indexed in Google and Bing.</td></tr><tr><th scope="row">Decide</th><td>Allow or block training bots knowingly; it does not change search visibility.</td></tr><tr><th scope="row">Measure</th><td>AI referrals in analytics, bot hits in server logs.</td></tr></tbody></table></div>
+      </div>
+    </section>
+
+    <section id="method">
+      <div class="wrap">
+        <p class="section-label">/ 08 · Method</p>
+        <h2>Big sites have big guards</h2>
+        <div class="tbl"><table class=""><thead><tr><th scope="col">Layer</th><th scope="col">What it does</th><th scope="col">How it was handled</th></tr></thead><tbody><tr><th scope="row">CDN</th><td>Serves and filters traffic</td><td>Logged the provider, never read as intent</td></tr><tr><th scope="row">Bot management</th><td>Scores every visit</td><td>Counted words, not only status codes</td></tr><tr><th scope="row">Verified bots</th><td>Lets real crawlers in by IP</td><td>The limit: I test the name, not the IP</td></tr><tr><th scope="row">Anti-impersonation</th><td>Blocks fake famous bots</td><td>The placebo exposes it</td></tr><tr><th scope="row">Client fingerprint</th><td>Checks a “Chrome” behaves like Chrome</td><td>The fake Chrome is a baseline, not a user</td></tr><tr><th scope="row">JS challenge</th><td>Asks to run JavaScript first</td><td>Marked “verif.”, not an AI block</td></tr><tr><th scope="row">Rate limit</th><td>Slows fast clients</td><td>Pauses and random order</td></tr></tbody></table></div><p class="note">Between 15 and 35 requests per site over two days, home page only. The honest limit: real crawlers come from verified IP ranges and may get a different answer. What this shows is that rules looking at the bot’s name exist.</p><p class="prose"><strong>Sources:</strong> <a href="https://developers.google.com/search/docs/appearance/ai-features">Google: AI features and your website</a> · <a href="https://developers.openai.com/api/docs/bots">OpenAI crawlers</a> · <a href="https://llmstxt.org/">llms.txt proposal</a> · <a href="https://www.rfc-editor.org/rfc/rfc9309">RFC 9309, robots.txt</a></p>
+      </div>
+    </section>
+  </main>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+    <button class="close" type="button" aria-label="Close">&times;</button>
+    <img src="" alt="" />
+  </div>
+
+  <section class="cta" id="contact">
+    <div class="wrap">
+      <p class="kicker">/ Next</p>
+      <h2>Measure before you claim.</h2>
+      <p>Scripts written with help from Claude; the controls, the doubts and the discarded findings, by hand. If you need someone who checks before shipping, say hi.</p>
+      <div class="actions">
+        <a class="btn" href="mailto:hi.hache.cervera@gmail.com?subject=IBEX%2035%20research">Get in touch</a>
+        <a class="alt" href="../data/ibex-35-ai-2026-10.csv">Download the data</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <p>&copy; 2026 Ada (hache) Cervera. Built by hand in Valencia.</p>
+      <p class="path">Infrastructure <span>&rarr;</span> CMS <span>&rarr;</span> Search <span>&rarr;</span> Operations</p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var GA_ID = 'G-6JCDHFSJ4M';
+      var ga = document.createElement('script'); ga.async = true; ga.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID; document.head.appendChild(ga);
+      window.dataLayer = window.dataLayer || []; window.gtag = function () { window.dataLayer.push(arguments); };
+      gtag('js', new Date()); gtag('config', GA_ID);
+      function track(n, p) { if (window.gtag) window.gtag('event', n, p || {}); }
+      document.getElementById('modeToggle').addEventListener('click', function () {
+        var t = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+        document.documentElement.dataset.theme = t; try { localStorage.setItem('theme', t); } catch (e) {}
+      });
+      var box = document.getElementById('lightbox'), boxImg = box.querySelector('img'), last = null;
+      document.querySelectorAll('[data-zoom]').forEach(function (img) {
+        img.parentElement.addEventListener('click', function () {
+          last = img.parentElement; boxImg.src = img.src; boxImg.alt = img.alt; box.classList.add('on'); box.querySelector('.close').focus();
+          track('image_open', { page: 'ibex', image: img.getAttribute('src') });
+        });
+      });
+      function closeBox() { box.classList.remove('on'); boxImg.src = ''; if (last) last.focus(); }
+      box.querySelector('.close').addEventListener('click', closeBox);
+      box.addEventListener('click', function (e) { if (e.target === box) closeBox(); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && box.classList.contains('on')) closeBox(); });
+      document.querySelectorAll('a[href$=".csv"], a[href$=".json"]').forEach(function (a) { a.addEventListener('click', function () { track('data_download', { file: a.getAttribute('href') }); }); });
+    })();
+  </script>
+</body>
+</html>
