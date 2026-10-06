@@ -39,7 +39,7 @@ export default function Experience() {
     <section id="experience" ref={rootRef} className="relative px-6 py-32 md:px-12 md:py-48">
       <div className="relative z-20 mx-auto w-full max-w-6xl">
         <div data-heading>
-          <p className="font-display text-sm font-semibold uppercase tracking-[0.08em] text-accent">{t.experience.label}</p>
+          <p className="font-display text-sm font-semibold uppercase tracking-[0.08em] text-accent-ink">{t.experience.label}</p>
           <h2 className="mt-6 font-display text-[clamp(1.9rem,3.5vw,2.8rem)] font-bold tracking-tightest">
             <Words>{t.experience.h2}</Words>
           </h2>
@@ -61,7 +61,7 @@ export default function Experience() {
                   aria-hidden="true"
                 />
                 <div className="md:pr-12">
-                  <p className="font-display text-sm font-semibold text-accent">{job.dates}</p>
+                  <p className="font-display text-sm font-semibold text-accent-ink">{job.dates}</p>
                   <p className="mt-1 text-sm text-muted">{job.place}</p>
                 </div>
                 <div className="md:pl-12">

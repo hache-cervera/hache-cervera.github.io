@@ -36,7 +36,7 @@ function Stat({ value, suffix, label }) {
         <span data-count={value}>0</span>
         <span className="text-accent">{suffix}</span>
       </span>
-      <span className="text-sm text-muted">{label}</span>
+      <span className="text-sm text-white/60">{label}</span>
     </div>
   );
 }
@@ -96,7 +96,7 @@ export default function About() {
             headline and the hard facts without scrolling past the story. */}
         <div className="md:sticky md:top-24">
           <div data-rise>
-            <p className="font-display text-sm font-semibold uppercase tracking-[0.08em] text-accent">{t.about.label}</p>
+            <p className="font-display text-sm font-semibold uppercase tracking-[0.08em] text-accent-ink">{t.about.label}</p>
             <h2 className="mt-6 font-display text-[clamp(2rem,4vw,3rem)] font-bold leading-[1.12] tracking-tightest">
               <span className="block"><Words>{t.about.h2a}</Words></span>
               <span className="block"><Words>{t.about.h2b}</Words></span>
@@ -144,7 +144,7 @@ export default function About() {
                 <li key={l.n} data-layer className="group relative p-5">
                   <span className="absolute left-0 top-0 h-full w-0.5 origin-top scale-y-0 bg-accent transition-transform duration-300 group-hover:scale-y-100" />
                   <div className="flex items-baseline gap-3">
-                    <span className="font-display text-xs font-bold text-accent">{l.n}</span>
+                    <span className="font-display text-xs font-bold text-accent-ink">{l.n}</span>
                     <span className="font-display text-base font-bold transition-colors duration-300 group-hover:text-accent">
                       {l.name}
                     </span>
@@ -170,7 +170,7 @@ export default function About() {
           </p>
 
           <div data-rise className="border border-line bg-page p-5">
-            <p className="flex items-center gap-2 font-display text-[11px] font-semibold uppercase tracking-[0.16em] text-accent">
+            <p className="flex items-center gap-2 font-display text-[11px] font-semibold uppercase tracking-[0.16em] text-accent-ink">
               <Icon name="server" />
               {t.about.labLabel}
             </p>

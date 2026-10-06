@@ -91,16 +91,16 @@ export default function Skills() {
   return (
     <section id="skills" ref={rootRef} className="relative h-screen overflow-hidden">
       <div className="relative z-20 mx-auto flex h-full w-full max-w-6xl flex-col justify-center px-6 md:px-12">
-        <p className="font-display text-sm font-semibold uppercase tracking-[0.08em] text-accent">{t.skills.label}</p>
+        <p className="font-display text-sm font-semibold uppercase tracking-[0.08em] text-accent-ink">{t.skills.label}</p>
 
         <div className="relative mt-6 h-[480px] sm:h-[460px] md:max-w-[58%]">
           {disciplines.map((d) => (
             <div key={d.id} data-discipline className="absolute inset-0">
-              <p className="font-display text-xs font-semibold uppercase tracking-[0.14em] text-muted">{d.node}</p>
+              <p className="font-display text-xs font-semibold uppercase tracking-[0.14em] text-muted-strong">{d.node}</p>
               <h3 className="mt-3 font-display text-[clamp(1.9rem,4vw,3rem)] font-bold tracking-tightest">
                 {d.label}
               </h3>
-              {d.note && <p className="mt-4 max-w-md text-sm leading-relaxed text-muted">{d.note}</p>}
+              {d.note && <p className="mt-4 max-w-md text-sm leading-relaxed text-muted-strong">{d.note}</p>}
               <ul className="mt-6 flex flex-wrap gap-2 sm:mt-8 sm:gap-3">
                 {d.tools.map((t) => (
                   <ToolBadge key={t.name} {...t} />
@@ -110,17 +110,17 @@ export default function Skills() {
           ))}
         </div>
 
-        <p className="mt-6 max-w-md border-l-2 border-accent pl-4 text-sm leading-relaxed text-muted md:max-w-[58%]">
+        <p className="mt-6 max-w-md border-l-2 border-accent pl-4 text-sm leading-relaxed text-muted-strong md:max-w-[58%]">
           {t.skills.note}
         </p>
       </div>
 
       <div className="absolute bottom-10 left-1/2 z-20 flex -translate-x-1/2 items-center gap-4" aria-hidden="true">
-        <span data-index className="font-display text-xs text-muted">01</span>
+        <span data-index className="font-display text-xs text-muted-strong">01</span>
         <span className="relative h-px w-40 bg-line">
           <span data-progress className="absolute left-0 top-0 h-full bg-accent" style={{ width: '0%' }} />
         </span>
-        <span className="font-display text-xs text-muted">06</span>
+        <span className="font-display text-xs text-muted-strong">06</span>
       </div>
     </section>
   );

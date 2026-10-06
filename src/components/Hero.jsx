@@ -89,8 +89,8 @@ function MagneticLink({ href, children, accent, external }) {
       onMouseLeave={() => { mx.set(0); my.set(0); }}
       className={
         accent
-          ? 'group inline-flex items-center gap-2 rounded bg-accent px-8 py-4 font-display font-semibold text-white transition-colors duration-300 hover:bg-accent-hover'
-          : 'group inline-flex items-center gap-2 rounded bg-ink px-8 py-4 font-display font-semibold text-page transition-colors duration-300 hover:bg-accent hover:text-white'
+          ? 'group inline-flex items-center gap-2 rounded bg-accent-solid px-8 py-4 font-display font-semibold text-white transition-colors duration-300 hover:bg-accent-solid-hover'
+          : 'group inline-flex items-center gap-2 rounded bg-ink px-8 py-4 font-display font-semibold text-page transition-colors duration-300 hover:bg-accent-solid hover:text-white'
       }
     >
       {children}
@@ -134,7 +134,7 @@ export default function Hero() {
       <NodeField />
 
       <div className="relative z-20 mx-auto w-full max-w-6xl">
-        <p className="overflow-hidden font-display text-sm font-semibold uppercase tracking-[0.08em] text-accent">
+        <p className="overflow-hidden font-display text-sm font-semibold uppercase tracking-[0.08em] text-accent-ink">
           <span data-line className="inline-block">{t.hero.kicker}</span>
         </p>
 
