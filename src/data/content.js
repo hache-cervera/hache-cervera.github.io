@@ -46,6 +46,7 @@ const DISCIPLINES_RAW = [
       { mark: 'H5', name: L('HTML', 'HTML') },
       { mark: 'C3', name: L('CSS', 'CSS') },
       { mark: 'Js', name: L('JavaScript', 'JavaScript') },
+      { mark: 'Re', name: L('React', 'React') },
     ],
   },
   {

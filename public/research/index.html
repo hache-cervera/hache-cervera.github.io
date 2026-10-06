@@ -17,7 +17,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
   <script>(function () { try { document.documentElement.dataset.theme = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light'; } catch (e) {} })();</script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Research · Ada (hache) Cervera","description":"Original studies on how websites work underneath: AI crawlers, performance and accessibility, with the method and the data on every page.","inLanguage":"en","url":"https://hache-cervera.github.io/research/","hasPart":[{"@type":"Article","headline":"Is the IBEX 35 ready for AI search?","url":"https://hache-cervera.github.io/research/ibex-35-ai/","datePublished":"2026-10-06"}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Research · Ada (hache) Cervera","description":"Original studies on how websites work underneath: AI crawlers, performance and accessibility, with the method and the data on every page.","inLanguage":"en","url":"https://hache-cervera.github.io/research/","hasPart":[{"@type":"Article","headline":"How slow and how accessible are city council websites?","url":"https://hache-cervera.github.io/research/city-councils/","datePublished":"2026-10-06"},{"@type":"Article","headline":"Is the IBEX 35 ready for AI search?","url":"https://hache-cervera.github.io/research/ibex-35-ai/","datePublished":"2026-10-06"}]}</script>
   <style>
     :root {
       --bg: #ffffff;
@@ -592,6 +592,10 @@
       <h1>Studies I ran <em>myself</em></h1>
       <p class="lede">Public websites measured with real browsers, a control group when it matters, and the data downloadable. Each study says what was measured, when, and what it cannot prove.</p>
       <div class="studies">
+        <a class="study" href="city-councils/">
+          <div><p class="section-label">October 2026 · Public websites</p><h2>How slow and how accessible are city council websites?</h2><p>Speed (Lighthouse, mobile) and accessibility (axe, WCAG 2.1 AA) of the city council websites of Spain’s 50 provincial capitals.</p><span class="go">Read the study</span></div>
+          <p class="num">42/49<small>home pages with WCAG errors on desktop</small></p>
+        </a>
         <a class="study" href="ibex-35-ai/">
           <div><p class="section-label">October 2026 · AI search</p><h2>Is the IBEX 35 ready for AI search?</h2><p>robots.txt, firewall rules and llms.txt of Spain’s 35 largest listed companies, tested with a placebo bot as the control group.</p><span class="go">Read the study</span></div>
           <p class="num">0/35<small>block AI search bots in robots.txt</small></p>

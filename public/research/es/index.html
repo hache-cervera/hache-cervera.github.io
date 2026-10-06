@@ -17,7 +17,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
   <script>(function () { try { document.documentElement.dataset.theme = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light'; } catch (e) {} })();</script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Investigaciones · Ada (hache) Cervera","description":"Estudios propios sobre cómo funcionan las webs por dentro: bots de IA, rendimiento y accesibilidad, con el método y los datos en cada página.","inLanguage":"es","url":"https://hache-cervera.github.io/research/es/","hasPart":[{"@type":"Article","headline":"¿Está el IBEX 35 preparado para la búsqueda con IA?","url":"https://hache-cervera.github.io/research/es/ibex-35-ia/","datePublished":"2026-10-06"}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Investigaciones · Ada (hache) Cervera","description":"Estudios propios sobre cómo funcionan las webs por dentro: bots de IA, rendimiento y accesibilidad, con el método y los datos en cada página.","inLanguage":"es","url":"https://hache-cervera.github.io/research/es/","hasPart":[{"@type":"Article","headline":"¿Cómo de lentas y accesibles son las webs de los ayuntamientos?","url":"https://hache-cervera.github.io/research/es/ayuntamientos/","datePublished":"2026-10-06"},{"@type":"Article","headline":"¿Está el IBEX 35 preparado para la búsqueda con IA?","url":"https://hache-cervera.github.io/research/es/ibex-35-ia/","datePublished":"2026-10-06"}]}</script>
   <style>
     :root {
       --bg: #ffffff;
@@ -592,6 +592,10 @@
       <h1>Investigaciones <em>propias</em></h1>
       <p class="lede">Webs públicas medidas con navegadores reales, un grupo de control cuando hace falta y los datos para descargar. Cada estudio dice qué se midió, cuándo y qué no puede demostrar.</p>
       <div class="studies">
+        <a class="study" href="ayuntamientos/">
+          <div><p class="section-label">Octubre 2026 · Webs públicas</p><h2>¿Cómo de lentas y accesibles son las webs de los ayuntamientos?</h2><p>Velocidad (Lighthouse, móvil) y accesibilidad (axe, WCAG 2.1 AA) de las webs de los ayuntamientos de las 50 capitales de provincia.</p><span class="go">Leer el estudio</span></div>
+          <p class="num">42/49<small>portadas con errores WCAG en escritorio</small></p>
+        </a>
         <a class="study" href="ibex-35-ia/">
           <div><p class="section-label">Octubre 2026 · Búsqueda con IA</p><h2>¿Está el IBEX 35 preparado para la búsqueda con IA?</h2><p>robots.txt, reglas de cortafuegos y llms.txt de las 35 empresas del IBEX, con un bot placebo como grupo de control.</p><span class="go">Leer el estudio</span></div>
           <p class="num">0/35<small>cierran su robots.txt a los bots de búsqueda con IA</small></p>

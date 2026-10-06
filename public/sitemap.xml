@@ -43,4 +43,16 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://hache-cervera.github.io/research/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://hache-cervera.github.io/research/es/"/>
   </url>
+  <url>
+    <loc>https://hache-cervera.github.io/research/city-councils/</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hache-cervera.github.io/research/city-councils/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hache-cervera.github.io/research/es/ayuntamientos/"/>
+  </url>
+  <url>
+    <loc>https://hache-cervera.github.io/research/es/ayuntamientos/</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hache-cervera.github.io/research/city-councils/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hache-cervera.github.io/research/es/ayuntamientos/"/>
+  </url>
 </urlset>
