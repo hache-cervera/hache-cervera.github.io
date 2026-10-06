@@ -15,9 +15,12 @@
   <meta property="og:type" content="article" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/svg+xml" href="../../../favicon.svg" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="preload" href="/fonts/sora-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <style>
+    @font-face { font-family: 'Sora'; font-style: normal; font-weight: 600 800; font-display: swap; src: url('/fonts/sora-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400 500; font-display: swap; src: url('/fonts/inter-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  </style>
   <script>(function () { try { document.documentElement.dataset.theme = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light'; } catch (e) {} })();</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"¿Cómo de lentas y accesibles son las webs de los ayuntamientos?","description":"Investigación propia: velocidad (Lighthouse, móvil) y accesibilidad (axe, WCAG 2.1 AA) de las webs de los ayuntamientos de las 50 capitales de provincia, con los datos para descargar.","inLanguage":"es","datePublished":"2026-10-06","url":"https://hache-cervera.github.io/research/es/ayuntamientos/","image":"https://hache-cervera.github.io/research/img/aytos-og.jpg","author":{"@type":"Person","name":"Ada (hache) Cervera","url":"https://hache-cervera.github.io/"}},{"@type":"Dataset","name":"Webs de ayuntamientos: velocidad y accesibilidad (octubre 2026)","description":"Investigación propia: velocidad (Lighthouse, móvil) y accesibilidad (axe, WCAG 2.1 AA) de las webs de los ayuntamientos de las 50 capitales de provincia, con los datos para descargar.","inLanguage":"es","creator":{"@type":"Person","name":"Ada (hache) Cervera"},"temporalCoverage":"2026-10-04/2026-10-06","license":"https://creativecommons.org/licenses/by/4.0/","isAccessibleForFree":true,"distribution":[{"@type":"DataDownload","encodingFormat":"text/csv","contentUrl":"https://hache-cervera.github.io/research/data/city-councils-2026-10.csv"},{"@type":"DataDownload","encodingFormat":"application/json","contentUrl":"https://hache-cervera.github.io/research/data/city-councils-2026-10.json"}]}]}</script>
   <style>
@@ -575,6 +578,7 @@
     html:not([data-theme='dark']) .btn { background: #c22e00; border-color: #c22e00; }
     html .cta .kicker { color: var(--accent); }
   </style>
+  <script src="/consent.js" defer></script>
 </head>
 <body>
   <div class="grain" aria-hidden="true"></div>
@@ -683,16 +687,12 @@
   </section>
   <footer>
     <div class="wrap">
-      <p>&copy; 2026 Ada (hache) Cervera. Hecho a mano en Valencia.</p>
+      <p>&copy; 2026 Ada (hache) Cervera. Hecho a mano en Valencia. <a href="#" data-cookies>Cookies</a></p>
       <p class="path">Infrastructure <span>&rarr;</span> CMS <span>&rarr;</span> Search <span>&rarr;</span> Operations</p>
     </div>
   </footer>
   <script>
     (function () {
-      var GA_ID = 'G-6JCDHFSJ4M';
-      var ga = document.createElement('script'); ga.async = true; ga.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID; document.head.appendChild(ga);
-      window.dataLayer = window.dataLayer || []; window.gtag = function () { window.dataLayer.push(arguments); };
-      gtag('js', new Date()); gtag('config', GA_ID);
       function track(n, p) { if (window.gtag) window.gtag('event', n, p || {}); }
       document.getElementById('modeToggle').addEventListener('click', function () {
         var t = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';

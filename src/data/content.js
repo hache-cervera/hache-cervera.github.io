@@ -135,9 +135,9 @@ export function getDisciplines(lang) {
 export const DISCIPLINES = getDisciplines('en');
 
 export const LOGOS = [
-  { src: 'logos/cofidis.png', alt: 'Cofidis' },
-  { src: 'logos/benimar.png', alt: 'Benimar' },
-  { src: 'logos/apm-terminals.png', alt: 'APM Terminals' },
+  { src: 'logos/cofidis.webp', alt: 'Cofidis', w: 500, h: 200 },
+  { src: 'logos/benimar.webp', alt: 'Benimar', w: 500, h: 200 },
+  { src: 'logos/apm-terminals.webp', alt: 'APM Terminals', w: 500, h: 200 },
 ];
 
 const EXPERIENCE_RAW = [

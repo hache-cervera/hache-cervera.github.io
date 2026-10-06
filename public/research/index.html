@@ -13,9 +13,12 @@
   <meta property="og:image" content="https://hache-cervera.github.io/og-home.jpg" />
   <meta property="og:type" content="website" />
   <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="preload" href="/fonts/sora-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <style>
+    @font-face { font-family: 'Sora'; font-style: normal; font-weight: 600 800; font-display: swap; src: url('/fonts/sora-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400 500; font-display: swap; src: url('/fonts/inter-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  </style>
   <script>(function () { try { document.documentElement.dataset.theme = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light'; } catch (e) {} })();</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Research · Ada (hache) Cervera","description":"Original studies on how websites work underneath: AI crawlers, performance and accessibility, with the method and the data on every page.","inLanguage":"en","url":"https://hache-cervera.github.io/research/","hasPart":[{"@type":"Article","headline":"How slow and how accessible are city council websites?","url":"https://hache-cervera.github.io/research/city-councils/","datePublished":"2026-10-06"},{"@type":"Article","headline":"Is the IBEX 35 ready for AI search?","url":"https://hache-cervera.github.io/research/ibex-35-ai/","datePublished":"2026-10-06"}]}</script>
   <style>
@@ -568,6 +571,7 @@
     .study .go { display: inline-block; margin-top: 20px; font-family: var(--font-display); font-weight: 600; font-size: 0.875rem; text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px; }
     html:not([data-theme='dark']) .kicker, html:not([data-theme='dark']) .section-label, html:not([data-theme='dark']) .study .num { color: #c22e00; }
   </style>
+  <script src="/consent.js" defer></script>
 </head>
 <body>
   <div class="grain" aria-hidden="true"></div>
@@ -605,16 +609,12 @@
   </main>
   <footer>
     <div class="wrap">
-      <p>&copy; 2026 Ada (hache) Cervera. Built by hand in Valencia.</p>
+      <p>&copy; 2026 Ada (hache) Cervera. Built by hand in Valencia. <a href="#" data-cookies>Cookies</a></p>
       <p class="path">Infrastructure <span>&rarr;</span> CMS <span>&rarr;</span> Search <span>&rarr;</span> Operations</p>
     </div>
   </footer>
   <script>
     (function () {
-      var GA_ID = 'G-6JCDHFSJ4M';
-      var ga = document.createElement('script'); ga.async = true; ga.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID; document.head.appendChild(ga);
-      window.dataLayer = window.dataLayer || []; window.gtag = function () { window.dataLayer.push(arguments); };
-      gtag('js', new Date()); gtag('config', GA_ID);
       document.getElementById('modeToggle').addEventListener('click', function () {
         var t = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
         document.documentElement.dataset.theme = t; try { localStorage.setItem('theme', t); } catch (e) {}
