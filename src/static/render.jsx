@@ -1,14 +1,14 @@
-// Build-time render of the home content as plain HTML (English).
+// Build-time render of the home content as plain HTML (English at /, Spanish at /es/).
 // scripts/prerender.mjs puts it inside #root, so crawlers, link previews and
 // visitors without JavaScript get the real text. React replaces it on mount.
 import { renderToStaticMarkup } from 'react-dom/server';
 import { translations } from '../i18n';
 import { getExperience, getDisciplines } from '../data/content';
 
-function StaticHome() {
-  const t = translations.en;
-  const experience = getExperience('en');
-  const disciplines = getDisciplines('en');
+function StaticHome({ lang }) {
+  const t = translations[lang];
+  const experience = getExperience(lang);
+  const disciplines = getDisciplines(lang);
   return (
     <main className="relative">
       <section id="hero" className="relative flex min-h-screen flex-col justify-center px-6 py-24 md:px-12">
@@ -26,8 +26,8 @@ function StaticHome() {
             {t.hero.status} <a href={t.cvHref}>{t.hero.cv}</a>
           </p>
           <p className="mt-10 flex flex-wrap gap-4 font-display font-semibold">
-            <a href="work/">{t.hero.portfolio}</a>
-            <a href="research/">{t.hero.research}</a>
+            <a href={lang === 'es' ? 'work/es/' : 'work/'}>{t.hero.portfolio}</a>
+            <a href={lang === 'es' ? 'research/es/' : 'research/'}>{t.hero.research}</a>
           </p>
         </div>
       </section>
@@ -133,6 +133,6 @@ function StaticHome() {
   );
 }
 
-export function render() {
-  return renderToStaticMarkup(<StaticHome />);
+export function render(lang = 'en') {
+  return renderToStaticMarkup(<StaticHome lang={lang} />);
 }

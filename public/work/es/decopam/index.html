@@ -15,12 +15,12 @@
   <meta property="og:type" content="article" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/svg+xml" href="../../../favicon.svg" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500&display=swap"
-    rel="stylesheet"
-  />
+  <link rel="preload" href="/fonts/sora-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <style>
+    @font-face { font-family: 'Sora'; font-style: normal; font-weight: 600 800; font-display: swap; src: url('/fonts/sora-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400 500; font-display: swap; src: url('/fonts/inter-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  </style>
   <script>
     (function () {
       try {
@@ -567,7 +567,13 @@
       cursor: pointer;
     }
     .lightbox .close:hover { color: var(--accent); }
+  
+    /* brand orange #ff3c00 reaches 3.56:1 on white; small text and buttons use a darker shade in light theme */
+    html:not([data-theme='dark']) .kicker, html:not([data-theme='dark']) .section-label, html:not([data-theme='dark']) main a:not(.btn):not(.alt), html:not([data-theme='dark']) code { color: #c22e00; }
+    html:not([data-theme='dark']) .btn { background: #c22e00; border-color: #c22e00; }
+    html .cta .kicker { color: var(--accent); }
   </style>
+  <script src="/consent.js" defer></script>
 </head>
 
 <body>
@@ -725,7 +731,7 @@
           &uacute;nico archivo de importaci&oacute;n que una persona pudiera auditar antes de que
           se escribiera nada.
         </p>
-        <div class="tbl">
+        <div class="tbl" tabindex="0" role="region" aria-label="Tabla">
           <table>
             <thead><tr><th>Fuente</th><th>Qu&eacute; aporta</th></tr></thead>
             <tbody>
@@ -756,7 +762,7 @@
           solo sentido si sale mal. Estas quedaron fijadas de antemano para no tener que decidir
           nada con prisa.
         </p>
-        <div class="tbl">
+        <div class="tbl" tabindex="0" role="region" aria-label="Tabla">
           <table>
             <thead><tr><th>Regla</th><th>Por qu&eacute;</th></tr></thead>
             <tbody>
@@ -782,7 +788,7 @@
           productos variables se comportara como una tienda y no como una exportaci&oacute;n de
           base de datos.
         </p>
-        <div class="tbl">
+        <div class="tbl" tabindex="0" role="region" aria-label="Tabla">
           <table>
             <thead><tr><th>Cambio</th><th>Qu&eacute; implic&oacute;</th></tr></thead>
             <tbody>
@@ -842,7 +848,7 @@
       <div class="wrap">
         <p class="section-label">/ 05 &middot; Qu&eacute; demuestra</p>
         <h2>Por qu&eacute; merece la pena leerlo</h2>
-        <div class="tbl">
+        <div class="tbl" tabindex="0" role="region" aria-label="Tabla">
           <table>
             <thead><tr><th>Afirmaci&oacute;n</th><th>Evidencia</th></tr></thead>
             <tbody>
@@ -878,24 +884,14 @@
 
   <footer>
     <div class="wrap">
-      <p>&copy; 2026 Ada (hache) Cervera. Hecho a mano en Valencia.</p>
+      <p>&copy; 2026 Ada (hache) Cervera. Hecho a mano en Valencia. <a href="#" data-cookies>Cookies</a></p>
       <p class="path">Infraestructura <span>&rarr;</span> CMS <span>&rarr;</span> B&uacute;squeda <span>&rarr;</span> Operativa</p>
     </div>
   </footer>
 
   <script>
     (function () {
-      var GA_ID = 'G-6JCDHFSJ4M';
-      if (GA_ID) {
-        var ga = document.createElement('script');
-        ga.async = true;
-        ga.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
-        document.head.appendChild(ga);
-        window.dataLayer = window.dataLayer || [];
-        window.gtag = function () { window.dataLayer.push(arguments); };
-        gtag('js', new Date());
-        gtag('config', GA_ID);
-      }
+      
       function track(name, params) {
         if (window.gtag) window.gtag('event', name, params || {});
       }

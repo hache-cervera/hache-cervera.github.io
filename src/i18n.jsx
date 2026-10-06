@@ -233,14 +233,17 @@ export const translations = {
 const LangContext = createContext({ lang: 'en', setLang: () => {}, t: translations.en });
 
 export function LangProvider({ children }) {
-  const [lang, setLang] = useState(() => {
+  // The URL decides the language: / is English, /es/ is Spanish (both prerendered).
+  // A visitor who chose Spanish before and lands on / is sent to /es/.
+  const [lang, setLang] = useState(() => (window.location.pathname.startsWith('/es') ? 'es' : 'en'));
+
+  useEffect(() => {
     try {
-      const saved = localStorage.getItem('lang');
-      return saved === 'es' ? 'es' : 'en';
+      if (window.location.pathname === '/' && localStorage.getItem('lang') === 'es') window.location.replace('/es/');
     } catch {
-      return 'en';
+      /* private mode */
     }
-  });
+  }, []);
 
   useEffect(() => {
     try {

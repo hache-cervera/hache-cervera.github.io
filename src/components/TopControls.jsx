@@ -18,6 +18,19 @@ export default function TopControls() {
     window.dispatchEvent(new CustomEvent('themechange', { detail: theme }));
   }, [theme]);
 
+  // Each language has its own URL, so switching navigates to it.
+  const choose = (code) => {
+    try {
+      localStorage.setItem('lang', code);
+    } catch {
+      /* private mode */
+    }
+    const onEs = window.location.pathname.startsWith('/es');
+    if (code === 'es' && !onEs) window.location.assign('/es/');
+    else if (code === 'en' && onEs) window.location.assign('/');
+    else setLang(code);
+  };
+
   const langChip = (code) =>
     `flex h-10 w-10 items-center justify-center border border-line ctl-surface font-display text-xs font-semibold uppercase tracking-[0.04em] backdrop-blur transition-colors duration-200 ${
       lang === code ? 'text-ink border-b-2 !border-b-accent' : 'text-muted hover:text-ink hover:border-ink'
@@ -26,10 +39,10 @@ export default function TopControls() {
   return (
     <div className="absolute right-4 top-4 z-40 flex gap-2 md:fixed md:right-6 md:top-6">
       <div className="flex">
-        <button type="button" onClick={() => setLang('en')} aria-pressed={lang === 'en'} className={langChip('en')}>
+        <button type="button" onClick={() => choose('en')} aria-pressed={lang === 'en'} className={langChip('en')}>
           EN
         </button>
-        <button type="button" onClick={() => setLang('es')} aria-pressed={lang === 'es'} className={`-ml-px ${langChip('es')}`}>
+        <button type="button" onClick={() => choose('es')} aria-pressed={lang === 'es'} className={`-ml-px ${langChip('es')}`}>
           ES
         </button>
       </div>

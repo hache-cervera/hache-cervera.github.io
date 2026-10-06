@@ -52,6 +52,9 @@ export default function Works() {
               data-logo
               src={logo.src}
               alt={logo.alt}
+              width={logo.w}
+              height={logo.h}
+              decoding="async"
               whileHover={{ scale: 1.06, y: -4 }}
               transition={{ type: 'spring', stiffness: 300, damping: 20 }}
               className="h-16 w-auto object-contain grayscale opacity-70 transition-[filter,opacity] duration-500 hover:grayscale-0 hover:opacity-100 md:h-24"
