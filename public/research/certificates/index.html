@@ -611,6 +611,24 @@
     .wordmark { margin-top: 24px; font-family: 'Archivo', var(--font-display); font-weight: 900; font-size: clamp(3.4rem, 9vw, 6.5rem); line-height: 0.9; letter-spacing: -0.045em; padding-right: 0.06em; }
     .wordmark span { color: var(--accent); }
     .wordmark + h3 { margin-top: 16px; font-family: var(--font-display); font-weight: 700; font-size: clamp(1.3rem, 2.4vw, 1.8rem); letter-spacing: -0.02em; line-height: 1.2; }
+    .banner { position: relative; background: #E4E5E3; color: #0F0F10; overflow: hidden; border-bottom: 1px solid #0F0F10; }
+    .banner-in { position: relative; display: grid; grid-template-columns: 1fr; padding-top: 56px; }
+    @media (min-width: 900px) { .banner-in { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); padding-top: 88px; } }
+    .banner-text { position: relative; z-index: 1; }
+    html .banner .kicker { color: #C22E00; }
+    .banner h1 { margin-top: 20px; font-family: var(--font-display); font-weight: 800; font-size: clamp(2.2rem, 4.6vw, 3.8rem); letter-spacing: -0.03em; line-height: 1.05; color: #0F0F10; }
+    .banner h1 em { font-style: italic; color: #C22E00; padding-right: 0.1em; }
+    .banner .lede { margin-top: 20px; max-width: 34rem; font-size: 1.0625rem; color: #3A3A3A; }
+    .banner .actions { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+    .banner .trust { margin-top: 14px; max-width: 32rem; font-size: 0.9375rem; color: #3A3A3A; }
+    .banner .trust strong { color: #0F0F10; font-weight: 600; }
+    .banner .sub { margin-top: 20px; }
+    html .banner .alt { color: #3A3A3A; border-color: #0F0F10; }
+    html .banner .alt:hover { color: #C22E00; border-color: #C22E00; }
+    .banner .tub { display: block; width: 70%; max-width: 300px; height: auto; color: #0F0F10; margin: 24px auto 0; }
+    @media (min-width: 900px) { .banner .tub { width: 100%; max-width: 620px; justify-self: end; align-self: end; margin: 0 -110px -36px 0; } }
+    .banner-word { grid-column: 1 / -1; position: relative; z-index: 1; margin: 16px 0 0 -0.03em; font-family: 'Archivo', var(--font-display); font-weight: 900; font-size: clamp(5.2rem, 19vw, 16.5rem); line-height: 0.82; letter-spacing: -0.055em; color: #0F0F10; white-space: nowrap; padding-right: 0.05em; }
+    .banner-word span { color: #FF3C00; }
   </style>
   <script src="/consent.js" defer></script>
 </head>
@@ -632,10 +650,9 @@
   </header>
 
   <main>
-    <div class="hero wrap">
-      <span class="glow" style="top: -140px; right: -160px;" aria-hidden="true"></span>
-      <div class="hero-grid">
-        <div>
+    <div class="banner">
+      <div class="wrap banner-in">
+        <div class="banner-text">
           <p class="kicker">/ TLS certificates</p>
           <h1>Check when your website's <em>TLS certificate</em> expires</h1>
           <p class="lede">Your website's TLS certificate expires, and sooner every year. From 15 March 2027 it can last 100 days at most, and from 2029, 47. If you renew by hand, that's going from once a year to at least four times, then around eight.</p>
@@ -645,7 +662,8 @@
           <p class="trust"><strong>Open source, MIT licence.</strong> No sign-up, and it runs on your machine: your data goes nowhere.</p>
           <p class="sub"><a class="alt" href="#highlights">See how the 1,000 most visited .es sites are doing</a></p>
         </div>
-        <div class="hero-art"><svg class="tub" viewBox="0 0 480 480" role="img" aria-label="yogurTLS: a yogurt tub with its lid peeled back and a keyhole on the label"><polygon points="128,214 352,214 343.5,272 136.5,272" fill="currentColor"/><polygon points="146.8,342 333.2,342 322,418 158,418" fill="currentColor"/><rect x="104" y="188" width="272" height="30" fill="currentColor"/><circle cx="240" cy="294" r="15" fill="currentColor"/><polygon points="232,298 248,298 254,328 226,328" fill="currentColor"/><g transform="rotate(24 378 188)"><rect x="106" y="170" width="272" height="18" fill="#FF3C00"/><rect x="84" y="164" width="30" height="30" fill="#FF3C00"/></g></svg></div>
+        <svg class="tub" viewBox="0 0 480 480" role="img" aria-label="yogurTLS: a yogurt tub with its lid peeled back and a keyhole on the label"><polygon points="128,214 352,214 343.5,272 136.5,272" fill="currentColor"/><polygon points="146.8,342 333.2,342 322,418 158,418" fill="currentColor"/><rect x="104" y="188" width="272" height="30" fill="currentColor"/><circle cx="240" cy="294" r="15" fill="currentColor"/><polygon points="232,298 248,298 254,328 226,328" fill="currentColor"/><g transform="rotate(24 378 188)"><rect x="106" y="170" width="272" height="18" fill="#FF3C00"/><rect x="84" y="164" width="30" height="30" fill="#FF3C00"/></g></svg>
+        <p class="banner-word" aria-hidden="true">yogur<span>TLS</span></p>
       </div>
     </div>
 
