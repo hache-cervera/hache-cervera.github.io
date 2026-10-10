@@ -4,13 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Comprueba la caducidad del certificado TLS de tu web · Investigación · Ada (hache) Cervera</title>
-  <meta name="description" content="Los certificados TLS durarán 100 días desde 2027 y 47 desde 2029. Comprueba el tuyo con yogurTLS, gratis, y mira cómo están las 1.000 webs .es más visitadas." />
+  <meta name="description" content="Los certificados TLS durarán 100 días desde 2027 y 47 desde 2029. Comprueba el tuyo con yogurTLS, open source, y mira cómo están las 1.000 webs .es más visitadas." />
   <link rel="canonical" href="https://hache-cervera.github.io/research/es/certificados/" />
   <link rel="alternate" hreflang="es" href="https://hache-cervera.github.io/research/es/certificados/" />
   <link rel="alternate" hreflang="en" href="https://hache-cervera.github.io/research/certificates/" />
   <link rel="alternate" hreflang="x-default" href="https://hache-cervera.github.io/research/certificates/" />
   <meta property="og:title" content="Comprueba la caducidad del certificado TLS de tu web" />
-  <meta property="og:description" content="Los certificados TLS durarán 100 días desde 2027 y 47 desde 2029. Comprueba el tuyo con yogurTLS, gratis, y mira cómo están las 1.000 webs .es más visitadas." />
+  <meta property="og:description" content="Los certificados TLS durarán 100 días desde 2027 y 47 desde 2029. Comprueba el tuyo con yogurTLS, open source, y mira cómo están las 1.000 webs .es más visitadas." />
   <meta property="og:image" content="https://hache-cervera.github.io/og-home.jpg" />
   <meta property="og:url" content="https://hache-cervera.github.io/research/es/certificados/" />
   <meta property="og:type" content="article" />
@@ -26,7 +26,7 @@
   <script>
     (function () { try { document.documentElement.dataset.theme = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light'; } catch (e) {} })();
   </script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"Comprueba la caducidad del certificado TLS de tu web","description":"Los certificados TLS durarán 100 días desde 2027 y 47 desde 2029. Comprueba el tuyo con yogurTLS, gratis, y mira cómo están las 1.000 webs .es más visitadas.","inLanguage":"es","datePublished":"2026-10-10","dateModified":"2026-10-10","url":"https://hache-cervera.github.io/research/es/certificados/","author":{"@type":"Person","name":"Ada (hache) Cervera","url":"https://hache-cervera.github.io/"}},{"@type":"Dataset","name":"Certificados TLS de las 1.000 webs .es más visitadas (octubre 2026)","description":"Los certificados TLS durarán 100 días desde 2027 y 47 desde 2029. Comprueba el tuyo con yogurTLS, gratis, y mira cómo están las 1.000 webs .es más visitadas.","inLanguage":"es","creator":{"@type":"Person","name":"Ada (hache) Cervera"},"temporalCoverage":"2026-10-09","license":"https://creativecommons.org/licenses/by/4.0/","isAccessibleForFree":true,"distribution":[{"@type":"DataDownload","encodingFormat":"text/csv","contentUrl":"https://hache-cervera.github.io/research/data/certificados-es-2026-10.csv"},{"@type":"DataDownload","encodingFormat":"application/json","contentUrl":"https://hache-cervera.github.io/research/data/certificados-es-2026-10.json"}]}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"Comprueba la caducidad del certificado TLS de tu web","description":"Los certificados TLS durarán 100 días desde 2027 y 47 desde 2029. Comprueba el tuyo con yogurTLS, open source, y mira cómo están las 1.000 webs .es más visitadas.","inLanguage":"es","datePublished":"2026-10-10","dateModified":"2026-10-10","url":"https://hache-cervera.github.io/research/es/certificados/","author":{"@type":"Person","name":"Ada (hache) Cervera","url":"https://hache-cervera.github.io/"}},{"@type":"Dataset","name":"Certificados TLS de las 1.000 webs .es más visitadas (octubre 2026)","description":"Los certificados TLS durarán 100 días desde 2027 y 47 desde 2029. Comprueba el tuyo con yogurTLS, open source, y mira cómo están las 1.000 webs .es más visitadas.","inLanguage":"es","creator":{"@type":"Person","name":"Ada (hache) Cervera"},"temporalCoverage":"2026-10-09","license":"https://creativecommons.org/licenses/by/4.0/","isAccessibleForFree":true,"distribution":[{"@type":"DataDownload","encodingFormat":"text/csv","contentUrl":"https://hache-cervera.github.io/research/data/certificados-es-2026-10.csv"},{"@type":"DataDownload","encodingFormat":"application/json","contentUrl":"https://hache-cervera.github.io/research/data/certificados-es-2026-10.json"}]}]}</script>
   <style>
     :root {
       --bg: #ffffff;
@@ -598,23 +598,19 @@
     pre code, html:not([data-theme='dark']) pre code { background: none; padding: 0; color: inherit; font-size: inherit; }
     /* yogurTLS brand */
     @font-face { font-family: 'Archivo'; font-style: normal; font-weight: 900; font-display: swap; src: url('/fonts/archivo-latin-900.woff2') format('woff2'); }
-    .hero-grid { display: grid; gap: 40px; grid-template-columns: 1fr; align-items: center; }
-    @media (min-width: 900px) { .hero-grid { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 56px; } }
-    .btn-xl { font-size: 1.125rem; padding: 20px 36px; }
-    .btn-xl strong { font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; }
-    .hero .sub { margin-top: 20px; }
-    .brand-card { display: flex; flex-direction: column; gap: 14px; padding: 32px 32px 28px; background: #E4E5E3; color: #0F0F10; border: 1px solid #0F0F10; text-decoration: none; transition: transform 0.25s ease; }
-    .brand-card:hover { transform: translateY(-4px); }
-    .brand-card svg { display: block; width: 100%; max-width: 280px; height: auto; margin: 0 auto; }
-    .brand-word { font-family: 'Archivo', var(--font-display); font-weight: 900; font-size: clamp(2.6rem, 6vw, 3.6rem); line-height: 0.9; letter-spacing: -0.045em; }
-    .brand-word span { color: #FF3C00; padding-right: 0.04em; }
-    .brand-card code, html:not([data-theme='dark']) .brand-card code { background: none; padding: 0; color: #0F0F10; font-size: 1rem; }
-    .brand-card .free { font-family: var(--font-display); font-weight: 700; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: #C22E00; }
     .hero h1 em { padding-right: 0.12em; margin-right: -0.04em; }
-    html:not([data-theme='dark']) main a.brand-card { color: #0F0F10; }
-    .brand-head { display: flex; align-items: center; gap: 20px; margin-top: 24px; }
-    .brand-head svg { width: 72px; height: 72px; flex-shrink: 0; background: #E4E5E3; }
-    .brand-head h2 { margin-top: 0; }
+    .hero-grid { display: grid; gap: 24px; grid-template-columns: 1fr; }
+    @media (min-width: 900px) { .hero-grid { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 24px; } }
+    .hero-art { display: flex; justify-content: center; align-items: flex-end; }
+    .hero-art .tub { width: 100%; max-width: 240px; height: auto; color: var(--ink); display: block; }
+    @media (min-width: 900px) { .hero-art .tub { max-width: 520px; margin-bottom: -150px; margin-right: -60px; } }
+    .btn-xl { font-size: 1.125rem; padding: 22px 40px; }
+    .hero .trust { margin-top: 16px; max-width: 30rem; font-size: 0.9375rem; color: var(--muted); }
+    .hero .trust strong { color: var(--ink); font-weight: 600; }
+    .hero .sub { margin-top: 28px; }
+    .wordmark { margin-top: 24px; font-family: 'Archivo', var(--font-display); font-weight: 900; font-size: clamp(3.4rem, 9vw, 6.5rem); line-height: 0.9; letter-spacing: -0.045em; padding-right: 0.06em; }
+    .wordmark span { color: var(--accent); }
+    .wordmark + h3 { margin-top: 16px; font-family: var(--font-display); font-weight: 700; font-size: clamp(1.3rem, 2.4vw, 1.8rem); letter-spacing: -0.02em; line-height: 1.2; }
   </style>
   <script src="/consent.js" defer></script>
 </head>
@@ -644,24 +640,21 @@
           <h1>Comprueba la caducidad del <em>certificado TLS</em> de tu web</h1>
           <p class="lede">El certificado TLS de tu web caduca, y cada vez antes. Desde el 15 de marzo de 2027 no podrá durar más de 100 días, y desde 2029, más de 47. Si lo renuevas a mano, pasarás de hacerlo una vez al año a por lo menos cuatro, y luego a unas ocho.</p>
           <div class="actions">
-            <a class="btn btn-xl" href="#yogurtls">Comprueba <strong>gratis</strong> tu web con yogurTLS</a>
+            <a class="btn btn-xl" href="#yogurtls">Comprueba tu web con yogurTLS</a>
           </div>
+          <p class="trust"><strong>Open source, con licencia MIT.</strong> Sin registro, y se ejecuta en tu ordenador: no envía tus datos a nadie.</p>
           <p class="sub"><a class="alt" href="#highlights">Ver cómo están las 1.000 webs .es más visitadas</a></p>
         </div>
-        <a class="brand-card" href="#yogurtls" aria-label="yogurTLS, ir a la herramienta">
-          <svg viewBox="0 0 480 480" aria-hidden="true" focusable="false"><polygon points="128,214 352,214 322,418 158,418" fill="#0F0F10"/><rect x="104" y="188" width="272" height="34" fill="#0F0F10"/><polygon points="136,272 344,272 334,342 146,342" fill="#E4E5E3"/><circle cx="240" cy="296" r="15" fill="#0F0F10"/><polygon points="232,300 248,300 254,330 226,330" fill="#0F0F10"/><polygon points="378,188 362,170 118,84 104,112" fill="#FF3C00"/><circle cx="98" cy="92" r="22" fill="#FF3C00"/></svg>
-          <span class="brand-word">yogur<span>TLS</span></span>
-          <code>npx yogurtls tudominio.es</code>
-          <span class="free">Gratis y de código abierto</span>
-        </a>
+        <div class="hero-art"><svg class="tub" viewBox="0 0 480 480" role="img" aria-label="yogurTLS: una tarrina de yogur con la tapa levantada y una cerradura en la etiqueta"><polygon points="128,214 352,214 343.5,272 136.5,272" fill="currentColor"/><polygon points="146.8,342 333.2,342 322,418 158,418" fill="currentColor"/><rect x="104" y="188" width="272" height="30" fill="currentColor"/><circle cx="240" cy="294" r="15" fill="currentColor"/><polygon points="232,298 248,298 254,328 226,328" fill="currentColor"/><g transform="rotate(-24 378 188)"><rect x="106" y="170" width="272" height="18" fill="#FF3C00"/><rect x="84" y="164" width="30" height="30" fill="#FF3C00"/></g></svg></div>
       </div>
     </div>
 
     <section id="yogurtls">
       <div class="wrap">
         <p class="section-label">/ La herramienta</p>
-        <div class="brand-head"><svg viewBox="0 0 480 480" aria-hidden="true" focusable="false"><polygon points="128,214 352,214 322,418 158,418" fill="#0F0F10"/><rect x="104" y="188" width="272" height="34" fill="#0F0F10"/><polygon points="136,272 344,272 334,342 146,342" fill="#E4E5E3"/><circle cx="240" cy="296" r="15" fill="#0F0F10"/><polygon points="232,300 248,300 254,330 226,330" fill="#0F0F10"/><polygon points="378,188 362,170 118,84 104,112" fill="#FF3C00"/><circle cx="98" cy="92" r="22" fill="#FF3C00"/></svg><h2>yogurTLS: mira la fecha de caducidad de tu certificado</h2></div>
-        <p class="section-intro">Un comprobador gratuito de un solo comando. Le das tu dominio y te dice cómo está tu certificado TLS, qué cambia para ti en 2027 y, si algo va mal, cómo se arregla. Solo necesitas Node 20 o superior.</p>
+        <h2 class="wordmark">yogur<span>TLS</span></h2>
+        <h3>Mira cuándo caduca tu certificado TLS y cómo arreglar lo que esté mal</h3>
+        <p class="section-intro">Un comprobador open source de un solo comando. Le das tu dominio y te dice cómo está tu certificado TLS, qué cambia para ti en 2027 y, si algo va mal, cómo se arregla. Solo necesitas Node 20 o superior.</p>
         <pre class="cmd"><code>npx yogurtls tudominio.es --es</code></pre>
         <pre class="out" aria-label="Ejemplo de salida de yogurTLS"><code>tudominio.es                                   BIEN
   Emisor        Let's Encrypt
@@ -699,7 +692,7 @@ www.tudominio.es                               OJO
           <a class="btn" href="https://github.com/hache-cervera/yogurtls">Código en GitHub</a>
           <a class="alt" href="https://www.npmjs.com/package/yogurtls">Paquete en npm</a>
         </div>
-        <p class="note">Gratis y de código abierto, con licencia MIT. En inglés por defecto; <code>--es</code> lo pone en español.</p>
+        <p class="note">Open source, con licencia MIT. Sin registro ni cuentas. En inglés por defecto; <code>--es</code> lo pone en español.</p>
       </div>
     </section>
 
@@ -707,7 +700,7 @@ www.tudominio.es                               OJO
       <div class="wrap">
         <p class="section-label">/ Cómo solucionarlo</p>
         <h2>Cómo renovar el certificado TLS sin depender de acordarte</h2>
-        <p class="section-intro">Renovar a mano es la cita previa del DNI: si se te olvida o no hay hueco, te quedas sin él. Lo que quieres es que el DNI te llegue renovado al buzón. Esto es lo que lo consigue, y todo es gratis.</p>
+        <p class="section-intro">Renovar a mano es la cita previa del DNI: si se te olvida o no hay hueco, te quedas sin él. Lo que quieres es que el DNI te llegue renovado al buzón. Esto es lo que lo consigue, y todo es gratuito.</p>
         <div class="tbl" tabindex="0" role="region" aria-label="Qué hacer"><table><thead><tr><th scope="col">Paso</th><th scope="col">Cómo</th></tr></thead><tbody>
           <tr><th scope="row">Automatizar la renovación</th><td>Con ACME, el protocolo que usa Let's Encrypt: certbot o acme.sh en tu servidor, o tu hosting o tu CDN si ya lo hacen por ti. Con 47 días, renovar a mano deja de ser una opción.</td></tr>
           <tr><th scope="row">Enviar la cadena completa</th><td>El servidor tiene que mandar tu certificado y el intermedio. Con certbot, usa <code>fullchain.pem</code> en vez de <code>cert.pem</code>.</td></tr>
