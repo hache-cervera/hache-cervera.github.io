@@ -611,11 +611,11 @@
     .stage-tub { position: absolute; left: 50%; top: 6%; height: 54%; width: auto; transform: translateX(-50%); }
     .stage-word { position: absolute; left: 0; right: 0; bottom: 118px; text-align: center; font-family: 'Archivo', var(--font-display); font-weight: 900; font-size: clamp(4rem, 13vw, 11.5rem); line-height: 0.85; letter-spacing: -0.055em; color: #0F0F10; white-space: nowrap; }
     .stage-word span { color: #FF3C00; padding-right: 0.04em; }
-    .notch { position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); padding: 14px 14px 0; background: var(--bg); border-radius: var(--r) var(--r) 0 0; }
+    .notch { position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); padding: 22px 26px 0; background: var(--bg); border-radius: var(--r) var(--r) 0 0; }
     .notch::before, .notch::after { content: ""; position: absolute; bottom: 0; width: var(--r); height: var(--r); }
     .notch::before { left: calc(var(--r) * -1); background: radial-gradient(circle at 0 0, transparent var(--r), var(--bg) calc(var(--r) + 0.5px)); }
     .notch::after { right: calc(var(--r) * -1); background: radial-gradient(circle at 100% 0, transparent var(--r), var(--bg) calc(var(--r) + 0.5px)); }
-    .notch .btn { display: block; border-radius: calc(var(--r) - 14px); font-size: 1.1875rem; padding: 22px 44px; white-space: nowrap; }
+    .notch .btn { display: block; border-radius: 16px; font-size: 1.1875rem; padding: 22px 44px; white-space: nowrap; }
     .hero3 .trust { margin-top: 24px; font-size: 1.0625rem; color: var(--muted); }
     .hero3 .trust strong { color: var(--ink); font-weight: 600; }
     .hero3 .sub { margin-top: 16px; }
@@ -623,7 +623,7 @@
       .stage { height: 420px; }
       .stage-tub { top: 8%; height: 46%; }
       .stage-word { bottom: 128px; font-size: 3.6rem; }
-      .notch { width: calc(100% - 2 * var(--r) - 16px); padding: 10px 10px 0; }
+      .notch { width: calc(100% - 2 * var(--r) - 16px); padding: 16px 16px 0; }
       .notch .btn { padding: 18px 12px; white-space: normal; text-align: center; font-size: 1.0625rem; border-radius: calc(var(--r) - 10px); }
     }
     .out-note { margin-top: 10px; font-size: 0.9375rem; color: var(--muted); }
