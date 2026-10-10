@@ -599,36 +599,28 @@
     /* yogurTLS brand */
     @font-face { font-family: 'Archivo'; font-style: normal; font-weight: 900; font-display: swap; src: url('/fonts/archivo-latin-900.woff2') format('woff2'); }
     .hero h1 em { padding-right: 0.12em; margin-right: -0.04em; }
-    .hero-grid { display: grid; gap: 24px; grid-template-columns: 1fr; }
-    @media (min-width: 900px) { .hero-grid { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 24px; } }
-    .hero-art { display: flex; justify-content: center; align-items: center; }
-    .hero-art .tub { width: 100%; max-width: 240px; height: auto; color: var(--ink); display: block; }
-    @media (min-width: 900px) { .hero-art .tub { max-width: 560px; margin-right: -150px; margin-top: -40px; } }
     .btn-xl { font-size: 1.125rem; padding: 22px 40px; }
-    .hero .trust { margin-top: 16px; max-width: 30rem; font-size: 0.9375rem; color: var(--muted); }
-    .hero .trust strong { color: var(--ink); font-weight: 600; }
-    .hero .sub { margin-top: 28px; }
-    .wordmark { margin-top: 24px; font-family: 'Archivo', var(--font-display); font-weight: 900; font-size: clamp(3.4rem, 9vw, 6.5rem); line-height: 0.9; letter-spacing: -0.045em; padding-right: 0.06em; }
-    .wordmark span { color: var(--accent); }
-    .wordmark + h3 { margin-top: 16px; font-family: var(--font-display); font-weight: 700; font-size: clamp(1.3rem, 2.4vw, 1.8rem); letter-spacing: -0.02em; line-height: 1.2; }
-    .banner { position: relative; background: #E4E5E3; color: #0F0F10; overflow: hidden; border-bottom: 1px solid #0F0F10; }
-    .banner-in { position: relative; display: grid; grid-template-columns: 1fr; padding-top: 56px; }
-    @media (min-width: 900px) { .banner-in { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); padding-top: 88px; } }
-    .banner-text { position: relative; z-index: 1; }
-    html .banner .kicker { color: #C22E00; }
-    .banner h1 { margin-top: 20px; font-family: var(--font-display); font-weight: 800; font-size: clamp(2.2rem, 4.6vw, 3.8rem); letter-spacing: -0.03em; line-height: 1.05; color: #0F0F10; }
-    .banner h1 em { font-style: italic; color: #C22E00; padding-right: 0.1em; }
-    .banner .lede { margin-top: 20px; max-width: 34rem; font-size: 1.0625rem; color: #3A3A3A; }
-    .banner .actions { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
-    .banner .trust { margin-top: 14px; max-width: 32rem; font-size: 0.9375rem; color: #3A3A3A; }
-    .banner .trust strong { color: #0F0F10; font-weight: 600; }
-    .banner .sub { margin-top: 20px; }
-    html .banner .alt { color: #3A3A3A; border-color: #0F0F10; }
-    html .banner .alt:hover { color: #C22E00; border-color: #C22E00; }
-    .banner .tub { display: block; width: 70%; max-width: 300px; height: auto; color: #0F0F10; margin: 24px auto 0; }
-    @media (min-width: 900px) { .banner .tub { width: 100%; max-width: 620px; justify-self: end; align-self: end; margin: 0 -110px -36px 0; } }
-    .banner-word { grid-column: 1 / -1; position: relative; z-index: 1; margin: 16px 0 0 -0.03em; font-family: 'Archivo', var(--font-display); font-weight: 900; font-size: clamp(5.2rem, 19vw, 16.5rem); line-height: 0.82; letter-spacing: -0.055em; color: #0F0F10; white-space: nowrap; padding-right: 0.05em; }
-    .banner-word span { color: #FF3C00; }
+    .hero2 { position: relative; padding-top: 64px; padding-bottom: 64px; }
+    @media (min-width: 768px) { .hero2 { padding-top: 96px; } }
+    .hero2-top { display: grid; gap: 24px; grid-template-columns: 1fr; align-items: end; }
+    @media (min-width: 960px) { .hero2-top { grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); gap: 56px; } }
+    .hero2 h1 { margin-top: 20px; font-family: var(--font-display); font-weight: 800; font-size: clamp(2.4rem, 5.4vw, 4.4rem); letter-spacing: -0.035em; line-height: 1.02; }
+    .hero2 h1 em { font-style: italic; color: var(--accent); padding-right: 0.1em; }
+    .hero2 .lede { font-size: 1.0625rem; color: var(--muted); }
+    .hero2 .actions { margin-top: 24px; }
+    .hero2 .trust { margin-top: 14px; font-size: 0.9375rem; color: var(--muted); }
+    .hero2 .trust strong { color: var(--ink); font-weight: 600; }
+    .promo { position: relative; display: block; margin-top: 48px; height: clamp(320px, 40vw, 520px); background: #FF3C00; border-radius: 16px; overflow: hidden; text-decoration: none; }
+    html main a.promo, html main a.promo:hover { color: #0F0F10; }
+    html .promo code { position: absolute; top: 24px; left: 28px; background: none; padding: 0; color: #0F0F10; font-size: clamp(0.875rem, 1.4vw, 1.125rem); }
+    .promo-tag { position: absolute; top: 24px; right: 28px; font-family: var(--font-display); font-weight: 700; font-size: 0.875rem; color: #0F0F10; }
+    .promo-tub { position: absolute; right: 3%; bottom: -6%; height: 96%; width: auto; transition: transform 0.4s ease; }
+    .promo:hover .promo-tub { transform: translateY(-8px) rotate(-2deg); }
+    @media (prefers-reduced-motion: reduce) { .promo-tub { transition: none; } }
+    .promo-word { position: absolute; z-index: 1; left: 24px; bottom: 10px; font-family: 'Archivo', var(--font-display); font-weight: 900; font-size: clamp(4.2rem, 14.5vw, 12.5rem); line-height: 0.85; letter-spacing: -0.055em; padding-right: 0.06em; color: #0F0F10; white-space: nowrap; }
+    .promo-word span { color: #E4E5E3; }
+    .hero2 .sub { margin-top: 20px; }
+    .out-note { margin-top: 8px; font-size: 0.8125rem; color: var(--muted); }
   </style>
   <script src="/consent.js" defer></script>
 </head>
@@ -650,21 +642,25 @@
   </header>
 
   <main>
-    <div class="banner">
-      <div class="wrap banner-in">
-        <div class="banner-text">
+    <div class="hero2 wrap">
+      <div class="hero2-top">
+        <div>
           <p class="kicker">/ Certificados TLS</p>
           <h1>Comprueba la caducidad del <em>certificado TLS</em> de tu web</h1>
-          <p class="lede">El certificado TLS de tu web caduca, y cada vez antes. Desde el 15 de marzo de 2027 no podrá durar más de 100 días, y desde 2029, más de 47. Si lo renuevas a mano, pasarás de hacerlo una vez al año a por lo menos cuatro, y luego a unas ocho.</p>
-          <div class="actions">
-            <a class="btn btn-xl" href="#yogurtls">Comprueba tu web con yogurTLS</a>
-          </div>
-          <p class="trust"><strong>Open source, con licencia MIT.</strong> Sin registro, y se ejecuta en tu ordenador: no envía tus datos a nadie.</p>
-          <p class="sub"><a class="alt" href="#highlights">Ver cómo están las 1.000 webs .es más visitadas</a></p>
         </div>
-        <svg class="tub" viewBox="0 0 480 480" role="img" aria-label="yogurTLS: una tarrina de yogur con la tapa levantada y una cerradura en la etiqueta"><polygon points="128,214 352,214 343.5,272 136.5,272" fill="currentColor"/><polygon points="146.8,342 333.2,342 322,418 158,418" fill="currentColor"/><rect x="104" y="188" width="272" height="30" fill="currentColor"/><circle cx="240" cy="294" r="15" fill="currentColor"/><polygon points="232,298 248,298 254,328 226,328" fill="currentColor"/><g transform="rotate(24 378 188)"><rect x="106" y="170" width="272" height="18" fill="#FF3C00"/><rect x="84" y="164" width="30" height="30" fill="#FF3C00"/></g></svg>
-        <p class="banner-word" aria-hidden="true">yogur<span>TLS</span></p>
+        <div>
+          <p class="lede">El certificado TLS de tu web caduca, y cada vez antes. Desde el 15 de marzo de 2027 no podrá durar más de 100 días, y desde 2029, más de 47. Si lo renuevas a mano, pasarás de hacerlo una vez al año a por lo menos cuatro, y luego a unas ocho.</p>
+          <div class="actions"><a class="btn btn-xl" href="#yogurtls">Comprueba tu web con yogurTLS</a></div>
+          <p class="trust"><strong>Open source, con licencia MIT.</strong> Sin registro, y se ejecuta en tu ordenador: no envía tus datos a nadie.</p>
+        </div>
       </div>
+      <a class="promo" href="#yogurtls" aria-label="yogurTLS: ir a la herramienta">
+        <code>npx yogurtls tudominio.es</code>
+        <span class="promo-tag">Open source</span>
+        <svg class="promo-tub" viewBox="0 0 480 480" aria-hidden="true" focusable="false"><polygon points="128,214 352,214 343.5,272 136.5,272" fill="#0F0F10"/><polygon points="146.8,342 333.2,342 322,418 158,418" fill="#0F0F10"/><rect x="104" y="188" width="272" height="30" fill="#0F0F10"/><circle cx="240" cy="294" r="15" fill="#0F0F10"/><polygon points="232,298 248,298 254,328 226,328" fill="#0F0F10"/><g transform="rotate(24 378 188)"><rect x="106" y="170" width="272" height="18" fill="#E4E5E3"/><rect x="84" y="164" width="30" height="30" fill="#E4E5E3"/></g></svg>
+        <span class="promo-word" aria-hidden="true">yogur<span>TLS</span></span>
+      </a>
+      <p class="sub"><a class="alt" href="#highlights">Ver cómo están las 1.000 webs .es más visitadas</a></p>
     </div>
 
     <section id="yogurtls">
@@ -672,26 +668,28 @@
         <p class="section-label">/ La herramienta</p>
         <h2>Mira cuándo caduca tu certificado TLS y cómo arreglar lo que esté mal</h2>
         <p class="section-intro">Un comprobador open source de un solo comando. Le das tu dominio y te dice cómo está tu certificado TLS, qué cambia para ti en 2027 y, si algo va mal, cómo se arregla. Solo necesitas Node 20 o superior.</p>
-        <pre class="cmd"><code>npx yogurtls tudominio.es --es</code></pre>
-        <pre class="out" aria-label="Ejemplo de salida de yogurTLS"><code>tudominio.es                                   BIEN
-  Emisor        Let's Encrypt
-  Caduca        12 dic 2026 (quedan 63 días)
-  Duración      90 días
-  Cadena        completa
-  2027          Ya cumple el límite de 100 días que llega en marzo de 2027.
+        <pre class="cmd"><code>npx yogurtls devilfruittcg.com incomplete-chain.badssl.com --es</code></pre>
+        <pre class="out" aria-label="Ejemplo de salida de yogurTLS"><code>devilfruittcg.com             BIEN
+  Emisor           Google Trust Services
+  Caduca           28 nov 2026 (quedan 49 días)
+  Duración         90 días
+  Cadena           completa
+  2027             Ya cumple el límite de 100 días que llega en marzo de 2027.
 
-www.tudominio.es                               OJO
-  Emisor        Sectigo
-  Caduca        3 nov 2026 (quedan 24 días)
-  Duración      199 días
-  Cadena        incompleta
-  Qué pasa      Falta el certificado intermedio. Los navegadores lo suplen,
-                salvo un Firefox recién instalado, pero curl, las apps,
-                las integraciones y los bots darán error.
-  Cómo se arregla  Configura el servidor para que envíe la cadena completa.
-                Con certbot, usa fullchain.pem en vez de cert.pem.
+incomplete-chain.badssl.com   OJO
+  Emisor           Let's Encrypt
+  Caduca           28 dic 2026 (quedan 79 días)
+  Duración         90 días
+  Cadena           incompleta
+  Qué pasa         Falta el certificado intermedio. Los navegadores lo suplen, salvo un Firefox
+                   recién instalado, pero curl, las apps, las integraciones y los bots darán error.
+  Cómo se arregla  Configura el servidor para que envíe la cadena completa. Con certbot, usa
+                   `fullchain.pem` en vez de `cert.pem`. Si no, une tu certificado y el intermedio
+                   de tu autoridad en un solo archivo.
+  2027             Ya cumple el límite de 100 días que llega en marzo de 2027.
 
 1 en verde, 1 en ámbar, 0 en rojo.</code></pre>
+        <p class="out-note">Salida real de yogurTLS 1.0.0 del 10 de octubre de 2026. Los días que quedan dependen del día en que lo ejecutes.</p>
         <div class="tbl" tabindex="0" role="region" aria-label="Qué comprueba yogurTLS"><table><thead><tr><th scope="col">Qué comprueba</th><th scope="col">Por qué</th></tr></thead><tbody>
           <tr><th scope="row">Caducidad y duración</th><td>Cuántos días le quedan y si ya va al ritmo de 2027 y 2029.</td></tr>
           <tr><th scope="row">Cadena completa</th><td>Lo que el navegador te esconde: si falta el intermedio, tu web carga con candado y falla para apps, integraciones y bots.</td></tr>
