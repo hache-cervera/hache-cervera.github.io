@@ -4,13 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The TLS certificate clock: 1,000 .es sites · Research · Ada (hache) Cervera</title>
-  <meta name="description" content="Original research: validity, issuer and chain of the TLS certificates of the 1,000 most visited .es sites, against the 100-day limit in 2027 and 47 days in 2029." />
+  <meta name="description" content="TLS certificates will last 100 days from 2027 and 47 from 2029. Check yours for free with yogurTLS, and see how the 1,000 most visited .es sites are doing." />
   <link rel="canonical" href="https://hache-cervera.github.io/research/certificates/" />
   <link rel="alternate" hreflang="en" href="https://hache-cervera.github.io/research/certificates/" />
   <link rel="alternate" hreflang="es" href="https://hache-cervera.github.io/research/es/certificados/" />
   <link rel="alternate" hreflang="x-default" href="https://hache-cervera.github.io/research/certificates/" />
   <meta property="og:title" content="Your website's certificate expires. From March, much sooner." />
-  <meta property="og:description" content="Original research: validity, issuer and chain of the TLS certificates of the 1,000 most visited .es sites, against the 100-day limit in 2027 and 47 days in 2029." />
+  <meta property="og:description" content="TLS certificates will last 100 days from 2027 and 47 from 2029. Check yours for free with yogurTLS, and see how the 1,000 most visited .es sites are doing." />
   <meta property="og:image" content="https://hache-cervera.github.io/og-home.jpg" />
   <meta property="og:url" content="https://hache-cervera.github.io/research/certificates/" />
   <meta property="og:type" content="article" />
@@ -26,7 +26,7 @@
   <script>
     (function () { try { document.documentElement.dataset.theme = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light'; } catch (e) {} })();
   </script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"Your website's certificate expires. From March, much sooner.","description":"Original research: validity, issuer and chain of the TLS certificates of the 1,000 most visited .es sites, against the 100-day limit in 2027 and 47 days in 2029.","inLanguage":"en","datePublished":"2026-10-10","dateModified":"2026-10-10","url":"https://hache-cervera.github.io/research/certificates/","author":{"@type":"Person","name":"Ada (hache) Cervera","url":"https://hache-cervera.github.io/"}},{"@type":"Dataset","name":"TLS certificates of the 1,000 most visited .es sites (October 2026)","description":"Original research: validity, issuer and chain of the TLS certificates of the 1,000 most visited .es sites, against the 100-day limit in 2027 and 47 days in 2029.","inLanguage":"en","creator":{"@type":"Person","name":"Ada (hache) Cervera"},"temporalCoverage":"2026-10-09","license":"https://creativecommons.org/licenses/by/4.0/","isAccessibleForFree":true,"distribution":[{"@type":"DataDownload","encodingFormat":"text/csv","contentUrl":"https://hache-cervera.github.io/research/data/certificados-es-2026-10.csv"},{"@type":"DataDownload","encodingFormat":"application/json","contentUrl":"https://hache-cervera.github.io/research/data/certificados-es-2026-10.json"}]}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"Your website's certificate expires. From March, much sooner.","description":"TLS certificates will last 100 days from 2027 and 47 from 2029. Check yours for free with yogurTLS, and see how the 1,000 most visited .es sites are doing.","inLanguage":"en","datePublished":"2026-10-10","dateModified":"2026-10-10","url":"https://hache-cervera.github.io/research/certificates/","author":{"@type":"Person","name":"Ada (hache) Cervera","url":"https://hache-cervera.github.io/"}},{"@type":"Dataset","name":"TLS certificates of the 1,000 most visited .es sites (October 2026)","description":"TLS certificates will last 100 days from 2027 and 47 from 2029. Check yours for free with yogurTLS, and see how the 1,000 most visited .es sites are doing.","inLanguage":"en","creator":{"@type":"Person","name":"Ada (hache) Cervera"},"temporalCoverage":"2026-10-09","license":"https://creativecommons.org/licenses/by/4.0/","isAccessibleForFree":true,"distribution":[{"@type":"DataDownload","encodingFormat":"text/csv","contentUrl":"https://hache-cervera.github.io/research/data/certificados-es-2026-10.csv"},{"@type":"DataDownload","encodingFormat":"application/json","contentUrl":"https://hache-cervera.github.io/research/data/certificados-es-2026-10.json"}]}]}</script>
   <style>
     :root {
       --bg: #ffffff;
@@ -591,6 +591,11 @@
     .prose { margin-top: 16px; max-width: 46rem; color: var(--muted); }
     .prose + .prose { margin-top: 12px; }
     code { font-size: 0.875em; }
+    /* tool block */
+    section .actions { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+    pre { margin-top: 24px; max-width: 48rem; overflow-x: auto; padding: 16px 20px; background: var(--panel); color: #f2f2f2; border-left: 3px solid var(--accent); font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 0.8125rem; line-height: 1.55; }
+    pre.cmd { font-size: 1rem; }
+    pre code, html:not([data-theme='dark']) pre code { background: none; padding: 0; color: inherit; font-size: inherit; }
   </style>
   <script src="/consent.js" defer></script>
 </head>
@@ -614,17 +619,81 @@
   <main>
     <div class="hero wrap">
       <span class="glow" style="top: -140px; right: -160px;" aria-hidden="true"></span>
-      <p class="kicker">/ Research / TLS certificates / October 2026</p>
+      <p class="kicker">/ TLS certificates / October 2026</p>
       <h1>Your website's certificate expires. From March, <em>much sooner</em>.</h1>
-      <p class="lede">A TLS certificate is a website's ID card: it puts the padlock there and tells the browser it can trust the site. From 15 March 2027 a certificate can last 100 days at most, and from 2029, 47. I measured the certificates of the 1,000 most visited .es sites to see who already renews at that pace and who will have to change habits.</p>
-      <dl class="meta"><div><dt>Sample</dt><dd>1,000 .es domains, Tranco list K9Z7W</dd></div><div><dt>Measurable</dt><dd>958 with a certificate</dd></div><div><dt>Measured</dt><dd>9 October 2026, from one connection in Valencia</dd></div><div><dt>The rule</dt><dd>CA/B Forum Baseline Requirements, v2.3.1, section 6.3.2</dd></div><div><dt>Tools</dt><dd>Node 20 (TLS), real Chrome 154 and Firefox 157</dd></div><div><dt>Data</dt><dd><a href="../data/certificados-es-2026-10.csv">CSV</a> and <a href="../data/certificados-es-2026-10.json">JSON</a>, aggregated</dd></div></dl>
-      <p class="note"><strong>What this page leaves out:</strong> the name of any site with a broken certificate. Error figures are always totals, and so is the downloadable data.</p>
+      <p class="lede">From 15 March 2027 a certificate can last 100 days at most, and from 2029, 47. If you renew by hand, that's going from once a year to at least four times, then around eight. Every one you forget is a site showing the red "your connection is not private" page.</p>
+      <div class="actions">
+        <a class="btn" href="#yogurtls">Check your site with yogurTLS</a>
+        <a class="alt" href="#highlights">See how the 1,000 most visited .es sites are doing</a>
+      </div>
     </div>
+
+    <section id="yogurtls">
+      <div class="wrap">
+        <p class="section-label">/ The tool</p>
+        <h2>yogurTLS: check your certificate's best-before date</h2>
+        <p class="section-intro">A free one-command checker. Give it your domain and it tells you how your certificate is doing, what changes for you in 2027 and, if something is wrong, how to fix it. All you need is Node 20 or newer.</p>
+        <pre class="cmd"><code>npx yogurtls yourdomain.com</code></pre>
+        <pre class="out" aria-label="Example yogurTLS output"><code>yourdomain.com                                 GOOD
+  Issuer        Let's Encrypt
+  Expires       12 Dec 2026 (63 days left)
+  Validity      90 days
+  Chain         complete
+  2027          Already within the 100-day limit coming in March 2027.
+
+www.yourdomain.com                             WARN
+  Issuer        Sectigo
+  Expires       3 Nov 2026 (24 days left)
+  Validity      199 days
+  Chain         incomplete
+  What's wrong  The intermediate certificate is missing. Browsers work
+                around it, except a freshly installed Firefox, but curl,
+                apps, integrations and bots will fail.
+  How to fix it Make your server send the full chain.
+                With certbot, use fullchain.pem instead of cert.pem.
+
+1 good, 1 warning, 0 failing.</code></pre>
+        <div class="tbl" tabindex="0" role="region" aria-label="What yogurTLS checks"><table><thead><tr><th scope="col">What it checks</th><th scope="col">Why</th></tr></thead><tbody>
+          <tr><th scope="row">Expiry and validity</th><td>How many days are left and whether it already runs at the 2027 and 2029 pace.</td></tr>
+          <tr><th scope="row">Full chain</th><td>What your browser hides: with the intermediate missing, your site shows a padlock and fails for apps, integrations and bots.</td></tr>
+          <tr><th scope="row">With and without www</th><td>Both at once. One in four .es sites uses a different certificate on each, and the forgotten corner is where expired ones turn up.</td></tr>
+          <tr><th scope="row">Name, authority and self-signed</th><td>What makes a browser show its error page.</td></tr>
+        </tbody></table></div>
+        <ul class="list">
+          <li><strong>Traffic light:</strong> GOOD, WARN or FAIL, always with the word, never colour alone.</li>
+          <li><strong>Several sites:</strong> <code>npx yogurtls a.com b.com</code> or <code>npx yogurtls --file domains.txt</code>.</li>
+          <li><strong>For automation:</strong> <code>--warn-days 14</code> flags whatever expires soon, and the exit code (0 good, 1 warning, 2 failing) works in a cron job or a GitHub Actions workflow.</li>
+          <li><strong>Privacy:</strong> it runs on your machine, only connects to the domains you give it and sends nothing to anyone.</li>
+          <li><strong>What it doesn't do:</strong> it renews and installs nothing. It only reads what any browser sees.</li>
+        </ul>
+        <div class="actions">
+          <a class="btn" href="https://github.com/hache-cervera/yogurtls">Code on GitHub</a>
+          <a class="alt" href="https://www.npmjs.com/package/yogurtls">Package on npm</a>
+        </div>
+        <p class="note">Free and open source, MIT licence. English by default; <code>--es</code> switches it to Spanish.</p>
+      </div>
+    </section>
+
+    <section id="fix">
+      <div class="wrap">
+        <p class="section-label">/ How to fix it</p>
+        <h2>Have the new ID card arrive by post</h2>
+        <p class="section-intro">Renewing by hand is like renewing a passport: forget it and you are stuck. This is what keeps it from happening, and all of it is free.</p>
+        <div class="tbl" tabindex="0" role="region" aria-label="What to do"><table><thead><tr><th scope="col">Step</th><th scope="col">How</th></tr></thead><tbody>
+          <tr><th scope="row">Automate renewal</th><td>With ACME, the protocol Let's Encrypt uses: certbot or acme.sh on your server, or your host or CDN if they already do it. At 47 days, renewing by hand stops being an option.</td></tr>
+          <tr><th scope="row">Send the full chain</th><td>Your server has to send your certificate and the intermediate. With certbot, use <code>fullchain.pem</code> instead of <code>cert.pem</code>.</td></tr>
+          <tr><th scope="row">Check it outside the browser</th><td>With yogurTLS, or with <code>openssl s_client -connect yourdomain.com:443 -servername yourdomain.com</code>, which should end in <code>Verify return code: 0 (ok)</code>. Without installing anything, SSL Labs flags an incomplete chain as "Chain issues: Incomplete".</td></tr>
+          <tr><th scope="row">Watch the expiry date</th><td>Even when automated, because automation fails too. <code>npx yogurtls yourdomain.com --warn-days 14</code> in a cron job warns you in time.</td></tr>
+          <tr><th scope="row">Check every version</th><td>With <code>www</code>, without it, and any subdomain still in DNS.</td></tr>
+        </tbody></table></div>
+      </div>
+    </section>
 
     <section id="highlights">
       <div class="wrap">
-        <p class="section-label">/ Summary</p>
-        <h2>The numbers</h2>
+        <p class="section-label">/ The study</p>
+        <h2>How the 1,000 most visited .es sites are doing</h2>
+        <p class="section-intro">I measured the certificates of the 1,000 most visited .es domains on the Tranco list, all on 9 October 2026. 958 could be measured.</p>
         <div class="figs"><div><b>421/958</b><span>already use certificates of 100 days or less, the 2027 pace</span></div><div><b>201/958</b><span>still serve one-year certificates, all issued before March 2026</span></div><div><b>464/958</b><span>use Let's Encrypt, Google Trust Services or Amazon, which renew on their own</span></div><div><b>21</b><span>showed a certificate error in Chrome on measurement day</span></div><div><b>11</b><span>load in the browser and fail outside it because of an incomplete chain</span></div></div>
       </div>
     </section>
@@ -645,7 +714,6 @@
         <h2>From ID card to yogurt</h2>
         <p class="section-intro">Browsers and certificate authorities decide this together at the CA/B Forum. The maximum counts from the day a certificate is issued, not from its expiry.</p>
         <div class="tbl" tabindex="0" role="region" aria-label="Validity schedule"><table><caption>Source: CA/B Forum Baseline Requirements, version 2.3.1, section 6.3.2.</caption><thead><tr><th scope="col">Issued from</th><th scope="col">Maximum validity</th><th scope="col">If you renew by hand</th></tr></thead><tbody><tr><th scope="row">Before 15 Mar 2026</th><td>398 days</td><td>once a year</td></tr><tr><th scope="row">15 Mar 2026</th><td>200 days</td><td>twice a year</td></tr><tr><th scope="row">15 Mar 2027</th><td>100 days</td><td>at least 4 times a year</td></tr><tr><th scope="row">15 Mar 2029</th><td>47 days</td><td>around 8 times a year</td></tr></tbody></table></div>
-        <p class="note">Renewing by hand is like renewing a passport: forget it and you are stuck. For a website, that means the red "your connection is not private" page.</p>
       </div>
     </section>
 
@@ -663,13 +731,13 @@
     <section id="findings">
       <div class="wrap">
         <p class="section-label">/ 04 / Findings</p>
-        <h2>What caught my eye</h2>
+        <h2>What's worth knowing</h2>
         <ul class="list">
-          <li><strong>Your browser covers the gap.</strong> 11 sites are missing their intermediate certificate. Chrome downloads it on the spot and Firefox takes it from a list it keeps updated, so both show the padlock. curl, apps, business integrations and bots do neither, and for them the site fails. The owner opens the site, sees the padlock and assumes all is well.</li>
-          <li><strong>A fresh Firefox does fail.</strong> My first Firefox run gave 10 errors out of 11 (<code>SEC_ERROR_UNKNOWN_ISSUER</code>). It was a brand new profile, without the intermediate list. With a profile synced for 16 minutes, all 11 loaded. I keep it as a control group: it shows that list is what saves Firefox.</li>
-          <li><strong>The Greek authority behind Spanish universities.</strong> 70 .es domains carry certificates from HARICA, the Greek academic network's authority. Since January 2025 HARICA runs the certificate service of GÉANT, the European research network, and RedIRIS offers it in Spain. By domain name they are universities (47), public bodies (11) and research centres (10). I checked 15 at random by hand and 13 matched.</li>
-          <li><strong>The sites already on the 2029 pace didn't choose it.</strong> All 19 certificates of 47 days or less last exactly 30 days, and 17 come from Certainly, Fastly's authority, which only works with its CDN and renews every 20 days. The early adopters are early because their CDN does it for them.</li>
-          <li><strong>Two certificates per site.</strong> On 226 of 847 domains (26.7%), the <code>www</code> and non-<code>www</code> versions use different certificates. Not a fault, but two things to renew, and the forgotten corner is where expired ones show up.</li>
+          <li><strong>Your browser covers the gap.</strong> 11 sites are missing their intermediate certificate. Chrome downloads it on the spot and Firefox takes it from a list it keeps updated, so both show the padlock. curl, apps, business integrations and bots do neither, and for them the site fails. You open your site, see the padlock and assume all is well.</li>
+          <li><strong>A fresh Firefox does fail.</strong> With a brand new profile, without that list, 10 of the 11 failed (<code>SEC_ERROR_UNKNOWN_ISSUER</code>). With a profile synced for 16 minutes, all 11 loaded. That's the control group: the list is what saves Firefox.</li>
+          <li><strong>The Greek authority behind Spanish universities.</strong> 70 .es domains carry certificates from HARICA, the Greek academic network's authority. Since January 2025 HARICA runs the certificate service of GÉANT, the European research network, and RedIRIS offers it in Spain. By domain name they are universities (47), public bodies (11) and research centres (10); I checked 15 at random by hand and 13 matched. If you work at a university, this rule hits you directly.</li>
+          <li><strong>The sites already on the 2029 pace didn't choose it.</strong> All 19 certificates of 47 days or less last exactly 30 days, and 17 come from Certainly, Fastly's authority, which only works with its CDN and renews every 20 days. If your CDN or host renews for you, the 2027 change won't touch you.</li>
+          <li><strong>Two certificates per site.</strong> On 226 of 847 domains (26.7%), the <code>www</code> and non-<code>www</code> versions use different certificates. Not a fault, but two things to renew.</li>
         </ul>
       </div>
     </section>
@@ -678,39 +746,25 @@
       <div class="wrap">
         <p class="section-label">/ 05 / What can't be measured</p>
         <h2>Who renews by hand is invisible from outside</h2>
-        <p class="prose">I wanted to know which sites renew by hand. I tried it with the public certificate history (Certificate Transparency, queried through crt.sh) on a random subsample of 100 domains, with thresholds fixed before looking at results.</p>
-        <p class="prose">It didn't work. Large sites hold dozens of certificates at once (their CDN, several providers, one per product), crt.sh misses wildcard and multi-domain certificates, and even Let's Encrypt, which renews on its own by design, came out as "manual". If a method gets wrong what you know for sure, you can't trust the rest. I dropped it without publishing a figure and without moving the thresholds.</p>
-        <p class="note">That's why 48.4% is the share of sites whose issuer renews on its own, not measured renewals. The rest may be automated too: from outside you can't tell.</p>
-      </div>
-    </section>
-
-    <section id="fix">
-      <div class="wrap">
-        <p class="section-label">/ 06 / How to fix it</p>
-        <h2>Have the new ID card arrive by post</h2>
-        <div class="tbl" tabindex="0" role="region" aria-label="What to do"><table><thead><tr><th scope="col">Step</th><th scope="col">How</th></tr></thead><tbody>
-          <tr><th scope="row">Look at your certificate</th><td>In the browser, the icon left of the address, "Connection is secure", "Certificate is valid". It shows who issued it and when it expires.</td></tr>
-          <tr><th scope="row">Check it the way an app does</th><td><code>openssl s_client -connect yourdomain.com:443 -servername yourdomain.com</code> should end in <code>Verify return code: 0 (ok)</code>. If it says <code>unable to verify the first certificate</code>, the intermediate is missing. Without installing anything: SSL Labs flags it as "Chain issues: Incomplete".</td></tr>
-          <tr><th scope="row">Automate renewal</th><td>With ACME, the protocol Let's Encrypt uses: certbot or acme.sh on your server, or your host or CDN if they already do it. It's free.</td></tr>
-          <tr><th scope="row">Send the full chain</th><td>Your server has to send your certificate and the intermediate. With certbot, use <code>fullchain.pem</code> instead of <code>cert.pem</code>.</td></tr>
-          <tr><th scope="row">Watch the expiry date</th><td>Even when automated: automation fails too, and you'd rather find out before your customers do.</td></tr>
-          <tr><th scope="row">Check both versions</th><td>With <code>www</code> and without it, plus any subdomain still in DNS.</td></tr>
-        </tbody></table></div>
-        <p class="note">I'm building <strong>yogurTLS</strong>, a free one-command checker that tells you how your certificate is doing, what changes in 2027 and how to fix whatever is wrong.</p>
+        <p class="prose">I tried to tell which sites renew by hand using the public certificate history (Certificate Transparency, queried through crt.sh), on a random subsample of 100 domains, with thresholds fixed before looking at results.</p>
+        <p class="prose">It didn't work. Large sites hold dozens of certificates at once, crt.sh misses wildcard and multi-domain certificates, and even Let's Encrypt, which renews on its own by design, came out as "manual". If a method gets wrong what you know for sure, you can't trust the rest, so I dropped it without publishing a figure.</p>
+        <p class="note">That's why 48.4% is the share of sites whose issuer renews on its own, not measured renewals. It's also why yogurTLS doesn't tell you whether your renewal is manual or automatic: only what can be measured.</p>
       </div>
     </section>
 
     <section id="method">
       <div class="wrap">
-        <p class="section-label">/ 07 / Method</p>
-        <h2>How I measured it, and its limits</h2>
+        <p class="section-label">/ 06 / Method</p>
+        <h2>How it was measured, and its limits</h2>
+        <dl class="meta"><div><dt>Sample</dt><dd>1,000 .es domains, Tranco list K9Z7W</dd></div><div><dt>Measurable</dt><dd>958 with a certificate</dd></div><div><dt>Measured</dt><dd>9 October 2026, from one connection in Valencia</dd></div><div><dt>The rule</dt><dd>CA/B Forum Baseline Requirements, v2.3.1, section 6.3.2</dd></div><div><dt>Tools</dt><dd>Node 20 (TLS), real Chrome 154 and Firefox 157</dd></div><div><dt>Data</dt><dd><a href="../data/certificados-es-2026-10.csv">CSV</a> and <a href="../data/certificados-es-2026-10.json">JSON</a>, aggregated</dd></div></dl>
         <ul class="list">
           <li><strong>Sample.</strong> The first 1,000 domains ending in <code>.es</code> on Tranco list K9Z7W. It starts at rank 724, because many large Spanish sites use <code>.com</code>: this is the most visited .es web, not the whole Spanish web.</li>
-          <li><strong>Unit.</strong> The domain, measured at the home page's final destination after redirects (949 of 1,000; the other 51 at the default host). Both <code>www</code> and non-<code>www</code> are kept raw.</li>
-          <li><strong>Connection.</strong> One normal TLS handshake per host with Node 20, like any browser. No path or port scanning.</li>
-          <li><strong>Errors.</strong> Every invalid certificate was measured again and opened in a real Chrome 154 to confirm the cause. The 11 incomplete chains were also tested in Firefox 157, with a fresh profile and a synced one.</li>
+          <li><strong>Unit.</strong> The domain, measured at the home page's final destination after redirects (949 of 1,000; the other 51 at the default host).</li>
+          <li><strong>Connection.</strong> One normal TLS handshake per host, like any browser. No path or port scanning.</li>
+          <li><strong>Errors.</strong> Every invalid certificate was measured again and opened in a real Chrome to confirm the cause. The 11 incomplete chains were also tested in Firefox, with a fresh profile and a synced one.</li>
           <li><strong>No secure connection.</strong> 42 domains: 8 sites (living at another address or only unencrypted), 9 technical domains, classified by name, and 25 with no visible site.</li>
           <li><strong>Limits.</strong> One network location, one day: a CDN may serve a different certificate depending on where you connect from. Two sites fixed their certificate the next day; they count as they were on the 9th.</li>
+          <li><strong>No names.</strong> Neither this page nor the downloadable data names any site with a broken certificate.</li>
         </ul>
         <p class="prose"><strong>Sources:</strong> <a href="https://cabforum.org/working-groups/server/baseline-requirements/">CA/B Forum, Baseline Requirements</a>, <a href="https://tranco-list.eu/list/K9Z7W">Tranco list K9Z7W</a>, <a href="https://security.geant.org/?p=15289">GÉANT Trusted Certificate Service</a>, <a href="https://rediris.es/tcs/cas">RedIRIS, TCS authorities</a>, <a href="https://docs.fastly.com/products/certainly">Fastly, Certainly</a> and <a href="https://www.rfc-editor.org/rfc/rfc8555">RFC 8555, ACME</a>.</p>
       </div>
@@ -719,12 +773,12 @@
 
   <section class="cta" id="contact">
     <div class="wrap">
-      <p class="kicker">/ Next</p>
-      <h2>I check before I publish.</h2>
-      <p>I wrote the scripts with help from Claude. Deciding what counts, checking every broken site by hand and dropping what didn't hold up was on me. If your team needs someone who checks like this, get in touch.</p>
+      <p class="kicker">/ Try it</p>
+      <h2>Did something come up red?</h2>
+      <p>Run yogurTLS on your site. If something is unclear, breaks or a check is missing, open an issue on GitHub or email me.</p>
       <div class="actions">
-        <a class="btn" href="mailto:hi.hache.cervera@gmail.com?subject=TLS%20certificates%20research">Email me</a>
-        <a class="alt" href="../data/certificados-es-2026-10.csv">Download the data</a>
+        <a class="btn" href="https://github.com/hache-cervera/yogurtls">yogurTLS on GitHub</a>
+        <a class="alt" href="mailto:hi.hache.cervera@gmail.com?subject=yogurTLS">Email me</a>
       </div>
     </div>
   </section>
@@ -744,6 +798,7 @@
         document.documentElement.dataset.theme = t; try { localStorage.setItem('theme', t); } catch (e) {}
       });
       document.querySelectorAll('a[href$=".csv"], a[href$=".json"]').forEach(function (a) { a.addEventListener('click', function () { track('data_download', { file: a.getAttribute('href') }); }); });
+      document.querySelectorAll('a[href*="yogurtls"]').forEach(function (a) { a.addEventListener('click', function () { track('tool_click', { href: a.getAttribute('href') }); }); });
     })();
   </script>
 </body>
