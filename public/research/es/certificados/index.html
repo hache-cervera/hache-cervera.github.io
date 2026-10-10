@@ -609,7 +609,7 @@
     .hero3 .lede { margin-top: 24px; font-size: 1.25rem; line-height: 1.55; color: var(--muted); }
     .stage { --r: 28px; position: relative; margin-top: 56px; height: clamp(460px, 50vw, 640px); background: #E4E5E3; border-radius: var(--r); overflow: hidden; }
     .stage-tub { position: absolute; left: 50%; top: 6%; height: 54%; width: auto; transform: translateX(-50%); }
-    .stage-word { position: absolute; left: 0; right: 0; bottom: 118px; text-align: center; font-family: 'Archivo', var(--font-display); font-weight: 900; font-size: clamp(4rem, 13vw, 11.5rem); line-height: 0.85; letter-spacing: -0.055em; color: #0F0F10; white-space: nowrap; }
+    .stage-word { position: absolute; left: 0; right: 0; bottom: 118px; text-align: center; font-family: 'JetBrains Mono', ui-monospace, monospace; font-weight: 800; font-size: clamp(3.4rem, 11vw, 10rem); line-height: 0.9; letter-spacing: -0.04em; color: #0F0F10; white-space: nowrap; }
     .stage-word span { color: #FF3C00; padding-right: 0.04em; }
     .notch { position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); padding: 22px 26px 0; background: var(--bg); border-radius: var(--r) var(--r) 0 0; }
     .notch::before, .notch::after { content: ""; position: absolute; bottom: 0; width: var(--r); height: var(--r); }
@@ -622,12 +622,51 @@
     @media (max-width: 699px) {
       .stage { height: 420px; }
       .stage-tub { top: 8%; height: 46%; }
-      .stage-word { bottom: 128px; font-size: 3.6rem; }
+      .stage-word { bottom: 128px; font-size: 3rem; }
       .notch { width: calc(100% - 2 * var(--r) - 16px); padding: 16px 16px 0; }
       .notch .btn { padding: 18px 12px; white-space: normal; text-align: center; font-size: 1.0625rem; border-radius: calc(var(--r) - 10px); }
     }
     .out-note { margin-top: 10px; font-size: 0.9375rem; color: var(--muted); }
     pre.out { font-size: 0.875rem; }
+    /* yogurTLS product block: its own identity, not the site's */
+    @font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 800; font-display: swap; src: url('/fonts/jetbrains-mono-latin-800.woff2') format('woff2'); }
+    section.tool { background: #E4E5E3; color: #0F0F10; border-top: 2px solid #0F0F10; border-bottom: 2px solid #0F0F10; padding: 80px 0 96px; }
+    .tool .brand { display: flex; align-items: center; gap: 16px; }
+    .tool-icon { width: 64px; height: 64px; flex-shrink: 0; }
+    .tool .name { font-family: 'JetBrains Mono', ui-monospace, monospace; font-weight: 800; font-size: clamp(2.2rem, 4.4vw, 3.2rem); line-height: 0.9; letter-spacing: -0.04em; padding-right: 0.05em; }
+    .tool .name span { color: #FF3C00; }
+    .tool .ver { margin-left: auto; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 0.9375rem; color: #0F0F10; }
+    .tool h2 { margin-top: 40px; max-width: 24ch; font-family: 'JetBrains Mono', ui-monospace, monospace; font-weight: 800; font-size: clamp(1.8rem, 3.6vw, 2.9rem); line-height: 1.1; letter-spacing: -0.03em; color: #0F0F10; }
+    .tool .intro { margin-top: 20px; max-width: 40rem; font-size: 1.25rem; line-height: 1.55; color: #2B2B2B; }
+    .tool .install { margin-top: 40px; display: flex; align-items: stretch; max-width: 46rem; background: #0F0F10; color: #F2F2F2; }
+    .tool .install code, html:not([data-theme='dark']) .tool .install code { flex: 1; min-width: 0; padding: 22px 24px; background: none; color: #F2F2F2; font-size: clamp(1rem, 2vw, 1.25rem); overflow-x: auto; white-space: nowrap; }
+    .tool .install code b { color: #FF3C00; font-weight: 400; }
+    .tool .copy { flex-shrink: 0; min-width: 112px; border: none; background: #FF3C00; color: #0F0F10; font-family: 'JetBrains Mono', ui-monospace, monospace; font-weight: 800; font-size: 1.0625rem; cursor: pointer; padding: 0 24px; }
+    .tool .copy:hover { background: #F2F2F2; }
+    .tool .req { margin-top: 12px; font-size: 1rem; color: #2B2B2B; }
+    .tool-grid { margin-top: 64px; display: grid; gap: 48px; grid-template-columns: 1fr; }
+    @media (min-width: 1000px) { .tool-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 56px; } }
+    .tool h3 { font-family: 'JetBrains Mono', ui-monospace, monospace; font-weight: 800; font-size: 1.5rem; letter-spacing: -0.02em; line-height: 1.1; color: #0F0F10; }
+    .tool .checks { margin-top: 20px; list-style: none; }
+    .tool .checks li { display: grid; grid-template-columns: 56px 1fr; gap: 8px; padding: 18px 0; border-top: 2px solid #0F0F10; }
+    .tool .checks li:last-child { border-bottom: 2px solid #0F0F10; }
+    .tool .checks .n { font-family: 'JetBrains Mono', ui-monospace, monospace; font-weight: 800; font-size: 1.5rem; color: #FF3C00; line-height: 1.1; }
+    .tool .checks strong { display: block; font-size: 1.125rem; font-weight: 600; color: #0F0F10; }
+    .tool .checks p { margin-top: 4px; font-size: 1.0625rem; line-height: 1.55; color: #2B2B2B; }
+    .tool pre.out { margin-top: 20px; max-width: none; background: #0F0F10; color: #F2F2F2; border-left: 0; font-size: 0.875rem; padding: 20px 22px; }
+    .tool pre.out .p { color: #FF3C00; }
+    .tool .out-note { margin-top: 10px; font-size: 0.9375rem; color: #2B2B2B; }
+    .tool .opts { margin-top: 64px; display: grid; gap: 0; grid-template-columns: 1fr; border-top: 2px solid #0F0F10; }
+    @media (min-width: 760px) { .tool .opts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (min-width: 1100px) { .tool .opts { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+    .tool .opts div { padding: 20px 20px 20px 0; border-bottom: 2px solid #0F0F10; }
+    .tool .opts code, html:not([data-theme='dark']) .tool .opts code { background: none; padding: 0; color: #0F0F10; font-size: 1rem; font-weight: 600; }
+    .tool .opts p { margin-top: 8px; font-size: 1rem; line-height: 1.5; color: #2B2B2B; }
+    .tool .privacy { margin-top: 40px; max-width: 46rem; font-size: 1.125rem; line-height: 1.6; color: #0F0F10; }
+    .tool .links { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 16px; }
+    .tool .links a, html:not([data-theme='dark']) main .tool .links a { display: inline-block; padding: 18px 30px; border: 2px solid #0F0F10; border-radius: 16px; font-family: 'JetBrains Mono', ui-monospace, monospace; font-weight: 800; font-size: 1.125rem; text-decoration: none; color: #0F0F10; background: none; }
+    .tool .links a.primary, html:not([data-theme='dark']) main .tool .links a.primary { background: #0F0F10; color: #E4E5E3; }
+    .tool .links a:hover, html:not([data-theme='dark']) main .tool .links a:hover { background: #FF3C00; border-color: #FF3C00; color: #0F0F10; }
     /* readability: larger body text on every study */
     body { font-size: 1.125rem; line-height: 1.6; }
     .prose, .section-intro, .list li { font-size: 1.125rem; line-height: 1.65; }
@@ -676,13 +715,18 @@
       <p class="sub"><a class="alt" href="#highlights">Ver cómo están las 1.000 webs .es más visitadas</a></p>
     </div>
 
-    <section id="yogurtls">
+    <section id="yogurtls" class="tool">
       <div class="wrap">
-        <p class="section-label">/ La herramienta</p>
-        <h2>Mira cuándo caduca tu certificado TLS y cómo arreglar lo que esté mal</h2>
-        <p class="section-intro">Un comprobador open source de un solo comando. Le das tu dominio y te dice cómo está tu certificado TLS, qué cambia para ti en 2027 y, si algo va mal, cómo se arregla. Solo necesitas Node 20 o superior.</p>
-        <pre class="cmd"><code>npx yogurtls devilfruittcg.com incomplete-chain.badssl.com --es</code></pre>
-        <pre class="out" aria-label="Ejemplo de salida de yogurTLS"><code>devilfruittcg.com             BIEN
+        <div class="brand"><svg class="tool-icon" viewBox="0 0 480 480" aria-hidden="true" focusable="false"><polygon points="128,214 352,214 343.5,272 136.5,272" fill="#0F0F10"/><polygon points="146.8,342 333.2,342 322,418 158,418" fill="#0F0F10"/><rect x="104" y="188" width="272" height="30" fill="#0F0F10"/><circle cx="240" cy="294" r="15" fill="#0F0F10"/><polygon points="232,298 248,298 254,328 226,328" fill="#0F0F10"/><g transform="rotate(24 378 188)"><rect x="106" y="170" width="272" height="18" fill="#FF3C00"/><rect x="84" y="164" width="30" height="30" fill="#FF3C00"/></g></svg><span class="name">yogur<span>TLS</span></span><span class="ver">v1.0.0, licencia MIT</span></div>
+        <h2>Mira cuándo caduca tu certificado TLS y cómo arreglar lo que esté mal.</h2>
+        <p class="intro">Un comprobador open source de un solo comando. Le das tu dominio y te dice cómo está tu certificado TLS, qué cambia para ti en 2027 y, si algo va mal, cómo se arregla.</p>
+        <div class="install"><code id="yt-cmd"><b>$</b> npx yogurtls tudominio.es --es</code><button class="copy" type="button" data-copy="npx yogurtls tudominio.es --es" data-done="Copiado">Copiar</button></div>
+        <p class="req">Solo necesitas Node 20 o superior. No hay que instalar nada más.</p>
+        <div class="tool-grid">
+          <div><h3>Qué comprueba</h3><ul class="checks"><li><span class="n">01</span><div><strong>Caducidad y duración</strong><p>Cuántos días le quedan y si ya va al ritmo de 2027 y 2029.</p></div></li><li><span class="n">02</span><div><strong>Cadena completa</strong><p>Lo que el navegador te esconde: si falta el intermedio, tu web carga con candado y falla para apps, integraciones y bots.</p></div></li><li><span class="n">03</span><div><strong>Con www y sin www</strong><p>Los dos a la vez. Una de cada cuatro webs .es usa certificados distintos en cada uno.</p></div></li><li><span class="n">04</span><div><strong>Nombre, autoridad y autofirmados</strong><p>Lo que hace que un navegador muestre el aviso de error. Con semáforo: BIEN, OJO o MAL, siempre con la palabra.</p></div></li></ul></div>
+          <div><h3>Así responde</h3><pre class="out" aria-label="Así responde"><code><span class="p">$</span> npx yogurtls devilfruittcg.com incomplete-chain.badssl.com --es
+
+devilfruittcg.com             BIEN
   Emisor           Google Trust Services
   Caduca           28 nov 2026 (quedan 49 días)
   Duración         90 días
@@ -701,26 +745,11 @@ incomplete-chain.badssl.com   OJO
                    de tu autoridad en un solo archivo.
   2027             Ya cumple el límite de 100 días que llega en marzo de 2027.
 
-1 en verde, 1 en ámbar, 0 en rojo.</code></pre>
-        <p class="out-note">Salida real de yogurTLS 1.0.0 del 10 de octubre de 2026. Los días que quedan dependen del día en que lo ejecutes.</p>
-        <div class="tbl" tabindex="0" role="region" aria-label="Qué comprueba yogurTLS"><table><thead><tr><th scope="col">Qué comprueba</th><th scope="col">Por qué</th></tr></thead><tbody>
-          <tr><th scope="row">Caducidad y duración</th><td>Cuántos días le quedan y si ya va al ritmo de 2027 y 2029.</td></tr>
-          <tr><th scope="row">Cadena completa</th><td>Lo que el navegador te esconde: si falta el intermedio, tu web carga con candado y falla para apps, integraciones y bots.</td></tr>
-          <tr><th scope="row">Con www y sin www</th><td>Los dos a la vez. Una de cada cuatro webs .es usa certificados distintos en cada uno, y el rincón olvidado es donde aparecen los caducados.</td></tr>
-          <tr><th scope="row">Nombre, autoridad y autofirmados</th><td>Lo que hace que un navegador muestre el aviso de error.</td></tr>
-        </tbody></table></div>
-        <ul class="list">
-          <li><strong>Semáforo:</strong> BIEN, OJO o MAL, siempre con la palabra, no solo con el color.</li>
-          <li><strong>Varias webs:</strong> <code>npx yogurtls a.es b.es</code> o <code>npx yogurtls --file dominios.txt</code>.</li>
-          <li><strong>Para automatizar:</strong> <code>--warn-days 14</code> pone en ámbar lo que caduca pronto, y el código de salida (0 verde, 1 ámbar, 2 rojo) sirve para un cron o una tarea de GitHub Actions.</li>
-          <li><strong>Privacidad:</strong> se ejecuta en tu ordenador, solo se conecta a los dominios que le pidas y no envía nada a nadie.</li>
-          <li><strong>Lo que no hace:</strong> no renueva ni instala nada. Solo lee lo que ve cualquier navegador.</li>
-        </ul>
-        <div class="actions">
-          <a class="btn" href="https://github.com/hache-cervera/yogurtls">Código en GitHub</a>
-          <a class="alt" href="https://www.npmjs.com/package/yogurtls">Paquete en npm</a>
+1 en verde, 1 en ámbar, 0 en rojo.</code></pre><p class="out-note">Salida real de yogurTLS 1.0.0 del 10 de octubre de 2026. Los días que quedan dependen del día en que lo ejecutes.</p></div>
         </div>
-        <p class="note">Open source, con licencia MIT. Sin registro ni cuentas. En inglés por defecto; <code>--es</code> lo pone en español.</p>
+        <div class="opts"><div><code>npx yogurtls a.es b.es</code><p>Varias webs a la vez.</p></div><div><code>npx yogurtls --file dominios.txt</code><p>Una lista en un archivo, una web por línea.</p></div><div><code>--warn-days 14</code><p>Ámbar si caduca pronto. Sale con código 0, 1 o 2 para un cron o GitHub Actions.</p></div><div><code>--es</code><p>En español. Por defecto, en inglés.</p></div></div>
+        <p class="privacy"><strong>Se ejecuta en tu ordenador</strong>, solo se conecta a los dominios que le pidas y no envía nada a nadie. No renueva ni instala nada: solo lee lo que ve cualquier navegador.</p>
+        <div class="links"><a class="primary" href="https://github.com/hache-cervera/yogurtls">Código en GitHub</a><a href="https://www.npmjs.com/package/yogurtls">Paquete en npm</a></div>
       </div>
     </section>
 
@@ -848,6 +877,7 @@ incomplete-chain.badssl.com   OJO
         document.documentElement.dataset.theme = t; try { localStorage.setItem('theme', t); } catch (e) {}
       });
       document.querySelectorAll('a[href$=".csv"], a[href$=".json"]').forEach(function (a) { a.addEventListener('click', function () { track('data_download', { file: a.getAttribute('href') }); }); });
+      document.querySelectorAll('.tool .copy').forEach(function (b) { b.addEventListener('click', function () { var label = b.textContent; try { navigator.clipboard.writeText(b.getAttribute('data-copy')).then(function () { b.textContent = b.getAttribute('data-done'); setTimeout(function () { b.textContent = label; }, 1800); track('tool_copy', {}); }); } catch (e) {} }); });
       document.querySelectorAll('a[href*="yogurtls"]').forEach(function (a) { a.addEventListener('click', function () { track('tool_click', { href: a.getAttribute('href') }); }); });
     })();
   </script>
