@@ -1,14 +1,14 @@
-# Hache Cervera — My website portfolio
+# Hache Cervera: portfolio and research
 
-My personal site. One page, a 3D chip travelling through it, and the stuff I do: design, code, motion and SEO.
+My personal site. Who I am, what I've built and the studies I publish under `/research/`, each one with its method and data so anyone can repeat it.
 
-The chip is procedural WebGL, not a video — around 7,000 triangles rendered live, with six nodes that light up as you scroll.
+The 3D chip on the home page is drawn live in WebGL: around 7,000 triangles and six nodes that light up as you scroll.
 
 ## Stack
 
-- [React](https://react.dev) + [Vite](https://vitejs.dev).
+- [React](https://react.dev) and [Vite](https://vitejs.dev).
 - [Tailwind CSS](https://tailwindcss.com) for layout and tokens.
-- [GSAP + ScrollTrigger](https://gsap.com) for scroll choreography (pins, scrubs, reveals).
+- [GSAP and ScrollTrigger](https://gsap.com) for the scroll choreography (pins, scrubs, reveals).
 - [Lenis](https://lenis.darkroom.engineering) for smooth scrolling.
 - [Three.js](https://threejs.org) (r128) for the chip scene.
 - [Framer Motion](https://www.framer.com/motion) for micro-interactions.
@@ -25,14 +25,14 @@ npm run build    # production build in dist/
 
 ```
 src/
-├── App.jsx               # sections + smooth scroll + chip choreography
+├── App.jsx               # sections, smooth scroll and chip choreography
 ├── three/ChipScene.js    # the chip: geometry, lights, render loop
 ├── data/content.js       # all the copy: skills, experience, client logos
 └── components/           # one file per section
 ```
 
-Deploys itself to GitHub Pages on every push to `main`. The previous version of this site lives in the `old-site` branch.
+Every push to `main` deploys the site to GitHub Pages. The previous version lives in the `old-site` branch.
 
-## About the process
+## How it's made
 
-Designed and built by me, pair-programming with Claude. No secret about it: the point is knowing how to work with these tools — directing them, questioning them, and understanding every line that ships — not pretending they don't exist. Same rule as the AI node on the site: a tool, not a crutch.
+I designed and built it pair-programming with Claude. I decide what gets built, question what the tool suggests and read every line that ships. The research scripts are made the same way; choosing what to measure and checking the odd cases by hand stays with me.
