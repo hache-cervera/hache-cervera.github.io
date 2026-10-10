@@ -610,7 +610,7 @@
     .stage { --r: 28px; position: relative; margin-top: 56px; height: clamp(440px, 44vw, 560px); background: #FF2E7E; border-radius: var(--r); overflow: hidden; }
     .stage-lockup { position: absolute; left: 0; right: 0; top: 0; bottom: 96px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; }
     .stage-tub { display: block; height: clamp(140px, 16vw, 200px); width: auto; }
-    .stage-word { margin: 0; font-family: 'JetBrains Mono', ui-monospace, monospace; font-weight: 800; font-size: clamp(2.6rem, 5.6vw, 4.75rem); line-height: 1; letter-spacing: -0.04em; color: #0F0F10; white-space: nowrap; }
+    .stage-word { margin: 0; font-family: 'JetBrains Mono', ui-monospace, monospace; font-weight: 800; font-size: clamp(2.6rem, 5.6vw, 4.75rem); line-height: 1; letter-spacing: -0.04em; color: #FFFFFF; white-space: nowrap; }
     .stage-word span { color: #FFFFFF; padding-right: 0.04em; }
     .notch { position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); padding: 22px 26px 0; background: var(--bg); border-radius: var(--r) var(--r) 0 0; }
     .notch::before, .notch::after { content: ""; position: absolute; bottom: 0; width: var(--r); height: var(--r); }
@@ -712,7 +712,7 @@
       <p class="lede">Your website's TLS certificate expires, and sooner every year. From 15 March 2027 it can last 100 days at most, and from 2029, 47. If you renew by hand, that's going from once a year to at least four times, then around eight.</p>
       <div class="stage">
         <div class="stage-lockup">
-          <svg class="stage-tub" viewBox="80 30 320 400" role="img" aria-label="yogurTLS: a yogurt tub with its lid peeled back and a keyhole on the label"><polygon points="128,214 352,214 343.5,272 136.5,272" fill="#0F0F10"/><polygon points="146.8,342 333.2,342 322,418 158,418" fill="#0F0F10"/><rect x="104" y="188" width="272" height="30" fill="#0F0F10"/><circle cx="240" cy="294" r="15" fill="#0F0F10"/><polygon points="232,298 248,298 254,328 226,328" fill="#0F0F10"/><g transform="rotate(24 378 188)"><rect x="106" y="170" width="272" height="18" fill="#FFFFFF"/><rect x="84" y="164" width="30" height="30" fill="#FFFFFF"/></g></svg>
+          <svg class="stage-tub" viewBox="60 50 340 380" role="img" aria-label="yogurTLS: a yogurt tub with its lid peeled back and a keyhole on the label"><polygon points="128,214 352,214 343.5,272 136.5,272" fill="#FFFFFF"/><polygon points="146.8,342 333.2,342 322,418 158,418" fill="#FFFFFF"/><rect x="104" y="188" width="272" height="30" fill="#FFFFFF"/><circle cx="240" cy="294" r="15" fill="#FFFFFF"/><polygon points="232,298 248,298 254,328 226,328" fill="#FFFFFF"/><polygon points="378,188 362,170 118,84 104,112" fill="#FFFFFF"/><circle cx="98" cy="92" r="22" fill="#FFFFFF"/></svg>
           <p class="stage-word" aria-hidden="true">yogur<span>TLS</span></p>
         </div>
         <div class="notch"><a class="btn" href="#yogurtls">Check your site with yogurTLS</a></div>
@@ -723,7 +723,7 @@
 
     <section id="yogurtls" class="tool">
       <div class="wrap">
-        <div class="brand"><svg class="tool-icon" viewBox="0 0 480 480" aria-hidden="true" focusable="false"><polygon points="128,214 352,214 343.5,272 136.5,272" fill="#0F0F10"/><polygon points="146.8,342 333.2,342 322,418 158,418" fill="#0F0F10"/><rect x="104" y="188" width="272" height="30" fill="#0F0F10"/><circle cx="240" cy="294" r="15" fill="#0F0F10"/><polygon points="232,298 248,298 254,328 226,328" fill="#0F0F10"/><g transform="rotate(24 378 188)"><rect x="106" y="170" width="272" height="18" fill="#FF2E7E"/><rect x="84" y="164" width="30" height="30" fill="#FF2E7E"/></g></svg><span class="name">yogur<span>TLS</span></span><span class="ver">v1.0.0, MIT licence</span></div>
+        <div class="brand"><svg class="tool-icon" viewBox="0 0 480 480" aria-hidden="true" focusable="false"><polygon points="128,214 352,214 343.5,272 136.5,272" fill="#0F0F10"/><polygon points="146.8,342 333.2,342 322,418 158,418" fill="#0F0F10"/><rect x="104" y="188" width="272" height="30" fill="#0F0F10"/><circle cx="240" cy="294" r="15" fill="#0F0F10"/><polygon points="232,298 248,298 254,328 226,328" fill="#0F0F10"/><polygon points="378,188 362,170 118,84 104,112" fill="#FF2E7E"/><circle cx="98" cy="92" r="22" fill="#FF2E7E"/></svg><span class="name">yogur<span>TLS</span></span><span class="ver">v1.0.0, MIT licence</span></div>
         <h2>See when your TLS certificate expires, and how to fix what is wrong.</h2>
         <p class="intro">An open source one-command checker. Give it your domain and it tells you how your TLS certificate is doing, what changes for you in 2027 and, if something is wrong, how to fix it.</p>
         <div class="install"><code id="yt-cmd"><b>$</b> npx yogurtls yourdomain.com</code><button class="copy" type="button" data-copy="npx yogurtls yourdomain.com" data-done="Copied">Copy</button></div>
