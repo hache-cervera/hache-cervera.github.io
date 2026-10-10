@@ -607,22 +607,26 @@
     .hero3 h1 em { font-style: italic; color: var(--accent); padding-right: 0.1em; }
     .hero3 .lede, .hero3 .trust { margin-left: auto; margin-right: auto; max-width: 40rem; text-wrap: pretty; }
     .hero3 .lede { margin-top: 24px; font-size: 1.25rem; line-height: 1.55; color: var(--muted); }
-    .stage { --r: 28px; position: relative; margin-top: 56px; height: clamp(460px, 50vw, 640px); background: #E4E5E3; border-radius: var(--r); overflow: hidden; }
-    .stage-tub { position: absolute; left: 50%; top: 6%; height: 54%; width: auto; transform: translateX(-50%); }
-    .stage-word { position: absolute; left: 0; right: 0; bottom: 118px; text-align: center; font-family: 'JetBrains Mono', ui-monospace, monospace; font-weight: 800; font-size: clamp(3.4rem, 11vw, 10rem); line-height: 0.9; letter-spacing: -0.04em; color: #0F0F10; white-space: nowrap; }
-    .stage-word span { color: #FF2E7E; padding-right: 0.04em; }
+    .stage { --r: 28px; position: relative; margin-top: 56px; height: clamp(440px, 44vw, 560px); background: #FF2E7E; border-radius: var(--r); overflow: hidden; }
+    .stage-lockup { position: absolute; left: 0; right: 0; top: 0; bottom: 96px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; }
+    .stage-tub { display: block; height: clamp(140px, 16vw, 200px); width: auto; }
+    .stage-word { margin: 0; font-family: 'JetBrains Mono', ui-monospace, monospace; font-weight: 800; font-size: clamp(2.6rem, 5.6vw, 4.75rem); line-height: 1; letter-spacing: -0.04em; color: #0F0F10; white-space: nowrap; }
+    .stage-word span { color: #FFFFFF; padding-right: 0.04em; }
     .notch { position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); padding: 22px 26px 0; background: var(--bg); border-radius: var(--r) var(--r) 0 0; }
     .notch::before, .notch::after { content: ""; position: absolute; bottom: 0; width: var(--r); height: var(--r); }
     .notch::before { left: calc(var(--r) * -1); background: radial-gradient(circle at 0 0, transparent var(--r), var(--bg) calc(var(--r) + 0.5px)); }
     .notch::after { right: calc(var(--r) * -1); background: radial-gradient(circle at 100% 0, transparent var(--r), var(--bg) calc(var(--r) + 0.5px)); }
+    html .stage .notch .btn { background: #0F0F10; border-color: #0F0F10; color: #FFFFFF; }
+    html .stage .notch .btn:hover { background: #2B2B2B; border-color: #2B2B2B; }
     .notch .btn { display: block; border-radius: 16px; font-size: 1.1875rem; padding: 22px 44px; white-space: nowrap; }
     .hero3 .trust { margin-top: 24px; font-size: 1.0625rem; color: var(--muted); }
     .hero3 .trust strong { color: var(--ink); font-weight: 600; }
     .hero3 .sub { margin-top: 16px; }
     @media (max-width: 699px) {
-      .stage { height: 420px; }
-      .stage-tub { top: 8%; height: 46%; }
-      .stage-word { bottom: 128px; font-size: 3rem; }
+      .stage { height: 400px; }
+      .stage-lockup { bottom: 104px; gap: 8px; }
+      .stage-tub { height: 130px; }
+      .stage-word { font-size: 2.6rem; }
       .notch { width: calc(100% - 2 * var(--r) - 16px); padding: 16px 16px 0; }
       .notch .btn { padding: 18px 12px; white-space: normal; text-align: center; font-size: 1.0625rem; border-radius: calc(var(--r) - 10px); }
     }
@@ -707,8 +711,10 @@
       <h1>Comprueba la caducidad del <em>certificado TLS</em> de tu web</h1>
       <p class="lede">El certificado TLS de tu web caduca, y cada vez antes. Desde el 15 de marzo de 2027 no podrá durar más de 100 días, y desde 2029, más de 47. Si lo renuevas a mano, pasarás de hacerlo una vez al año a por lo menos cuatro, y luego a unas ocho.</p>
       <div class="stage">
-        <svg class="stage-tub" viewBox="0 0 480 480" role="img" aria-label="yogurTLS: una tarrina de yogur con la tapa levantada y una cerradura en la etiqueta"><polygon points="128,214 352,214 343.5,272 136.5,272" fill="#0F0F10"/><polygon points="146.8,342 333.2,342 322,418 158,418" fill="#0F0F10"/><rect x="104" y="188" width="272" height="30" fill="#0F0F10"/><circle cx="240" cy="294" r="15" fill="#0F0F10"/><polygon points="232,298 248,298 254,328 226,328" fill="#0F0F10"/><g transform="rotate(24 378 188)"><rect x="106" y="170" width="272" height="18" fill="#FF2E7E"/><rect x="84" y="164" width="30" height="30" fill="#FF2E7E"/></g></svg>
-        <p class="stage-word" aria-hidden="true">yogur<span>TLS</span></p>
+        <div class="stage-lockup">
+          <svg class="stage-tub" viewBox="80 30 320 400" role="img" aria-label="yogurTLS: una tarrina de yogur con la tapa levantada y una cerradura en la etiqueta"><polygon points="128,214 352,214 343.5,272 136.5,272" fill="#0F0F10"/><polygon points="146.8,342 333.2,342 322,418 158,418" fill="#0F0F10"/><rect x="104" y="188" width="272" height="30" fill="#0F0F10"/><circle cx="240" cy="294" r="15" fill="#0F0F10"/><polygon points="232,298 248,298 254,328 226,328" fill="#0F0F10"/><g transform="rotate(24 378 188)"><rect x="106" y="170" width="272" height="18" fill="#FFFFFF"/><rect x="84" y="164" width="30" height="30" fill="#FFFFFF"/></g></svg>
+          <p class="stage-word" aria-hidden="true">yogur<span>TLS</span></p>
+        </div>
         <div class="notch"><a class="btn" href="#yogurtls">Comprueba tu web con yogurTLS</a></div>
       </div>
       <p class="trust"><strong>Open source, con licencia MIT.</strong> Sin registro, y se ejecuta en tu ordenador: no envía tus datos a nadie.</p>
