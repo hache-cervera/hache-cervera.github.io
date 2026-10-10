@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The TLS certificate clock: 1,000 .es sites · Research · Ada (hache) Cervera</title>
+  <meta name="description" content="Original research: validity, issuer and chain of the TLS certificates of the 1,000 most visited .es sites, against the 100-day limit in 2027 and 47 days in 2029." />
+  <link rel="canonical" href="https://hache-cervera.github.io/research/certificates/" />
+  <link rel="alternate" hreflang="en" href="https://hache-cervera.github.io/research/certificates/" />
+  <link rel="alternate" hreflang="es" href="https://hache-cervera.github.io/research/es/certificados/" />
+  <link rel="alternate" hreflang="x-default" href="https://hache-cervera.github.io/research/certificates/" />
+  <meta property="og:title" content="Your website's certificate expires. From March, much sooner." />
+  <meta property="og:description" content="Original research: validity, issuer and chain of the TLS certificates of the 1,000 most visited .es sites, against the 100-day limit in 2027 and 47 days in 2029." />
+  <meta property="og:image" content="https://hache-cervera.github.io/og-home.jpg" />
+  <meta property="og:url" content="https://hache-cervera.github.io/research/certificates/" />
+  <meta property="og:type" content="article" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg" />
+  <link rel="preload" href="/fonts/sora-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <style>
+    @font-face { font-family: 'Sora'; font-style: normal; font-weight: 600 800; font-display: swap; src: url('/fonts/sora-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400 500; font-display: swap; src: url('/fonts/inter-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  </style>
+  <script>
+    (function () { try { document.documentElement.dataset.theme = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light'; } catch (e) {} })();
+  </script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"Your website's certificate expires. From March, much sooner.","description":"Original research: validity, issuer and chain of the TLS certificates of the 1,000 most visited .es sites, against the 100-day limit in 2027 and 47 days in 2029.","inLanguage":"en","datePublished":"2026-10-10","dateModified":"2026-10-10","url":"https://hache-cervera.github.io/research/certificates/","author":{"@type":"Person","name":"Ada (hache) Cervera","url":"https://hache-cervera.github.io/"}},{"@type":"Dataset","name":"TLS certificates of the 1,000 most visited .es sites (October 2026)","description":"Original research: validity, issuer and chain of the TLS certificates of the 1,000 most visited .es sites, against the 100-day limit in 2027 and 47 days in 2029.","inLanguage":"en","creator":{"@type":"Person","name":"Ada (hache) Cervera"},"temporalCoverage":"2026-10-09","license":"https://creativecommons.org/licenses/by/4.0/","isAccessibleForFree":true,"distribution":[{"@type":"DataDownload","encodingFormat":"text/csv","contentUrl":"https://hache-cervera.github.io/research/data/certificados-es-2026-10.csv"},{"@type":"DataDownload","encodingFormat":"application/json","contentUrl":"https://hache-cervera.github.io/research/data/certificados-es-2026-10.json"}]}]}</script>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --surface: #f5f5f5;
+      --panel: #0a0a0a;
+      --ink: #0a0a0a;
+      --muted: #6b6b6b;
+      --line: #e5e5e5;
+      --accent: #ff3c00;
+      --accent-hover: #e63500;
+      --accent-soft: #ffe8e1;
+      --seo: #2d5f8a;
+      --seo-w: #e9f0f6;
+      --aeo: #2f7d4f;
+      --aeo-w: #e8f3ec;
+      --geo: #7d4f9e;
+      --geo-w: #f2ebf7;
+      --font-display: 'Sora', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+    :root[data-theme="dark"] {
+      --bg: #0d0d0d;
+      --surface: #1c1c1c;
+      --ink: #f2f2f2;
+      --muted: #9a9a9a;
+      --line: #2a2a2a;
+      --accent-soft: #3a1608;
+      --seo: #7fb3dd;
+      --seo-w: #12202c;
+      --aeo: #7fc79b;
+      --aeo-w: #112318;
+      --geo: #bb96d6;
+      --geo-w: #1e1526;
+    }
+    :root[data-theme="dark"] .grain { mix-blend-mode: screen; opacity: 0.045; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    ::selection { background: var(--accent); color: #fff; }
+
+    .grain {
+      position: fixed;
+      inset: 0;
+      z-index: 40;
+      pointer-events: none;
+      opacity: 0.028;
+      mix-blend-mode: multiply;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%25" height="100%25" filter="url(%23n)"/></svg>');
+    }
+
+    .glow {
+      position: absolute;
+      width: 480px;
+      height: 480px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 60, 0, 0.09) 0%, rgba(255, 60, 0, 0) 68%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .deco { position: absolute; background: var(--accent); pointer-events: none; z-index: 0; }
+    @keyframes floaty { 0%, 100% { transform: translateY(0) rotate(8deg); } 50% { transform: translateY(-12px) rotate(14deg); } }
+    .deco { animation: floaty 7s ease-in-out infinite; }
+    @media (prefers-reduced-motion: reduce) { .deco { animation: none; } }
+
+    .wrap { max-width: 72rem; margin: 0 auto; padding: 0 24px; }
+    @media (min-width: 768px) { .wrap { padding: 0 48px; } }
+    a { color: inherit; }
+
+    /* ---------- Header ---------- */
+    header { padding: 24px 0; border-bottom: 1px solid var(--line); }
+    header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .back {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.875rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s ease;
+    }
+    .back:hover { color: var(--accent); }
+    .back span { color: var(--accent); transition: transform 0.2s ease; display: inline-block; }
+    .back:hover span { transform: translateX(-4px); }
+    .hctrl { display: flex; align-items: center; gap: 16px; }
+    .lang {
+      display: flex;
+      gap: 8px;
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+    .lang a { text-decoration: none; color: var(--muted); padding: 4px 2px; border-bottom: 2px solid transparent; }
+    .lang a:hover { color: var(--accent); }
+    .lang a.on { color: var(--ink); border-bottom-color: var(--accent); }
+    .tbtn {
+      position: relative;
+      width: 40px;
+      height: 40px;
+      background: none;
+      border: 1px solid var(--line);
+      cursor: pointer;
+      overflow: hidden;
+      transition: border-color 0.25s ease;
+    }
+    .tbtn:hover { border-color: var(--accent); }
+    .tbtn .sky {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.6s cubic-bezier(0.6, 0, 0.25, 1.3);
+    }
+    :root[data-theme="dark"] .tbtn .sky { transform: rotate(-45deg); }
+    .tbtn .core {
+      position: relative;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      transition: transform 0.5s cubic-bezier(0.6, 0, 0.25, 1.3), box-shadow 0.4s ease;
+    }
+    :root[data-theme="dark"] .tbtn .core { transform: scale(1.35); box-shadow: 0 0 12px rgba(255, 60, 0, 0.55); }
+    .tbtn .veil {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 12px;
+      height: 12px;
+      margin: -6px 0 0 -6px;
+      border-radius: 50%;
+      background: var(--bg);
+      transform: translate(15px, -15px);
+      transition: transform 0.5s cubic-bezier(0.6, 0, 0.25, 1.3), background 0.25s ease;
+      z-index: 2;
+    }
+    :root[data-theme="dark"] .tbtn .veil { transform: translate(4px, -4px) scale(1.35); }
+    .tbtn .ray {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 2px;
+      height: 5px;
+      margin: -2.5px 0 0 -1px;
+      border-radius: 1px;
+      background: var(--accent);
+      transform: rotate(var(--r)) translateY(-10px);
+      transition: transform 0.45s ease, opacity 0.35s ease;
+    }
+    :root[data-theme="dark"] .tbtn .ray { transform: rotate(var(--r)) translateY(-4px) scale(0.2); opacity: 0; }
+    @media (prefers-reduced-motion: reduce) { .tbtn .sky, .tbtn .core, .tbtn .veil, .tbtn .ray { transition: none; } }
+
+    /* ---------- Hero ---------- */
+    .hero { position: relative; padding: 80px 24px 56px; }
+    .hero > *:not(.glow):not(.deco) { position: relative; z-index: 1; }
+    @media (min-width: 768px) { .hero { padding: 112px 48px 72px; } }
+    .kicker {
+      font-family: var(--font-display);
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .hero h1 {
+      margin-top: 24px;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(2.2rem, 5.6vw, 4.2rem);
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      word-break: break-word;
+    }
+    .hero h1 em {
+      font-style: italic;
+      background: linear-gradient(100deg, #ff3c00 0%, #ff8a5c 35%, #ff3c00 65%, #ff5a24 100%);
+      background-size: 220% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: shimmer 4s linear infinite;
+    }
+    @keyframes shimmer { to { background-position: -220% 0; } }
+    .hero .lede { margin-top: 24px; max-width: 44rem; font-size: 1.125rem; color: var(--muted); }
+    .hero .actions { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+    .btn {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.875rem;
+      text-decoration: none;
+      padding: 14px 28px;
+      background: var(--accent);
+      color: #fff;
+      transition: background 0.2s ease;
+    }
+    .btn:hover { background: var(--accent-hover); }
+    .alt {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.875rem;
+      text-decoration: none;
+      color: var(--muted);
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 2px;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+    .alt:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* ---------- Meta grid ---------- */
+    .meta {
+      margin-top: 48px;
+      display: grid;
+      grid-template-columns: 1fr;
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+    }
+    @media (min-width: 560px) { .meta { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 900px) { .meta { grid-template-columns: repeat(3, 1fr); } }
+    .meta div { padding: 16px 20px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .meta dt {
+      font-family: var(--font-display);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .meta dd { margin-top: 4px; font-size: 0.9375rem; font-weight: 500; }
+
+    /* ---------- Sections ---------- */
+    /* overflow:hidden keeps the bleeding .glow circles from widening the page */
+    section, .hero { overflow: hidden; }
+    section { position: relative; padding: 64px 0 80px; border-top: 1px solid var(--line); }
+    section .wrap { position: relative; z-index: 1; }
+    .section-label {
+      font-family: var(--font-display);
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    section h2 {
+      margin-top: 24px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+    }
+    .section-intro { margin-top: 16px; max-width: 46rem; color: var(--muted); }
+    section p + p { margin-top: 12px; }
+    .note {
+      margin-top: 24px;
+      max-width: 46rem;
+      padding: 12px 16px;
+      border-left: 2px solid var(--accent);
+      background: var(--surface);
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+    .note strong { color: var(--ink); font-weight: 600; }
+    code {
+      font-family: ui-monospace, 'SF Mono', Consolas, monospace;
+      font-size: 0.8125em;
+      background: var(--surface);
+      padding: 2px 6px;
+      color: var(--accent);
+    }
+
+    /* ---------- Panel quote ---------- */
+    .quote {
+      margin-top: 40px;
+      background: var(--panel);
+      color: #f2f2f2;
+      padding: 32px 28px;
+      border-left: 3px solid var(--accent);
+    }
+    @media (min-width: 768px) { .quote { padding: 40px 44px; } }
+    .quote p { color: rgba(242, 242, 242, 0.82); font-size: 1.0625rem; max-width: 48rem; }
+    .quote strong { color: #fff; font-weight: 600; }
+
+    /* ---------- Stats ---------- */
+    .stats {
+      margin-top: 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+    }
+    @media (min-width: 768px) { .stats { grid-template-columns: repeat(4, 1fr); } }
+    .stats div { padding: 24px 20px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .stats b {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(1.9rem, 4vw, 2.6rem);
+      letter-spacing: -0.04em;
+      line-height: 1;
+      color: var(--accent);
+    }
+    .stats span { display: block; margin-top: 8px; font-size: 0.8125rem; color: var(--muted); }
+
+    /* ---------- Sitemap ---------- */
+    .sitemap { margin-top: 40px; display: grid; gap: 12px; grid-template-columns: 1fr; }
+    @media (min-width: 640px) { .sitemap { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 1000px) { .sitemap { grid-template-columns: repeat(4, 1fr); } }
+    .smap { display: flex; flex-direction: column; gap: 6px; }
+    .smap .top {
+      background: var(--panel);
+      color: #fff;
+      padding: 12px 14px;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.8125rem;
+    }
+    .smap .top i { display: block; margin-top: 3px; font-style: normal; font-size: 0.6875rem; font-weight: 400; color: rgba(255, 255, 255, 0.55); }
+    .smap .kid { border: 1px solid var(--line); background: var(--surface); padding: 9px 14px; font-size: 0.8125rem; color: var(--muted); }
+
+    /* ---------- Highlights ---------- */
+    .hl { margin-top: 40px; display: grid; gap: 16px; grid-template-columns: 1fr; }
+    @media (min-width: 640px) { .hl { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 1000px) { .hl { grid-template-columns: repeat(3, 1fr); } }
+    .hl-item { border: 1px solid var(--line); padding: 24px; transition: border-color 0.3s ease; }
+    .hl-item:hover { border-color: var(--ink); }
+    .hl-item svg { display: block; color: var(--accent); }
+    .hl-item h3 {
+      margin-top: 16px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.125rem;
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+    }
+    .hl-item p { margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
+
+    /* ---------- Timeline ---------- */
+    .tl { margin-top: 48px; display: grid; gap: 24px; grid-template-columns: 1fr; list-style: none; }
+    @media (min-width: 900px) { .tl { grid-template-columns: repeat(4, 1fr); } }
+    .tl-step { border-top: 2px solid var(--line); padding-top: 16px; }
+    .tl-step.now { border-top-color: var(--accent); }
+    .tl-step b {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .tl-step.now b { color: var(--accent); }
+    .tl-step p { margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
+
+    /* ---------- One article, three surfaces ---------- */
+    .flow { margin-top: 40px; }
+    .flow-src {
+      border: 1px solid var(--ink);
+      background: var(--surface);
+      padding: 16px 24px;
+      text-align: center;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--ink);
+    }
+    .flow-fan { display: grid; grid-template-columns: repeat(3, 1fr); height: 24px; }
+    .flow-fan span { justify-self: center; width: 1px; background: var(--line); }
+    .flow-outs { display: grid; gap: 16px; grid-template-columns: 1fr; }
+    @media (max-width: 699px) { .flow-fan { display: none; } .flow-outs { margin-top: 16px; } }
+    @media (min-width: 700px) { .flow-outs { grid-template-columns: repeat(3, 1fr); } }
+    .flow-out { border: 1px solid var(--line); border-top: 3px solid; padding: 16px; }
+    .flow-out.o-seo { border-top-color: var(--seo); }
+    .flow-out.o-aeo { border-top-color: var(--aeo); }
+    .flow-out.o-geo { border-top-color: var(--geo); }
+    .flow-out b { display: block; font-family: var(--font-display); font-weight: 700; font-size: 1rem; }
+    .flow-out span { display: block; margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
+
+    /* ---------- Layers ---------- */
+    .layers { margin-top: 40px; display: flex; flex-direction: column; gap: 16px; }
+    .layer { padding: 24px 26px; border-left: 3px solid; }
+    .layer.l-seo { background: var(--seo-w); border-color: var(--seo); }
+    .layer.l-aeo { background: var(--aeo-w); border-color: var(--aeo); }
+    .layer.l-geo { background: var(--geo-w); border-color: var(--geo); }
+    .layer .tag {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      color: #fff;
+    }
+    .l-seo .tag { background: var(--seo); }
+    .l-aeo .tag { background: var(--aeo); }
+    .l-geo .tag { background: var(--geo); }
+    :root[data-theme="dark"] .layer .tag { color: #0d0d0d; }
+    .layer h3 {
+      margin-top: 12px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.0625rem;
+      letter-spacing: -0.02em;
+    }
+    .layer ul { margin-top: 12px; padding-left: 18px; }
+    .layer li { font-size: 0.875rem; color: var(--muted); margin-bottom: 8px; }
+    .layer li:last-child { margin-bottom: 0; }
+    .layer li strong { color: var(--ink); font-weight: 600; }
+
+    /* ---------- Component cards ---------- */
+    .cards { margin-top: 40px; display: grid; gap: 24px; grid-template-columns: 1fr; }
+    @media (min-width: 768px) { .cards { grid-template-columns: 1fr 1fr; } }
+    .card { border: 1px solid var(--line); overflow: hidden; transition: border-color 0.3s ease; }
+    .card:hover { border-color: var(--ink); }
+    .card figure { margin: 0; aspect-ratio: 16 / 10; overflow: hidden; background: var(--surface); border-bottom: 1px solid var(--line); cursor: zoom-in; }
+    .card figure img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; transition: transform 0.6s ease; }
+    .card:hover figure img { transform: scale(1.03); }
+    .card .body { padding: 22px 24px; }
+    /* Component gallery: let each shot keep its own height instead of cropping it */
+    .cards.gallery { align-items: start; }
+    .cards.gallery figure { aspect-ratio: auto; }
+    .cards.gallery figure img { height: auto; object-fit: contain; }
+    @media (min-width: 900px) { .cards.three { grid-template-columns: repeat(3, 1fr); } }
+    .card h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.125rem; letter-spacing: -0.02em; }
+    .card p { margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
+
+    /* ---------- Stack ---------- */
+    .group { margin-top: 32px; }
+    .group h3 {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .tags { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .tags li {
+      list-style: none;
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      padding: 5px 12px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--muted);
+    }
+    .tags li.key { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+
+    /* ---------- Tables ---------- */
+    /* Migration figures, stated as figures. */
+    .figs { margin-top: 40px; display: grid; grid-template-columns: repeat(2, 1fr); border: 1px solid var(--line); }
+    @media (min-width: 760px) { .figs { grid-template-columns: repeat(5, 1fr); } }
+    .figs div { padding: 20px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .figs b {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.75rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      color: var(--ink);
+    }
+    .figs span { display: block; margin-top: 8px; font-size: 0.75rem; line-height: 1.35; color: var(--muted); }
+
+    .tbl { margin-top: 40px; border: 1px solid var(--line); overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.875rem; min-width: 34rem; }
+    th {
+      background: var(--surface);
+      padding: 12px 18px;
+      text-align: left;
+      font-family: var(--font-display);
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border-bottom: 1px solid var(--line);
+    }
+    td { padding: 14px 18px; border-bottom: 1px solid var(--line); color: var(--muted); vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    td strong { color: var(--ink); font-weight: 600; }
+    td:first-child { white-space: nowrap; }
+
+    /* ---------- CTA + footer ---------- */
+    .cta { position: relative; background: var(--panel); color: #f2f2f2; border-top: none; overflow: hidden; }
+    .cta .kicker { color: var(--accent); }
+    .cta h2 { color: #fff; }
+    .cta p { margin-top: 16px; max-width: 40rem; color: rgba(242, 242, 242, 0.7); }
+    .cta .actions { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+    .cta .alt { color: rgba(242, 242, 242, 0.7); border-color: rgba(242, 242, 242, 0.25); }
+    .cta .alt:hover { color: var(--accent); border-color: var(--accent); }
+    footer { padding: 40px 0; border-top: 1px solid var(--line); }
+    footer .wrap { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; font-size: 0.8125rem; color: var(--muted); }
+    footer .path { font-family: var(--font-display); }
+    footer .path span { color: var(--accent); }
+
+    /* ---------- Reveal + lightbox ---------- */
+    .rv { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .rv.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { .rv { opacity: 1; transform: none; transition: none; } }
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(8, 8, 8, 0.94);
+      padding: 32px 16px;
+    }
+    .lightbox.on { display: flex; }
+    .lightbox img { max-width: 100%; max-height: 100%; object-fit: contain; }
+    .lightbox .close {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 2rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+    .lightbox .close:hover { color: var(--accent); }
+  
+    /* brand orange #ff3c00 reaches 3.56:1 on white; small text and buttons use a darker shade in light theme */
+    html:not([data-theme='dark']) .kicker, html:not([data-theme='dark']) .section-label, html:not([data-theme='dark']) main a:not(.btn):not(.alt), html:not([data-theme='dark']) code { color: #c22e00; }
+    html:not([data-theme='dark']) .btn { background: #c22e00; border-color: #c22e00; }
+    html .cta .kicker { color: var(--accent); }
+  
+    /* research extras */
+    .slides { margin-top: 40px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    @media (min-width: 760px) { .slides { grid-template-columns: repeat(3, 1fr); } }
+    .slides button { padding: 0; border: 1px solid var(--line); background: none; cursor: zoom-in; display: block; }
+    .slides img { display: block; width: 100%; height: auto; }
+    .tbl table { font-size: 0.8125rem; }
+    .tbl caption { text-align: left; padding: 12px 16px; font-size: 0.8125rem; color: var(--muted); caption-side: bottom; }
+    .mx td.c { text-align: center; font-family: var(--font-display); font-weight: 600; font-size: 0.75rem; white-space: nowrap; }
+    .mx td.x { background: #c22e00; color: #fff; }
+    .mx td.v { background: var(--line); color: var(--ink); }
+    /* brand orange fails 4.5:1 on white for small text: darker shade in light theme only */
+    html:not([data-theme='dark']) .kicker, html:not([data-theme='dark']) .section-label, html:not([data-theme='dark']) code { color: #c22e00; }
+    html:not([data-theme='dark']) .btn { background: #c22e00; border-color: #c22e00; }
+    html .cta .kicker { color: var(--accent); }
+    .mx th.v { writing-mode: vertical-rl; transform: rotate(180deg); white-space: nowrap; }
+    .list { margin-top: 24px; max-width: 46rem; padding-left: 1.2rem; }
+    .list li { margin-top: 12px; color: var(--muted); }
+    .list li strong { color: var(--ink); }
+    .prose { margin-top: 16px; max-width: 46rem; color: var(--muted); }
+    .prose + .prose { margin-top: 12px; }
+    code { font-size: 0.875em; }
+  </style>
+  <script src="/consent.js" defer></script>
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <header>
+    <div class="wrap">
+      <a class="back" href="../"><span>&larr;</span> All research</a>
+      <div class="hctrl">
+        <nav class="lang" aria-label="Language">
+          <a class="on" aria-current="page" href="./">EN</a>
+          <a href="../es/certificados/">ES</a>
+        </nav>
+        <button class="tbtn" id="modeToggle" type="button" aria-label="Switch between light and dark mode">
+          <span class="sky" aria-hidden="true"><span class="ray" style="--r:0deg"></span><span class="ray" style="--r:45deg"></span><span class="ray" style="--r:90deg"></span><span class="ray" style="--r:135deg"></span><span class="ray" style="--r:180deg"></span><span class="ray" style="--r:225deg"></span><span class="ray" style="--r:270deg"></span><span class="ray" style="--r:315deg"></span><span class="core"></span><span class="veil"></span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="hero wrap">
+      <span class="glow" style="top: -140px; right: -160px;" aria-hidden="true"></span>
+      <p class="kicker">/ Research / TLS certificates / October 2026</p>
+      <h1>Your website's certificate expires. From March, <em>much sooner</em>.</h1>
+      <p class="lede">A TLS certificate is a website's ID card: it puts the padlock there and tells the browser it can trust the site. From 15 March 2027 a certificate can last 100 days at most, and from 2029, 47. I measured the certificates of the 1,000 most visited .es sites to see who already renews at that pace and who will have to change habits.</p>
+      <dl class="meta"><div><dt>Sample</dt><dd>1,000 .es domains, Tranco list K9Z7W</dd></div><div><dt>Measurable</dt><dd>958 with a certificate</dd></div><div><dt>Measured</dt><dd>9 October 2026, from one connection in Valencia</dd></div><div><dt>The rule</dt><dd>CA/B Forum Baseline Requirements, v2.3.1, section 6.3.2</dd></div><div><dt>Tools</dt><dd>Node 20 (TLS), real Chrome 154 and Firefox 157</dd></div><div><dt>Data</dt><dd><a href="../data/certificados-es-2026-10.csv">CSV</a> and <a href="../data/certificados-es-2026-10.json">JSON</a>, aggregated</dd></div></dl>
+      <p class="note"><strong>What this page leaves out:</strong> the name of any site with a broken certificate. Error figures are always totals, and so is the downloadable data.</p>
+    </div>
+
+    <section id="highlights">
+      <div class="wrap">
+        <p class="section-label">/ Summary</p>
+        <h2>The numbers</h2>
+        <div class="figs"><div><b>421/958</b><span>already use certificates of 100 days or less, the 2027 pace</span></div><div><b>201/958</b><span>still serve one-year certificates, all issued before March 2026</span></div><div><b>464/958</b><span>use Let's Encrypt, Google Trust Services or Amazon, which renew on their own</span></div><div><b>21</b><span>showed a certificate error in Chrome on measurement day</span></div><div><b>11</b><span>load in the browser and fail outside it because of an incomplete chain</span></div></div>
+      </div>
+    </section>
+
+    <section id="basics">
+      <div class="wrap">
+        <p class="section-label">/ 01 / The basics</p>
+        <h2>What a TLS certificate is, assuming nothing</h2>
+        <p class="prose">When you open a site over <code>https://</code>, two things happen. What you send travels in a sealed envelope only that site can open. And the site shows a <strong>certificate</strong>, its ID card, to prove it is who it claims to be. A <strong>certificate authority</strong> signs it (Let's Encrypt, DigiCert, Google, Spain's FNMT…) after checking that whoever asks for it controls the domain.</p>
+        <p class="prose">Browsers ship with a list of authorities they trust, like someone who knows by heart which official stamps are real. But authorities keep their master stamp locked away and sign with an <strong>intermediate certificate</strong>. So a site has to show its ID card and also the credentials of the office that issued it. If those credentials are missing, the chain is incomplete.</p>
+        <p class="prose"><strong>Why do they expire?</strong> In case someone steals the key. Revoking a stolen certificate works poorly in practice, so the best defence is a short life.</p>
+      </div>
+    </section>
+
+    <section id="rule">
+      <div class="wrap">
+        <p class="section-label">/ 02 / What changes</p>
+        <h2>From ID card to yogurt</h2>
+        <p class="section-intro">Browsers and certificate authorities decide this together at the CA/B Forum. The maximum counts from the day a certificate is issued, not from its expiry.</p>
+        <div class="tbl" tabindex="0" role="region" aria-label="Validity schedule"><table><caption>Source: CA/B Forum Baseline Requirements, version 2.3.1, section 6.3.2.</caption><thead><tr><th scope="col">Issued from</th><th scope="col">Maximum validity</th><th scope="col">If you renew by hand</th></tr></thead><tbody><tr><th scope="row">Before 15 Mar 2026</th><td>398 days</td><td>once a year</td></tr><tr><th scope="row">15 Mar 2026</th><td>200 days</td><td>twice a year</td></tr><tr><th scope="row">15 Mar 2027</th><td>100 days</td><td>at least 4 times a year</td></tr><tr><th scope="row">15 Mar 2029</th><td>47 days</td><td>around 8 times a year</td></tr></tbody></table></div>
+        <p class="note">Renewing by hand is like renewing a passport: forget it and you are stuck. For a website, that means the red "your connection is not private" page.</p>
+      </div>
+    </section>
+
+    <section id="results">
+      <div class="wrap">
+        <p class="section-label">/ 03 / Results</p>
+        <h2>How long .es certificates last today</h2>
+        <p class="section-intro">Validity of the certificate each site serves, measured at the final destination of the home page after following redirects. One row per domain.</p>
+        <div class="tbl" tabindex="0" role="region" aria-label="Certificate validity"><table><caption>958 domains with a measurable certificate, 9 October 2026.</caption><thead><tr><th scope="col">Validity</th><th scope="col">Domains</th><th scope="col">% of 958</th><th scope="col">What it means</th></tr></thead><tbody><tr><th scope="row">47 days or less</th><td>19</td><td>2.0%</td><td>already within the 2029 limit</td></tr><tr><th scope="row">48 to 100 days</th><td>402</td><td>42.0%</td><td>already within the 2027 limit</td></tr><tr><th scope="row">101 to 200 days</th><td>336</td><td>35.1%</td><td>will have to renew twice as often</td></tr><tr><th scope="row">Over 200 days</th><td>201</td><td>21.0%</td><td>from renewing once a year to at least 4 times</td></tr></tbody></table></div>
+        <div class="tbl" tabindex="0" role="region" aria-label="Invalid certificates"><table><caption>34 domains (3.5%) with a certificate that does not validate, split by what a visitor sees.</caption><thead><tr><th scope="col">Group</th><th scope="col">Domains</th><th scope="col">Detail</th></tr></thead><tbody><tr><th scope="row">Error in Chrome</th><td>21</td><td>15 with a certificate that does not cover their name, 4 with an incomplete chain plus another fault, 2 expired (since 2021 and 2023)</td></tr><tr><th scope="row">Load in the browser, fail outside</th><td>12</td><td>11 with an incomplete chain and 1 whose chain OpenSSL does not validate</td></tr><tr><th scope="row">Not a certificate fault</th><td>1</td><td>HTTP/2 protocol error</td></tr></tbody></table></div>
+        <p class="prose">No certificate longer than 200 days was issued after 15 March 2026. All 958 follow the rule, which also works as a check that the measurement adds up.</p>
+      </div>
+    </section>
+
+    <section id="findings">
+      <div class="wrap">
+        <p class="section-label">/ 04 / Findings</p>
+        <h2>What caught my eye</h2>
+        <ul class="list">
+          <li><strong>Your browser covers the gap.</strong> 11 sites are missing their intermediate certificate. Chrome downloads it on the spot and Firefox takes it from a list it keeps updated, so both show the padlock. curl, apps, business integrations and bots do neither, and for them the site fails. The owner opens the site, sees the padlock and assumes all is well.</li>
+          <li><strong>A fresh Firefox does fail.</strong> My first Firefox run gave 10 errors out of 11 (<code>SEC_ERROR_UNKNOWN_ISSUER</code>). It was a brand new profile, without the intermediate list. With a profile synced for 16 minutes, all 11 loaded. I keep it as a control group: it shows that list is what saves Firefox.</li>
+          <li><strong>The Greek authority behind Spanish universities.</strong> 70 .es domains carry certificates from HARICA, the Greek academic network's authority. Since January 2025 HARICA runs the certificate service of GÉANT, the European research network, and RedIRIS offers it in Spain. By domain name they are universities (47), public bodies (11) and research centres (10). I checked 15 at random by hand and 13 matched.</li>
+          <li><strong>The sites already on the 2029 pace didn't choose it.</strong> All 19 certificates of 47 days or less last exactly 30 days, and 17 come from Certainly, Fastly's authority, which only works with its CDN and renews every 20 days. The early adopters are early because their CDN does it for them.</li>
+          <li><strong>Two certificates per site.</strong> On 226 of 847 domains (26.7%), the <code>www</code> and non-<code>www</code> versions use different certificates. Not a fault, but two things to renew, and the forgotten corner is where expired ones show up.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="limits">
+      <div class="wrap">
+        <p class="section-label">/ 05 / What can't be measured</p>
+        <h2>Who renews by hand is invisible from outside</h2>
+        <p class="prose">I wanted to know which sites renew by hand. I tried it with the public certificate history (Certificate Transparency, queried through crt.sh) on a random subsample of 100 domains, with thresholds fixed before looking at results.</p>
+        <p class="prose">It didn't work. Large sites hold dozens of certificates at once (their CDN, several providers, one per product), crt.sh misses wildcard and multi-domain certificates, and even Let's Encrypt, which renews on its own by design, came out as "manual". If a method gets wrong what you know for sure, you can't trust the rest. I dropped it without publishing a figure and without moving the thresholds.</p>
+        <p class="note">That's why 48.4% is the share of sites whose issuer renews on its own, not measured renewals. The rest may be automated too: from outside you can't tell.</p>
+      </div>
+    </section>
+
+    <section id="fix">
+      <div class="wrap">
+        <p class="section-label">/ 06 / How to fix it</p>
+        <h2>Have the new ID card arrive by post</h2>
+        <div class="tbl" tabindex="0" role="region" aria-label="What to do"><table><thead><tr><th scope="col">Step</th><th scope="col">How</th></tr></thead><tbody>
+          <tr><th scope="row">Look at your certificate</th><td>In the browser, the icon left of the address, "Connection is secure", "Certificate is valid". It shows who issued it and when it expires.</td></tr>
+          <tr><th scope="row">Check it the way an app does</th><td><code>openssl s_client -connect yourdomain.com:443 -servername yourdomain.com</code> should end in <code>Verify return code: 0 (ok)</code>. If it says <code>unable to verify the first certificate</code>, the intermediate is missing. Without installing anything: SSL Labs flags it as "Chain issues: Incomplete".</td></tr>
+          <tr><th scope="row">Automate renewal</th><td>With ACME, the protocol Let's Encrypt uses: certbot or acme.sh on your server, or your host or CDN if they already do it. It's free.</td></tr>
+          <tr><th scope="row">Send the full chain</th><td>Your server has to send your certificate and the intermediate. With certbot, use <code>fullchain.pem</code> instead of <code>cert.pem</code>.</td></tr>
+          <tr><th scope="row">Watch the expiry date</th><td>Even when automated: automation fails too, and you'd rather find out before your customers do.</td></tr>
+          <tr><th scope="row">Check both versions</th><td>With <code>www</code> and without it, plus any subdomain still in DNS.</td></tr>
+        </tbody></table></div>
+        <p class="note">I'm building <strong>yogurTLS</strong>, a free one-command checker that tells you how your certificate is doing, what changes in 2027 and how to fix whatever is wrong.</p>
+      </div>
+    </section>
+
+    <section id="method">
+      <div class="wrap">
+        <p class="section-label">/ 07 / Method</p>
+        <h2>How I measured it, and its limits</h2>
+        <ul class="list">
+          <li><strong>Sample.</strong> The first 1,000 domains ending in <code>.es</code> on Tranco list K9Z7W. It starts at rank 724, because many large Spanish sites use <code>.com</code>: this is the most visited .es web, not the whole Spanish web.</li>
+          <li><strong>Unit.</strong> The domain, measured at the home page's final destination after redirects (949 of 1,000; the other 51 at the default host). Both <code>www</code> and non-<code>www</code> are kept raw.</li>
+          <li><strong>Connection.</strong> One normal TLS handshake per host with Node 20, like any browser. No path or port scanning.</li>
+          <li><strong>Errors.</strong> Every invalid certificate was measured again and opened in a real Chrome 154 to confirm the cause. The 11 incomplete chains were also tested in Firefox 157, with a fresh profile and a synced one.</li>
+          <li><strong>No secure connection.</strong> 42 domains: 8 sites (living at another address or only unencrypted), 9 technical domains, classified by name, and 25 with no visible site.</li>
+          <li><strong>Limits.</strong> One network location, one day: a CDN may serve a different certificate depending on where you connect from. Two sites fixed their certificate the next day; they count as they were on the 9th.</li>
+        </ul>
+        <p class="prose"><strong>Sources:</strong> <a href="https://cabforum.org/working-groups/server/baseline-requirements/">CA/B Forum, Baseline Requirements</a>, <a href="https://tranco-list.eu/list/K9Z7W">Tranco list K9Z7W</a>, <a href="https://security.geant.org/?p=15289">GÉANT Trusted Certificate Service</a>, <a href="https://rediris.es/tcs/cas">RedIRIS, TCS authorities</a>, <a href="https://docs.fastly.com/products/certainly">Fastly, Certainly</a> and <a href="https://www.rfc-editor.org/rfc/rfc8555">RFC 8555, ACME</a>.</p>
+      </div>
+    </section>
+  </main>
+
+  <section class="cta" id="contact">
+    <div class="wrap">
+      <p class="kicker">/ Next</p>
+      <h2>I check before I publish.</h2>
+      <p>I wrote the scripts with help from Claude. Deciding what counts, checking every broken site by hand and dropping what didn't hold up was on me. If your team needs someone who checks like this, get in touch.</p>
+      <div class="actions">
+        <a class="btn" href="mailto:hi.hache.cervera@gmail.com?subject=TLS%20certificates%20research">Email me</a>
+        <a class="alt" href="../data/certificados-es-2026-10.csv">Download the data</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <p>&copy; 2026 Ada (hache) Cervera. Built by hand in Valencia. <a href="#" data-cookies>Cookies</a></p>
+      <p class="path">Infrastructure <span>&rarr;</span> CMS <span>&rarr;</span> Search <span>&rarr;</span> Operations</p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      function track(n, p) { if (window.gtag) window.gtag('event', n, p || {}); }
+      document.getElementById('modeToggle').addEventListener('click', function () {
+        var t = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+        document.documentElement.dataset.theme = t; try { localStorage.setItem('theme', t); } catch (e) {}
+      });
+      document.querySelectorAll('a[href$=".csv"], a[href$=".json"]').forEach(function (a) { a.addEventListener('click', function () { track('data_download', { file: a.getAttribute('href') }); }); });
+    })();
+  </script>
+</body>
+</html>
