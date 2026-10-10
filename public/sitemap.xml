@@ -64,4 +64,16 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://hache-cervera.github.io/research/city-councils/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://hache-cervera.github.io/research/es/ayuntamientos/"/>
   </url>
+  <url>
+    <loc>https://hache-cervera.github.io/research/certificates/</loc>
+    <lastmod>2026-10-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hache-cervera.github.io/research/certificates/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hache-cervera.github.io/research/es/certificados/"/>
+  </url>
+  <url>
+    <loc>https://hache-cervera.github.io/research/es/certificados/</loc>
+    <lastmod>2026-10-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hache-cervera.github.io/research/certificates/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hache-cervera.github.io/research/es/certificados/"/>
+  </url>
 </urlset>
