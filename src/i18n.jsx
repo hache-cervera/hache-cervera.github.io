@@ -4,7 +4,7 @@ import { createContext, useContext, useEffect, useState } from 'react';
 export const translations = {
   en: {
     hero: {
-      kicker: '/ Ada (hache) Cervera, Web Platform, Operations & WordPress Specialist',
+      kicker: '/ Ada (hache) Cervera, Web Platform, Infrastructure, Security and WordPress Specialist',
       h1a: "I don't make pretty things.",
       h1b: 'I make things that work,',
       h1c: 'and happen to be pretty.',
@@ -57,7 +57,7 @@ export const translations = {
       p4: 'For the same reason I run my own server at home. devilfruittcg.com is a niche One Piece TCG WordPress site on a Linux box with Docker and Nginx, in my living room. My lab. When the site behaves, the machine goes to LoRA models and ESP32 boards. I like understanding the layer underneath the thing that is supposed to just work.',
       factsLabel: 'At a glance',
       facts: [
-        { k: 'Role', v: 'Web Platform, Operations & WordPress Specialist' },
+        { k: 'Role', v: 'Web Platform, Infrastructure, Security and WordPress Specialist' },
         { k: 'Based', v: 'Valencia, Spain' },
         { k: 'Works', v: 'Remote, async, written-first' },
         { k: 'Owns', v: 'Hosting, DNS, CMS, performance, technical SEO' },
@@ -117,7 +117,7 @@ export const translations = {
   },
   es: {
     hero: {
-      kicker: '/ Ada (hache) Cervera, Especialista en Plataforma Web, Operativa y WordPress',
+      kicker: '/ Ada (hache) Cervera, Especialista en Plataforma Web, Infraestructura, Seguridad y WordPress',
       h1a: 'No hago cosas bonitas.',
       h1b: 'Hago cosas que funcionan,',
       h1c: 'y de paso son bonitas.',
@@ -170,7 +170,7 @@ export const translations = {
       p4: 'Por la misma razón tengo mi propio servidor en casa. devilfruittcg.com es un WordPress de nicho sobre One Piece TCG en una máquina Linux con Docker y Nginx, en mi salón. Mi laboratorio. Cuando la web se porta bien, la máquina se va a modelos LoRA y placas ESP32. Me gusta entender la capa de debajo de la cosa que se supone que funciona.',
       factsLabel: 'De un vistazo',
       facts: [
-        { k: 'Puesto', v: 'Especialista en Plataforma Web, Operativa y WordPress' },
+        { k: 'Puesto', v: 'Especialista en Plataforma Web, Infraestructura, Seguridad y WordPress' },
         { k: 'Ubicación', v: 'Valencia, España' },
         { k: 'Modo', v: 'En remoto, asíncrono, por escrito' },
         { k: 'Responsable de', v: 'Hosting, DNS, CMS, rendimiento y SEO técnico' },
