@@ -765,10 +765,10 @@
         <div class="diff">
           <h3>En qué se diferencia de un comprobador online</h3>
           <p class="diff-intro">Ver cuándo caduca un certificado es fácil: hay decenas de webs que lo hacen. yogurTLS está pensada para quien lleva una o varias webs y quiere enterarse antes de que algo se rompa.</p>
-          <p class="diff-intro">Si solo quieres mirar la fecha una vez, no necesitas nada: pulsa el icono que hay a la izquierda de la dirección, en «La conexión es segura» y luego en el certificado. Ahí sale la fecha de caducidad.</p>
+          <p class="diff-intro">Si solo quieres mirar la fecha una vez, no necesitas nada: pulsa el icono que hay a la izquierda de la dirección, en "La conexión es segura" y luego en el certificado. Ahí sale la fecha de caducidad.</p>
           <ul class="diff-list">
             <li><strong>Con www y sin www, a la vez.</strong> Los comprobadores online suelen mirar solo el nombre que escribes. En una de cada cuatro webs .es, cada versión lleva un certificado distinto.</li>
-            <li><strong>Te dice cómo se arregla, en español y sin jerga.</strong> No solo «cadena incompleta»: qué archivo cambiar y por qué tu web carga en el navegador y falla fuera de él.</li>
+            <li><strong>Te dice cómo se arregla, en español y sin jerga.</strong> No solo "cadena incompleta": qué archivo cambiar y por qué tu web carga en el navegador y falla fuera de él.</li>
             <li><strong>Todas tus webs y en automático.</strong> Una lista en un archivo y un código de salida para una tarea programada (cron): te avisa sin que tengas que acordarte de mirar.</li>
             <li><strong>Lo que cambia en 2027 y 2029 para tu certificado.</strong> No una noticia general, sino si el tuyo ya va a ese ritmo.</li>
             <li><strong>Gratis, sin cuenta y sin vendedor.</strong> Muchos comprobadores online son de empresas que venden certificados o servicios. Aquí no hay nada que comprar.</li>
@@ -819,7 +819,7 @@ incomplete-chain.badssl.com   OJO
           <li><strong>Se renueva, pero el servidor no se entera.</strong> El clásico: certbot deja el certificado nuevo en el disco, pero Nginx o Apache siguen enviando el viejo hasta que alguien los recarga. En el disco todo está bien y la web caduca igual.</li>
           <li><strong>Varios servidores.</strong> Detrás de un balanceador, el certificado se renueva en uno y en los demás no.</li>
         </ul>
-        <p class="prose">Y ojo: Let's Encrypt dejó de mandar el email de «tu certificado caduca pronto» en junio de 2025. Si era tu única alarma, ya no la tienes.</p>
+        <p class="prose">Y ojo: Let's Encrypt dejó de mandar el email de "tu certificado caduca pronto" en junio de 2025. Si era tu única alarma, ya no la tienes.</p>
       </div>
     </section>
 
@@ -829,14 +829,14 @@ incomplete-chain.badssl.com   OJO
         <h2>Qué pasa cuando caduca, y cómo se recupera</h2>
         <p class="section-intro">Un certificado caducado no apaga tu web, pero es casi lo mismo: el navegador se pone delante con una pantalla de aviso a pantalla completa.</p>
         <ul class="list">
-          <li><strong>En el navegador.</strong> Chrome muestra «La conexión no es privada» (<code>NET::ERR_CERT_DATE_INVALID</code>) y casi todo el mundo se va. Si tu web usa HSTS, ni siquiera hay botón para continuar.</li>
+          <li><strong>En el navegador.</strong> Chrome muestra "La conexión no es privada" (<code>NET::ERR_CERT_DATE_INVALID</code>) y casi todo el mundo se va. Si tu web usa HSTS, ni siquiera hay botón para continuar.</li>
           <li><strong>Fuera del navegador, en silencio.</strong> Apps, APIs, integraciones, los avisos de pago de tu pasarela y los webhooks fallan sin enseñar ninguna pantalla. Muchas veces es lo que más dinero cuesta, porque nadie lo ve.</li>
           <li><strong>En la confianza.</strong> Si tus visitas se acostumbran a saltarse el aviso en tu web, también lo harán en una web falsa.</li>
         </ul>
         <h3 class="sub-h">Si ya ha caducado, en este orden</h3>
         <ol class="steps">
           <li><strong>Mira por qué no se renovó.</strong> Si era automático, arregla primero la causa. Con certbot, <code>sudo certbot renew --dry-run</code> te enseña el error sin gastar intentos: Let's Encrypt solo te da 5 certificados iguales cada 7 días y 5 validaciones fallidas por hora, así que reintentar a ciegas puede dejarte bloqueada días.</li>
-          <li><strong>Renuévalo.</strong> Con certbot, <code>sudo certbot renew</code>. En un hosting, suele bastar con «reemitir» el certificado SSL en el panel.</li>
+          <li><strong>Renuévalo.</strong> Con certbot, <code>sudo certbot renew</code>. En un hosting, suele bastar con "reemitir" el certificado SSL en el panel.</li>
           <li><strong>Recarga el servidor</strong> para que use el nuevo: <code>sudo systemctl reload nginx</code> (o <code>apache2</code>). Si hay un CDN o un balanceador delante, súbelo allí también.</li>
           <li><strong>Si era un certificado comprado</strong> y la renovación va a tardar (los de empresa, OV o EV, piden validar la empresa y pueden ser días), pon uno gratuito de Let's Encrypt mientras tanto. Cifra igual, y tu web vuelve en minutos.</li>
           <li><strong>Compruébalo fuera del navegador</strong>, con y sin www y con la cadena completa: <code>npx yogurtls tudominio.es --es</code>. En cuanto el servidor envía el certificado nuevo, el aviso desaparece para todo el mundo.</li>
@@ -853,7 +853,7 @@ incomplete-chain.badssl.com   OJO
         <ul class="list">
           <li><strong>El candado no significa que la web sea de fiar.</strong> Solo dice que la conexión va cifrada y que quien la sirve controla ese dominio. Las webs de phishing también tienen candado, y gratis.</li>
           <li><strong>Gratis no es menos seguro.</strong> Un certificado de Let's Encrypt cifra igual que uno de pago. Los de empresa (OV o EV) añaden datos de quién está detrás, no más cifrado.</li>
-          <li><strong>Nunca lo «arregles» desactivando la verificación.</strong> Si una integración falla por el certificado, la tentación es <code>curl -k</code>, <code>verify=False</code> o similar. Eso deja que cualquiera se ponga en medio y lea o cambie los datos. El arreglo está en el servidor, no en quien se conecta.</li>
+          <li><strong>Nunca lo "arregles" desactivando la verificación.</strong> Si una integración falla por el certificado, la tentación es <code>curl -k</code>, <code>verify=False</code> o similar. Eso deja que cualquiera se ponga en medio y lea o cambie los datos. El arreglo está en el servidor, no en quien se conecta.</li>
           <li><strong>La clave privada es lo que de verdad protege.</strong> Que solo la pueda leer el servidor, y nunca por email ni en un repositorio. Si se filtra, revoca el certificado y saca uno nuevo con otra clave. Es uno de los motivos por los que los certificados duran cada vez menos: anular uno robado funciona mal, así que mejor que caduque pronto.</li>
           <li><strong>Decide quién puede emitir certificados para tu dominio.</strong> Un registro CAA en el DNS dice qué autoridades pueden hacerlo, y las autoridades están obligadas a respetarlo. Es gratis y se pone en un minuto en tu proveedor de DNS.</li>
           <li><strong>Todo certificado es público.</strong> Cada certificado de tu dominio queda apuntado en unos registros públicos (Certificate Transparency), con todos sus nombres. Puedes buscar el tuyo en <a href="https://crt.sh/">crt.sh</a> y ver si alguien ha sacado uno que no pediste. Y no metas en un certificado público el nombre de un subdominio interno que no quieras que se sepa.</li>
@@ -869,7 +869,7 @@ incomplete-chain.badssl.com   OJO
         <div class="tbl stack" tabindex="0" role="region" aria-label="Qué hacer"><table><thead><tr><th scope="col">Paso</th><th scope="col">Cómo</th></tr></thead><tbody>
           <tr><th scope="row">Automatizar la renovación</th><td>Con ACME, el protocolo que usa Let's Encrypt: certbot o acme.sh en tu servidor, o tu hosting o tu CDN si ya lo hacen por ti. Con 47 días, renovar a mano deja de ser una opción.</td></tr>
           <tr><th scope="row">Enviar la cadena completa</th><td>El servidor tiene que mandar tu certificado y el intermedio. Con certbot, usa <code>fullchain.pem</code> en vez de <code>cert.pem</code>.</td></tr>
-          <tr><th scope="row">Comprobarlo fuera del navegador</th><td>Con yogurTLS, o con <code>openssl s_client -connect tudominio.es:443 -servername tudominio.es</code>, que tiene que acabar en <code>Verify return code: 0 (ok)</code> (en Windows OpenSSL no viene instalado; lo trae Git for Windows, en Git Bash). Sin instalar nada, SSL Labs marca la cadena incompleta como «Chain issues: Incomplete».</td></tr>
+          <tr><th scope="row">Comprobarlo fuera del navegador</th><td>Con yogurTLS, o con <code>openssl s_client -connect tudominio.es:443 -servername tudominio.es</code>, que tiene que acabar en <code>Verify return code: 0 (ok)</code> (en Windows OpenSSL no viene instalado; lo trae Git for Windows, en Git Bash). Sin instalar nada, SSL Labs marca la cadena incompleta como "Chain issues: Incomplete".</td></tr>
           <tr><th scope="row">Vigilar la caducidad</th><td>Aunque esté automatizado, porque lo automático también falla. <code>npx yogurtls tudominio.es --warn-days 14</code> en un cron te avisa a tiempo.</td></tr>
           <tr><th scope="row">Revisar todas las versiones</th><td>Con <code>www</code>, sin <code>www</code> y cualquier subdominio que siga en el DNS.</td></tr>
         </tbody></table></div>
@@ -891,7 +891,7 @@ incomplete-chain.badssl.com   OJO
         <h2>Qué es un certificado TLS/SSL, sin dar nada por hecho</h2>
         <p class="prose">Cuando entras en una web con <code>https://</code> pasan dos cosas. Lo que mandas viaja en un sobre cerrado que solo puede abrir esa web. Y la web enseña un <strong>certificado</strong>, su DNI, para demostrar que es quien dice ser. Lo firma una <strong>autoridad de certificación</strong> (Let's Encrypt, DigiCert, Google, la FNMT…), que antes comprueba que quien lo pide controla el dominio.</p>
         <p class="prose">El navegador trae de fábrica una lista de autoridades en las que confía, como quien sabe de memoria qué sellos oficiales son válidos. Pero las autoridades no firman con su sello maestro, que guardan bajo llave: firman con un <strong>certificado intermedio</strong>. Por eso la web tiene que enseñar su DNI y, además, la acreditación de la comisaría que se lo hizo. Si falta esa acreditación, la cadena está incompleta.</p>
-        <p class="prose"><strong>¿TLS o SSL?</strong> Es lo mismo para lo que te importa. SSL es el nombre del protocolo antiguo, retirado hace años por inseguro; TLS es el que se usa hoy. Pero casi todo el mundo, yo incluida, sigue diciendo «certificado SSL», y los hostings lo siguen llamando así.</p>
+        <p class="prose"><strong>¿TLS o SSL?</strong> Es lo mismo para lo que te importa. SSL es el nombre del protocolo antiguo, retirado hace años por inseguro; TLS es el que se usa hoy. Pero casi todo el mundo, yo incluida, sigue diciendo "certificado SSL", y los hostings lo siguen llamando así.</p>
         <p class="prose"><strong>¿Por qué caducan?</strong> Por si alguien roba la clave. Anular un certificado robado funciona mal en la práctica, así que la mejor defensa es que dure poco.</p>
       </div>
     </section>
@@ -935,7 +935,7 @@ incomplete-chain.badssl.com   OJO
         <p class="section-label">/ 05 / Lo que no se puede medir</p>
         <h2>Quién renueva a mano no se ve desde fuera</h2>
         <p class="prose">Intenté saber qué webs renuevan a mano con el historial público de certificados (Certificate Transparency, consultado en crt.sh), sobre una submuestra aleatoria de 100 dominios y con los umbrales fijados antes de mirar los resultados.</p>
-        <p class="prose">No funcionó. Las webs grandes tienen decenas de certificados a la vez, crt.sh no encuentra bien los certificados comodín ni los multidominio, y hasta Let's Encrypt, que renueva solo por diseño, salía como «manual». Si el método falla en lo que sabes seguro, no te puedes fiar de lo demás, así que lo descarté sin publicar ninguna cifra.</p>
+        <p class="prose">No funcionó. Las webs grandes tienen decenas de certificados a la vez, crt.sh no encuentra bien los certificados comodín ni los multidominio, y hasta Let's Encrypt, que renueva solo por diseño, salía como "manual". Si el método falla en lo que sabes seguro, no te puedes fiar de lo demás, así que lo descarté sin publicar ninguna cifra.</p>
         <p class="note">Por eso el 48,4 % es el porcentaje de webs con un emisor que renueva solo, no renovaciones medidas. Por eso también yogurTLS no te dice si tu renovación es manual o automática: solo lo que se puede medir.</p>
       </div>
     </section>
