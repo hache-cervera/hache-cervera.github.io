@@ -56,7 +56,7 @@ function Director() {
               ['#contact',    { x: 0,    y: -0.15, rx: 0.5,  ry: 9.4,   scale: 0.7 }],
             ]
           : [
-              ['#hero',       { x: 0, y: 1.6,   rx: 0.55, ry: -0.4, scale: 0.6 }],
+              ['#hero',       { x: 2.1, y: -2.9,  rx: 0.55, ry: -0.4, scale: 0.55 }],
               ['#about',      { x: 0, y: 2.1,   rx: 0.55, ry: 2.4,  scale: 0.42 }],
               ['#skills',     { x: 0, y: 1.35,  rx: 0.5,  ry: 4.2,  scale: 0.58 }],
               ['#works',      { x: 0, y: 2.6,   rx: 0.4,  ry: 5.6,  scale: 0.38 }],
