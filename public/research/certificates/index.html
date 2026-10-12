@@ -721,6 +721,42 @@
       .tbl.stack td[data-label]::before { content: attr(data-label); display: block; margin-bottom: 2px; font-family: var(--font-display); font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
       .tbl.stack td[data-label] + td[data-label] { padding-top: 6px; }
     }
+    /* v3: figures */
+    .fig { margin-top: 40px; max-width: 46rem; }
+    .fig figcaption { margin-top: 12px; font-size: 0.9375rem; line-height: 1.5; color: var(--muted); }
+    .chain { display: grid; gap: 22px; }
+    .chain-row { display: grid; grid-template-columns: 8.5rem 1fr; gap: 16px; align-items: center; }
+    .chain-name { font-family: var(--font-display); font-weight: 700; font-size: 0.9375rem; }
+    .chain-name small { display: block; font-family: inherit; font-weight: 500; font-size: 0.8125rem; color: var(--muted); }
+    .links { display: flex; align-items: center; flex-wrap: wrap; row-gap: 8px; }
+    .link { padding: 10px 14px; border: 2px solid var(--ink); font-size: 0.9375rem; font-weight: 600; line-height: 1.2; background: var(--bg); }
+    .link.miss { border-style: dashed; border-color: var(--accent); color: var(--accent); }
+    .joint { width: 22px; height: 2px; background: var(--ink); }
+    .joint.miss { background: repeating-linear-gradient(90deg, var(--accent) 0 5px, transparent 5px 9px); }
+    .bars { display: grid; gap: 14px; }
+    .bar-row { display: grid; grid-template-columns: 11.5rem 1fr; gap: 16px; align-items: center; }
+    .bar-row .lab { font-size: 0.9375rem; line-height: 1.3; }
+    .bar-row .track { position: relative; height: 34px; }
+    .bar-row .fill { height: 100%; background: var(--ink); display: flex; align-items: center; justify-content: flex-end; min-width: 5.5rem; }
+    .bar-row .fill span { padding: 0 10px; color: var(--bg); font-family: var(--font-display); font-weight: 800; font-size: 0.9375rem; white-space: nowrap; }
+    .bar-row.hot .fill { background: var(--accent); }
+    .bar-row.hot .fill span { color: #fff; }
+    .stack { display: flex; height: 54px; width: 100%; }
+    .stack > div { height: 100%; }
+    .stack .s1 { background: var(--muted); } .stack .s2 { background: var(--ink); } .stack .s3 { background: var(--muted); opacity: .55; } .stack .s4 { background: var(--accent); }
+    .stack-legend { margin-top: 14px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 24px; font-size: 0.9375rem; }
+    @media (min-width: 760px) { .stack-legend { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+    .stack-legend b { font-family: var(--font-display); font-weight: 800; font-size: 1.375rem; display: block; }
+    .stack-legend i { display: inline-block; width: 12px; height: 12px; margin-right: 8px; }
+    .steps { list-style: none; padding-left: 0; counter-reset: st; border-top: 1px solid var(--line); max-width: 46rem; }
+    .steps li { counter-increment: st; position: relative; margin-top: 0; padding: 18px 0 18px 3.5rem; border-bottom: 1px solid var(--line); }
+    .steps li::before { content: counter(st, decimal-leading-zero); position: absolute; left: 0; top: 18px; font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; line-height: 1.1; color: var(--accent); }
+    @media (max-width: 559px) {
+      .chain-row, .bar-row { grid-template-columns: 1fr; gap: 8px; }
+      .links { flex-direction: column; align-items: flex-start; }
+      .joint { width: 2px; height: 14px; margin-left: 22px; }
+      .joint.miss { background: repeating-linear-gradient(180deg, var(--accent) 0 4px, transparent 4px 7px); }
+    }
   </style>
   <script src="/consent.js" defer></script>
 </head>
@@ -768,7 +804,6 @@
           <p class="diff-intro">If you only want to look at the date once, you need nothing: click the icon left of the address, then "Connection is secure" and the certificate. The expiry date is there.</p>
           <ul class="diff-list">
             <li><strong>With and without www, at once.</strong> Online checkers usually look only at the name you type. On one in four .es sites, each version has a different certificate.</li>
-            <li><strong>It tells you how to fix it, in plain words.</strong> Not just "incomplete chain": which file to change, and why your site works in the browser and fails outside it. In English or Spanish.</li>
             <li><strong>All your sites, on autopilot.</strong> A list in a file and an exit code for a scheduled job (cron): it warns you without you having to remember to look.</li>
             <li><strong>What 2027 and 2029 mean for your certificate.</strong> Not general news, but whether yours already runs at that pace.</li>
             <li><strong>Free, no account, nobody selling.</strong> Many online checkers belong to companies that sell certificates or services. There is nothing to buy here.</li>
@@ -891,6 +926,7 @@ incomplete-chain.badssl.com   WARN
         <h2>What a TLS/SSL certificate is, assuming nothing</h2>
         <p class="prose">When you open a site over <code>https://</code>, two things happen. What you send travels in a sealed envelope only that site can open. And the site shows a <strong>certificate</strong>, its ID card, to prove it is who it claims to be. A <strong>certificate authority</strong> signs it (Let's Encrypt, DigiCert, Google, Spain's FNMT…) after checking that whoever asks for it controls the domain.</p>
         <p class="prose">Browsers ship with a list of authorities they trust, like someone who knows by heart which official stamps are real. But authorities keep their master stamp locked away and sign with an <strong>intermediate certificate</strong>. So a site has to show its ID card and also the credentials of the office that issued it. If those credentials are missing, the chain is incomplete.</p>
+        <figure class="fig" role="img" aria-label="Certificate chain. Complete: your site, the intermediate and the root, which is already in the browser. Incomplete: your site without the intermediate; the browser copes, curl, apps and bots fail."><div class="chain" aria-hidden="true"><div class="chain-row"><span class="chain-name">Complete<small>everything works</small></span><div class="links"><span class="link">Your site</span><span class="joint"></span><span class="link">Intermediate</span><span class="joint"></span><span class="link">Root (in the browser)</span></div></div><div class="chain-row"><span class="chain-name">Incomplete<small>the browser copes; curl, apps and bots fail</small></span><div class="links"><span class="link">Your site</span><span class="joint miss"></span><span class="link miss">Intermediate missing</span><span class="joint miss"></span><span class="link">Root (in the browser)</span></div></div></div><figcaption>Your server has to send its certificate and the intermediate. The root already ships with the browser.</figcaption></figure>
         <p class="prose"><strong>TLS or SSL?</strong> The same thing, for what matters to you. SSL is the name of the old protocol, retired years ago as insecure; TLS is the one in use today. But almost everyone, me included, still says "SSL certificate", and hosting companies still call it that.</p>
         <p class="prose"><strong>Why do they expire?</strong> In case someone steals the key. Revoking a stolen certificate works poorly in practice, so the best defence is a short life.</p>
       </div>
@@ -901,6 +937,7 @@ incomplete-chain.badssl.com   WARN
         <p class="section-label">/ 02 / What changes</p>
         <h2>What changes in 2027 and 2029</h2>
         <p class="section-intro">Browsers and certificate authorities decide this together at the CA/B Forum. The maximum counts from the day a certificate is issued, not from its expiry. It's going from an ID card to a yogurt.</p>
+        <figure class="fig" role="img" aria-label="Maximum certificate validity: 398 days before 15 March 2026, 200 days from that date, 100 days from 15 March 2027 and 47 days from 15 March 2029."><div class="bars" aria-hidden="true"><div class="bar-row"><span class="lab">Before 15 Mar 2026</span><div class="track"><div class="fill" style="width:100.0%"><span>398 days</span></div></div></div><div class="bar-row"><span class="lab">From 15 Mar 2026</span><div class="track"><div class="fill" style="width:50.3%"><span>200 days</span></div></div></div><div class="bar-row"><span class="lab">From 15 Mar 2027</span><div class="track"><div class="fill" style="width:25.1%"><span>100 days</span></div></div></div><div class="bar-row hot"><span class="lab">From 15 Mar 2029</span><div class="track"><div class="fill" style="width:11.8%"><span>47 days</span></div></div></div></div><figcaption>Maximum validity of a certificate by the date it is issued. Bars to scale.</figcaption></figure>
         <div class="tbl stack" tabindex="0" role="region" aria-label="Validity schedule"><table><caption>Source: CA/B Forum Baseline Requirements, version 2.3.1, section 6.3.2.</caption><thead><tr><th scope="col">Issued from</th><th scope="col">Maximum validity</th><th scope="col">If you renew by hand</th></tr></thead><tbody><tr><th scope="row">Before 15 Mar 2026</th><td data-label="Maximum validity">398 days</td><td data-label="If you renew by hand">once a year</td></tr><tr><th scope="row">15 Mar 2026</th><td data-label="Maximum validity">200 days</td><td data-label="If you renew by hand">twice a year</td></tr><tr><th scope="row">15 Mar 2027</th><td data-label="Maximum validity">100 days</td><td data-label="If you renew by hand">at least 4 times a year</td></tr><tr><th scope="row">15 Mar 2029</th><td data-label="Maximum validity">47 days</td><td data-label="If you renew by hand">around 8 times a year</td></tr></tbody></table></div>
       </div>
     </section>
@@ -910,6 +947,7 @@ incomplete-chain.badssl.com   WARN
         <p class="section-label">/ 03 / Results</p>
         <h2>How long .es TLS certificates last today</h2>
         <p class="section-intro">Validity of the certificate each site serves, measured at the final destination of the home page after following redirects. One row per domain.</p>
+        <figure class="fig" role="img" aria-label="The 958 sites by certificate validity: 19 of 47 days or less, 402 of 48 to 100 days, 336 of 101 to 200 days and 201 of over 200 days."><div class="stack" aria-hidden="true"><div class="s1" style="width:2.0%"></div><div class="s2" style="width:42.0%"></div><div class="s3" style="width:35.1%"></div><div class="s4" style="width:21.0%"></div></div><div class="stack-legend" aria-hidden="true"><span><i style="background:var(--muted)"></i>47 days or less<b>19</b></span><span><i style="background:var(--ink)"></i>48 to 100 days<b>402</b></span><span><i style="background:var(--muted);opacity:.55"></i>101 to 200 days<b>336</b></span><span><i style="background:var(--accent)"></i>Over 200 days<b>201</b></span></div><figcaption>The 958 .es sites with a measurable certificate, 9 October 2026. Each segment is proportional to its number of sites.</figcaption></figure>
         <div class="tbl stack" tabindex="0" role="region" aria-label="Certificate validity"><table><caption>958 domains with a measurable certificate, 9 October 2026.</caption><thead><tr><th scope="col">Validity</th><th scope="col">Domains</th><th scope="col">% of 958</th><th scope="col">What it means</th></tr></thead><tbody><tr><th scope="row">47 days or less</th><td data-label="Domains">19</td><td data-label="% of 958">2.0%</td><td data-label="What it means">already within the 2029 limit</td></tr><tr><th scope="row">48 to 100 days</th><td data-label="Domains">402</td><td data-label="% of 958">42.0%</td><td data-label="What it means">already within the 2027 limit</td></tr><tr><th scope="row">101 to 200 days</th><td data-label="Domains">336</td><td data-label="% of 958">35.1%</td><td data-label="What it means">will have to renew twice as often</td></tr><tr><th scope="row">Over 200 days</th><td data-label="Domains">201</td><td data-label="% of 958">21.0%</td><td data-label="What it means">from renewing once a year to at least 4 times</td></tr></tbody></table></div>
         <div class="tbl stack" tabindex="0" role="region" aria-label="Invalid certificates"><table><caption>34 domains (3.5%) with a certificate that does not validate, split by what a visitor sees.</caption><thead><tr><th scope="col">Group</th><th scope="col">Domains</th><th scope="col">Detail</th></tr></thead><tbody><tr><th scope="row">Error in Chrome</th><td data-label="Domains">21</td><td data-label="Detail">15 with a certificate that does not cover their name, 4 with an incomplete chain plus another fault, 2 expired (since 2021 and 2023)</td></tr><tr><th scope="row">Load in the browser, fail outside</th><td data-label="Domains">12</td><td data-label="Detail">11 with an incomplete chain and 1 whose chain OpenSSL does not validate</td></tr><tr><th scope="row">Not a certificate fault</th><td data-label="Domains">1</td><td data-label="Detail">HTTP/2 protocol error</td></tr></tbody></table></div>
         <p class="prose">No certificate longer than 200 days was issued after 15 March 2026. All 958 follow the rule, which also works as a check that the measurement adds up.</p>
