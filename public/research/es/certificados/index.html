@@ -757,6 +757,24 @@
       .joint { width: 2px; height: 14px; margin-left: 22px; }
       .joint.miss { background: repeating-linear-gradient(180deg, var(--accent) 0 4px, transparent 4px 7px); }
     }
+    /* v4: yogurTLS 1.1 */
+    .tool .shot { display: block; width: 100%; height: auto; margin-top: 20px; border: 2px solid #0F0F10; }
+    .tool details.out-text { margin-top: 12px; }
+    .tool details.out-text summary { cursor: pointer; font-weight: 600; color: #0F0F10; }
+    .tool details.out-text pre.out { margin-top: 12px; }
+    .tool .extras { margin-top: 64px; display: grid; gap: 48px; grid-template-columns: minmax(0, 1fr); }
+    @media (min-width: 1000px) { .tool .extras { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 56px; } }
+    .tool .extras h3 { font-family: 'JetBrains Mono', ui-monospace, monospace; font-weight: 800; font-size: 1.375rem; letter-spacing: -0.02em; color: #0F0F10; }
+    .tool .extras h3 code { background: none; padding: 0; color: #D6005C; font-size: inherit; }
+    .tool .extras p { margin-top: 14px; font-size: 1.0625rem; line-height: 1.6; color: #2B2B2B; }
+    .tool .extras p code { overflow-wrap: anywhere; }
+    .tool .extras .limits { font-size: 1rem; color: #3A3A3A; }
+    .tool pre.cmd { margin-top: 14px; background: #0F0F10; color: #F2F2F2; padding: 14px 18px; overflow-x: auto; font-size: 0.9375rem; border-left: 0; max-width: none; }
+    .tool pre.cmd .p { color: #FF2E7E; }
+    @media (min-width: 1100px) { .tool .opts { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    .tool .extras h3 code { white-space: nowrap; }
+    .tool pre.cmd { white-space: pre-wrap; overflow-wrap: anywhere; }
+    .tool .shot-link { display: block; }
   </style>
   <script src="/consent.js" defer></script>
 </head>
@@ -795,7 +813,7 @@
 
     <section id="yogurtls" class="tool">
       <div class="wrap">
-        <div class="brand"><svg class="tool-icon" viewBox="0 0 480 480" aria-hidden="true" focusable="false"><polygon points="128,214 352,214 343.5,272 136.5,272" fill="#0F0F10"/><polygon points="146.8,342 333.2,342 322,418 158,418" fill="#0F0F10"/><rect x="104" y="188" width="272" height="30" fill="#0F0F10"/><circle cx="240" cy="294" r="15" fill="#0F0F10"/><polygon points="232,298 248,298 254,328 226,328" fill="#0F0F10"/><polygon points="378,188 362,170 118,84 104,112" fill="#FF2E7E"/><circle cx="98" cy="92" r="22" fill="#FF2E7E"/></svg><span class="name">yogur<span>TLS</span></span><span class="ver">v1.0.0, licencia MIT</span></div>
+        <div class="brand"><svg class="tool-icon" viewBox="0 0 480 480" aria-hidden="true" focusable="false"><polygon points="128,214 352,214 343.5,272 136.5,272" fill="#0F0F10"/><polygon points="146.8,342 333.2,342 322,418 158,418" fill="#0F0F10"/><rect x="104" y="188" width="272" height="30" fill="#0F0F10"/><circle cx="240" cy="294" r="15" fill="#0F0F10"/><polygon points="232,298 248,298 254,328 226,328" fill="#0F0F10"/><polygon points="378,188 362,170 118,84 104,112" fill="#FF2E7E"/><circle cx="98" cy="92" r="22" fill="#FF2E7E"/></svg><span class="name">yogur<span>TLS</span></span><span class="ver">v1.1.0, licencia MIT</span></div>
         <h2>Mira cómo está tu certificado TLS/SSL y cómo arreglar lo que esté mal.</h2>
         <p class="intro">Un comprobador gratuito y open source de un solo comando. Le das tu dominio y te dice cómo está tu certificado, qué cambia para ti en 2027 y, si algo va mal, cómo se arregla.</p>
         <div class="diff">
@@ -806,38 +824,65 @@
             <li><strong>Con www y sin www, a la vez.</strong> Los comprobadores online suelen mirar solo el nombre que escribes. En una de cada cuatro webs .es, cada versión lleva un certificado distinto.</li>
             <li><strong>Todas tus webs de una vez.</strong> Una lista en un archivo, y un código de salida para que una tarea programada (cron) te avise si algo sale en ámbar o en rojo, sin que tengas que acordarte de mirar.</li>
             <li><strong>Lo que cambia en 2027 y 2029 para tu certificado.</strong> No una noticia general, sino si el tuyo ya va a ese ritmo.</li>
+            <li><strong>Desde dentro de tu servidor.</strong> Desde fuera no se ve cómo se renueva un certificado. Ejecutada en tu servidor, te dice si la renovación automática está configurada y si el certificado se renovó pero nadie recargó la web.</li>
+            <li><strong>El aviso en tu calendario.</strong> Si renuevas a mano, te deja la cita apuntada en Google Calendar, Outlook o el de Apple.</li>
             <li><strong>Gratis, sin cuenta y sin vendedor.</strong> Muchos comprobadores online son de empresas que venden certificados o servicios. Aquí no hay nada que comprar.</li>
           </ul>
         </div>
-        <div class="install"><code id="yt-cmd"><b>$</b> npx yogurtls tudominio.es --es</code><button class="copy" type="button" data-copy="npx yogurtls tudominio.es --es" data-done="Copiado">Copiar</button></div>
+        <div class="install"><code id="yt-cmd"><b>$</b> npx yogurtls tudominio.es</code><button class="copy" type="button" data-copy="npx yogurtls tudominio.es" data-done="Copiado">Copiar</button></div>
         <p class="req">Solo necesitas Node 20 o superior. No hay que instalar nada más.</p>
         <div class="tool-grid">
           <div><h3>Qué comprueba</h3><ul class="checks"><li><span class="n">01</span><div><strong>Caducidad y duración</strong><p>Cuántos días le quedan y si ya va al ritmo de 2027 y 2029.</p></div></li><li><span class="n">02</span><div><strong>Cadena completa</strong><p>Lo que el navegador te esconde: si falta el intermedio, tu web carga con candado y falla para apps, integraciones y bots.</p></div></li><li><span class="n">03</span><div><strong>Con www y sin www</strong><p>Los dos a la vez. Una de cada cuatro webs .es usa certificados distintos en cada uno.</p></div></li><li><span class="n">04</span><div><strong>Nombre, autoridad y autofirmados</strong><p>Lo que hace que un navegador muestre el aviso de error. Con semáforo: BIEN, OJO o MAL, siempre con la palabra.</p></div></li></ul></div>
-          <div><h3>Así responde</h3><pre class="out" aria-label="Así responde"><code><span class="p">$</span> npx yogurtls devilfruittcg.com incomplete-chain.badssl.com --es
+          <div><h3>Así responde</h3><a class="shot-link" href="/research/img/yogurtls-terminal.webp" title="Abrir la captura a tamaño completo"><img class="shot" src="/research/img/yogurtls-terminal.webp" width="1160" height="732" loading="lazy" alt="Terminal con el logo de yogurTLS en rosa y el informe de tres webs: devilfruittcg.com en verde (BIEN), incomplete-chain.badssl.com en ámbar (OJO) por la cadena incompleta, con qué pasa y cómo se arregla, y expired.badssl.com en rojo (MAL), caducado desde 2015."></a><details class="out-text"><summary>Ver la salida en texto</summary><pre class="out"><code><span class="p">$</span> npx yogurtls devilfruittcg.com incomplete-chain.badssl.com expired.badssl.com
 
 devilfruittcg.com             BIEN
   Emisor           Google Trust Services
-  Caduca           28 nov 2026 (quedan 49 días)
+  Caduca           28 nov 2026 (quedan 47 días)
   Duración         90 días
   Cadena           completa
   2027             Ya cumple el límite de 100 días que llega en marzo de 2027.
 
 incomplete-chain.badssl.com   OJO
   Emisor           Let's Encrypt
-  Caduca           28 dic 2026 (quedan 79 días)
+  Caduca           28 dic 2026 (quedan 76 días)
   Duración         90 días
   Cadena           incompleta
-  Qué pasa         Falta el certificado intermedio. Los navegadores lo suplen, salvo un Firefox
-                   recién instalado, pero curl, las apps, las integraciones y los bots darán error.
-  Cómo se arregla  Configura el servidor para que envíe la cadena completa. Con certbot, usa
-                   `fullchain.pem` en vez de `cert.pem`. Si no, une tu certificado y el intermedio
-                   de tu autoridad en un solo archivo.
+  Qué pasa         Falta el certificado intermedio. Los navegadores lo suplen, salvo un Firefox recién
+                   instalado, pero curl, las apps, las integraciones y los bots darán error.
+  Cómo se arregla  Configura el servidor para que envíe la cadena completa. Con certbot, usa `fullchain.pem`
+                   en vez de `cert.pem`. Si no, une tu certificado y el intermedio de tu autoridad en un solo
+                   archivo.
   2027             Ya cumple el límite de 100 días que llega en marzo de 2027.
 
-1 en verde, 1 en ámbar, 0 en rojo.</code></pre><p class="out-note">Salida real de yogurTLS 1.0.0 del 10 de octubre de 2026. Los días que quedan dependen del día en que lo ejecutes.</p></div>
+expired.badssl.com            MAL
+  Emisor           COMODO CA Limited
+  Caduca           12 abr 2015 (caducado hace 4201 días)
+  Duración         4 días
+  Cadena           completa
+  Qué pasa         Caducó el 12 abr 2015. Los navegadores muestran un aviso de error.
+  Cómo se arregla  Renuévalo ya. Con certbot: `certbot renew`. Para que no se repita, automatiza la renovación
+                   con ACME.
+
+1 en verde, 1 en ámbar, 1 en rojo.</code></pre></details><p class="out-note">Salida real de yogurTLS 1.1.0 del 12 de octubre de 2026, en un Windows en español. Los días que quedan dependen del día en que lo ejecutes.</p></div>
         </div>
-        <div class="opts"><div><code>npx yogurtls a.es b.es</code><p>Varias webs a la vez.</p></div><div><code>npx yogurtls --file dominios.txt</code><p>Una lista en un archivo, una web por línea.</p></div><div><code>--warn-days 14</code><p>Ámbar si caduca pronto. Sale con código 0, 1 o 2 para una tarea programada (cron).</p></div><div><code>--es</code><p>En español. Por defecto, en inglés.</p></div></div>
-        <p class="privacy"><strong>Se ejecuta en tu ordenador</strong>, solo se conecta a los dominios que le pidas y no envía nada a nadie. No renueva ni instala nada: solo lee lo que ve cualquier navegador.</p>
+        <div class="opts"><div><code>npx yogurtls a.es b.es</code><p>Varias webs a la vez.</p></div><div><code>npx yogurtls --file dominios.txt</code><p>Una lista en un archivo, una web por línea.</p></div><div><code>--warn-days 14</code><p>Ámbar si caduca pronto. Sale con código 0, 1 o 2 para una tarea programada (cron).</p></div><div><code>--es</code> <code>--en</code><p>Idioma. Por defecto, el de tu sistema.</p></div><div><code>npx yogurtls</code><p>Sin nada más, te pregunta el dominio.</p></div></div>
+        <p class="privacy"><strong>Se ejecuta en tu ordenador</strong> (o en tu servidor, con <code>--servidor</code>), solo se conecta a los dominios que le pidas y no envía nada a nadie. No renueva ni instala nada: solo lee.</p>
+        <div class="extras">
+          <div>
+            <h3>Desde tu servidor: <code>--servidor</code></h3>
+            <p>Desde fuera no se ve cómo se renueva tu certificado. Desde dentro, se puede mirar. Ejecútalo en la máquina que sirve la web:</p>
+            <pre class="cmd"><code><span class="p">$</span> sudo npx yogurtls tudominio.es --servidor</code></pre>
+            <p>Compara el certificado que hay en el disco (donde lo guardan certbot o acme.sh) con el que envía la web. Si el del disco es más nuevo, la renovación funcionó pero nadie recargó el servidor, y te dice el comando para arreglarlo. También busca si la renovación automática está configurada: el temporizador de certbot o una tarea programada con certbot o acme.sh. Que esté configurada no garantiza que funcione, por eso compara además los dos certificados.</p>
+            <p class="limits"><strong>Límites.</strong> Solo en Linux. Si delante hay un CDN como Cloudflare, el certificado que ve la gente es el del CDN, así que no los compara y te lo dice. Si tus certificados viven en Docker o en un panel, indícale el archivo con <code>--cert</code>; entonces no juzga la renovación, porque la hace el contenedor o el panel y desde ahí no se ve.</p>
+          </div>
+          <div>
+            <h3>El aviso en tu calendario: <code>--calendario</code></h3>
+            <p>Para quien renueva a mano. Guarda un aviso por dominio 14 días antes de que caduque (cámbialo con <code>--warn-days</code>) y lo importas en Google Calendar, Outlook o el calendario de Apple.</p>
+            <pre class="cmd"><code><span class="p">$</span> npx yogurtls tudominio.es --calendario avisos.ics</code></pre>
+            <img class="shot" src="/research/img/yogurtls-calendario.webp" width="815" height="320" loading="lazy" alt="Aviso de Google Calendar el sábado 14 de noviembre: Renovar el certificado TLS de devilfruittcg.com. Caduca el 28 nov 2026. Si se renueva solo, no te hace falta este aviso. Compruébalo con: npx yogurtls devilfruittcg.com. Alarma el mismo día a las 9:00.">
+            <p class="limits">No sabe si tu certificado se renueva solo, así que lo dice en el propio aviso. Si renuevas, vuelve a generarlo.</p>
+          </div>
+        </div>
         <div class="links"><a class="primary" href="https://github.com/hache-cervera/yogurtls">Código en GitHub</a><a href="https://www.npmjs.com/package/yogurtls">Paquete en npm</a></div>
       </div>
     </section>
@@ -876,7 +921,7 @@ incomplete-chain.badssl.com   OJO
           <li><strong>Si era un certificado comprado</strong> y la renovación va a tardar (los de empresa, OV o EV, piden validar la empresa y pueden ser días), pon uno gratuito de Let's Encrypt mientras tanto. Cifra igual, y tu web vuelve en minutos.</li>
           <li><strong>Compruébalo fuera del navegador</strong>, con y sin www y con la cadena completa: <code>npx yogurtls tudominio.es --es</code>. En cuanto el servidor envía el certificado nuevo, el aviso desaparece para todo el mundo.</li>
           <li><strong>Recupera lo que falló en silencio.</strong> Revisa los avisos de pago y los webhooks de esas horas: muchas pasarelas solo reintentan unas cuantas veces.</li>
-          <li><strong>Pon una alarma</strong> para que no se repita: <code>npx yogurtls tudominio.es --warn-days 14</code> en una tarea programada (cron).</li>
+          <li><strong>Pon una alarma</strong> para que no se repita: <code>npx yogurtls tudominio.es --warn-days 14</code> en una tarea programada (cron), o el aviso en tu calendario con <code>--calendario avisos.ics</code>.</li>
         </ol>
       </div>
     </section>
@@ -974,7 +1019,7 @@ incomplete-chain.badssl.com   OJO
         <h2>Quién renueva a mano no se ve desde fuera</h2>
         <p class="prose">Intenté saber qué webs renuevan a mano con el historial público de certificados (Certificate Transparency, consultado en crt.sh), sobre una submuestra aleatoria de 100 dominios y con los umbrales fijados antes de mirar los resultados.</p>
         <p class="prose">No funcionó. Las webs grandes tienen decenas de certificados a la vez, crt.sh no encuentra bien los certificados comodín ni los multidominio, y hasta Let's Encrypt, que renueva solo por diseño, salía como "manual". Si el método falla en lo que sabes seguro, no te puedes fiar de lo demás, así que lo descarté sin publicar ninguna cifra.</p>
-        <p class="note">Por eso el 48,4 % es el porcentaje de webs con un emisor que renueva solo, no renovaciones medidas. Por eso también yogurTLS no te dice si tu renovación es manual o automática: solo lo que se puede medir.</p>
+        <p class="note">Por eso el 48,4 % es el porcentaje de webs con un emisor que renueva solo, no renovaciones medidas. Lo volví a intentar en yogurTLS, sobre 150 webs del estudio, y solo llegaba a una conclusión en el 9 % de las que se sabe que renuevan solas. Por eso yogurTLS no lo deduce desde fuera. Lo que sí hace es mirarlo desde dentro, con <code>--servidor</code>, en tu propia máquina.</p>
       </div>
     </section>
 
