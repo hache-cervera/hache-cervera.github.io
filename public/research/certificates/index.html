@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Check when your website's TLS certificate expires · Research · Ada (hache) Cervera</title>
-  <meta name="description" content="TLS certificates will last 100 days from 2027 and 47 from 2029. Check yours with yogurTLS, which is open source, and see how the 1,000 most visited .es sites are doing." />
+  <title>Check your website's TLS/SSL certificate for free · Research · Ada (hache) Cervera</title>
+  <meta name="description" content="TLS/SSL certificates will last 100 days from 2027 and 47 from 2029. Check yours for free with yogurTLS, see what happens when one expires, and how the 1,000 most visited .es sites are doing." />
   <link rel="canonical" href="https://hache-cervera.github.io/research/certificates/" />
   <link rel="alternate" hreflang="en" href="https://hache-cervera.github.io/research/certificates/" />
   <link rel="alternate" hreflang="es" href="https://hache-cervera.github.io/research/es/certificados/" />
   <link rel="alternate" hreflang="x-default" href="https://hache-cervera.github.io/research/certificates/" />
-  <meta property="og:title" content="Check when your website's TLS certificate expires" />
-  <meta property="og:description" content="TLS certificates will last 100 days from 2027 and 47 from 2029. Check yours with yogurTLS, which is open source, and see how the 1,000 most visited .es sites are doing." />
+  <meta property="og:title" content="Check your website's TLS/SSL certificate for free" />
+  <meta property="og:description" content="TLS/SSL certificates will last 100 days from 2027 and 47 from 2029. Check yours for free with yogurTLS, see what happens when one expires, and how the 1,000 most visited .es sites are doing." />
   <meta property="og:image" content="https://hache-cervera.github.io/og-home.jpg" />
   <meta property="og:url" content="https://hache-cervera.github.io/research/certificates/" />
   <meta property="og:type" content="article" />
@@ -685,6 +685,42 @@
     .meta dd { font-size: 1.0625rem; }
     .hl-item p, .card p, .tl-step p, .layer li, .flow-out span { font-size: 1rem; }
     footer .wrap { font-size: 0.9375rem; }
+    /* v2: differentiators, steps, mobile fixes */
+    .tool .diff { margin-top: 48px; max-width: 52rem; }
+    .tool .diff h3 { font-family: 'JetBrains Mono', ui-monospace, monospace; font-weight: 800; font-size: 1.375rem; letter-spacing: -0.02em; color: #0F0F10; }
+    .tool .diff-intro { margin-top: 12px; font-size: 1.125rem; line-height: 1.6; color: #2B2B2B; }
+    .tool .diff-list { margin-top: 16px; list-style: none; border-top: 2px solid #0F0F10; }
+    .tool .diff-list li { padding: 16px 0; border-bottom: 2px solid #0F0F10; font-size: 1.0625rem; line-height: 1.55; color: #2B2B2B; }
+    .tool .diff-list strong { color: #0F0F10; }
+    .tool-grid, .tool-grid > div { min-width: 0; }
+    @media (max-width: 999px) { .tool-grid { grid-template-columns: minmax(0, 1fr); } }
+    .tool pre.out { overflow-x: auto; }
+    .sub-h { margin-top: 40px; font-family: var(--font-display); font-weight: 700; font-size: 1.375rem; letter-spacing: -0.01em; }
+    .steps { margin-top: 16px; max-width: 46rem; padding-left: 1.4rem; }
+    .steps li { margin-top: 14px; color: var(--muted); font-size: 1.125rem; line-height: 1.65; }
+    .steps li strong { color: var(--ink); }
+    .list code, .steps code, .prose code { overflow-wrap: anywhere; }
+    @media (max-width: 699px) {
+      .tbl.stack { border: 0; overflow: visible; }
+      .tbl.stack table { min-width: 0; }
+      .tbl.stack thead { display: none; }
+      .tbl.stack tr { display: block; border: 1px solid var(--line); margin-bottom: 12px; }
+      .tbl.stack th[scope="row"], .tbl.stack td { display: block; width: auto; border: 0; }
+      .tbl.stack th[scope="row"] { padding: 12px 16px 4px; }
+      .tbl.stack td { padding: 0 16px 14px; }
+      .tbl.stack code { overflow-wrap: anywhere; white-space: normal; }
+    }
+    #rule th, #rule td, #results th, #results td { vertical-align: middle; }
+    @media (max-width: 759px) { .figs div:last-child:nth-child(odd) { grid-column: 1 / -1; } }
+    @media (max-width: 699px) {
+      .tool .install code, html:not([data-theme='dark']) .tool .install code { white-space: normal; overflow-wrap: anywhere; font-size: 1rem; padding: 18px 16px; }
+      .tool .brand { flex-wrap: wrap; }
+      .tool .ver { margin-left: 0; width: 100%; }
+    }
+    @media (max-width: 699px) {
+      .tbl.stack td[data-label]::before { content: attr(data-label); display: block; margin-bottom: 2px; font-family: var(--font-display); font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+      .tbl.stack td[data-label] + td[data-label] { padding-top: 6px; }
+    }
   </style>
   <script src="/consent.js" defer></script>
 </head>
@@ -707,9 +743,9 @@
 
   <main>
     <div class="hero3 wrap">
-      <p class="kicker">/ TLS certificates</p>
-      <h1>Check when your website's <em>TLS certificate</em> expires</h1>
-      <p class="lede">Your website's TLS certificate expires, and sooner every year. From 15 March 2027 it can last 100 days at most, and from 2029, 47. If you renew by hand, that's going from once a year to at least four times, then around eight.</p>
+      <p class="kicker">/ TLS/SSL certificates</p>
+      <h1>Check your website's <em>TLS/SSL certificate</em> for free</h1>
+      <p class="lede">Your website's TLS certificate (what many of us still call SSL) expires, and sooner every year. From 15 March 2027 it can last 100 days at most, and from 2029, 47. If you renew by hand, that's going from once a year to at least four times, then around eight.</p>
       <div class="stage">
         <div class="stage-lockup">
           <svg class="stage-tub" viewBox="60 50 340 380" role="img" aria-label="yogurTLS: a yogurt tub with its lid peeled back and a keyhole on the label"><polygon points="128,214 352,214 343.5,272 136.5,272" fill="#FFFFFF"/><polygon points="146.8,342 333.2,342 322,418 158,418" fill="#FFFFFF"/><rect x="104" y="188" width="272" height="30" fill="#FFFFFF"/><circle cx="240" cy="294" r="15" fill="#FFFFFF"/><polygon points="232,298 248,298 254,328 226,328" fill="#FFFFFF"/><polygon points="378,188 362,170 118,84 104,112" fill="#FFFFFF"/><circle cx="98" cy="92" r="22" fill="#FFFFFF"/></svg>
@@ -717,15 +753,26 @@
         </div>
         <div class="notch"><a class="btn" href="#yogurtls">Check your site with yogurTLS</a></div>
       </div>
-      <p class="trust"><strong>Open source, MIT licence.</strong> No sign-up, and it runs on your machine: your data goes nowhere.</p>
+      <p class="trust"><strong>Free and open source, MIT licence.</strong> No sign-up, no account, and it runs on your machine: your data goes nowhere.</p>
       <p class="sub"><a class="alt" href="#highlights">See how the 1,000 most visited .es sites are doing</a></p>
     </div>
 
     <section id="yogurtls" class="tool">
       <div class="wrap">
         <div class="brand"><svg class="tool-icon" viewBox="0 0 480 480" aria-hidden="true" focusable="false"><polygon points="128,214 352,214 343.5,272 136.5,272" fill="#0F0F10"/><polygon points="146.8,342 333.2,342 322,418 158,418" fill="#0F0F10"/><rect x="104" y="188" width="272" height="30" fill="#0F0F10"/><circle cx="240" cy="294" r="15" fill="#0F0F10"/><polygon points="232,298 248,298 254,328 226,328" fill="#0F0F10"/><polygon points="378,188 362,170 118,84 104,112" fill="#FF2E7E"/><circle cx="98" cy="92" r="22" fill="#FF2E7E"/></svg><span class="name">yogur<span>TLS</span></span><span class="ver">v1.0.0, MIT licence</span></div>
-        <h2>See when your TLS certificate expires, and how to fix what is wrong.</h2>
-        <p class="intro">An open source one-command checker. Give it your domain and it tells you how your TLS certificate is doing, what changes for you in 2027 and, if something is wrong, how to fix it.</p>
+        <h2>See how your TLS/SSL certificate is doing, and how to fix what is wrong.</h2>
+        <p class="intro">A free, open source, one-command checker. Give it your domain and it tells you how your certificate is doing, what changes for you in 2027 and, if something is wrong, how to fix it.</p>
+        <div class="diff">
+          <h3>How it differs from an online checker</h3>
+          <p class="diff-intro">Seeing when a certificate expires is easy: dozens of websites do it. yogurTLS is for people who run one or several sites and want to know before something breaks.</p>
+          <ul class="diff-list">
+            <li><strong>With and without www, at once.</strong> Online checkers look only at the name you type. On one in four .es sites, each version has a different certificate.</li>
+            <li><strong>It tells you how to fix it, in plain words.</strong> Not just "incomplete chain": which file to change, and why your site works in Chrome and fails everywhere else. In English or Spanish.</li>
+            <li><strong>All your sites, on autopilot.</strong> A list in a file and an exit code for a cron job or GitHub Actions: it warns you without you having to remember to look.</li>
+            <li><strong>What 2027 and 2029 mean for your certificate.</strong> Not general news, but whether yours already runs at that pace.</li>
+            <li><strong>Free, no account, nobody selling.</strong> Many online checkers belong to companies that sell certificates or services. There is nothing to buy here.</li>
+          </ul>
+        </div>
         <div class="install"><code id="yt-cmd"><b>$</b> npx yogurtls yourdomain.com</code><button class="copy" type="button" data-copy="npx yogurtls yourdomain.com" data-done="Copied">Copy</button></div>
         <p class="req">All you need is Node 20 or newer. Nothing else to install.</p>
         <div class="tool-grid">
@@ -759,12 +806,66 @@ incomplete-chain.badssl.com   WARN
       </div>
     </section>
 
+    <section id="no-auto-renewal">
+      <div class="wrap">
+        <p class="section-label">/ Before it happens</p>
+        <h2>When a TLS/SSL certificate does not renew on its own</h2>
+        <p class="section-intro">With Let's Encrypt and almost any modern host, the certificate renews by itself. But there are cases where it does not, and some are treacherous because nobody notices until the site breaks.</p>
+        <ul class="list">
+          <li><strong>Bought certificates.</strong> If you bought it from a commercial authority (DigiCert, Sectigo…), renewing means buying again, validating, downloading and installing by hand. Common in large companies, public bodies and universities.</li>
+          <li><strong>Uploaded by hand.</strong> A certificate pasted into a control panel, a CDN or a load balancer does not renew: that system did not issue it and cannot ask for another.</li>
+          <li><strong>The automatic renewal broke.</strong> The certbot scheduled job stopped after a server move, the domain now points somewhere else (a new CDN, another server), port 80 is closed, or the DNS API key expired. It all looked automatic, and from that day on it is not.</li>
+          <li><strong>It renews, but the server never finds out.</strong> The classic: certbot saves the new certificate to disk, but Nginx or Apache keep sending the old one until someone reloads them. On disk everything is fine, and the site expires anyway.</li>
+          <li><strong>Several servers.</strong> Behind a load balancer, the certificate renews on one and not on the others.</li>
+        </ul>
+        <p class="prose">And note: Let's Encrypt stopped sending its "your certificate expires soon" email in June 2025. If that was your only alarm, you no longer have it.</p>
+      </div>
+    </section>
+
+    <section id="expired">
+      <div class="wrap">
+        <p class="section-label">/ If it already happened</p>
+        <h2>What happens when it expires, and how to recover</h2>
+        <p class="section-intro">An expired certificate does not switch your site off, but it is close: the browser stands in front of it with a full-screen warning.</p>
+        <ul class="list">
+          <li><strong>In the browser.</strong> Chrome shows "Your connection is not private" (<code>NET::ERR_CERT_DATE_INVALID</code>) and almost everyone leaves. If your site uses HSTS, there is not even a button to continue.</li>
+          <li><strong>Outside the browser, silently.</strong> Apps, APIs, integrations, your payment provider's notifications and webhooks fail without showing any screen. That is often what costs the most money, because nobody sees it.</li>
+          <li><strong>In trust.</strong> If your visitors learn to click through the warning on your site, they will do it on a fake one too.</li>
+        </ul>
+        <h3 class="sub-h">If it has expired, in this order</h3>
+        <ol class="steps">
+          <li><strong>Find out why it did not renew.</strong> If it was automatic, fix the cause first. With certbot, <code>sudo certbot renew --dry-run</code> shows the error without using up attempts: Let's Encrypt only gives you 5 identical certificates every 7 days and 5 failed validations per hour, so retrying blindly can lock you out for days.</li>
+          <li><strong>Renew it.</strong> With certbot, <code>sudo certbot renew</code>. On a hosting plan, "reissue SSL certificate" in the control panel is usually enough.</li>
+          <li><strong>Reload the server</strong> so it uses the new one: <code>sudo systemctl reload nginx</code> (or <code>apache2</code>). If there is a CDN or load balancer in front, upload it there too.</li>
+          <li><strong>If it was a bought certificate</strong> and the renewal will take time (business certificates, OV or EV, need the company validated and can take days), put up a free Let's Encrypt one in the meantime. It encrypts just the same, and your site is back in minutes.</li>
+          <li><strong>Check it outside the browser</strong>, with and without www and with the full chain: <code>npx yogurtls yourdomain.com</code>. As soon as the server sends the new certificate, the warning goes away for everyone.</li>
+          <li><strong>Recover what failed silently.</strong> Check payment notifications and webhooks from those hours: many providers only retry a few times.</li>
+          <li><strong>Set an alarm</strong> so it does not happen again: <code>npx yogurtls yourdomain.com --warn-days 14</code> in a cron job or GitHub Actions.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="security">
+      <div class="wrap">
+        <p class="section-label">/ Security</p>
+        <h2>What's worth knowing about security</h2>
+        <ul class="list">
+          <li><strong>The padlock does not mean the site can be trusted.</strong> It only says the connection is encrypted and whoever serves it controls that domain. Phishing sites have a padlock too, for free.</li>
+          <li><strong>Free is not less secure.</strong> A Let's Encrypt certificate encrypts exactly like a paid one. Business certificates (OV or EV) add details of who is behind the site, not more encryption.</li>
+          <li><strong>Never "fix" it by turning verification off.</strong> When an integration fails because of the certificate, the temptation is <code>curl -k</code>, <code>verify=False</code> or similar. That lets anyone sit in the middle and read or change the data. The fix belongs on the server, not on whoever connects to it.</li>
+          <li><strong>The private key is what really protects you.</strong> Only the server should be able to read it, and never by email or in a repository. If it leaks, revoke the certificate and get a new one with a new key. It is one of the reasons certificates keep getting shorter: revoking a stolen one works poorly, so it is better if it expires soon.</li>
+          <li><strong>Decide who can issue certificates for your domain.</strong> A CAA record in your DNS says which authorities may do it, and authorities are required to respect it. It is free and takes a minute at your DNS provider.</li>
+          <li><strong>Every certificate is public.</strong> Each certificate for your domain is recorded in public logs (Certificate Transparency), with all its names. You can look yours up on <a href="https://crt.sh/">crt.sh</a> and see whether someone got one you did not ask for. And do not put the name of an internal subdomain you want to keep quiet in a public certificate.</li>
+        </ul>
+      </div>
+    </section>
+
     <section id="fix">
       <div class="wrap">
         <p class="section-label">/ How to fix it</p>
-        <h2>How to renew your TLS certificate without having to remember</h2>
+        <h2>How to renew your TLS/SSL certificate without having to remember</h2>
         <p class="section-intro">Renewing by hand is like renewing a passport: forget it and you are stuck. What you want is the new one arriving by post. This gets you there, and all of it is free.</p>
-        <div class="tbl" tabindex="0" role="region" aria-label="What to do"><table><thead><tr><th scope="col">Step</th><th scope="col">How</th></tr></thead><tbody>
+        <div class="tbl stack" tabindex="0" role="region" aria-label="What to do"><table><thead><tr><th scope="col">Step</th><th scope="col">How</th></tr></thead><tbody>
           <tr><th scope="row">Automate renewal</th><td>With ACME, the protocol Let's Encrypt uses: certbot or acme.sh on your server, or your host or CDN if they already do it. At 47 days, renewing by hand stops being an option.</td></tr>
           <tr><th scope="row">Send the full chain</th><td>Your server has to send your certificate and the intermediate. With certbot, use <code>fullchain.pem</code> instead of <code>cert.pem</code>.</td></tr>
           <tr><th scope="row">Check it outside the browser</th><td>With yogurTLS, or with <code>openssl s_client -connect yourdomain.com:443 -servername yourdomain.com</code>, which should end in <code>Verify return code: 0 (ok)</code>. Without installing anything, SSL Labs flags an incomplete chain as "Chain issues: Incomplete".</td></tr>
@@ -786,9 +887,10 @@ incomplete-chain.badssl.com   WARN
     <section id="basics">
       <div class="wrap">
         <p class="section-label">/ 01 / The basics</p>
-        <h2>What a TLS certificate is, assuming nothing</h2>
+        <h2>What a TLS/SSL certificate is, assuming nothing</h2>
         <p class="prose">When you open a site over <code>https://</code>, two things happen. What you send travels in a sealed envelope only that site can open. And the site shows a <strong>certificate</strong>, its ID card, to prove it is who it claims to be. A <strong>certificate authority</strong> signs it (Let's Encrypt, DigiCert, Google, Spain's FNMT…) after checking that whoever asks for it controls the domain.</p>
         <p class="prose">Browsers ship with a list of authorities they trust, like someone who knows by heart which official stamps are real. But authorities keep their master stamp locked away and sign with an <strong>intermediate certificate</strong>. So a site has to show its ID card and also the credentials of the office that issued it. If those credentials are missing, the chain is incomplete.</p>
+        <p class="prose"><strong>TLS or SSL?</strong> The same thing, for what matters to you. SSL is the name of the old protocol, retired years ago as insecure; TLS is the one in use today. But almost everyone, me included, still says "SSL certificate", and hosting companies still call it that.</p>
         <p class="prose"><strong>Why do they expire?</strong> In case someone steals the key. Revoking a stolen certificate works poorly in practice, so the best defence is a short life.</p>
       </div>
     </section>
@@ -798,7 +900,7 @@ incomplete-chain.badssl.com   WARN
         <p class="section-label">/ 02 / What changes</p>
         <h2>What changes in 2027 and 2029</h2>
         <p class="section-intro">Browsers and certificate authorities decide this together at the CA/B Forum. The maximum counts from the day a certificate is issued, not from its expiry. It's going from an ID card to a yogurt.</p>
-        <div class="tbl" tabindex="0" role="region" aria-label="Validity schedule"><table><caption>Source: CA/B Forum Baseline Requirements, version 2.3.1, section 6.3.2.</caption><thead><tr><th scope="col">Issued from</th><th scope="col">Maximum validity</th><th scope="col">If you renew by hand</th></tr></thead><tbody><tr><th scope="row">Before 15 Mar 2026</th><td>398 days</td><td>once a year</td></tr><tr><th scope="row">15 Mar 2026</th><td>200 days</td><td>twice a year</td></tr><tr><th scope="row">15 Mar 2027</th><td>100 days</td><td>at least 4 times a year</td></tr><tr><th scope="row">15 Mar 2029</th><td>47 days</td><td>around 8 times a year</td></tr></tbody></table></div>
+        <div class="tbl stack" tabindex="0" role="region" aria-label="Validity schedule"><table><caption>Source: CA/B Forum Baseline Requirements, version 2.3.1, section 6.3.2.</caption><thead><tr><th scope="col">Issued from</th><th scope="col">Maximum validity</th><th scope="col">If you renew by hand</th></tr></thead><tbody><tr><th scope="row">Before 15 Mar 2026</th><td data-label="Maximum validity">398 days</td><td data-label="If you renew by hand">once a year</td></tr><tr><th scope="row">15 Mar 2026</th><td data-label="Maximum validity">200 days</td><td data-label="If you renew by hand">twice a year</td></tr><tr><th scope="row">15 Mar 2027</th><td data-label="Maximum validity">100 days</td><td data-label="If you renew by hand">at least 4 times a year</td></tr><tr><th scope="row">15 Mar 2029</th><td data-label="Maximum validity">47 days</td><td data-label="If you renew by hand">around 8 times a year</td></tr></tbody></table></div>
       </div>
     </section>
 
@@ -807,8 +909,8 @@ incomplete-chain.badssl.com   WARN
         <p class="section-label">/ 03 / Results</p>
         <h2>How long .es TLS certificates last today</h2>
         <p class="section-intro">Validity of the certificate each site serves, measured at the final destination of the home page after following redirects. One row per domain.</p>
-        <div class="tbl" tabindex="0" role="region" aria-label="Certificate validity"><table><caption>958 domains with a measurable certificate, 9 October 2026.</caption><thead><tr><th scope="col">Validity</th><th scope="col">Domains</th><th scope="col">% of 958</th><th scope="col">What it means</th></tr></thead><tbody><tr><th scope="row">47 days or less</th><td>19</td><td>2.0%</td><td>already within the 2029 limit</td></tr><tr><th scope="row">48 to 100 days</th><td>402</td><td>42.0%</td><td>already within the 2027 limit</td></tr><tr><th scope="row">101 to 200 days</th><td>336</td><td>35.1%</td><td>will have to renew twice as often</td></tr><tr><th scope="row">Over 200 days</th><td>201</td><td>21.0%</td><td>from renewing once a year to at least 4 times</td></tr></tbody></table></div>
-        <div class="tbl" tabindex="0" role="region" aria-label="Invalid certificates"><table><caption>34 domains (3.5%) with a certificate that does not validate, split by what a visitor sees.</caption><thead><tr><th scope="col">Group</th><th scope="col">Domains</th><th scope="col">Detail</th></tr></thead><tbody><tr><th scope="row">Error in Chrome</th><td>21</td><td>15 with a certificate that does not cover their name, 4 with an incomplete chain plus another fault, 2 expired (since 2021 and 2023)</td></tr><tr><th scope="row">Load in the browser, fail outside</th><td>12</td><td>11 with an incomplete chain and 1 whose chain OpenSSL does not validate</td></tr><tr><th scope="row">Not a certificate fault</th><td>1</td><td>HTTP/2 protocol error</td></tr></tbody></table></div>
+        <div class="tbl stack" tabindex="0" role="region" aria-label="Certificate validity"><table><caption>958 domains with a measurable certificate, 9 October 2026.</caption><thead><tr><th scope="col">Validity</th><th scope="col">Domains</th><th scope="col">% of 958</th><th scope="col">What it means</th></tr></thead><tbody><tr><th scope="row">47 days or less</th><td data-label="Domains">19</td><td data-label="% of 958">2.0%</td><td data-label="What it means">already within the 2029 limit</td></tr><tr><th scope="row">48 to 100 days</th><td data-label="Domains">402</td><td data-label="% of 958">42.0%</td><td data-label="What it means">already within the 2027 limit</td></tr><tr><th scope="row">101 to 200 days</th><td data-label="Domains">336</td><td data-label="% of 958">35.1%</td><td data-label="What it means">will have to renew twice as often</td></tr><tr><th scope="row">Over 200 days</th><td data-label="Domains">201</td><td data-label="% of 958">21.0%</td><td data-label="What it means">from renewing once a year to at least 4 times</td></tr></tbody></table></div>
+        <div class="tbl stack" tabindex="0" role="region" aria-label="Invalid certificates"><table><caption>34 domains (3.5%) with a certificate that does not validate, split by what a visitor sees.</caption><thead><tr><th scope="col">Group</th><th scope="col">Domains</th><th scope="col">Detail</th></tr></thead><tbody><tr><th scope="row">Error in Chrome</th><td data-label="Domains">21</td><td data-label="Detail">15 with a certificate that does not cover their name, 4 with an incomplete chain plus another fault, 2 expired (since 2021 and 2023)</td></tr><tr><th scope="row">Load in the browser, fail outside</th><td data-label="Domains">12</td><td data-label="Detail">11 with an incomplete chain and 1 whose chain OpenSSL does not validate</td></tr><tr><th scope="row">Not a certificate fault</th><td data-label="Domains">1</td><td data-label="Detail">HTTP/2 protocol error</td></tr></tbody></table></div>
         <p class="prose">No certificate longer than 200 days was issued after 15 March 2026. All 958 follow the rule, which also works as a check that the measurement adds up.</p>
       </div>
     </section>

@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Comprueba la caducidad del certificado TLS de tu web · Investigación · Ada (hache) Cervera</title>
-  <meta name="description" content="Los certificados TLS durarán 100 días desde 2027 y 47 desde 2029. Comprueba el tuyo con yogurTLS, open source, y mira cómo están las 1.000 webs .es más visitadas." />
+  <title>Comprueba gratis el certificado TLS/SSL de tu web · Investigación · Ada (hache) Cervera</title>
+  <meta name="description" content="Los certificados TLS/SSL durarán 100 días desde 2027 y 47 desde 2029. Comprueba el tuyo gratis con yogurTLS, qué pasa si caduca y cómo están las 1.000 webs .es más visitadas." />
   <link rel="canonical" href="https://hache-cervera.github.io/research/es/certificados/" />
   <link rel="alternate" hreflang="es" href="https://hache-cervera.github.io/research/es/certificados/" />
   <link rel="alternate" hreflang="en" href="https://hache-cervera.github.io/research/certificates/" />
   <link rel="alternate" hreflang="x-default" href="https://hache-cervera.github.io/research/certificates/" />
-  <meta property="og:title" content="Comprueba la caducidad del certificado TLS de tu web" />
-  <meta property="og:description" content="Los certificados TLS durarán 100 días desde 2027 y 47 desde 2029. Comprueba el tuyo con yogurTLS, open source, y mira cómo están las 1.000 webs .es más visitadas." />
+  <meta property="og:title" content="Comprueba gratis el certificado TLS/SSL de tu web" />
+  <meta property="og:description" content="Los certificados TLS/SSL durarán 100 días desde 2027 y 47 desde 2029. Comprueba el tuyo gratis con yogurTLS, open source, y mira cómo están las 1.000 webs .es más visitadas." />
   <meta property="og:image" content="https://hache-cervera.github.io/og-home.jpg" />
   <meta property="og:url" content="https://hache-cervera.github.io/research/es/certificados/" />
   <meta property="og:type" content="article" />
@@ -685,6 +685,42 @@
     .meta dd { font-size: 1.0625rem; }
     .hl-item p, .card p, .tl-step p, .layer li, .flow-out span { font-size: 1rem; }
     footer .wrap { font-size: 0.9375rem; }
+    /* v2: differentiators, steps, mobile fixes */
+    .tool .diff { margin-top: 48px; max-width: 52rem; }
+    .tool .diff h3 { font-family: 'JetBrains Mono', ui-monospace, monospace; font-weight: 800; font-size: 1.375rem; letter-spacing: -0.02em; color: #0F0F10; }
+    .tool .diff-intro { margin-top: 12px; font-size: 1.125rem; line-height: 1.6; color: #2B2B2B; }
+    .tool .diff-list { margin-top: 16px; list-style: none; border-top: 2px solid #0F0F10; }
+    .tool .diff-list li { padding: 16px 0; border-bottom: 2px solid #0F0F10; font-size: 1.0625rem; line-height: 1.55; color: #2B2B2B; }
+    .tool .diff-list strong { color: #0F0F10; }
+    .tool-grid, .tool-grid > div { min-width: 0; }
+    @media (max-width: 999px) { .tool-grid { grid-template-columns: minmax(0, 1fr); } }
+    .tool pre.out { overflow-x: auto; }
+    .sub-h { margin-top: 40px; font-family: var(--font-display); font-weight: 700; font-size: 1.375rem; letter-spacing: -0.01em; }
+    .steps { margin-top: 16px; max-width: 46rem; padding-left: 1.4rem; }
+    .steps li { margin-top: 14px; color: var(--muted); font-size: 1.125rem; line-height: 1.65; }
+    .steps li strong { color: var(--ink); }
+    .list code, .steps code, .prose code { overflow-wrap: anywhere; }
+    @media (max-width: 699px) {
+      .tbl.stack { border: 0; overflow: visible; }
+      .tbl.stack table { min-width: 0; }
+      .tbl.stack thead { display: none; }
+      .tbl.stack tr { display: block; border: 1px solid var(--line); margin-bottom: 12px; }
+      .tbl.stack th[scope="row"], .tbl.stack td { display: block; width: auto; border: 0; }
+      .tbl.stack th[scope="row"] { padding: 12px 16px 4px; }
+      .tbl.stack td { padding: 0 16px 14px; }
+      .tbl.stack code { overflow-wrap: anywhere; white-space: normal; }
+    }
+    #rule th, #rule td, #results th, #results td { vertical-align: middle; }
+    @media (max-width: 759px) { .figs div:last-child:nth-child(odd) { grid-column: 1 / -1; } }
+    @media (max-width: 699px) {
+      .tool .install code, html:not([data-theme='dark']) .tool .install code { white-space: normal; overflow-wrap: anywhere; font-size: 1rem; padding: 18px 16px; }
+      .tool .brand { flex-wrap: wrap; }
+      .tool .ver { margin-left: 0; width: 100%; }
+    }
+    @media (max-width: 699px) {
+      .tbl.stack td[data-label]::before { content: attr(data-label); display: block; margin-bottom: 2px; font-family: var(--font-display); font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+      .tbl.stack td[data-label] + td[data-label] { padding-top: 6px; }
+    }
   </style>
   <script src="/consent.js" defer></script>
 </head>
@@ -707,9 +743,9 @@
 
   <main>
     <div class="hero3 wrap">
-      <p class="kicker">/ Certificados TLS</p>
-      <h1>Comprueba la caducidad del <em>certificado TLS</em> de tu web</h1>
-      <p class="lede">El certificado TLS de tu web caduca, y cada vez antes. Desde el 15 de marzo de 2027 no podrá durar más de 100 días, y desde 2029, más de 47. Si lo renuevas a mano, pasarás de hacerlo una vez al año a por lo menos cuatro, y luego a unas ocho.</p>
+      <p class="kicker">/ Certificados TLS/SSL</p>
+      <h1>Comprueba gratis el <em>certificado TLS/SSL</em> de tu web</h1>
+      <p class="lede">El certificado TLS de tu web (el que mucha gente seguimos llamando SSL) caduca, y cada vez antes. Desde el 15 de marzo de 2027 no podrá durar más de 100 días, y desde 2029, más de 47. Si lo renuevas a mano, pasarás de hacerlo una vez al año a por lo menos cuatro, y luego a unas ocho.</p>
       <div class="stage">
         <div class="stage-lockup">
           <svg class="stage-tub" viewBox="60 50 340 380" role="img" aria-label="yogurTLS: una tarrina de yogur con la tapa levantada y una cerradura en la etiqueta"><polygon points="128,214 352,214 343.5,272 136.5,272" fill="#FFFFFF"/><polygon points="146.8,342 333.2,342 322,418 158,418" fill="#FFFFFF"/><rect x="104" y="188" width="272" height="30" fill="#FFFFFF"/><circle cx="240" cy="294" r="15" fill="#FFFFFF"/><polygon points="232,298 248,298 254,328 226,328" fill="#FFFFFF"/><polygon points="378,188 362,170 118,84 104,112" fill="#FFFFFF"/><circle cx="98" cy="92" r="22" fill="#FFFFFF"/></svg>
@@ -717,15 +753,26 @@
         </div>
         <div class="notch"><a class="btn" href="#yogurtls">Comprueba tu web con yogurTLS</a></div>
       </div>
-      <p class="trust"><strong>Open source, con licencia MIT.</strong> Sin registro, y se ejecuta en tu ordenador: no envía tus datos a nadie.</p>
+      <p class="trust"><strong>Gratis y open source, con licencia MIT.</strong> Sin registro ni cuenta, y se ejecuta en tu ordenador: no envía tus datos a nadie.</p>
       <p class="sub"><a class="alt" href="#highlights">Ver cómo están las 1.000 webs .es más visitadas</a></p>
     </div>
 
     <section id="yogurtls" class="tool">
       <div class="wrap">
         <div class="brand"><svg class="tool-icon" viewBox="0 0 480 480" aria-hidden="true" focusable="false"><polygon points="128,214 352,214 343.5,272 136.5,272" fill="#0F0F10"/><polygon points="146.8,342 333.2,342 322,418 158,418" fill="#0F0F10"/><rect x="104" y="188" width="272" height="30" fill="#0F0F10"/><circle cx="240" cy="294" r="15" fill="#0F0F10"/><polygon points="232,298 248,298 254,328 226,328" fill="#0F0F10"/><polygon points="378,188 362,170 118,84 104,112" fill="#FF2E7E"/><circle cx="98" cy="92" r="22" fill="#FF2E7E"/></svg><span class="name">yogur<span>TLS</span></span><span class="ver">v1.0.0, licencia MIT</span></div>
-        <h2>Mira cuándo caduca tu certificado TLS y cómo arreglar lo que esté mal.</h2>
-        <p class="intro">Un comprobador open source de un solo comando. Le das tu dominio y te dice cómo está tu certificado TLS, qué cambia para ti en 2027 y, si algo va mal, cómo se arregla.</p>
+        <h2>Mira cómo está tu certificado TLS/SSL y cómo arreglar lo que esté mal.</h2>
+        <p class="intro">Un comprobador gratuito y open source de un solo comando. Le das tu dominio y te dice cómo está tu certificado, qué cambia para ti en 2027 y, si algo va mal, cómo se arregla.</p>
+        <div class="diff">
+          <h3>En qué se diferencia de un comprobador online</h3>
+          <p class="diff-intro">Ver cuándo caduca un certificado es fácil: hay decenas de webs que lo hacen. yogurTLS está pensada para quien lleva una o varias webs y quiere enterarse antes de que algo se rompa.</p>
+          <ul class="diff-list">
+            <li><strong>Con www y sin www, a la vez.</strong> Los comprobadores online miran solo el nombre que escribes. En una de cada cuatro webs .es, cada versión lleva un certificado distinto.</li>
+            <li><strong>Te dice cómo se arregla, en español y sin jerga.</strong> No solo «cadena incompleta»: qué archivo cambiar y por qué tu web carga en Chrome y falla en todo lo demás.</li>
+            <li><strong>Todas tus webs y en automático.</strong> Una lista en un archivo y un código de salida para un cron o GitHub Actions: te avisa sin que tengas que acordarte de mirar.</li>
+            <li><strong>Lo que cambia en 2027 y 2029 para tu certificado.</strong> No una noticia general, sino si el tuyo ya va a ese ritmo.</li>
+            <li><strong>Gratis, sin cuenta y sin vendedor.</strong> Muchos comprobadores online son de empresas que venden certificados o servicios. Aquí no hay nada que comprar.</li>
+          </ul>
+        </div>
         <div class="install"><code id="yt-cmd"><b>$</b> npx yogurtls tudominio.es --es</code><button class="copy" type="button" data-copy="npx yogurtls tudominio.es --es" data-done="Copiado">Copiar</button></div>
         <p class="req">Solo necesitas Node 20 o superior. No hay que instalar nada más.</p>
         <div class="tool-grid">
@@ -759,12 +806,66 @@ incomplete-chain.badssl.com   OJO
       </div>
     </section>
 
+    <section id="no-renueva">
+      <div class="wrap">
+        <p class="section-label">/ Antes de que pase</p>
+        <h2>Cuándo no se renueva solo un certificado TLS/SSL</h2>
+        <p class="section-intro">Con Let's Encrypt y casi cualquier hosting moderno, el certificado se renueva solo. Pero hay casos en los que no, y alguno es traicionero porque nadie se entera hasta que la web falla.</p>
+        <ul class="list">
+          <li><strong>Certificados comprados.</strong> Si lo compraste a una autoridad comercial (DigiCert, Sectigo…), renovarlo es volver a comprar, validar, descargar e instalar a mano. Es lo habitual en empresas grandes, administraciones y universidades.</li>
+          <li><strong>Subidos a mano.</strong> Un certificado que pegaste en un panel, un CDN o un balanceador no se renueva solo: ese sistema no lo emitió y no sabe pedir otro.</li>
+          <li><strong>La renovación automática se rompió.</strong> La tarea programada de certbot dejó de ejecutarse tras migrar de servidor, el dominio ahora apunta a otro sitio (un CDN nuevo, otro servidor), el puerto 80 está cerrado o caducó la clave de la API del DNS. Todo parecía automático, y desde ese día ya no lo es.</li>
+          <li><strong>Se renueva, pero el servidor no se entera.</strong> El clásico: certbot deja el certificado nuevo en el disco, pero Nginx o Apache siguen enviando el viejo hasta que alguien los recarga. En el disco todo está bien y la web caduca igual.</li>
+          <li><strong>Varios servidores.</strong> Detrás de un balanceador, el certificado se renueva en uno y en los demás no.</li>
+        </ul>
+        <p class="prose">Y ojo: Let's Encrypt dejó de mandar el email de «tu certificado caduca pronto» en junio de 2025. Si era tu única alarma, ya no la tienes.</p>
+      </div>
+    </section>
+
+    <section id="caduca">
+      <div class="wrap">
+        <p class="section-label">/ Si ya ha pasado</p>
+        <h2>Qué pasa cuando caduca, y cómo se recupera</h2>
+        <p class="section-intro">Un certificado caducado no apaga tu web, pero es casi lo mismo: el navegador se pone delante con una pantalla de aviso a pantalla completa.</p>
+        <ul class="list">
+          <li><strong>En el navegador.</strong> Chrome muestra «La conexión no es privada» (<code>NET::ERR_CERT_DATE_INVALID</code>) y casi todo el mundo se va. Si tu web usa HSTS, ni siquiera hay botón para continuar.</li>
+          <li><strong>Fuera del navegador, en silencio.</strong> Apps, APIs, integraciones, los avisos de pago de tu pasarela y los webhooks fallan sin enseñar ninguna pantalla. Muchas veces es lo que más dinero cuesta, porque nadie lo ve.</li>
+          <li><strong>En la confianza.</strong> Si tus visitas se acostumbran a saltarse el aviso en tu web, también lo harán en una web falsa.</li>
+        </ul>
+        <h3 class="sub-h">Si ya ha caducado, en este orden</h3>
+        <ol class="steps">
+          <li><strong>Mira por qué no se renovó.</strong> Si era automático, arregla primero la causa. Con certbot, <code>sudo certbot renew --dry-run</code> te enseña el error sin gastar intentos: Let's Encrypt solo te da 5 certificados iguales cada 7 días y 5 validaciones fallidas por hora, así que reintentar a ciegas puede dejarte bloqueada días.</li>
+          <li><strong>Renuévalo.</strong> Con certbot, <code>sudo certbot renew</code>. En un hosting, suele bastar con «reemitir» el certificado SSL en el panel.</li>
+          <li><strong>Recarga el servidor</strong> para que use el nuevo: <code>sudo systemctl reload nginx</code> (o <code>apache2</code>). Si hay un CDN o un balanceador delante, súbelo allí también.</li>
+          <li><strong>Si era un certificado comprado</strong> y la renovación va a tardar (los de empresa, OV o EV, piden validar la empresa y pueden ser días), pon uno gratuito de Let's Encrypt mientras tanto. Cifra igual, y tu web vuelve en minutos.</li>
+          <li><strong>Compruébalo fuera del navegador</strong>, con y sin www y con la cadena completa: <code>npx yogurtls tudominio.es --es</code>. En cuanto el servidor envía el certificado nuevo, el aviso desaparece para todo el mundo.</li>
+          <li><strong>Recupera lo que falló en silencio.</strong> Revisa los avisos de pago y los webhooks de esas horas: muchas pasarelas solo reintentan unas cuantas veces.</li>
+          <li><strong>Pon una alarma</strong> para que no se repita: <code>npx yogurtls tudominio.es --warn-days 14</code> en un cron o en GitHub Actions.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="seguridad">
+      <div class="wrap">
+        <p class="section-label">/ Seguridad</p>
+        <h2>Lo que conviene saber de seguridad</h2>
+        <ul class="list">
+          <li><strong>El candado no significa que la web sea de fiar.</strong> Solo dice que la conexión va cifrada y que quien la sirve controla ese dominio. Las webs de phishing también tienen candado, y gratis.</li>
+          <li><strong>Gratis no es menos seguro.</strong> Un certificado de Let's Encrypt cifra igual que uno de pago. Los de empresa (OV o EV) añaden datos de quién está detrás, no más cifrado.</li>
+          <li><strong>Nunca lo «arregles» desactivando la verificación.</strong> Si una integración falla por el certificado, la tentación es <code>curl -k</code>, <code>verify=False</code> o similar. Eso deja que cualquiera se ponga en medio y lea o cambie los datos. El arreglo está en el servidor, no en quien se conecta.</li>
+          <li><strong>La clave privada es lo que de verdad protege.</strong> Que solo la pueda leer el servidor, y nunca por email ni en un repositorio. Si se filtra, revoca el certificado y saca uno nuevo con otra clave. Es uno de los motivos por los que los certificados duran cada vez menos: anular uno robado funciona mal, así que mejor que caduque pronto.</li>
+          <li><strong>Decide quién puede emitir certificados para tu dominio.</strong> Un registro CAA en el DNS dice qué autoridades pueden hacerlo, y las autoridades están obligadas a respetarlo. Es gratis y se pone en un minuto en tu proveedor de DNS.</li>
+          <li><strong>Todo certificado es público.</strong> Cada certificado de tu dominio queda apuntado en unos registros públicos (Certificate Transparency), con todos sus nombres. Puedes buscar el tuyo en <a href="https://crt.sh/">crt.sh</a> y ver si alguien ha sacado uno que no pediste. Y no metas en un certificado público el nombre de un subdominio interno que no quieras que se sepa.</li>
+        </ul>
+      </div>
+    </section>
+
     <section id="fix">
       <div class="wrap">
         <p class="section-label">/ Cómo solucionarlo</p>
-        <h2>Cómo renovar el certificado TLS sin depender de acordarte</h2>
+        <h2>Cómo renovar el certificado TLS/SSL sin depender de acordarte</h2>
         <p class="section-intro">Renovar a mano es la cita previa del DNI: si se te olvida o no hay hueco, te quedas sin él. Lo que quieres es que el DNI te llegue renovado al buzón. Esto es lo que lo consigue, y todo es gratuito.</p>
-        <div class="tbl" tabindex="0" role="region" aria-label="Qué hacer"><table><thead><tr><th scope="col">Paso</th><th scope="col">Cómo</th></tr></thead><tbody>
+        <div class="tbl stack" tabindex="0" role="region" aria-label="Qué hacer"><table><thead><tr><th scope="col">Paso</th><th scope="col">Cómo</th></tr></thead><tbody>
           <tr><th scope="row">Automatizar la renovación</th><td>Con ACME, el protocolo que usa Let's Encrypt: certbot o acme.sh en tu servidor, o tu hosting o tu CDN si ya lo hacen por ti. Con 47 días, renovar a mano deja de ser una opción.</td></tr>
           <tr><th scope="row">Enviar la cadena completa</th><td>El servidor tiene que mandar tu certificado y el intermedio. Con certbot, usa <code>fullchain.pem</code> en vez de <code>cert.pem</code>.</td></tr>
           <tr><th scope="row">Comprobarlo fuera del navegador</th><td>Con yogurTLS, o con <code>openssl s_client -connect tudominio.es:443 -servername tudominio.es</code>, que tiene que acabar en <code>Verify return code: 0 (ok)</code>. Sin instalar nada, SSL Labs marca la cadena incompleta como «Chain issues: Incomplete».</td></tr>
@@ -786,9 +887,10 @@ incomplete-chain.badssl.com   OJO
     <section id="basics">
       <div class="wrap">
         <p class="section-label">/ 01 / Lo básico</p>
-        <h2>Qué es un certificado TLS, sin dar nada por hecho</h2>
+        <h2>Qué es un certificado TLS/SSL, sin dar nada por hecho</h2>
         <p class="prose">Cuando entras en una web con <code>https://</code> pasan dos cosas. Lo que mandas viaja en un sobre cerrado que solo puede abrir esa web. Y la web enseña un <strong>certificado</strong>, su DNI, para demostrar que es quien dice ser. Lo firma una <strong>autoridad de certificación</strong> (Let's Encrypt, DigiCert, Google, la FNMT…), que antes comprueba que quien lo pide controla el dominio.</p>
         <p class="prose">El navegador trae de fábrica una lista de autoridades en las que confía, como quien sabe de memoria qué sellos oficiales son válidos. Pero las autoridades no firman con su sello maestro, que guardan bajo llave: firman con un <strong>certificado intermedio</strong>. Por eso la web tiene que enseñar su DNI y, además, la acreditación de la comisaría que se lo hizo. Si falta esa acreditación, la cadena está incompleta.</p>
+        <p class="prose"><strong>¿TLS o SSL?</strong> Es lo mismo para lo que te importa. SSL es el nombre del protocolo antiguo, retirado hace años por inseguro; TLS es el que se usa hoy. Pero casi todo el mundo, yo incluida, sigue diciendo «certificado SSL», y los hostings lo siguen llamando así.</p>
         <p class="prose"><strong>¿Por qué caducan?</strong> Por si alguien roba la clave. Anular un certificado robado funciona mal en la práctica, así que la mejor defensa es que dure poco.</p>
       </div>
     </section>
@@ -798,7 +900,7 @@ incomplete-chain.badssl.com   OJO
         <p class="section-label">/ 02 / Qué cambia</p>
         <h2>Qué cambia en 2027 y 2029</h2>
         <p class="section-intro">Lo deciden los navegadores y las autoridades en el CA/B Forum. La duración máxima cuenta desde la fecha en que se emite el certificado, no desde la de caducidad. Es pasar del DNI al yogur.</p>
-        <div class="tbl" tabindex="0" role="region" aria-label="Calendario de validez"><table><caption>Fuente: Baseline Requirements del CA/B Forum, versión 2.3.1, sección 6.3.2.</caption><thead><tr><th scope="col">Emitido desde</th><th scope="col">Duración máxima</th><th scope="col">Si renuevas a mano</th></tr></thead><tbody><tr><th scope="row">Antes del 15-mar-2026</th><td>398 días</td><td>una vez al año</td></tr><tr><th scope="row">15-mar-2026</th><td>200 días</td><td>dos veces al año</td></tr><tr><th scope="row">15-mar-2027</th><td>100 días</td><td>al menos 4 veces al año</td></tr><tr><th scope="row">15-mar-2029</th><td>47 días</td><td>unas 8 veces al año</td></tr></tbody></table></div>
+        <div class="tbl stack" tabindex="0" role="region" aria-label="Calendario de validez"><table><caption>Fuente: Baseline Requirements del CA/B Forum, versión 2.3.1, sección 6.3.2.</caption><thead><tr><th scope="col">Emitido desde</th><th scope="col">Duración máxima</th><th scope="col">Si renuevas a mano</th></tr></thead><tbody><tr><th scope="row">Antes del 15-mar-2026</th><td data-label="Duración máxima">398 días</td><td data-label="Si renuevas a mano">una vez al año</td></tr><tr><th scope="row">15-mar-2026</th><td data-label="Duración máxima">200 días</td><td data-label="Si renuevas a mano">dos veces al año</td></tr><tr><th scope="row">15-mar-2027</th><td data-label="Duración máxima">100 días</td><td data-label="Si renuevas a mano">al menos 4 veces al año</td></tr><tr><th scope="row">15-mar-2029</th><td data-label="Duración máxima">47 días</td><td data-label="Si renuevas a mano">unas 8 veces al año</td></tr></tbody></table></div>
       </div>
     </section>
 
@@ -807,8 +909,8 @@ incomplete-chain.badssl.com   OJO
         <p class="section-label">/ 03 / Resultados</p>
         <h2>Cuánto duran hoy los certificados TLS de las webs .es</h2>
         <p class="section-intro">Duración del certificado que sirve cada web, medida en el destino final de la portada después de seguir las redirecciones. Una fila por dominio.</p>
-        <div class="tbl" tabindex="0" role="region" aria-label="Duración del certificado"><table><caption>958 dominios con certificado medible, 9 de octubre de 2026.</caption><thead><tr><th scope="col">Duración</th><th scope="col">Dominios</th><th scope="col">% de 958</th><th scope="col">Qué quiere decir</th></tr></thead><tbody><tr><th scope="row">47 días o menos</th><td>19</td><td>2,0 %</td><td>ya cumplen el límite de 2029</td></tr><tr><th scope="row">48 a 100 días</th><td>402</td><td>42,0 %</td><td>ya cumplen el límite de 2027</td></tr><tr><th scope="row">101 a 200 días</th><td>336</td><td>35,1 %</td><td>tendrán que renovar el doble de veces</td></tr><tr><th scope="row">Más de 200 días</th><td>201</td><td>21,0 %</td><td>de renovar una vez al año a hacerlo al menos 4</td></tr></tbody></table></div>
-        <div class="tbl" tabindex="0" role="region" aria-label="Certificados no válidos"><table><caption>34 dominios (3,5 %) con un certificado que no valida, separados según lo que ve un visitante.</caption><thead><tr><th scope="col">Grupo</th><th scope="col">Dominios</th><th scope="col">Detalle</th></tr></thead><tbody><tr><th scope="row">Error en Chrome</th><td>21</td><td>15 con un certificado que no cubre su nombre, 4 con la cadena incompleta y otro fallo encima, 2 caducados (desde 2021 y 2023)</td></tr><tr><th scope="row">Cargan en el navegador, fallan fuera</th><td>12</td><td>11 con la cadena incompleta y 1 cuya cadena no valida OpenSSL</td></tr><tr><th scope="row">Fallo que no es de certificado</th><td>1</td><td>error del protocolo HTTP/2</td></tr></tbody></table></div>
+        <div class="tbl stack" tabindex="0" role="region" aria-label="Duración del certificado"><table><caption>958 dominios con certificado medible, 9 de octubre de 2026.</caption><thead><tr><th scope="col">Duración</th><th scope="col">Dominios</th><th scope="col">% de 958</th><th scope="col">Qué quiere decir</th></tr></thead><tbody><tr><th scope="row">47 días o menos</th><td data-label="Dominios">19</td><td data-label="% de 958">2,0 %</td><td data-label="Qué quiere decir">ya cumplen el límite de 2029</td></tr><tr><th scope="row">48 a 100 días</th><td data-label="Dominios">402</td><td data-label="% de 958">42,0 %</td><td data-label="Qué quiere decir">ya cumplen el límite de 2027</td></tr><tr><th scope="row">101 a 200 días</th><td data-label="Dominios">336</td><td data-label="% de 958">35,1 %</td><td data-label="Qué quiere decir">tendrán que renovar el doble de veces</td></tr><tr><th scope="row">Más de 200 días</th><td data-label="Dominios">201</td><td data-label="% de 958">21,0 %</td><td data-label="Qué quiere decir">de renovar una vez al año a hacerlo al menos 4</td></tr></tbody></table></div>
+        <div class="tbl stack" tabindex="0" role="region" aria-label="Certificados no válidos"><table><caption>34 dominios (3,5 %) con un certificado que no valida, separados según lo que ve un visitante.</caption><thead><tr><th scope="col">Grupo</th><th scope="col">Dominios</th><th scope="col">Detalle</th></tr></thead><tbody><tr><th scope="row">Error en Chrome</th><td data-label="Dominios">21</td><td data-label="Detalle">15 con un certificado que no cubre su nombre, 4 con la cadena incompleta y otro fallo encima, 2 caducados (desde 2021 y 2023)</td></tr><tr><th scope="row">Cargan en el navegador, fallan fuera</th><td data-label="Dominios">12</td><td data-label="Detalle">11 con la cadena incompleta y 1 cuya cadena no valida OpenSSL</td></tr><tr><th scope="row">Fallo que no es de certificado</th><td data-label="Dominios">1</td><td data-label="Detalle">error del protocolo HTTP/2</td></tr></tbody></table></div>
         <p class="prose">Ningún certificado de más de 200 días se emitió después del 15 de marzo de 2026. La norma se cumple en los 958, y además sirve como comprobación de que la medición cuadra.</p>
       </div>
     </section>
