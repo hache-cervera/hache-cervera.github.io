@@ -4,8 +4,8 @@
   "description": "Web platform, operations and WordPress specialist.",
   "start_url": "/",
   "display": "browser",
-  "background_color": "#0a0a0a",
-  "theme_color": "#0a0a0a",
+  "background_color": "#0F0F10",
+  "theme_color": "#0F0F10",
   "icons": [
     {
       "src": "/icon-192.png",
