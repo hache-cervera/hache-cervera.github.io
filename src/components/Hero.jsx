@@ -2,6 +2,7 @@ import { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 import { useLang } from '../i18n';
+import CatMark from './CatMark';
 
 /** Floating network dots that repel from the cursor. */
 function NodeField() {
@@ -134,6 +135,12 @@ export default function Hero() {
       <NodeField />
 
       <div className="relative z-20 mx-auto w-full max-w-6xl">
+        {/* Signature: the pixel cat, with its cursor eye blinking like a terminal */}
+        <div className="mb-8 overflow-hidden">
+          <span data-line className="block w-fit">
+            <CatMark blink title="Ada (hache) Cervera" className="h-auto w-12 text-ink md:w-14" />
+          </span>
+        </div>
         <p className="overflow-hidden font-display text-sm font-semibold uppercase tracking-[0.08em] text-accent-ink">
           <span data-line className="inline-block">{t.hero.kicker}</span>
         </p>
