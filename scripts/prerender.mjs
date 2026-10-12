@@ -19,7 +19,7 @@ const withAlternates = html.replace('<link rel="canonical"', alternates + '<link
 writeFileSync(file, withAlternates.replace('<div id="root"></div>', `<div id="root">${render('en')}</div>`));
 
 const ES = {
-  title: 'Ada (hache) Cervera | Especialista en Plataforma Web, Operativa y WordPress',
+  title: 'Hache Cervera | Especialista en Plataforma Web, Operativa y WordPress',
   desc: 'Ada (hache) Cervera, especialista en plataforma web, operativa y WordPress en Valencia, en remoto. Más de 15 webs en producción de principio a fin: hosting, DNS, Cloudflare, SSL, backups, migraciones, Core Web Vitals y SEO técnico en WordPress, Shopify, Wix y PrestaShop.',
   og: 'Más de 15 webs en producción de principio a fin: hosting, DNS, migraciones, rendimiento y SEO técnico. Abierta a puestos en remoto.',
 };
