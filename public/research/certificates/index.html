@@ -769,7 +769,7 @@
           <ul class="diff-list">
             <li><strong>With and without www, at once.</strong> Online checkers usually look only at the name you type. On one in four .es sites, each version has a different certificate.</li>
             <li><strong>It tells you how to fix it, in plain words.</strong> Not just "incomplete chain": which file to change, and why your site works in the browser and fails outside it. In English or Spanish.</li>
-            <li><strong>All your sites, on autopilot.</strong> A list in a file and an exit code for a cron job or GitHub Actions: it warns you without you having to remember to look.</li>
+            <li><strong>All your sites, on autopilot.</strong> A list in a file and an exit code for a scheduled job (cron): it warns you without you having to remember to look.</li>
             <li><strong>What 2027 and 2029 mean for your certificate.</strong> Not general news, but whether yours already runs at that pace.</li>
             <li><strong>Free, no account, nobody selling.</strong> Many online checkers belong to companies that sell certificates or services. There is nothing to buy here.</li>
           </ul>
@@ -801,7 +801,7 @@ incomplete-chain.badssl.com   WARN
 
 1 green, 1 amber, 0 red.</code></pre><p class="out-note">Real yogurTLS 1.0.0 output from 10 October 2026. The days left depend on the day you run it.</p></div>
         </div>
-        <div class="opts"><div><code>npx yogurtls a.com b.com</code><p>Several sites at once.</p></div><div><code>npx yogurtls --file domains.txt</code><p>A list in a file, one site per line.</p></div><div><code>--warn-days 14</code><p>Amber when expiry is close. Exits 0, 1 or 2 for a cron job or GitHub Actions.</p></div><div><code>--es</code><p>In Spanish. English by default.</p></div></div>
+        <div class="opts"><div><code>npx yogurtls a.com b.com</code><p>Several sites at once.</p></div><div><code>npx yogurtls --file domains.txt</code><p>A list in a file, one site per line.</p></div><div><code>--warn-days 14</code><p>Amber when expiry is close. Exits 0, 1 or 2 for a scheduled job (cron).</p></div><div><code>--es</code><p>In Spanish. English by default.</p></div></div>
         <p class="privacy"><strong>It runs on your machine</strong>, only connects to the domains you give it and sends nothing to anyone. It renews and installs nothing: it only reads what any browser sees.</p>
         <div class="links"><a class="primary" href="https://github.com/hache-cervera/yogurtls">Code on GitHub</a><a href="https://www.npmjs.com/package/yogurtls">Package on npm</a></div>
       </div>
@@ -841,7 +841,7 @@ incomplete-chain.badssl.com   WARN
           <li><strong>If it was a bought certificate</strong> and the renewal will take time (business certificates, OV or EV, need the company validated and can take days), put up a free Let's Encrypt one in the meantime. It encrypts just the same, and your site is back in minutes.</li>
           <li><strong>Check it outside the browser</strong>, with and without www and with the full chain: <code>npx yogurtls yourdomain.com</code>. As soon as the server sends the new certificate, the warning goes away for everyone.</li>
           <li><strong>Recover what failed silently.</strong> Check payment notifications and webhooks from those hours: many providers only retry a few times.</li>
-          <li><strong>Set an alarm</strong> so it does not happen again: <code>npx yogurtls yourdomain.com --warn-days 14</code> in a cron job or GitHub Actions.</li>
+          <li><strong>Set an alarm</strong> so it does not happen again: <code>npx yogurtls yourdomain.com --warn-days 14</code> in a scheduled job (cron).</li>
         </ol>
       </div>
     </section>

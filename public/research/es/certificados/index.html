@@ -769,7 +769,7 @@
           <ul class="diff-list">
             <li><strong>Con www y sin www, a la vez.</strong> Los comprobadores online suelen mirar solo el nombre que escribes. En una de cada cuatro webs .es, cada versión lleva un certificado distinto.</li>
             <li><strong>Te dice cómo se arregla, en español y sin jerga.</strong> No solo «cadena incompleta»: qué archivo cambiar y por qué tu web carga en el navegador y falla fuera de él.</li>
-            <li><strong>Todas tus webs y en automático.</strong> Una lista en un archivo y un código de salida para un cron o GitHub Actions: te avisa sin que tengas que acordarte de mirar.</li>
+            <li><strong>Todas tus webs y en automático.</strong> Una lista en un archivo y un código de salida para una tarea programada (cron): te avisa sin que tengas que acordarte de mirar.</li>
             <li><strong>Lo que cambia en 2027 y 2029 para tu certificado.</strong> No una noticia general, sino si el tuyo ya va a ese ritmo.</li>
             <li><strong>Gratis, sin cuenta y sin vendedor.</strong> Muchos comprobadores online son de empresas que venden certificados o servicios. Aquí no hay nada que comprar.</li>
           </ul>
@@ -801,7 +801,7 @@ incomplete-chain.badssl.com   OJO
 
 1 en verde, 1 en ámbar, 0 en rojo.</code></pre><p class="out-note">Salida real de yogurTLS 1.0.0 del 10 de octubre de 2026. Los días que quedan dependen del día en que lo ejecutes.</p></div>
         </div>
-        <div class="opts"><div><code>npx yogurtls a.es b.es</code><p>Varias webs a la vez.</p></div><div><code>npx yogurtls --file dominios.txt</code><p>Una lista en un archivo, una web por línea.</p></div><div><code>--warn-days 14</code><p>Ámbar si caduca pronto. Sale con código 0, 1 o 2 para un cron o GitHub Actions.</p></div><div><code>--es</code><p>En español. Por defecto, en inglés.</p></div></div>
+        <div class="opts"><div><code>npx yogurtls a.es b.es</code><p>Varias webs a la vez.</p></div><div><code>npx yogurtls --file dominios.txt</code><p>Una lista en un archivo, una web por línea.</p></div><div><code>--warn-days 14</code><p>Ámbar si caduca pronto. Sale con código 0, 1 o 2 para una tarea programada (cron).</p></div><div><code>--es</code><p>En español. Por defecto, en inglés.</p></div></div>
         <p class="privacy"><strong>Se ejecuta en tu ordenador</strong>, solo se conecta a los dominios que le pidas y no envía nada a nadie. No renueva ni instala nada: solo lee lo que ve cualquier navegador.</p>
         <div class="links"><a class="primary" href="https://github.com/hache-cervera/yogurtls">Código en GitHub</a><a href="https://www.npmjs.com/package/yogurtls">Paquete en npm</a></div>
       </div>
@@ -841,7 +841,7 @@ incomplete-chain.badssl.com   OJO
           <li><strong>Si era un certificado comprado</strong> y la renovación va a tardar (los de empresa, OV o EV, piden validar la empresa y pueden ser días), pon uno gratuito de Let's Encrypt mientras tanto. Cifra igual, y tu web vuelve en minutos.</li>
           <li><strong>Compruébalo fuera del navegador</strong>, con y sin www y con la cadena completa: <code>npx yogurtls tudominio.es --es</code>. En cuanto el servidor envía el certificado nuevo, el aviso desaparece para todo el mundo.</li>
           <li><strong>Recupera lo que falló en silencio.</strong> Revisa los avisos de pago y los webhooks de esas horas: muchas pasarelas solo reintentan unas cuantas veces.</li>
-          <li><strong>Pon una alarma</strong> para que no se repita: <code>npx yogurtls tudominio.es --warn-days 14</code> en un cron o en GitHub Actions.</li>
+          <li><strong>Pon una alarma</strong> para que no se repita: <code>npx yogurtls tudominio.es --warn-days 14</code> en una tarea programada (cron).</li>
         </ol>
       </div>
     </section>
