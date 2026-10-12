@@ -804,7 +804,7 @@
           <p class="diff-intro">Si solo quieres mirar la fecha una vez, no necesitas nada: pulsa el icono que hay a la izquierda de la dirección, en "La conexión es segura" y luego en el certificado. Ahí sale la fecha de caducidad.</p>
           <ul class="diff-list">
             <li><strong>Con www y sin www, a la vez.</strong> Los comprobadores online suelen mirar solo el nombre que escribes. En una de cada cuatro webs .es, cada versión lleva un certificado distinto.</li>
-            <li><strong>Todas tus webs y en automático.</strong> Una lista en un archivo y un código de salida para una tarea programada (cron): te avisa sin que tengas que acordarte de mirar.</li>
+            <li><strong>Todas tus webs de una vez.</strong> Una lista en un archivo, y un código de salida para que una tarea programada (cron) te avise si algo sale en ámbar o en rojo, sin que tengas que acordarte de mirar.</li>
             <li><strong>Lo que cambia en 2027 y 2029 para tu certificado.</strong> No una noticia general, sino si el tuyo ya va a ese ritmo.</li>
             <li><strong>Gratis, sin cuenta y sin vendedor.</strong> Muchos comprobadores online son de empresas que venden certificados o servicios. Aquí no hay nada que comprar.</li>
           </ul>
@@ -905,7 +905,7 @@ incomplete-chain.badssl.com   OJO
           <tr><th scope="row">Automatizar la renovación</th><td>Con ACME, el protocolo que usa Let's Encrypt: certbot o acme.sh en tu servidor, o tu hosting o tu CDN si ya lo hacen por ti. Con 47 días, renovar a mano deja de ser una opción.</td></tr>
           <tr><th scope="row">Enviar la cadena completa</th><td>El servidor tiene que mandar tu certificado y el intermedio. Con certbot, usa <code>fullchain.pem</code> en vez de <code>cert.pem</code>.</td></tr>
           <tr><th scope="row">Comprobarlo fuera del navegador</th><td>Con yogurTLS, o con <code>openssl s_client -connect tudominio.es:443 -servername tudominio.es</code>, que tiene que acabar en <code>Verify return code: 0 (ok)</code> (en Windows OpenSSL no viene instalado; lo trae Git for Windows, en Git Bash). Sin instalar nada, SSL Labs marca la cadena incompleta como "Chain issues: Incomplete".</td></tr>
-          <tr><th scope="row">Vigilar la caducidad</th><td>Aunque esté automatizado, porque lo automático también falla. <code>npx yogurtls tudominio.es --warn-days 14</code> en un cron te avisa a tiempo.</td></tr>
+          <tr><th scope="row">Vigilar la caducidad</th><td>Aunque esté automatizado, porque lo automático también falla. <code>npx yogurtls tudominio.es --warn-days 14</code> en una tarea programada (cron) puede avisarte a tiempo.</td></tr>
           <tr><th scope="row">Revisar todas las versiones</th><td>Con <code>www</code>, sin <code>www</code> y cualquier subdominio que siga en el DNS.</td></tr>
         </tbody></table></div>
       </div>
