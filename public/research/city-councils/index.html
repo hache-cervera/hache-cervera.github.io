@@ -607,6 +607,7 @@
     footer .social { display: flex; flex-wrap: wrap; gap: 18px; }
     footer .social a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
     footer .social a:hover { color: var(--ink); }
+    .subh { margin-top: 48px; font-family: var(--font-display); font-weight: 700; font-size: 1.375rem; letter-spacing: -0.02em; max-width: 46rem; }
   </style>
   <script src="/consent.js" defer></script>
 </head>
@@ -681,6 +682,16 @@
         <p class="section-label">/ 04 · WCAG</p>
         <h2>What WCAG is, version by version</h2>
         <p class="prose">The Web Content Accessibility Guidelines are the W3C’s technical standard for making websites usable by people with disabilities: blind people using screen readers, people who navigate only with a keyboard, people with low vision, deaf people, people with cognitive disabilities. They are organised around four principles: content must be perceivable, operable, understandable and robust.</p><p class="prose">Each rule is a “success criterion” with a level: A (the minimum), AA and AAA. Laws ask for <strong>level AA</strong>, which means meeting every A and AA criterion. No law requires AAA as a whole.</p><div class="tbl" tabindex="0" role="region" aria-label="Version"><table><thead><tr><th scope="col">Version</th><th scope="col">Year</th><th scope="col">What it added</th></tr></thead><tbody><tr><th scope="row">WCAG 1.0</th><td class="n">1999</td><td>The first version, written for the HTML of the time. Replaced.</td></tr><tr><th scope="row">WCAG 2.0</th><td class="n">2008</td><td>Technology-neutral rules and the A/AA/AAA levels. Also ISO/IEC 40500:2012.</td></tr><tr><th scope="row">WCAG 2.1</th><td class="n">2018</td><td>17 new criteria for mobile, low vision and cognitive needs: reflow at 320 px (1.4.10), contrast of icons and controls (1.4.11), text spacing, screen orientation, pointer gestures, status messages.</td></tr><tr><th scope="row">WCAG 2.2</th><td class="n">2023</td><td>9 new criteria: focus not hidden behind sticky bars (2.4.11), alternatives to dragging (2.5.7), targets of at least 24 px (2.5.8), help in a consistent place, not asking twice for the same data, and logins without puzzles (3.3.8). Removes 4.1.1 Parsing.</td></tr><tr><th scope="row">WCAG 3.0</th><td class="n">draft</td><td>A full rewrite still in progress at the W3C. Not a standard yet.</td></tr></tbody></table></div>
+        <h3 class="subh">A burden? What they ask for, and what they don't</h3>
+        <p class="prose">Some people see WCAG as a straitjacket that forces one way of designing. But they don't set colours, typefaces or layouts. They set what people must be able to do: read text with enough contrast, use everything with a keyboard, know what each button is for. How you get there is up to you.</p>
+        <p class="prose">And what they ask for is almost exactly a well-built website, including for people without any disability:</p>
+        <ul class="list">
+          <li><strong>Code that lasts.</strong> A real button instead of a clickable div, labelled forms, headings in order. It's correct HTML, and it breaks less.</li>
+          <li><strong>Sites machines can understand.</strong> Search engines, voice assistants, AI agents and testing tools such as Playwright read that same structure, each element's role and name, to work out what is on the page.</li>
+          <li><strong>Sites that are easier to use.</strong> Contrast to read in bright sunlight, captions to watch a video with the sound off, pages that don't break when you zoom in.</li>
+          <li><strong>A criterion you can check.</strong> Without WCAG, "accessible" would be an opinion. With it, there is a list you can require when you commission a site and check when it's delivered.</li>
+        </ul>
+        <p class="prose">They do have costs, and it's worth saying so: a very light brand palette may not reach the contrast text needs, captioning video takes time, and fixing an old site that was built badly is expensive. Thought about from the start, the cost is much lower.</p>
       </div>
     </section>
 

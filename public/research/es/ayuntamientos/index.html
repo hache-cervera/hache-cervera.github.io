@@ -607,6 +607,7 @@
     footer .social { display: flex; flex-wrap: wrap; gap: 18px; }
     footer .social a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
     footer .social a:hover { color: var(--ink); }
+    .subh { margin-top: 48px; font-family: var(--font-display); font-weight: 700; font-size: 1.375rem; letter-spacing: -0.02em; max-width: 46rem; }
   </style>
   <script src="/consent.js" defer></script>
 </head>
@@ -681,6 +682,16 @@
         <p class="section-label">/ 04 · WCAG</p>
         <h2>Qué son las WCAG, versión a versión</h2>
         <p class="prose">Las Pautas de Accesibilidad para el Contenido Web (WCAG) son la norma técnica del W3C para que una web la puedan usar personas con discapacidad: personas ciegas con lector de pantalla, quien navega solo con el teclado, personas con baja visión, personas sordas, personas con discapacidad cognitiva. Se ordenan en cuatro principios: el contenido tiene que ser perceptible, operable, comprensible y robusto.</p><p class="prose">Cada regla es un "criterio de conformidad" con un nivel: A (el mínimo), AA y AAA. Las leyes piden el <strong>nivel AA</strong>, que significa cumplir todos los criterios A y AA. Ninguna ley exige el AAA completo.</p><div class="tbl" tabindex="0" role="region" aria-label="Versión"><table><thead><tr><th scope="col">Versión</th><th scope="col">Año</th><th scope="col">Qué añadió</th></tr></thead><tbody><tr><th scope="row">WCAG 1.0</th><td class="n">1999</td><td>La primera, pensada para el HTML de la época. Sustituida.</td></tr><tr><th scope="row">WCAG 2.0</th><td class="n">2008</td><td>Reglas independientes de la tecnología y los niveles A/AA/AAA. También es la ISO/IEC 40500:2012.</td></tr><tr><th scope="row">WCAG 2.1</th><td class="n">2018</td><td>17 criterios nuevos para móvil, baja visión y discapacidad cognitiva: adaptarse a 320 px (1.4.10), contraste de iconos y controles (1.4.11), espaciado del texto, orientación de la pantalla, gestos con el puntero, mensajes de estado.</td></tr><tr><th scope="row">WCAG 2.2</th><td class="n">2023</td><td>9 criterios nuevos: que el foco no quede tapado por barras fijas (2.4.11), alternativas a arrastrar (2.5.7), objetivos de al menos 24 px (2.5.8), ayuda siempre en el mismo sitio, no pedir dos veces el mismo dato y accesos sin acertijos (3.3.8). Elimina el 4.1.1, Procesamiento.</td></tr><tr><th scope="row">WCAG 3.0</th><td class="n">borrador</td><td>Una reescritura completa que el W3C aún está preparando. Todavía no es norma.</td></tr></tbody></table></div>
+        <h3 class="subh">¿Una carga? Lo que piden y lo que no</h3>
+        <p class="prose">Hay quien ve las WCAG como un corsé que obliga a diseñar de una manera. Pero no fijan colores, tipografías ni estructuras. Fijan lo que tiene que poder hacer la gente: leer el texto con suficiente contraste, usar todo con el teclado, saber para qué sirve cada botón. Cómo lo consigas es cosa tuya.</p>
+        <p class="prose">Y lo que piden coincide casi entero con una web bien hecha, también para quien no tiene ninguna discapacidad:</p>
+        <ul class="list">
+          <li><strong>Código que se mantiene.</strong> Un botón de verdad en vez de un div con un clic, formularios con etiqueta, encabezados en orden. Es HTML correcto, y se rompe menos.</li>
+          <li><strong>Webs que entienden las máquinas.</strong> Buscadores, asistentes de voz, agentes de IA y herramientas de pruebas como Playwright leen esa misma estructura, los roles y los nombres de cada elemento, para saber qué hay en la página.</li>
+          <li><strong>Webs más fáciles de usar.</strong> Contraste para leer con el sol de frente, subtítulos para ver un vídeo sin sonido, páginas que no se rompen al ampliar.</li>
+          <li><strong>Un criterio que se puede comprobar.</strong> Sin WCAG, "accesible" sería una opinión. Con ellas hay una lista que se puede pedir al encargar una web y revisar al entregarla.</li>
+        </ul>
+        <p class="prose">También tienen costes, y conviene decirlo: una paleta de marca muy clara puede no llegar al contraste que pide el texto, subtitular vídeos lleva tiempo y arreglar una web vieja que se hizo mal sale caro. Si se tienen en cuenta desde el principio, el coste es mucho menor.</p>
       </div>
     </section>
 
