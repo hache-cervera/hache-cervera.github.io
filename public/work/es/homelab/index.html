@@ -583,6 +583,9 @@
     footer .social { display: flex; flex-wrap: wrap; gap: 18px; }
     footer .social a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
     footer .social a:hover { color: var(--ink); }
+    /* a11y (WCAG 1.4.3): white on #ff3c00 is 3.56:1, so buttons use the darker shade in both themes */
+    html[data-theme='dark'] .btn { background: #c22e00; border-color: #c22e00; color: #fff; }
+    html[data-theme='dark'] .btn:hover { background: #a82800; border-color: #a82800; }
   </style>
   <script src="/consent.js" defer></script>
 </head>
@@ -826,7 +829,7 @@
         </p>
       </div>
     </section>
-  </main>
+
 
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Visor de im&aacute;genes">
     <button class="close" type="button" aria-label="Cerrar">&times;</button>
@@ -845,6 +848,7 @@
       </div>
     </div>
   </section>
+  </main>
 
   <footer>
     <div class="wrap">

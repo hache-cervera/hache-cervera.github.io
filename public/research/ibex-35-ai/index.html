@@ -615,6 +615,9 @@
     footer .social { display: flex; flex-wrap: wrap; gap: 18px; }
     footer .social a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
     footer .social a:hover { color: var(--ink); }
+    /* a11y (WCAG 1.4.3): white on #ff3c00 is 3.56:1, so buttons use the darker shade in both themes */
+    html[data-theme='dark'] .btn { background: #c22e00; border-color: #c22e00; color: #fff; }
+    html[data-theme='dark'] .btn:hover { background: #a82800; border-color: #a82800; }
   </style>
   <script src="/consent.js" defer></script>
 </head>
@@ -724,7 +727,7 @@
         <div class="tbl" tabindex="0" role="region" aria-label="Layer"><table class=""><thead><tr><th scope="col">Layer</th><th scope="col">What it does</th><th scope="col">How it was handled</th></tr></thead><tbody><tr><th scope="row">CDN</th><td>Serves and filters traffic</td><td>Logged the provider, never read as intent</td></tr><tr><th scope="row">Bot management</th><td>Scores every visit</td><td>Counted words, not only status codes</td></tr><tr><th scope="row">Verified bots</th><td>Lets real crawlers in by IP</td><td>The limit: I test the name, not the IP</td></tr><tr><th scope="row">Anti-impersonation</th><td>Blocks fake famous bots</td><td>The placebo exposes it</td></tr><tr><th scope="row">Client fingerprint</th><td>Checks a “Chrome” behaves like Chrome</td><td>The fake Chrome is a baseline, not a user</td></tr><tr><th scope="row">JS challenge</th><td>Asks to run JavaScript first</td><td>Marked “verif.”, not an AI block</td></tr><tr><th scope="row">Rate limit</th><td>Slows fast clients</td><td>Pauses and random order</td></tr></tbody></table></div><p class="note">Between 15 and 35 requests per site over two days, home page only. The limit: real crawlers come from verified IP ranges and may get a different answer. This shows that some rules look at the bot’s name, not what the real GPTBot sees.</p><p class="prose"><strong>Sources:</strong> <a href="https://developers.google.com/search/docs/appearance/ai-features">Google: AI features and your website</a> · <a href="https://developers.openai.com/api/docs/bots">OpenAI crawlers</a> · <a href="https://llmstxt.org/">llms.txt proposal</a> · <a href="https://www.rfc-editor.org/rfc/rfc9309">RFC 9309, robots.txt</a></p>
       </div>
     </section>
-  </main>
+
 
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
     <button class="close" type="button" aria-label="Close">&times;</button>
@@ -742,6 +745,7 @@
       </div>
     </div>
   </section>
+  </main>
 
   <footer>
     <div class="wrap">

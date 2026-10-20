@@ -608,6 +608,9 @@
     footer .social a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
     footer .social a:hover { color: var(--ink); }
     .subh { margin-top: 48px; font-family: var(--font-display); font-weight: 700; font-size: 1.375rem; letter-spacing: -0.02em; max-width: 46rem; }
+    /* a11y (WCAG 1.4.3): white on #ff3c00 is 3.56:1, so buttons use the darker shade in both themes */
+    html[data-theme='dark'] .btn { background: #c22e00; border-color: #c22e00; color: #fff; }
+    html[data-theme='dark'] .btn:hover { background: #a82800; border-color: #a82800; }
   </style>
   <script src="/consent.js" defer></script>
 </head>
@@ -710,7 +713,7 @@
         <ul class="list"><li>Velocidad: Lighthouse, el motor de PageSpeed Insights, con un móvil normalito simulado y 4G lenta. Cada web, tres veces, y me quedo con la mediana: unas 150 mediciones. Lo repetí a mano en PageSpeed: casi todas se movieron menos de 10 puntos; la que más, Vitoria, de 92 a 65. Fíate más del orden que del número exacto.</li><li>El peso es el dato más estable: 30 MB son 30 MB, mida quien mida.</li><li>Es una prueba de laboratorio con un móvil simulado, no datos de usuarios reales, y solo de la portada.</li><li>almeria.es no es el Ayuntamiento, es la Diputación: la web correcta hubo que buscarla a mano.</li><li>Accesibilidad: axe-core 4.13 contra WCAG 2.1 A y AA. Descarté dos detectores por no ser fiables: el del foco invisible y el de "saltar al contenido".</li></ul><p class="prose"><strong>Fuentes:</strong> <a href="https://www.w3.org/WAI/standards-guidelines/wcag/">W3C: resumen de las WCAG</a> · <a href="https://www.w3.org/WAI/standards-guidelines/wcag/new-in-22/">Novedades de las WCAG 2.2</a> · <a href="https://www.deque.com/blog/en-301-549-v4-1-1-is-final-what-changed-what-it-means-and-what-you-should-do/">EN 301 549 v4.1.1 (Deque)</a> · <a href="https://www.boe.es/buscar/act.php?id=BOE-A-2018-12699">RD 1112/2018 (BOE)</a> · <a href="https://www.boe.es/buscar/act.php?id=BOE-A-2023-11022">Ley 11/2023 (BOE)</a> · <a href="https://www.jdsupra.com/legalnews/department-of-justice-delays-compliance-2688927/">Plazos del ADA, título II (JD Supra)</a></p>
       </div>
     </section>
-  </main>
+
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Visor de imágenes">
     <button class="close" type="button" aria-label="Cerrar">&times;</button>
     <img src="" alt="" />
@@ -726,6 +729,7 @@
       </div>
     </div>
   </section>
+  </main>
   <footer>
     <div class="wrap">
       <p class="sign"><svg class="cat" viewBox="0 0 18 17" shape-rendering="crispEdges" aria-hidden="true" focusable="false"><path fill="currentColor" d="M1 0h1v1h-1zM16 0h1v1h-1zM1 1h2v1h-2zM15 1h2v1h-2zM1 2h3v1h-3zM14 2h3v1h-3zM1 3h4v1h-4zM13 3h4v1h-4zM1 4h16v1h-16zM0 5h18v1h-18zM0 6h3v1h-3zM4 6h14v1h-14zM0 7h4v1h-4zM5 7h13v1h-13zM0 8h5v1h-5zM6 8h12v1h-12zM0 9h4v1h-4zM5 9h13v1h-13zM0 10h3v1h-3zM4 10h7v1h-7zM15 10h3v1h-3zM0 11h8v1h-8zM10 11h8v1h-8zM0 12h7v1h-7zM8 12h2v1h-2zM11 12h7v1h-7zM0 13h8v1h-8zM10 13h8v1h-8zM1 14h16v1h-16zM2 15h14v1h-14zM3 16h12v1h-12z"/><path class="acc" d="M11 10h4v1h-4z"/></svg>&copy; 2026 Ada (hache) Cervera. Hecho a mano en Valencia. <a href="#" data-cookies>Cookies</a></p>

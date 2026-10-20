@@ -815,6 +815,11 @@
     footer .social { display: flex; flex-wrap: wrap; gap: 18px; }
     footer .social a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
     footer .social a:hover { color: var(--ink); }
+    /* a11y (WCAG 1.4.3): white on #ff3c00 is 3.56:1, so buttons use the darker shade in both themes */
+    html[data-theme='dark'] .btn { background: #c22e00; border-color: #c22e00; color: #fff; }
+    html[data-theme='dark'] .btn:hover { background: #a82800; border-color: #a82800; }
+    html:not([data-theme='dark']) .project .more { color: #c22e00; }
+    footer { color: rgba(255, 255, 255, 0.62); }
   </style>
   <script src="/consent.js" defer></script>
 </head>
@@ -892,13 +897,13 @@
       se hacen p&uacute;blicos, as&iacute; que esta p&aacute;gina ense&ntilde;a lo que puedo
       ense&ntilde;ar. El resto lo cuento en una conversaci&oacute;n.
     </p>
-    <div class="filters wrap" role="tablist" aria-label="Filter the work">
-      <button class="chip is-on" data-filter="all" type="button">Todo</button>
-      <button class="chip" data-filter="infra" type="button">Infraestructura</button>
-      <button class="chip" data-filter="seo" type="button">SEO / GEO / AEO</button>
-      <button class="chip" data-filter="web" type="button">Webs</button>
-      <button class="chip" data-filter="design" type="button">Diseño y Branding</button>
-      <button class="chip" data-filter="video" type="button">Vídeo y Social</button>
+    <div class="filters wrap" role="group" aria-label="Filter the work">
+      <button class="chip is-on" data-filter="all" type="button" aria-pressed="true">Todo</button>
+      <button class="chip" data-filter="infra" type="button" aria-pressed="false">Infraestructura</button>
+      <button class="chip" data-filter="seo" type="button" aria-pressed="false">SEO / GEO / AEO</button>
+      <button class="chip" data-filter="web" type="button" aria-pressed="false">Webs</button>
+      <button class="chip" data-filter="design" type="button" aria-pressed="false">Diseño y Branding</button>
+      <button class="chip" data-filter="video" type="button" aria-pressed="false">Vídeo y Social</button>
     </div>
 
     <!-- ============ 01 · Infrastructure & Operations ============ -->
@@ -1156,14 +1161,14 @@
           </div>
           <p class="strip-hint" aria-hidden="true">Desliza para ver más <span>→</span></p>
           <div class="strip" data-gallery>
-            <button type="button"><img src="../img/ford-metro.jpg" alt="Ford Lightning metro billboard with dachshund evolution" loading="lazy" /></button>
+            <button type="button"><img width="1100" height="825" src="../img/ford-metro.jpg" alt="Ford Lightning metro billboard with dachshund evolution" loading="lazy" /></button>
             <button class="yt" type="button" data-id="xStagHuUZ9k" aria-label="Play the Ford Lightning spot">
-              <img src="../img/ford-poster.jpg" alt="Ford Lightning spot, Dynamic Range frame" loading="lazy" />
+              <img width="1100" height="618" src="../img/ford-poster.jpg" alt="Ford Lightning spot, Dynamic Range frame" loading="lazy" />
               <span class="play">&#9654;</span>
             </button>
-            <button type="button"><img src="../img/ford-billboard.jpg" alt="Ford Lightning roadside billboard" loading="lazy" /></button>
-            <button type="button"><img src="../img/ford-window.jpg" alt="Ford Lightning street-level posters" loading="lazy" /></button>
-            <button type="button"><img src="../img/ford-web.jpg" alt="Ford Lightning campaign web design screens" loading="lazy" /></button>
+            <button type="button"><img width="1100" height="733" src="../img/ford-billboard.jpg" alt="Ford Lightning roadside billboard" loading="lazy" /></button>
+            <button type="button"><img width="1100" height="825" src="../img/ford-window.jpg" alt="Ford Lightning street-level posters" loading="lazy" /></button>
+            <button type="button"><img width="1100" height="718" src="../img/ford-web.jpg" alt="Ford Lightning campaign web design screens" loading="lazy" /></button>
           </div>
         </article>
 
@@ -1193,12 +1198,12 @@
             <p class="strip-hint" aria-hidden="true">Desliza para ver más <span>→</span></p>
           </div>
           <div class="strip" data-gallery>
-            <button type="button"><img src="../img/fscb-bb-01.jpg" alt="Cañada Blanch Football School brandbook cover" loading="lazy" /></button>
-            <button type="button"><img src="../img/fscb-bb-03.jpg" alt="Brandbook page, our mission and purpose" loading="lazy" /></button>
-            <button type="button"><img src="../img/fscb-bb-05.jpg" alt="Brandbook page, logo concept" loading="lazy" /></button>
-            <button type="button"><img src="../img/fscb-bb-07.jpg" alt="Brandbook page, logo colour variations" loading="lazy" /></button>
-            <button type="button"><img src="../img/fscb-bb-08.jpg" alt="Brandbook page, brand typographies" loading="lazy" /></button>
-            <button type="button"><img src="../img/fscb-bb-10.jpg" alt="Brandbook page, colour palette" loading="lazy" /></button>
+            <button type="button"><img width="1440" height="810" src="../img/fscb-bb-01.jpg" alt="Cañada Blanch Football School brandbook cover" loading="lazy" /></button>
+            <button type="button"><img width="1440" height="810" src="../img/fscb-bb-03.jpg" alt="Brandbook page, our mission and purpose" loading="lazy" /></button>
+            <button type="button"><img width="1440" height="810" src="../img/fscb-bb-05.jpg" alt="Brandbook page, logo concept" loading="lazy" /></button>
+            <button type="button"><img width="1440" height="810" src="../img/fscb-bb-07.jpg" alt="Brandbook page, logo colour variations" loading="lazy" /></button>
+            <button type="button"><img width="1440" height="810" src="../img/fscb-bb-08.jpg" alt="Brandbook page, brand typographies" loading="lazy" /></button>
+            <button type="button"><img width="1440" height="810" src="../img/fscb-bb-10.jpg" alt="Brandbook page, colour palette" loading="lazy" /></button>
           </div>
 
           <div class="media-row">
@@ -1243,15 +1248,15 @@
             <p class="strip-hint" aria-hidden="true">Desliza para ver más <span>→</span></p>
           </div>
           <div class="strip" data-gallery>
-            <button type="button"><img src="../img/mapubli-01.jpg" alt="Mapubli brand manual cover" loading="lazy" /></button>
-            <button type="button"><img src="../img/mapubli-04.jpg" alt="Mapubli brand manual, values" loading="lazy" /></button>
-            <button type="button"><img src="../img/mapubli-09.jpg" alt="Mapubli brand manual, logo chapter" loading="lazy" /></button>
-            <button type="button"><img src="../img/mapubli-11.jpg" alt="Mapubli brand manual, colour palette" loading="lazy" /></button>
-            <button type="button"><img src="../img/mapubli-13.jpg" alt="Mapubli brand manual, logo on colour backgrounds" loading="lazy" /></button>
-            <button type="button"><img src="../img/mapubli-14.jpg" alt="Mapubli brand manual, fonts and typography" loading="lazy" /></button>
-            <button type="button"><img src="../img/mapubli-20.jpg" alt="Mapubli brand manual, social media system" loading="lazy" /></button>
-            <button type="button"><img src="../img/mapubli-24.jpg" alt="Mapubli brand manual, Instagram templates" loading="lazy" /></button>
-            <button type="button"><img src="../img/mapubli-30.jpg" alt="Mapubli brand manual, what to do and what to avoid" loading="lazy" /></button>
+            <button type="button"><img width="1440" height="810" src="../img/mapubli-01.jpg" alt="Mapubli brand manual cover" loading="lazy" /></button>
+            <button type="button"><img width="1440" height="810" src="../img/mapubli-04.jpg" alt="Mapubli brand manual, values" loading="lazy" /></button>
+            <button type="button"><img width="1440" height="810" src="../img/mapubli-09.jpg" alt="Mapubli brand manual, logo chapter" loading="lazy" /></button>
+            <button type="button"><img width="1440" height="810" src="../img/mapubli-11.jpg" alt="Mapubli brand manual, colour palette" loading="lazy" /></button>
+            <button type="button"><img width="1440" height="810" src="../img/mapubli-13.jpg" alt="Mapubli brand manual, logo on colour backgrounds" loading="lazy" /></button>
+            <button type="button"><img width="1440" height="810" src="../img/mapubli-14.jpg" alt="Mapubli brand manual, fonts and typography" loading="lazy" /></button>
+            <button type="button"><img width="1440" height="810" src="../img/mapubli-20.jpg" alt="Mapubli brand manual, social media system" loading="lazy" /></button>
+            <button type="button"><img width="1440" height="810" src="../img/mapubli-24.jpg" alt="Mapubli brand manual, Instagram templates" loading="lazy" /></button>
+            <button type="button"><img width="1440" height="810" src="../img/mapubli-30.jpg" alt="Mapubli brand manual, what to do and what to avoid" loading="lazy" /></button>
           </div>
         </article>
 
@@ -1274,13 +1279,13 @@
           </div>
           <p class="strip-hint" aria-hidden="true">Desliza para ver más <span>→</span></p>
           <div class="strip" data-gallery>
-            <button type="button"><img src="../img/canesval-logo.jpg" alt="Canesval final logotype" loading="lazy" /></button>
-            <button type="button"><img src="../img/canesval-antes.jpg" alt="Canesval concept exploration and previous marks" loading="lazy" /></button>
+            <button type="button"><img width="849" height="496" src="../img/canesval-logo.jpg" alt="Canesval final logotype" loading="lazy" /></button>
+            <button type="button"><img width="1100" height="733" src="../img/canesval-antes.jpg" alt="Canesval concept exploration and previous marks" loading="lazy" /></button>
             <video src="../media/canesval-anim.mp4" poster="../media/canesval-anim-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Canesval animated brand piece"></video>
-            <button type="button"><img src="../img/canesval-bags.jpg" alt="Canesval branded paper bags" loading="lazy" /></button>
-            <button type="button"><img src="../img/canesval-badges.jpg" alt="Canesval staff badges and lanyards" loading="lazy" /></button>
-            <button type="button"><img src="../img/canesval-tote.jpg" alt="Canesval tote bag with handwritten note" loading="lazy" /></button>
-            <button type="button"><img src="../img/canesval-card.jpg" alt="Canesval business card" loading="lazy" /></button>
+            <button type="button"><img width="1100" height="795" src="../img/canesval-bags.jpg" alt="Canesval branded paper bags" loading="lazy" /></button>
+            <button type="button"><img width="1100" height="705" src="../img/canesval-badges.jpg" alt="Canesval staff badges and lanyards" loading="lazy" /></button>
+            <button type="button"><img width="778" height="777" src="../img/canesval-tote.jpg" alt="Canesval tote bag with handwritten note" loading="lazy" /></button>
+            <button type="button"><img width="1100" height="717" src="../img/canesval-card.jpg" alt="Canesval business card" loading="lazy" /></button>
           </div>
         </article>
 
@@ -1303,11 +1308,11 @@
           </div>
           <p class="strip-hint" aria-hidden="true">Desliza para ver más <span>→</span></p>
           <div class="strip" data-gallery>
-            <button type="button"><img src="../img/fitz-pack.jpg" alt="The Fitzgerald anniversary packaging with burger" loading="lazy" /></button>
+            <button type="button"><img width="1100" height="536" src="../img/fitz-pack.jpg" alt="The Fitzgerald anniversary packaging with burger" loading="lazy" /></button>
             <video src="../media/fitz-loop1.mp4" poster="../media/fitz-loop1-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="The Fitzgerald animation loop"></video>
-            <button type="button"><img src="../img/fitz-cube.jpg" alt="The Fitzgerald cube packaging mockup" loading="lazy" /></button>
+            <button type="button"><img width="1100" height="912" src="../img/fitz-cube.jpg" alt="The Fitzgerald cube packaging mockup" loading="lazy" /></button>
             <video src="../media/fitz-loop2.mp4" poster="../media/fitz-loop2-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="The Fitzgerald animation loop"></video>
-            <button type="button"><img src="../img/fitz-illus.jpg" alt="The Fitzgerald anniversary illustration" loading="lazy" /></button>
+            <button type="button"><img width="828" height="852" src="../img/fitz-illus.jpg" alt="The Fitzgerald anniversary illustration" loading="lazy" /></button>
           </div>
         </article>
 
@@ -1392,7 +1397,7 @@
         </div>
       </div>
     </section>
-  </main>
+
 
   <!-- Lightbox -->
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Visor de imágenes">
@@ -1424,6 +1429,7 @@
       </div>
     </div>
   </section>
+  </main>
 
   <footer>
     <div class="wrap">
@@ -1571,7 +1577,7 @@
         video: document.getElementById('video'),
       };
       function applyFilter(f) {
-        chips.forEach(function (c) { c.classList.toggle('is-on', c.dataset.filter === f); });
+        chips.forEach(function (c) { c.classList.toggle('is-on', c.dataset.filter === f); c.setAttribute('aria-pressed', String(c.dataset.filter === f)); });
         Object.keys(sections).forEach(function (k) {
           sections[k].classList.toggle('filtered-out', f !== 'all' && f !== k);
         });
