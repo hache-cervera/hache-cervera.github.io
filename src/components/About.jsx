@@ -125,7 +125,7 @@ export default function About() {
         </div>
 
         <div className="flex flex-col gap-6">
-          <div data-rise className="flex flex-wrap gap-12 rounded bg-panel p-8 text-white">
+          <div data-rise className="flex flex-wrap gap-12 rounded-sm bg-panel p-8 text-white">
             <Stat value={15} suffix="+" label={t.about.stat1} />
             <Stat value={4} suffix="" label={t.about.stat2} />
           </div>

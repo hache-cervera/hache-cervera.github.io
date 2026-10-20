@@ -1,6 +1,43 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@theme {
+  --color-page: var(--c-bg);
+  --color-panel: #0a0a0a;
+  --color-ink: var(--c-ink);
+  --color-muted: var(--c-muted);
+  --color-muted-strong: var(--c-muted-strong);
+  --color-line: var(--c-line);
+
+  --color-accent: #ff3c00;
+  --color-accent-hover: #e63500;
+  --color-accent-soft: #ffe8e1;
+  --color-accent-ink: var(--c-accent-ink);
+  --color-accent-solid: #c22e00;
+  --color-accent-solid-hover: #a82800;
+
+  --font-display: Sora, sans-serif;
+  --font-body: Inter, sans-serif;
+
+  --tracking-tightest: -0.03em;
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
 
 /* Theme tokens: light by default, remapped when data-theme="dark" is set on <html> */
 :root {
@@ -78,7 +115,7 @@ body {
   opacity: 0.045;
 }
 .grain {
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%25" height="100%25" filter="url(%23n)"/></svg>');
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%25" height="100%25" filter="url%28%23n%29"/></svg>');
 }
 
 /* Faint circuit-grid texture used behind dark panels */

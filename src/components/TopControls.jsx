@@ -32,8 +32,8 @@ export default function TopControls() {
   };
 
   const langChip = (code) =>
-    `flex h-10 w-10 items-center justify-center border border-line ctl-surface font-display text-xs font-semibold uppercase tracking-[0.04em] backdrop-blur transition-colors duration-200 ${
-      lang === code ? 'text-ink border-b-2 !border-b-accent' : 'text-muted hover:text-ink hover:border-ink'
+    `flex h-10 w-10 items-center justify-center border border-line ctl-surface font-display text-xs font-semibold uppercase tracking-[0.04em] backdrop-blur-sm transition-colors duration-200 ${
+      lang === code ? 'text-ink border-b-2 border-b-accent!' : 'text-muted hover:text-ink hover:border-ink'
     }`;
 
   return (
@@ -51,7 +51,7 @@ export default function TopControls() {
         type="button"
         onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
         aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-        className="tbtn ctl-surface backdrop-blur"
+        className="tbtn ctl-surface backdrop-blur-sm"
       >
         <span className="sky" aria-hidden="true">
           {[0, 45, 90, 135, 180, 225, 270, 315].map((r) => (

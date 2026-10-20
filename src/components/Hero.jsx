@@ -90,8 +90,8 @@ function MagneticLink({ href, children, accent, external }) {
       onMouseLeave={() => { mx.set(0); my.set(0); }}
       className={
         accent
-          ? 'group inline-flex items-center gap-2 rounded bg-accent-solid px-8 py-4 font-display font-semibold text-white transition-colors duration-300 hover:bg-accent-solid-hover'
-          : 'group inline-flex items-center gap-2 rounded bg-ink px-8 py-4 font-display font-semibold text-page transition-colors duration-300 hover:bg-accent-solid hover:text-white'
+          ? 'group inline-flex items-center gap-2 rounded-sm bg-accent-solid px-8 py-4 font-display font-semibold text-white transition-colors duration-300 hover:bg-accent-solid-hover'
+          : 'group inline-flex items-center gap-2 rounded-sm bg-ink px-8 py-4 font-display font-semibold text-page transition-colors duration-300 hover:bg-accent-solid hover:text-white'
       }
     >
       {children}

@@ -33,7 +33,7 @@ export default function Research() {
                 </div>
                 <p className="md:text-right">
                   <span className="block font-display text-6xl font-extrabold leading-none text-accent-ink md:text-7xl">{it.stat}</span>
-                  <span className="mt-2 block max-w-[14rem] text-sm text-muted-strong md:ml-auto">{it.statLabel}</span>
+                  <span className="mt-2 block max-w-56 text-sm text-muted-strong md:ml-auto">{it.statLabel}</span>
                 </p>
               </a>
             </li>

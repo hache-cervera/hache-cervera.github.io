@@ -11,9 +11,9 @@ function ToolBadge({ mark, name }) {
       data-hover
       whileHover={{ y: -3 }}
       transition={{ type: 'spring', stiffness: 400, damping: 18 }}
-      className="flex items-center gap-2 rounded border border-ink py-1.5 pl-1.5 pr-3 font-display text-xs sm:gap-3 sm:py-2 sm:pl-2 sm:pr-4 sm:text-sm md:text-base"
+      className="flex items-center gap-2 rounded-sm border border-ink py-1.5 pl-1.5 pr-3 font-display text-xs sm:gap-3 sm:py-2 sm:pl-2 sm:pr-4 sm:text-sm md:text-base"
     >
-      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded bg-ink text-[10px] font-bold text-page sm:h-8 sm:w-8 sm:text-xs">
+      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-sm bg-ink text-[10px] font-bold text-page sm:h-8 sm:w-8 sm:text-xs">
         {mark}
       </span>
       {name}
