@@ -3,6 +3,7 @@
 // visitors without JavaScript get the real text. React replaces it on mount.
 import { renderToStaticMarkup } from 'react-dom/server';
 import { translations } from '../i18n';
+import { linkSite } from '../components/SiteLink';
 import { getExperience, getDisciplines } from '../data/content';
 
 function StaticHome({ lang }) {
@@ -54,7 +55,7 @@ function StaticHome({ lang }) {
             </div>
           ))}
           <p className="mt-6 max-w-2xl text-muted">{t.about.geoNote}</p>
-          <p className="mt-6 max-w-2xl text-muted">{t.about.p4}</p>
+          <p className="mt-6 max-w-2xl text-muted">{linkSite(t.about.p4)}</p>
           <p className="mt-6 max-w-2xl text-muted">{t.about.p3}</p>
         </div>
       </section>

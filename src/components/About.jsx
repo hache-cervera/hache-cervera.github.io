@@ -1,6 +1,7 @@
 import { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import Words from './Words';
+import { linkSite } from './SiteLink';
 import { useLang } from '../i18n';
 
 /* Inline stroke icons, 16px grid, currentColor. No emoji anywhere on the site. */
@@ -175,7 +176,7 @@ export default function About() {
               <Icon name="server" />
               {t.about.labLabel}
             </p>
-            <p className="mt-2 text-sm leading-relaxed text-muted">{t.about.p4}</p>
+            <p className="mt-2 text-sm leading-relaxed text-muted">{linkSite(t.about.p4)}</p>
             <ul className="mt-4 flex flex-wrap gap-2">
               {[
                 ['server', t.about.labKit[0]],
