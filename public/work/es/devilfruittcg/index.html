@@ -574,6 +574,11 @@
     html:not([data-theme='dark']) .now b, html:not([data-theme='dark']) .tags .key { color: #c22e00; }
   </style>
   <script src="/consent.js" defer></script>
+  <style>
+    /* Solid accent, no gradients: nothing gets clipped at the edges */
+    .glow { display: none !important; }
+    h1 em { background: none !important; color: var(--accent) !important; -webkit-text-fill-color: currentColor; animation: none !important; padding-right: 0.12em; }
+  </style>
 </head>
 <body>
   <div class="grain" aria-hidden="true"></div>

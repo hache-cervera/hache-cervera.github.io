@@ -591,6 +591,11 @@
     html[data-theme='dark'] .btn:hover { background: #a82800; border-color: #a82800; }
   </style>
   <script src="/consent.js" defer></script>
+  <style>
+    /* Solid accent, no gradients: nothing gets clipped at the edges */
+    .glow { display: none !important; }
+    h1 em { background: none !important; color: var(--accent) !important; -webkit-text-fill-color: currentColor; animation: none !important; padding-right: 0.12em; }
+  </style>
 </head>
 <body>
   <div class="grain" aria-hidden="true"></div>
@@ -616,7 +621,7 @@
       <p class="lede">Webs públicas medidas con navegadores reales, datos reales de empresa contados en agregado, un grupo de control cuando hace falta y los datos para descargar. Cada estudio dice qué se midió, cuándo y qué no puede demostrar.</p>
       <div class="studies">
         <a class="study" href="catalogos-proveedores/">
-          <div><p class="section-label">Octubre 2026 · Datos de proveedor</p><h2>¿Qué traen de verdad los catálogos de proveedor?</h2><p>Cinco fuentes de proveedor de una empresa de recambios de motor, 37.948 productos contados campo a campo: qué llega, qué falta y qué supone para una tienda online.</p><span class="go">Leer el estudio</span></div>
+          <div><p class="section-label">Octubre 2026 · Shopify</p><h2>¿Qué le falta a un catálogo de proveedor para Shopify?</h2><p>37.948 recambios de motor de cinco fuentes de proveedor, comparados campo a campo con lo que necesitan Shopify y Google: fotos, GTIN, pesos, filtros y límites de importación.</p><span class="go">Leer el estudio</span></div>
           <p class="num">0/37.948<small>productos llegan con foto</small></p>
         </a>
         <a class="study" href="certificados/">

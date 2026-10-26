@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>What do supplier catalogues actually contain? · Research · Hache Cervera</title>
-  <meta name="description" content="Original research: what data five supplier sources of an engine spare parts company provide (37,948 products). No photos, 3.8% with a description. Aggregates only, with the data downloadable." />
+  <title>What is a supplier catalogue missing for Shopify? · Research · Hache Cervera</title>
+  <meta name="description" content="Original research: 37,948 products from five engine spare parts supplier sources, compared with what Shopify and Google need. No photos, no GTINs, no weights. Aggregates only, with the data downloadable." />
   <link rel="canonical" href="https://hache-cervera.github.io/research/supplier-catalogues/" />
   <link rel="alternate" hreflang="en" href="https://hache-cervera.github.io/research/supplier-catalogues/" />
   <link rel="alternate" hreflang="es" href="https://hache-cervera.github.io/research/es/catalogos-proveedores/" />
-  <meta property="og:title" content="What do supplier catalogues actually contain?" />
-  <meta property="og:description" content="Original research: what data five supplier sources of an engine spare parts company provide (37,948 products). No photos, 3.8% with a description. Aggregates only, with the data downloadable." />
+  <meta property="og:title" content="What is a supplier catalogue missing for Shopify?" />
+  <meta property="og:description" content="Original research: 37,948 products from five engine spare parts supplier sources, compared with what Shopify and Google need. No photos, no GTINs, no weights. Aggregates only, with the data downloadable." />
   <meta property="og:image" content="https://hache-cervera.github.io/og-home.jpg" />
   <meta property="og:url" content="https://hache-cervera.github.io/research/supplier-catalogues/" />
   <meta property="og:type" content="article" />
@@ -23,7 +23,7 @@
     @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400 500; font-display: swap; src: url('/fonts/inter-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
   </style>
   <script>(function () { try { document.documentElement.dataset.theme = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light'; } catch (e) {} })();</script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"What do supplier catalogues actually contain?","description":"Original research: what data five supplier sources of an engine spare parts company provide (37,948 products). No photos, 3.8% with a description. Aggregates only, with the data downloadable.","inLanguage":"en","datePublished":"2026-10-26","url":"https://hache-cervera.github.io/research/supplier-catalogues/","image":"https://hache-cervera.github.io/og-home.jpg","author":{"@type":"Person","name":"Ada (hache) Cervera","url":"https://hache-cervera.github.io/"}},{"@type":"Dataset","name":"Engine spare parts supplier catalogues: what data they contain (October 2026)","description":"Original research: what data five supplier sources of an engine spare parts company provide (37,948 products). No photos, 3.8% with a description. Aggregates only, with the data downloadable.","inLanguage":"en","creator":{"@type":"Person","name":"Ada (hache) Cervera"},"temporalCoverage":"2026-10-25","isAccessibleForFree":true,"distribution":[{"@type":"DataDownload","encodingFormat":"text/csv","contentUrl":"https://hache-cervera.github.io/research/data/supplier-catalogues-2026-10.csv"},{"@type":"DataDownload","encodingFormat":"application/json","contentUrl":"https://hache-cervera.github.io/research/data/supplier-catalogues-2026-10.json"}]}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"What is a supplier catalogue missing for Shopify?","description":"Original research: 37,948 products from five engine spare parts supplier sources, compared with what Shopify and Google need. No photos, no GTINs, no weights. Aggregates only, with the data downloadable.","inLanguage":"en","datePublished":"2026-10-26","url":"https://hache-cervera.github.io/research/supplier-catalogues/","image":"https://hache-cervera.github.io/og-home.jpg","author":{"@type":"Person","name":"Ada (hache) Cervera","url":"https://hache-cervera.github.io/"}},{"@type":"Dataset","name":"Engine spare parts supplier catalogues: what data they contain (October 2026)","description":"Original research: 37,948 products from five engine spare parts supplier sources, compared with what Shopify and Google need. No photos, no GTINs, no weights. Aggregates only, with the data downloadable.","inLanguage":"en","creator":{"@type":"Person","name":"Ada (hache) Cervera"},"temporalCoverage":"2026-10-25","isAccessibleForFree":true,"distribution":[{"@type":"DataDownload","encodingFormat":"text/csv","contentUrl":"https://hache-cervera.github.io/research/data/supplier-catalogues-2026-10.csv"},{"@type":"DataDownload","encodingFormat":"application/json","contentUrl":"https://hache-cervera.github.io/research/data/supplier-catalogues-2026-10.json"}]}]}</script>
   <style>
     :root {
       --bg: #ffffff;
@@ -633,6 +633,71 @@
     }
   </style>
   <script src="/consent.js" defer></script>
+  <style>
+    /* Solid accent, no gradients: nothing gets clipped at the edges */
+    .glow { display: none !important; }
+    h1 em { background: none !important; color: var(--accent) !important; -webkit-text-fill-color: currentColor; animation: none !important; padding-right: 0.12em; }
+  </style>
+  <style>
+    /* Charts and diagrams: flat bars on theme tokens, no gradients */
+    .viz { margin-top: 32px; border: 1px solid var(--line); padding: 24px; }
+    .viz + .viz { margin-top: 16px; }
+    .viz h3 { font-family: var(--font-display); font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+    .viz .cap { margin-top: 6px; font-size: 0.875rem; color: var(--muted); max-width: 46rem; }
+    .bars { list-style: none; margin: 20px 0 0; padding: 0; display: grid; gap: 12px; }
+    .bars li { display: grid; grid-template-columns: minmax(7rem, 14rem) minmax(0, 1fr) 5.5rem; gap: 12px; align-items: center; font-size: 0.875rem; }
+    .bars .lab { min-width: 0; }
+    .bars .track { position: relative; height: 14px; background: var(--surface); }
+    .bars .fill { position: absolute; top: 0; bottom: 0; left: 0; background: var(--ink); }
+    .bars .fill.acc { background: var(--accent); }
+    .bars .fill.in { background: var(--accent); }
+    .bars .v { text-align: right; font-family: var(--font-display); font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .bars li.zero .v { color: var(--accent); }
+    .bars li.zero .track { outline: 1px dashed var(--accent); outline-offset: -1px; background: transparent; }
+    .bars .limit { position: absolute; top: -6px; bottom: -6px; border-left: 2px solid var(--accent); }
+    .legend { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 16px; font-size: 0.8125rem; color: var(--muted); }
+    .legend span { display: inline-flex; align-items: center; gap: 8px; }
+    .legend i { display: inline-block; width: 12px; height: 12px; background: var(--ink); }
+    .legend i.acc { background: var(--accent); }
+    .legend i.line { width: 2px; height: 14px; background: var(--accent); }
+    .legend i.dash { background: transparent; outline: 1px dashed var(--accent); outline-offset: -1px; }
+    .stackbar { display: flex; height: 40px; margin-top: 20px; gap: 2px; }
+    .stackbar span { background: var(--surface); min-width: 6px; }
+    .stackbar span.big { background: var(--ink); }
+    .stackbar span.acc { background: var(--accent); }
+    .stacklab { display: flex; justify-content: space-between; gap: 12px; margin-top: 8px; font-size: 0.8125rem; color: var(--muted); }
+    .stacklab b { color: var(--ink); font-family: var(--font-display); }
+    .fmap { margin-top: 32px; display: grid; gap: 0; border-top: 1px solid var(--line); }
+    .fmap .row { display: grid; grid-template-columns: 11rem minmax(0, 1fr) minmax(0, 1fr); gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--line); align-items: start; }
+    .fmap .row.head { padding: 12px 0; font-family: var(--font-display); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+    .fmap .f { font-family: var(--font-display); font-weight: 600; }
+    .fmap .f small { display: block; margin-top: 6px; }
+    .fmap p { font-size: 0.9375rem; }
+    .fmap p + p { margin-top: 6px; }
+    .fmap code { font-size: 0.8125rem; }
+    .chip { display: inline-block; padding: 2px 8px; font-family: var(--font-display); font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; border: 1px solid var(--ink); color: var(--ink); }
+    .chip.part { border-color: var(--accent); color: var(--accent); }
+    .chip.none { background: var(--ink); color: var(--bg); }
+    .chip.tool { background: var(--accent-soft); border-color: var(--accent-soft); color: var(--ink); }
+    .ba { margin-top: 32px; display: grid; gap: 16px; grid-template-columns: 1fr; }
+    @media (min-width: 760px) { .ba { grid-template-columns: 1fr 1fr; } }
+    .ba > div { border: 1px solid var(--line); padding: 24px; min-width: 0; }
+    .ba h3 { font-family: var(--font-display); font-size: 1rem; font-weight: 600; }
+    .ba .pair { display: flex; align-items: baseline; gap: 12px; margin-top: 16px; flex-wrap: wrap; font-family: var(--font-display); font-variant-numeric: tabular-nums; }
+    .ba .pair b { font-size: 2rem; line-height: 1; }
+    .ba .pair .to { color: var(--muted); }
+    .ba .pair .bad { color: var(--accent); }
+    .ba p { margin-top: 12px; font-size: 0.9375rem; }
+    .ba .verdict { margin-top: 16px; display: inline-block; }
+    .prose strong, .section-intro strong { color: var(--ink); }
+    @media (max-width: 640px) {
+      .viz { padding: 18px; }
+      .bars li { grid-template-columns: minmax(0, 1fr) auto; row-gap: 6px; }
+      .bars .track { grid-column: 1 / -1; grid-row: 2; }
+      .fmap .row { grid-template-columns: 1fr; gap: 8px; }
+      .fmap .row.head { display: none; }
+    }
+  </style>
 </head>
 <body>
   <div class="grain" aria-hidden="true"></div>
@@ -652,70 +717,131 @@
   </header>
   <main>
     <div class="hero wrap">
-      <span class="glow" style="top: -140px; right: -160px;" aria-hidden="true"></span>
-      <p class="kicker">/ Research · Supplier data · October 2026</p>
-      <h1>What do supplier <em>catalogues</em> actually contain?</h1>
-      <p class="lede">An engine spare parts company in Spain wanted its products in an online shop. Nobody sends it product data through an API: it gets PDF catalogues, a listing from another shop and a price list. I counted what arrives in those files, field by field, across 37,948 products.</p>
-      <dl class="meta"><div><dt>Company</dt><dd>One distributor of engine spare parts in Spain, anonymous</dd></div><div><dt>Sources</dt><dd>5: three PDF catalogues, one online shop listing and one market price list</dd></div><div><dt>Products</dt><dd>37,948, after filtering out what is not an engine part</dd></div><div><dt>Measured</dt><dd>25 Oct 2026, on the full files</dd></div><div><dt>Data</dt><dd><a href="../data/supplier-catalogues-2026-10.csv">CSV</a> · <a href="../data/supplier-catalogues-2026-10.json">JSON</a></dd></div></dl>
-      <p class="note"><strong>Not on this page:</strong> supplier names, the company’s name or any single product. Only counts. The product data belongs to the client.</p>
+      <p class="kicker">/ Research · Shopify · October 2026</p>
+      <h1>What is a supplier catalogue missing <em>for Shopify?</em></h1>
+      <p class="lede">An engine spare parts distributor gets its products as PDF catalogues, another shop’s listing and a price list. <strong>No supplier has an API.</strong> I counted what each file brings, field by field, across 37,948 products, and compared it with what Shopify and Google need to sell them.</p>
+      <dl class="meta"><div><dt>Company</dt><dd>One distributor of engine spare parts in Spain, anonymous</dd></div><div><dt>Sources</dt><dd>5: three PDF catalogues, one online shop listing and one market price list</dd></div><div><dt>Products</dt><dd>37,948, after filtering out what is not an engine part</dd></div><div><dt>Compared with</dt><dd>Shopify CSV import, Search &amp; Discovery and Google Merchant Center</dd></div><div><dt>Measured</dt><dd>25 Oct 2026, on the full files</dd></div><div><dt>Data</dt><dd><a href="../data/supplier-catalogues-2026-10.csv">CSV</a> · <a href="../data/supplier-catalogues-2026-10.json">JSON</a></dd></div></dl>
+      <p class="note"><strong>Not on this page:</strong> supplier names, the company’s name or any single product. Only counts.</p>
     </div>
 
     <section id="highlights">
       <div class="wrap">
         <p class="section-label">/ In short</p>
         <h2>The numbers</h2>
-        <div class="figs"><div><b>0</b><span>products arrive with a photo</span></div><div><b>3.8%</b><span>arrive with a description</span></div><div><b>91%</b><span>end up with a price</span></div><div><b>0</b><span>arrive with weight, stock or lead time</span></div><div><b>65%</b><span>of shop listings can only show a generic image</span></div></div>
+        <div class="figs"><div><b>0</b><span>products with a photo, barcode or weight</span></div><div><b>3.8%</b><span>arrive with a description</span></div><div><b>1,179</b><span>distinct models to filter by; a filter shows 100</span></div><div><b>24.7 MB</b><span>full CSV; Shopify takes 15 per import</span></div><div><b>65%</b><span>of listings get a generic image</span></div></div>
       </div>
     </section>
 
     <section id="fields">
       <div class="wrap">
         <p class="section-label">/ 01 · What arrives</p>
-        <h2>A name and a price, and little else</h2>
-        <p class="prose">Every product has a name, and 91% end up with a price. That is the easy part. Only 1,434 products, 3.8%, come with a description and a list of compatible engines, and all of them come from the PDF catalogues. Not a single file brings a photo, a weight, a barcode, stock, a lead time, a cost price or cross-references to other brands.</p>
-        <div class="tbl fit" tabindex="0" role="region" aria-label="What each product arrives with (of 37,948)"><table><thead><tr><th scope="col">Field</th><th scope="col">Products</th><th scope="col">%</th></tr></thead><tbody><tr><th scope="row">Name</th><td class="n">37,948</td><td class="n">100%</td></tr><tr><th scope="row">Family</th><td class="n">37,404</td><td class="n">99%</td></tr><tr><th scope="row">Price</th><td class="n">34,379</td><td class="n">91%</td></tr><tr><th scope="row">Description</th><td class="n">1,434</td><td class="n">3.8%</td></tr><tr><th scope="row">Compatible engines</th><td class="n">1,434</td><td class="n">3.8%</td></tr><tr><th scope="row">Photo</th><td class="n">0</td><td class="n">0%</td></tr><tr><th scope="row">Weight</th><td class="n">0</td><td class="n">0%</td></tr><tr><th scope="row">Barcode (EAN)</th><td class="n">0</td><td class="n">0%</td></tr><tr><th scope="row">Stock</th><td class="n">0</td><td class="n">0%</td></tr><tr><th scope="row">Lead time</th><td class="n">0</td><td class="n">0%</td></tr><tr><th scope="row">Cost price</th><td class="n">0</td><td class="n">0%</td></tr><tr><th scope="row">Cross-references</th><td class="n">0</td><td class="n">0%</td></tr></tbody></table></div>
-        <p class="prose">Each empty column becomes a decision in the shop. Without weight, shipping cannot be calculated by weight. Without stock or lead time, the honest button is “ask about availability”, not “add to cart”. Without photos, the shop has to choose between a generic image and no image.</p>
-        <p class="prose">Names also arrive in Spanish, German and English. After the tool translates them, 62 still look foreign and are flagged for a person to check.</p>
+        <h2>A name and a price. Little else</h2>
+        <p class="prose">Every product has a name and <strong>91% end up with a price</strong>. Only <strong>3.8%</strong> come with a description and compatible engines, all from the PDF catalogues. <strong>No file brings a photo, barcode, weight, stock, lead time, cost or cross-references.</strong></p>
+        <div class="viz" role="figure" aria-label="Share of the 37,948 products that arrive with each field">
+          <h3>What each product arrives with</h3>
+          <p class="cap">Share of the 37,948 products. Price counts after joining sources by reference.</p>
+          <ul class="bars"><li class=""><span class="lab">Name</span><span class="track"><span class="fill" style="width:100.0%"></span></span><span class="v">100%</span></li><li class=""><span class="lab">Family</span><span class="track"><span class="fill" style="width:98.6%"></span></span><span class="v">99%</span></li><li class=""><span class="lab">Price</span><span class="track"><span class="fill" style="width:90.6%"></span></span><span class="v">91%</span></li><li class=""><span class="lab">Description</span><span class="track"><span class="fill acc" style="width:3.8%"></span></span><span class="v">3.8%</span></li><li class=""><span class="lab">Compatible engines</span><span class="track"><span class="fill acc" style="width:3.8%"></span></span><span class="v">3.8%</span></li><li class="zero"><span class="lab">Photo</span><span class="track"><span class="fill" style="width:0.0%"></span></span><span class="v">0%</span></li><li class="zero"><span class="lab">Barcode (GTIN)</span><span class="track"><span class="fill" style="width:0.0%"></span></span><span class="v">0%</span></li><li class="zero"><span class="lab">Weight</span><span class="track"><span class="fill" style="width:0.0%"></span></span><span class="v">0%</span></li><li class="zero"><span class="lab">Stock</span><span class="track"><span class="fill" style="width:0.0%"></span></span><span class="v">0%</span></li><li class="zero"><span class="lab">Lead time</span><span class="track"><span class="fill" style="width:0.0%"></span></span><span class="v">0%</span></li><li class="zero"><span class="lab">Cost price</span><span class="track"><span class="fill" style="width:0.0%"></span></span><span class="v">0%</span></li><li class="zero"><span class="lab">Cross-references</span><span class="track"><span class="fill" style="width:0.0%"></span></span><span class="v">0%</span></li></ul>
+          <div class="legend"><span><i></i>Most products</span><span><i class="acc"></i>Under half</span><span><i class="dash"></i>No product at all</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="shopify">
+      <div class="wrap">
+        <p class="section-label">/ 02 · In Shopify</p>
+        <h2>What each gap means in the shop</h2>
+        <p class="prose">Each empty field has consequences in the shop: <strong>it changes how orders ship, how customers filter and whether Google shows the product.</strong> For each one, what Shopify does with it and what the tool decided.</p>
+        <div class="fmap"><div class="row head" aria-hidden="true"><span>Field</span><span>What Shopify uses it for</span><span>What the tool does</span></div><div class="row"><div class="f">Photo<small><span class="chip none">None</span></small></div><p><strong>Product media.</strong> Google Merchant Center rejects placeholders such as “coming soon”, but allows a generic image or illustration in <strong>Vehicles &amp; Parts</strong> (category 888).</p><p>One generic image per part family on <strong>22,211 listings</strong>, with “indicative image” in the alt text. The rest go without.</p></div><div class="row"><div class="f">Barcode (GTIN)<small><span class="chip none">None</span></small></div><p><strong>Barcode column.</strong> Without a GTIN, Google ranks the product lower but accepts <strong>brand + MPN</strong> instead.</p><p>The supplier reference goes into the SKU, ready to be used as the MPN. Barcode stays empty instead of invented.</p></div><div class="row"><div class="f">Weight<small><span class="chip none">None</span></small></div><p><strong>Shipping.</strong> Weight-based rates and carrier-calculated rates need a weight on every variant.</p><p>Weight column ready but empty. Shipping has to use flat or price-based rates until a supplier sends weights.</p></div><div class="row"><div class="f">Stock and lead time<small><span class="chip none">None</span></small></div><p><strong>Inventory.</strong> Tracked inventory stops selling at zero. Untracked, the product can always be bought.</p><p>Inventory not tracked, <code>continue</code> selling, and an availability metafield set to “Ask”, with the shop phone in the description.</p></div><div class="row"><div class="f">Cost price<small><span class="chip none">None</span></small></div><p><strong>Cost per item.</strong> Feeds Shopify’s margin and gross profit reports.</p><p>Empty. Prices come from the market, not from a tariff, so there is no cost to report yet. The column fills itself once a tariff arrives.</p></div><div class="row"><div class="f">Description<small><span class="chip part">3.8%</span></small></div><p><strong>Product page and SEO.</strong> Title, body, SEO title and meta description.</p><p>Titles rewritten and translated from the name. SEO title and meta description generated for <strong>34,339 of 34,339 listings</strong>.</p></div><div class="row"><div class="f">Compatibility<small><span class="chip part">3.8%</span></small></div><p><strong>Metafields and filters.</strong> Make, models and engine codes as list metafields that Search &amp; Discovery can filter on.</p><p>Written to three metafields. Section 04 shows why a plain filter will not hold them.</p></div><div class="row"><div class="f">Family<small><span class="chip ok">99%</span></small></div><p><strong>Product type, tags and collections.</strong> Automated collections pick products by tag.</p><p>134 product types and one tag per engine system, so <strong>15 automated collections</strong> fill themselves.</p></div></div>
       </div>
     </section>
 
     <section id="sources">
       <div class="wrap">
-        <p class="section-label">/ 02 · Five sources</p>
-        <h2>The biggest source is the emptiest</h2>
-        <p class="prose">Source C, a listing of original parts saved from an online shop, has 107,632 rows. 71,118 are dropped because they are not engine parts, and the remaining 36,514 are 96% of the catalogue. They come with a name, a reference and a price, and nothing else: no description, no compatible engines, not even a family. The tool works out the family from the name for 35,970 of them.</p>
-        <p class="prose">The PDF catalogues are the opposite: descriptions and engines, but no prices. Catalogues B and D get their price from list E by joining on the reference: 1,259 of 1,289 and 135 of 137.</p>
-        <div class="tbl stack" tabindex="0" role="region" aria-label="The five sources"><table><thead><tr><th scope="col">Source</th><th scope="col">Format</th><th scope="col">Rows read</th><th scope="col">Kept</th><th scope="col">With price after joining</th><th scope="col">With description</th></tr></thead><tbody><tr><th scope="row">A · Gasket catalogue</th><td class="n" data-label="Format">PDF</td><td class="n" data-label="Rows read">8</td><td class="n" data-label="Kept">8</td><td class="n" data-label="With price after joining">0</td><td class="n" data-label="With description">8</td></tr><tr><th scope="row">B · Catalogue by engine make</th><td class="n" data-label="Format">PDF</td><td class="n" data-label="Rows read">1,289</td><td class="n" data-label="Kept">1,289</td><td class="n" data-label="With price after joining">1,259</td><td class="n" data-label="With description">1,289</td></tr><tr><th scope="row">C · Original parts listing from an online shop</th><td class="n" data-label="Format">Web</td><td class="n" data-label="Rows read">107,632</td><td class="n" data-label="Kept">36,514</td><td class="n" data-label="With price after joining">32,985</td><td class="n" data-label="With description">0</td></tr><tr><th scope="row">D · Piston catalogue</th><td class="n" data-label="Format">PDF</td><td class="n" data-label="Rows read">137</td><td class="n" data-label="Kept">137</td><td class="n" data-label="With price after joining">135</td><td class="n" data-label="With description">137</td></tr><tr><th scope="row">E · Market price list</th><td class="n" data-label="Format">Web</td><td class="n" data-label="Rows read">1,426</td><td class="n" data-label="Kept">1,426</td><td class="n" data-label="With price after joining">1,394</td><td class="n" data-label="With description">0</td></tr></tbody></table></div>
+        <p class="section-label">/ 03 · Five sources</p>
+        <h2>The biggest source brings the least</h2>
+        <p class="prose">Source C, an original parts listing saved from an online shop, has 107,632 rows. 71,118 are dropped as not engine parts. The <strong>remaining 36,514 are 96% of the catalogue</strong> and bring a name, a reference and a price, with no description, no engines and no family: the tool works out the family from the name for 35,970.</p>
+        <div class="viz" role="figure" aria-label="Products by source">
+          <h3>Where the 37,948 products come from</h3>
+          <div class="stackbar"><span class="" style="flex:0.60" title="A: 8"></span><span class="acc" style="flex:3.40" title="B: 1,289"></span><span class="big" style="flex:96.22" title="C: 36,514"></span><span class="acc" style="flex:0.60" title="D: 137"></span><span class="" style="flex:3.76" title="E: 1,426"></span></div>
+          <div class="stacklab"><span><b>C</b> · online shop listing · 36,514 (96%)</span><span><b>A, B, D, E</b> · 1,434</span></div>
+          <div class="legend"><span><i></i>Name, reference and price only</span><span><i class="acc"></i>PDF catalogues with description and engines</span></div>
+        </div>
+        <p class="prose">The PDFs are the opposite: descriptions and engines, no prices. <strong>B and D take their price from list E by joining on the reference</strong>: 1,259 of 1,289 and 135 of 137.</p>
+        <div class="tbl stack" tabindex="0" role="region" aria-label="The five sources"><table><thead><tr><th scope="col">Source</th><th scope="col">Format</th><th scope="col">Rows read</th><th scope="col">Kept</th><th scope="col">Priced after joining</th><th scope="col">With description</th></tr></thead><tbody><tr><th scope="row">A · Gasket catalogue</th><td class="n" data-label="Format">PDF</td><td class="n" data-label="Rows read">8</td><td class="n" data-label="Kept">8</td><td class="n" data-label="Priced after joining">0</td><td class="n" data-label="With description">8</td></tr><tr><th scope="row">B · Catalogue by engine make</th><td class="n" data-label="Format">PDF</td><td class="n" data-label="Rows read">1,289</td><td class="n" data-label="Kept">1,289</td><td class="n" data-label="Priced after joining">1,259</td><td class="n" data-label="With description">1,289</td></tr><tr><th scope="row">C · Original parts listing from an online shop</th><td class="n" data-label="Format">Web</td><td class="n" data-label="Rows read">107,632</td><td class="n" data-label="Kept">36,514</td><td class="n" data-label="Priced after joining">32,985</td><td class="n" data-label="With description">0</td></tr><tr><th scope="row">D · Piston catalogue</th><td class="n" data-label="Format">PDF</td><td class="n" data-label="Rows read">137</td><td class="n" data-label="Kept">137</td><td class="n" data-label="Priced after joining">135</td><td class="n" data-label="With description">137</td></tr><tr><th scope="row">E · Market price list</th><td class="n" data-label="Format">Web</td><td class="n" data-label="Rows read">1,426</td><td class="n" data-label="Kept">1,426</td><td class="n" data-label="Priced after joining">1,394</td><td class="n" data-label="With description">0</td></tr></tbody></table></div>
       </div>
     </section>
 
-    <section id="systems">
+    <section id="filters">
       <div class="wrap">
-        <p class="section-label">/ 03 · In the shop</p>
-        <h2>Where the parts go, and what picture they get</h2>
-        <p class="prose">The 37,948 products become 34,339 shop listings (34,379 variants; only 32 listings have more than one). Almost all of them, 34,333, say which vehicle make they fit. Only 559, 1.6%, name a model, and 450 an engine code.</p>
-        <p class="prose">With no photos, each listing gets one generic image for its family, when there is one: 22,211 listings, 65%. Coverage depends on the system. A gasket looks like a gasket; a sensor or a workshop tool does not look like the next one.</p>
-        <div class="tbl stack" tabindex="0" role="region" aria-label="Listings by engine system, and how many get a generic image"><table><thead><tr><th scope="col">System</th><th scope="col">Listings</th><th scope="col">Generic image</th><th scope="col">%</th></tr></thead><tbody><tr><th scope="row">Fuel system</th><td class="n" data-label="Listings">6,548</td><td class="n" data-label="Generic image">4,586</td><td class="n" data-label="%">70%</td></tr><tr><th scope="row">Gaskets and seals</th><td class="n" data-label="Listings">5,448</td><td class="n" data-label="Generic image">5,334</td><td class="n" data-label="%">98%</td></tr><tr><th scope="row">Pipes, fittings and connections</th><td class="n" data-label="Listings">4,353</td><td class="n" data-label="Generic image">3,779</td><td class="n" data-label="%">87%</td></tr><tr><th scope="row">Cylinder head and timing</th><td class="n" data-label="Listings">3,886</td><td class="n" data-label="Generic image">833</td><td class="n" data-label="%">21%</td></tr><tr><th scope="row">Bolts and fasteners</th><td class="n" data-label="Listings">3,336</td><td class="n" data-label="Generic image">2,029</td><td class="n" data-label="%">61%</td></tr><tr><th scope="row">Pistons, rods and crankshaft</th><td class="n" data-label="Listings">2,651</td><td class="n" data-label="Generic image">1,082</td><td class="n" data-label="%">41%</td></tr><tr><th scope="row">Turbo, intake and exhaust</th><td class="n" data-label="Listings">2,464</td><td class="n" data-label="Generic image">1,793</td><td class="n" data-label="%">73%</td></tr><tr><th scope="row">Cooling system</th><td class="n" data-label="Listings">1,478</td><td class="n" data-label="Generic image">832</td><td class="n" data-label="%">56%</td></tr><tr><th scope="row">Repair kits and sets</th><td class="n" data-label="Listings">1,463</td><td class="n" data-label="Generic image">1,231</td><td class="n" data-label="%">84%</td></tr><tr><th scope="row">Lubrication system</th><td class="n" data-label="Listings">782</td><td class="n" data-label="Generic image">190</td><td class="n" data-label="%">24%</td></tr><tr><th scope="row">Electrical system and sensors</th><td class="n" data-label="Listings">704</td><td class="n" data-label="Generic image">45</td><td class="n" data-label="%">6.4%</td></tr><tr><th scope="row">Workshop tools</th><td class="n" data-label="Listings">413</td><td class="n" data-label="Generic image">3</td><td class="n" data-label="%">0.7%</td></tr><tr><th scope="row">Filtration</th><td class="n" data-label="Listings">407</td><td class="n" data-label="Generic image">305</td><td class="n" data-label="%">75%</td></tr><tr><th scope="row">Hydraulics</th><td class="n" data-label="Listings">229</td><td class="n" data-label="Generic image">143</td><td class="n" data-label="%">62%</td></tr><tr><th scope="row">Other engine parts</th><td class="n" data-label="Listings">177</td><td class="n" data-label="Generic image">26</td><td class="n" data-label="%">15%</td></tr><tr><th scope="row"><strong>Total</strong></th><td class="n" data-label="Listings"><strong>34,339</strong></td><td class="n" data-label="Generic image"><strong>22,211</strong></td><td class="n" data-label="%"><strong>65%</strong></td></tr></tbody></table></div>
+        <p class="section-label">/ 04 · Filters</p>
+        <h2>Search by vehicle does not fit in a plain filter</h2>
+        <p class="prose">Search &amp; Discovery can filter on list text metafields, but <strong>a filter shows at most 100 values in the shop</strong> and a group holds 200. Vehicle make fits: 10 values. Models and engine codes do not: <strong>1,179 models on only 559 listings, and 707 codes on 450</strong>.</p>
+        <div class="viz" role="figure" aria-label="Distinct filter values against the 100 values a filter shows">
+          <h3>Distinct values per filter</h3>
+          <ul class="bars"><li><span class="lab">Vehicle makes<br /><small>on 34,333 listings</small></span><span class="track"><span class="fill" style="width:0.8%"></span><span class="limit" style="left:8.33%"></span></span><span class="v">10</span></li><li><span class="lab">Engine codes<br /><small>on 450 listings</small></span><span class="track"><span class="fill acc" style="width:58.9%"></span><span class="limit" style="left:8.33%"></span></span><span class="v">707</span></li><li><span class="lab">Models<br /><small>on 559 listings</small></span><span class="track"><span class="fill acc" style="width:98.2%"></span><span class="limit" style="left:8.33%"></span></span><span class="v">1,179</span></li></ul>
+          <div class="legend"><span><i class="line"></i>100: most values a Search &amp; Discovery filter shows in the shop</span></div>
+        </div>
+        <p class="prose">Make does not narrow much either: <strong>one make is on 97% of listings</strong>. What works from day one are the <strong>15 automated collections by engine system</strong>. Searching by model or engine needs a fitment search (an app or metaobjects), and first, more compatibility data from suppliers.</p>
+      </div>
+    </section>
+
+    <section id="images">
+      <div class="wrap">
+        <p class="section-label">/ 05 · Images</p>
+        <h2>A generic image per family, where it makes sense</h2>
+        <p class="prose">With no photos, each listing gets its family’s generic image when there is one: <strong>22,211 listings, 65%</strong>. Google accepts it because the parts sit in the Vehicles &amp; Parts category. <strong>A gasket looks like the next gasket</strong>; a sensor or a workshop tool does not, and there coverage drops to almost zero.</p>
+        <div class="viz" role="figure" aria-label="Listings per engine system and how many have a generic image">
+          <h3>Listings per system, and how many get an image</h3>
+          <p class="cap">Bar length: listings, out of 34,339. Percentage: share with a generic image.</p>
+          <ul class="bars"><li><span class="lab">Fuel system</span><span class="track"><span class="fill" style="width:100.0%"></span><span class="fill in" style="width:70.0%"></span></span><span class="v">70%</span></li><li><span class="lab">Gaskets and seals</span><span class="track"><span class="fill" style="width:83.2%"></span><span class="fill in" style="width:81.5%"></span></span><span class="v">98%</span></li><li><span class="lab">Pipes, fittings and connections</span><span class="track"><span class="fill" style="width:66.5%"></span><span class="fill in" style="width:57.7%"></span></span><span class="v">87%</span></li><li><span class="lab">Cylinder head and timing</span><span class="track"><span class="fill" style="width:59.3%"></span><span class="fill in" style="width:12.7%"></span></span><span class="v">21%</span></li><li><span class="lab">Bolts and fasteners</span><span class="track"><span class="fill" style="width:50.9%"></span><span class="fill in" style="width:31.0%"></span></span><span class="v">61%</span></li><li><span class="lab">Pistons, rods and crankshaft</span><span class="track"><span class="fill" style="width:40.5%"></span><span class="fill in" style="width:16.5%"></span></span><span class="v">41%</span></li><li><span class="lab">Turbo, intake and exhaust</span><span class="track"><span class="fill" style="width:37.6%"></span><span class="fill in" style="width:27.4%"></span></span><span class="v">73%</span></li><li><span class="lab">Cooling system</span><span class="track"><span class="fill" style="width:22.6%"></span><span class="fill in" style="width:12.7%"></span></span><span class="v">56%</span></li><li><span class="lab">Repair kits and sets</span><span class="track"><span class="fill" style="width:22.3%"></span><span class="fill in" style="width:18.8%"></span></span><span class="v">84%</span></li><li><span class="lab">Lubrication system</span><span class="track"><span class="fill" style="width:11.9%"></span><span class="fill in" style="width:2.9%"></span></span><span class="v">24%</span></li><li><span class="lab">Electrical system and sensors</span><span class="track"><span class="fill" style="width:10.8%"></span><span class="fill in" style="width:0.7%"></span></span><span class="v">6.4%</span></li><li><span class="lab">Workshop tools</span><span class="track"><span class="fill" style="width:6.3%"></span><span class="fill in" style="width:0.0%"></span></span><span class="v">0.7%</span></li><li><span class="lab">Filtration</span><span class="track"><span class="fill" style="width:6.2%"></span><span class="fill in" style="width:4.7%"></span></span><span class="v">75%</span></li><li><span class="lab">Hydraulics</span><span class="track"><span class="fill" style="width:3.5%"></span><span class="fill in" style="width:2.2%"></span></span><span class="v">62%</span></li><li><span class="lab">Other engine parts</span><span class="track"><span class="fill" style="width:2.7%"></span><span class="fill in" style="width:0.4%"></span></span><span class="v">15%</span></li></ul>
+          <div class="legend"><span><i class="acc"></i>With generic image</span><span><i></i>Without image</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="import">
+      <div class="wrap">
+        <p class="section-label">/ 06 · Import</p>
+        <h2>The full catalogue does not go in at once</h2>
+        <p class="prose">The full import file weighs <strong>24.7 MB</strong> and Shopify takes <strong>15 MB per CSV</strong>. It has to go in two or more parts, or as samples, which is how the tool starts.</p>
+        <div class="viz" role="figure" aria-label="Size of the full import file against Shopify's limit">
+          <h3>Full import file</h3>
+          <ul class="bars"><li><span class="lab">34,379 rows</span><span class="track"><span class="fill acc" style="width:100%"></span><span class="limit" style="left:60.8%"></span></span><span class="v">24.7 MB</span></li></ul>
+          <div class="legend"><span><i class="line"></i>15 MB: largest CSV Shopify accepts per import</span></div>
+        </div>
+        <p class="prose">Updating prices has its own trap. With <strong>“Overwrite products with matching handles”</strong> on, <strong>a blank cell clears the value in the shop</strong>. That is why price changes go in a separate CSV with only 7 columns, matched by SKU: title, URL handle, option name and value, SKU, price and cost.</p>
       </div>
     </section>
 
     <section id="tests">
       <div class="wrap">
-        <p class="section-label">/ 04 · Two tests</p>
-        <h2>Two fixes that looked good on paper</h2>
-        <h3 class="subh">Image by name</h3>
-        <p class="prose">If a listing has no family image, the tool could look for one by words in the name. On the full catalogue that takes listings with an image from 22,211 to 25,311, 3,100 more. I reviewed a sample of 15 by hand: 14 showed the wrong part. A wrong photo on a spare part is worse than none, so it stays an advanced option, off by default.</p>
-        <h3 class="subh">Filtering by whole words</h3>
-        <p class="prose">The filter that drops what is not an engine part matches pieces of words. Matching whole words looks cleaner, but on the full files it removes 840 products, 420 of them springs, and lets in 75 new ones, such as cable grommets. 765 fewer products in total. Which products the shop should sell is the client’s call, not a code change, so the filter stays as it is.</p>
+        <p class="section-label">/ 07 · Two tests</p>
+        <h2>Two fixes that stayed out</h2>
+        <p class="prose">Both improved a number, and both stayed off after review.</p>
+        <div class="ba">
+          <div>
+            <h3>Image by name</h3>
+            <div class="pair"><b>22,211</b><span class="to">→</span><b>25,311</b></div>
+            <p>Looking up images by words in the name gives <strong>3,100 more listings</strong> a picture. In a hand-checked sample, <strong>14 of 15 showed the wrong part</strong>. A wrong photo breaks Google’s rule that the image shows the product.</p>
+            <span class="chip none verdict">Off by default</span>
+          </div>
+          <div>
+            <h3>Filtering by whole words</h3>
+            <div class="pair"><b>37,948</b><span class="to">→</span><b class="bad">37,183</b></div>
+            <p>Cleaner on paper. On the full files it <strong>removes 840 products, 420 of them springs</strong>, and lets in 75 that are not engine parts, such as cable grommets. What the shop sells is the client’s call.</p>
+            <span class="chip none verdict">Not shipped</span>
+          </div>
+        </div>
       </div>
     </section>
 
     <section id="method">
       <div class="wrap">
-        <p class="section-label">/ 05 · Method</p>
+        <p class="section-label">/ 08 · Method</p>
         <h2>How it was counted, and its limits</h2>
-        <ul class="list"><li>One company, five sources. It describes this case, not every supplier in the sector.</li><li>Counts come from the catalogue tool’s own output on the full files, run on 25 October 2026. A field counts as present when it is not empty.</li><li>The sources are anonymised as A to E. Product-level data is the client’s and is not published; the downloadable files only hold the counts on this page.</li><li>Prices are market prices from source E and the online shop listing, not the distributor’s own tariff.</li><li>The image test was checked on a sample of 15 listings, enough to see the problem, not to measure its exact size.</li></ul>
-        <p class="prose">How the tool that did the counting was built, and what it changed for the client: <a href="../../work/parts-catalogue/">the case study</a>.</p>
+        <ul class="list"><li><strong>One company, five sources.</strong> It describes this case, not the whole sector.</li><li><strong>Counts come from the tool itself</strong> on the full files, run on 25 October 2026. A field counts as present when it is not empty.</li><li><strong>Sources anonymised as A to E.</strong> Product-level data is the client’s; the downloadable files only hold the counts on this page.</li><li><strong>Market prices</strong> from source E and the online shop listing, not the distributor’s tariff.</li><li><strong>The image test was checked on 15 listings</strong>: enough to see the problem, not to size it exactly.</li><li><strong>Shopify and Google limits</strong> taken from their documentation on 26 October 2026.</li></ul>
+        <p class="prose"><strong>Sources:</strong> <a href="https://help.shopify.com/en/manual/products/import-export/import-products">Shopify: importing products with a CSV file</a> · <a href="https://help.shopify.com/en/manual/online-store/search-and-discovery/filters">Shopify: Search &amp; Discovery filters</a> · <a href="https://support.google.com/merchants/answer/6324350?hl=en">Google: image link</a> · <a href="https://support.google.com/merchants/answer/160161?hl=en">Google: product identifiers</a></p>
+        <p class="prose">How the tool that did the counting was built: <a href="../../work/parts-catalogue/"><strong>the case study</strong></a>.</p>
       </div>
     </section>
 

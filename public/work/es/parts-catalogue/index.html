@@ -606,6 +606,71 @@
       .flow li:last-child { border-right: 0; }
     }
   </style>
+  <style>
+    /* Solid accent, no gradients: nothing gets clipped at the edges */
+    .glow { display: none !important; }
+    h1 em { background: none !important; color: var(--accent) !important; -webkit-text-fill-color: currentColor; animation: none !important; padding-right: 0.12em; }
+  </style>
+  <style>
+    /* Charts and diagrams: flat bars on theme tokens, no gradients */
+    .viz { margin-top: 32px; border: 1px solid var(--line); padding: 24px; }
+    .viz + .viz { margin-top: 16px; }
+    .viz h3 { font-family: var(--font-display); font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+    .viz .cap { margin-top: 6px; font-size: 0.875rem; color: var(--muted); max-width: 46rem; }
+    .bars { list-style: none; margin: 20px 0 0; padding: 0; display: grid; gap: 12px; }
+    .bars li { display: grid; grid-template-columns: minmax(7rem, 14rem) minmax(0, 1fr) 5.5rem; gap: 12px; align-items: center; font-size: 0.875rem; }
+    .bars .lab { min-width: 0; }
+    .bars .track { position: relative; height: 14px; background: var(--surface); }
+    .bars .fill { position: absolute; top: 0; bottom: 0; left: 0; background: var(--ink); }
+    .bars .fill.acc { background: var(--accent); }
+    .bars .fill.in { background: var(--accent); }
+    .bars .v { text-align: right; font-family: var(--font-display); font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .bars li.zero .v { color: var(--accent); }
+    .bars li.zero .track { outline: 1px dashed var(--accent); outline-offset: -1px; background: transparent; }
+    .bars .limit { position: absolute; top: -6px; bottom: -6px; border-left: 2px solid var(--accent); }
+    .legend { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 16px; font-size: 0.8125rem; color: var(--muted); }
+    .legend span { display: inline-flex; align-items: center; gap: 8px; }
+    .legend i { display: inline-block; width: 12px; height: 12px; background: var(--ink); }
+    .legend i.acc { background: var(--accent); }
+    .legend i.line { width: 2px; height: 14px; background: var(--accent); }
+    .legend i.dash { background: transparent; outline: 1px dashed var(--accent); outline-offset: -1px; }
+    .stackbar { display: flex; height: 40px; margin-top: 20px; gap: 2px; }
+    .stackbar span { background: var(--surface); min-width: 6px; }
+    .stackbar span.big { background: var(--ink); }
+    .stackbar span.acc { background: var(--accent); }
+    .stacklab { display: flex; justify-content: space-between; gap: 12px; margin-top: 8px; font-size: 0.8125rem; color: var(--muted); }
+    .stacklab b { color: var(--ink); font-family: var(--font-display); }
+    .fmap { margin-top: 32px; display: grid; gap: 0; border-top: 1px solid var(--line); }
+    .fmap .row { display: grid; grid-template-columns: 11rem minmax(0, 1fr) minmax(0, 1fr); gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--line); align-items: start; }
+    .fmap .row.head { padding: 12px 0; font-family: var(--font-display); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+    .fmap .f { font-family: var(--font-display); font-weight: 600; }
+    .fmap .f small { display: block; margin-top: 6px; }
+    .fmap p { font-size: 0.9375rem; }
+    .fmap p + p { margin-top: 6px; }
+    .fmap code { font-size: 0.8125rem; }
+    .chip { display: inline-block; padding: 2px 8px; font-family: var(--font-display); font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; border: 1px solid var(--ink); color: var(--ink); }
+    .chip.part { border-color: var(--accent); color: var(--accent); }
+    .chip.none { background: var(--ink); color: var(--bg); }
+    .chip.tool { background: var(--accent-soft); border-color: var(--accent-soft); color: var(--ink); }
+    .ba { margin-top: 32px; display: grid; gap: 16px; grid-template-columns: 1fr; }
+    @media (min-width: 760px) { .ba { grid-template-columns: 1fr 1fr; } }
+    .ba > div { border: 1px solid var(--line); padding: 24px; min-width: 0; }
+    .ba h3 { font-family: var(--font-display); font-size: 1rem; font-weight: 600; }
+    .ba .pair { display: flex; align-items: baseline; gap: 12px; margin-top: 16px; flex-wrap: wrap; font-family: var(--font-display); font-variant-numeric: tabular-nums; }
+    .ba .pair b { font-size: 2rem; line-height: 1; }
+    .ba .pair .to { color: var(--muted); }
+    .ba .pair .bad { color: var(--accent); }
+    .ba p { margin-top: 12px; font-size: 0.9375rem; }
+    .ba .verdict { margin-top: 16px; display: inline-block; }
+    .prose strong, .section-intro strong { color: var(--ink); }
+    @media (max-width: 640px) {
+      .viz { padding: 18px; }
+      .bars li { grid-template-columns: minmax(0, 1fr) auto; row-gap: 6px; }
+      .bars .track { grid-column: 1 / -1; grid-row: 2; }
+      .fmap .row { grid-template-columns: 1fr; gap: 8px; }
+      .fmap .row.head { display: none; }
+    }
+  </style>
 </head>
 
 <body>
@@ -632,8 +697,6 @@
 
   <main>
     <div class="hero wrap">
-      <span class="glow" style="top: -140px; right: -160px;" aria-hidden="true"></span>
-      <span class="glow" style="bottom: -220px; left: -240px; width: 380px; height: 380px;" aria-hidden="true"></span>
       <span class="deco" style="top: 110px; right: 12%; width: 14px; height: 14px;" aria-hidden="true"></span>
       <span class="deco" style="top: 220px; right: 5%; width: 8px; height: 8px; opacity: 0.55; animation-delay: 1.2s;" aria-hidden="true"></span>
       <p class="kicker">/ Caso &middot; Datos y herramientas para ecommerce</p>
@@ -655,25 +718,21 @@
         <div><dt>Plataforma</dt><dd>Shopify</dd></div>
         <div><dt>Hecho con</dt><dd>Python, Streamlit, Admin API de Shopify</dd></div>
         <div><dt>Rol</dt><dd>Diagnóstico, herramienta de datos y montaje de la tienda</dd></div>
-        <div><dt>Estado</dt><dd>Funcionando en una tienda de desarrollo</dd></div>
         <div><dt>Contexto</dt><dd>Proyecto independiente, octubre de 2026</dd></div>
       </dl>
 
       <p class="note">
         <strong>Qué es esta página:</strong> el cliente queda en el anonimato, igual que sus
-        proveedores y marcas. Las cifras salen de pasar la herramienta por los catálogos reales
-        de los proveedores; las de la tienda, de una tienda de desarrollo de Shopify, que se
-        comporta igual que la real. El código lo escribí programando en pareja con Claude, como
+        proveedores y marcas. Las cifras salen de pasar la herramienta por los catálogos completos de los proveedores. El código lo escribí programando en pareja con Claude, como
         el resto de esta web: yo decidí qué construir y comprobé cada resultado contra los datos.
       </p>
     </div>
 
     <!-- ============ HIGHLIGHTS ============ -->
     <section id="highlights">
-      <span class="glow" style="top: -80px; right: -280px;" aria-hidden="true"></span>
       <div class="wrap">
         <p class="section-label">/ En corto</p>
-        <h2>En qué consistió de verdad</h2>
+        <h2>El proyecto en cifras</h2>
 
         <div class="figs">
           <div><b>192</b><span>productos en una tienda que debería tener más de 1.000</span></div>
@@ -688,7 +747,7 @@
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <circle cx="12" cy="12" r="9" /><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.5v.7" /><path d="M12 17h.01" />
             </svg>
-            <h3>La primera pregunta, no el primer boceto</h3>
+            <h3>Primero, para qué es la web</h3>
             <p>Antes de proponer nada pregunté para qué era la web: informar, vender o las dos cosas. Las dos. Eso apartó el rediseño y señaló la mitad que fallaba.</p>
           </article>
           <article class="hl-item">
@@ -724,7 +783,7 @@
               <path d="M3 3v18h18" /><path d="m7 15 4-4 3 3 5-6" />
             </svg>
             <h3>Medir antes de cambiar</h3>
-            <p>Cada cambio se pasó por el catálogo real completo y se comparó producto a producto. Un arreglo que parecía obvio habría quitado 840 productos, así que no se hizo.</p>
+            <p>Cada cambio se pasó por el catálogo completo y se comparó producto a producto. Un arreglo que parecía obvio habría quitado 840 productos, así que no se hizo.</p>
           </article>
         </div>
       </div>
@@ -732,23 +791,23 @@
 
     <!-- ============ 01 EL PROBLEMA ============ -->
     <section id="problem">
-      <span class="glow" style="top: 40px; left: -280px;" aria-hidden="true"></span>
       <div class="wrap">
         <p class="section-label">/ 01 &middot; El problema</p>
         <h2>Una web nueva no habría añadido ni un producto</h2>
         <p class="section-intro">
           El encargo era una web nueva. Al mirar la que tenían, no estaba mal, así que la pregunta
           útil era para qué la querían. La respuesta fue las dos cosas: presentar la empresa y
-          vender. La parte de presentación funcionaba. La tienda tenía 192 productos cuando el
-          catálogo pasa de mil, y ni siquiera esos 192 estaban bien: fallos en las categorías y
+          vender. La parte de presentación funcionaba. <strong>La tienda tenía 192 productos cuando el
+          catálogo pasa de mil</strong>, y ni siquiera esos 192 estaban bien: fallos en las categorías y
           enlaces del menú que no llevaban a ningún sitio.
         </p>
         <p class="section-intro">
           La causa estaba antes de la web. Cada proveedor manda precios y referencias a su manera:
           hojas de Excel, exportaciones en CSV, catálogos en PDF, cada uno con columnas y nombres
-          distintos para lo mismo. Ninguno ofrece API. Subir un producto a la tienda era copiarlo
-          a mano del fichero que lo tuviera, y por eso la mayoría nunca llegó.
+          distintos para lo mismo. <strong>Ninguno ofrece API.</strong> Subir un producto a la tienda era copiarlo
+          a mano del fichero que lo tuviera, y por eso <strong>la mayoría nunca llegó</strong>.
         </p>
+        <div class="viz" role="figure" aria-label="Productos en la tienda frente al catálogo"><h3>Productos en la tienda frente al catálogo</h3><ul class="bars"><li><span class="lab">En la tienda</span><span class="track"><span class="fill acc" style="width:19.2%"></span></span><span class="v">192</span></li><li><span class="lab">En el catálogo del cliente</span><span class="track"><span class="fill" style="width:100.0%"></span></span><span class="v">+1.000</span></li></ul></div>
         <p class="note">
           <strong>La decisión:</strong> mantener la web y la plataforma, y arreglar el proceso que
           alimenta la tienda. Un rediseño se habría visto más y no habría cambiado nada de los 192.
@@ -760,16 +819,17 @@
     <section id="data">
       <div class="wrap">
         <p class="section-label">/ 02 &middot; Los datos</p>
-        <h2>Lo que traen de verdad los ficheros de proveedores</h2>
+        <h2>Lo que traen los ficheros de proveedores</h2>
         <p class="section-intro">
           Antes de diseñar nada pasé todas las fuentes de proveedores por la misma cadena y conté
           lo que salía. Los catálogos completos son mucho más grandes que lo que venderá la
           tienda (unos mil productos para empezar), lo que los convertía en una buena prueba de
           carga.
         </p>
+        <div class="viz" role="figure" aria-label="De las filas de los proveedores a las fichas de Shopify"><h3>De las filas de los proveedores a las fichas de Shopify</h3><p class="cap">Cinco fuentes juntas. Se descartan las filas que no son recambio de motor, se juntan las piezas repetidas y quedan fuera las que ninguna fuente da con precio.</p><ul class="bars"><li><span class="lab">Filas leídas</span><span class="track"><span class="fill" style="width:100.0%"></span></span><span class="v">110.492</span></li><li><span class="lab">Productos distintos</span><span class="track"><span class="fill" style="width:34.3%"></span></span><span class="v">37.948</span></li><li><span class="lab">Variantes listas para Shopify</span><span class="track"><span class="fill acc" style="width:31.1%"></span></span><span class="v">34.379</span></li><li><span class="lab">Fichas de producto</span><span class="track"><span class="fill acc" style="width:31.1%"></span></span><span class="v">34.339</span></li></ul></div>
         <div class="tbl" tabindex="0" role="region" aria-label="Tabla">
           <table>
-            <thead><tr><th>Medido con los ficheros reales</th><th>Resultado</th></tr></thead>
+            <thead><tr><th>Medido con los ficheros completos</th><th>Resultado</th></tr></thead>
             <tbody>
             <tr><td><strong>Productos distintos tras juntar todas las fuentes</strong></td><td>37.948</td></tr>
             <tr><td><strong>Listos para Shopify</strong></td><td>34.379 variantes en 34.339 fichas</td></tr>
@@ -790,7 +850,6 @@
 
     <!-- ============ 03 LA HERRAMIENTA ============ -->
     <section id="tool">
-      <span class="glow" style="top: 0; right: -280px;" aria-hidden="true"></span>
       <div class="wrap">
         <p class="section-label">/ 03 &middot; La herramienta</p>
         <h2>Un motor, cinco etapas</h2>
@@ -838,12 +897,26 @@
             <tbody>
             <tr><td><strong>No inventar el stock</strong></td><td>Sin API de los proveedores no hay una cifra de stock fiable. Cada producto dice "consulta disponibilidad" con el teléfono de la tienda en vez de un "en stock" que nadie puede garantizar. El campo ya existe para cuando haya datos reales.</td></tr>
             <tr><td><strong>Imágenes por tipo de pieza, no por nombre</strong></td><td>Buscar la imagen por palabras del nombre añadiría 3.100 fotos más. Revisé una muestra: casi todas eran erróneas, como una tapa de bomba con la foto de la bomba entera. La opción existe, apagada.</td></tr>
-            <tr><td><strong>Probar primero con una muestra</strong></td><td>Una primera importación de unos 33.000 productos se atascó en la tienda de pruebas. Desde entonces la herramienta genera muestras del tamaño que se quiera, repartidas entre familias, y puede repetir la misma para comparar el antes y el después.</td></tr>
+            <tr><td><strong>Probar primero con una muestra</strong></td><td>Una primera importación de unos 33.000 productos se atascó. Desde entonces la herramienta genera muestras del tamaño que se quiera, repartidas entre familias, y puede repetir la misma para comparar el antes y el después.</td></tr>
             <tr><td><strong>Un modo aparte para actualizar</strong></td><td>Reimportar todo con "sobrescribir" devolvería a borrador los productos publicados y vaciaría lo que se haya rellenado a mano. El modo actualizar lee la exportación de la tienda, empareja por SKU y envía solo las columnas que cambian.</td></tr>
             <tr><td><strong>Montaje seguro de la tienda</strong></td><td>Simula salvo que se le diga lo contrario, mira lo que existe antes de crear nada, nunca borra, pide las credenciales al arrancar y usa una llave que caduca en 24 horas.</td></tr>
-            <tr><td><strong>Avisar, no elegir en silencio</strong></td><td>Dos ficheros que no coinciden, la misma referencia con dos marcas, un perfil a punto de pisar otro: todo se le enseña a quien la usa en vez de decidirlo por su cuenta.</td></tr>
+            <tr><td><strong>Avisar antes de elegir</strong></td><td>Dos ficheros que no coinciden, la misma referencia con dos marcas, un perfil a punto de pisar otro: todo se le enseña a quien la usa en vez de decidirlo por su cuenta.</td></tr>
             </tbody>
           </table>
+        </div>
+        <div class="ba">
+          <div>
+            <h3>Reimportar todo con “sobrescribir”</h3>
+            <p>Una celda vacía en el CSV <strong>borra el valor de la tienda</strong>.</p>
+            <ul class="list"><li>Los productos publicados <strong>vuelven a borrador</strong></li><li>Los textos y fotos puestos a mano <strong>se vacían</strong></li><li>Cada fila se sube aunque no haya cambiado nada</li></ul>
+            <span class="chip none verdict">Se descarta</span>
+          </div>
+          <div>
+            <h3>Modo actualizar</h3>
+            <p>Lee la exportación de la tienda, <strong>empareja por SKU</strong> y compara.</p>
+            <ul class="list"><li><strong>Solo cambian precio y coste</strong>, en un CSV de 7 columnas</li><li>Los productos nuevos van en un fichero aparte, como borrador</li><li>Estado, textos y fotos <strong>no se tocan</strong></li></ul>
+            <span class="chip tool verdict">Lo que hace la herramienta</span>
+          </div>
         </div>
         <div class="cards gallery">
           <div class="card wide">
@@ -851,9 +924,9 @@
               <img src="../../img/catalogo-actualizar.webp" width="1600" height="1332" alt="La interfaz de la herramienta en modo actualizar: las dos decisiones principales destacadas, después cuatro cifras (1 producto cambia, 1 nuevo, 24 ya en la tienda, 0 sin tocar) y las instrucciones para importar cada fichero" loading="lazy" data-zoom />
             </figure>
             <div class="body">
-              <h3>El modo actualizar, en una tienda de prueba</h3>
+              <h3>El modo actualizar, con datos de ejemplo</h3>
               <p>
-                Una tienda simulada de 24 productos con un precio viejo y un producto sin subir:
+                Una exportación de ejemplo de 24 productos, con un precio viejo y un producto sin subir:
                 la herramienta encuentra justo un cambio y un producto nuevo, y explica cómo se
                 importa cada fichero.
               </p>
@@ -865,7 +938,6 @@
 
     <!-- ============ 05 INCIDENCIAS ============ -->
     <section id="incidents">
-      <span class="glow" style="top: 0; right: -280px;" aria-hidden="true"></span>
       <div class="wrap">
         <p class="section-label">/ 05 &middot; Incidencias</p>
         <h2>Lo que se rompió, y algo que decidí no arreglar</h2>
@@ -877,11 +949,11 @@
           <table>
             <thead><tr><th>Síntoma</th><th>Causa</th><th>Lección</th></tr></thead>
             <tbody>
-            <tr><td><strong>Importación de ~33.000 productos atascada</strong></td><td>Sin investigar: se sustituyó la tienda de pruebas.</td><td>Empezar por una muestra. De ahí salió el modo muestra.</td></tr>
-            <tr><td><strong>~3.000 productos importados invisibles</strong></td><td>No estaban publicados en el canal de la tienda online.</td><td>Publicar es una columna de la importación, no un paso posterior.</td></tr>
+            <tr><td><strong>Importación de ~33.000 productos atascada</strong></td><td>Sin investigar; se volvió a empezar por partes.</td><td>Empezar por una muestra. De ahí salió el modo muestra.</td></tr>
+            <tr><td><strong>~3.000 productos importados invisibles</strong></td><td>No estaban publicados en el canal de la tienda online.</td><td>Publicar va ahora en la importación, como una columna más.</td></tr>
             <tr><td><strong>Las bombas de mano desaparecían</strong></td><td>"HAND" se traducía como "manual", y el filtro descarta los manuales de mantenimiento.</td><td>Una traducción puede hacer saltar un filtro más adelante. Ahora es "de mano".</td></tr>
             <tr><td><strong>514 productos en "Otros"</strong></td><td>Faltaban reglas para cojinetes, retenes, mangueras, piezas hidráulicas y útiles de taller.</td><td>Reglas nuevas y un sistema nuevo, Hidráulica: bajó a 177. El orden de las reglas importa.</td></tr>
-            <tr><td><strong>12 productos con la foto de otro</strong></td><td>Sin analizar; se encontraron revisando la tienda de pruebas a ojo.</td><td>Retiradas y comprobadas una a una: 124 de 188 productos con imagen, ninguno de los 12.</td></tr>
+            <tr><td><strong>12 productos con la foto de otro</strong></td><td>Sin analizar; se encontraron revisando la tienda a ojo.</td><td>Retiradas y comprobadas una a una: 124 de 188 productos con imagen, ninguno de los 12.</td></tr>
             <tr><td><strong>El script de montaje fallaba en Windows</strong></td><td>El Python del equipo se fiaba de un certificado caducado.</td><td>Llevar los certificados (certifi) con la herramienta en vez de fiarse del equipo.</td></tr>
             <tr><td><strong>No se podía crear la app como antes</strong></td><td>Shopify dejó de permitir apps personalizadas nuevas en el panel el 1 de enero de 2026.</td><td>App creada en el Dev Dashboard con credenciales de cliente. Cada app pertenece a su tienda.</td></tr>
             <tr><td><strong>"0.206" kg leído como 206 kg</strong></td><td>Un punto seguido de tres cifras se tomaba como miles, como en las tarifas europeas.</td><td>Encontrado al revisar el código, antes de que llegara ningún peso. Cada perfil indica ahora su formato de decimales.</td></tr>
@@ -894,29 +966,27 @@
 
     <!-- ============ 06 QUÉ DEMUESTRA ============ -->
     <section id="value">
-      <span class="glow" style="bottom: 0; left: -280px;" aria-hidden="true"></span>
       <div class="wrap">
         <p class="section-label">/ 06 &middot; Qué demuestra</p>
-        <h2>Por qué merece la pena leerlo</h2>
+        <h2>Lo que demuestra</h2>
         <div class="tbl" tabindex="0" role="region" aria-label="Tabla">
           <table>
             <thead><tr><th>Afirmación</th><th>Prueba</th></tr></thead>
             <tbody>
             <tr><td><strong>Diagnóstico antes que entrega</strong></td><td>El encargo era una web; el arreglo fue un proceso de datos. Los 192 frente a más de 1.000 lo decidieron.</td></tr>
-            <tr><td><strong>Datos desordenados, tratados con honestidad</strong></td><td>37.948 productos de fuentes que no coinciden en formato, idioma ni datos, con cada exclusión y cada conflicto listados en vez de escondidos.</td></tr>
-            <tr><td><strong>Segura en una tienda real</strong></td><td>Montaje que simula, sin borrados, sin credenciales guardadas, y un modo actualizar que no puede tocar estado, textos ni fotos.</td></tr>
-            <tr><td><strong>Comprobado, no supuesto</strong></td><td>37 pruebas automáticas, y cada cambio comparado producto a producto con el catálogo real completo antes de darlo por bueno.</td></tr>
+            <tr><td><strong>Datos desordenados, sin esconder nada</strong></td><td>37.948 productos de fuentes que no coinciden en formato, idioma ni datos, con cada exclusión y cada conflicto listados en vez de escondidos.</td></tr>
+            <tr><td><strong>Segura para la tienda</strong></td><td>Montaje que simula, sin borrados, sin credenciales guardadas, y un modo actualizar que no puede tocar estado, textos ni fotos.</td></tr>
+            <tr><td><strong>Cada cambio, medido</strong></td><td>37 pruebas automáticas, y cada cambio comparado producto a producto con el catálogo completo antes de darlo por bueno.</td></tr>
             <tr><td><strong>Entregada</strong></td><td>Una interfaz de cuatro pasos, una guía de dos páginas para quien la usa, documentación completa y un repositorio privado con un commit por cambio.</td></tr>
             </tbody>
           </table>
         </div>
         <p class="note">
-          <strong>Pendiente:</strong> pasar de la tienda de desarrollo a la real, tarifas reales
-          del distribuidor en vez de precios de mercado, filtros por vehículo y motor en la tienda,
+          <strong>Siguientes pasos:</strong> tarifas del distribuidor en vez de precios de mercado, filtros por vehículo y motor en la tienda,
           más fotos, y decidir con el cliente qué pasa con los productos que ya están en la tienda
-          sin referencia. Una herramienta sin nada pendiente es una herramienta que no usa nadie.
+          sin referencia.
         </p>
-        <p class="note"><strong>Los datos de detrás:</strong> qué traen de verdad las cinco fuentes, contado campo a campo, está en un estudio aparte: <a href="../../../research/es/catalogos-proveedores/">¿Qué traen de verdad los catálogos de proveedor?</a></p>
+        <p class="note"><strong>Los datos de detrás:</strong> qué traen las cinco fuentes, contado campo a campo frente a lo que necesitan Shopify y Google, está en un estudio aparte: <a href="../../../research/es/catalogos-proveedores/">¿Qué le falta a un catálogo de proveedor para Shopify?</a></p>
       </div>
     </section>
 
@@ -927,7 +997,6 @@
   </div>
 
   <section class="cta" id="contact">
-    <span class="glow" style="top: -160px; right: -160px;" aria-hidden="true"></span>
     <div class="wrap">
       <p class="kicker">/ Siguiente</p>
       <h2>Todo conecta.</h2>

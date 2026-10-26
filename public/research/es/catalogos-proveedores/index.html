@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>¿Qué traen los catálogos de proveedor? · Investigación · Hache Cervera</title>
-  <meta name="description" content="Investigación propia: qué datos traen cinco fuentes de proveedor de una empresa de recambios de motor (37.948 productos). Cero fotos, un 3,8 % con descripción. Solo agregados, con los datos para descargar." />
+  <title>¿Qué le falta a un catálogo de proveedor para Shopify? · Investigación · Hache Cervera</title>
+  <meta name="description" content="Investigación propia: 37.948 productos de cinco fuentes de proveedor de recambios de motor, comparados con lo que Shopify y Google necesitan. Cero fotos, cero GTIN, cero pesos. Solo agregados, con los datos para descargar." />
   <link rel="canonical" href="https://hache-cervera.github.io/research/es/catalogos-proveedores/" />
   <link rel="alternate" hreflang="es" href="https://hache-cervera.github.io/research/es/catalogos-proveedores/" />
   <link rel="alternate" hreflang="en" href="https://hache-cervera.github.io/research/supplier-catalogues/" />
-  <meta property="og:title" content="¿Qué traen los catálogos de proveedor?" />
-  <meta property="og:description" content="Investigación propia: qué datos traen cinco fuentes de proveedor de una empresa de recambios de motor (37.948 productos). Cero fotos, un 3,8 % con descripción. Solo agregados, con los datos para descargar." />
+  <meta property="og:title" content="¿Qué le falta a un catálogo de proveedor para Shopify?" />
+  <meta property="og:description" content="Investigación propia: 37.948 productos de cinco fuentes de proveedor de recambios de motor, comparados con lo que Shopify y Google necesitan. Cero fotos, cero GTIN, cero pesos. Solo agregados, con los datos para descargar." />
   <meta property="og:image" content="https://hache-cervera.github.io/og-home.jpg" />
   <meta property="og:url" content="https://hache-cervera.github.io/research/es/catalogos-proveedores/" />
   <meta property="og:type" content="article" />
@@ -23,7 +23,7 @@
     @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400 500; font-display: swap; src: url('/fonts/inter-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
   </style>
   <script>(function () { try { document.documentElement.dataset.theme = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light'; } catch (e) {} })();</script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"¿Qué traen los catálogos de proveedor?","description":"Investigación propia: qué datos traen cinco fuentes de proveedor de una empresa de recambios de motor (37.948 productos). Cero fotos, un 3,8 % con descripción. Solo agregados, con los datos para descargar.","inLanguage":"es","datePublished":"2026-10-26","url":"https://hache-cervera.github.io/research/es/catalogos-proveedores/","image":"https://hache-cervera.github.io/og-home.jpg","author":{"@type":"Person","name":"Ada (hache) Cervera","url":"https://hache-cervera.github.io/"}},{"@type":"Dataset","name":"Catálogos de proveedor de recambios de motor: qué datos traen (octubre 2026)","description":"Investigación propia: qué datos traen cinco fuentes de proveedor de una empresa de recambios de motor (37.948 productos). Cero fotos, un 3,8 % con descripción. Solo agregados, con los datos para descargar.","inLanguage":"es","creator":{"@type":"Person","name":"Ada (hache) Cervera"},"temporalCoverage":"2026-10-25","isAccessibleForFree":true,"distribution":[{"@type":"DataDownload","encodingFormat":"text/csv","contentUrl":"https://hache-cervera.github.io/research/data/supplier-catalogues-2026-10.csv"},{"@type":"DataDownload","encodingFormat":"application/json","contentUrl":"https://hache-cervera.github.io/research/data/supplier-catalogues-2026-10.json"}]}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"¿Qué le falta a un catálogo de proveedor para Shopify?","description":"Investigación propia: 37.948 productos de cinco fuentes de proveedor de recambios de motor, comparados con lo que Shopify y Google necesitan. Cero fotos, cero GTIN, cero pesos. Solo agregados, con los datos para descargar.","inLanguage":"es","datePublished":"2026-10-26","url":"https://hache-cervera.github.io/research/es/catalogos-proveedores/","image":"https://hache-cervera.github.io/og-home.jpg","author":{"@type":"Person","name":"Ada (hache) Cervera","url":"https://hache-cervera.github.io/"}},{"@type":"Dataset","name":"Catálogos de proveedor de recambios de motor: qué datos traen (octubre 2026)","description":"Investigación propia: 37.948 productos de cinco fuentes de proveedor de recambios de motor, comparados con lo que Shopify y Google necesitan. Cero fotos, cero GTIN, cero pesos. Solo agregados, con los datos para descargar.","inLanguage":"es","creator":{"@type":"Person","name":"Ada (hache) Cervera"},"temporalCoverage":"2026-10-25","isAccessibleForFree":true,"distribution":[{"@type":"DataDownload","encodingFormat":"text/csv","contentUrl":"https://hache-cervera.github.io/research/data/supplier-catalogues-2026-10.csv"},{"@type":"DataDownload","encodingFormat":"application/json","contentUrl":"https://hache-cervera.github.io/research/data/supplier-catalogues-2026-10.json"}]}]}</script>
   <style>
     :root {
       --bg: #ffffff;
@@ -633,6 +633,71 @@
     }
   </style>
   <script src="/consent.js" defer></script>
+  <style>
+    /* Solid accent, no gradients: nothing gets clipped at the edges */
+    .glow { display: none !important; }
+    h1 em { background: none !important; color: var(--accent) !important; -webkit-text-fill-color: currentColor; animation: none !important; padding-right: 0.12em; }
+  </style>
+  <style>
+    /* Charts and diagrams: flat bars on theme tokens, no gradients */
+    .viz { margin-top: 32px; border: 1px solid var(--line); padding: 24px; }
+    .viz + .viz { margin-top: 16px; }
+    .viz h3 { font-family: var(--font-display); font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+    .viz .cap { margin-top: 6px; font-size: 0.875rem; color: var(--muted); max-width: 46rem; }
+    .bars { list-style: none; margin: 20px 0 0; padding: 0; display: grid; gap: 12px; }
+    .bars li { display: grid; grid-template-columns: minmax(7rem, 14rem) minmax(0, 1fr) 5.5rem; gap: 12px; align-items: center; font-size: 0.875rem; }
+    .bars .lab { min-width: 0; }
+    .bars .track { position: relative; height: 14px; background: var(--surface); }
+    .bars .fill { position: absolute; top: 0; bottom: 0; left: 0; background: var(--ink); }
+    .bars .fill.acc { background: var(--accent); }
+    .bars .fill.in { background: var(--accent); }
+    .bars .v { text-align: right; font-family: var(--font-display); font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .bars li.zero .v { color: var(--accent); }
+    .bars li.zero .track { outline: 1px dashed var(--accent); outline-offset: -1px; background: transparent; }
+    .bars .limit { position: absolute; top: -6px; bottom: -6px; border-left: 2px solid var(--accent); }
+    .legend { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 16px; font-size: 0.8125rem; color: var(--muted); }
+    .legend span { display: inline-flex; align-items: center; gap: 8px; }
+    .legend i { display: inline-block; width: 12px; height: 12px; background: var(--ink); }
+    .legend i.acc { background: var(--accent); }
+    .legend i.line { width: 2px; height: 14px; background: var(--accent); }
+    .legend i.dash { background: transparent; outline: 1px dashed var(--accent); outline-offset: -1px; }
+    .stackbar { display: flex; height: 40px; margin-top: 20px; gap: 2px; }
+    .stackbar span { background: var(--surface); min-width: 6px; }
+    .stackbar span.big { background: var(--ink); }
+    .stackbar span.acc { background: var(--accent); }
+    .stacklab { display: flex; justify-content: space-between; gap: 12px; margin-top: 8px; font-size: 0.8125rem; color: var(--muted); }
+    .stacklab b { color: var(--ink); font-family: var(--font-display); }
+    .fmap { margin-top: 32px; display: grid; gap: 0; border-top: 1px solid var(--line); }
+    .fmap .row { display: grid; grid-template-columns: 11rem minmax(0, 1fr) minmax(0, 1fr); gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--line); align-items: start; }
+    .fmap .row.head { padding: 12px 0; font-family: var(--font-display); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+    .fmap .f { font-family: var(--font-display); font-weight: 600; }
+    .fmap .f small { display: block; margin-top: 6px; }
+    .fmap p { font-size: 0.9375rem; }
+    .fmap p + p { margin-top: 6px; }
+    .fmap code { font-size: 0.8125rem; }
+    .chip { display: inline-block; padding: 2px 8px; font-family: var(--font-display); font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; border: 1px solid var(--ink); color: var(--ink); }
+    .chip.part { border-color: var(--accent); color: var(--accent); }
+    .chip.none { background: var(--ink); color: var(--bg); }
+    .chip.tool { background: var(--accent-soft); border-color: var(--accent-soft); color: var(--ink); }
+    .ba { margin-top: 32px; display: grid; gap: 16px; grid-template-columns: 1fr; }
+    @media (min-width: 760px) { .ba { grid-template-columns: 1fr 1fr; } }
+    .ba > div { border: 1px solid var(--line); padding: 24px; min-width: 0; }
+    .ba h3 { font-family: var(--font-display); font-size: 1rem; font-weight: 600; }
+    .ba .pair { display: flex; align-items: baseline; gap: 12px; margin-top: 16px; flex-wrap: wrap; font-family: var(--font-display); font-variant-numeric: tabular-nums; }
+    .ba .pair b { font-size: 2rem; line-height: 1; }
+    .ba .pair .to { color: var(--muted); }
+    .ba .pair .bad { color: var(--accent); }
+    .ba p { margin-top: 12px; font-size: 0.9375rem; }
+    .ba .verdict { margin-top: 16px; display: inline-block; }
+    .prose strong, .section-intro strong { color: var(--ink); }
+    @media (max-width: 640px) {
+      .viz { padding: 18px; }
+      .bars li { grid-template-columns: minmax(0, 1fr) auto; row-gap: 6px; }
+      .bars .track { grid-column: 1 / -1; grid-row: 2; }
+      .fmap .row { grid-template-columns: 1fr; gap: 8px; }
+      .fmap .row.head { display: none; }
+    }
+  </style>
 </head>
 <body>
   <div class="grain" aria-hidden="true"></div>
@@ -652,70 +717,131 @@
   </header>
   <main>
     <div class="hero wrap">
-      <span class="glow" style="top: -140px; right: -160px;" aria-hidden="true"></span>
-      <p class="kicker">/ Investigación · Datos de proveedor · Octubre 2026</p>
-      <h1>¿Qué traen de verdad los <em>catálogos</em> de proveedor?</h1>
-      <p class="lede">Una empresa de recambios de motor quería sus productos en una tienda online. Nadie le pasa los datos por API: le llegan catálogos en PDF, el listado de otra tienda y una lista de precios. Conté qué trae cada archivo, campo a campo, en 37.948 productos.</p>
-      <dl class="meta"><div><dt>Empresa</dt><dd>Una distribuidora de recambios de motor en España, anónima</dd></div><div><dt>Fuentes</dt><dd>5: tres catálogos en PDF, el listado de una tienda online y una lista de precios de mercado</dd></div><div><dt>Productos</dt><dd>37.948, después de quitar lo que no es recambio de motor</dd></div><div><dt>Medido</dt><dd>25 oct 2026, sobre los archivos completos</dd></div><div><dt>Datos</dt><dd><a href="../../data/supplier-catalogues-2026-10.csv">CSV</a> · <a href="../../data/supplier-catalogues-2026-10.json">JSON</a></dd></div></dl>
-      <p class="note"><strong>Lo que no está aquí:</strong> nombres de proveedores, el de la empresa ni ningún producto suelto. Solo recuentos. Los datos de producto son del cliente.</p>
+      <p class="kicker">/ Investigación · Shopify · Octubre 2026</p>
+      <h1>¿Qué le falta a un catálogo de proveedor <em>para Shopify?</em></h1>
+      <p class="lede">Una distribuidora de recambios de motor recibe sus productos en catálogos PDF, en el listado de otra tienda y en una lista de precios. <strong>Ningún proveedor tiene API.</strong> Conté qué trae cada archivo, campo a campo, en 37.948 productos, y lo comparé con lo que Shopify y Google necesitan para vender.</p>
+      <dl class="meta"><div><dt>Empresa</dt><dd>Una distribuidora de recambios de motor en España, anónima</dd></div><div><dt>Fuentes</dt><dd>5: tres catálogos PDF, el listado de una tienda online y una lista de precios de mercado</dd></div><div><dt>Productos</dt><dd>37.948, después de quitar lo que no es recambio de motor</dd></div><div><dt>Comparado con</dt><dd>Importación CSV de Shopify, Search &amp; Discovery y Google Merchant Center</dd></div><div><dt>Medido</dt><dd>25 oct 2026, sobre los archivos completos</dd></div><div><dt>Datos</dt><dd><a href="../../data/supplier-catalogues-2026-10.csv">CSV</a> · <a href="../../data/supplier-catalogues-2026-10.json">JSON</a></dd></div></dl>
+      <p class="note"><strong>Lo que no está aquí:</strong> nombres de proveedores, el de la empresa ni ningún producto suelto. Solo recuentos.</p>
     </div>
 
     <section id="highlights">
       <div class="wrap">
         <p class="section-label">/ En resumen</p>
         <h2>Los números</h2>
-        <div class="figs"><div><b>0</b><span>productos llegan con foto</span></div><div><b>3,8 %</b><span>llegan con descripción</span></div><div><b>91 %</b><span>acaban con precio</span></div><div><b>0</b><span>llegan con peso, stock o plazo de entrega</span></div><div><b>65 %</b><span>de las fichas de la tienda solo pueden llevar imagen genérica</span></div></div>
+        <div class="figs"><div><b>0</b><span>productos con foto, código de barras o peso</span></div><div><b>3,8 %</b><span>llegan con descripción</span></div><div><b>1.179</b><span>modelos distintos para filtrar; un filtro enseña 100</span></div><div><b>24,7 MB</b><span>de CSV completo; Shopify admite 15 por importación</span></div><div><b>65 %</b><span>de las fichas, con imagen genérica</span></div></div>
       </div>
     </section>
 
     <section id="fields">
       <div class="wrap">
         <p class="section-label">/ 01 · Qué llega</p>
-        <h2>Un nombre y un precio, y poco más</h2>
-        <p class="prose">Todos los productos tienen nombre y el 91 % acaba con precio. Eso es lo fácil. Solo 1.434 productos, un 3,8 %, traen descripción y lista de motores compatibles, y todos vienen de los catálogos en PDF. Ningún archivo trae foto, peso, código de barras, stock, plazo de entrega, precio de coste ni referencias cruzadas con otras marcas.</p>
-        <div class="tbl fit" tabindex="0" role="region" aria-label="Con qué llega cada producto (de 37.948)"><table><thead><tr><th scope="col">Campo</th><th scope="col">Productos</th><th scope="col">%</th></tr></thead><tbody><tr><th scope="row">Nombre</th><td class="n">37.948</td><td class="n">100 %</td></tr><tr><th scope="row">Familia</th><td class="n">37.404</td><td class="n">99 %</td></tr><tr><th scope="row">Precio</th><td class="n">34.379</td><td class="n">91 %</td></tr><tr><th scope="row">Descripción</th><td class="n">1.434</td><td class="n">3,8 %</td></tr><tr><th scope="row">Motores compatibles</th><td class="n">1.434</td><td class="n">3,8 %</td></tr><tr><th scope="row">Foto</th><td class="n">0</td><td class="n">0 %</td></tr><tr><th scope="row">Peso</th><td class="n">0</td><td class="n">0 %</td></tr><tr><th scope="row">Código de barras (EAN)</th><td class="n">0</td><td class="n">0 %</td></tr><tr><th scope="row">Stock</th><td class="n">0</td><td class="n">0 %</td></tr><tr><th scope="row">Plazo de entrega</th><td class="n">0</td><td class="n">0 %</td></tr><tr><th scope="row">Precio de coste</th><td class="n">0</td><td class="n">0 %</td></tr><tr><th scope="row">Referencias cruzadas</th><td class="n">0</td><td class="n">0 %</td></tr></tbody></table></div>
-        <p class="prose">Cada columna vacía es una decisión en la tienda. Sin peso, el envío no se puede calcular por peso. Sin stock ni plazo, el botón honrado es “consultar disponibilidad”, no “añadir al carrito”. Sin fotos, la tienda tiene que elegir entre una imagen genérica o ninguna.</p>
-        <p class="prose">Los nombres además llegan en español, alemán e inglés. Después de que la herramienta los traduzca, 62 siguen pareciendo extranjeros y quedan marcados para que los revise una persona.</p>
+        <h2>Nombre y precio. Del resto, casi nada</h2>
+        <p class="prose">Todos los productos tienen nombre y el <strong>91 % acaba con precio</strong>. Solo el <strong>3,8 %</strong> trae descripción y motores compatibles, y todo eso sale de los catálogos PDF. <strong>Ningún archivo trae foto, código de barras, peso, stock, plazo, coste ni referencias cruzadas.</strong></p>
+        <div class="viz" role="figure" aria-label="Porcentaje de los 37.948 productos que llegan con cada campo">
+          <h3>Con qué llega cada producto</h3>
+          <p class="cap">Porcentaje de los 37.948 productos. El precio cuenta después de cruzar las fuentes por referencia.</p>
+          <ul class="bars"><li class=""><span class="lab">Nombre</span><span class="track"><span class="fill" style="width:100.0%"></span></span><span class="v">100 %</span></li><li class=""><span class="lab">Familia</span><span class="track"><span class="fill" style="width:98.6%"></span></span><span class="v">99 %</span></li><li class=""><span class="lab">Precio</span><span class="track"><span class="fill" style="width:90.6%"></span></span><span class="v">91 %</span></li><li class=""><span class="lab">Descripción</span><span class="track"><span class="fill acc" style="width:3.8%"></span></span><span class="v">3,8 %</span></li><li class=""><span class="lab">Motores compatibles</span><span class="track"><span class="fill acc" style="width:3.8%"></span></span><span class="v">3,8 %</span></li><li class="zero"><span class="lab">Foto</span><span class="track"><span class="fill" style="width:0.0%"></span></span><span class="v">0 %</span></li><li class="zero"><span class="lab">Código de barras (GTIN)</span><span class="track"><span class="fill" style="width:0.0%"></span></span><span class="v">0 %</span></li><li class="zero"><span class="lab">Peso</span><span class="track"><span class="fill" style="width:0.0%"></span></span><span class="v">0 %</span></li><li class="zero"><span class="lab">Stock</span><span class="track"><span class="fill" style="width:0.0%"></span></span><span class="v">0 %</span></li><li class="zero"><span class="lab">Plazo de entrega</span><span class="track"><span class="fill" style="width:0.0%"></span></span><span class="v">0 %</span></li><li class="zero"><span class="lab">Precio de coste</span><span class="track"><span class="fill" style="width:0.0%"></span></span><span class="v">0 %</span></li><li class="zero"><span class="lab">Referencias cruzadas</span><span class="track"><span class="fill" style="width:0.0%"></span></span><span class="v">0 %</span></li></ul>
+          <div class="legend"><span><i></i>La mayoría</span><span><i class="acc"></i>Menos de la mitad</span><span><i class="dash"></i>Ningún producto</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="shopify">
+      <div class="wrap">
+        <p class="section-label">/ 02 · En Shopify</p>
+        <h2>Qué supone cada hueco en la tienda</h2>
+        <p class="prose">Cada campo vacío tiene consecuencias en la tienda: <strong>cambia cómo se envía, cómo se filtra y si Google enseña el producto.</strong> Para cada uno, lo que Shopify hace con él y la decisión que tomó la herramienta.</p>
+        <div class="fmap"><div class="row head" aria-hidden="true"><span>Campo</span><span>Para qué lo usa Shopify</span><span>Qué hace la herramienta</span></div><div class="row"><div class="f">Foto<small><span class="chip none">Ninguno</span></small></div><p><strong>Imagen del producto.</strong> Google Merchant Center rechaza los marcadores tipo “próximamente”, pero admite una imagen genérica o ilustración en <strong>Vehículos y recambios</strong> (categoría 888).</p><p>Una imagen genérica por familia de pieza en <strong>22.211 fichas</strong>, con “imagen orientativa” en el texto alternativo. El resto, sin imagen.</p></div><div class="row"><div class="f">Código de barras (GTIN)<small><span class="chip none">Ninguno</span></small></div><p><strong>Columna Barcode.</strong> Sin GTIN, Google le da menos alcance al producto, pero acepta <strong>marca + MPN</strong> en su lugar.</p><p>La referencia del proveedor va al SKU, lista para usarse como MPN. El código de barras se queda vacío en vez de inventarlo.</p></div><div class="row"><div class="f">Peso<small><span class="chip none">Ninguno</span></small></div><p><strong>Envíos.</strong> Las tarifas por peso y las calculadas por transportista necesitan el peso de cada variante.</p><p>Columna de peso preparada pero vacía. El envío tiene que ir con tarifa plana o por importe hasta que algún proveedor mande pesos.</p></div><div class="row"><div class="f">Stock y plazo<small><span class="chip none">Ninguno</span></small></div><p><strong>Inventario.</strong> Con seguimiento, el producto deja de venderse a cero. Sin seguimiento, siempre se puede comprar.</p><p>Inventario sin seguimiento, <code>continue</code> (seguir vendiendo) y un metafield de disponibilidad en “Consultar”, con el teléfono de la tienda en la descripción.</p></div><div class="row"><div class="f">Precio de coste<small><span class="chip none">Ninguno</span></small></div><p><strong>Coste por artículo.</strong> Alimenta los informes de margen y beneficio bruto de Shopify.</p><p>Vacío. Los precios son de mercado, no de tarifa, así que todavía no hay coste que poner. La columna se rellena sola cuando llegue una tarifa.</p></div><div class="row"><div class="f">Descripción<small><span class="chip part">3,8 %</span></small></div><p><strong>Ficha y SEO.</strong> Título, cuerpo, título SEO y meta descripción.</p><p>Títulos reescritos y traducidos desde el nombre. Título SEO y meta descripción generados para <strong>34.339 de 34.339 fichas</strong>.</p></div><div class="row"><div class="f">Compatibilidad<small><span class="chip part">3,8 %</span></small></div><p><strong>Metafields y filtros.</strong> Marca, modelos y códigos de motor como metafields de lista, que Search &amp; Discovery puede usar como filtro.</p><p>Escritos en tres metafields. La sección 04 explica por qué un filtro normal no basta.</p></div><div class="row"><div class="f">Familia<small><span class="chip ok">99 %</span></small></div><p><strong>Tipo de producto, etiquetas y colecciones.</strong> Las colecciones automáticas eligen productos por etiqueta.</p><p>134 tipos de producto y una etiqueta por sistema del motor, así que <strong>15 colecciones automáticas</strong> se llenan solas.</p></div></div>
       </div>
     </section>
 
     <section id="sources">
       <div class="wrap">
-        <p class="section-label">/ 02 · Cinco fuentes</p>
-        <h2>La fuente más grande es la más vacía</h2>
-        <p class="prose">La fuente C, un listado de recambio original guardado de una tienda online, tiene 107.632 filas. 71.118 se descartan porque no son recambio de motor, y los 36.514 que quedan son el 96 % del catálogo. Traen nombre, referencia y precio, y nada más: ni descripción, ni motores compatibles, ni siquiera familia. La herramienta deduce la familia por el nombre en 35.970 de ellos.</p>
-        <p class="prose">Los catálogos en PDF son lo contrario: descripciones y motores, pero sin precio. Los catálogos B y D sacan el precio de la lista E cruzando por referencia: 1.259 de 1.289 y 135 de 137.</p>
+        <p class="section-label">/ 03 · Cinco fuentes</p>
+        <h2>La fuente más grande es la que menos trae</h2>
+        <p class="prose">La fuente C, un listado de recambio original guardado de una tienda online, tiene 107.632 filas. 71.118 se descartan por no ser recambio de motor. Los <strong>36.514 que quedan son el 96 % del catálogo</strong> y traen nombre, referencia y precio, sin descripción, sin motores y sin familia: la herramienta deduce la familia por el nombre en 35.970.</p>
+        <div class="viz" role="figure" aria-label="Productos por fuente">
+          <h3>De dónde salen los 37.948 productos</h3>
+          <div class="stackbar"><span class="" style="flex:0.60" title="A: 8"></span><span class="acc" style="flex:3.40" title="B: 1.289"></span><span class="big" style="flex:96.22" title="C: 36.514"></span><span class="acc" style="flex:0.60" title="D: 137"></span><span class="" style="flex:3.76" title="E: 1.426"></span></div>
+          <div class="stacklab"><span><b>C</b> · listado de tienda online · 36.514 (96 %)</span><span><b>A, B, D, E</b> · 1.434</span></div>
+          <div class="legend"><span><i></i>Solo nombre, referencia y precio</span><span><i class="acc"></i>Catálogos PDF con descripción y motores</span></div>
+        </div>
+        <p class="prose">Los PDF son lo contrario: descripciones y motores, sin precio. <strong>B y D sacan el precio de la lista E cruzando por referencia</strong>: 1.259 de 1.289 y 135 de 137.</p>
         <div class="tbl stack" tabindex="0" role="region" aria-label="Las cinco fuentes"><table><thead><tr><th scope="col">Fuente</th><th scope="col">Formato</th><th scope="col">Filas leídas</th><th scope="col">Se quedan</th><th scope="col">Con precio tras cruzar</th><th scope="col">Con descripción</th></tr></thead><tbody><tr><th scope="row">A · Catálogo de juntas</th><td class="n" data-label="Formato">PDF</td><td class="n" data-label="Filas leídas">8</td><td class="n" data-label="Se quedan">8</td><td class="n" data-label="Con precio tras cruzar">0</td><td class="n" data-label="Con descripción">8</td></tr><tr><th scope="row">B · Catálogo por marca de motor</th><td class="n" data-label="Formato">PDF</td><td class="n" data-label="Filas leídas">1.289</td><td class="n" data-label="Se quedan">1.289</td><td class="n" data-label="Con precio tras cruzar">1.259</td><td class="n" data-label="Con descripción">1.289</td></tr><tr><th scope="row">C · Listado de recambio original de una tienda online</th><td class="n" data-label="Formato">Web</td><td class="n" data-label="Filas leídas">107.632</td><td class="n" data-label="Se quedan">36.514</td><td class="n" data-label="Con precio tras cruzar">32.985</td><td class="n" data-label="Con descripción">0</td></tr><tr><th scope="row">D · Catálogo de pistones</th><td class="n" data-label="Formato">PDF</td><td class="n" data-label="Filas leídas">137</td><td class="n" data-label="Se quedan">137</td><td class="n" data-label="Con precio tras cruzar">135</td><td class="n" data-label="Con descripción">137</td></tr><tr><th scope="row">E · Lista de precios de mercado</th><td class="n" data-label="Formato">Web</td><td class="n" data-label="Filas leídas">1.426</td><td class="n" data-label="Se quedan">1.426</td><td class="n" data-label="Con precio tras cruzar">1.394</td><td class="n" data-label="Con descripción">0</td></tr></tbody></table></div>
       </div>
     </section>
 
-    <section id="systems">
+    <section id="filters">
       <div class="wrap">
-        <p class="section-label">/ 03 · En la tienda</p>
-        <h2>Dónde va cada pieza y qué imagen lleva</h2>
-        <p class="prose">Los 37.948 productos se convierten en 34.339 fichas de tienda (34.379 variantes; solo 32 fichas tienen más de una). Casi todas, 34.333, dicen para qué marca de vehículo son. Solo 559, un 1,6 %, nombran un modelo, y 450 un código de motor.</p>
-        <p class="prose">Sin fotos, cada ficha lleva una imagen genérica de su familia, cuando la hay: 22.211 fichas, un 65 %. Depende mucho del sistema. Una junta se parece a otra junta; un sensor o una herramienta de taller no se parecen a la siguiente.</p>
-        <div class="tbl stack" tabindex="0" role="region" aria-label="Fichas por sistema del motor y cuántas tienen imagen genérica"><table><thead><tr><th scope="col">Sistema</th><th scope="col">Fichas</th><th scope="col">Imagen genérica</th><th scope="col">%</th></tr></thead><tbody><tr><th scope="row">Sistema de combustible</th><td class="n" data-label="Fichas">6.548</td><td class="n" data-label="Imagen genérica">4.586</td><td class="n" data-label="%">70 %</td></tr><tr><th scope="row">Juntas y retenes</th><td class="n" data-label="Fichas">5.448</td><td class="n" data-label="Imagen genérica">5.334</td><td class="n" data-label="%">98 %</td></tr><tr><th scope="row">Tubos, racores y conexiones</th><td class="n" data-label="Fichas">4.353</td><td class="n" data-label="Imagen genérica">3.779</td><td class="n" data-label="%">87 %</td></tr><tr><th scope="row">Culata y distribución</th><td class="n" data-label="Fichas">3.886</td><td class="n" data-label="Imagen genérica">833</td><td class="n" data-label="%">21 %</td></tr><tr><th scope="row">Tornillería y fijaciones</th><td class="n" data-label="Fichas">3.336</td><td class="n" data-label="Imagen genérica">2.029</td><td class="n" data-label="%">61 %</td></tr><tr><th scope="row">Pistones, bielas y cigüeñal</th><td class="n" data-label="Fichas">2.651</td><td class="n" data-label="Imagen genérica">1.082</td><td class="n" data-label="%">41 %</td></tr><tr><th scope="row">Turbo, admisión y escape</th><td class="n" data-label="Fichas">2.464</td><td class="n" data-label="Imagen genérica">1.793</td><td class="n" data-label="%">73 %</td></tr><tr><th scope="row">Sistema de refrigeración</th><td class="n" data-label="Fichas">1.478</td><td class="n" data-label="Imagen genérica">832</td><td class="n" data-label="%">56 %</td></tr><tr><th scope="row">Kits y juegos de reparación</th><td class="n" data-label="Fichas">1.463</td><td class="n" data-label="Imagen genérica">1.231</td><td class="n" data-label="%">84 %</td></tr><tr><th scope="row">Sistema de lubricación</th><td class="n" data-label="Fichas">782</td><td class="n" data-label="Imagen genérica">190</td><td class="n" data-label="%">24 %</td></tr><tr><th scope="row">Sistema eléctrico y sensores</th><td class="n" data-label="Fichas">704</td><td class="n" data-label="Imagen genérica">45</td><td class="n" data-label="%">6,4 %</td></tr><tr><th scope="row">Herramientas de taller</th><td class="n" data-label="Fichas">413</td><td class="n" data-label="Imagen genérica">3</td><td class="n" data-label="%">0,7 %</td></tr><tr><th scope="row">Filtración</th><td class="n" data-label="Fichas">407</td><td class="n" data-label="Imagen genérica">305</td><td class="n" data-label="%">75 %</td></tr><tr><th scope="row">Hidráulica</th><td class="n" data-label="Fichas">229</td><td class="n" data-label="Imagen genérica">143</td><td class="n" data-label="%">62 %</td></tr><tr><th scope="row">Otros recambios de motor</th><td class="n" data-label="Fichas">177</td><td class="n" data-label="Imagen genérica">26</td><td class="n" data-label="%">15 %</td></tr><tr><th scope="row"><strong>Total</strong></th><td class="n" data-label="Fichas"><strong>34.339</strong></td><td class="n" data-label="Imagen genérica"><strong>22.211</strong></td><td class="n" data-label="%"><strong>65 %</strong></td></tr></tbody></table></div>
+        <p class="section-label">/ 04 · Filtros</p>
+        <h2>Buscar por vehículo no cabe en un filtro normal</h2>
+        <p class="prose">Search &amp; Discovery filtra por metafields de texto en lista, pero <strong>un filtro enseña como mucho 100 valores en la tienda</strong> y un grupo admite 200. Marca de vehículo cabe: 10 valores. Modelos y códigos de motor, no: <strong>1.179 modelos en solo 559 fichas y 707 códigos en 450</strong>.</p>
+        <div class="viz" role="figure" aria-label="Valores distintos de cada filtro frente a los 100 que muestra un filtro">
+          <h3>Valores distintos por filtro</h3>
+          <ul class="bars"><li><span class="lab">Marcas de vehículo<br /><small>en 34.333 fichas</small></span><span class="track"><span class="fill" style="width:0.8%"></span><span class="limit" style="left:8.33%"></span></span><span class="v">10</span></li><li><span class="lab">Códigos de motor<br /><small>en 450 fichas</small></span><span class="track"><span class="fill acc" style="width:58.9%"></span><span class="limit" style="left:8.33%"></span></span><span class="v">707</span></li><li><span class="lab">Modelos<br /><small>en 559 fichas</small></span><span class="track"><span class="fill acc" style="width:98.2%"></span><span class="limit" style="left:8.33%"></span></span><span class="v">1.179</span></li></ul>
+          <div class="legend"><span><i class="line"></i>100: lo máximo que enseña un filtro de Search &amp; Discovery en la tienda</span></div>
+        </div>
+        <p class="prose">La marca tampoco ayuda mucho: <strong>una sola marca está en el 97 % de las fichas</strong>. Lo que sí funciona desde el primer día son las <strong>15 colecciones automáticas por sistema del motor</strong>. Para buscar por modelo o motor hace falta un buscador de compatibilidad (una app o metaobjetos), y antes, que los proveedores manden más compatibilidades.</p>
+      </div>
+    </section>
+
+    <section id="images">
+      <div class="wrap">
+        <p class="section-label">/ 05 · Imágenes</p>
+        <h2>Una imagen genérica por familia, donde tiene sentido</h2>
+        <p class="prose">Sin fotos, cada ficha lleva la imagen genérica de su familia cuando la hay: <strong>22.211 fichas, el 65 %</strong>. Google la admite porque los recambios están en la categoría Vehículos y recambios. <strong>Una junta se parece a otra junta</strong>; un sensor o una herramienta de taller no, y ahí la cobertura baja casi a cero.</p>
+        <div class="viz" role="figure" aria-label="Fichas por sistema del motor y cuántas tienen imagen genérica">
+          <h3>Fichas por sistema y cuántas llevan imagen</h3>
+          <p class="cap">Largo de la barra: fichas, de 34.339. Porcentaje: las que tienen imagen genérica.</p>
+          <ul class="bars"><li><span class="lab">Sistema de combustible</span><span class="track"><span class="fill" style="width:100.0%"></span><span class="fill in" style="width:70.0%"></span></span><span class="v">70 %</span></li><li><span class="lab">Juntas y retenes</span><span class="track"><span class="fill" style="width:83.2%"></span><span class="fill in" style="width:81.5%"></span></span><span class="v">98 %</span></li><li><span class="lab">Tubos, racores y conexiones</span><span class="track"><span class="fill" style="width:66.5%"></span><span class="fill in" style="width:57.7%"></span></span><span class="v">87 %</span></li><li><span class="lab">Culata y distribución</span><span class="track"><span class="fill" style="width:59.3%"></span><span class="fill in" style="width:12.7%"></span></span><span class="v">21 %</span></li><li><span class="lab">Tornillería y fijaciones</span><span class="track"><span class="fill" style="width:50.9%"></span><span class="fill in" style="width:31.0%"></span></span><span class="v">61 %</span></li><li><span class="lab">Pistones, bielas y cigüeñal</span><span class="track"><span class="fill" style="width:40.5%"></span><span class="fill in" style="width:16.5%"></span></span><span class="v">41 %</span></li><li><span class="lab">Turbo, admisión y escape</span><span class="track"><span class="fill" style="width:37.6%"></span><span class="fill in" style="width:27.4%"></span></span><span class="v">73 %</span></li><li><span class="lab">Sistema de refrigeración</span><span class="track"><span class="fill" style="width:22.6%"></span><span class="fill in" style="width:12.7%"></span></span><span class="v">56 %</span></li><li><span class="lab">Kits y juegos de reparación</span><span class="track"><span class="fill" style="width:22.3%"></span><span class="fill in" style="width:18.8%"></span></span><span class="v">84 %</span></li><li><span class="lab">Sistema de lubricación</span><span class="track"><span class="fill" style="width:11.9%"></span><span class="fill in" style="width:2.9%"></span></span><span class="v">24 %</span></li><li><span class="lab">Sistema eléctrico y sensores</span><span class="track"><span class="fill" style="width:10.8%"></span><span class="fill in" style="width:0.7%"></span></span><span class="v">6,4 %</span></li><li><span class="lab">Herramientas de taller</span><span class="track"><span class="fill" style="width:6.3%"></span><span class="fill in" style="width:0.0%"></span></span><span class="v">0,7 %</span></li><li><span class="lab">Filtración</span><span class="track"><span class="fill" style="width:6.2%"></span><span class="fill in" style="width:4.7%"></span></span><span class="v">75 %</span></li><li><span class="lab">Hidráulica</span><span class="track"><span class="fill" style="width:3.5%"></span><span class="fill in" style="width:2.2%"></span></span><span class="v">62 %</span></li><li><span class="lab">Otros recambios de motor</span><span class="track"><span class="fill" style="width:2.7%"></span><span class="fill in" style="width:0.4%"></span></span><span class="v">15 %</span></li></ul>
+          <div class="legend"><span><i class="acc"></i>Con imagen genérica</span><span><i></i>Sin imagen</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="import">
+      <div class="wrap">
+        <p class="section-label">/ 06 · Importar</p>
+        <h2>El catálogo completo no entra de una vez</h2>
+        <p class="prose">El fichero de importación completo pesa <strong>24,7 MB</strong> y Shopify acepta <strong>15 MB por CSV</strong>. Hay que subirlo en dos partes o más, o por muestras, que es como la herramienta empieza.</p>
+        <div class="viz" role="figure" aria-label="Tamaño del fichero de importación completo frente al límite de Shopify">
+          <h3>Fichero de importación completo</h3>
+          <ul class="bars"><li><span class="lab">34.379 filas</span><span class="track"><span class="fill acc" style="width:100%"></span><span class="limit" style="left:60.8%"></span></span><span class="v">24,7 MB</span></li></ul>
+          <div class="legend"><span><i class="line"></i>15 MB: el CSV más grande que admite Shopify en una importación</span></div>
+        </div>
+        <p class="prose">Y al actualizar precios hay otra trampa. Si se marca la opción de <strong>sobrescribir los productos que ya existen</strong>, <strong>una celda vacía borra lo que hay en la tienda</strong>. Por eso los cambios de precio van en un CSV aparte con solo 7 columnas, emparejadas por SKU: título, URL, opción, valor, SKU, precio y coste.</p>
       </div>
     </section>
 
     <section id="tests">
       <div class="wrap">
-        <p class="section-label">/ 04 · Dos pruebas</p>
-        <h2>Dos arreglos que sobre el papel parecían buenos</h2>
-        <h3 class="subh">Imagen por nombre</h3>
-        <p class="prose">Si una ficha no tiene imagen de familia, la herramienta podría buscar una por palabras del nombre. Sobre el catálogo completo, las fichas con imagen pasan de 22.211 a 25.311, 3.100 más. Revisé a mano una muestra de 15: 14 enseñaban la pieza equivocada. En un recambio, una foto equivocada es peor que ninguna, así que se queda como opción avanzada, desactivada.</p>
-        <h3 class="subh">Filtrar por palabras completas</h3>
-        <p class="prose">El filtro que quita lo que no es recambio de motor busca trozos de palabra. Buscar palabras completas parece más limpio, pero sobre los archivos completos quita 840 productos, 420 de ellos muelles, y deja entrar 75 nuevos, como pasacables. 765 productos menos en total. Qué productos vende la tienda lo decide el cliente, no un cambio de código, así que el filtro se queda como está.</p>
+        <p class="section-label">/ 07 · Dos pruebas</p>
+        <h2>Dos arreglos que se quedaron fuera</h2>
+        <p class="prose">Las dos mejoraban un número y las dos se quedaron fuera al revisarlas.</p>
+        <div class="ba">
+          <div>
+            <h3>Imagen por nombre</h3>
+            <div class="pair"><b>22.211</b><span class="to">→</span><b>25.311</b></div>
+            <p>Buscar imagen por palabras del nombre da foto a <strong>3.100 fichas más</strong>. En una muestra revisada a mano, <strong>14 de 15 enseñaban la pieza equivocada</strong>. Una foto equivocada incumple la regla de Google de que la imagen muestre el producto.</p>
+            <span class="chip none verdict">Desactivada</span>
+          </div>
+          <div>
+            <h3>Filtrar por palabras completas</h3>
+            <div class="pair"><b>37.948</b><span class="to">→</span><b class="bad">37.183</b></div>
+            <p>Más limpio sobre el papel. Sobre los archivos completos <strong>quita 840 productos, 420 de ellos muelles</strong>, y deja entrar 75 que no son recambio de motor, como pasacables. Qué vende la tienda lo decide el cliente.</p>
+            <span class="chip none verdict">No se aplica</span>
+          </div>
+        </div>
       </div>
     </section>
 
     <section id="method">
       <div class="wrap">
-        <p class="section-label">/ 05 · Método</p>
+        <p class="section-label">/ 08 · Método</p>
         <h2>Cómo se contó y sus límites</h2>
-        <ul class="list"><li>Una empresa, cinco fuentes. Describe este caso, no a todos los proveedores del sector.</li><li>Los recuentos salen de la propia herramienta de catálogo sobre los archivos completos, el 25 de octubre de 2026. Un campo cuenta como presente cuando no está vacío.</li><li>Las fuentes están anonimizadas de la A a la E. Los datos por producto son del cliente y no se publican; los archivos para descargar solo tienen los recuentos de esta página.</li><li>Los precios son de mercado, de la fuente E y del listado de la tienda online, no la tarifa propia de la distribuidora.</li><li>La prueba de imágenes se revisó con una muestra de 15 fichas: basta para ver el problema, no para medir su tamaño exacto.</li></ul>
-        <p class="prose">Cómo se hizo la herramienta que contó todo esto y qué cambió para el cliente: <a href="../../../work/es/parts-catalogue/">el caso</a>.</p>
+        <ul class="list"><li><strong>Una empresa, cinco fuentes.</strong> Describe este caso, no a todo el sector.</li><li><strong>Los recuentos salen de la propia herramienta</strong> sobre los archivos completos, el 25 de octubre de 2026. Un campo cuenta como presente cuando no está vacío.</li><li><strong>Fuentes anonimizadas de la A a la E.</strong> Los datos por producto son del cliente; los archivos para descargar solo tienen los recuentos de esta página.</li><li><strong>Precios de mercado</strong>, de la fuente E y del listado de la tienda online, no la tarifa de la distribuidora.</li><li><strong>La prueba de imágenes se revisó con 15 fichas</strong>: basta para ver el problema, no para medir su tamaño exacto.</li><li><strong>Límites de Shopify y Google</strong> consultados en su documentación el 26 de octubre de 2026.</li></ul>
+        <p class="prose"><strong>Fuentes:</strong> <a href="https://help.shopify.com/es/manual/products/import-export/import-products">Shopify: importar productos con CSV</a> · <a href="https://help.shopify.com/es/manual/online-store/search-and-discovery/filters">Shopify: filtros de Search &amp; Discovery</a> · <a href="https://support.google.com/merchants/answer/6324350?hl=es">Google: enlace de imagen</a> · <a href="https://support.google.com/merchants/answer/160161?hl=es">Google: identificadores de producto</a></p>
+        <p class="prose">Cómo se hizo la herramienta que contó todo esto: <a href="../../../work/es/parts-catalogue/"><strong>el caso</strong></a>.</p>
       </div>
     </section>
 

@@ -606,6 +606,71 @@
       .flow li:last-child { border-right: 0; }
     }
   </style>
+  <style>
+    /* Solid accent, no gradients: nothing gets clipped at the edges */
+    .glow { display: none !important; }
+    h1 em { background: none !important; color: var(--accent) !important; -webkit-text-fill-color: currentColor; animation: none !important; padding-right: 0.12em; }
+  </style>
+  <style>
+    /* Charts and diagrams: flat bars on theme tokens, no gradients */
+    .viz { margin-top: 32px; border: 1px solid var(--line); padding: 24px; }
+    .viz + .viz { margin-top: 16px; }
+    .viz h3 { font-family: var(--font-display); font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+    .viz .cap { margin-top: 6px; font-size: 0.875rem; color: var(--muted); max-width: 46rem; }
+    .bars { list-style: none; margin: 20px 0 0; padding: 0; display: grid; gap: 12px; }
+    .bars li { display: grid; grid-template-columns: minmax(7rem, 14rem) minmax(0, 1fr) 5.5rem; gap: 12px; align-items: center; font-size: 0.875rem; }
+    .bars .lab { min-width: 0; }
+    .bars .track { position: relative; height: 14px; background: var(--surface); }
+    .bars .fill { position: absolute; top: 0; bottom: 0; left: 0; background: var(--ink); }
+    .bars .fill.acc { background: var(--accent); }
+    .bars .fill.in { background: var(--accent); }
+    .bars .v { text-align: right; font-family: var(--font-display); font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .bars li.zero .v { color: var(--accent); }
+    .bars li.zero .track { outline: 1px dashed var(--accent); outline-offset: -1px; background: transparent; }
+    .bars .limit { position: absolute; top: -6px; bottom: -6px; border-left: 2px solid var(--accent); }
+    .legend { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 16px; font-size: 0.8125rem; color: var(--muted); }
+    .legend span { display: inline-flex; align-items: center; gap: 8px; }
+    .legend i { display: inline-block; width: 12px; height: 12px; background: var(--ink); }
+    .legend i.acc { background: var(--accent); }
+    .legend i.line { width: 2px; height: 14px; background: var(--accent); }
+    .legend i.dash { background: transparent; outline: 1px dashed var(--accent); outline-offset: -1px; }
+    .stackbar { display: flex; height: 40px; margin-top: 20px; gap: 2px; }
+    .stackbar span { background: var(--surface); min-width: 6px; }
+    .stackbar span.big { background: var(--ink); }
+    .stackbar span.acc { background: var(--accent); }
+    .stacklab { display: flex; justify-content: space-between; gap: 12px; margin-top: 8px; font-size: 0.8125rem; color: var(--muted); }
+    .stacklab b { color: var(--ink); font-family: var(--font-display); }
+    .fmap { margin-top: 32px; display: grid; gap: 0; border-top: 1px solid var(--line); }
+    .fmap .row { display: grid; grid-template-columns: 11rem minmax(0, 1fr) minmax(0, 1fr); gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--line); align-items: start; }
+    .fmap .row.head { padding: 12px 0; font-family: var(--font-display); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+    .fmap .f { font-family: var(--font-display); font-weight: 600; }
+    .fmap .f small { display: block; margin-top: 6px; }
+    .fmap p { font-size: 0.9375rem; }
+    .fmap p + p { margin-top: 6px; }
+    .fmap code { font-size: 0.8125rem; }
+    .chip { display: inline-block; padding: 2px 8px; font-family: var(--font-display); font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; border: 1px solid var(--ink); color: var(--ink); }
+    .chip.part { border-color: var(--accent); color: var(--accent); }
+    .chip.none { background: var(--ink); color: var(--bg); }
+    .chip.tool { background: var(--accent-soft); border-color: var(--accent-soft); color: var(--ink); }
+    .ba { margin-top: 32px; display: grid; gap: 16px; grid-template-columns: 1fr; }
+    @media (min-width: 760px) { .ba { grid-template-columns: 1fr 1fr; } }
+    .ba > div { border: 1px solid var(--line); padding: 24px; min-width: 0; }
+    .ba h3 { font-family: var(--font-display); font-size: 1rem; font-weight: 600; }
+    .ba .pair { display: flex; align-items: baseline; gap: 12px; margin-top: 16px; flex-wrap: wrap; font-family: var(--font-display); font-variant-numeric: tabular-nums; }
+    .ba .pair b { font-size: 2rem; line-height: 1; }
+    .ba .pair .to { color: var(--muted); }
+    .ba .pair .bad { color: var(--accent); }
+    .ba p { margin-top: 12px; font-size: 0.9375rem; }
+    .ba .verdict { margin-top: 16px; display: inline-block; }
+    .prose strong, .section-intro strong { color: var(--ink); }
+    @media (max-width: 640px) {
+      .viz { padding: 18px; }
+      .bars li { grid-template-columns: minmax(0, 1fr) auto; row-gap: 6px; }
+      .bars .track { grid-column: 1 / -1; grid-row: 2; }
+      .fmap .row { grid-template-columns: 1fr; gap: 8px; }
+      .fmap .row.head { display: none; }
+    }
+  </style>
 </head>
 
 <body>
@@ -632,8 +697,6 @@
 
   <main>
     <div class="hero wrap">
-      <span class="glow" style="top: -140px; right: -160px;" aria-hidden="true"></span>
-      <span class="glow" style="bottom: -220px; left: -240px; width: 380px; height: 380px;" aria-hidden="true"></span>
       <span class="deco" style="top: 110px; right: 12%; width: 14px; height: 14px;" aria-hidden="true"></span>
       <span class="deco" style="top: 220px; right: 5%; width: 8px; height: 8px; opacity: 0.55; animation-delay: 1.2s;" aria-hidden="true"></span>
       <p class="kicker">/ Case study &middot; Ecommerce data and tooling</p>
@@ -655,14 +718,12 @@
         <div><dt>Platform</dt><dd>Shopify</dd></div>
         <div><dt>Built with</dt><dd>Python, Streamlit, Shopify Admin API</dd></div>
         <div><dt>Role</dt><dd>Diagnosis, data tool and store setup</dd></div>
-        <div><dt>Status</dt><dd>Working on a development store</dd></div>
         <div><dt>Context</dt><dd>Independent project, October 2026</dd></div>
       </dl>
 
       <p class="note">
         <strong>What this page is:</strong> the client is kept anonymous, and so are its suppliers
-        and brands. The figures come from running the tool on the real supplier catalogues; the
-        store figures come from a Shopify development store, which behaves like the live one.
+        and brands. The figures come from running the tool on the full supplier catalogues.
         The code was written pair-programming with Claude, like the rest of this site: I decided
         what to build and checked every result against the data.
       </p>
@@ -670,10 +731,9 @@
 
     <!-- ============ HIGHLIGHTS ============ -->
     <section id="highlights">
-      <span class="glow" style="top: -80px; right: -280px;" aria-hidden="true"></span>
       <div class="wrap">
         <p class="section-label">/ In short</p>
-        <h2>What the job actually was</h2>
+        <h2>The project in numbers</h2>
 
         <div class="figs">
           <div><b>192</b><span>products listed in a shop that should have 1,000+</span></div>
@@ -688,7 +748,7 @@
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <circle cx="12" cy="12" r="9" /><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.5v.7" /><path d="M12 17h.01" />
             </svg>
-            <h3>The first question, not the first mockup</h3>
+            <h3>First, what the site is for</h3>
             <p>Before proposing anything I asked what the site was for: information, sales, or both. Both. That pointed away from a redesign and towards the half that was broken.</p>
           </article>
           <article class="hl-item">
@@ -724,7 +784,7 @@
               <path d="M3 3v18h18" /><path d="m7 15 4-4 3 3 5-6" />
             </svg>
             <h3>Measured before changed</h3>
-            <p>Every change was run against the full real catalogue and compared product by product. One fix that looked obvious would have removed 840 products, so it was not made.</p>
+            <p>Every change was run against the full catalogue and compared product by product. One fix that looked obvious would have removed 840 products, so it was not made.</p>
           </article>
         </div>
       </div>
@@ -732,24 +792,24 @@
 
     <!-- ============ 01 THE PROBLEM ============ -->
     <section id="problem">
-      <span class="glow" style="top: 40px; left: -280px;" aria-hidden="true"></span>
       <div class="wrap">
         <p class="section-label">/ 01 &middot; The problem</p>
         <h2>A new website would not have added a single product</h2>
         <p class="section-intro">
           The brief was a new website. Looking at the existing one, it was not bad, so the useful
           question was what it was for. The answer was both: a company presentation and a shop.
-          The presentation side worked. The shop listed 192 products when the catalogue runs to
-          more than a thousand, and even those 192 had category errors and menu links that led
+          The presentation side worked. <strong>The shop listed 192 products when the catalogue runs to
+          more than a thousand</strong>, and even those 192 had category errors and menu links that led
           nowhere.
         </p>
         <p class="section-intro">
           The cause was upstream of the website. Each supplier sends prices and references in its
           own way: Excel sheets, CSV exports, PDF catalogues, each with different columns and
-          names for the same thing. None offers an API. Putting a product in the shop meant
-          copying it by hand from whichever file had it, which is why most products never got
-          there.
+          names for the same thing. <strong>None offers an API.</strong> Putting a product in the shop meant
+          copying it by hand from whichever file had it, which is why <strong>most products never got
+          there</strong>.
         </p>
+        <div class="viz" role="figure" aria-label="Products in the shop against the catalogue"><h3>Products in the shop against the catalogue</h3><ul class="bars"><li><span class="lab">In the shop</span><span class="track"><span class="fill acc" style="width:19.2%"></span></span><span class="v">192</span></li><li><span class="lab">In the client’s catalogue</span><span class="track"><span class="fill" style="width:100.0%"></span></span><span class="v">1,000+</span></li></ul></div>
         <p class="note">
           <strong>The decision:</strong> keep the site and the platform, and fix the process that
           feeds the shop. A redesign would have been more visible and would have changed nothing
@@ -762,16 +822,17 @@
     <section id="data">
       <div class="wrap">
         <p class="section-label">/ 02 &middot; The data</p>
-        <h2>What supplier files actually contain</h2>
+        <h2>What supplier files contain</h2>
         <p class="section-intro">
           Before designing anything I put every supplier source through the same pipeline and
           counted what came out. The full supplier catalogues are far larger than what the shop
           will sell (around a thousand products to start with), which made them a good stress
           test.
         </p>
+        <div class="viz" role="figure" aria-label="From supplier rows to Shopify listings"><h3>From supplier rows to Shopify listings</h3><p class="cap">Five sources together. Rows that are not engine parts are dropped, repeated parts are joined, and parts no source prices stay out.</p><ul class="bars"><li><span class="lab">Rows read</span><span class="track"><span class="fill" style="width:100.0%"></span></span><span class="v">110,492</span></li><li><span class="lab">Distinct products</span><span class="track"><span class="fill" style="width:34.3%"></span></span><span class="v">37,948</span></li><li><span class="lab">Variants ready for Shopify</span><span class="track"><span class="fill acc" style="width:31.1%"></span></span><span class="v">34,379</span></li><li><span class="lab">Product listings</span><span class="track"><span class="fill acc" style="width:31.1%"></span></span><span class="v">34,339</span></li></ul></div>
         <div class="tbl" tabindex="0" role="region" aria-label="Table">
           <table>
-            <thead><tr><th>Measured on the real files</th><th>Result</th></tr></thead>
+            <thead><tr><th>Measured on the full files</th><th>Result</th></tr></thead>
             <tbody>
             <tr><td><strong>Distinct products after merging every source</strong></td><td>37,948</td></tr>
             <tr><td><strong>Ready for Shopify</strong></td><td>34,379 variants in 34,339 listings</td></tr>
@@ -792,7 +853,6 @@
 
     <!-- ============ 03 THE TOOL ============ -->
     <section id="tool">
-      <span class="glow" style="top: 0; right: -280px;" aria-hidden="true"></span>
       <div class="wrap">
         <p class="section-label">/ 03 &middot; The tool</p>
         <h2>One engine, five stages</h2>
@@ -840,12 +900,26 @@
             <tbody>
             <tr><td><strong>No fake stock</strong></td><td>Without supplier APIs there is no reliable stock figure. Every product says "check availability" with the shop's phone number instead of showing an "in stock" nobody can guarantee. The field is already there for when real data exists.</td></tr>
             <tr><td><strong>Images by part type, not by name</strong></td><td>Matching images on words in the name would add 3,100 more photos. I checked a sample: almost all were wrong, a pump cover showing a whole pump. The option exists, switched off.</td></tr>
-            <tr><td><strong>Test on a sample first</strong></td><td>A first import of around 33,000 products got stuck on the test store. Since then the tool can build a sample of any size spread across part families, and repeat exactly the same one to compare before and after.</td></tr>
+            <tr><td><strong>Test on a sample first</strong></td><td>A first import of around 33,000 products got stuck. Since then the tool can build a sample of any size spread across part families, and repeat exactly the same one to compare before and after.</td></tr>
             <tr><td><strong>A separate update mode</strong></td><td>Re-importing everything with "overwrite" would set live products back to draft and blank anything filled in by hand. The update mode reads the store export, matches by SKU and sends only the columns that change.</td></tr>
             <tr><td><strong>Safe store setup</strong></td><td>Dry run unless told otherwise, checks what exists before creating anything, never deletes, asks for credentials at run time and uses a token that expires in 24 hours.</td></tr>
-            <tr><td><strong>Warnings, not silent choices</strong></td><td>Two files disagreeing, the same reference under two brands, a profile about to overwrite another: each one is shown to the user rather than decided quietly.</td></tr>
+            <tr><td><strong>Warn before choosing</strong></td><td>Two files disagreeing, the same reference under two brands, a profile about to overwrite another: each one is shown to the user rather than decided quietly.</td></tr>
             </tbody>
           </table>
+        </div>
+        <div class="ba">
+          <div>
+            <h3>Reimport everything with “overwrite”</h3>
+            <p>A blank cell in the CSV <strong>clears the value in the shop</strong>.</p>
+            <ul class="list"><li>Published products <strong>go back to draft</strong></li><li>Texts and photos added by hand <strong>are emptied</strong></li><li>Every row is uploaded, changed or not</li></ul>
+            <span class="chip none verdict">Ruled out</span>
+          </div>
+          <div>
+            <h3>Update mode</h3>
+            <p>Reads the store export, <strong>matches by SKU</strong> and compares.</p>
+            <ul class="list"><li><strong>Only price and cost change</strong>, in a 7-column CSV</li><li>New products go in a separate file, as drafts</li><li>Status, texts and photos <strong>are left alone</strong></li></ul>
+            <span class="chip tool verdict">What the tool does</span>
+          </div>
         </div>
         <div class="cards gallery">
           <div class="card wide">
@@ -853,9 +927,9 @@
               <img src="../img/catalogo-actualizar.webp" width="1600" height="1332" alt="The tool interface in update mode: the two main choices highlighted, then four figures (1 product changing, 1 new, 24 already in the store, 0 left untouched) and the instructions for importing each file" loading="lazy" data-zoom />
             </figure>
             <div class="body">
-              <h3>Update mode, on a test store</h3>
+              <h3>Update mode, on example data</h3>
               <p>
-                A simulated store of 24 products with one old price and one product missing:
+                An example export of 24 products, with one old price and one product missing:
                 the tool finds exactly one change and one new product, and explains how each file
                 is imported. The interface is in Spanish, like the people who use it.
               </p>
@@ -867,7 +941,6 @@
 
     <!-- ============ 05 INCIDENTS ============ -->
     <section id="incidents">
-      <span class="glow" style="top: 0; right: -280px;" aria-hidden="true"></span>
       <div class="wrap">
         <p class="section-label">/ 05 &middot; Incidents</p>
         <h2>Things that broke, and one I chose not to fix</h2>
@@ -879,11 +952,11 @@
           <table>
             <thead><tr><th>Symptom</th><th>Cause</th><th>Lesson</th></tr></thead>
             <tbody>
-            <tr><td><strong>Import of ~33,000 products stuck</strong></td><td>Not investigated: the test store was replaced instead.</td><td>Start with a sample. Became the sample mode.</td></tr>
-            <tr><td><strong>~3,000 imported products invisible</strong></td><td>They were not published to the online store channel.</td><td>Publishing is a column in the import, not an afterthought.</td></tr>
+            <tr><td><strong>Import of ~33,000 products stuck</strong></td><td>Not investigated; started again in smaller parts.</td><td>Start with a sample. Became the sample mode.</td></tr>
+            <tr><td><strong>~3,000 imported products invisible</strong></td><td>They were not published to the online store channel.</td><td>Publishing now goes in the import, as one more column.</td></tr>
             <tr><td><strong>Hand pumps vanished</strong></td><td>"HAND" was translated as "manual", and the filter drops maintenance manuals.</td><td>A translation can trip a filter further down the line. Now "de mano".</td></tr>
             <tr><td><strong>514 products in "Other"</strong></td><td>No rules for bearings, seals, hoses, hydraulic parts or workshop tools.</td><td>New rules and a new hydraulics system: down to 177. Rule order matters.</td></tr>
-            <tr><td><strong>12 products with someone else's photo</strong></td><td>Not analysed; found by checking the test store by eye.</td><td>Removed and checked one by one: 124 of 188 products with an image, none of the 12.</td></tr>
+            <tr><td><strong>12 products with someone else's photo</strong></td><td>Not analysed; found by checking the shop by eye.</td><td>Removed and checked one by one: 124 of 188 products with an image, none of the 12.</td></tr>
             <tr><td><strong>Setup script failed on Windows</strong></td><td>The local Python trusted an expired certificate.</td><td>Ship the certificate bundle (certifi) with the tool instead of trusting the machine.</td></tr>
             <tr><td><strong>No way to create the app the old way</strong></td><td>Shopify stopped allowing new custom apps in the admin on 1 January 2026.</td><td>App built in the Dev Dashboard with client credentials. Each app belongs to its store.</td></tr>
             <tr><td><strong>"0.206" kg read as 206 kg</strong></td><td>A dot followed by three digits was taken as thousands, as in European price lists.</td><td>Found in code review before any weights arrived. Each supplier profile now states its decimal format.</td></tr>
@@ -896,29 +969,27 @@
 
     <!-- ============ 06 WHAT IT PROVES ============ -->
     <section id="value">
-      <span class="glow" style="bottom: 0; left: -280px;" aria-hidden="true"></span>
       <div class="wrap">
         <p class="section-label">/ 06 &middot; What it proves</p>
-        <h2>Why this one is worth reading</h2>
+        <h2>What it shows</h2>
         <div class="tbl" tabindex="0" role="region" aria-label="Table">
           <table>
             <thead><tr><th>Claim</th><th>Evidence</th></tr></thead>
             <tbody>
             <tr><td><strong>Diagnosis before delivery</strong></td><td>The brief was a website; the fix was a data process. The 192 against 1,000+ is what decided it.</td></tr>
-            <tr><td><strong>Messy data, handled honestly</strong></td><td>37,948 products from sources that disagree in format, language and completeness, with every exclusion and conflict listed rather than hidden.</td></tr>
-            <tr><td><strong>Safe on a live store</strong></td><td>Dry-run setup, no deletions, no stored credentials, and an update mode that cannot touch status, texts or photos.</td></tr>
-            <tr><td><strong>Verified, not assumed</strong></td><td>37 automated tests, and every change compared product by product against the full real catalogue before it was kept.</td></tr>
+            <tr><td><strong>Messy data, nothing hidden</strong></td><td>37,948 products from sources that disagree in format, language and completeness, with every exclusion and conflict listed rather than hidden.</td></tr>
+            <tr><td><strong>Safe for the shop</strong></td><td>Dry-run setup, no deletions, no stored credentials, and an update mode that cannot touch status, texts or photos.</td></tr>
+            <tr><td><strong>Every change measured</strong></td><td>37 automated tests, and every change compared product by product against the full catalogue before it was kept.</td></tr>
             <tr><td><strong>Handed over</strong></td><td>A four-step interface, a two-page guide for the people who use it, full documentation, and a private repository with one commit per change.</td></tr>
             </tbody>
           </table>
         </div>
         <p class="note">
-          <strong>Still open:</strong> moving from the development store to the live one, real
-          distributor price lists instead of market prices, store filters by vehicle and engine,
+          <strong>Next steps:</strong> distributor price lists instead of market prices, store filters by vehicle and engine,
           more photos, and deciding with the client what happens to the products already in the
-          shop without a reference. A tool with no open items is a tool nobody is using.
+          shop without a reference.
         </p>
-        <p class="note"><strong>The data behind it:</strong> what the five sources actually contain, counted field by field, is a separate study: <a href="../../research/supplier-catalogues/">What do supplier catalogues actually contain?</a></p>
+        <p class="note"><strong>The data behind it:</strong> what the five sources bring, counted field by field against what Shopify and Google need, is a separate study: <a href="../../research/supplier-catalogues/">What is a supplier catalogue missing for Shopify?</a></p>
       </div>
     </section>
 
@@ -929,7 +1000,6 @@
   </div>
 
   <section class="cta" id="contact">
-    <span class="glow" style="top: -160px; right: -160px;" aria-hidden="true"></span>
     <div class="wrap">
       <p class="kicker">/ Next</p>
       <h2>Everything connects.</h2>

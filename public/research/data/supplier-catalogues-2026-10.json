@@ -3,7 +3,7 @@
   "title": "What supplier catalogues contain: engine spare parts",
   "author": "Ada (hache) Cervera",
   "measured": "2026-10-25",
-  "note": "Aggregates only. Five supplier sources of one engine spare parts company in Spain, anonymised (A to E). Counts come from the catalogue tool's own output on the full files. Product-level data is the client's and is not published. Prices are market prices, not the distributor's tariff. with_* columns count what each source itself provides; priced_after_merge counts the products that end up with a price once sources are joined by reference (catalogues B and D get theirs from price list E). Source C has no family column; the tool derives it from the name for 35,970 products."
+  "note": "Aggregates only. Five supplier sources of one engine spare parts company in Spain, anonymised (A to E). Counts come from the catalogue tool's own output on the full files. Product-level data is the client's and is not published. Prices are market prices, not the distributor's tariff. with_* columns count what each source itself provides; priced_after_merge counts the products that end up with a price once sources are joined by reference (catalogues B and D get theirs from price list E). Source C has no family column; the tool derives it from the name for 35,970 products. The shopify block counts the tool's full Shopify import file: distinct filter values, file size and generated fields."
  },
  "sources": [
   {
@@ -244,5 +244,23 @@
    "of_which_springs": 420,
    "added": 75
   }
+ },
+ "shopify": {
+  "csv_rows": 34379,
+  "csv_bytes": 24659988,
+  "shopify_csv_limit_bytes": 15000000,
+  "listings_with_generic_image": 22211,
+  "seo_title": 34339,
+  "seo_description": 34339,
+  "product_types": 134,
+  "automated_collections": 15,
+  "distinct_makes": 10,
+  "top_make_listings": 33169,
+  "distinct_models": 1179,
+  "distinct_engine_codes": 707,
+  "search_discovery_values_shown_per_filter": 100,
+  "barcodes": 0,
+  "weights": 0,
+  "cost_per_item": 0
  }
 }

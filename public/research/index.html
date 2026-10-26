@@ -591,6 +591,11 @@
     html[data-theme='dark'] .btn:hover { background: #a82800; border-color: #a82800; }
   </style>
   <script src="/consent.js" defer></script>
+  <style>
+    /* Solid accent, no gradients: nothing gets clipped at the edges */
+    .glow { display: none !important; }
+    h1 em { background: none !important; color: var(--accent) !important; -webkit-text-fill-color: currentColor; animation: none !important; padding-right: 0.12em; }
+  </style>
 </head>
 <body>
   <div class="grain" aria-hidden="true"></div>
@@ -616,7 +621,7 @@
       <p class="lede">Public websites measured with real browsers, real business data counted in aggregate, a control group when it matters, and the data downloadable. Each study says what was measured, when, and what it cannot prove.</p>
       <div class="studies">
         <a class="study" href="supplier-catalogues/">
-          <div><p class="section-label">October 2026 · Supplier data</p><h2>What do supplier catalogues actually contain?</h2><p>Five supplier sources of an engine spare parts company, 37,948 products counted field by field: what arrives, what is missing and what that means for an online shop.</p><span class="go">Read the study</span></div>
+          <div><p class="section-label">October 2026 · Shopify</p><h2>What is a supplier catalogue missing for Shopify?</h2><p>37,948 engine spare parts from five supplier sources, compared field by field with what Shopify and Google need: photos, GTINs, weights, filters and import limits.</p><span class="go">Read the study</span></div>
           <p class="num">0/37,948<small>products arrive with a photo</small></p>
         </a>
         <a class="study" href="certificates/">

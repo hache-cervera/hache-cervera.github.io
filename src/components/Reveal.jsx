@@ -55,10 +55,6 @@ export default function Reveal() {
         style={{ clipPath: 'inset(24% 14% 24% 14% round 20px)' }}
       >
         <div className="circuit-grid absolute inset-0" aria-hidden="true" />
-        <div
-          className="absolute left-1/2 top-1/2 h-[560px] w-[560px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/15 blur-[100px]"
-          aria-hidden="true"
-        />
       </div>
 
       <div className="pointer-events-none relative z-20 flex h-full flex-col items-center justify-between px-6 py-16 md:px-12">

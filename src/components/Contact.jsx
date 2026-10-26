@@ -40,7 +40,6 @@ export default function Contact() {
     <section id="contact" ref={rootRef} className="relative overflow-hidden px-6 py-32 text-center md:px-12 md:py-48">
       {/* dark backdrop under the chip canvas */}
       <div className="absolute inset-0 z-0 bg-panel" aria-hidden="true">
-        <div className="absolute left-1/2 top-1/2 h-[640px] w-[640px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/15 blur-[110px]" />
       </div>
 
       <div className="relative z-20 mx-auto flex w-full max-w-4xl flex-col items-center gap-4">
