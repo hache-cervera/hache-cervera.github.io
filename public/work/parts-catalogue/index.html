@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="canonical" href="https://hache-cervera.github.io/work/parts-catalogue/" />
+  <link rel="alternate" hreflang="en" href="https://hache-cervera.github.io/work/parts-catalogue/" />
+  <link rel="alternate" hreflang="es" href="https://hache-cervera.github.io/work/es/parts-catalogue/" />
+  <title>Supplier catalogue to Shopify &middot; Ecommerce data case study &middot; Hache Cervera</title>
+  <meta
+    name="description"
+    content="Case study: an engine spare parts shop listed 192 products out of 1,000+ because suppliers send catalogues in different formats with no API. A Python tool that reads any supplier file, unifies 37,948 products, classifies them and prepares Shopify imports and safe updates."
+  />
+  <meta property="og:title" content="Supplier catalogue to Shopify" />
+  <meta property="og:description" content="37,948 supplier products unified, classified and turned into Shopify imports, with an update mode that never overwrites the live store." />
+  <meta property="og:image" content="https://hache-cervera.github.io/work/img/og.jpg" />
+  <meta property="og:type" content="article" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg" />
+  <link rel="preload" href="/fonts/sora-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <style>
+    @font-face { font-family: 'Sora'; font-style: normal; font-weight: 600 800; font-display: swap; src: url('/fonts/sora-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400 500; font-display: swap; src: url('/fonts/inter-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  </style>
+  <script>
+    (function () {
+      try {
+        document.documentElement.dataset.theme = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light';
+      } catch (e) {}
+    })();
+  </script>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --surface: #f5f5f5;
+      --panel: #0a0a0a;
+      --ink: #0a0a0a;
+      --muted: #6b6b6b;
+      --line: #e5e5e5;
+      --accent: #ff3c00;
+      --accent-hover: #e63500;
+      --accent-soft: #ffe8e1;
+      --seo: #2d5f8a;
+      --seo-w: #e9f0f6;
+      --aeo: #2f7d4f;
+      --aeo-w: #e8f3ec;
+      --geo: #7d4f9e;
+      --geo-w: #f2ebf7;
+      --font-display: 'Sora', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+    :root[data-theme="dark"] {
+      --bg: #0d0d0d;
+      --surface: #1c1c1c;
+      --ink: #f2f2f2;
+      --muted: #9a9a9a;
+      --line: #2a2a2a;
+      --accent-soft: #3a1608;
+      --seo: #7fb3dd;
+      --seo-w: #12202c;
+      --aeo: #7fc79b;
+      --aeo-w: #112318;
+      --geo: #bb96d6;
+      --geo-w: #1e1526;
+    }
+    :root[data-theme="dark"] .grain { mix-blend-mode: screen; opacity: 0.045; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    ::selection { background: var(--accent); color: #fff; }
+
+    .grain {
+      position: fixed;
+      inset: 0;
+      z-index: 40;
+      pointer-events: none;
+      opacity: 0.028;
+      mix-blend-mode: multiply;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%25" height="100%25" filter="url(%23n)"/></svg>');
+    }
+
+    .glow {
+      position: absolute;
+      width: 480px;
+      height: 480px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 60, 0, 0.09) 0%, rgba(255, 60, 0, 0) 68%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .deco { position: absolute; background: var(--accent); pointer-events: none; z-index: 0; }
+    @keyframes floaty { 0%, 100% { transform: translateY(0) rotate(8deg); } 50% { transform: translateY(-12px) rotate(14deg); } }
+    .deco { animation: floaty 7s ease-in-out infinite; }
+    @media (prefers-reduced-motion: reduce) { .deco { animation: none; } }
+
+    .wrap { max-width: 72rem; margin: 0 auto; padding: 0 24px; }
+    @media (min-width: 768px) { .wrap { padding: 0 48px; } }
+    a { color: inherit; }
+
+    /* ---------- Header ---------- */
+    header { padding: 24px 0; border-bottom: 1px solid var(--line); }
+    header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .back {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.875rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s ease;
+    }
+    .back:hover { color: var(--accent); }
+    .back span { color: var(--accent); transition: transform 0.2s ease; display: inline-block; }
+    .back:hover span { transform: translateX(-4px); }
+    .hctrl { display: flex; align-items: center; gap: 16px; }
+    .lang {
+      display: flex;
+      gap: 8px;
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+    .lang a { text-decoration: none; color: var(--muted); padding: 4px 2px; border-bottom: 2px solid transparent; }
+    .lang a:hover { color: var(--accent); }
+    .lang a.on { color: var(--ink); border-bottom-color: var(--accent); }
+    .tbtn {
+      position: relative;
+      width: 40px;
+      height: 40px;
+      background: none;
+      border: 1px solid var(--line);
+      cursor: pointer;
+      overflow: hidden;
+      transition: border-color 0.25s ease;
+    }
+    .tbtn:hover { border-color: var(--accent); }
+    .tbtn .sky {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.6s cubic-bezier(0.6, 0, 0.25, 1.3);
+    }
+    :root[data-theme="dark"] .tbtn .sky { transform: rotate(-45deg); }
+    .tbtn .core {
+      position: relative;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      transition: transform 0.5s cubic-bezier(0.6, 0, 0.25, 1.3), box-shadow 0.4s ease;
+    }
+    :root[data-theme="dark"] .tbtn .core { transform: scale(1.35); box-shadow: 0 0 12px rgba(255, 60, 0, 0.55); }
+    .tbtn .veil {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 12px;
+      height: 12px;
+      margin: -6px 0 0 -6px;
+      border-radius: 50%;
+      background: var(--bg);
+      transform: translate(15px, -15px);
+      transition: transform 0.5s cubic-bezier(0.6, 0, 0.25, 1.3), background 0.25s ease;
+      z-index: 2;
+    }
+    :root[data-theme="dark"] .tbtn .veil { transform: translate(4px, -4px) scale(1.35); }
+    .tbtn .ray {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 2px;
+      height: 5px;
+      margin: -2.5px 0 0 -1px;
+      border-radius: 1px;
+      background: var(--accent);
+      transform: rotate(var(--r)) translateY(-10px);
+      transition: transform 0.45s ease, opacity 0.35s ease;
+    }
+    :root[data-theme="dark"] .tbtn .ray { transform: rotate(var(--r)) translateY(-4px) scale(0.2); opacity: 0; }
+    @media (prefers-reduced-motion: reduce) { .tbtn .sky, .tbtn .core, .tbtn .veil, .tbtn .ray { transition: none; } }
+
+    /* ---------- Hero ---------- */
+    .hero { position: relative; padding: 80px 24px 56px; }
+    .hero > *:not(.glow):not(.deco) { position: relative; z-index: 1; }
+    @media (min-width: 768px) { .hero { padding: 112px 48px 72px; } }
+    .kicker {
+      font-family: var(--font-display);
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .hero h1 {
+      margin-top: 24px;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(2.2rem, 5.6vw, 4.2rem);
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      word-break: break-word;
+    }
+    .hero h1 em {
+      font-style: italic;
+      background: linear-gradient(100deg, #ff3c00 0%, #ff8a5c 35%, #ff3c00 65%, #ff5a24 100%);
+      background-size: 220% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: shimmer 4s linear infinite;
+    }
+    @keyframes shimmer { to { background-position: -220% 0; } }
+    .hero .lede { margin-top: 24px; max-width: 44rem; font-size: 1.125rem; color: var(--muted); }
+    .hero .actions { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+    .btn {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.875rem;
+      text-decoration: none;
+      padding: 14px 28px;
+      background: var(--accent);
+      color: #fff;
+      transition: background 0.2s ease;
+    }
+    .btn:hover { background: var(--accent-hover); }
+    .alt {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.875rem;
+      text-decoration: none;
+      color: var(--muted);
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 2px;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+    .alt:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* ---------- Meta grid ---------- */
+    .meta {
+      margin-top: 48px;
+      display: grid;
+      grid-template-columns: 1fr;
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+    }
+    @media (min-width: 560px) { .meta { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 900px) { .meta { grid-template-columns: repeat(3, 1fr); } }
+    .meta div { padding: 16px 20px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .meta dt {
+      font-family: var(--font-display);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .meta dd { margin-top: 4px; font-size: 0.9375rem; font-weight: 500; }
+
+    /* ---------- Sections ---------- */
+    /* overflow:hidden keeps the bleeding .glow circles from widening the page */
+    section, .hero { overflow: hidden; }
+    section { position: relative; padding: 64px 0 80px; border-top: 1px solid var(--line); }
+    section .wrap { position: relative; z-index: 1; }
+    .section-label {
+      font-family: var(--font-display);
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    section h2 {
+      margin-top: 24px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+    }
+    .section-intro { margin-top: 16px; max-width: 46rem; color: var(--muted); }
+    section p + p { margin-top: 12px; }
+    .note {
+      margin-top: 24px;
+      max-width: 46rem;
+      padding: 12px 16px;
+      border-left: 2px solid var(--accent);
+      background: var(--surface);
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+    .note strong { color: var(--ink); font-weight: 600; }
+    code {
+      font-family: ui-monospace, 'SF Mono', Consolas, monospace;
+      font-size: 0.8125em;
+      background: var(--surface);
+      padding: 2px 6px;
+      color: var(--accent);
+    }
+
+    /* ---------- Panel quote ---------- */
+    .quote {
+      margin-top: 40px;
+      background: var(--panel);
+      color: #f2f2f2;
+      padding: 32px 28px;
+      border-left: 3px solid var(--accent);
+    }
+    @media (min-width: 768px) { .quote { padding: 40px 44px; } }
+    .quote p { color: rgba(242, 242, 242, 0.82); font-size: 1.0625rem; max-width: 48rem; }
+    .quote strong { color: #fff; font-weight: 600; }
+
+    /* ---------- Stats ---------- */
+    .stats {
+      margin-top: 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+    }
+    @media (min-width: 768px) { .stats { grid-template-columns: repeat(4, 1fr); } }
+    .stats div { padding: 24px 20px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .stats b {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(1.9rem, 4vw, 2.6rem);
+      letter-spacing: -0.04em;
+      line-height: 1;
+      color: var(--accent);
+    }
+    .stats span { display: block; margin-top: 8px; font-size: 0.8125rem; color: var(--muted); }
+
+    /* ---------- Sitemap ---------- */
+    .sitemap { margin-top: 40px; display: grid; gap: 12px; grid-template-columns: 1fr; }
+    @media (min-width: 640px) { .sitemap { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 1000px) { .sitemap { grid-template-columns: repeat(4, 1fr); } }
+    .smap { display: flex; flex-direction: column; gap: 6px; }
+    .smap .top {
+      background: var(--panel);
+      color: #fff;
+      padding: 12px 14px;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.8125rem;
+    }
+    .smap .top i { display: block; margin-top: 3px; font-style: normal; font-size: 0.6875rem; font-weight: 400; color: rgba(255, 255, 255, 0.55); }
+    .smap .kid { border: 1px solid var(--line); background: var(--surface); padding: 9px 14px; font-size: 0.8125rem; color: var(--muted); }
+
+    /* ---------- Highlights ---------- */
+    .hl { margin-top: 40px; display: grid; gap: 16px; grid-template-columns: 1fr; }
+    @media (min-width: 640px) { .hl { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 1000px) { .hl { grid-template-columns: repeat(3, 1fr); } }
+    .hl-item { border: 1px solid var(--line); padding: 24px; transition: border-color 0.3s ease; }
+    .hl-item:hover { border-color: var(--ink); }
+    .hl-item svg { display: block; color: var(--accent); }
+    .hl-item h3 {
+      margin-top: 16px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.125rem;
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+    }
+    .hl-item p { margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
+
+    /* ---------- Timeline ---------- */
+    .tl { margin-top: 48px; display: grid; gap: 24px; grid-template-columns: 1fr; list-style: none; }
+    @media (min-width: 900px) { .tl { grid-template-columns: repeat(4, 1fr); } }
+    .tl-step { border-top: 2px solid var(--line); padding-top: 16px; }
+    .tl-step.now { border-top-color: var(--accent); }
+    .tl-step b {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .tl-step.now b { color: var(--accent); }
+    .tl-step p { margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
+
+    /* ---------- One article, three surfaces ---------- */
+    .flow { margin-top: 40px; }
+    .flow-src {
+      border: 1px solid var(--ink);
+      background: var(--surface);
+      padding: 16px 24px;
+      text-align: center;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--ink);
+    }
+    .flow-fan { display: grid; grid-template-columns: repeat(3, 1fr); height: 24px; }
+    .flow-fan span { justify-self: center; width: 1px; background: var(--line); }
+    .flow-outs { display: grid; gap: 16px; grid-template-columns: 1fr; }
+    @media (max-width: 699px) { .flow-fan { display: none; } .flow-outs { margin-top: 16px; } }
+    @media (min-width: 700px) { .flow-outs { grid-template-columns: repeat(3, 1fr); } }
+    .flow-out { border: 1px solid var(--line); border-top: 3px solid; padding: 16px; }
+    .flow-out.o-seo { border-top-color: var(--seo); }
+    .flow-out.o-aeo { border-top-color: var(--aeo); }
+    .flow-out.o-geo { border-top-color: var(--geo); }
+    .flow-out b { display: block; font-family: var(--font-display); font-weight: 700; font-size: 1rem; }
+    .flow-out span { display: block; margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
+
+    /* ---------- Layers ---------- */
+    .layers { margin-top: 40px; display: flex; flex-direction: column; gap: 16px; }
+    .layer { padding: 24px 26px; border-left: 3px solid; }
+    .layer.l-seo { background: var(--seo-w); border-color: var(--seo); }
+    .layer.l-aeo { background: var(--aeo-w); border-color: var(--aeo); }
+    .layer.l-geo { background: var(--geo-w); border-color: var(--geo); }
+    .layer .tag {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      color: #fff;
+    }
+    .l-seo .tag { background: var(--seo); }
+    .l-aeo .tag { background: var(--aeo); }
+    .l-geo .tag { background: var(--geo); }
+    :root[data-theme="dark"] .layer .tag { color: #0d0d0d; }
+    .layer h3 {
+      margin-top: 12px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.0625rem;
+      letter-spacing: -0.02em;
+    }
+    .layer ul { margin-top: 12px; padding-left: 18px; }
+    .layer li { font-size: 0.875rem; color: var(--muted); margin-bottom: 8px; }
+    .layer li:last-child { margin-bottom: 0; }
+    .layer li strong { color: var(--ink); font-weight: 600; }
+
+    /* ---------- Component cards ---------- */
+    .cards { margin-top: 40px; display: grid; gap: 24px; grid-template-columns: 1fr; }
+    @media (min-width: 768px) { .cards { grid-template-columns: 1fr 1fr; } }
+    .card { border: 1px solid var(--line); overflow: hidden; transition: border-color 0.3s ease; }
+    .card:hover { border-color: var(--ink); }
+    .card figure { margin: 0; aspect-ratio: 16 / 10; overflow: hidden; background: var(--surface); border-bottom: 1px solid var(--line); cursor: zoom-in; }
+    .card figure img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; transition: transform 0.6s ease; }
+    .card:hover figure img { transform: scale(1.03); }
+    .card .body { padding: 22px 24px; }
+    /* Component gallery: let each shot keep its own height instead of cropping it */
+    .cards.gallery { align-items: start; }
+    .cards.gallery figure { aspect-ratio: auto; }
+    .cards.gallery figure img { height: auto; object-fit: contain; }
+    /* An establishing shot that runs the full width of the grid. */
+    .cards.gallery .card.wide { grid-column: 1 / -1; }
+    @media (min-width: 900px) { .cards.three { grid-template-columns: repeat(3, 1fr); } }
+    .card h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.125rem; letter-spacing: -0.02em; }
+    .card p { margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
+
+    /* ---------- Stack ---------- */
+    .group { margin-top: 32px; }
+    .group h3 {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .tags { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .tags li {
+      list-style: none;
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      padding: 5px 12px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--muted);
+    }
+    .tags li.key { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+
+    /* ---------- Tables ---------- */
+    /* Migration figures, stated as figures. */
+    .figs { margin-top: 40px; display: grid; grid-template-columns: repeat(2, 1fr); border: 1px solid var(--line); }
+    @media (min-width: 760px) { .figs { grid-template-columns: repeat(5, 1fr); } }
+    .figs div { padding: 20px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .figs b {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.75rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      color: var(--ink);
+    }
+    .figs span { display: block; margin-top: 8px; font-size: 0.75rem; line-height: 1.35; color: var(--muted); }
+
+    .tbl { margin-top: 40px; border: 1px solid var(--line); overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.875rem; min-width: 34rem; }
+    th {
+      background: var(--surface);
+      padding: 12px 18px;
+      text-align: left;
+      font-family: var(--font-display);
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border-bottom: 1px solid var(--line);
+    }
+    td { padding: 14px 18px; border-bottom: 1px solid var(--line); color: var(--muted); vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    td strong { color: var(--ink); font-weight: 600; }
+    td:first-child { white-space: nowrap; }
+
+    /* ---------- CTA + footer ---------- */
+    .cta { position: relative; background: var(--panel); color: #f2f2f2; border-top: none; overflow: hidden; }
+    .cta .kicker { color: var(--accent); }
+    .cta h2 { color: #fff; }
+    .cta p { margin-top: 16px; max-width: 40rem; color: rgba(242, 242, 242, 0.7); }
+    .cta .actions { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+    .cta .alt { color: rgba(242, 242, 242, 0.7); border-color: rgba(242, 242, 242, 0.25); }
+    .cta .alt:hover { color: var(--accent); border-color: var(--accent); }
+    footer { padding: 40px 0; border-top: 1px solid var(--line); }
+    footer .wrap { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; font-size: 0.8125rem; color: var(--muted); }
+    footer .path { font-family: var(--font-display); }
+    footer .path span { color: var(--accent); }
+
+    /* ---------- Reveal + lightbox ---------- */
+    .rv { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .rv.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { .rv { opacity: 1; transform: none; transition: none; } }
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(8, 8, 8, 0.94);
+      padding: 32px 16px;
+    }
+    .lightbox.on { display: flex; }
+    .lightbox img { max-width: 100%; max-height: 100%; object-fit: contain; }
+    .lightbox .close {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 2rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+    .lightbox .close:hover { color: var(--accent); }
+  
+    /* brand orange #ff3c00 reaches 3.56:1 on white; small text and buttons use a darker shade in light theme */
+    html:not([data-theme='dark']) .kicker, html:not([data-theme='dark']) .section-label, html:not([data-theme='dark']) main a:not(.btn):not(.alt), html:not([data-theme='dark']) code { color: #c22e00; }
+    html:not([data-theme='dark']) .btn { background: #c22e00; border-color: #c22e00; }
+    html .cta .kicker { color: var(--accent); }
+    /* hache: cat mark (signature) and profile links */
+    .hleft { display: flex; align-items: center; gap: 16px; min-width: 0; }
+    .mark { display: inline-flex; flex: none; color: var(--ink); line-height: 0; }
+    .mark svg { width: 30px; height: auto; }
+    .mark:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+    .cat .acc { fill: var(--accent); }
+    footer .sign svg { display: inline-block; width: 18px; height: auto; margin-right: 10px; vertical-align: -2px; }
+    footer .social { display: flex; flex-wrap: wrap; gap: 18px; }
+    footer .social a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+    footer .social a:hover { color: var(--ink); }
+    /* a11y (WCAG 1.4.3): white on #ff3c00 is 3.56:1, so buttons use the darker shade in both themes */
+    html[data-theme='dark'] .btn { background: #c22e00; border-color: #c22e00; color: #fff; }
+    html[data-theme='dark'] .btn:hover { background: #a82800; border-color: #a82800; }
+  </style>
+  <script src="/consent.js" defer></script>
+  <style>
+    /* Pipeline: five stages, stacked on mobile, in a row from 900px */
+    .flow { margin-top: 40px; padding: 0; list-style: none; display: grid; grid-template-columns: 1fr; border: 1px solid var(--line); }
+    .flow li { padding: 20px; border-bottom: 1px solid var(--line); }
+    .flow li:last-child { border-bottom: 0; }
+    .flow small { display: block; font-family: var(--font-display); font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.1em; color: var(--accent); }
+    .flow b { display: block; margin-top: 6px; font-family: var(--font-display); font-weight: 700; font-size: 1.0625rem; letter-spacing: -0.02em; }
+    .flow p { margin-top: 8px; font-size: 0.875rem; line-height: 1.5; color: var(--muted); }
+    /* The italic gradient title is clipped at its last letter without a little room */
+    .hero h1 em { padding-right: 0.12em; }
+    @media (min-width: 900px) {
+      .flow { grid-template-columns: repeat(5, 1fr); }
+      .flow li { border-bottom: 0; border-right: 1px solid var(--line); }
+      .flow li:last-child { border-right: 0; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header>
+    <div class="wrap">
+      <div class="hleft"><a class="mark" href="/" aria-label="Ada (hache) Cervera, home"><svg class="cat" viewBox="0 0 18 17" shape-rendering="crispEdges" aria-hidden="true" focusable="false"><path fill="currentColor" d="M1 0h1v1h-1zM16 0h1v1h-1zM1 1h2v1h-2zM15 1h2v1h-2zM1 2h3v1h-3zM14 2h3v1h-3zM1 3h4v1h-4zM13 3h4v1h-4zM1 4h16v1h-16zM0 5h18v1h-18zM0 6h3v1h-3zM4 6h14v1h-14zM0 7h4v1h-4zM5 7h13v1h-13zM0 8h5v1h-5zM6 8h12v1h-12zM0 9h4v1h-4zM5 9h13v1h-13zM0 10h3v1h-3zM4 10h7v1h-7zM15 10h3v1h-3zM0 11h8v1h-8zM10 11h8v1h-8zM0 12h7v1h-7zM8 12h2v1h-2zM11 12h7v1h-7zM0 13h8v1h-8zM10 13h8v1h-8zM1 14h16v1h-16zM2 15h14v1h-14zM3 16h12v1h-12z"/><path class="acc" d="M11 10h4v1h-4z"/></svg></a><a class="back" href="../"><span>&larr;</span> Back to work</a></div>
+      <div class="hctrl">
+        <nav class="lang" aria-label="Language">
+          <a class="on" href="./" aria-current="page">EN</a>
+          <a href="../es/parts-catalogue/">ES</a>
+        </nav>
+        <button class="tbtn" id="modeToggle" type="button" aria-label="Switch between light and dark mode">
+          <span class="sky" aria-hidden="true">
+            <span class="ray" style="--r:0deg"></span><span class="ray" style="--r:45deg"></span><span class="ray" style="--r:90deg"></span><span class="ray" style="--r:135deg"></span><span class="ray" style="--r:180deg"></span><span class="ray" style="--r:225deg"></span><span class="ray" style="--r:270deg"></span><span class="ray" style="--r:315deg"></span>
+            <span class="core"></span>
+            <span class="veil"></span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="hero wrap">
+      <span class="glow" style="top: -140px; right: -160px;" aria-hidden="true"></span>
+      <span class="glow" style="bottom: -220px; left: -240px; width: 380px; height: 380px;" aria-hidden="true"></span>
+      <span class="deco" style="top: 110px; right: 12%; width: 14px; height: 14px;" aria-hidden="true"></span>
+      <span class="deco" style="top: 220px; right: 5%; width: 8px; height: 8px; opacity: 0.55; animation-delay: 1.2s;" aria-hidden="true"></span>
+      <p class="kicker">/ Case study &middot; Ecommerce data and tooling</p>
+      <h1>Supplier catalogue<em> to Shopify</em></h1>
+      <p class="lede">
+        An engine spare parts company asked for a new website. The site was fine. The shop was
+        not: it listed 192 products out of more than a thousand, because every supplier sends its
+        catalogue in a different format and none of them has an API. So instead of a redesign I
+        built the missing piece: a tool that reads any supplier file, unifies it, classifies it
+        and hands Shopify a file it can import.
+      </p>
+      <div class="actions">
+        <a class="btn" href="#tool">See how the tool works</a>
+        <a class="alt" href="../">See the rest of the work</a>
+      </div>
+
+      <dl class="meta">
+        <div><dt>Client</dt><dd>Engine spare parts company, Spain</dd></div>
+        <div><dt>Platform</dt><dd>Shopify</dd></div>
+        <div><dt>Built with</dt><dd>Python, Streamlit, Shopify Admin API</dd></div>
+        <div><dt>Role</dt><dd>Diagnosis, data tool and store setup</dd></div>
+        <div><dt>Status</dt><dd>Working on a development store</dd></div>
+        <div><dt>Context</dt><dd>Independent project, October 2026</dd></div>
+      </dl>
+
+      <p class="note">
+        <strong>What this page is:</strong> the client is kept anonymous, and so are its suppliers
+        and brands. The figures come from running the tool on the real supplier catalogues; the
+        store figures come from a Shopify development store, which behaves like the live one.
+        The code was written pair-programming with Claude, like the rest of this site: I decided
+        what to build and checked every result against the data.
+      </p>
+    </div>
+
+    <!-- ============ HIGHLIGHTS ============ -->
+    <section id="highlights">
+      <span class="glow" style="top: -80px; right: -280px;" aria-hidden="true"></span>
+      <div class="wrap">
+        <p class="section-label">/ In short</p>
+        <h2>What the job actually was</h2>
+
+        <div class="figs">
+          <div><b>192</b><span>products listed in a shop that should have 1,000+</span></div>
+          <div><b>37,948</b><span>supplier products unified into one table</span></div>
+          <div><b>0</b><span>conflicts left unexplained between sources</span></div>
+          <div><b>15</b><span>engine systems, assigned by editable rules</span></div>
+          <div><b>37</b><span>automated tests on every change</span></div>
+        </div>
+
+        <div class="hl">
+          <article class="hl-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="9" /><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.5v.7" /><path d="M12 17h.01" />
+            </svg>
+            <h3>The first question, not the first mockup</h3>
+            <p>Before proposing anything I asked what the site was for: information, sales, or both. Both. That pointed away from a redesign and towards the half that was broken.</p>
+          </article>
+          <article class="hl-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="4" width="18" height="16" rx="1" /><path d="M3 9h18M9 9v11" />
+            </svg>
+            <h3>Each format, learned once</h3>
+            <p>The tool recognises a supplier file by its column headers. A new format is described once, saved as a profile, and recognised on its own from then on.</p>
+          </article>
+          <article class="hl-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 6h16M4 12h10M4 18h6" /><path d="m16 15 2 2 4-4" />
+            </svg>
+            <h3>Rules in a spreadsheet</h3>
+            <p>Categories, images, VAT and margins live in CSV files you can open in Excel. Adding a supplier or a category is configuration, not code.</p>
+          </article>
+          <article class="hl-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 2.5 4.5 5.5v6c0 5 3.2 8.6 7.5 10 4.3-1.4 7.5-5 7.5-10v-6L12 2.5Z" /><path d="m9 12 2.2 2.2L15.5 10" />
+            </svg>
+            <h3>Dry run by default</h3>
+            <p>The script that sets up the store only reports what it would do. It writes only when told to, never deletes, and never stores credentials.</p>
+          </article>
+          <article class="hl-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M20 12a8 8 0 1 1-2.3-5.7" /><path d="M20 4v4h-4" />
+            </svg>
+            <h3>Update without overwriting</h3>
+            <p>Once products are live, the tool compares against the store and sends only price and cost changes. Status, texts and photos are left exactly as they are.</p>
+          </article>
+          <article class="hl-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 3v18h18" /><path d="m7 15 4-4 3 3 5-6" />
+            </svg>
+            <h3>Measured before changed</h3>
+            <p>Every change was run against the full real catalogue and compared product by product. One fix that looked obvious would have removed 840 products, so it was not made.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 01 THE PROBLEM ============ -->
+    <section id="problem">
+      <span class="glow" style="top: 40px; left: -280px;" aria-hidden="true"></span>
+      <div class="wrap">
+        <p class="section-label">/ 01 &middot; The problem</p>
+        <h2>A new website would not have added a single product</h2>
+        <p class="section-intro">
+          The brief was a new website. Looking at the existing one, it was not bad, so the useful
+          question was what it was for. The answer was both: a company presentation and a shop.
+          The presentation side worked. The shop listed 192 products when the catalogue runs to
+          more than a thousand, and even those 192 had category errors and menu links that led
+          nowhere.
+        </p>
+        <p class="section-intro">
+          The cause was upstream of the website. Each supplier sends prices and references in its
+          own way: Excel sheets, CSV exports, PDF catalogues, each with different columns and
+          names for the same thing. None offers an API. Putting a product in the shop meant
+          copying it by hand from whichever file had it, which is why most products never got
+          there.
+        </p>
+        <p class="note">
+          <strong>The decision:</strong> keep the site and the platform, and fix the process that
+          feeds the shop. A redesign would have been more visible and would have changed nothing
+          about the 192.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ 02 THE DATA ============ -->
+    <section id="data">
+      <div class="wrap">
+        <p class="section-label">/ 02 &middot; The data</p>
+        <h2>What supplier files actually contain</h2>
+        <p class="section-intro">
+          Before designing anything I put every supplier source through the same pipeline and
+          counted what came out. The full supplier catalogues are far larger than what the shop
+          will sell (around a thousand products to start with), which made them a good stress
+          test.
+        </p>
+        <div class="tbl" tabindex="0" role="region" aria-label="Table">
+          <table>
+            <thead><tr><th>Measured on the real files</th><th>Result</th></tr></thead>
+            <tbody>
+            <tr><td><strong>Distinct products after merging every source</strong></td><td>37,948</td></tr>
+            <tr><td><strong>Ready for Shopify</strong></td><td>34,379 variants in 34,339 listings</td></tr>
+            <tr><td><strong>Left out because no source gives a price</strong></td><td>3,569, listed in the report with the reason</td></tr>
+            <tr><td><strong>Conflicts between sources</strong></td><td>0 (when two files disagree, the tool says which file and which row)</td></tr>
+            <tr><td><strong>Products arriving with a photo, weight, barcode or lead time</strong></td><td>0</td></tr>
+            <tr><td><strong>Products arriving without a description</strong></td><td>36,514</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">
+          <strong>What that meant:</strong> the tool could not just move data around. It had to
+          supply what nobody sends, such as images and an availability message, and say clearly
+          what is still missing rather than invent it.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ 03 THE TOOL ============ -->
+    <section id="tool">
+      <span class="glow" style="top: 0; right: -280px;" aria-hidden="true"></span>
+      <div class="wrap">
+        <p class="section-label">/ 03 &middot; The tool</p>
+        <h2>One engine, five stages</h2>
+        <p class="section-intro">
+          A Python pipeline with a small local web interface on top. Files go in as they arrive;
+          a Shopify import file and a quality report come out. There is no server and no
+          database: everything runs on the computer of whoever uses it, starting from the files
+          each time.
+        </p>
+        <ol class="flow">
+          <li><small>01</small><b>Read</b><p>Excel, CSV or PDF. Finds the header row even under titles, skips headers repeated on every PDF page.</p></li>
+          <li><small>02</small><b>Recognise</b><p>Matches the column headers against saved supplier profiles. A new format is described once in the interface.</p></li>
+          <li><small>03</small><b>Clean and merge</b><p>Normalises references and prices, merges the same part across files and records every disagreement.</p></li>
+          <li><small>04</small><b>Classify and complete</b><p>Translates names, assigns one of 15 engine systems, vehicle data, a generic image per part type and variants by size.</p></li>
+          <li><small>05</small><b>Write</b><p>Shopify CSV, a master table with the source of every value, and an Excel report of what needs a human.</p></li>
+        </ol>
+        <div class="tbl" tabindex="0" role="region" aria-label="Table">
+          <table>
+            <thead><tr><th>Piece</th><th>What it does</th></tr></thead>
+            <tbody>
+            <tr><td><strong>Supplier profiles</strong></td><td>One small file per format: which column is the reference, which is the price, whether prices include VAT, how the supplier writes decimals.</td></tr>
+            <tr><td><strong>Name rewriting</strong></td><td>Catalogue names in English come as "NOUN,DETAIL". They are turned round and translated with a glossary of about 270 expressions, so "GASKET,EXHAUST MANIFOLD" becomes "Exhaust manifold gasket" in Spanish.</td></tr>
+            <tr><td><strong>Engine systems</strong></td><td>15 systems that follow the categories the shop already had. Assigned by ordered rules in a CSV; 177 of 34,339 listings still fall into "Other".</td></tr>
+            <tr><td><strong>Generic images</strong></td><td>No supplier sends photos, so each part type gets a generic image, marked as indicative in its alt text: 22,211 listings covered.</td></tr>
+            <tr><td><strong>Interface</strong></td><td>Four steps in the browser, opened with a double click: upload, check the columns, choose what to generate, download.</td></tr>
+            <tr><td><strong>Store setup script</strong></td><td>Creates the custom fields, one automatic collection per engine system and the menu links, through the Shopify Admin GraphQL API.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 04 DECISIONS ============ -->
+    <section id="decisions">
+      <div class="wrap">
+        <p class="section-label">/ 04 &middot; Decisions</p>
+        <h2>Built for someone else to run</h2>
+        <p class="section-intro">
+          The person using it day to day will not be me. That changed more decisions than any
+          technical constraint did.
+        </p>
+        <div class="tbl" tabindex="0" role="region" aria-label="Table">
+          <table>
+            <thead><tr><th>Decision</th><th>Why</th></tr></thead>
+            <tbody>
+            <tr><td><strong>No fake stock</strong></td><td>Without supplier APIs there is no reliable stock figure. Every product says "check availability" with the shop's phone number instead of showing an "in stock" nobody can guarantee. The field is already there for when real data exists.</td></tr>
+            <tr><td><strong>Images by part type, not by name</strong></td><td>Matching images on words in the name would add 3,100 more photos. I checked a sample: almost all were wrong, a pump cover showing a whole pump. The option exists, switched off.</td></tr>
+            <tr><td><strong>Test on a sample first</strong></td><td>A first import of around 33,000 products got stuck on the test store. Since then the tool can build a sample of any size spread across part families, and repeat exactly the same one to compare before and after.</td></tr>
+            <tr><td><strong>A separate update mode</strong></td><td>Re-importing everything with "overwrite" would set live products back to draft and blank anything filled in by hand. The update mode reads the store export, matches by SKU and sends only the columns that change.</td></tr>
+            <tr><td><strong>Safe store setup</strong></td><td>Dry run unless told otherwise, checks what exists before creating anything, never deletes, asks for credentials at run time and uses a token that expires in 24 hours.</td></tr>
+            <tr><td><strong>Warnings, not silent choices</strong></td><td>Two files disagreeing, the same reference under two brands, a profile about to overwrite another: each one is shown to the user rather than decided quietly.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="cards gallery">
+          <div class="card wide">
+            <figure>
+              <img src="../img/catalogo-actualizar.webp" width="1600" height="1332" alt="The tool interface in update mode: the two main choices highlighted, then four figures (1 product changing, 1 new, 24 already in the store, 0 left untouched) and the instructions for importing each file" loading="lazy" data-zoom />
+            </figure>
+            <div class="body">
+              <h3>Update mode, on a test store</h3>
+              <p>
+                A simulated store of 24 products with one old price and one product missing:
+                the tool finds exactly one change and one new product, and explains how each file
+                is imported. The interface is in Spanish, like the people who use it.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 05 INCIDENTS ============ -->
+    <section id="incidents">
+      <span class="glow" style="top: 0; right: -280px;" aria-hidden="true"></span>
+      <div class="wrap">
+        <p class="section-label">/ 05 &middot; Incidents</p>
+        <h2>Things that broke, and one I chose not to fix</h2>
+        <p class="section-intro">
+          Most of the features above exist because something went wrong first. Where the cause
+          was not investigated, the table says so.
+        </p>
+        <div class="tbl" tabindex="0" role="region" aria-label="Table">
+          <table>
+            <thead><tr><th>Symptom</th><th>Cause</th><th>Lesson</th></tr></thead>
+            <tbody>
+            <tr><td><strong>Import of ~33,000 products stuck</strong></td><td>Not investigated: the test store was replaced instead.</td><td>Start with a sample. Became the sample mode.</td></tr>
+            <tr><td><strong>~3,000 imported products invisible</strong></td><td>They were not published to the online store channel.</td><td>Publishing is a column in the import, not an afterthought.</td></tr>
+            <tr><td><strong>Hand pumps vanished</strong></td><td>"HAND" was translated as "manual", and the filter drops maintenance manuals.</td><td>A translation can trip a filter further down the line. Now "de mano".</td></tr>
+            <tr><td><strong>514 products in "Other"</strong></td><td>No rules for bearings, seals, hoses, hydraulic parts or workshop tools.</td><td>New rules and a new hydraulics system: down to 177. Rule order matters.</td></tr>
+            <tr><td><strong>12 products with someone else's photo</strong></td><td>Not analysed; found by checking the test store by eye.</td><td>Removed and checked one by one: 124 of 188 products with an image, none of the 12.</td></tr>
+            <tr><td><strong>Setup script failed on Windows</strong></td><td>The local Python trusted an expired certificate.</td><td>Ship the certificate bundle (certifi) with the tool instead of trusting the machine.</td></tr>
+            <tr><td><strong>No way to create the app the old way</strong></td><td>Shopify stopped allowing new custom apps in the admin on 1 January 2026.</td><td>App built in the Dev Dashboard with client credentials. Each app belongs to its store.</td></tr>
+            <tr><td><strong>"0.206" kg read as 206 kg</strong></td><td>A dot followed by three digits was taken as thousands, as in European price lists.</td><td>Found in code review before any weights arrived. Each supplier profile now states its decimal format.</td></tr>
+            <tr><td><strong>The filter matched inside words</strong></td><td>"RING" also matches "SPRING".</td><td>Not changed. Matching whole words would drop 840 products, 420 of them springs. Which parts to sell is a business decision, not a code fix.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 06 WHAT IT PROVES ============ -->
+    <section id="value">
+      <span class="glow" style="bottom: 0; left: -280px;" aria-hidden="true"></span>
+      <div class="wrap">
+        <p class="section-label">/ 06 &middot; What it proves</p>
+        <h2>Why this one is worth reading</h2>
+        <div class="tbl" tabindex="0" role="region" aria-label="Table">
+          <table>
+            <thead><tr><th>Claim</th><th>Evidence</th></tr></thead>
+            <tbody>
+            <tr><td><strong>Diagnosis before delivery</strong></td><td>The brief was a website; the fix was a data process. The 192 against 1,000+ is what decided it.</td></tr>
+            <tr><td><strong>Messy data, handled honestly</strong></td><td>37,948 products from sources that disagree in format, language and completeness, with every exclusion and conflict listed rather than hidden.</td></tr>
+            <tr><td><strong>Safe on a live store</strong></td><td>Dry-run setup, no deletions, no stored credentials, and an update mode that cannot touch status, texts or photos.</td></tr>
+            <tr><td><strong>Verified, not assumed</strong></td><td>37 automated tests, and every change compared product by product against the full real catalogue before it was kept.</td></tr>
+            <tr><td><strong>Handed over</strong></td><td>A four-step interface, a two-page guide for the people who use it, full documentation, and a private repository with one commit per change.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">
+          <strong>Still open:</strong> moving from the development store to the live one, real
+          distributor price lists instead of market prices, store filters by vehicle and engine,
+          more photos, and deciding with the client what happens to the products already in the
+          shop without a reference. A tool with no open items is a tool nobody is using.
+        </p>
+      </div>
+    </section>
+
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+    <button class="close" type="button" aria-label="Close">&times;</button>
+    <img src="" alt="" />
+  </div>
+
+  <section class="cta" id="contact">
+    <span class="glow" style="top: -160px; right: -160px;" aria-hidden="true"></span>
+    <div class="wrap">
+      <p class="kicker">/ Next</p>
+      <h2>Everything connects.</h2>
+      <p>The brief was a website and the fix was a data process. Asking what something is for before building it is most of the job. If that is the kind of work you need, say hi.</p>
+      <div class="actions">
+        <a class="btn" href="mailto:hi.hache.cervera@gmail.com?subject=Supplier%20catalogue%20case%20study">Get in touch</a>
+        <a class="alt" href="../">See the rest of the work</a>
+      </div>
+    </div>
+  </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p class="sign"><svg class="cat" viewBox="0 0 18 17" shape-rendering="crispEdges" aria-hidden="true" focusable="false"><path fill="currentColor" d="M1 0h1v1h-1zM16 0h1v1h-1zM1 1h2v1h-2zM15 1h2v1h-2zM1 2h3v1h-3zM14 2h3v1h-3zM1 3h4v1h-4zM13 3h4v1h-4zM1 4h16v1h-16zM0 5h18v1h-18zM0 6h3v1h-3zM4 6h14v1h-14zM0 7h4v1h-4zM5 7h13v1h-13zM0 8h5v1h-5zM6 8h12v1h-12zM0 9h4v1h-4zM5 9h13v1h-13zM0 10h3v1h-3zM4 10h7v1h-7zM15 10h3v1h-3zM0 11h8v1h-8zM10 11h8v1h-8zM0 12h7v1h-7zM8 12h2v1h-2zM11 12h7v1h-7zM0 13h8v1h-8zM10 13h8v1h-8zM1 14h16v1h-16zM2 15h14v1h-14zM3 16h12v1h-12z"/><path class="acc" d="M11 10h4v1h-4z"/></svg>&copy; 2026 Ada (hache) Cervera. Built by hand in Valencia. <a href="#" data-cookies>Cookies</a></p>
+      <p class="path">Infrastructure <span>&rarr;</span> CMS <span>&rarr;</span> Search <span>&rarr;</span> Operations</p>
+      <p class="social"><a href="https://github.com/hache-cervera">GitHub</a><a href="https://www.npmjs.com/~hache-cervera">npm</a><a href="https://www.linkedin.com/in/hache-cervera">LinkedIn</a></p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      
+      function track(name, params) {
+        if (window.gtag) window.gtag('event', name, params || {});
+      }
+
+      /* Theme toggle, shares its storage key with the rest of the site */
+      document.getElementById('modeToggle').addEventListener('click', function () {
+        var t = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+        document.documentElement.dataset.theme = t;
+        try { localStorage.setItem('theme', t); } catch (e) {}
+        track('theme', { value: t });
+      });
+
+      /* Lightbox */
+      var box = document.getElementById('lightbox');
+      var boxImg = box.querySelector('img');
+      document.querySelectorAll('[data-zoom]').forEach(function (img) {
+        img.parentElement.addEventListener('click', function () {
+          boxImg.src = img.src;
+          boxImg.alt = img.alt;
+          box.classList.add('on');
+          track('image_open', { project: 'parts-catalogue', image: img.getAttribute('src') });
+        });
+      });
+      function closeBox() { box.classList.remove('on'); boxImg.src = ''; }
+      box.querySelector('.close').addEventListener('click', closeBox);
+      box.addEventListener('click', function (e) { if (e.target === box) closeBox(); });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && box.classList.contains('on')) closeBox();
+      });
+
+      /* Reveal on scroll */
+      var rv = document.querySelectorAll('.card, .layer, .smap, .quote, .tbl, .hl-item, .tl-step, .flow-out');
+      rv.forEach(function (el) { el.classList.add('rv'); });
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+        rv.forEach(function (el) { io.observe(el); });
+      } else {
+        rv.forEach(function (el) { el.classList.add('in'); });
+      }
+
+      /* Section views and scroll depth */
+      if ('IntersectionObserver' in window) {
+        var seen = {};
+        var sIO = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting && !seen[e.target.id]) {
+              seen[e.target.id] = 1;
+              track('section_view', { section: e.target.id, page: 'parts-catalogue' });
+            }
+          });
+        }, { threshold: 0.3 });
+        document.querySelectorAll('section[id]').forEach(function (s) { sIO.observe(s); });
+      }
+      var depth = {};
+      window.addEventListener('scroll', function () {
+        var h = document.documentElement.scrollHeight - window.innerHeight;
+        if (h <= 0) return;
+        var pct = Math.round((window.scrollY / h) * 100);
+        [50, 90].forEach(function (m) {
+          if (pct >= m && !depth[m]) { depth[m] = 1; track('scroll_depth', { percent: m, page: 'parts-catalogue' }); }
+        });
+      }, { passive: true });
+    })();
+  </script>
+</body>
+</html>

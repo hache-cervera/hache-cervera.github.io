@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="canonical" href="https://hache-cervera.github.io/work/es/parts-catalogue/" />
+  <link rel="alternate" hreflang="en" href="https://hache-cervera.github.io/work/parts-catalogue/" />
+  <link rel="alternate" hreflang="es" href="https://hache-cervera.github.io/work/es/parts-catalogue/" />
+  <title>Cat&aacute;logo de proveedores a Shopify &middot; Caso de datos para ecommerce &middot; Hache Cervera</title>
+  <meta
+    name="description"
+    content="Caso: una tienda de recambios de motor ten&iacute;a 192 productos de m&aacute;s de 1.000 porque los proveedores mandan sus cat&aacute;logos en formatos distintos y sin API. Una herramienta en Python que lee cualquier fichero de proveedor, unifica 37.948 productos, los clasifica y prepara importaciones y actualizaciones seguras para Shopify."
+  />
+  <meta property="og:title" content="Cat&aacute;logo de proveedores a Shopify" />
+  <meta property="og:description" content="37.948 productos de proveedores unificados, clasificados y convertidos en importaciones de Shopify, con un modo actualizar que nunca pisa la tienda." />
+  <meta property="og:image" content="https://hache-cervera.github.io/work/img/og.jpg" />
+  <meta property="og:type" content="article" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="../../../favicon.svg" />
+  <link rel="preload" href="/fonts/sora-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <style>
+    @font-face { font-family: 'Sora'; font-style: normal; font-weight: 600 800; font-display: swap; src: url('/fonts/sora-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400 500; font-display: swap; src: url('/fonts/inter-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  </style>
+  <script>
+    (function () {
+      try {
+        document.documentElement.dataset.theme = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light';
+      } catch (e) {}
+    })();
+  </script>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --surface: #f5f5f5;
+      --panel: #0a0a0a;
+      --ink: #0a0a0a;
+      --muted: #6b6b6b;
+      --line: #e5e5e5;
+      --accent: #ff3c00;
+      --accent-hover: #e63500;
+      --accent-soft: #ffe8e1;
+      --seo: #2d5f8a;
+      --seo-w: #e9f0f6;
+      --aeo: #2f7d4f;
+      --aeo-w: #e8f3ec;
+      --geo: #7d4f9e;
+      --geo-w: #f2ebf7;
+      --font-display: 'Sora', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+    :root[data-theme="dark"] {
+      --bg: #0d0d0d;
+      --surface: #1c1c1c;
+      --ink: #f2f2f2;
+      --muted: #9a9a9a;
+      --line: #2a2a2a;
+      --accent-soft: #3a1608;
+      --seo: #7fb3dd;
+      --seo-w: #12202c;
+      --aeo: #7fc79b;
+      --aeo-w: #112318;
+      --geo: #bb96d6;
+      --geo-w: #1e1526;
+    }
+    :root[data-theme="dark"] .grain { mix-blend-mode: screen; opacity: 0.045; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    ::selection { background: var(--accent); color: #fff; }
+
+    .grain {
+      position: fixed;
+      inset: 0;
+      z-index: 40;
+      pointer-events: none;
+      opacity: 0.028;
+      mix-blend-mode: multiply;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%25" height="100%25" filter="url(%23n)"/></svg>');
+    }
+
+    .glow {
+      position: absolute;
+      width: 480px;
+      height: 480px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 60, 0, 0.09) 0%, rgba(255, 60, 0, 0) 68%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .deco { position: absolute; background: var(--accent); pointer-events: none; z-index: 0; }
+    @keyframes floaty { 0%, 100% { transform: translateY(0) rotate(8deg); } 50% { transform: translateY(-12px) rotate(14deg); } }
+    .deco { animation: floaty 7s ease-in-out infinite; }
+    @media (prefers-reduced-motion: reduce) { .deco { animation: none; } }
+
+    .wrap { max-width: 72rem; margin: 0 auto; padding: 0 24px; }
+    @media (min-width: 768px) { .wrap { padding: 0 48px; } }
+    a { color: inherit; }
+
+    /* ---------- Header ---------- */
+    header { padding: 24px 0; border-bottom: 1px solid var(--line); }
+    header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .back {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.875rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s ease;
+    }
+    .back:hover { color: var(--accent); }
+    .back span { color: var(--accent); transition: transform 0.2s ease; display: inline-block; }
+    .back:hover span { transform: translateX(-4px); }
+    .hctrl { display: flex; align-items: center; gap: 16px; }
+    .lang {
+      display: flex;
+      gap: 8px;
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+    .lang a { text-decoration: none; color: var(--muted); padding: 4px 2px; border-bottom: 2px solid transparent; }
+    .lang a:hover { color: var(--accent); }
+    .lang a.on { color: var(--ink); border-bottom-color: var(--accent); }
+    .tbtn {
+      position: relative;
+      width: 40px;
+      height: 40px;
+      background: none;
+      border: 1px solid var(--line);
+      cursor: pointer;
+      overflow: hidden;
+      transition: border-color 0.25s ease;
+    }
+    .tbtn:hover { border-color: var(--accent); }
+    .tbtn .sky {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.6s cubic-bezier(0.6, 0, 0.25, 1.3);
+    }
+    :root[data-theme="dark"] .tbtn .sky { transform: rotate(-45deg); }
+    .tbtn .core {
+      position: relative;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      transition: transform 0.5s cubic-bezier(0.6, 0, 0.25, 1.3), box-shadow 0.4s ease;
+    }
+    :root[data-theme="dark"] .tbtn .core { transform: scale(1.35); box-shadow: 0 0 12px rgba(255, 60, 0, 0.55); }
+    .tbtn .veil {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 12px;
+      height: 12px;
+      margin: -6px 0 0 -6px;
+      border-radius: 50%;
+      background: var(--bg);
+      transform: translate(15px, -15px);
+      transition: transform 0.5s cubic-bezier(0.6, 0, 0.25, 1.3), background 0.25s ease;
+      z-index: 2;
+    }
+    :root[data-theme="dark"] .tbtn .veil { transform: translate(4px, -4px) scale(1.35); }
+    .tbtn .ray {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 2px;
+      height: 5px;
+      margin: -2.5px 0 0 -1px;
+      border-radius: 1px;
+      background: var(--accent);
+      transform: rotate(var(--r)) translateY(-10px);
+      transition: transform 0.45s ease, opacity 0.35s ease;
+    }
+    :root[data-theme="dark"] .tbtn .ray { transform: rotate(var(--r)) translateY(-4px) scale(0.2); opacity: 0; }
+    @media (prefers-reduced-motion: reduce) { .tbtn .sky, .tbtn .core, .tbtn .veil, .tbtn .ray { transition: none; } }
+
+    /* ---------- Hero ---------- */
+    .hero { position: relative; padding: 80px 24px 56px; }
+    .hero > *:not(.glow):not(.deco) { position: relative; z-index: 1; }
+    @media (min-width: 768px) { .hero { padding: 112px 48px 72px; } }
+    .kicker {
+      font-family: var(--font-display);
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .hero h1 {
+      margin-top: 24px;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(2.2rem, 5.6vw, 4.2rem);
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      word-break: break-word;
+    }
+    .hero h1 em {
+      font-style: italic;
+      background: linear-gradient(100deg, #ff3c00 0%, #ff8a5c 35%, #ff3c00 65%, #ff5a24 100%);
+      background-size: 220% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: shimmer 4s linear infinite;
+    }
+    @keyframes shimmer { to { background-position: -220% 0; } }
+    .hero .lede { margin-top: 24px; max-width: 44rem; font-size: 1.125rem; color: var(--muted); }
+    .hero .actions { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+    .btn {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.875rem;
+      text-decoration: none;
+      padding: 14px 28px;
+      background: var(--accent);
+      color: #fff;
+      transition: background 0.2s ease;
+    }
+    .btn:hover { background: var(--accent-hover); }
+    .alt {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.875rem;
+      text-decoration: none;
+      color: var(--muted);
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 2px;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+    .alt:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* ---------- Meta grid ---------- */
+    .meta {
+      margin-top: 48px;
+      display: grid;
+      grid-template-columns: 1fr;
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+    }
+    @media (min-width: 560px) { .meta { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 900px) { .meta { grid-template-columns: repeat(3, 1fr); } }
+    .meta div { padding: 16px 20px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .meta dt {
+      font-family: var(--font-display);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .meta dd { margin-top: 4px; font-size: 0.9375rem; font-weight: 500; }
+
+    /* ---------- Sections ---------- */
+    /* overflow:hidden keeps the bleeding .glow circles from widening the page */
+    section, .hero { overflow: hidden; }
+    section { position: relative; padding: 64px 0 80px; border-top: 1px solid var(--line); }
+    section .wrap { position: relative; z-index: 1; }
+    .section-label {
+      font-family: var(--font-display);
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    section h2 {
+      margin-top: 24px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+    }
+    .section-intro { margin-top: 16px; max-width: 46rem; color: var(--muted); }
+    section p + p { margin-top: 12px; }
+    .note {
+      margin-top: 24px;
+      max-width: 46rem;
+      padding: 12px 16px;
+      border-left: 2px solid var(--accent);
+      background: var(--surface);
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+    .note strong { color: var(--ink); font-weight: 600; }
+    code {
+      font-family: ui-monospace, 'SF Mono', Consolas, monospace;
+      font-size: 0.8125em;
+      background: var(--surface);
+      padding: 2px 6px;
+      color: var(--accent);
+    }
+
+    /* ---------- Panel quote ---------- */
+    .quote {
+      margin-top: 40px;
+      background: var(--panel);
+      color: #f2f2f2;
+      padding: 32px 28px;
+      border-left: 3px solid var(--accent);
+    }
+    @media (min-width: 768px) { .quote { padding: 40px 44px; } }
+    .quote p { color: rgba(242, 242, 242, 0.82); font-size: 1.0625rem; max-width: 48rem; }
+    .quote strong { color: #fff; font-weight: 600; }
+
+    /* ---------- Stats ---------- */
+    .stats {
+      margin-top: 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+    }
+    @media (min-width: 768px) { .stats { grid-template-columns: repeat(4, 1fr); } }
+    .stats div { padding: 24px 20px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .stats b {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(1.9rem, 4vw, 2.6rem);
+      letter-spacing: -0.04em;
+      line-height: 1;
+      color: var(--accent);
+    }
+    .stats span { display: block; margin-top: 8px; font-size: 0.8125rem; color: var(--muted); }
+
+    /* ---------- Sitemap ---------- */
+    .sitemap { margin-top: 40px; display: grid; gap: 12px; grid-template-columns: 1fr; }
+    @media (min-width: 640px) { .sitemap { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 1000px) { .sitemap { grid-template-columns: repeat(4, 1fr); } }
+    .smap { display: flex; flex-direction: column; gap: 6px; }
+    .smap .top {
+      background: var(--panel);
+      color: #fff;
+      padding: 12px 14px;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.8125rem;
+    }
+    .smap .top i { display: block; margin-top: 3px; font-style: normal; font-size: 0.6875rem; font-weight: 400; color: rgba(255, 255, 255, 0.55); }
+    .smap .kid { border: 1px solid var(--line); background: var(--surface); padding: 9px 14px; font-size: 0.8125rem; color: var(--muted); }
+
+    /* ---------- Highlights ---------- */
+    .hl { margin-top: 40px; display: grid; gap: 16px; grid-template-columns: 1fr; }
+    @media (min-width: 640px) { .hl { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 1000px) { .hl { grid-template-columns: repeat(3, 1fr); } }
+    .hl-item { border: 1px solid var(--line); padding: 24px; transition: border-color 0.3s ease; }
+    .hl-item:hover { border-color: var(--ink); }
+    .hl-item svg { display: block; color: var(--accent); }
+    .hl-item h3 {
+      margin-top: 16px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.125rem;
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+    }
+    .hl-item p { margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
+
+    /* ---------- Timeline ---------- */
+    .tl { margin-top: 48px; display: grid; gap: 24px; grid-template-columns: 1fr; list-style: none; }
+    @media (min-width: 900px) { .tl { grid-template-columns: repeat(4, 1fr); } }
+    .tl-step { border-top: 2px solid var(--line); padding-top: 16px; }
+    .tl-step.now { border-top-color: var(--accent); }
+    .tl-step b {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .tl-step.now b { color: var(--accent); }
+    .tl-step p { margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
+
+    /* ---------- One article, three surfaces ---------- */
+    .flow { margin-top: 40px; }
+    .flow-src {
+      border: 1px solid var(--ink);
+      background: var(--surface);
+      padding: 16px 24px;
+      text-align: center;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--ink);
+    }
+    .flow-fan { display: grid; grid-template-columns: repeat(3, 1fr); height: 24px; }
+    .flow-fan span { justify-self: center; width: 1px; background: var(--line); }
+    .flow-outs { display: grid; gap: 16px; grid-template-columns: 1fr; }
+    @media (max-width: 699px) { .flow-fan { display: none; } .flow-outs { margin-top: 16px; } }
+    @media (min-width: 700px) { .flow-outs { grid-template-columns: repeat(3, 1fr); } }
+    .flow-out { border: 1px solid var(--line); border-top: 3px solid; padding: 16px; }
+    .flow-out.o-seo { border-top-color: var(--seo); }
+    .flow-out.o-aeo { border-top-color: var(--aeo); }
+    .flow-out.o-geo { border-top-color: var(--geo); }
+    .flow-out b { display: block; font-family: var(--font-display); font-weight: 700; font-size: 1rem; }
+    .flow-out span { display: block; margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
+
+    /* ---------- Layers ---------- */
+    .layers { margin-top: 40px; display: flex; flex-direction: column; gap: 16px; }
+    .layer { padding: 24px 26px; border-left: 3px solid; }
+    .layer.l-seo { background: var(--seo-w); border-color: var(--seo); }
+    .layer.l-aeo { background: var(--aeo-w); border-color: var(--aeo); }
+    .layer.l-geo { background: var(--geo-w); border-color: var(--geo); }
+    .layer .tag {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      color: #fff;
+    }
+    .l-seo .tag { background: var(--seo); }
+    .l-aeo .tag { background: var(--aeo); }
+    .l-geo .tag { background: var(--geo); }
+    :root[data-theme="dark"] .layer .tag { color: #0d0d0d; }
+    .layer h3 {
+      margin-top: 12px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.0625rem;
+      letter-spacing: -0.02em;
+    }
+    .layer ul { margin-top: 12px; padding-left: 18px; }
+    .layer li { font-size: 0.875rem; color: var(--muted); margin-bottom: 8px; }
+    .layer li:last-child { margin-bottom: 0; }
+    .layer li strong { color: var(--ink); font-weight: 600; }
+
+    /* ---------- Component cards ---------- */
+    .cards { margin-top: 40px; display: grid; gap: 24px; grid-template-columns: 1fr; }
+    @media (min-width: 768px) { .cards { grid-template-columns: 1fr 1fr; } }
+    .card { border: 1px solid var(--line); overflow: hidden; transition: border-color 0.3s ease; }
+    .card:hover { border-color: var(--ink); }
+    .card figure { margin: 0; aspect-ratio: 16 / 10; overflow: hidden; background: var(--surface); border-bottom: 1px solid var(--line); cursor: zoom-in; }
+    .card figure img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; transition: transform 0.6s ease; }
+    .card:hover figure img { transform: scale(1.03); }
+    .card .body { padding: 22px 24px; }
+    /* Component gallery: let each shot keep its own height instead of cropping it */
+    .cards.gallery { align-items: start; }
+    .cards.gallery figure { aspect-ratio: auto; }
+    .cards.gallery figure img { height: auto; object-fit: contain; }
+    /* An establishing shot that runs the full width of the grid. */
+    .cards.gallery .card.wide { grid-column: 1 / -1; }
+    @media (min-width: 900px) { .cards.three { grid-template-columns: repeat(3, 1fr); } }
+    .card h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.125rem; letter-spacing: -0.02em; }
+    .card p { margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
+
+    /* ---------- Stack ---------- */
+    .group { margin-top: 32px; }
+    .group h3 {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .tags { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .tags li {
+      list-style: none;
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      padding: 5px 12px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--muted);
+    }
+    .tags li.key { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+
+    /* ---------- Tables ---------- */
+    /* Migration figures, stated as figures. */
+    .figs { margin-top: 40px; display: grid; grid-template-columns: repeat(2, 1fr); border: 1px solid var(--line); }
+    @media (min-width: 760px) { .figs { grid-template-columns: repeat(5, 1fr); } }
+    .figs div { padding: 20px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .figs b {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.75rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      color: var(--ink);
+    }
+    .figs span { display: block; margin-top: 8px; font-size: 0.75rem; line-height: 1.35; color: var(--muted); }
+
+    .tbl { margin-top: 40px; border: 1px solid var(--line); overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.875rem; min-width: 34rem; }
+    th {
+      background: var(--surface);
+      padding: 12px 18px;
+      text-align: left;
+      font-family: var(--font-display);
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border-bottom: 1px solid var(--line);
+    }
+    td { padding: 14px 18px; border-bottom: 1px solid var(--line); color: var(--muted); vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    td strong { color: var(--ink); font-weight: 600; }
+    td:first-child { white-space: nowrap; }
+
+    /* ---------- CTA + footer ---------- */
+    .cta { position: relative; background: var(--panel); color: #f2f2f2; border-top: none; overflow: hidden; }
+    .cta .kicker { color: var(--accent); }
+    .cta h2 { color: #fff; }
+    .cta p { margin-top: 16px; max-width: 40rem; color: rgba(242, 242, 242, 0.7); }
+    .cta .actions { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+    .cta .alt { color: rgba(242, 242, 242, 0.7); border-color: rgba(242, 242, 242, 0.25); }
+    .cta .alt:hover { color: var(--accent); border-color: var(--accent); }
+    footer { padding: 40px 0; border-top: 1px solid var(--line); }
+    footer .wrap { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; font-size: 0.8125rem; color: var(--muted); }
+    footer .path { font-family: var(--font-display); }
+    footer .path span { color: var(--accent); }
+
+    /* ---------- Reveal + lightbox ---------- */
+    .rv { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .rv.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { .rv { opacity: 1; transform: none; transition: none; } }
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(8, 8, 8, 0.94);
+      padding: 32px 16px;
+    }
+    .lightbox.on { display: flex; }
+    .lightbox img { max-width: 100%; max-height: 100%; object-fit: contain; }
+    .lightbox .close {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 2rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+    .lightbox .close:hover { color: var(--accent); }
+  
+    /* brand orange #ff3c00 reaches 3.56:1 on white; small text and buttons use a darker shade in light theme */
+    html:not([data-theme='dark']) .kicker, html:not([data-theme='dark']) .section-label, html:not([data-theme='dark']) main a:not(.btn):not(.alt), html:not([data-theme='dark']) code { color: #c22e00; }
+    html:not([data-theme='dark']) .btn { background: #c22e00; border-color: #c22e00; }
+    html .cta .kicker { color: var(--accent); }
+    /* hache: cat mark (signature) and profile links */
+    .hleft { display: flex; align-items: center; gap: 16px; min-width: 0; }
+    .mark { display: inline-flex; flex: none; color: var(--ink); line-height: 0; }
+    .mark svg { width: 30px; height: auto; }
+    .mark:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+    .cat .acc { fill: var(--accent); }
+    footer .sign svg { display: inline-block; width: 18px; height: auto; margin-right: 10px; vertical-align: -2px; }
+    footer .social { display: flex; flex-wrap: wrap; gap: 18px; }
+    footer .social a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+    footer .social a:hover { color: var(--ink); }
+    /* a11y (WCAG 1.4.3): white on #ff3c00 is 3.56:1, so buttons use the darker shade in both themes */
+    html[data-theme='dark'] .btn { background: #c22e00; border-color: #c22e00; color: #fff; }
+    html[data-theme='dark'] .btn:hover { background: #a82800; border-color: #a82800; }
+  </style>
+  <script src="/consent.js" defer></script>
+  <style>
+    /* Pipeline: five stages, stacked on mobile, in a row from 900px */
+    .flow { margin-top: 40px; padding: 0; list-style: none; display: grid; grid-template-columns: 1fr; border: 1px solid var(--line); }
+    .flow li { padding: 20px; border-bottom: 1px solid var(--line); }
+    .flow li:last-child { border-bottom: 0; }
+    .flow small { display: block; font-family: var(--font-display); font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.1em; color: var(--accent); }
+    .flow b { display: block; margin-top: 6px; font-family: var(--font-display); font-weight: 700; font-size: 1.0625rem; letter-spacing: -0.02em; }
+    .flow p { margin-top: 8px; font-size: 0.875rem; line-height: 1.5; color: var(--muted); }
+    /* The italic gradient title is clipped at its last letter without a little room */
+    .hero h1 em { padding-right: 0.12em; }
+    @media (min-width: 900px) {
+      .flow { grid-template-columns: repeat(5, 1fr); }
+      .flow li { border-bottom: 0; border-right: 1px solid var(--line); }
+      .flow li:last-child { border-right: 0; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header>
+    <div class="wrap">
+      <div class="hleft"><a class="mark" href="/es/" aria-label="Ada (hache) Cervera, inicio"><svg class="cat" viewBox="0 0 18 17" shape-rendering="crispEdges" aria-hidden="true" focusable="false"><path fill="currentColor" d="M1 0h1v1h-1zM16 0h1v1h-1zM1 1h2v1h-2zM15 1h2v1h-2zM1 2h3v1h-3zM14 2h3v1h-3zM1 3h4v1h-4zM13 3h4v1h-4zM1 4h16v1h-16zM0 5h18v1h-18zM0 6h3v1h-3zM4 6h14v1h-14zM0 7h4v1h-4zM5 7h13v1h-13zM0 8h5v1h-5zM6 8h12v1h-12zM0 9h4v1h-4zM5 9h13v1h-13zM0 10h3v1h-3zM4 10h7v1h-7zM15 10h3v1h-3zM0 11h8v1h-8zM10 11h8v1h-8zM0 12h7v1h-7zM8 12h2v1h-2zM11 12h7v1h-7zM0 13h8v1h-8zM10 13h8v1h-8zM1 14h16v1h-16zM2 15h14v1h-14zM3 16h12v1h-12z"/><path class="acc" d="M11 10h4v1h-4z"/></svg></a><a class="back" href="../"><span>&larr;</span> Volver al trabajo</a></div>
+      <div class="hctrl">
+        <nav class="lang" aria-label="Idioma">
+          <a href="../../parts-catalogue/">EN</a>
+          <a class="on" href="./" aria-current="page">ES</a>
+        </nav>
+        <button class="tbtn" id="modeToggle" type="button" aria-label="Cambiar entre modo claro y oscuro">
+          <span class="sky" aria-hidden="true">
+            <span class="ray" style="--r:0deg"></span><span class="ray" style="--r:45deg"></span><span class="ray" style="--r:90deg"></span><span class="ray" style="--r:135deg"></span><span class="ray" style="--r:180deg"></span><span class="ray" style="--r:225deg"></span><span class="ray" style="--r:270deg"></span><span class="ray" style="--r:315deg"></span>
+            <span class="core"></span>
+            <span class="veil"></span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="hero wrap">
+      <span class="glow" style="top: -140px; right: -160px;" aria-hidden="true"></span>
+      <span class="glow" style="bottom: -220px; left: -240px; width: 380px; height: 380px;" aria-hidden="true"></span>
+      <span class="deco" style="top: 110px; right: 12%; width: 14px; height: 14px;" aria-hidden="true"></span>
+      <span class="deco" style="top: 220px; right: 5%; width: 8px; height: 8px; opacity: 0.55; animation-delay: 1.2s;" aria-hidden="true"></span>
+      <p class="kicker">/ Caso &middot; Datos y herramientas para ecommerce</p>
+      <h1>Catálogo de proveedores<em> a Shopify</em></h1>
+      <p class="lede">
+        Una empresa de recambios de motor pidió una web nueva. La web estaba bien. La tienda no:
+        tenía 192 productos de más de mil, porque cada proveedor manda su catálogo en un formato
+        distinto y ninguno tiene API. Así que en vez de rediseñar construí la pieza que faltaba:
+        una herramienta que lee cualquier fichero de proveedor, lo unifica, lo clasifica y le da
+        a Shopify un fichero que puede importar.
+      </p>
+      <div class="actions">
+        <a class="btn" href="#tool">Ver cómo funciona</a>
+        <a class="alt" href="../">Ver el resto del trabajo</a>
+      </div>
+
+      <dl class="meta">
+        <div><dt>Cliente</dt><dd>Empresa de recambios de motor, España</dd></div>
+        <div><dt>Plataforma</dt><dd>Shopify</dd></div>
+        <div><dt>Hecho con</dt><dd>Python, Streamlit, Admin API de Shopify</dd></div>
+        <div><dt>Rol</dt><dd>Diagnóstico, herramienta de datos y montaje de la tienda</dd></div>
+        <div><dt>Estado</dt><dd>Funcionando en una tienda de desarrollo</dd></div>
+        <div><dt>Contexto</dt><dd>Proyecto independiente, octubre de 2026</dd></div>
+      </dl>
+
+      <p class="note">
+        <strong>Qué es esta página:</strong> el cliente queda en el anonimato, igual que sus
+        proveedores y marcas. Las cifras salen de pasar la herramienta por los catálogos reales
+        de los proveedores; las de la tienda, de una tienda de desarrollo de Shopify, que se
+        comporta igual que la real. El código lo escribí programando en pareja con Claude, como
+        el resto de esta web: yo decidí qué construir y comprobé cada resultado contra los datos.
+      </p>
+    </div>
+
+    <!-- ============ HIGHLIGHTS ============ -->
+    <section id="highlights">
+      <span class="glow" style="top: -80px; right: -280px;" aria-hidden="true"></span>
+      <div class="wrap">
+        <p class="section-label">/ En corto</p>
+        <h2>En qué consistió de verdad</h2>
+
+        <div class="figs">
+          <div><b>192</b><span>productos en una tienda que debería tener más de 1.000</span></div>
+          <div><b>37.948</b><span>productos de proveedores unificados en una tabla</span></div>
+          <div><b>0</b><span>conflictos entre fuentes sin explicar</span></div>
+          <div><b>15</b><span>sistemas del motor, asignados con reglas editables</span></div>
+          <div><b>37</b><span>pruebas automáticas en cada cambio</span></div>
+        </div>
+
+        <div class="hl">
+          <article class="hl-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="9" /><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.5v.7" /><path d="M12 17h.01" />
+            </svg>
+            <h3>La primera pregunta, no el primer boceto</h3>
+            <p>Antes de proponer nada pregunté para qué era la web: informar, vender o las dos cosas. Las dos. Eso apartó el rediseño y señaló la mitad que fallaba.</p>
+          </article>
+          <article class="hl-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="4" width="18" height="16" rx="1" /><path d="M3 9h18M9 9v11" />
+            </svg>
+            <h3>Cada formato se aprende una vez</h3>
+            <p>La herramienta reconoce un fichero de proveedor por sus cabeceras. Un formato nuevo se describe una vez, se guarda como perfil y a partir de ahí se reconoce solo.</p>
+          </article>
+          <article class="hl-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 6h16M4 12h10M4 18h6" /><path d="m16 15 2 2 4-4" />
+            </svg>
+            <h3>Reglas en una hoja de cálculo</h3>
+            <p>Categorías, imágenes, IVA y márgenes están en CSV que se abren con Excel. Añadir un proveedor o una categoría es configurar, no programar.</p>
+          </article>
+          <article class="hl-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 2.5 4.5 5.5v6c0 5 3.2 8.6 7.5 10 4.3-1.4 7.5-5 7.5-10v-6L12 2.5Z" /><path d="m9 12 2.2 2.2L15.5 10" />
+            </svg>
+            <h3>Simula por defecto</h3>
+            <p>El script que monta la tienda solo cuenta lo que haría. Escribe únicamente cuando se le dice, nunca borra y no guarda credenciales.</p>
+          </article>
+          <article class="hl-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M20 12a8 8 0 1 1-2.3-5.7" /><path d="M20 4v4h-4" />
+            </svg>
+            <h3>Actualizar sin pisar</h3>
+            <p>Con los productos ya en la tienda, la herramienta compara con lo que hay y envía solo los cambios de precio y coste. Estado, textos y fotos se quedan como están.</p>
+          </article>
+          <article class="hl-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 3v18h18" /><path d="m7 15 4-4 3 3 5-6" />
+            </svg>
+            <h3>Medir antes de cambiar</h3>
+            <p>Cada cambio se pasó por el catálogo real completo y se comparó producto a producto. Un arreglo que parecía obvio habría quitado 840 productos, así que no se hizo.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 01 EL PROBLEMA ============ -->
+    <section id="problem">
+      <span class="glow" style="top: 40px; left: -280px;" aria-hidden="true"></span>
+      <div class="wrap">
+        <p class="section-label">/ 01 &middot; El problema</p>
+        <h2>Una web nueva no habría añadido ni un producto</h2>
+        <p class="section-intro">
+          El encargo era una web nueva. Al mirar la que tenían, no estaba mal, así que la pregunta
+          útil era para qué la querían. La respuesta fue las dos cosas: presentar la empresa y
+          vender. La parte de presentación funcionaba. La tienda tenía 192 productos cuando el
+          catálogo pasa de mil, y ni siquiera esos 192 estaban bien: fallos en las categorías y
+          enlaces del menú que no llevaban a ningún sitio.
+        </p>
+        <p class="section-intro">
+          La causa estaba antes de la web. Cada proveedor manda precios y referencias a su manera:
+          hojas de Excel, exportaciones en CSV, catálogos en PDF, cada uno con columnas y nombres
+          distintos para lo mismo. Ninguno ofrece API. Subir un producto a la tienda era copiarlo
+          a mano del fichero que lo tuviera, y por eso la mayoría nunca llegó.
+        </p>
+        <p class="note">
+          <strong>La decisión:</strong> mantener la web y la plataforma, y arreglar el proceso que
+          alimenta la tienda. Un rediseño se habría visto más y no habría cambiado nada de los 192.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ 02 LOS DATOS ============ -->
+    <section id="data">
+      <div class="wrap">
+        <p class="section-label">/ 02 &middot; Los datos</p>
+        <h2>Lo que traen de verdad los ficheros de proveedores</h2>
+        <p class="section-intro">
+          Antes de diseñar nada pasé todas las fuentes de proveedores por la misma cadena y conté
+          lo que salía. Los catálogos completos son mucho más grandes que lo que venderá la
+          tienda (unos mil productos para empezar), lo que los convertía en una buena prueba de
+          carga.
+        </p>
+        <div class="tbl" tabindex="0" role="region" aria-label="Tabla">
+          <table>
+            <thead><tr><th>Medido con los ficheros reales</th><th>Resultado</th></tr></thead>
+            <tbody>
+            <tr><td><strong>Productos distintos tras juntar todas las fuentes</strong></td><td>37.948</td></tr>
+            <tr><td><strong>Listos para Shopify</strong></td><td>34.379 variantes en 34.339 fichas</td></tr>
+            <tr><td><strong>Fuera porque ninguna fuente da precio</strong></td><td>3.569, listados en el informe con el motivo</td></tr>
+            <tr><td><strong>Conflictos entre fuentes</strong></td><td>0 (si dos ficheros no coinciden, la herramienta dice qué fichero y qué fila)</td></tr>
+            <tr><td><strong>Productos que llegan con foto, peso, código de barras o plazo</strong></td><td>0</td></tr>
+            <tr><td><strong>Productos que llegan sin descripción</strong></td><td>36.514</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">
+          <strong>Lo que significaba:</strong> la herramienta no podía limitarse a mover datos.
+          Tenía que poner lo que nadie manda, como las imágenes o el aviso de disponibilidad, y
+          decir con claridad lo que sigue faltando en vez de inventarlo.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ 03 LA HERRAMIENTA ============ -->
+    <section id="tool">
+      <span class="glow" style="top: 0; right: -280px;" aria-hidden="true"></span>
+      <div class="wrap">
+        <p class="section-label">/ 03 &middot; La herramienta</p>
+        <h2>Un motor, cinco etapas</h2>
+        <p class="section-intro">
+          Una cadena en Python con una pequeña interfaz web local encima. Los ficheros entran tal
+          como llegan; sale un fichero de importación para Shopify y un informe de calidad. No hay
+          servidor ni base de datos: todo corre en el ordenador de quien la usa y cada vez se
+          empieza desde los ficheros.
+        </p>
+        <ol class="flow">
+          <li><small>01</small><b>Leer</b><p>Excel, CSV o PDF. Encuentra la cabecera aunque haya títulos encima y salta las cabeceras repetidas en cada página del PDF.</p></li>
+          <li><small>02</small><b>Reconocer</b><p>Compara las cabeceras con los perfiles de proveedor guardados. Un formato nuevo se describe una vez en la interfaz.</p></li>
+          <li><small>03</small><b>Limpiar y juntar</b><p>Normaliza referencias y precios, junta la misma pieza de varios ficheros y apunta cada desacuerdo.</p></li>
+          <li><small>04</small><b>Clasificar y completar</b><p>Traduce nombres, asigna uno de 15 sistemas del motor, datos del vehículo, una imagen genérica por tipo de pieza y variantes por medida.</p></li>
+          <li><small>05</small><b>Escribir</b><p>CSV de Shopify, una tabla maestra con el origen de cada dato y un informe en Excel de lo que necesita a una persona.</p></li>
+        </ol>
+        <div class="tbl" tabindex="0" role="region" aria-label="Tabla">
+          <table>
+            <thead><tr><th>Pieza</th><th>Qué hace</th></tr></thead>
+            <tbody>
+            <tr><td><strong>Perfiles de proveedor</strong></td><td>Un fichero pequeño por formato: qué columna es la referencia, cuál el precio, si los precios llevan IVA, cómo escribe los decimales el proveedor.</td></tr>
+            <tr><td><strong>Reescritura de nombres</strong></td><td>Los nombres en inglés llegan como "SUSTANTIVO,DETALLE". Se les da la vuelta y se traducen con un glosario de unas 270 expresiones: "GASKET,EXHAUST MANIFOLD" pasa a "Junta de colector de escape".</td></tr>
+            <tr><td><strong>Sistemas del motor</strong></td><td>15 sistemas que siguen las categorías que ya tenía la tienda. Se asignan con reglas en orden en un CSV; 177 de 34.339 fichas siguen cayendo en "Otros".</td></tr>
+            <tr><td><strong>Imágenes genéricas</strong></td><td>Ningún proveedor manda fotos, así que cada tipo de pieza lleva una imagen genérica, marcada como orientativa en su texto alternativo: 22.211 fichas cubiertas.</td></tr>
+            <tr><td><strong>Interfaz</strong></td><td>Cuatro pasos en el navegador, que se abre con doble clic: subir, revisar las columnas, elegir qué generar y descargar.</td></tr>
+            <tr><td><strong>Script de montaje de la tienda</strong></td><td>Crea los campos propios, una colección automática por sistema del motor y los enlaces del menú, con la Admin API de Shopify (GraphQL).</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 04 DECISIONES ============ -->
+    <section id="decisions">
+      <div class="wrap">
+        <p class="section-label">/ 04 &middot; Decisiones</p>
+        <h2>Hecha para que la use otra persona</h2>
+        <p class="section-intro">
+          Quien la va a usar en el día a día no soy yo. Eso cambió más decisiones que cualquier
+          limitación técnica.
+        </p>
+        <div class="tbl" tabindex="0" role="region" aria-label="Tabla">
+          <table>
+            <thead><tr><th>Decisión</th><th>Por qué</th></tr></thead>
+            <tbody>
+            <tr><td><strong>No inventar el stock</strong></td><td>Sin API de los proveedores no hay una cifra de stock fiable. Cada producto dice "consulta disponibilidad" con el teléfono de la tienda en vez de un "en stock" que nadie puede garantizar. El campo ya existe para cuando haya datos reales.</td></tr>
+            <tr><td><strong>Imágenes por tipo de pieza, no por nombre</strong></td><td>Buscar la imagen por palabras del nombre añadiría 3.100 fotos más. Revisé una muestra: casi todas eran erróneas, como una tapa de bomba con la foto de la bomba entera. La opción existe, apagada.</td></tr>
+            <tr><td><strong>Probar primero con una muestra</strong></td><td>Una primera importación de unos 33.000 productos se atascó en la tienda de pruebas. Desde entonces la herramienta genera muestras del tamaño que se quiera, repartidas entre familias, y puede repetir la misma para comparar el antes y el después.</td></tr>
+            <tr><td><strong>Un modo aparte para actualizar</strong></td><td>Reimportar todo con "sobrescribir" devolvería a borrador los productos publicados y vaciaría lo que se haya rellenado a mano. El modo actualizar lee la exportación de la tienda, empareja por SKU y envía solo las columnas que cambian.</td></tr>
+            <tr><td><strong>Montaje seguro de la tienda</strong></td><td>Simula salvo que se le diga lo contrario, mira lo que existe antes de crear nada, nunca borra, pide las credenciales al arrancar y usa una llave que caduca en 24 horas.</td></tr>
+            <tr><td><strong>Avisar, no elegir en silencio</strong></td><td>Dos ficheros que no coinciden, la misma referencia con dos marcas, un perfil a punto de pisar otro: todo se le enseña a quien la usa en vez de decidirlo por su cuenta.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="cards gallery">
+          <div class="card wide">
+            <figure>
+              <img src="../../img/catalogo-actualizar.webp" width="1600" height="1332" alt="La interfaz de la herramienta en modo actualizar: las dos decisiones principales destacadas, después cuatro cifras (1 producto cambia, 1 nuevo, 24 ya en la tienda, 0 sin tocar) y las instrucciones para importar cada fichero" loading="lazy" data-zoom />
+            </figure>
+            <div class="body">
+              <h3>El modo actualizar, en una tienda de prueba</h3>
+              <p>
+                Una tienda simulada de 24 productos con un precio viejo y un producto sin subir:
+                la herramienta encuentra justo un cambio y un producto nuevo, y explica cómo se
+                importa cada fichero.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 05 INCIDENCIAS ============ -->
+    <section id="incidents">
+      <span class="glow" style="top: 0; right: -280px;" aria-hidden="true"></span>
+      <div class="wrap">
+        <p class="section-label">/ 05 &middot; Incidencias</p>
+        <h2>Lo que se rompió, y algo que decidí no arreglar</h2>
+        <p class="section-intro">
+          Casi todo lo de arriba existe porque antes algo salió mal. Donde la causa no se
+          investigó, la tabla lo dice.
+        </p>
+        <div class="tbl" tabindex="0" role="region" aria-label="Tabla">
+          <table>
+            <thead><tr><th>Síntoma</th><th>Causa</th><th>Lección</th></tr></thead>
+            <tbody>
+            <tr><td><strong>Importación de ~33.000 productos atascada</strong></td><td>Sin investigar: se sustituyó la tienda de pruebas.</td><td>Empezar por una muestra. De ahí salió el modo muestra.</td></tr>
+            <tr><td><strong>~3.000 productos importados invisibles</strong></td><td>No estaban publicados en el canal de la tienda online.</td><td>Publicar es una columna de la importación, no un paso posterior.</td></tr>
+            <tr><td><strong>Las bombas de mano desaparecían</strong></td><td>"HAND" se traducía como "manual", y el filtro descarta los manuales de mantenimiento.</td><td>Una traducción puede hacer saltar un filtro más adelante. Ahora es "de mano".</td></tr>
+            <tr><td><strong>514 productos en "Otros"</strong></td><td>Faltaban reglas para cojinetes, retenes, mangueras, piezas hidráulicas y útiles de taller.</td><td>Reglas nuevas y un sistema nuevo, Hidráulica: bajó a 177. El orden de las reglas importa.</td></tr>
+            <tr><td><strong>12 productos con la foto de otro</strong></td><td>Sin analizar; se encontraron revisando la tienda de pruebas a ojo.</td><td>Retiradas y comprobadas una a una: 124 de 188 productos con imagen, ninguno de los 12.</td></tr>
+            <tr><td><strong>El script de montaje fallaba en Windows</strong></td><td>El Python del equipo se fiaba de un certificado caducado.</td><td>Llevar los certificados (certifi) con la herramienta en vez de fiarse del equipo.</td></tr>
+            <tr><td><strong>No se podía crear la app como antes</strong></td><td>Shopify dejó de permitir apps personalizadas nuevas en el panel el 1 de enero de 2026.</td><td>App creada en el Dev Dashboard con credenciales de cliente. Cada app pertenece a su tienda.</td></tr>
+            <tr><td><strong>"0.206" kg leído como 206 kg</strong></td><td>Un punto seguido de tres cifras se tomaba como miles, como en las tarifas europeas.</td><td>Encontrado al revisar el código, antes de que llegara ningún peso. Cada perfil indica ahora su formato de decimales.</td></tr>
+            <tr><td><strong>El filtro encajaba dentro de otras palabras</strong></td><td>"RING" también encaja en "SPRING".</td><td>Sin cambiar. Con palabras completas saldrían 840 productos, 420 de ellos muelles. Qué piezas se venden es una decisión de negocio, no un arreglo de código.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 06 QUÉ DEMUESTRA ============ -->
+    <section id="value">
+      <span class="glow" style="bottom: 0; left: -280px;" aria-hidden="true"></span>
+      <div class="wrap">
+        <p class="section-label">/ 06 &middot; Qué demuestra</p>
+        <h2>Por qué merece la pena leerlo</h2>
+        <div class="tbl" tabindex="0" role="region" aria-label="Tabla">
+          <table>
+            <thead><tr><th>Afirmación</th><th>Prueba</th></tr></thead>
+            <tbody>
+            <tr><td><strong>Diagnóstico antes que entrega</strong></td><td>El encargo era una web; el arreglo fue un proceso de datos. Los 192 frente a más de 1.000 lo decidieron.</td></tr>
+            <tr><td><strong>Datos desordenados, tratados con honestidad</strong></td><td>37.948 productos de fuentes que no coinciden en formato, idioma ni datos, con cada exclusión y cada conflicto listados en vez de escondidos.</td></tr>
+            <tr><td><strong>Segura en una tienda real</strong></td><td>Montaje que simula, sin borrados, sin credenciales guardadas, y un modo actualizar que no puede tocar estado, textos ni fotos.</td></tr>
+            <tr><td><strong>Comprobado, no supuesto</strong></td><td>37 pruebas automáticas, y cada cambio comparado producto a producto con el catálogo real completo antes de darlo por bueno.</td></tr>
+            <tr><td><strong>Entregada</strong></td><td>Una interfaz de cuatro pasos, una guía de dos páginas para quien la usa, documentación completa y un repositorio privado con un commit por cambio.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">
+          <strong>Pendiente:</strong> pasar de la tienda de desarrollo a la real, tarifas reales
+          del distribuidor en vez de precios de mercado, filtros por vehículo y motor en la tienda,
+          más fotos, y decidir con el cliente qué pasa con los productos que ya están en la tienda
+          sin referencia. Una herramienta sin nada pendiente es una herramienta que no usa nadie.
+        </p>
+      </div>
+    </section>
+
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Visor de im&aacute;genes">
+    <button class="close" type="button" aria-label="Cerrar">&times;</button>
+    <img src="" alt="" />
+  </div>
+
+  <section class="cta" id="contact">
+    <span class="glow" style="top: -160px; right: -160px;" aria-hidden="true"></span>
+    <div class="wrap">
+      <p class="kicker">/ Siguiente</p>
+      <h2>Todo conecta.</h2>
+      <p>El encargo era una web y el arreglo fue un proceso de datos. Preguntar para qu&eacute; sirve algo antes de construirlo es casi todo el trabajo. Si es el tipo de trabajo que necesitas, escr&iacute;beme.</p>
+      <div class="actions">
+        <a class="btn" href="mailto:hi.hache.cervera@gmail.com?subject=Caso%20cat%C3%A1logo%20de%20proveedores">Hablamos</a>
+        <a class="alt" href="../">Ver el resto del trabajo</a>
+      </div>
+    </div>
+  </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p class="sign"><svg class="cat" viewBox="0 0 18 17" shape-rendering="crispEdges" aria-hidden="true" focusable="false"><path fill="currentColor" d="M1 0h1v1h-1zM16 0h1v1h-1zM1 1h2v1h-2zM15 1h2v1h-2zM1 2h3v1h-3zM14 2h3v1h-3zM1 3h4v1h-4zM13 3h4v1h-4zM1 4h16v1h-16zM0 5h18v1h-18zM0 6h3v1h-3zM4 6h14v1h-14zM0 7h4v1h-4zM5 7h13v1h-13zM0 8h5v1h-5zM6 8h12v1h-12zM0 9h4v1h-4zM5 9h13v1h-13zM0 10h3v1h-3zM4 10h7v1h-7zM15 10h3v1h-3zM0 11h8v1h-8zM10 11h8v1h-8zM0 12h7v1h-7zM8 12h2v1h-2zM11 12h7v1h-7zM0 13h8v1h-8zM10 13h8v1h-8zM1 14h16v1h-16zM2 15h14v1h-14zM3 16h12v1h-12z"/><path class="acc" d="M11 10h4v1h-4z"/></svg>&copy; 2026 Ada (hache) Cervera. Hecho a mano en Valencia. <a href="#" data-cookies>Cookies</a></p>
+      <p class="path">Infraestructura <span>&rarr;</span> CMS <span>&rarr;</span> B&uacute;squeda <span>&rarr;</span> Operativa</p>
+      <p class="social"><a href="https://github.com/hache-cervera">GitHub</a><a href="https://www.npmjs.com/~hache-cervera">npm</a><a href="https://www.linkedin.com/in/hache-cervera">LinkedIn</a></p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      
+      function track(name, params) {
+        if (window.gtag) window.gtag('event', name, params || {});
+      }
+
+      /* Theme toggle, shares its storage key with the rest of the site */
+      document.getElementById('modeToggle').addEventListener('click', function () {
+        var t = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+        document.documentElement.dataset.theme = t;
+        try { localStorage.setItem('theme', t); } catch (e) {}
+        track('theme', { value: t });
+      });
+
+      /* Lightbox */
+      var box = document.getElementById('lightbox');
+      var boxImg = box.querySelector('img');
+      document.querySelectorAll('[data-zoom]').forEach(function (img) {
+        img.parentElement.addEventListener('click', function () {
+          boxImg.src = img.src;
+          boxImg.alt = img.alt;
+          box.classList.add('on');
+          track('image_open', { project: 'parts-catalogue', image: img.getAttribute('src') });
+        });
+      });
+      function closeBox() { box.classList.remove('on'); boxImg.src = ''; }
+      box.querySelector('.close').addEventListener('click', closeBox);
+      box.addEventListener('click', function (e) { if (e.target === box) closeBox(); });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && box.classList.contains('on')) closeBox();
+      });
+
+      /* Reveal on scroll */
+      var rv = document.querySelectorAll('.card, .layer, .smap, .quote, .tbl, .hl-item, .tl-step, .flow-out');
+      rv.forEach(function (el) { el.classList.add('rv'); });
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+        rv.forEach(function (el) { io.observe(el); });
+      } else {
+        rv.forEach(function (el) { el.classList.add('in'); });
+      }
+
+      /* Section views and scroll depth */
+      if ('IntersectionObserver' in window) {
+        var seen = {};
+        var sIO = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting && !seen[e.target.id]) {
+              seen[e.target.id] = 1;
+              track('section_view', { section: e.target.id, page: 'parts-catalogue' });
+            }
+          });
+        }, { threshold: 0.3 });
+        document.querySelectorAll('section[id]').forEach(function (s) { sIO.observe(s); });
+      }
+      var depth = {};
+      window.addEventListener('scroll', function () {
+        var h = document.documentElement.scrollHeight - window.innerHeight;
+        if (h <= 0) return;
+        var pct = Math.round((window.scrollY / h) * 100);
+        [50, 90].forEach(function (m) {
+          if (pct >= m && !depth[m]) { depth[m] = 1; track('scroll_depth', { percent: m, page: 'parts-catalogue' }); }
+        });
+      }, { passive: true });
+    })();
+  </script>
+</body>
+</html>

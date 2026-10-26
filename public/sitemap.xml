@@ -43,6 +43,16 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://hache-cervera.github.io/work/es/homelab/"/>
   </url>
   <url>
+    <loc>https://hache-cervera.github.io/work/parts-catalogue/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hache-cervera.github.io/work/parts-catalogue/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hache-cervera.github.io/work/es/parts-catalogue/"/>
+  </url>
+  <url>
+    <loc>https://hache-cervera.github.io/work/es/parts-catalogue/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hache-cervera.github.io/work/parts-catalogue/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hache-cervera.github.io/work/es/parts-catalogue/"/>
+  </url>
+  <url>
     <loc>https://hache-cervera.github.io/research/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://hache-cervera.github.io/research/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://hache-cervera.github.io/research/es/"/>
