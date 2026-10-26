@@ -1,0 +1,248 @@
+{
+ "meta": {
+  "title": "What supplier catalogues contain: engine spare parts",
+  "author": "Ada (hache) Cervera",
+  "measured": "2026-10-25",
+  "note": "Aggregates only. Five supplier sources of one engine spare parts company in Spain, anonymised (A to E). Counts come from the catalogue tool's own output on the full files. Product-level data is the client's and is not published. Prices are market prices, not the distributor's tariff. with_* columns count what each source itself provides; priced_after_merge counts the products that end up with a price once sources are joined by reference (catalogues B and D get theirs from price list E). Source C has no family column; the tool derives it from the name for 35,970 products."
+ },
+ "sources": [
+  {
+   "source": "A",
+   "type": "Gasket catalogue",
+   "format": "PDF, tables extracted",
+   "rows_read": 8,
+   "filtered_out": 0,
+   "products": 8,
+   "with_price": 0,
+   "with_description": 8,
+   "with_compatibility": 8,
+   "with_family": 8,
+   "matched_with_another_source": 0,
+   "with_photo": 0,
+   "with_weight": 0,
+   "with_barcode": 0,
+   "with_lead_time": 0,
+   "with_stock": 0,
+   "with_cost_price": 0,
+   "priced_after_merge": 0
+  },
+  {
+   "source": "B",
+   "type": "Catalogue by engine make",
+   "format": "PDF, tables extracted",
+   "rows_read": 1289,
+   "filtered_out": 0,
+   "products": 1289,
+   "with_price": 0,
+   "with_description": 1289,
+   "with_compatibility": 1289,
+   "with_family": 1289,
+   "matched_with_another_source": 1289,
+   "with_photo": 0,
+   "with_weight": 0,
+   "with_barcode": 0,
+   "with_lead_time": 0,
+   "with_stock": 0,
+   "with_cost_price": 0,
+   "priced_after_merge": 1259
+  },
+  {
+   "source": "C",
+   "type": "Original parts listing from an online shop",
+   "format": "Web listing saved to CSV",
+   "rows_read": 107632,
+   "filtered_out": 71118,
+   "products": 36514,
+   "with_price": 32985,
+   "with_description": 0,
+   "with_compatibility": 0,
+   "with_family": 0,
+   "matched_with_another_source": 0,
+   "with_photo": 0,
+   "with_weight": 0,
+   "with_barcode": 0,
+   "with_lead_time": 0,
+   "with_stock": 0,
+   "with_cost_price": 0,
+   "priced_after_merge": 32985,
+   "family_derived_from_name": 35970
+  },
+  {
+   "source": "D",
+   "type": "Piston catalogue",
+   "format": "PDF, tables extracted",
+   "rows_read": 137,
+   "filtered_out": 0,
+   "products": 137,
+   "with_price": 0,
+   "with_description": 137,
+   "with_compatibility": 137,
+   "with_family": 137,
+   "matched_with_another_source": 137,
+   "with_photo": 0,
+   "with_weight": 0,
+   "with_barcode": 0,
+   "with_lead_time": 0,
+   "with_stock": 0,
+   "with_cost_price": 0,
+   "priced_after_merge": 135
+  },
+  {
+   "source": "E",
+   "type": "Market price list",
+   "format": "Web prices saved to CSV",
+   "rows_read": 1426,
+   "filtered_out": 0,
+   "products": 1426,
+   "with_price": 1394,
+   "with_description": 0,
+   "with_compatibility": 0,
+   "with_family": 0,
+   "matched_with_another_source": 1426,
+   "with_photo": 0,
+   "with_weight": 0,
+   "with_barcode": 0,
+   "with_lead_time": 0,
+   "with_stock": 0,
+   "with_cost_price": 0,
+   "priced_after_merge": 1394
+  }
+ ],
+ "fields_on_37948_products": {
+  "total_products": 37948,
+  "name": 37948,
+  "family": 37404,
+  "price": 34379,
+  "description": 1434,
+  "compatibility": 1434,
+  "photo": 0,
+  "weight": 0,
+  "barcode": 0,
+  "lead_time": 0,
+  "stock": 0,
+  "cost_price": 0,
+  "cross_references": 0
+ },
+ "listings": {
+  "listings": 34339,
+  "variants": 34379,
+  "listings_with_more_than_one_variant": 32,
+  "with_vehicle_make": 34333,
+  "with_models": 559,
+  "with_engine_codes": 450,
+  "with_generic_image": 22211,
+  "names_still_flagged_foreign": {
+   "total": 62,
+   "german": 33,
+   "english": 29
+  }
+ },
+ "systems": [
+  {
+   "system": "Fuel system",
+   "system_es": "Sistema de combustible",
+   "listings": 6548,
+   "with_generic_image": 4586
+  },
+  {
+   "system": "Gaskets and seals",
+   "system_es": "Juntas y retenes",
+   "listings": 5448,
+   "with_generic_image": 5334
+  },
+  {
+   "system": "Pipes, fittings and connections",
+   "system_es": "Tubos, racores y conexiones",
+   "listings": 4353,
+   "with_generic_image": 3779
+  },
+  {
+   "system": "Cylinder head and timing",
+   "system_es": "Culata y distribución",
+   "listings": 3886,
+   "with_generic_image": 833
+  },
+  {
+   "system": "Bolts and fasteners",
+   "system_es": "Tornillería y fijaciones",
+   "listings": 3336,
+   "with_generic_image": 2029
+  },
+  {
+   "system": "Pistons, rods and crankshaft",
+   "system_es": "Pistones, bielas y cigüeñal",
+   "listings": 2651,
+   "with_generic_image": 1082
+  },
+  {
+   "system": "Turbo, intake and exhaust",
+   "system_es": "Turbo, admisión y escape",
+   "listings": 2464,
+   "with_generic_image": 1793
+  },
+  {
+   "system": "Cooling system",
+   "system_es": "Sistema de refrigeración",
+   "listings": 1478,
+   "with_generic_image": 832
+  },
+  {
+   "system": "Repair kits and sets",
+   "system_es": "Kits y juegos de reparación",
+   "listings": 1463,
+   "with_generic_image": 1231
+  },
+  {
+   "system": "Lubrication system",
+   "system_es": "Sistema de lubricación",
+   "listings": 782,
+   "with_generic_image": 190
+  },
+  {
+   "system": "Electrical system and sensors",
+   "system_es": "Sistema eléctrico y sensores",
+   "listings": 704,
+   "with_generic_image": 45
+  },
+  {
+   "system": "Workshop tools",
+   "system_es": "Herramientas de taller",
+   "listings": 413,
+   "with_generic_image": 3
+  },
+  {
+   "system": "Filtration",
+   "system_es": "Filtración",
+   "listings": 407,
+   "with_generic_image": 305
+  },
+  {
+   "system": "Hydraulics",
+   "system_es": "Hidráulica",
+   "listings": 229,
+   "with_generic_image": 143
+  },
+  {
+   "system": "Other engine parts",
+   "system_es": "Otros recambios de motor",
+   "listings": 177,
+   "with_generic_image": 26
+  }
+ ],
+ "tests": {
+  "image_by_name": {
+   "listings_with_image_before": 22211,
+   "after": 25311,
+   "gained": 3100,
+   "sample_reviewed": 15,
+   "sample_wrong_part": 14
+  },
+  "filter_whole_words": {
+   "products_before": 37948,
+   "products_after": 37183,
+   "removed": 840,
+   "of_which_springs": 420,
+   "added": 75
+  }
+ }
+}

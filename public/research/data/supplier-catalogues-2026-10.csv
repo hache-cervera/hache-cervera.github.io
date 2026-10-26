@@ -1,0 +1,6 @@
+﻿source,type,format,rows_read,filtered_out,products,with_price,priced_after_merge,with_description,with_compatibility,with_family,matched_with_another_source,with_photo,with_weight,with_barcode,with_lead_time,with_stock,with_cost_price
+A,Gasket catalogue,"PDF, tables extracted",8,0,8,0,0,8,8,8,0,0,0,0,0,0,0
+B,Catalogue by engine make,"PDF, tables extracted",1289,0,1289,0,1259,1289,1289,1289,1289,0,0,0,0,0,0
+C,Original parts listing from an online shop,Web listing saved to CSV,107632,71118,36514,32985,32985,0,0,0,0,0,0,0,0,0,0
+D,Piston catalogue,"PDF, tables extracted",137,0,137,0,135,137,137,137,137,0,0,0,0,0,0
+E,Market price list,Web prices saved to CSV,1426,0,1426,1394,1394,0,0,0,1426,0,0,0,0,0,0
