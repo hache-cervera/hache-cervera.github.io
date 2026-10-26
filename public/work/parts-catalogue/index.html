@@ -671,6 +671,13 @@
       .fmap .row.head { display: none; }
     }
   </style>
+  <style>
+    .ba ul { margin: 14px 0 0; padding-left: 1.2rem; display: grid; gap: 8px; list-style: disc; }
+    .ba ul li { margin: 0; font-size: 0.9375rem; line-height: 1.5; color: var(--ink); }
+    .ba .verdict { margin-top: 20px; }
+    .viz + .note, .viz + .prose, .fmap + .prose, .ba + .cards, .ba + .prose { margin-top: 24px; }
+    .cards + .ba, .tbl + .cards, .flow + .cards { margin-top: 32px; }
+  </style>
 </head>
 
 <body>
@@ -718,7 +725,6 @@
         <div><dt>Platform</dt><dd>Shopify</dd></div>
         <div><dt>Built with</dt><dd>Python, Streamlit, Shopify Admin API</dd></div>
         <div><dt>Role</dt><dd>Diagnosis, data tool and store setup</dd></div>
-        <div><dt>Context</dt><dd>Independent project, October 2026</dd></div>
       </dl>
 
       <p class="note">
@@ -755,7 +761,7 @@
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <rect x="3" y="4" width="18" height="16" rx="1" /><path d="M3 9h18M9 9v11" />
             </svg>
-            <h3>Each format, learned once</h3>
+            <h3>Saved formats per supplier</h3>
             <p>The tool recognises a supplier file by its column headers. A new format is described once, saved as a profile, and recognised on its own from then on.</p>
           </article>
           <article class="hl-item">
@@ -776,14 +782,14 @@
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M20 12a8 8 0 1 1-2.3-5.7" /><path d="M20 4v4h-4" />
             </svg>
-            <h3>Update without overwriting</h3>
+            <h3>Update price and cost only</h3>
             <p>Once products are live, the tool compares against the store and sends only price and cost changes. Status, texts and photos are left exactly as they are.</p>
           </article>
           <article class="hl-item">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M3 3v18h18" /><path d="m7 15 4-4 3 3 5-6" />
             </svg>
-            <h3>Measured before changed</h3>
+            <h3>Changes tested on the full catalogue</h3>
             <p>Every change was run against the full catalogue and compared product by product. One fix that looked obvious would have removed 840 products, so it was not made.</p>
           </article>
         </div>
@@ -794,7 +800,7 @@
     <section id="problem">
       <div class="wrap">
         <p class="section-label">/ 01 &middot; The problem</p>
-        <h2>A new website would not have added a single product</h2>
+        <h2>192 products in the shop out of more than a thousand</h2>
         <p class="section-intro">
           The brief was a new website. Looking at the existing one, it was not bad, so the useful
           question was what it was for. The answer was both: a company presentation and a shop.
@@ -855,10 +861,10 @@
     <section id="tool">
       <div class="wrap">
         <p class="section-label">/ 03 &middot; The tool</p>
-        <h2>One engine, five stages</h2>
+        <h2>How the tool works</h2>
         <p class="section-intro">
           A Python pipeline with a small local web interface on top. Files go in as they arrive;
-          a Shopify import file and a quality report come out. There is no server and no
+          a Shopify import file and a quality report come out. <strong>It works the same with 200 products as with 37,948.</strong> There is no server and no
           database: everything runs on the computer of whoever uses it, starting from the files
           each time.
         </p>
@@ -869,6 +875,17 @@
           <li><small>04</small><b>Classify and complete</b><p>Translates names, assigns one of 15 engine systems, vehicle data, a generic image per part type and variants by size.</p></li>
           <li><small>05</small><b>Write</b><p>Shopify CSV, a master table with the source of every value, and an Excel report of what needs a human.</p></li>
         </ol>
+        <div class="cards gallery">
+          <div class="card wide">
+            <figure>
+              <img src="../img/catalogo-formatos.webp" alt="Step 2 of the tool: four files recognised with their saved format and a fifth in a new format, with the form to say what each column is and two columns flagged for review" loading="lazy" data-zoom />
+            </figure>
+            <div class="body">
+              <h3>Step 2: known formats and a new one</h3>
+              <p>The first four files are recognised by their headers. The fifth is a new format: the tool proposes what each column is, flags what is worth checking and saves it for next time. The interface is in Spanish, like the people who use it.</p>
+            </div>
+          </div>
+        </div>
         <div class="tbl" tabindex="0" role="region" aria-label="Table">
           <table>
             <thead><tr><th>Piece</th><th>What it does</th></tr></thead>
@@ -882,6 +899,17 @@
             </tbody>
           </table>
         </div>
+        <div class="cards gallery">
+          <div class="card wide">
+            <figure>
+              <img src="../img/catalogo-resultado.webp" alt="Step 4 of the tool: a button to download the Shopify CSV, buttons for the quality report, the unified catalogue and the collections to create, and import instructions" loading="lazy" data-zoom />
+            </figure>
+            <div class="body">
+              <h3>Step 4: what comes out</h3>
+              <p>The Shopify CSV, the quality report in Excel, the unified catalogue and the collections to create, with the steps to import it without overwriting what is already there. Example data.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -889,7 +917,7 @@
     <section id="decisions">
       <div class="wrap">
         <p class="section-label">/ 04 &middot; Decisions</p>
-        <h2>Built for someone else to run</h2>
+        <h2>Decisions made for the people who use it</h2>
         <p class="section-intro">
           The person using it day to day will not be me. That changed more decisions than any
           technical constraint did.
@@ -898,7 +926,7 @@
           <table>
             <thead><tr><th>Decision</th><th>Why</th></tr></thead>
             <tbody>
-            <tr><td><strong>No fake stock</strong></td><td>Without supplier APIs there is no reliable stock figure. Every product says "check availability" with the shop's phone number instead of showing an "in stock" nobody can guarantee. The field is already there for when real data exists.</td></tr>
+            <tr><td><strong>Availability on request</strong></td><td>Without supplier APIs there is no reliable stock figure. Every product says "check availability" with the shop's phone number instead of showing an "in stock" nobody can guarantee. The field is already there for when real data exists.</td></tr>
             <tr><td><strong>Images by part type, not by name</strong></td><td>Matching images on words in the name would add 3,100 more photos. I checked a sample: almost all were wrong, a pump cover showing a whole pump. The option exists, switched off.</td></tr>
             <tr><td><strong>Test on a sample first</strong></td><td>A first import of around 33,000 products got stuck. Since then the tool can build a sample of any size spread across part families, and repeat exactly the same one to compare before and after.</td></tr>
             <tr><td><strong>A separate update mode</strong></td><td>Re-importing everything with "overwrite" would set live products back to draft and blank anything filled in by hand. The update mode reads the store export, matches by SKU and sends only the columns that change.</td></tr>
@@ -906,6 +934,17 @@
             <tr><td><strong>Warn before choosing</strong></td><td>Two files disagreeing, the same reference under two brands, a profile about to overwrite another: each one is shown to the user rather than decided quietly.</td></tr>
             </tbody>
           </table>
+        </div>
+        <div class="cards gallery">
+          <div class="card wide">
+            <figure>
+              <img src="../img/catalogo-muestra.webp" alt="Step 3 with the sample chosen: how many products (200) and the advanced options, with VAT, margin and the image-by-name option switched off" loading="lazy" data-zoom />
+            </figure>
+            <div class="body">
+              <h3>The sample and the advanced options</h3>
+              <p>The sample spreads 200 products across part families to test before uploading everything. Image by name is off; VAT and margin are changed here without touching code.</p>
+            </div>
+          </div>
         </div>
         <div class="ba">
           <div>
@@ -943,7 +982,7 @@
     <section id="incidents">
       <div class="wrap">
         <p class="section-label">/ 05 &middot; Incidents</p>
-        <h2>Things that broke, and one I chose not to fix</h2>
+        <h2>Incidents and how they were solved</h2>
         <p class="section-intro">
           Most of the features above exist because something went wrong first. Where the cause
           was not investigated, the table says so.
@@ -976,19 +1015,15 @@
           <table>
             <thead><tr><th>Claim</th><th>Evidence</th></tr></thead>
             <tbody>
-            <tr><td><strong>Diagnosis before delivery</strong></td><td>The brief was a website; the fix was a data process. The 192 against 1,000+ is what decided it.</td></tr>
-            <tr><td><strong>Messy data, nothing hidden</strong></td><td>37,948 products from sources that disagree in format, language and completeness, with every exclusion and conflict listed rather than hidden.</td></tr>
+            <tr><td><strong>Diagnosis before proposing</strong></td><td>The brief was a website; the fix was a data process. The 192 against 1,000+ is what decided it.</td></tr>
+            <tr><td><strong>Every exclusion listed</strong></td><td>37,948 products from sources that disagree in format, language and completeness, with every exclusion and conflict listed rather than hidden.</td></tr>
             <tr><td><strong>Safe for the shop</strong></td><td>Dry-run setup, no deletions, no stored credentials, and an update mode that cannot touch status, texts or photos.</td></tr>
-            <tr><td><strong>Every change measured</strong></td><td>37 automated tests, and every change compared product by product against the full catalogue before it was kept.</td></tr>
+            <tr><td><strong>Every change checked</strong></td><td>37 automated tests, and every change compared product by product against the full catalogue before it was kept.</td></tr>
+            <tr><td><strong>Scales without code changes</strong></td><td>Tested with 37,948 products while the shop starts with about a thousand. A new supplier is a format saved once, and categories, images and margins are CSV files. The same process runs a 200-product sample or the whole catalogue.</td></tr>
             <tr><td><strong>Handed over</strong></td><td>A four-step interface, a two-page guide for the people who use it, full documentation, and a private repository with one commit per change.</td></tr>
             </tbody>
           </table>
         </div>
-        <p class="note">
-          <strong>Next steps:</strong> distributor price lists instead of market prices, store filters by vehicle and engine,
-          more photos, and deciding with the client what happens to the products already in the
-          shop without a reference.
-        </p>
         <p class="note"><strong>The data behind it:</strong> what the five sources bring, counted field by field against what Shopify and Google need, is a separate study: <a href="../../research/supplier-catalogues/">What is a supplier catalogue missing for Shopify?</a></p>
       </div>
     </section>
@@ -1002,8 +1037,8 @@
   <section class="cta" id="contact">
     <div class="wrap">
       <p class="kicker">/ Next</p>
-      <h2>Everything connects.</h2>
-      <p>The brief was a website and the fix was a data process. Asking what something is for before building it is most of the job. If that is the kind of work you need, say hi.</p>
+      <h2>Got a catalogue like this?</h2>
+      <p>If your shop depends on supplier files that do not fit together, email me and we will look at it.</p>
       <div class="actions">
         <a class="btn" href="mailto:hi.hache.cervera@gmail.com?subject=Supplier%20catalogue%20case%20study">Get in touch</a>
         <a class="alt" href="../">See the rest of the work</a>

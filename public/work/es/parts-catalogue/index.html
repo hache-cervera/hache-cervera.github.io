@@ -671,6 +671,13 @@
       .fmap .row.head { display: none; }
     }
   </style>
+  <style>
+    .ba ul { margin: 14px 0 0; padding-left: 1.2rem; display: grid; gap: 8px; list-style: disc; }
+    .ba ul li { margin: 0; font-size: 0.9375rem; line-height: 1.5; color: var(--ink); }
+    .ba .verdict { margin-top: 20px; }
+    .viz + .note, .viz + .prose, .fmap + .prose, .ba + .cards, .ba + .prose { margin-top: 24px; }
+    .cards + .ba, .tbl + .cards, .flow + .cards { margin-top: 32px; }
+  </style>
 </head>
 
 <body>
@@ -718,7 +725,6 @@
         <div><dt>Plataforma</dt><dd>Shopify</dd></div>
         <div><dt>Hecho con</dt><dd>Python, Streamlit, Admin API de Shopify</dd></div>
         <div><dt>Rol</dt><dd>Diagnóstico, herramienta de datos y montaje de la tienda</dd></div>
-        <div><dt>Contexto</dt><dd>Proyecto independiente, octubre de 2026</dd></div>
       </dl>
 
       <p class="note">
@@ -754,7 +760,7 @@
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <rect x="3" y="4" width="18" height="16" rx="1" /><path d="M3 9h18M9 9v11" />
             </svg>
-            <h3>Cada formato se aprende una vez</h3>
+            <h3>Formatos guardados por proveedor</h3>
             <p>La herramienta reconoce un fichero de proveedor por sus cabeceras. Un formato nuevo se describe una vez, se guarda como perfil y a partir de ahí se reconoce solo.</p>
           </article>
           <article class="hl-item">
@@ -775,14 +781,14 @@
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M20 12a8 8 0 1 1-2.3-5.7" /><path d="M20 4v4h-4" />
             </svg>
-            <h3>Actualizar sin pisar</h3>
+            <h3>Actualizar solo precio y coste</h3>
             <p>Con los productos ya en la tienda, la herramienta compara con lo que hay y envía solo los cambios de precio y coste. Estado, textos y fotos se quedan como están.</p>
           </article>
           <article class="hl-item">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M3 3v18h18" /><path d="m7 15 4-4 3 3 5-6" />
             </svg>
-            <h3>Medir antes de cambiar</h3>
+            <h3>Cambios probados con el catálogo completo</h3>
             <p>Cada cambio se pasó por el catálogo completo y se comparó producto a producto. Un arreglo que parecía obvio habría quitado 840 productos, así que no se hizo.</p>
           </article>
         </div>
@@ -793,7 +799,7 @@
     <section id="problem">
       <div class="wrap">
         <p class="section-label">/ 01 &middot; El problema</p>
-        <h2>Una web nueva no habría añadido ni un producto</h2>
+        <h2>192 productos en la tienda de más de mil</h2>
         <p class="section-intro">
           El encargo era una web nueva. Al mirar la que tenían, no estaba mal, así que la pregunta
           útil era para qué la querían. La respuesta fue las dos cosas: presentar la empresa y
@@ -852,10 +858,10 @@
     <section id="tool">
       <div class="wrap">
         <p class="section-label">/ 03 &middot; La herramienta</p>
-        <h2>Un motor, cinco etapas</h2>
+        <h2>Cómo funciona la herramienta</h2>
         <p class="section-intro">
           Una cadena en Python con una pequeña interfaz web local encima. Los ficheros entran tal
-          como llegan; sale un fichero de importación para Shopify y un informe de calidad. No hay
+          como llegan; sale un fichero de importación para Shopify y un informe de calidad. <strong>Funciona igual con 200 productos que con 37.948.</strong> No hay
           servidor ni base de datos: todo corre en el ordenador de quien la usa y cada vez se
           empieza desde los ficheros.
         </p>
@@ -866,6 +872,17 @@
           <li><small>04</small><b>Clasificar y completar</b><p>Traduce nombres, asigna uno de 15 sistemas del motor, datos del vehículo, una imagen genérica por tipo de pieza y variantes por medida.</p></li>
           <li><small>05</small><b>Escribir</b><p>CSV de Shopify, una tabla maestra con el origen de cada dato y un informe en Excel de lo que necesita a una persona.</p></li>
         </ol>
+        <div class="cards gallery">
+          <div class="card wide">
+            <figure>
+              <img src="../../img/catalogo-formatos.webp" alt="Paso 2 de la herramienta: cuatro ficheros reconocidos con su formato guardado y un quinto de formato nuevo, con el formulario para indicar qué es cada columna y dos columnas marcadas para revisar" loading="lazy" data-zoom />
+            </figure>
+            <div class="body">
+              <h3>Paso 2: formatos conocidos y uno nuevo</h3>
+              <p>Los cuatro primeros ficheros se reconocen por sus cabeceras. El quinto es un formato nuevo: la herramienta propone qué es cada columna, marca lo que conviene revisar y lo guarda para la próxima vez.</p>
+            </div>
+          </div>
+        </div>
         <div class="tbl" tabindex="0" role="region" aria-label="Tabla">
           <table>
             <thead><tr><th>Pieza</th><th>Qué hace</th></tr></thead>
@@ -879,6 +896,17 @@
             </tbody>
           </table>
         </div>
+        <div class="cards gallery">
+          <div class="card wide">
+            <figure>
+              <img src="../../img/catalogo-resultado.webp" alt="Paso 4 de la herramienta: botón para descargar el CSV de Shopify, botones para el informe de calidad, el catálogo unificado y las colecciones a crear, e instrucciones para importarlo" loading="lazy" data-zoom />
+            </figure>
+            <div class="body">
+              <h3>Paso 4: lo que sale</h3>
+              <p>El CSV para Shopify, el informe de calidad en Excel, el catálogo unificado y las colecciones a crear, con los pasos para importarlo sin pisar lo que ya hay. Datos de ejemplo.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -886,7 +914,7 @@
     <section id="decisions">
       <div class="wrap">
         <p class="section-label">/ 04 &middot; Decisiones</p>
-        <h2>Hecha para que la use otra persona</h2>
+        <h2>Decisiones pensadas para quien la usa</h2>
         <p class="section-intro">
           Quien la va a usar en el día a día no soy yo. Eso cambió más decisiones que cualquier
           limitación técnica.
@@ -895,7 +923,7 @@
           <table>
             <thead><tr><th>Decisión</th><th>Por qué</th></tr></thead>
             <tbody>
-            <tr><td><strong>No inventar el stock</strong></td><td>Sin API de los proveedores no hay una cifra de stock fiable. Cada producto dice "consulta disponibilidad" con el teléfono de la tienda en vez de un "en stock" que nadie puede garantizar. El campo ya existe para cuando haya datos reales.</td></tr>
+            <tr><td><strong>Disponibilidad bajo consulta</strong></td><td>Sin API de los proveedores no hay una cifra de stock fiable. Cada producto dice "consulta disponibilidad" con el teléfono de la tienda en vez de un "en stock" que nadie puede garantizar. El campo ya existe para cuando haya datos reales.</td></tr>
             <tr><td><strong>Imágenes por tipo de pieza, no por nombre</strong></td><td>Buscar la imagen por palabras del nombre añadiría 3.100 fotos más. Revisé una muestra: casi todas eran erróneas, como una tapa de bomba con la foto de la bomba entera. La opción existe, apagada.</td></tr>
             <tr><td><strong>Probar primero con una muestra</strong></td><td>Una primera importación de unos 33.000 productos se atascó. Desde entonces la herramienta genera muestras del tamaño que se quiera, repartidas entre familias, y puede repetir la misma para comparar el antes y el después.</td></tr>
             <tr><td><strong>Un modo aparte para actualizar</strong></td><td>Reimportar todo con "sobrescribir" devolvería a borrador los productos publicados y vaciaría lo que se haya rellenado a mano. El modo actualizar lee la exportación de la tienda, empareja por SKU y envía solo las columnas que cambian.</td></tr>
@@ -903,6 +931,17 @@
             <tr><td><strong>Avisar antes de elegir</strong></td><td>Dos ficheros que no coinciden, la misma referencia con dos marcas, un perfil a punto de pisar otro: todo se le enseña a quien la usa en vez de decidirlo por su cuenta.</td></tr>
             </tbody>
           </table>
+        </div>
+        <div class="cards gallery">
+          <div class="card wide">
+            <figure>
+              <img src="../../img/catalogo-muestra.webp" alt="Paso 3 con la muestra elegida: cuántos productos (200) y las opciones avanzadas, con el IVA, el margen y la imagen genérica por nombre apagada" loading="lazy" data-zoom />
+            </figure>
+            <div class="body">
+              <h3>La muestra y las opciones avanzadas</h3>
+              <p>La muestra reparte 200 productos entre familias para probar antes de subirlo todo. La imagen por nombre está apagada; IVA y margen se cambian aquí sin tocar el código.</p>
+            </div>
+          </div>
         </div>
         <div class="ba">
           <div>
@@ -940,7 +979,7 @@
     <section id="incidents">
       <div class="wrap">
         <p class="section-label">/ 05 &middot; Incidencias</p>
-        <h2>Lo que se rompió, y algo que decidí no arreglar</h2>
+        <h2>Incidencias y cómo se resolvieron</h2>
         <p class="section-intro">
           Casi todo lo de arriba existe porque antes algo salió mal. Donde la causa no se
           investigó, la tabla lo dice.
@@ -973,19 +1012,15 @@
           <table>
             <thead><tr><th>Afirmación</th><th>Prueba</th></tr></thead>
             <tbody>
-            <tr><td><strong>Diagnóstico antes que entrega</strong></td><td>El encargo era una web; el arreglo fue un proceso de datos. Los 192 frente a más de 1.000 lo decidieron.</td></tr>
-            <tr><td><strong>Datos desordenados, sin esconder nada</strong></td><td>37.948 productos de fuentes que no coinciden en formato, idioma ni datos, con cada exclusión y cada conflicto listados en vez de escondidos.</td></tr>
+            <tr><td><strong>Diagnóstico antes de proponer</strong></td><td>El encargo era una web; el arreglo fue un proceso de datos. Los 192 frente a más de 1.000 lo decidieron.</td></tr>
+            <tr><td><strong>Cada exclusión, listada</strong></td><td>37.948 productos de fuentes que no coinciden en formato, idioma ni datos, con cada exclusión y cada conflicto listados en vez de escondidos.</td></tr>
             <tr><td><strong>Segura para la tienda</strong></td><td>Montaje que simula, sin borrados, sin credenciales guardadas, y un modo actualizar que no puede tocar estado, textos ni fotos.</td></tr>
-            <tr><td><strong>Cada cambio, medido</strong></td><td>37 pruebas automáticas, y cada cambio comparado producto a producto con el catálogo completo antes de darlo por bueno.</td></tr>
+            <tr><td><strong>Cada cambio, comprobado</strong></td><td>37 pruebas automáticas, y cada cambio comparado producto a producto con el catálogo completo antes de darlo por bueno.</td></tr>
+            <tr><td><strong>Escalable sin tocar código</strong></td><td>Probada con 37.948 productos cuando la tienda empieza con unos mil. Un proveedor nuevo es un formato que se guarda una vez, y categorías, imágenes y márgenes son CSV. El mismo proceso sirve para una muestra de 200 o para el catálogo entero.</td></tr>
             <tr><td><strong>Entregada</strong></td><td>Una interfaz de cuatro pasos, una guía de dos páginas para quien la usa, documentación completa y un repositorio privado con un commit por cambio.</td></tr>
             </tbody>
           </table>
         </div>
-        <p class="note">
-          <strong>Siguientes pasos:</strong> tarifas del distribuidor en vez de precios de mercado, filtros por vehículo y motor en la tienda,
-          más fotos, y decidir con el cliente qué pasa con los productos que ya están en la tienda
-          sin referencia.
-        </p>
         <p class="note"><strong>Los datos de detrás:</strong> qué traen las cinco fuentes, contado campo a campo frente a lo que necesitan Shopify y Google, está en un estudio aparte: <a href="../../../research/es/catalogos-proveedores/">¿Qué le falta a un catálogo de proveedor para Shopify?</a></p>
       </div>
     </section>
@@ -999,10 +1034,10 @@
   <section class="cta" id="contact">
     <div class="wrap">
       <p class="kicker">/ Siguiente</p>
-      <h2>Todo conecta.</h2>
-      <p>El encargo era una web y el arreglo fue un proceso de datos. Preguntar para qu&eacute; sirve algo antes de construirlo es casi todo el trabajo. Si es el tipo de trabajo que necesitas, escr&iacute;beme.</p>
+      <h2>¿Tienes un catálogo parecido?</h2>
+      <p>Si tu tienda depende de ficheros de proveedores que no encajan entre sí, escríbeme y lo miramos.</p>
       <div class="actions">
-        <a class="btn" href="mailto:hi.hache.cervera@gmail.com?subject=Caso%20cat%C3%A1logo%20de%20proveedores">Hablamos</a>
+        <a class="btn" href="mailto:hi.hache.cervera@gmail.com?subject=Caso%20cat%C3%A1logo%20de%20proveedores">Escríbeme</a>
         <a class="alt" href="../">Ver el resto del trabajo</a>
       </div>
     </div>

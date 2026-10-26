@@ -689,6 +689,11 @@
     .ba .pair .bad { color: var(--accent); }
     .ba p { margin-top: 12px; font-size: 0.9375rem; }
     .ba .verdict { margin-top: 16px; display: inline-block; }
+    .ba ul { margin: 14px 0 0; padding-left: 1.2rem; display: grid; gap: 8px; list-style: disc; }
+    .ba ul li { margin: 0; font-size: 0.9375rem; line-height: 1.5; color: var(--ink); }
+    .ba .verdict { margin-top: 20px; }
+    .viz + .note, .viz + .prose, .fmap + .prose, .ba + .cards, .ba + .prose { margin-top: 24px; }
+    .cards + .ba, .tbl + .cards, .flow + .cards { margin-top: 32px; }
     .prose strong, .section-intro strong { color: var(--ink); }
     @media (max-width: 640px) {
       .viz { padding: 18px; }
@@ -735,7 +740,7 @@
     <section id="fields">
       <div class="wrap">
         <p class="section-label">/ 01 · Qué llega</p>
-        <h2>Nombre y precio. Del resto, casi nada</h2>
+        <h2>Qué datos llegan de los proveedores</h2>
         <p class="prose">Todos los productos tienen nombre y el <strong>91 % acaba con precio</strong>. Solo el <strong>3,8 %</strong> trae descripción y motores compatibles, y todo eso sale de los catálogos PDF. <strong>Ningún archivo trae foto, código de barras, peso, stock, plazo, coste ni referencias cruzadas.</strong></p>
         <div class="viz" role="figure" aria-label="Porcentaje de los 37.948 productos que llegan con cada campo">
           <h3>Con qué llega cada producto</h3>
@@ -749,7 +754,7 @@
     <section id="shopify">
       <div class="wrap">
         <p class="section-label">/ 02 · En Shopify</p>
-        <h2>Qué supone cada hueco en la tienda</h2>
+        <h2>Qué supone cada dato que falta en Shopify</h2>
         <p class="prose">Cada campo vacío tiene consecuencias en la tienda: <strong>cambia cómo se envía, cómo se filtra y si Google enseña el producto.</strong> Para cada uno, lo que Shopify hace con él y la decisión que tomó la herramienta.</p>
         <div class="fmap"><div class="row head" aria-hidden="true"><span>Campo</span><span>Para qué lo usa Shopify</span><span>Qué hace la herramienta</span></div><div class="row"><div class="f">Foto<small><span class="chip none">Ninguno</span></small></div><p><strong>Imagen del producto.</strong> Google Merchant Center rechaza los marcadores tipo “próximamente”, pero admite una imagen genérica o ilustración en <strong>Vehículos y recambios</strong> (categoría 888).</p><p>Una imagen genérica por familia de pieza en <strong>22.211 fichas</strong>, con “imagen orientativa” en el texto alternativo. El resto, sin imagen.</p></div><div class="row"><div class="f">Código de barras (GTIN)<small><span class="chip none">Ninguno</span></small></div><p><strong>Columna Barcode.</strong> Sin GTIN, Google le da menos alcance al producto, pero acepta <strong>marca + MPN</strong> en su lugar.</p><p>La referencia del proveedor va al SKU, lista para usarse como MPN. El código de barras se queda vacío en vez de inventarlo.</p></div><div class="row"><div class="f">Peso<small><span class="chip none">Ninguno</span></small></div><p><strong>Envíos.</strong> Las tarifas por peso y las calculadas por transportista necesitan el peso de cada variante.</p><p>Columna de peso preparada pero vacía. El envío tiene que ir con tarifa plana o por importe hasta que algún proveedor mande pesos.</p></div><div class="row"><div class="f">Stock y plazo<small><span class="chip none">Ninguno</span></small></div><p><strong>Inventario.</strong> Con seguimiento, el producto deja de venderse a cero. Sin seguimiento, siempre se puede comprar.</p><p>Inventario sin seguimiento, <code>continue</code> (seguir vendiendo) y un metafield de disponibilidad en “Consultar”, con el teléfono de la tienda en la descripción.</p></div><div class="row"><div class="f">Precio de coste<small><span class="chip none">Ninguno</span></small></div><p><strong>Coste por artículo.</strong> Alimenta los informes de margen y beneficio bruto de Shopify.</p><p>Vacío. Los precios son de mercado, no de tarifa, así que todavía no hay coste que poner. La columna se rellena sola cuando llegue una tarifa.</p></div><div class="row"><div class="f">Descripción<small><span class="chip part">3,8 %</span></small></div><p><strong>Ficha y SEO.</strong> Título, cuerpo, título SEO y meta descripción.</p><p>Títulos reescritos y traducidos desde el nombre. Título SEO y meta descripción generados para <strong>34.339 de 34.339 fichas</strong>.</p></div><div class="row"><div class="f">Compatibilidad<small><span class="chip part">3,8 %</span></small></div><p><strong>Metafields y filtros.</strong> Marca, modelos y códigos de motor como metafields de lista, que Search &amp; Discovery puede usar como filtro.</p><p>Escritos en tres metafields. La sección 04 explica por qué un filtro normal no basta.</p></div><div class="row"><div class="f">Familia<small><span class="chip ok">99 %</span></small></div><p><strong>Tipo de producto, etiquetas y colecciones.</strong> Las colecciones automáticas eligen productos por etiqueta.</p><p>134 tipos de producto y una etiqueta por sistema del motor, así que <strong>15 colecciones automáticas</strong> se llenan solas.</p></div></div>
       </div>
@@ -758,7 +763,7 @@
     <section id="sources">
       <div class="wrap">
         <p class="section-label">/ 03 · Cinco fuentes</p>
-        <h2>La fuente más grande es la que menos trae</h2>
+        <h2>Las cinco fuentes</h2>
         <p class="prose">La fuente C, un listado de recambio original guardado de una tienda online, tiene 107.632 filas. 71.118 se descartan por no ser recambio de motor. Los <strong>36.514 que quedan son el 96 % del catálogo</strong> y traen nombre, referencia y precio, sin descripción, sin motores y sin familia: la herramienta deduce la familia por el nombre en 35.970.</p>
         <div class="viz" role="figure" aria-label="Productos por fuente">
           <h3>De dónde salen los 37.948 productos</h3>
@@ -774,7 +779,7 @@
     <section id="filters">
       <div class="wrap">
         <p class="section-label">/ 04 · Filtros</p>
-        <h2>Buscar por vehículo no cabe en un filtro normal</h2>
+        <h2>Filtros por vehículo en Shopify</h2>
         <p class="prose">Search &amp; Discovery filtra por metafields de texto en lista, pero <strong>un filtro enseña como mucho 100 valores en la tienda</strong> y un grupo admite 200. Marca de vehículo cabe: 10 valores. Modelos y códigos de motor, no: <strong>1.179 modelos en solo 559 fichas y 707 códigos en 450</strong>.</p>
         <div class="viz" role="figure" aria-label="Valores distintos de cada filtro frente a los 100 que muestra un filtro">
           <h3>Valores distintos por filtro</h3>
@@ -788,7 +793,7 @@
     <section id="images">
       <div class="wrap">
         <p class="section-label">/ 05 · Imágenes</p>
-        <h2>Una imagen genérica por familia, donde tiene sentido</h2>
+        <h2>Imágenes genéricas por familia</h2>
         <p class="prose">Sin fotos, cada ficha lleva la imagen genérica de su familia cuando la hay: <strong>22.211 fichas, el 65 %</strong>. Google la admite porque los recambios están en la categoría Vehículos y recambios. <strong>Una junta se parece a otra junta</strong>; un sensor o una herramienta de taller no, y ahí la cobertura baja casi a cero.</p>
         <div class="viz" role="figure" aria-label="Fichas por sistema del motor y cuántas tienen imagen genérica">
           <h3>Fichas por sistema y cuántas llevan imagen</h3>
@@ -802,7 +807,7 @@
     <section id="import">
       <div class="wrap">
         <p class="section-label">/ 06 · Importar</p>
-        <h2>El catálogo completo no entra de una vez</h2>
+        <h2>El límite de importación de Shopify</h2>
         <p class="prose">El fichero de importación completo pesa <strong>24,7 MB</strong> y Shopify acepta <strong>15 MB por CSV</strong>. Hay que subirlo en dos partes o más, o por muestras, que es como la herramienta empieza.</p>
         <div class="viz" role="figure" aria-label="Tamaño del fichero de importación completo frente al límite de Shopify">
           <h3>Fichero de importación completo</h3>
@@ -816,8 +821,8 @@
     <section id="tests">
       <div class="wrap">
         <p class="section-label">/ 07 · Dos pruebas</p>
-        <h2>Dos arreglos que se quedaron fuera</h2>
-        <p class="prose">Las dos mejoraban un número y las dos se quedaron fuera al revisarlas.</p>
+        <h2>Dos cambios probados que no se aplicaron</h2>
+        <p class="prose">Los dos mejoraban una cifra, pero al revisarlos a mano empeoraban la tienda.</p>
         <div class="ba">
           <div>
             <h3>Imagen por nombre</h3>

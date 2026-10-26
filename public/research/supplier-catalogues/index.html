@@ -689,6 +689,11 @@
     .ba .pair .bad { color: var(--accent); }
     .ba p { margin-top: 12px; font-size: 0.9375rem; }
     .ba .verdict { margin-top: 16px; display: inline-block; }
+    .ba ul { margin: 14px 0 0; padding-left: 1.2rem; display: grid; gap: 8px; list-style: disc; }
+    .ba ul li { margin: 0; font-size: 0.9375rem; line-height: 1.5; color: var(--ink); }
+    .ba .verdict { margin-top: 20px; }
+    .viz + .note, .viz + .prose, .fmap + .prose, .ba + .cards, .ba + .prose { margin-top: 24px; }
+    .cards + .ba, .tbl + .cards, .flow + .cards { margin-top: 32px; }
     .prose strong, .section-intro strong { color: var(--ink); }
     @media (max-width: 640px) {
       .viz { padding: 18px; }
@@ -735,7 +740,7 @@
     <section id="fields">
       <div class="wrap">
         <p class="section-label">/ 01 · What arrives</p>
-        <h2>A name and a price. Little else</h2>
+        <h2>What data arrives from suppliers</h2>
         <p class="prose">Every product has a name and <strong>91% end up with a price</strong>. Only <strong>3.8%</strong> come with a description and compatible engines, all from the PDF catalogues. <strong>No file brings a photo, barcode, weight, stock, lead time, cost or cross-references.</strong></p>
         <div class="viz" role="figure" aria-label="Share of the 37,948 products that arrive with each field">
           <h3>What each product arrives with</h3>
@@ -749,7 +754,7 @@
     <section id="shopify">
       <div class="wrap">
         <p class="section-label">/ 02 · In Shopify</p>
-        <h2>What each gap means in the shop</h2>
+        <h2>What each missing field means in Shopify</h2>
         <p class="prose">Each empty field has consequences in the shop: <strong>it changes how orders ship, how customers filter and whether Google shows the product.</strong> For each one, what Shopify does with it and what the tool decided.</p>
         <div class="fmap"><div class="row head" aria-hidden="true"><span>Field</span><span>What Shopify uses it for</span><span>What the tool does</span></div><div class="row"><div class="f">Photo<small><span class="chip none">None</span></small></div><p><strong>Product media.</strong> Google Merchant Center rejects placeholders such as “coming soon”, but allows a generic image or illustration in <strong>Vehicles &amp; Parts</strong> (category 888).</p><p>One generic image per part family on <strong>22,211 listings</strong>, with “indicative image” in the alt text. The rest go without.</p></div><div class="row"><div class="f">Barcode (GTIN)<small><span class="chip none">None</span></small></div><p><strong>Barcode column.</strong> Without a GTIN, Google ranks the product lower but accepts <strong>brand + MPN</strong> instead.</p><p>The supplier reference goes into the SKU, ready to be used as the MPN. Barcode stays empty instead of invented.</p></div><div class="row"><div class="f">Weight<small><span class="chip none">None</span></small></div><p><strong>Shipping.</strong> Weight-based rates and carrier-calculated rates need a weight on every variant.</p><p>Weight column ready but empty. Shipping has to use flat or price-based rates until a supplier sends weights.</p></div><div class="row"><div class="f">Stock and lead time<small><span class="chip none">None</span></small></div><p><strong>Inventory.</strong> Tracked inventory stops selling at zero. Untracked, the product can always be bought.</p><p>Inventory not tracked, <code>continue</code> selling, and an availability metafield set to “Ask”, with the shop phone in the description.</p></div><div class="row"><div class="f">Cost price<small><span class="chip none">None</span></small></div><p><strong>Cost per item.</strong> Feeds Shopify’s margin and gross profit reports.</p><p>Empty. Prices come from the market, not from a tariff, so there is no cost to report yet. The column fills itself once a tariff arrives.</p></div><div class="row"><div class="f">Description<small><span class="chip part">3.8%</span></small></div><p><strong>Product page and SEO.</strong> Title, body, SEO title and meta description.</p><p>Titles rewritten and translated from the name. SEO title and meta description generated for <strong>34,339 of 34,339 listings</strong>.</p></div><div class="row"><div class="f">Compatibility<small><span class="chip part">3.8%</span></small></div><p><strong>Metafields and filters.</strong> Make, models and engine codes as list metafields that Search &amp; Discovery can filter on.</p><p>Written to three metafields. Section 04 shows why a plain filter will not hold them.</p></div><div class="row"><div class="f">Family<small><span class="chip ok">99%</span></small></div><p><strong>Product type, tags and collections.</strong> Automated collections pick products by tag.</p><p>134 product types and one tag per engine system, so <strong>15 automated collections</strong> fill themselves.</p></div></div>
       </div>
@@ -758,7 +763,7 @@
     <section id="sources">
       <div class="wrap">
         <p class="section-label">/ 03 · Five sources</p>
-        <h2>The biggest source brings the least</h2>
+        <h2>The five sources</h2>
         <p class="prose">Source C, an original parts listing saved from an online shop, has 107,632 rows. 71,118 are dropped as not engine parts. The <strong>remaining 36,514 are 96% of the catalogue</strong> and bring a name, a reference and a price, with no description, no engines and no family: the tool works out the family from the name for 35,970.</p>
         <div class="viz" role="figure" aria-label="Products by source">
           <h3>Where the 37,948 products come from</h3>
@@ -774,7 +779,7 @@
     <section id="filters">
       <div class="wrap">
         <p class="section-label">/ 04 · Filters</p>
-        <h2>Search by vehicle does not fit in a plain filter</h2>
+        <h2>Vehicle filters in Shopify</h2>
         <p class="prose">Search &amp; Discovery can filter on list text metafields, but <strong>a filter shows at most 100 values in the shop</strong> and a group holds 200. Vehicle make fits: 10 values. Models and engine codes do not: <strong>1,179 models on only 559 listings, and 707 codes on 450</strong>.</p>
         <div class="viz" role="figure" aria-label="Distinct filter values against the 100 values a filter shows">
           <h3>Distinct values per filter</h3>
@@ -788,7 +793,7 @@
     <section id="images">
       <div class="wrap">
         <p class="section-label">/ 05 · Images</p>
-        <h2>A generic image per family, where it makes sense</h2>
+        <h2>Generic images per family</h2>
         <p class="prose">With no photos, each listing gets its family’s generic image when there is one: <strong>22,211 listings, 65%</strong>. Google accepts it because the parts sit in the Vehicles &amp; Parts category. <strong>A gasket looks like the next gasket</strong>; a sensor or a workshop tool does not, and there coverage drops to almost zero.</p>
         <div class="viz" role="figure" aria-label="Listings per engine system and how many have a generic image">
           <h3>Listings per system, and how many get an image</h3>
@@ -802,7 +807,7 @@
     <section id="import">
       <div class="wrap">
         <p class="section-label">/ 06 · Import</p>
-        <h2>The full catalogue does not go in at once</h2>
+        <h2>Shopify's import limit</h2>
         <p class="prose">The full import file weighs <strong>24.7 MB</strong> and Shopify takes <strong>15 MB per CSV</strong>. It has to go in two or more parts, or as samples, which is how the tool starts.</p>
         <div class="viz" role="figure" aria-label="Size of the full import file against Shopify's limit">
           <h3>Full import file</h3>
@@ -816,8 +821,8 @@
     <section id="tests">
       <div class="wrap">
         <p class="section-label">/ 07 · Two tests</p>
-        <h2>Two fixes that stayed out</h2>
-        <p class="prose">Both improved a number, and both stayed off after review.</p>
+        <h2>Two changes tested and not applied</h2>
+        <p class="prose">Both improved a number, but checked by hand they made the shop worse.</p>
         <div class="ba">
           <div>
             <h3>Image by name</h3>
