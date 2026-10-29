@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="canonical" href="https://hache-cervera.github.io/work/es/decopam/" />
+  <link rel="alternate" hreflang="en" href="https://hache-cervera.github.io/work/decopam/" />
+  <link rel="alternate" hreflang="es" href="https://hache-cervera.github.io/work/es/decopam/" />
   <title>decopam.es &middot; Caso de migraci&oacute;n PrestaShop a WooCommerce &middot; Hache Cervera</title>
   <meta
     name="description"
@@ -886,7 +889,7 @@
 
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Visor de im&aacute;genes">
     <button class="close" type="button" aria-label="Cerrar">&times;</button>
-    <img src="" alt="" />
+    <img alt="" />
   </div>
 
   <section class="cta" id="contact">
@@ -937,7 +940,7 @@
           track('image_open', { project: 'decopam', image: img.getAttribute('src') });
         });
       });
-      function closeBox() { box.classList.remove('on'); boxImg.src = ''; }
+      function closeBox() { box.classList.remove('on'); boxImg.removeAttribute('src'); }
       box.querySelector('.close').addEventListener('click', closeBox);
       box.addEventListener('click', function (e) { if (e.target === box) closeBox(); });
       document.addEventListener('keydown', function (e) {

@@ -876,7 +876,7 @@
         <div class="cards gallery">
           <div class="card wide">
             <figure>
-              <img src="../../img/catalogo-formatos.webp" alt="Paso 2 de la herramienta: cuatro ficheros reconocidos con su formato guardado y un quinto de formato nuevo, con el formulario para indicar qué es cada columna y dos columnas marcadas para revisar" loading="lazy" data-zoom />
+              <img src="../../img/catalogo-formatos.webp" width="1600" height="1757" alt="Paso 2 de la herramienta: cuatro ficheros reconocidos con su formato guardado y un quinto de formato nuevo, con el formulario para indicar qué es cada columna y dos columnas marcadas para revisar" loading="lazy" data-zoom />
             </figure>
             <div class="body">
               <h3>Paso 2: formatos conocidos y uno nuevo</h3>
@@ -900,7 +900,7 @@
         <div class="cards gallery">
           <div class="card wide">
             <figure>
-              <img src="../../img/catalogo-resultado.webp" alt="Paso 4 de la herramienta: botón para descargar el CSV de Shopify, botones para el informe de calidad, el catálogo unificado y las colecciones a crear, e instrucciones para importarlo" loading="lazy" data-zoom />
+              <img src="../../img/catalogo-resultado.webp" width="1600" height="505" alt="Paso 4 de la herramienta: botón para descargar el CSV de Shopify, botones para el informe de calidad, el catálogo unificado y las colecciones a crear, e instrucciones para importarlo" loading="lazy" data-zoom />
             </figure>
             <div class="body">
               <h3>Paso 4: lo que sale</h3>
@@ -936,7 +936,7 @@
         <div class="cards gallery">
           <div class="card wide">
             <figure>
-              <img src="../../img/catalogo-muestra.webp" alt="Paso 3 con la muestra elegida: cuántos productos (200) y las opciones avanzadas, con el IVA, el margen y la imagen genérica por nombre apagada" loading="lazy" data-zoom />
+              <img src="../../img/catalogo-muestra.webp" width="1600" height="603" alt="Paso 3 con la muestra elegida: cuántos productos (200) y las opciones avanzadas, con el IVA, el margen y la imagen genérica por nombre apagada" loading="lazy" data-zoom />
             </figure>
             <div class="body">
               <h3>La muestra y las opciones avanzadas</h3>
@@ -1029,7 +1029,7 @@
 
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Visor de im&aacute;genes">
     <button class="close" type="button" aria-label="Cerrar">&times;</button>
-    <img src="" alt="" />
+    <img alt="" />
   </div>
 
   <section class="cta" id="contact">
@@ -1079,7 +1079,7 @@
           track('image_open', { project: 'parts-catalogue', image: img.getAttribute('src') });
         });
       });
-      function closeBox() { box.classList.remove('on'); boxImg.src = ''; }
+      function closeBox() { box.classList.remove('on'); boxImg.removeAttribute('src'); }
       box.querySelector('.close').addEventListener('click', closeBox);
       box.addEventListener('click', function (e) { if (e.target === box) closeBox(); });
       document.addEventListener('keydown', function (e) {

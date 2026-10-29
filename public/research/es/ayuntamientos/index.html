@@ -742,7 +742,7 @@
 
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Visor de imágenes">
     <button class="close" type="button" aria-label="Cerrar">&times;</button>
-    <img src="" alt="" />
+    <img alt="" />
   </div>
   <section class="cta" id="contact">
     <div class="wrap">
@@ -777,7 +777,7 @@
           track('image_open', { page: 'city-councils', image: img.getAttribute('src') });
         });
       });
-      function closeBox() { box.classList.remove('on'); boxImg.src = ''; if (last) last.focus(); }
+      function closeBox() { box.classList.remove('on'); boxImg.removeAttribute('src'); if (last) last.focus(); }
       box.querySelector('.close').addEventListener('click', closeBox);
       box.addEventListener('click', function (e) { if (e.target === box) closeBox(); });
       document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && box.classList.contains('on')) closeBox(); });

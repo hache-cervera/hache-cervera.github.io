@@ -1239,7 +1239,7 @@
 
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
     <button class="close" type="button" aria-label="Close">&times;</button>
-    <img src="" alt="" />
+    <img alt="" />
   </div>
 
   <section class="cta" id="contact">
@@ -1293,7 +1293,7 @@
           track('image_open', { project: 'devilfruittcg', image: img.getAttribute('src') });
         });
       });
-      function closeBox() { box.classList.remove('on'); boxImg.src = ''; }
+      function closeBox() { box.classList.remove('on'); boxImg.removeAttribute('src'); }
       box.querySelector('.close').addEventListener('click', closeBox);
       box.addEventListener('click', function (e) { if (e.target === box) closeBox(); });
       document.addEventListener('keydown', function (e) {

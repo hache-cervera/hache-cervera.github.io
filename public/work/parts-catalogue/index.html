@@ -879,7 +879,7 @@
         <div class="cards gallery">
           <div class="card wide">
             <figure>
-              <img src="../img/catalogo-formatos.webp" alt="Step 2 of the tool: four files recognised with their saved format and a fifth in a new format, with the form to say what each column is and two columns flagged for review" loading="lazy" data-zoom />
+              <img src="../img/catalogo-formatos.webp" width="1600" height="1757" alt="Step 2 of the tool: four files recognised with their saved format and a fifth in a new format, with the form to say what each column is and two columns flagged for review" loading="lazy" data-zoom />
             </figure>
             <div class="body">
               <h3>Step 2: known formats and a new one</h3>
@@ -903,7 +903,7 @@
         <div class="cards gallery">
           <div class="card wide">
             <figure>
-              <img src="../img/catalogo-resultado.webp" alt="Step 4 of the tool: a button to download the Shopify CSV, buttons for the quality report, the unified catalogue and the collections to create, and import instructions" loading="lazy" data-zoom />
+              <img src="../img/catalogo-resultado.webp" width="1600" height="505" alt="Step 4 of the tool: a button to download the Shopify CSV, buttons for the quality report, the unified catalogue and the collections to create, and import instructions" loading="lazy" data-zoom />
             </figure>
             <div class="body">
               <h3>Step 4: what comes out</h3>
@@ -939,7 +939,7 @@
         <div class="cards gallery">
           <div class="card wide">
             <figure>
-              <img src="../img/catalogo-muestra.webp" alt="Step 3 with the sample chosen: how many products (200) and the advanced options, with VAT, margin and the image-by-name option switched off" loading="lazy" data-zoom />
+              <img src="../img/catalogo-muestra.webp" width="1600" height="603" alt="Step 3 with the sample chosen: how many products (200) and the advanced options, with VAT, margin and the image-by-name option switched off" loading="lazy" data-zoom />
             </figure>
             <div class="body">
               <h3>The sample and the advanced options</h3>
@@ -1032,7 +1032,7 @@
 
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
     <button class="close" type="button" aria-label="Close">&times;</button>
-    <img src="" alt="" />
+    <img alt="" />
   </div>
 
   <section class="cta" id="contact">
@@ -1082,7 +1082,7 @@
           track('image_open', { project: 'parts-catalogue', image: img.getAttribute('src') });
         });
       });
-      function closeBox() { box.classList.remove('on'); boxImg.src = ''; }
+      function closeBox() { box.classList.remove('on'); boxImg.removeAttribute('src'); }
       box.querySelector('.close').addEventListener('click', closeBox);
       box.addEventListener('click', function (e) { if (e.target === box) closeBox(); });
       document.addEventListener('keydown', function (e) {

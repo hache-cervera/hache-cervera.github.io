@@ -6,8 +6,8 @@
   var KEY = 'consent-analytics';
   var es = (document.documentElement.lang || '').indexOf('es') === 0;
   var T = es
-    ? { text: 'Uso Google Analytics para saber cuánta gente lee esto. Solo se activa si aceptas. Aparte, cuento visitas sin cookies con GoatCounter, y los enlaces de mis correos llevan una referencia.', yes: 'Aceptar', no: 'Rechazar', label: 'Cookies' }
-    : { text: 'I use Google Analytics to see how many people read this. It only runs if you accept. Separately, I count visits without cookies with GoatCounter, and links in my emails carry a reference.', yes: 'Accept', no: 'Reject', label: 'Cookies' };
+    ? { text: 'Uso Google Analytics para saber cuánta gente lee esto. Solo se activa si aceptas. Las visitas se cuentan aparte, sin cookies, con GoatCounter.', yes: 'Aceptar', no: 'Rechazar', label: 'Cookies' }
+    : { text: 'I use Google Analytics to see how many people read this. It only runs if you accept. Visits are counted separately, without cookies, with GoatCounter.', yes: 'Accept', no: 'Reject', label: 'Cookies' };
 
   window.dataLayer = window.dataLayer || [];
   window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };

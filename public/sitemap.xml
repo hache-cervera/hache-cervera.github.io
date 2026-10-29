@@ -98,4 +98,24 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://hache-cervera.github.io/research/certificates/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://hache-cervera.github.io/research/es/certificados/"/>
   </url>
+  <url>
+    <loc>https://hache-cervera.github.io/work/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hache-cervera.github.io/work/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hache-cervera.github.io/work/es/"/>
+  </url>
+  <url>
+    <loc>https://hache-cervera.github.io/work/es/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hache-cervera.github.io/work/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hache-cervera.github.io/work/es/"/>
+  </url>
+  <url>
+    <loc>https://hache-cervera.github.io/work/decopam/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hache-cervera.github.io/work/decopam/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hache-cervera.github.io/work/es/decopam/"/>
+  </url>
+  <url>
+    <loc>https://hache-cervera.github.io/work/es/decopam/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hache-cervera.github.io/work/decopam/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hache-cervera.github.io/work/es/decopam/"/>
+  </url>
 </urlset>

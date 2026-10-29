@@ -26,12 +26,19 @@ npm run build    # production build in dist/
 ```
 src/
 ├── App.jsx               # sections, smooth scroll and chip choreography
+├── i18n.jsx              # home copy, one object per language
 ├── three/ChipScene.js    # the chip: geometry, lights, render loop
-├── data/content.js       # all the copy: skills, experience, client logos
+├── data/content.js       # skills, experience and client logos, per language
+├── static/render.jsx     # build-time HTML of the home (prerendered into dist/)
 └── components/           # one file per section
+public/
+├── work/                 # case studies, hand-written static HTML (English, es/ Spanish)
+├── research/             # studies with method and downloadable data
+└── stats.js              # visit counts with GoatCounter, no cookies
+scripts/prerender.mjs     # runs after the build: prerendered home in both languages
 ```
 
-Every push to `main` deploys the site to GitHub Pages. The previous version lives in the `old-site` branch.
+Every push to `main` builds the site and deploys it to GitHub Pages.
 
 ## How it's made
 
