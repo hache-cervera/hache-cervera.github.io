@@ -18,7 +18,7 @@ const C = {
     focus: 'WordPress · E-commerce · Performance · Technical SEO',
     quote: "I like solving problems, whether that's a client's web ecosystem or a bouldering wall.",
     summary:
-      'I have worked on 15+ websites across WordPress, Shopify, Wix and PrestaShop: hosting, DNS, Cloudflare, SSL, backups, migrations, performance audits and multilingual sites (WPML, hreflang). I troubleshoot layer by layer, from DNS and CDN to reverse proxy, application and database, and I look after security headers and cache strategy. Hands-on with SEO, GEO and AEO: structured data and access for AI crawlers. I started in marketing and design and moved to the technical side; I run my own home server and publish open research on how websites behave.',
+      'I have worked on 15+ websites across WordPress, Shopify, Wix and PrestaShop: hosting, DNS, Cloudflare, SSL, backups, migrations, performance and multilingual sites. I troubleshoot layer by layer, from DNS to database, and look after security headers and cache strategy. Also SEO, GEO and AEO. I started in marketing and design and moved to the technical side; I run my own home server and publish open research on websites.',
     labels: { contact: 'Contact', linkedin: 'LinkedIn', place: 'Place', languages: 'Languages', skills: 'Skills', certs: 'Certifications', education: 'Education', projects: 'Projects & research', experience: 'Experience', side: 'Resume' },
     place: 'Valencia, Spain',
     languages: 'Spanish (native) · Valencian (native) · English: Cambridge B2 on paper; fluent in practice: a year living in Prague speaking English every day, and work with English-speaking clients',
@@ -26,26 +26,25 @@ const C = {
     siteUrl: 'https://hache-cervera.github.io/',
     p1: {
       note: 'Dear recruiter: you probably have plenty more CVs to get through, so I have tried to make mine easy to read.',
-      pitch: 'I keep websites running, from the server to the search results: hosting, DNS, security and performance on WordPress and e-commerce.',
+      pitch: 'I keep websites running, from the server to the search results: hosting, DNS, security and performance.',
       facts: [['15+', 'websites worked on'], ['4', 'different CMS platforms'], ['Remote', 'or hybrid in Valencia; I can travel about once a month'], ['ES · VA · EN', 'English fluent in practice']],
-      bestLabel: 'What I do best',
       best: [
-        ['Infrastructure & hosting', 'DNS, Cloudflare, SSL, backups and migrations across 15+ sites. I also run my own Linux server with Docker and Nginx.'],
-        ['Security', 'Security headers, TLS and WAF rules. I built yogurTLS, an open-source TLS certificate checker published on npm.'],
-        ['Performance & technical SEO', 'Core Web Vitals, crawl audits with Screaming Frog and Ahrefs, structured data and access for AI crawlers.'],
-        ['Public research', 'Studies with the method and data anyone can repeat: AI search on the IBEX 35, speed and accessibility of 50 city council websites.'],
+        ['Infrastructure & hosting', 'DNS, Cloudflare, SSL, backups and migrations, on cPanel and Plesk. I run my own Linux server with Docker and Nginx.'],
+        ['Security', 'Security headers, TLS certificates and Cloudflare WAF rules.'],
+        ['Performance & technical SEO', 'Core Web Vitals, crawl audits with Screaming Frog and Ahrefs, and structured data.'],
+        ['R&D and tools', 'Internal tools that take repetitive work off the team, yogurTLS on npm, and my own research with public data.'],
       ],
       lastLabel: 'Latest role',
       highlights: [
-        '15+ websites across four different CMS platforms.',
+        '15+ websites across four different CMS platforms, WordPress and e-commerce.',
         'Multilingual sites with WPML and hreflang: Spanish, Valencian, English and more.',
-        'Security headers, cache strategy and performance audits as continuous work.',
+        'Process optimization and internal tools for the team.',
       ],
       stackLabel: 'Main stack',
       stack: 'WordPress · WooCommerce · WPML · Shopify · PrestaShop · cPanel · Plesk · Cloudflare · Linux · Docker · Nginx · GA4 · GTM · Search Console · Screaming Frog',
       next: 'If this already fits, all the detail is on the next page.',
       pageOf: 'Page 1 of 2',
-      closing: 'In years of experience I am not senior yet, but I learn fast and it shows: much of what is on this CV I taught myself and then put to work.',
+      closing: 'In years of experience I am not senior yet. I make up for it by learning: part of what is on this CV I taught myself, and I use it every day.',
     },
     skills: [
       ['Infra & hosting', ['Hosting management', 'cPanel', 'Plesk', 'DNS', 'Cloudflare', 'SSL certificates', 'Backups', 'Site migrations', 'Web security', 'Technical troubleshooting', 'Linux (Ubuntu Server)', 'Docker', 'Nginx']],
@@ -62,8 +61,8 @@ const C = {
       ['BTEC Level 5 HND, Art & Design', 'Pearson BTEC / ESAT, Valencia'],
     ],
     projects: [
-      ['yogurTLS', 'https://www.npmjs.com/package/yogurtls', 'Open-source TLS certificate checker, published on npm.'],
-      ['Research, 2026', 'https://hache-cervera.github.io/research/', 'IBEX 35 and AI search (robots.txt, firewalls, llms.txt of 35 companies), speed and accessibility of 50 city council websites, TLS certificates. Method and data public.'],
+      ['yogurTLS', 'https://www.npmjs.com/package/yogurtls', 'TLS certificate checker that runs on the server itself: it tells you whether auto-renewal is set up and whether a renewed certificate was never loaded, which online checkers cannot see. Open source.'],
+      ['Research, 2026', 'https://hache-cervera.github.io/research/', 'My own studies with public data on website speed, accessibility, security and AI search, with open data.'],
       ['Homelab', 'https://hache-cervera.github.io/work/homelab/', 'A niche WordPress site on my own Linux server with Docker and Nginx, behind Cloudflare.'],
     ],
     jobs: [
@@ -71,10 +70,10 @@ const C = {
         dates: 'Nov 2024 – Sep 2026', title: 'Web Platform & WordPress Specialist', org: 'Neurona Digital SL, Valencia',
         bullets: [
           '15+ websites across four different CMS platforms (WordPress, Shopify, Wix and PrestaShop): hosting, DNS, Cloudflare, SSL, backups, migrations and daily troubleshooting.',
-          'Multilingual multi-site operations with WPML and hreflang in Spanish, Valencian, English and other languages, on shared templates.',
-          'Technical performance audits with Screaming Frog and Ahrefs: crawl health, Core Web Vitals, redirect chains and canonicals, as continuous work rather than one-off reports.',
-          'Security headers (CSP, HSTS, X-Frame-Options, Referrer-Policy, Permissions-Policy) and cache strategy; issues isolated layer by layer, from DNS to database.',
-          'GA4 and GTM set up from scratch with conversion goals; GSC monitoring and structured data validation; Figma to Elementor Pro with no handoff in between.',
+          'Multilingual multi-site operations with WPML and hreflang in Spanish, Valencian, English and more.',
+          'Technical audits with Screaming Frog and Ahrefs: crawl health, Core Web Vitals, redirects and canonicals.',
+          'Security headers (CSP, HSTS and others) and cache strategy; issues isolated layer by layer, from DNS to database.',
+          'GA4 and GTM set up from scratch with conversion goals; Search Console monitoring and structured data validation.',
           'Process optimization and internal tools that take repetitive work off the team.',
         ],
       },
@@ -94,7 +93,7 @@ const C = {
     focus: 'WordPress · E-commerce · Rendimiento · SEO técnico',
     quote: 'Me gusta resolver problemas, ya sea en el ecosistema web de un cliente o en la pared de un rocódromo.',
     summary:
-      'He trabajado más de 15 webs en WordPress, Shopify, Wix y PrestaShop: hosting, DNS, Cloudflare, SSL, backups, migraciones, auditorías de rendimiento y webs multiidioma (WPML, hreflang). Resuelvo incidencias capa a capa, del DNS y la CDN al proxy inverso, la aplicación y la base de datos, y me ocupo de las cabeceras de seguridad y la estrategia de caché. También trabajo SEO, GEO y AEO: datos estructurados y acceso de los rastreadores de IA. Empecé en marketing y diseño y me pasé al lado técnico; tengo mi propio servidor en casa y publico investigaciones abiertas sobre webs.',
+      'He trabajado más de 15 webs en WordPress, Shopify, Wix y PrestaShop: hosting, DNS, Cloudflare, SSL, backups, migraciones, rendimiento y webs multiidioma. Resuelvo incidencias capa a capa, del DNS a la base de datos, y me ocupo de las cabeceras de seguridad y la estrategia de caché. También SEO, GEO y AEO. Empecé en marketing y diseño y me pasé al lado técnico; tengo mi propio servidor en casa y publico investigaciones abiertas sobre webs.',
     labels: { contact: 'Contacto', linkedin: 'LinkedIn', place: 'Ubicación', languages: 'Idiomas', skills: 'Habilidades', certs: 'Certificaciones', education: 'Formación', projects: 'Proyectos e I+D', experience: 'Experiencia', side: 'Currículum' },
     place: 'Valencia, España',
     languages: 'Castellano (nativo) · Valenciano (nativo) · Inglés: B2 de Cambridge en papel; en la práctica, fluido: un año viviendo en Praga hablando inglés a diario, y trabajo con clientes en inglés',
@@ -102,26 +101,25 @@ const C = {
     siteUrl: 'https://hache-cervera.github.io/es/',
     p1: {
       note: 'Querido recruiter: seguramente tengas muchos más CV por revisar, así que he intentado ponerte fácil la lectura del mío.',
-      pitch: 'Me encargo de que las webs funcionen, del servidor al buscador: hosting, DNS, seguridad y rendimiento en WordPress y e-commerce.',
+      pitch: 'Me encargo de que las webs funcionen, del servidor al buscador: hosting, DNS, seguridad y rendimiento.',
       facts: [['15+', 'webs trabajadas'], ['4', 'CMS distintos'], ['Remoto', 'o híbrido en Valencia; me desplazo una vez al mes si hace falta'], ['ES · VA · EN', 'inglés fluido en la práctica']],
-      bestLabel: 'Lo que hago mejor',
       best: [
-        ['Infraestructura y hosting', 'DNS, Cloudflare, SSL, backups y migraciones en más de 15 webs. Además tengo mi propio servidor Linux con Docker y Nginx.'],
-        ['Seguridad', 'Cabeceras de seguridad, TLS y reglas WAF. He creado yogurTLS, un comprobador de certificados TLS de código abierto publicado en npm.'],
-        ['Rendimiento y SEO técnico', 'Core Web Vitals, auditorías de rastreo con Screaming Frog y Ahrefs, datos estructurados y acceso para bots de IA.'],
-        ['Investigación pública', 'Estudios con el método y los datos para que cualquiera los repita: la búsqueda con IA en el IBEX 35, velocidad y accesibilidad de las webs de 50 ayuntamientos.'],
+        ['Infraestructura y hosting', 'DNS, Cloudflare, SSL, backups y migraciones, con cPanel y Plesk. Tengo mi propio servidor Linux con Docker y Nginx.'],
+        ['Seguridad', 'Cabeceras de seguridad, certificados TLS y reglas WAF en Cloudflare.'],
+        ['Rendimiento y SEO técnico', 'Core Web Vitals, auditorías de rastreo con Screaming Frog y Ahrefs, y datos estructurados.'],
+        ['I+D y herramientas', 'Herramientas internas que le quitan trabajo repetitivo al equipo, yogurTLS en npm e investigaciones propias con datos públicos.'],
       ],
       lastLabel: 'Último puesto',
       highlights: [
-        'Más de 15 webs trabajadas en cuatro CMS distintos.',
+        'Más de 15 webs trabajadas en cuatro CMS distintos, WordPress y e-commerce.',
         'Webs multiidioma con WPML y hreflang: castellano, valenciano, inglés y más.',
-        'Cabeceras de seguridad, estrategia de caché y auditorías de rendimiento como trabajo continuo.',
+        'Optimización de procesos y herramientas internas para el equipo.',
       ],
       stackLabel: 'Stack principal',
       stack: 'WordPress · WooCommerce · WPML · Shopify · PrestaShop · cPanel · Plesk · Cloudflare · Linux · Docker · Nginx · GA4 · GTM · Search Console · Screaming Frog',
       next: 'Si esto ya te encaja, todo el detalle está en la siguiente página.',
       pageOf: 'Página 1 de 2',
-      closing: 'En años de experiencia todavía no soy senior, pero aprendo rápido y se nota: buena parte de lo que sale en este CV lo aprendí por mi cuenta y lo puse a funcionar.',
+      closing: 'En años de experiencia todavía no soy senior. Lo compenso aprendiendo: parte de lo que aparece en este CV lo aprendí por mi cuenta, y lo uso a diario.',
     },
     skills: [
       ['Infraestructura y hosting', ['Gestión de hosting', 'cPanel', 'Plesk', 'DNS', 'Cloudflare', 'Certificados SSL', 'Backups', 'Migraciones', 'Seguridad web', 'Resolución de incidencias', 'Linux (Ubuntu Server)', 'Docker', 'Nginx']],
@@ -138,8 +136,8 @@ const C = {
       ['HND de nivel 5 en Arte y Diseño (BTEC)', 'Pearson BTEC / ESAT, Valencia'],
     ],
     projects: [
-      ['yogurTLS', 'https://www.npmjs.com/package/yogurtls', 'Comprobador de certificados TLS de código abierto, publicado en npm.'],
-      ['Investigaciones, 2026', 'https://hache-cervera.github.io/research/es/', 'El IBEX 35 y la búsqueda con IA (robots.txt, cortafuegos y llms.txt de 35 empresas), velocidad y accesibilidad de las webs de 50 ayuntamientos, certificados TLS. Método y datos públicos.'],
+      ['yogurTLS', 'https://www.npmjs.com/package/yogurtls', 'Comprobador de certificados TLS que se ejecuta dentro del servidor: dice si la renovación automática está configurada y si un certificado renovado se quedó sin cargar, algo que los comprobadores online no ven. Código abierto, en npm.'],
+      ['Investigaciones, 2026', 'https://hache-cervera.github.io/research/es/', 'Estudios propios con datos públicos sobre velocidad, accesibilidad, seguridad y búsqueda con IA en webs. Método y datos abiertos.'],
       ['Homelab', 'https://hache-cervera.github.io/work/es/homelab/', 'Una web de nicho en WordPress, en mi propio servidor Linux con Docker y Nginx, tras Cloudflare.'],
     ],
     jobs: [
@@ -147,10 +145,10 @@ const C = {
         dates: 'Nov 2024 – Sep 2026', title: 'Especialista en Plataforma Web y WordPress', org: 'Neurona Digital SL, Valencia',
         bullets: [
           'Más de 15 webs trabajadas en cuatro CMS distintos (WordPress, Shopify, Wix y PrestaShop): hosting, DNS, Cloudflare, SSL, backups, migraciones y resolución técnica diaria.',
-          'Webs multiidioma y multisite con WPML y hreflang en castellano, valenciano, inglés y otros idiomas, sobre plantillas compartidas.',
-          'Auditorías técnicas de rendimiento con Screaming Frog y Ahrefs: salud de rastreo, Core Web Vitals, cadenas de redirecciones y canonicals, como trabajo continuo y no como informe puntual.',
-          'Cabeceras de seguridad (CSP, HSTS, X-Frame-Options, Referrer-Policy, Permissions-Policy) y estrategia de caché; incidencias localizadas capa a capa, del DNS a la base de datos.',
-          'GA4 y GTM montados desde cero con objetivos de conversión; seguimiento en GSC y validación de datos estructurados; de Figma a Elementor Pro sin traspaso intermedio.',
+          'Webs multiidioma y multisite con WPML y hreflang en castellano, valenciano, inglés y otros idiomas.',
+          'Auditorías técnicas con Screaming Frog y Ahrefs: rastreo, Core Web Vitals, redirecciones y canonicals.',
+          'Cabeceras de seguridad (CSP, HSTS y otras) y estrategia de caché; incidencias resueltas capa a capa, del DNS a la base de datos.',
+          'GA4 y GTM montados desde cero con objetivos de conversión; seguimiento en Search Console y validación de datos estructurados.',
           'Optimización de procesos y herramientas internas para quitarle trabajo repetitivo al equipo.',
         ],
       },
@@ -219,7 +217,8 @@ h1 span { color: var(--accent); }
 .cline i { font-style: normal; color: #bbb; margin: 0 5pt; }
 .cline span { white-space: nowrap; }
 .cline a { color: var(--ink); border-bottom: 1px solid #d8d8d8; }
-.note { margin-top: 24pt; padding-left: 10pt; border-left: 2px solid var(--accent); font-size: 8.4pt; line-height: 1.5; color: #555; max-width: 500pt; }
+.note { margin-top: 24pt; padding: 3pt 0 3pt 12pt; border-left: 4px solid var(--accent); font-size: 9.6pt; line-height: 1.5; color: #333; max-width: none; }
+.note b { font: 700 9.8pt/1.5 Sora, Arial, sans-serif; color: var(--ink); }
 .nw { white-space: nowrap; }
 .pitch { margin-top: 16pt; font: 600 13.5pt/1.4 Sora, Arial, sans-serif; letter-spacing: -0.01em; max-width: 470pt; }
 .facts { margin-top: 24pt; display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1.5px solid var(--ink); border-bottom: 1px solid var(--line); }
@@ -228,7 +227,7 @@ h1 span { color: var(--accent); }
 .facts b { display: block; font: 800 19pt/1 Sora, Arial, sans-serif; color: var(--accent); letter-spacing: -0.01em; }
 .facts span { display: block; margin-top: 5pt; font-size: 7.6pt; color: #444; line-height: 1.35; }
 .k { margin-top: 24pt; font: 700 7pt/1 Sora, Arial, sans-serif; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
-.best { margin-top: 12pt; display: grid; grid-template-columns: 1fr 1fr; gap: 14pt 28pt; }
+.best { margin-top: 28pt; display: grid; grid-template-columns: 1fr 1fr; gap: 14pt 28pt; }
 .best h3 { font: 700 9.4pt/1.25 Sora, Arial, sans-serif; display: flex; gap: 6pt; align-items: baseline; }
 .best h3::before { content: ''; width: 6pt; height: 6pt; border-radius: 1.5pt; background: var(--accent); flex: none; transform: translateY(-1pt); }
 .best p { margin-top: 5pt; font-size: 8.6pt; line-height: 1.5; color: #333; }
@@ -242,7 +241,7 @@ h1 span { color: var(--accent); }
 .last li::marker { color: var(--accent); }
 .stack { margin-top: 10pt; font-size: 8.6pt; line-height: 1.6; color: #333; padding-top: 0; }
 .next { margin-top: auto; display: flex; justify-content: space-between; align-items: center; gap: 18pt; background: var(--card); color: #fff; border-radius: 12pt; padding: 18pt 20pt 18pt 22pt; }
-.next .po { display: block; font: 700 6.8pt/1 Sora, Arial, sans-serif; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+.next .po { display: inline-block; font: 700 8pt/1 Sora, Arial, sans-serif; letter-spacing: 0.1em; text-transform: uppercase; color: #fff; background: var(--accent); border-radius: 4pt; padding: 4pt 7pt; }
 .next p { margin-top: 7pt; font: 600 13pt/1.3 Sora, Arial, sans-serif; }
 .next .arrow { width: 38pt; height: 38pt; border-radius: 50%; background: var(--accent); display: grid; place-items: center; flex: none; }
 .next .arrow svg { width: 18pt; height: 18pt; fill: none; stroke: #fff; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
@@ -305,10 +304,9 @@ h2 + h3.g { margin-top: 0; }
       <p class="cline">${contactLine}</p>
     </div>
   </header>
-  <p class="note">${esc(p1.note)}</p>
+  <p class="note">${(([h, ...r]) => `<b>${esc(h)}:</b>${esc(r.join(":"))}`)(p1.note.split(":"))}</p>
   <p class="pitch">${esc(p1.pitch).replace("e-commerce", "<span class=\"nw\">e-commerce</span>")}</p>
   <div class="facts">${p1.facts.map(([n, l]) => `<div><b>${esc(n)}</b><span>${esc(l)}</span></div>`).join('')}</div>
-  <p class="k">${esc(p1.bestLabel)}</p>
   <div class="best">${p1.best.map(([h, p]) => `<div><h3>${esc(h)}</h3><p>${esc(p)}</p></div>`).join('')}</div>
   <p class="k">${esc(p1.lastLabel)}</p>
   <div class="last">
