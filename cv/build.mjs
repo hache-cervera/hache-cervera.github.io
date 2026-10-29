@@ -18,7 +18,7 @@ const C = {
     focus: 'WordPress · E-commerce · Performance · Technical SEO',
     quote: "I like solving problems, whether that's a client's web ecosystem or a bouldering wall.",
     summary:
-      'I have worked on 15+ websites across WordPress, Shopify, Wix and PrestaShop: hosting, DNS, Cloudflare, SSL, backups, migrations, performance and multilingual sites. I troubleshoot layer by layer, from DNS to database, and look after security headers and cache strategy. Also SEO, GEO and AEO. I started in marketing and design and moved to the technical side; I run my own home server and publish open research on websites.',
+      'I have worked on 20+ websites across WordPress, Shopify, Wix and PrestaShop: hosting, DNS, Cloudflare, SSL, backups, migrations, performance and multilingual sites. I troubleshoot layer by layer, from DNS to database, and look after security headers and cache strategy. Also SEO, GEO and AEO. I started in marketing and design and moved to the technical side; I run my own home server and publish open research on websites.',
     labels: { contact: 'Contact', linkedin: 'LinkedIn', place: 'Place', languages: 'Languages', skills: 'Skills', certs: 'Certifications', education: 'Education', projects: 'Projects & research', experience: 'Experience', side: 'Resume' },
     place: 'Valencia, Spain',
     languages: 'Spanish (native) · Valencian (native) · English: Cambridge B2 on paper; fluent in practice: a year living in Prague speaking English every day, and work with English-speaking clients',
@@ -27,12 +27,12 @@ const C = {
     p1: {
       note: 'Dear recruiter: you probably have plenty more CVs to get through, so I have tried to make mine easy to read.',
       pitch: 'I keep websites running, from the server to the search results: hosting, DNS, security and performance.',
-      facts: [['15+', 'websites worked on'], ['4', 'different CMS platforms'], ['Remote', 'or hybrid in Valencia; I can travel about once a month'], ['ES · VA · EN', 'English fluent in practice']],
+      facts: [['20+', 'websites worked on'], ['4', 'different CMS platforms'], ['Remote', 'or hybrid in Valencia. I can travel when needed, for urgent issues or the needs of the role, about once a month'], ['3', 'languages: Spanish, Valencian and English (fluent)']],
       best: [
         ['Infrastructure & hosting', 'DNS, Cloudflare, SSL, backups and migrations, on cPanel and Plesk. I run my own Linux server with Docker and Nginx.'],
         ['Security', 'Security headers, TLS certificates and Cloudflare WAF rules.'],
         ['Performance & technical SEO', 'Core Web Vitals, crawl audits with Screaming Frog and Ahrefs, and structured data.'],
-        ['R&D and tools', 'Internal tools that take repetitive work off the team, yogurTLS on npm, and my own research with public data.'],
+        ['R&D and tools', 'Internal tools that take repetitive work off the team, open‑source tools, and my own research, open to the public.'],
       ],
       lastLabel: 'Latest role',
       highlights: [
@@ -41,7 +41,7 @@ const C = {
         'Process optimization and internal tools for the team.',
       ],
       stackLabel: 'Main stack',
-      stack: 'WordPress · WooCommerce · WPML · Shopify · PrestaShop · cPanel · Plesk · Cloudflare · Linux · Docker · Nginx · GA4 · GTM · Search Console · Screaming Frog',
+      stack: 'WordPress · WooCommerce · WPML · Shopify · PrestaShop · cPanel · Plesk · Cloudflare · GA4 · GTM · Search Console · Screaming Frog',
       next: 'If this already fits, all the detail is on the next page.',
       pageOf: 'Page 1 of 2',
       closing: 'In years of experience I am not senior yet. I make up for it by learning: part of what is on this CV I taught myself, and I use it every day.',
@@ -93,7 +93,7 @@ const C = {
     focus: 'WordPress · E-commerce · Rendimiento · SEO técnico',
     quote: 'Me gusta resolver problemas, ya sea en el ecosistema web de un cliente o en la pared de un rocódromo.',
     summary:
-      'He trabajado más de 15 webs en WordPress, Shopify, Wix y PrestaShop: hosting, DNS, Cloudflare, SSL, backups, migraciones, rendimiento y webs multiidioma. Resuelvo incidencias capa a capa, del DNS a la base de datos, y me ocupo de las cabeceras de seguridad y la estrategia de caché. También SEO, GEO y AEO. Empecé en marketing y diseño y me pasé al lado técnico; tengo mi propio servidor en casa y publico investigaciones abiertas sobre webs.',
+      'He trabajado más de 20 webs en WordPress, Shopify, Wix y PrestaShop: hosting, DNS, Cloudflare, SSL, backups, migraciones, rendimiento y webs multiidioma. Resuelvo incidencias capa a capa, del DNS a la base de datos, y me ocupo de las cabeceras de seguridad y la estrategia de caché. También SEO, GEO y AEO. Empecé en marketing y diseño y me pasé al lado técnico; tengo mi propio servidor en casa y publico investigaciones abiertas sobre webs.',
     labels: { contact: 'Contacto', linkedin: 'LinkedIn', place: 'Ubicación', languages: 'Idiomas', skills: 'Habilidades', certs: 'Certificaciones', education: 'Formación', projects: 'Proyectos e I+D', experience: 'Experiencia', side: 'Currículum' },
     place: 'Valencia, España',
     languages: 'Castellano (nativo) · Valenciano (nativo) · Inglés: B2 de Cambridge en papel; en la práctica, fluido: un año viviendo en Praga hablando inglés a diario, y trabajo con clientes en inglés',
@@ -102,12 +102,12 @@ const C = {
     p1: {
       note: 'Querido recruiter: seguramente tengas muchos más CV por revisar, así que he intentado ponerte fácil la lectura del mío.',
       pitch: 'Me encargo de que las webs funcionen, del servidor al buscador: hosting, DNS, seguridad y rendimiento.',
-      facts: [['15+', 'webs trabajadas'], ['4', 'CMS distintos'], ['Remoto', 'o híbrido en Valencia; me desplazo una vez al mes si hace falta'], ['ES · VA · EN', 'inglés fluido en la práctica']],
+      facts: [['20+', 'webs trabajadas'], ['4', 'CMS distintos'], ['Remoto', 'o híbrido en Valencia. Puedo desplazarme cuando haga falta, por urgencias o necesidades del puesto, en torno a una vez al mes'], ['3', 'idiomas: castellano, valenciano e inglés (fluido)']],
       best: [
         ['Infraestructura y hosting', 'DNS, Cloudflare, SSL, backups y migraciones, con cPanel y Plesk. Tengo mi propio servidor Linux con Docker y Nginx.'],
         ['Seguridad', 'Cabeceras de seguridad, certificados TLS y reglas WAF en Cloudflare.'],
         ['Rendimiento y SEO técnico', 'Core Web Vitals, auditorías de rastreo con Screaming Frog y Ahrefs, y datos estructurados.'],
-        ['I+D y herramientas', 'Herramientas internas que le quitan trabajo repetitivo al equipo, yogurTLS en npm e investigaciones propias con datos públicos.'],
+        ['I+D y herramientas', 'Herramientas internas que le quitan trabajo repetitivo al equipo, herramientas open source e investigaciones propias abiertas al público.'],
       ],
       lastLabel: 'Último puesto',
       highlights: [
@@ -116,7 +116,7 @@ const C = {
         'Optimización de procesos y herramientas internas para el equipo.',
       ],
       stackLabel: 'Stack principal',
-      stack: 'WordPress · WooCommerce · WPML · Shopify · PrestaShop · cPanel · Plesk · Cloudflare · Linux · Docker · Nginx · GA4 · GTM · Search Console · Screaming Frog',
+      stack: 'WordPress · WooCommerce · WPML · Shopify · PrestaShop · cPanel · Plesk · Cloudflare · GA4 · GTM · Search Console · Screaming Frog',
       next: 'Si esto ya te encaja, todo el detalle está en la siguiente página.',
       pageOf: 'Página 1 de 2',
       closing: 'En años de experiencia todavía no soy senior. Lo compenso aprendiendo: parte de lo que aparece en este CV lo aprendí por mi cuenta, y lo uso a diario.',
@@ -220,6 +220,8 @@ h1 span { color: var(--accent); }
 .note { margin-top: 24pt; padding: 3pt 0 3pt 12pt; border-left: 4px solid var(--accent); font-size: 9.6pt; line-height: 1.5; color: #333; max-width: none; }
 .note b { font: 700 9.8pt/1.5 Sora, Arial, sans-serif; color: var(--ink); }
 .nw { white-space: nowrap; }
+p, li { text-wrap: pretty; }
+.stack { text-wrap: balance; }
 .pitch { margin-top: 16pt; font: 600 13.5pt/1.4 Sora, Arial, sans-serif; letter-spacing: -0.01em; max-width: 470pt; }
 .facts { margin-top: 24pt; display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1.5px solid var(--ink); border-bottom: 1px solid var(--line); }
 .facts div { padding: 11pt 10pt 12pt 0; }
@@ -314,7 +316,7 @@ h2 + h3.g { margin-top: 0; }
     <ul>${p1.highlights.map(x => `<li>${esc(x)}</li>`).join('')}</ul>
   </div>
   <p class="k">${esc(p1.stackLabel)}</p>
-  <p class="stack">${esc(p1.stack)}</p>
+  <p class="stack">${p1.stack.split(" · ").map((x, i, a) => `<span class="nw">${esc(x)}${i < a.length - 1 ? " ·" : ""}</span>`).join(" ")}</p>
   <div class="next"><div><span class="po">${esc(p1.pageOf)}</span><p>${esc(p1.next)}</p></div><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 4v16M5 13l7 7 7-7"/></svg></span></div>
 </div>
 <p class="side">${t.labels.side}</p>
