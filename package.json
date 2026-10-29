@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build && vite build --ssr src/static/render.jsx --outDir dist-ssr && node scripts/prerender.mjs",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "cv": "node cv/build.mjs"
   },
   "dependencies": {
     "framer-motion": "^11.15.0",
@@ -19,6 +20,7 @@
   "devDependencies": {
     "@tailwindcss/postcss": "^4.3.3",
     "@vitejs/plugin-react": "^6.1.2",
+    "playwright-core": "^1.48.2",
     "postcss": "^8.4.49",
     "tailwindcss": "^4.3.3",
     "vite": "^8.3.4"

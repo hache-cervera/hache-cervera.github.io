@@ -21,3 +21,6 @@ dist-ssr/
 
 # design tool local config (contains local paths)
 .impeccable/
+
+# CV: generated HTML (fonts and photo inlined), rebuilt by cv/build.mjs
+cv/*.html

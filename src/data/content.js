@@ -179,7 +179,7 @@ const EXPERIENCE_RAW = [
     role: L('Marketing Strategy & Sponsorships', 'Estrategia de Marketing y Patrocinios'),
     company: 'Jump Yard',
     place: 'Valencia',
-    dates: L('Jan – Jun 2025', 'Ene – Jun 2025'),
+    dates: L('Jun 2024 – Jun 2025', 'Jun 2024 – Jun 2025'),
     points: [
       L(
         "Coordinated the brand's Valencia opening day: €7,000 in revenue, 56% above the previous store record of €4,500 in Bilbao.",
