@@ -37,5 +37,19 @@ let es = withAlternates
 mkdirSync('dist/es', { recursive: true });
 writeFileSync('dist/es/index.html', es);
 
+// Reference pages for application emails: /ref-NNNN/ and /es/ref-NNNN/ are copies of the home
+// that GoatCounter counts under their own path (public/stats.js). Not indexed, canonical stays on the home.
+const refs = JSON.parse(readFileSync('scripts/alias-codes.json', 'utf8'));
+const enRef = readFileSync(file, 'utf8').replace('<head>', '<head>\n    <base href="/" />');
+for (const [dir, page, lang] of [['dist', enRef, 'en'], ['dist/es', es, 'es']]) {
+  const html = page
+    .replace(`<html lang="${lang}">`, `<html lang="${lang}" data-ref>`)
+    .replace('<link rel="canonical"', '<meta name="robots" content="noindex" />\n    <link rel="canonical"');
+  for (const ref of refs) {
+    mkdirSync(`${dir}/${ref}`, { recursive: true });
+    writeFileSync(`${dir}/${ref}/index.html`, html);
+  }
+}
+
 rmSync('dist-ssr', { recursive: true, force: true });
-console.log('prerendered home into dist/index.html and dist/es/index.html');
+console.log(`prerendered home into dist/index.html and dist/es/index.html, plus ${refs.length} reference pages per language`);

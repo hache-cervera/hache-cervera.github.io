@@ -103,3 +103,17 @@ Chromium is at `/opt/pw-browsers/chromium-1194/chrome-linux/chrome` with
 `document.scrollWidth === innerWidth` is not an overflow test here, because
 sections clip. Walk the DOM and compare each element against its parent instead.
 The `.glow` and `.deco` spans overflow on purpose; everything else should not.
+
+## Visit counts and email references
+
+`public/stats.js` loads GoatCounter (`hache.goatcounter.com`, no cookies) on every
+page: the home via `index.html`, each static page next to `consent.js`, and
+`404.html`. New static pages need the same `<script src="/stats.js" defer>` line.
+
+Application emails link to `/ref-NNNN/` or `/es/ref-NNNN/`. The build
+(`scripts/prerender.mjs`) writes a noindex copy of the home for every reference in
+`scripts/alias-codes.json`; canonical stays on the home. Numbers are random on
+purpose, so a recipient cannot infer how many applications went out. Which company
+got which reference is kept outside the repo. On these pages `stats.js` also sends
+a `leido <path>` event after 10 visible seconds or a scroll, to tell people apart
+from mail scanners. Adding references: append to the JSON, never renumber.
