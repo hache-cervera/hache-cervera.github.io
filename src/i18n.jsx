@@ -64,7 +64,7 @@ export const translations = {
         { k: 'Languages', v: 'Spanish and Valencian native, English professional' },
         { k: 'Certified', v: 'Ahrefs 2026, GA4 2025, Cambridge B2 2019' },
       ],
-      langsNote: 'English: B2 Cambridge on paper, plus a year living and working in English in Prague.',
+      langsNote: 'English: B2 Cambridge on paper; in practice, a year living in Prague speaking English every day, and work with English-speaking clients.',
     },
     skills: {
       label: '/ 02 · Stack',
@@ -177,7 +177,7 @@ export const translations = {
         { k: 'Idiomas', v: 'Castellano y valenciano nativos, inglés profesional' },
         { k: 'Certificaciones', v: 'Ahrefs 2026, GA4 2025, Cambridge B2 2019' },
       ],
-      langsNote: 'Inglés: B2 Cambridge sobre el papel, más un año viviendo y trabajando en inglés en Praga.',
+      langsNote: 'Inglés: B2 Cambridge sobre el papel; en la práctica, un año viviendo en Praga hablando inglés a diario, y trabajo con clientes en inglés.',
     },
     skills: {
       label: '/ 02 · Stack',

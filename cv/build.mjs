@@ -20,7 +20,7 @@ const C = {
       'End-to-end ownership of 15+ live web properties across WordPress, Shopify, Wix and PrestaShop: hosting, DNS, Cloudflare, SSL, backups, migrations, performance audits and multilingual sites (WPML, hreflang). I troubleshoot layer by layer, from DNS and CDN to reverse proxy, application and database, and I look after security headers and cache strategy. Hands-on with SEO, GEO and AEO: structured data and access for AI crawlers. I started in marketing and design and moved to the technical side; I run my own home server and publish open research on how websites behave.',
     labels: { contact: 'Contact', linkedin: 'LinkedIn', place: 'Place', languages: 'Languages', skills: 'Skills', certs: 'Certifications', education: 'Education', projects: 'Projects & research', experience: 'Experience', side: 'Resume' },
     place: 'Valencia, Spain',
-    languages: 'Spanish (native) · Valencian (native) · English: Cambridge B2 on paper; fluent in practice: a year living and working in Prague, and English-speaking clients',
+    languages: 'Spanish (native) · Valencian (native) · English: Cambridge B2 on paper; fluent in practice: a year living in Prague speaking English every day, and work with English-speaking clients',
     site: 'hache-cervera.github.io',
     siteUrl: 'https://hache-cervera.github.io/',
     skills: [
@@ -72,7 +72,7 @@ const C = {
       'Me encargo de principio a fin de más de 15 webs en producción en WordPress, Shopify, Wix y PrestaShop: hosting, DNS, Cloudflare, SSL, backups, migraciones, auditorías de rendimiento y webs multiidioma (WPML, hreflang). Resuelvo incidencias capa a capa, del DNS y la CDN al proxy inverso, la aplicación y la base de datos, y me ocupo de las cabeceras de seguridad y la estrategia de caché. También trabajo SEO, GEO y AEO: datos estructurados y acceso de los rastreadores de IA. Empecé en marketing y diseño y me pasé al lado técnico; tengo mi propio servidor en casa y publico investigaciones abiertas sobre webs.',
     labels: { contact: 'Contacto', linkedin: 'LinkedIn', place: 'Ubicación', languages: 'Idiomas', skills: 'Habilidades', certs: 'Certificaciones', education: 'Formación', projects: 'Proyectos e I+D', experience: 'Experiencia', side: 'Currículum' },
     place: 'Valencia, España',
-    languages: 'Castellano (nativo) · Valenciano (nativo) · Inglés: B2 de Cambridge en papel; en la práctica, fluido: un año viviendo y trabajando en Praga, y clientes en inglés',
+    languages: 'Castellano (nativo) · Valenciano (nativo) · Inglés: B2 de Cambridge en papel; en la práctica, fluido: un año viviendo en Praga hablando inglés a diario, y trabajo con clientes en inglés',
     site: 'hache-cervera.github.io/es',
     siteUrl: 'https://hache-cervera.github.io/es/',
     skills: [
