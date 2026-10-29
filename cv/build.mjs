@@ -20,13 +20,14 @@ const C = {
       'End-to-end ownership of 15+ live web properties across WordPress, Shopify, Wix and PrestaShop: hosting, DNS, Cloudflare, SSL, backups, migrations, performance audits and multilingual sites (WPML, hreflang). I troubleshoot layer by layer, from DNS and CDN to reverse proxy, application and database, and I look after security headers and cache strategy. Hands-on with SEO, GEO and AEO: structured data and access for AI crawlers. I started in marketing and moved to the technical side; I run my own home server and publish open research on how websites behave.',
     labels: { contact: 'Contact', linkedin: 'LinkedIn', place: 'Place', languages: 'Languages', skills: 'Skills', certs: 'Certifications', education: 'Education', projects: 'Projects & research', experience: 'Experience', side: 'Resume' },
     place: 'Valencia, Spain',
-    languages: 'Spanish (native) · Valencian (native) · English: Cambridge B2 First, professional working proficiency',
+    languages: 'Spanish (native) · Valencian (native) · English: Cambridge B2 on paper; fluent in practice, after a year living and working in English in Prague',
     site: 'hache-cervera.github.io',
     siteUrl: 'https://hache-cervera.github.io/',
     skills: [
       ['Infra & hosting', ['Hosting management', 'DNS', 'Cloudflare', 'SSL certificates', 'Backups', 'Site migrations', 'Web security', 'Technical troubleshooting', 'Linux (Ubuntu Server)', 'Docker', 'Nginx']],
-      ['Web', ['WordPress', 'Elementor Pro', 'Astra Pro', 'WPML', 'WooCommerce', 'Shopify', 'Wix', 'PrestaShop', 'HTML', 'CSS', 'PHP']],
-      ['Security & performance', ['Security headers', 'Cache strategy', 'Core Web Vitals']],
+      ['Web', ['WordPress', 'Elementor Pro', 'Astra Pro', 'WPML', 'WooCommerce', 'Shopify', 'Wix', 'PrestaShop']],
+      ['Code', ['HTML', 'CSS', 'PHP (child themes, hooks)', 'JavaScript', 'Python (basic scripting)', 'Git']],
+      ['Security & performance', ['Security headers', 'TLS / HTTPS', 'Cloudflare WAF rules', 'Cache strategy', 'Core Web Vitals', 'PageSpeed / Lighthouse', 'CSS & asset optimization']],
       ['Analytics & SEO', ['SE Ranking', 'GA4', 'GTM', 'GSC', 'Screaming Frog', 'Ahrefs', 'Semrush', 'Web accessibility']],
       ['PM & AI', ['ClickUp', 'Asana', 'Figma', 'AI automation (Claude, ChatGPT)', 'Async workflows']],
     ],
@@ -39,7 +40,7 @@ const C = {
     projects: [
       ['yogurTLS', 'https://www.npmjs.com/package/yogurtls', 'Open-source TLS certificate checker, published on npm.'],
       ['Research, 2026', 'https://hache-cervera.github.io/research/', 'IBEX 35 and AI search (robots.txt, firewalls, llms.txt of 35 companies), speed and accessibility of 50 city council websites, TLS certificates. Method and data public.'],
-      ['Homelab', 'https://hache-cervera.github.io/work/homelab/', 'devilfruittcg.com, a WordPress site on my own Linux server with Docker and Nginx, behind Cloudflare.'],
+      ['Homelab', 'https://hache-cervera.github.io/work/homelab/', 'A niche WordPress site on my own Linux server with Docker and Nginx, behind Cloudflare.'],
     ],
     jobs: [
       {
@@ -71,13 +72,14 @@ const C = {
       'Me encargo de principio a fin de más de 15 webs en producción en WordPress, Shopify, Wix y PrestaShop: hosting, DNS, Cloudflare, SSL, backups, migraciones, auditorías de rendimiento y webs multiidioma (WPML, hreflang). Resuelvo incidencias capa a capa, del DNS y la CDN al proxy inverso, la aplicación y la base de datos, y me ocupo de las cabeceras de seguridad y la estrategia de caché. También trabajo SEO, GEO y AEO: datos estructurados y acceso de los rastreadores de IA. Empecé en marketing y me pasé al lado técnico; tengo mi propio servidor en casa y publico investigaciones abiertas sobre cómo se comportan las webs.',
     labels: { contact: 'Contacto', linkedin: 'LinkedIn', place: 'Ubicación', languages: 'Idiomas', skills: 'Habilidades', certs: 'Certificaciones', education: 'Formación', projects: 'Proyectos e I+D', experience: 'Experiencia', side: 'Currículum' },
     place: 'Valencia, España',
-    languages: 'Castellano (nativo) · Valenciano (nativo) · Inglés: Cambridge B2 First, nivel profesional de trabajo',
+    languages: 'Castellano (nativo) · Valenciano (nativo) · Inglés: B2 de Cambridge en papel; en la práctica, fluido, tras un año viviendo y trabajando en inglés en Praga',
     site: 'hache-cervera.github.io/es',
     siteUrl: 'https://hache-cervera.github.io/es/',
     skills: [
       ['Infraestructura y hosting', ['Gestión de hosting', 'DNS', 'Cloudflare', 'Certificados SSL', 'Backups', 'Migraciones', 'Seguridad web', 'Resolución de incidencias', 'Linux (Ubuntu Server)', 'Docker', 'Nginx']],
-      ['Web', ['WordPress', 'Elementor Pro', 'Astra Pro', 'WPML', 'WooCommerce', 'Shopify', 'Wix', 'PrestaShop', 'HTML', 'CSS', 'PHP']],
-      ['Seguridad y rendimiento', ['Cabeceras de seguridad', 'Estrategia de caché', 'Core Web Vitals']],
+      ['Web', ['WordPress', 'Elementor Pro', 'Astra Pro', 'WPML', 'WooCommerce', 'Shopify', 'Wix', 'PrestaShop']],
+      ['Código', ['HTML', 'CSS', 'PHP (child themes, hooks)', 'JavaScript', 'Python (scripting básico)', 'Git']],
+      ['Seguridad y rendimiento', ['Cabeceras de seguridad', 'TLS / HTTPS', 'Reglas WAF de Cloudflare', 'Estrategia de caché', 'Core Web Vitals', 'PageSpeed / Lighthouse', 'Optimización de CSS y recursos']],
       ['Analítica y SEO', ['SE Ranking', 'GA4', 'GTM', 'GSC', 'Screaming Frog', 'Ahrefs', 'Semrush', 'Accesibilidad web']],
       ['Gestión e IA', ['ClickUp', 'Asana', 'Figma', 'Automatización con IA (Claude, ChatGPT)', 'Trabajo asíncrono']],
     ],
@@ -90,7 +92,7 @@ const C = {
     projects: [
       ['yogurTLS', 'https://www.npmjs.com/package/yogurtls', 'Comprobador de certificados TLS de código abierto, publicado en npm.'],
       ['Investigaciones, 2026', 'https://hache-cervera.github.io/research/es/', 'El IBEX 35 y la búsqueda con IA (robots.txt, cortafuegos y llms.txt de 35 empresas), velocidad y accesibilidad de las webs de 50 ayuntamientos, certificados TLS. Método y datos públicos.'],
-      ['Homelab', 'https://hache-cervera.github.io/work/es/homelab/', 'devilfruittcg.com, un WordPress en mi propio servidor Linux con Docker y Nginx, tras Cloudflare.'],
+      ['Homelab', 'https://hache-cervera.github.io/work/es/homelab/', 'Una web de nicho en WordPress, en mi propio servidor Linux con Docker y Nginx, tras Cloudflare.'],
     ],
     jobs: [
       {
@@ -168,10 +170,10 @@ h2 { display: flex; align-items: center; gap: 6pt; font: 700 8.2pt/1 Sora, Arial
 h2:not(:first-child) { margin-top: 15pt; }
 .badge { width: 13pt; height: 13pt; border-radius: 3pt; background: var(--accent); display: grid; place-items: center; flex: none; }
 .badge svg { width: 8.5pt; height: 8.5pt; fill: none; stroke: #fff; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
-h3 { font: 700 6.2pt/1.2 Sora, Arial, sans-serif; letter-spacing: 0.07em; text-transform: uppercase; color: var(--accent); margin: 9pt 0 5pt; }
+h3 { font: 700 6.2pt/1.2 Sora, Arial, sans-serif; letter-spacing: 0.07em; text-transform: uppercase; color: var(--accent); margin: 8pt 0 4pt; }
 h2 + h3 { margin-top: 0; }
-.tags { display: flex; flex-wrap: wrap; gap: 4pt; }
-.tags span { border: 1px solid #d4d4d4; border-radius: 99pt; padding: 2.2pt 6pt; font-size: 6.6pt; line-height: 1.25; }
+.tags { display: flex; flex-wrap: wrap; gap: 3pt; }
+.tags span { border: 1px solid #d4d4d4; border-radius: 99pt; padding: 1.5pt 5pt; font-size: 6.4pt; line-height: 1.25; }
 .item + .item { margin-top: 7pt; }
 .year { font: 700 8.2pt/1.2 Sora, Arial, sans-serif; color: var(--accent); }
 .item b { display: block; font: 600 7.1pt/1.3 Sora, Arial, sans-serif; }
@@ -243,8 +245,13 @@ for (const lang of Object.keys(C)) {
   const p = await browser.newPage();
   await p.setContent(html, { waitUntil: 'load' });
   await p.evaluate(() => document.fonts.ready);
-  const overflow = await p.evaluate(() => { const w = document.querySelector('.wrap'); return [...w.querySelectorAll('main > section')].map(s => Math.round(s.scrollHeight - s.clientHeight)); });
-  if (overflow.some(o => o > 0)) console.warn(lang, 'column overflow (pt-ish px):', overflow);
+  // the page clips at the bottom, so check the last element of each column against the bottom of .wrap
+  const overflow = await p.evaluate(() => {
+    const bottom = document.querySelector('.wrap').getBoundingClientRect().bottom;
+    return [...document.querySelectorAll('main > section')].map(s => Math.round(s.lastElementChild.getBoundingClientRect().bottom - bottom));
+  });
+  if (overflow.some(o => o > 0)) throw new Error(`${lang}: column runs past the page by ${overflow} px`);
+  console.log(lang, 'space left per column (px):', overflow.map(o => -o).join(', '));
   await p.pdf({ path: join(out, C[lang].file), format: 'A4', printBackground: true, preferCSSPageSize: true, tagged: true });
   console.log('wrote', C[lang].file);
 }
