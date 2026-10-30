@@ -11,7 +11,7 @@
     "check:stats": "node scripts/check-stats.mjs"
   },
   "dependencies": {
-    "framer-motion": "^11.15.0",
+    "framer-motion": "^14.7.0",
     "gsap": "^3.12.5",
     "lenis": "^1.1.18",
     "react": "^18.3.1",
