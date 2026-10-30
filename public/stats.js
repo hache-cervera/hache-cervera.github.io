@@ -4,7 +4,11 @@
    On those pages a second event, "leido /es/ref-NNNN/", fires only if someone keeps the tab
    visible for 10 seconds or scrolls: mail scanners open links on delivery but do not stay. */
 (function () {
+  var isRef = document.documentElement.hasAttribute('data-ref');
   window.goatcounter = { endpoint: 'https://hache.goatcounter.com/count' };
+  // count.js takes the path from <link rel="canonical"> when there is one. Reference pages
+  // point their canonical at the home, so without this every visit would count as "/".
+  if (isRef) window.goatcounter.path = function () { return location.pathname.replace(/\/$/, ''); };
 
   var s = document.createElement('script');
   s.async = true;
@@ -12,7 +16,7 @@
   s.setAttribute('data-goatcounter', window.goatcounter.endpoint);
   document.head.appendChild(s);
 
-  if (!document.documentElement.hasAttribute('data-ref')) return;
+  if (!isRef) return;
 
   var sent = false;
   function read() {
