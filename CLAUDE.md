@@ -117,3 +117,11 @@ purpose, so a recipient cannot infer how many applications went out. Which compa
 got which reference is kept outside the repo. On these pages `stats.js` also sends
 a `leido <path>` event after 10 visible seconds or a scroll, to tell people apart
 from mail scanners. Adding references: append to the JSON, never renumber.
+
+`count.js` takes the path from `<link rel="canonical">` when it is on the same host,
+and reference pages point their canonical at the home, so `stats.js` overrides the
+path on them. Without it every reference visit counts as `/` (this shipped once,
+in October 2026). Localhost cannot show the bug, because the canonical host differs.
+`npm run check:stats` loads every page of `dist/` under the real origin, with the
+GoatCounter endpoint blocked, and fails if a reference page would count under any
+other path. The deploy workflow runs it after the build.

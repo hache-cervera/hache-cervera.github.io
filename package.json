@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build && vite build --ssr src/static/render.jsx --outDir dist-ssr && node scripts/prerender.mjs",
     "preview": "vite preview",
-    "cv": "node cv/build.mjs"
+    "cv": "node cv/build.mjs",
+    "check:stats": "node scripts/check-stats.mjs"
   },
   "dependencies": {
     "framer-motion": "^11.15.0",

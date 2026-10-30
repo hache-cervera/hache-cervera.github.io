@@ -25,6 +25,8 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+      # Blocks the deploy if any /ref-NNNN/ page would count under the wrong path in GoatCounter.
+      - run: npm run check:stats
       - uses: actions/configure-pages@v5
         with:
           enablement: true
