@@ -11,6 +11,18 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://hache-cervera.github.io/es/"/>
   </url>
   <url>
+    <loc>https://hache-cervera.github.io/research/how-websites-store-your-password/</loc>
+    <lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hache-cervera.github.io/research/how-websites-store-your-password/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hache-cervera.github.io/research/es/como-guarda-la-web-tu-contrasena/"/>
+  </url>
+  <url>
+    <loc>https://hache-cervera.github.io/research/es/como-guarda-la-web-tu-contrasena/</loc>
+    <lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hache-cervera.github.io/research/how-websites-store-your-password/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hache-cervera.github.io/research/es/como-guarda-la-web-tu-contrasena/"/>
+  </url>
+  <url>
     <loc>https://hache-cervera.github.io/research/supplier-catalogues/</loc>
     <lastmod>2026-10-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://hache-cervera.github.io/research/supplier-catalogues/"/>

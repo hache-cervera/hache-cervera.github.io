@@ -1,0 +1,81 @@
+grupo,grupo_nombre,contrasena,almacenamiento,cayo,fase,segundos_hasta_caer,intentos_por_segundo,en_rockyou
+A,comunes,PleaseUseMe,MD5,no,,,11351300000,no
+A,comunes,iforgot,MD5,si,diccionario,7.2,11351300000,si
+A,comunes,ineedapassword,MD5,si,diccionario,7.2,11351300000,si
+B,parecen-fuertes,SniperKing=Usopp?100%,MD5,no,,,11351300000,no
+B,parecen-fuertes,SuuuuperRRRrr!77,MD5,no,,,11351300000,no
+B,parecen-fuertes,ZoroGotLostAg@in!404,MD5,no,,,11351300000,no
+C,bromas-de-internet,CrazyCatLady,MD5,si,combinacion de palabras,27.6,11351300000,no
+C,bromas-de-internet,EarlyAlzheimers,MD5,no,,,11351300000,no
+C,bromas-de-internet,FBISurveillanceVan,MD5,no,,,11351300000,no
+C,bromas-de-internet,PorqueFi,MD5,no,,,11351300000,no
+D,frases-de-palabras,DiarrheaIsHereditary.ItRunsN1sJeans.,MD5,no,,,11351300000,no
+D,frases-de-palabras,LongHairedFreakyPeopleNeedNotApply,MD5,no,,,11351300000,no
+D,frases-de-palabras,NoOneHasntDoneXGopu,MD5,no,,,11351300000,no
+D,frases-de-palabras,memorysucks,MD5,no,,,11351300000,no
+D,frases-de-palabras,whydoialwaysforget,MD5,no,,,11351300000,no
+E,ridicula-larga,IndianMilitaryCyberIntelligenceWingCommanderMajorSheeKumarPaPaPa@123,MD5,no,,,11351300000,no
+F,aleatorias,j%=bQHxw{NTC0GE^^y1=,MD5,no,,,11351300000,no
+F,aleatorias,jR4(QY5GWgTS^Bm7,MD5,no,,,11351300000,no
+F,aleatorias,nGA295h{,MD5,no,,,11351300000,no
+F,aleatorias,xsor{lR=^yu=,MD5,no,,,11351300000,no
+A,comunes,PleaseUseMe,SHA-256,no,,,2878100000,no
+A,comunes,iforgot,SHA-256,si,diccionario,24.1,2878100000,si
+A,comunes,ineedapassword,SHA-256,si,diccionario,24.1,2878100000,si
+B,parecen-fuertes,SniperKing=Usopp?100%,SHA-256,no,,,2878100000,no
+B,parecen-fuertes,SuuuuperRRRrr!77,SHA-256,no,,,2878100000,no
+B,parecen-fuertes,ZoroGotLostAg@in!404,SHA-256,no,,,2878100000,no
+C,bromas-de-internet,CrazyCatLady,SHA-256,si,combinacion de palabras,45.1,2878100000,no
+C,bromas-de-internet,EarlyAlzheimers,SHA-256,no,,,2878100000,no
+C,bromas-de-internet,FBISurveillanceVan,SHA-256,no,,,2878100000,no
+C,bromas-de-internet,PorqueFi,SHA-256,no,,,2878100000,no
+D,frases-de-palabras,DiarrheaIsHereditary.ItRunsN1sJeans.,SHA-256,no,,,2878100000,no
+D,frases-de-palabras,LongHairedFreakyPeopleNeedNotApply,SHA-256,no,,,2878100000,no
+D,frases-de-palabras,NoOneHasntDoneXGopu,SHA-256,no,,,2878100000,no
+D,frases-de-palabras,memorysucks,SHA-256,no,,,2878100000,no
+D,frases-de-palabras,whydoialwaysforget,SHA-256,no,,,2878100000,no
+E,ridicula-larga,IndianMilitaryCyberIntelligenceWingCommanderMajorSheeKumarPaPaPa@123,SHA-256,no,,,2878100000,no
+F,aleatorias,j%=bQHxw{NTC0GE^^y1=,SHA-256,no,,,2878100000,no
+F,aleatorias,jR4(QY5GWgTS^Bm7,SHA-256,no,,,2878100000,no
+F,aleatorias,nGA295h{,SHA-256,no,,,2878100000,no
+F,aleatorias,xsor{lR=^yu=,SHA-256,no,,,2878100000,no
+A,comunes,PleaseUseMe,bcrypt (coste 12),no,,,317,no
+A,comunes,iforgot,bcrypt (coste 12),no,,,317,si
+A,comunes,ineedapassword,bcrypt (coste 12),no,,,317,si
+B,parecen-fuertes,SniperKing=Usopp?100%,bcrypt (coste 12),no,,,317,no
+B,parecen-fuertes,SuuuuperRRRrr!77,bcrypt (coste 12),no,,,317,no
+B,parecen-fuertes,ZoroGotLostAg@in!404,bcrypt (coste 12),no,,,317,no
+C,bromas-de-internet,CrazyCatLady,bcrypt (coste 12),no,,,317,no
+C,bromas-de-internet,EarlyAlzheimers,bcrypt (coste 12),no,,,317,no
+C,bromas-de-internet,FBISurveillanceVan,bcrypt (coste 12),no,,,317,no
+C,bromas-de-internet,PorqueFi,bcrypt (coste 12),no,,,317,no
+D,frases-de-palabras,DiarrheaIsHereditary.ItRunsN1sJeans.,bcrypt (coste 12),no,,,317,no
+D,frases-de-palabras,LongHairedFreakyPeopleNeedNotApply,bcrypt (coste 12),no,,,317,no
+D,frases-de-palabras,NoOneHasntDoneXGopu,bcrypt (coste 12),no,,,317,no
+D,frases-de-palabras,memorysucks,bcrypt (coste 12),no,,,317,no
+D,frases-de-palabras,whydoialwaysforget,bcrypt (coste 12),no,,,317,no
+E,ridicula-larga,IndianMilitaryCyberIntelligenceWingCommanderMajorSheeKumarPaPaPa@123,bcrypt (coste 12),no,,,317,no
+F,aleatorias,j%=bQHxw{NTC0GE^^y1=,bcrypt (coste 12),no,,,317,no
+F,aleatorias,jR4(QY5GWgTS^Bm7,bcrypt (coste 12),no,,,317,no
+F,aleatorias,nGA295h{,bcrypt (coste 12),no,,,317,no
+F,aleatorias,xsor{lR=^yu=,bcrypt (coste 12),no,,,317,no
+A,comunes,PleaseUseMe,"Argon2id (46 MiB, t=1, p=1)",no,,,2478,no
+A,comunes,iforgot,"Argon2id (46 MiB, t=1, p=1)",no,,,2478,si
+A,comunes,ineedapassword,"Argon2id (46 MiB, t=1, p=1)",no,,,2478,si
+B,parecen-fuertes,SniperKing=Usopp?100%,"Argon2id (46 MiB, t=1, p=1)",no,,,2478,no
+B,parecen-fuertes,SuuuuperRRRrr!77,"Argon2id (46 MiB, t=1, p=1)",no,,,2478,no
+B,parecen-fuertes,ZoroGotLostAg@in!404,"Argon2id (46 MiB, t=1, p=1)",no,,,2478,no
+C,bromas-de-internet,CrazyCatLady,"Argon2id (46 MiB, t=1, p=1)",no,,,2478,no
+C,bromas-de-internet,EarlyAlzheimers,"Argon2id (46 MiB, t=1, p=1)",no,,,2478,no
+C,bromas-de-internet,FBISurveillanceVan,"Argon2id (46 MiB, t=1, p=1)",no,,,2478,no
+C,bromas-de-internet,PorqueFi,"Argon2id (46 MiB, t=1, p=1)",no,,,2478,no
+D,frases-de-palabras,DiarrheaIsHereditary.ItRunsN1sJeans.,"Argon2id (46 MiB, t=1, p=1)",no,,,2478,no
+D,frases-de-palabras,LongHairedFreakyPeopleNeedNotApply,"Argon2id (46 MiB, t=1, p=1)",no,,,2478,no
+D,frases-de-palabras,NoOneHasntDoneXGopu,"Argon2id (46 MiB, t=1, p=1)",no,,,2478,no
+D,frases-de-palabras,memorysucks,"Argon2id (46 MiB, t=1, p=1)",no,,,2478,no
+D,frases-de-palabras,whydoialwaysforget,"Argon2id (46 MiB, t=1, p=1)",no,,,2478,no
+E,ridicula-larga,IndianMilitaryCyberIntelligenceWingCommanderMajorSheeKumarPaPaPa@123,"Argon2id (46 MiB, t=1, p=1)",no,,,2478,no
+F,aleatorias,j%=bQHxw{NTC0GE^^y1=,"Argon2id (46 MiB, t=1, p=1)",no,,,2478,no
+F,aleatorias,jR4(QY5GWgTS^Bm7,"Argon2id (46 MiB, t=1, p=1)",no,,,2478,no
+F,aleatorias,nGA295h{,"Argon2id (46 MiB, t=1, p=1)",no,,,2478,no
+F,aleatorias,xsor{lR=^yu=,"Argon2id (46 MiB, t=1, p=1)",no,,,2478,no
