@@ -1,4 +1,4 @@
-grupo,grupo_nombre,contrasena,almacenamiento,cayo,fase,segundos_hasta_caer,intentos_por_segundo,en_rockyou
+grupo,grupo_nombre,contrasena,almacenamiento,cayo,fase,segundos_fin_de_fase,intentos_por_segundo,en_rockyou
 A,comunes,PleaseUseMe,MD5,no,,,11351300000,no
 A,comunes,iforgot,MD5,si,diccionario,7.2,11351300000,si
 A,comunes,ineedapassword,MD5,si,diccionario,7.2,11351300000,si

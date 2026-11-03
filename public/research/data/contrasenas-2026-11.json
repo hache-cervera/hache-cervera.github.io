@@ -2,7 +2,7 @@
  "estudio": "Cómo guarda la web tu contraseña",
  "medido": "2026-11-02",
  "equipo": "portátil con RTX 4060 (OpenCL)",
- "nota": "cayo=no significa que no cayó en el tiempo del test, no que sea segura. Sin hashes ni configuración del ataque.",
+ "nota": "cayo=no significa que no cayó en el tiempo del test, no que sea segura. segundos_fin_de_fase: final de la fase en la que cayó, contado desde el inicio del ataque; cayó en ese tiempo o antes. intentos_por_segundo: velocidad máxima de esa forma de guardar. Sin hashes ni configuración del ataque.",
  "filas": [
   {
    "grupo": "A",
@@ -11,9 +11,9 @@
    "almacenamiento": "MD5",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 11351300000,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "A",
@@ -22,9 +22,9 @@
    "almacenamiento": "MD5",
    "cayo": "si",
    "fase": "diccionario",
-   "segundos_hasta_caer": "7.2",
    "intentos_por_segundo": 11351300000,
-   "en_rockyou": "si"
+   "en_rockyou": "si",
+   "segundos_fin_de_fase": "7.2"
   },
   {
    "grupo": "A",
@@ -33,9 +33,9 @@
    "almacenamiento": "MD5",
    "cayo": "si",
    "fase": "diccionario",
-   "segundos_hasta_caer": "7.2",
    "intentos_por_segundo": 11351300000,
-   "en_rockyou": "si"
+   "en_rockyou": "si",
+   "segundos_fin_de_fase": "7.2"
   },
   {
    "grupo": "B",
@@ -44,9 +44,9 @@
    "almacenamiento": "MD5",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 11351300000,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "B",
@@ -55,9 +55,9 @@
    "almacenamiento": "MD5",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 11351300000,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "B",
@@ -66,9 +66,9 @@
    "almacenamiento": "MD5",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 11351300000,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "C",
@@ -77,9 +77,9 @@
    "almacenamiento": "MD5",
    "cayo": "si",
    "fase": "combinacion de palabras",
-   "segundos_hasta_caer": "27.6",
    "intentos_por_segundo": 11351300000,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": "27.6"
   },
   {
    "grupo": "C",
@@ -88,9 +88,9 @@
    "almacenamiento": "MD5",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 11351300000,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "C",
@@ -99,9 +99,9 @@
    "almacenamiento": "MD5",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 11351300000,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "C",
@@ -110,9 +110,9 @@
    "almacenamiento": "MD5",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 11351300000,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "D",
@@ -121,9 +121,9 @@
    "almacenamiento": "MD5",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 11351300000,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "D",
@@ -132,9 +132,9 @@
    "almacenamiento": "MD5",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 11351300000,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "D",
@@ -143,9 +143,9 @@
    "almacenamiento": "MD5",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 11351300000,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "D",
@@ -154,9 +154,9 @@
    "almacenamiento": "MD5",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 11351300000,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "D",
@@ -165,9 +165,9 @@
    "almacenamiento": "MD5",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 11351300000,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "E",
@@ -176,9 +176,9 @@
    "almacenamiento": "MD5",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 11351300000,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "F",
@@ -187,9 +187,9 @@
    "almacenamiento": "MD5",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 11351300000,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "F",
@@ -198,9 +198,9 @@
    "almacenamiento": "MD5",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 11351300000,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "F",
@@ -209,9 +209,9 @@
    "almacenamiento": "MD5",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 11351300000,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "F",
@@ -220,9 +220,9 @@
    "almacenamiento": "MD5",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 11351300000,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "A",
@@ -231,9 +231,9 @@
    "almacenamiento": "SHA-256",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 2878100000,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "A",
@@ -242,9 +242,9 @@
    "almacenamiento": "SHA-256",
    "cayo": "si",
    "fase": "diccionario",
-   "segundos_hasta_caer": "24.1",
    "intentos_por_segundo": 2878100000,
-   "en_rockyou": "si"
+   "en_rockyou": "si",
+   "segundos_fin_de_fase": "24.1"
   },
   {
    "grupo": "A",
@@ -253,9 +253,9 @@
    "almacenamiento": "SHA-256",
    "cayo": "si",
    "fase": "diccionario",
-   "segundos_hasta_caer": "24.1",
    "intentos_por_segundo": 2878100000,
-   "en_rockyou": "si"
+   "en_rockyou": "si",
+   "segundos_fin_de_fase": "24.1"
   },
   {
    "grupo": "B",
@@ -264,9 +264,9 @@
    "almacenamiento": "SHA-256",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 2878100000,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "B",
@@ -275,9 +275,9 @@
    "almacenamiento": "SHA-256",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 2878100000,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "B",
@@ -286,9 +286,9 @@
    "almacenamiento": "SHA-256",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 2878100000,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "C",
@@ -297,9 +297,9 @@
    "almacenamiento": "SHA-256",
    "cayo": "si",
    "fase": "combinacion de palabras",
-   "segundos_hasta_caer": "45.1",
    "intentos_por_segundo": 2878100000,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": "45.1"
   },
   {
    "grupo": "C",
@@ -308,9 +308,9 @@
    "almacenamiento": "SHA-256",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 2878100000,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "C",
@@ -319,9 +319,9 @@
    "almacenamiento": "SHA-256",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 2878100000,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "C",
@@ -330,9 +330,9 @@
    "almacenamiento": "SHA-256",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 2878100000,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "D",
@@ -341,9 +341,9 @@
    "almacenamiento": "SHA-256",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 2878100000,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "D",
@@ -352,9 +352,9 @@
    "almacenamiento": "SHA-256",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 2878100000,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "D",
@@ -363,9 +363,9 @@
    "almacenamiento": "SHA-256",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 2878100000,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "D",
@@ -374,9 +374,9 @@
    "almacenamiento": "SHA-256",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 2878100000,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "D",
@@ -385,9 +385,9 @@
    "almacenamiento": "SHA-256",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 2878100000,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "E",
@@ -396,9 +396,9 @@
    "almacenamiento": "SHA-256",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 2878100000,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "F",
@@ -407,9 +407,9 @@
    "almacenamiento": "SHA-256",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 2878100000,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "F",
@@ -418,9 +418,9 @@
    "almacenamiento": "SHA-256",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 2878100000,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "F",
@@ -429,9 +429,9 @@
    "almacenamiento": "SHA-256",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 2878100000,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "F",
@@ -440,9 +440,9 @@
    "almacenamiento": "SHA-256",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 2878100000,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "A",
@@ -451,9 +451,9 @@
    "almacenamiento": "bcrypt (coste 12)",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 317,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "A",
@@ -462,9 +462,9 @@
    "almacenamiento": "bcrypt (coste 12)",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 317,
-   "en_rockyou": "si"
+   "en_rockyou": "si",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "A",
@@ -473,9 +473,9 @@
    "almacenamiento": "bcrypt (coste 12)",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 317,
-   "en_rockyou": "si"
+   "en_rockyou": "si",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "B",
@@ -484,9 +484,9 @@
    "almacenamiento": "bcrypt (coste 12)",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 317,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "B",
@@ -495,9 +495,9 @@
    "almacenamiento": "bcrypt (coste 12)",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 317,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "B",
@@ -506,9 +506,9 @@
    "almacenamiento": "bcrypt (coste 12)",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 317,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "C",
@@ -517,9 +517,9 @@
    "almacenamiento": "bcrypt (coste 12)",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 317,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "C",
@@ -528,9 +528,9 @@
    "almacenamiento": "bcrypt (coste 12)",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 317,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "C",
@@ -539,9 +539,9 @@
    "almacenamiento": "bcrypt (coste 12)",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 317,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "C",
@@ -550,9 +550,9 @@
    "almacenamiento": "bcrypt (coste 12)",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 317,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "D",
@@ -561,9 +561,9 @@
    "almacenamiento": "bcrypt (coste 12)",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 317,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "D",
@@ -572,9 +572,9 @@
    "almacenamiento": "bcrypt (coste 12)",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 317,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "D",
@@ -583,9 +583,9 @@
    "almacenamiento": "bcrypt (coste 12)",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 317,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "D",
@@ -594,9 +594,9 @@
    "almacenamiento": "bcrypt (coste 12)",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 317,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "D",
@@ -605,9 +605,9 @@
    "almacenamiento": "bcrypt (coste 12)",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 317,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "E",
@@ -616,9 +616,9 @@
    "almacenamiento": "bcrypt (coste 12)",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 317,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "F",
@@ -627,9 +627,9 @@
    "almacenamiento": "bcrypt (coste 12)",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 317,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "F",
@@ -638,9 +638,9 @@
    "almacenamiento": "bcrypt (coste 12)",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 317,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "F",
@@ -649,9 +649,9 @@
    "almacenamiento": "bcrypt (coste 12)",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 317,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "F",
@@ -660,9 +660,9 @@
    "almacenamiento": "bcrypt (coste 12)",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 317,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "A",
@@ -671,9 +671,9 @@
    "almacenamiento": "Argon2id (46 MiB, t=1, p=1)",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 2478,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "A",
@@ -682,9 +682,9 @@
    "almacenamiento": "Argon2id (46 MiB, t=1, p=1)",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 2478,
-   "en_rockyou": "si"
+   "en_rockyou": "si",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "A",
@@ -693,9 +693,9 @@
    "almacenamiento": "Argon2id (46 MiB, t=1, p=1)",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 2478,
-   "en_rockyou": "si"
+   "en_rockyou": "si",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "B",
@@ -704,9 +704,9 @@
    "almacenamiento": "Argon2id (46 MiB, t=1, p=1)",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 2478,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "B",
@@ -715,9 +715,9 @@
    "almacenamiento": "Argon2id (46 MiB, t=1, p=1)",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 2478,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "B",
@@ -726,9 +726,9 @@
    "almacenamiento": "Argon2id (46 MiB, t=1, p=1)",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 2478,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "C",
@@ -737,9 +737,9 @@
    "almacenamiento": "Argon2id (46 MiB, t=1, p=1)",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 2478,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "C",
@@ -748,9 +748,9 @@
    "almacenamiento": "Argon2id (46 MiB, t=1, p=1)",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 2478,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "C",
@@ -759,9 +759,9 @@
    "almacenamiento": "Argon2id (46 MiB, t=1, p=1)",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 2478,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "C",
@@ -770,9 +770,9 @@
    "almacenamiento": "Argon2id (46 MiB, t=1, p=1)",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 2478,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "D",
@@ -781,9 +781,9 @@
    "almacenamiento": "Argon2id (46 MiB, t=1, p=1)",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 2478,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "D",
@@ -792,9 +792,9 @@
    "almacenamiento": "Argon2id (46 MiB, t=1, p=1)",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 2478,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "D",
@@ -803,9 +803,9 @@
    "almacenamiento": "Argon2id (46 MiB, t=1, p=1)",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 2478,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "D",
@@ -814,9 +814,9 @@
    "almacenamiento": "Argon2id (46 MiB, t=1, p=1)",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 2478,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "D",
@@ -825,9 +825,9 @@
    "almacenamiento": "Argon2id (46 MiB, t=1, p=1)",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 2478,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "E",
@@ -836,9 +836,9 @@
    "almacenamiento": "Argon2id (46 MiB, t=1, p=1)",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 2478,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "F",
@@ -847,9 +847,9 @@
    "almacenamiento": "Argon2id (46 MiB, t=1, p=1)",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 2478,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "F",
@@ -858,9 +858,9 @@
    "almacenamiento": "Argon2id (46 MiB, t=1, p=1)",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 2478,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "F",
@@ -869,9 +869,9 @@
    "almacenamiento": "Argon2id (46 MiB, t=1, p=1)",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 2478,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   },
   {
    "grupo": "F",
@@ -880,9 +880,9 @@
    "almacenamiento": "Argon2id (46 MiB, t=1, p=1)",
    "cayo": "no",
    "fase": "",
-   "segundos_hasta_caer": "",
    "intentos_por_segundo": 2478,
-   "en_rockyou": "no"
+   "en_rockyou": "no",
+   "segundos_fin_de_fase": ""
   }
  ]
 }
