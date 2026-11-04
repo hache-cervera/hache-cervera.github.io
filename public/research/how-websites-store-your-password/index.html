@@ -926,7 +926,7 @@
     <section id="parameters">
       <div class="wrap">
         <p class="section-label">/ 07 · Configuration</p>
-        <h2>The configuration matters, not the algorithm's name</h2>
+        <h2>The algorithm's configuration decides</h2>
         <div class="quote"><p><strong>Saying "this site uses bcrypt" or "it uses MD5" is not enough.</strong> What sets the price of each guess is the parameters it runs with: the cost, the memory, the passes, the salt.</p></div>
         <h3 class="sub">Argon2id, the newer one, held less than bcrypt</h3>
         <p class="prose">With the test settings, <strong>bcrypt held about 8 times longer</strong>: 317 guesses a second, against 2,478 for Argon2id. <strong>Argon2id ran at the minimum OWASP recommends</strong> (46 MiB and one pass, the first option on its list). <strong>bcrypt ran above its own</strong>: cost 12, where the minimum is 10. Argon2id with more memory or more passes would be slower to attack, and bcrypt at cost 10 about 4 times faster (a calculation: each step of cost doubles the work). Raising the parameters has a price: the server takes longer on every login.</p>

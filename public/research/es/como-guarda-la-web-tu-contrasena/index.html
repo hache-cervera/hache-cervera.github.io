@@ -926,7 +926,7 @@
     <section id="parameters">
       <div class="wrap">
         <p class="section-label">/ 07 · La configuración</p>
-        <h2>Manda la configuración, no la etiqueta del algoritmo</h2>
+        <h2>Manda la configuración del algoritmo</h2>
         <div class="quote"><p><strong>Decir «esta web usa bcrypt» o «usa MD5» no basta.</strong> Lo que fija el precio de cada intento son los parámetros con los que se usa: el coste, la memoria, las pasadas, la sal.</p></div>
         <h3 class="sub">Argon2id, más moderno, aguantó menos que bcrypt</h3>
         <p class="prose">Con los parámetros del test, <strong>bcrypt aguantó unas 8 veces más</strong>: 317 intentos por segundo, frente a 2.478 de Argon2id. <strong>Argon2id iba en el mínimo que recomienda OWASP</strong> (46 MiB y una pasada, la primera opción de su lista). <strong>bcrypt iba por encima del suyo</strong>: coste 12, cuando el mínimo es 10. Argon2id con más memoria o más pasadas sería más lento de atacar, y bcrypt con coste 10, unas 4 veces más rápido (cálculo: cada punto de coste duplica el trabajo). Subir los parámetros tiene un precio: el servidor tarda más en cada inicio de sesión.</p>
