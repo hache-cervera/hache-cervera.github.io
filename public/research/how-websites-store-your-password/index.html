@@ -4,12 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>How long would it take to steal your password? · Research · Hache Cervera</title>
-  <meta name="description" content="The same 20 passwords, stored four ways and attacked from a laptop. With MD5, 3 fell in seconds; with bcrypt and Argon2id, none did. What changes is how the website stores them." />
+  <meta name="description" content="When a website’s database is stolen, what decides whether your password falls in seconds or never? The same 20, stored four ways: with MD5, 3 fell; with bcrypt and Argon2id, none. The configuration matters." />
   <link rel="canonical" href="https://hache-cervera.github.io/research/how-websites-store-your-password/" />
   <link rel="alternate" hreflang="en" href="https://hache-cervera.github.io/research/how-websites-store-your-password/" />
   <link rel="alternate" hreflang="es" href="https://hache-cervera.github.io/research/es/como-guarda-la-web-tu-contrasena/" />
   <meta property="og:title" content="How long would it take to steal your password?" />
-  <meta property="og:description" content="The same 20 passwords, stored four ways and attacked from a laptop. With MD5, 3 fell in seconds; with bcrypt and Argon2id, none did. What changes is how the website stores them." />
+  <meta property="og:description" content="When a website’s database is stolen, what decides whether your password falls in seconds or never? The same 20, stored four ways: with MD5, 3 fell; with bcrypt and Argon2id, none. The configuration matters." />
   <meta property="og:image" content="https://hache-cervera.github.io/og-home.jpg" />
   <meta property="og:url" content="https://hache-cervera.github.io/research/how-websites-store-your-password/" />
   <meta property="og:type" content="article" />
@@ -23,7 +23,7 @@
     @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400 500; font-display: swap; src: url('/fonts/inter-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
   </style>
   <script>(function () { try { document.documentElement.dataset.theme = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light'; } catch (e) {} })();</script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"How long would it take to steal your password?","description":"The same 20 passwords, stored four ways and attacked from a laptop. With MD5, 3 fell in seconds; with bcrypt and Argon2id, none did. What changes is how the website stores them.","inLanguage":"en","datePublished":"2026-11-03","dateModified":"2026-11-03","url":"https://hache-cervera.github.io/research/how-websites-store-your-password/","author":{"@type":"Person","name":"Ada (hache) Cervera","url":"https://hache-cervera.github.io/"}},{"@type":"Dataset","name":"Attack results for 20 passwords stored four ways (November 2026)","description":"The same 20 passwords, stored four ways and attacked from a laptop. With MD5, 3 fell in seconds; with bcrypt and Argon2id, none did. What changes is how the website stores them.","inLanguage":"en","creator":{"@type":"Person","name":"Ada (hache) Cervera"},"temporalCoverage":"2026-11-02","license":"https://creativecommons.org/licenses/by/4.0/","isAccessibleForFree":true,"distribution":[{"@type":"DataDownload","encodingFormat":"text/csv","contentUrl":"https://hache-cervera.github.io/research/data/contrasenas-2026-11.csv"},{"@type":"DataDownload","encodingFormat":"application/json","contentUrl":"https://hache-cervera.github.io/research/data/contrasenas-2026-11.json"}]}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"How long would it take to steal your password?","description":"When a website’s database is stolen, what decides whether your password falls in seconds or never? The same 20, stored four ways: with MD5, 3 fell; with bcrypt and Argon2id, none. The configuration matters.","inLanguage":"en","datePublished":"2026-11-03","dateModified":"2026-11-04","url":"https://hache-cervera.github.io/research/how-websites-store-your-password/","author":{"@type":"Person","name":"Ada (hache) Cervera","url":"https://hache-cervera.github.io/"}},{"@type":"Dataset","name":"Attack results for 20 passwords stored four ways (November 2026)","description":"When a website’s database is stolen, what decides whether your password falls in seconds or never? The same 20, stored four ways: with MD5, 3 fell; with bcrypt and Argon2id, none. The configuration matters.","inLanguage":"en","creator":{"@type":"Person","name":"Ada (hache) Cervera"},"temporalCoverage":"2026-11-02","license":"https://creativecommons.org/licenses/by/4.0/","isAccessibleForFree":true,"distribution":[{"@type":"DataDownload","encodingFormat":"text/csv","contentUrl":"https://hache-cervera.github.io/research/data/contrasenas-2026-11.csv"},{"@type":"DataDownload","encodingFormat":"application/json","contentUrl":"https://hache-cervera.github.io/research/data/contrasenas-2026-11.json"}]}]}</script>
   <style>
     :root {
       --bg: #ffffff;
@@ -714,6 +714,79 @@
     .pws .pw { white-space: normal; overflow-wrap: anywhere; }
     th .pw { font-size: 0.8125rem; }
 </style>
+  <style>
+    /* article v2: hierarchy, components, tables */
+    .prose, .list li { color: color-mix(in srgb, var(--ink) 80%, var(--bg)); }
+    .prose strong, .list li strong { color: var(--ink); }
+    section h2 { max-width: 44rem; }
+    h3.sub { margin-top: 56px; font-family: var(--font-display); font-weight: 700; font-size: 1.375rem; letter-spacing: -0.02em; line-height: 1.25; max-width: 46rem; }
+    h3.sub + .prose { margin-top: 12px; }
+    .toc { margin-top: 40px; display: grid; grid-template-columns: 1fr; list-style: none; border-top: 1px solid var(--line); }
+    @media (min-width: 640px) { .toc { grid-template-columns: 1fr 1fr; column-gap: 32px; } }
+    @media (min-width: 1000px) { .toc { grid-template-columns: repeat(3, 1fr); } }
+    .toc li { border-bottom: 1px solid var(--line); }
+    .toc a { display: flex; gap: 12px; align-items: baseline; padding: 12px 0; text-decoration: none; font-family: var(--font-display); font-weight: 600; font-size: 1rem; color: var(--ink) !important; transition: color 0.2s ease; }
+    .toc a span { min-width: 1.75rem; font-size: 0.75rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+    .toc a:hover { color: var(--accent) !important; }
+    .steps { list-style: none; margin-top: 40px; display: grid; gap: 28px 24px; grid-template-columns: 1fr; }
+    @media (min-width: 640px) { .steps { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 1100px) { .steps { grid-template-columns: repeat(5, 1fr); gap: 20px; } }
+    .steps li { border-top: 2px solid var(--line); padding-top: 16px; min-width: 0; }
+    .steps li.key { border-top-color: var(--accent); }
+    .steps b { display: block; font-family: var(--font-display); font-weight: 800; font-size: 2.5rem; line-height: 1; letter-spacing: -0.04em; color: var(--muted); }
+    .steps li.key b { color: var(--accent); }
+    .steps h3 { margin-top: 12px; font-family: var(--font-display); font-weight: 700; font-size: 1.0625rem; line-height: 1.3; }
+    .steps p { margin-top: 8px; font-size: 1rem; line-height: 1.55; color: var(--muted); }
+    .steps p strong { color: var(--ink); }
+    .steps code { overflow-wrap: anywhere; word-break: break-all; }
+    .ba > div.hot { border-color: var(--accent); border-top: 3px solid var(--accent); }
+    .ba > div:not(.hot) ul li { color: var(--muted); }
+    .ba .chip { margin-bottom: 12px; }
+    .pipe { list-style: none; margin-top: 40px; display: grid; gap: 12px; grid-template-columns: 1fr; }
+    @media (min-width: 700px) { .pipe { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 1100px) { .pipe { grid-template-columns: repeat(5, 1fr); } }
+    .pipe li { border: 1px solid var(--line); padding: 20px; min-width: 0; }
+    .pipe li:last-child { background: var(--surface); }
+    .pipe .ph { display: block; font-family: var(--font-display); font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+    html:not([data-theme='dark']) .pipe .ph { color: #c22e00; }
+    .pipe h3 { margin-top: 10px; font-family: var(--font-display); font-size: 1.125rem; font-weight: 700; letter-spacing: -0.01em; }
+    .pipe p { margin-top: 8px; font-size: 0.9375rem; line-height: 1.5; color: var(--muted); }
+    .pipe p strong { color: var(--ink); }
+    .figs.three { grid-template-columns: 1fr; }
+    @media (min-width: 760px) { .figs.three { grid-template-columns: repeat(3, 1fr); } }
+    .figs.three div:first-child b { color: var(--accent); }
+    .prefixes { margin-top: 20px; display: grid; grid-template-columns: 1fr; border-top: 1px solid var(--line); }
+    @media (min-width: 760px) { .prefixes { grid-template-columns: 1fr 1fr; column-gap: 32px; } }
+    .prefixes > div { display: grid; grid-template-columns: 9.5rem minmax(0, 1fr); gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+    .prefixes dt { font-family: var(--font-display); font-weight: 600; font-size: 0.875rem; }
+    .prefixes dd { font-size: 1rem; color: var(--muted); }
+    .tl.five { margin-top: 24px; }
+    @media (min-width: 900px) { .tl.five { grid-template-columns: repeat(5, 1fr); } }
+    .tl-step p strong { display: block; font-family: var(--font-display); font-size: 1.75rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; color: var(--ink); }
+    .tl-step.now p strong { color: var(--accent); }
+    .cols2 { margin-top: 32px; display: grid; gap: 16px; grid-template-columns: 1fr; }
+    @media (min-width: 900px) { .cols2 { grid-template-columns: 1fr 1fr; } }
+    .cols2 > div { border: 1px solid var(--line); padding: 28px; min-width: 0; }
+    .cols2 > div:first-child { border-top: 3px solid var(--accent); }
+    .cols2 h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.25rem; letter-spacing: -0.02em; }
+    .cols2 .list { margin-top: 8px; }
+    .cols2 .list li { font-size: 1rem; }
+    @media (max-width: 640px) { .cols2 > div { padding: 20px; } }
+    /* tables: dark header, readable row labels, zebra rows */
+    .tbl { margin-top: 32px; }
+    .tbl thead th { background: var(--panel); color: #f2f2f2; padding: 14px 18px; border-bottom: 0; letter-spacing: 0.08em; }
+    :root[data-theme='dark'] .tbl thead th { background: var(--surface); color: var(--ink); }
+    .tbl tbody th[scope='row'] { text-transform: none; letter-spacing: -0.01em; font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--ink); background: transparent; padding: 16px 18px; border-bottom: 1px solid var(--line); vertical-align: top; text-align: left; }
+    .tbl td { color: var(--ink); padding: 16px 18px; }
+    .tbl tbody tr:nth-child(even) > * { background: var(--surface); }
+    .tbl tbody tr:last-child > * { border-bottom: 0; }
+    .tbl td.n { font-family: var(--font-display); font-weight: 600; }
+    @media (max-width: 699px) {
+      .tbl.stack tbody tr:nth-child(even) > * { background: transparent; }
+      .tbl.stack tr { border-left: 3px solid var(--ink); }
+      .tbl.stack th[scope='row'] { font-size: 1.0625rem; }
+    }
+  </style>
 </head>
 <body>
   <div class="grain" aria-hidden="true"></div>
@@ -735,34 +808,71 @@
     <div class="hero wrap">
       <p class="kicker">/ Research · Web security · November 2026</p>
       <h1>How long would it take to steal <em>your password?</em></h1>
-      <p class="lede">I stored the same 20 passwords the four ways websites do and attacked them from a laptop. How long a password holds depends on two things: <strong>the password, and how the website stores it.</strong> The person signing up does not get to choose the second.</p>
+      <p class="lede">When a website's database gets stolen, what decides whether your password breaks in seconds or never breaks at all? I stored the same 20 passwords the four ways websites do and attacked them from a laptop. It comes down to two things: <strong>the password, and how the website stores it.</strong> The person signing up does not get to choose the second.</p>
       <dl class="meta"><div><dt>Passwords</dt><dd>20, picked by hand in 6 groups</dd></div><div><dt>Storage</dt><dd>MD5, SHA-256, bcrypt (cost 12) and Argon2id (46 MiB, 1 pass)</dd></div><div><dt>Hardware</dt><dd>A laptop with an RTX 4060</dd></div><div><dt>Tool</dt><dd>hashcat 7.0.0, open source</dd></div><div><dt>Measured</dt><dd>2 Nov 2026</dd></div><div><dt>Data</dt><dd><a href="../data/contrasenas-2026-11.csv">CSV</a> · <a href="../data/contrasenas-2026-11.json">JSON</a></dd></div></dl>
-      <p class="note"><strong>Not on this page:</strong> the commands, the attack settings or the hashes. It covers what happened and what to do about it.</p>
+      <p class="note"><strong>This is with the database already stolen.</strong> The attacker has the hashes on their own machine and guesses without limits. On a normal login page the site can slow guesses down, and that is a different scenario: this page is not saying someone can guess your Instagram from the sign-in screen. The exact commands and the hashes are not here either.</p>
     </div>
 
     <section id="highlights">
       <div class="wrap">
         <p class="section-label">/ Summary</p>
-        <h2>The figures</h2>
+        <h2>The numbers</h2>
         <div class="figs"><div><b>11,350 M</b><span>guesses per second against MD5</span></div><div><b>317</b><span>guesses per second against bcrypt</span></div><div><b>3 / 20</b><span>fell with MD5 and with SHA-256</span></div><div><b>0 / 20</b><span>fell with bcrypt and with Argon2id</span></div><div><b>7.2 s</b><span>or less for ineedapassword to fall with MD5</span></div></div>
+        <nav aria-label="Contents"><ol class="toc"><li><a href="#signup"><span>01</span>Signing up</a></li><li><a href="#methods"><span>02</span>The four methods</a></li><li><a href="#speed"><span>03</span>Speed</a></li><li><a href="#attack"><span>04</span>The attack</a></li><li><a href="#passwords"><span>05</span>The 20</a></li><li><a href="#fell"><span>06</span>What fell</a></li><li><a href="#parameters"><span>07</span>Configuration</a></li><li><a href="#cms"><span>08</span>In CMSs</a></li><li><a href="#lastpass"><span>09</span>The LastPass case</a></li><li><a href="#what-to-do"><span>10</span>What to do</a></li><li><a href="#method"><span>11</span>Method</a></li></ol></nav>
+      </div>
+    </section>
+
+    <section id="signup">
+      <div class="wrap">
+        <p class="section-label">/ 01 · Signing up</p>
+        <h2>What happens to your password when you sign up</h2>
+        <p class="prose">A well-built website does not keep your password. It keeps a <strong>hash</strong>: the result of running it through a formula that cannot be reversed. It takes five steps.</p>
+        <ol class="steps">
+          <li><b aria-hidden="true">1</b><h3>You type the password</h3><p>Into the form. It travels to the server encrypted over HTTPS.</p></li>
+          <li><b aria-hidden="true">2</b><h3>The server generates a salt</h3><p>A random value, different for each user.</p></li>
+          <li class="key"><b aria-hidden="true">3</b><h3>It runs it through the formula</h3><p>Password and salt, at whatever cost the developer chose. <strong>This is where it is all decided.</strong></p></li>
+          <li><b aria-hidden="true">4</b><h3>It stores a single line</h3><p>Algorithm, cost, salt and hash together. bcrypt at cost 12 starts with <code>$2y$12$</code>; Argon2id spells out its settings: <code>$argon2id$v=19$m=47104,t=1,p=1$</code>.</p></li>
+          <li><b aria-hidden="true">5</b><h3>It forgets the password</h3><p>When you come back, it repeats the sum with the stored salt and compares. If it matches, you are in.</p></li>
+        </ol>
+        <p class="prose">Whoever steals the database takes those lines. They do not see your password: they have to guess it, hash each guess and compare. <strong>What each guess costs them was decided by the website in step 3.</strong></p>
+        <div class="ba">
+          <div>
+            <p class="chip">A different scenario</p>
+            <h3>Normal login</h3>
+            <ul>
+              <li>The attacker guesses through the site's form, one at a time.</li>
+              <li>The site can stop them: attempt limits, temporary lockouts, a second factor.</li>
+              <li>What decides it: those defences, and your password not being one of the most common.</li>
+            </ul>
+          </div>
+          <div class="hot">
+            <p class="chip part">What this test measures</p>
+            <h3>Stolen database</h3>
+            <ul>
+              <li>The attacker has the hashes on their own machine and needs no one's permission.</li>
+              <li>No attempt limit applies, and a second factor does not help.</li>
+              <li>What decides it: how the password was stored, and how predictable it is.</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </section>
 
     <section id="methods">
       <div class="wrap">
-        <p class="section-label">/ 01 · The four methods</p>
-        <h2>What each way of storing a password is</h2>
-        <p class="prose">A website should never keep your password as is. It keeps a <strong>hash</strong>: a digest produced by running the password through a formula, which cannot be reversed. When you log in, the site hashes what you type and compares it with the stored one. All four methods in the test do that, but they were built for different jobs.</p>
+        <p class="section-label">/ 02 · The four methods</p>
+        <h2>What each storage method is</h2>
+        <p class="prose">All four methods in the test produce a hash, but they were built for different jobs.</p>
         <div class="tbl stack" tabindex="0" role="region" aria-label="What each way of storing a password is"><table><thead><tr><th scope="col">Method</th><th scope="col">What it is</th><th scope="col">What it was built for</th><th scope="col">Fit for passwords?</th></tr></thead><tbody><tr><th scope="row">MD5</th><td data-label="What it is">A 128-bit digest from 1992. Very fast to compute.</td><td data-label="What it was built for">Checking that a file has not changed, like a fingerprint. It is broken even for that today.</td><td data-label="Fit for passwords?"><strong>No.</strong> It is fast on purpose.</td></tr><tr><th scope="row">SHA-256</th><td data-label="What it is">A 256-bit digest from the SHA-2 family (2001). Fast, and sound as a fingerprint.</td><td data-label="What it was built for">Digital signatures, TLS certificates, file integrity.</td><td data-label="Fit for passwords?"><strong>Not on its own.</strong> It is fast on purpose too.</td></tr><tr><th scope="row">bcrypt</th><td data-label="What it is">A 1999 formula made for passwords. It is salted and has a cost: each step of cost doubles the work. Cost 12 means 4,096 repetitions.</td><td data-label="What it was built for">Storing passwords.</td><td data-label="Fit for passwords?"><strong>Yes.</strong> OWASP asks for cost 10 at least.</td></tr><tr><th scope="row">Argon2id</th><td data-label="What it is">The winner of the 2015 Password Hashing Competition. Salted, and it demands memory on top of time for every guess.</td><td data-label="What it was built for">Storing passwords, including against graphics cards.</td><td data-label="Fit for passwords?"><strong>Yes.</strong> It is OWASP's first choice.</td></tr></tbody></table></div>
-        <p class="note"><strong>A salt</strong> is a random value, different for each user, mixed in with the password. Two people with the same password end up with different hashes. In the test, MD5 and SHA-256 were unsalted, as on many older sites.</p>
+        <p class="note"><strong>A salt</strong> means two people with the same password end up with different hashes, so the attacker cannot crack them both at once. In the test, MD5 and SHA-256 were unsalted, as on many older sites.</p>
       </div>
     </section>
 
     <section id="speed">
       <div class="wrap">
-        <p class="section-label">/ 02 · Speed</p>
-        <h2>One attack, four speeds</h2>
-        <p class="prose">Whoever steals the database does not see the passwords, only the hashes. They have to guess, hash each guess and compare. <strong>How many guesses a second they get depends only on the method the website picked.</strong> These are the top speeds measured on the same laptop.</p>
+        <p class="section-label">/ 03 · Speed</p>
+        <h2>The same attack, at four speeds</h2>
+        <p class="prose"><strong>How many guesses a second the attacker gets depends only on the method the website picked.</strong> These are the top speeds measured on the same laptop.</p>
         <div class="tbl stack" tabindex="0" role="region" aria-label="One attack, four speeds"><table><thead><tr><th scope="col">How the site stores it</th><th scope="col">Guesses per second</th><th scope="col">Slower than MD5</th><th scope="col">What MD5 tries in 1 s</th></tr></thead><tbody><tr><th scope="row">MD5</th><td class="n" data-label="Guesses per second">11,351,300,000</td><td class="n" data-label="Slower than MD5">Baseline</td><td class="n" data-label="What MD5 tries in 1 s">1 s</td></tr><tr><th scope="row">SHA-256</th><td class="n" data-label="Guesses per second">2,878,100,000</td><td class="n" data-label="Slower than MD5">3.9×</td><td class="n" data-label="What MD5 tries in 1 s">3.9 s</td></tr><tr><th scope="row">Argon2id</th><td class="n" data-label="Guesses per second">2,478</td><td class="n" data-label="Slower than MD5">4.6 million×</td><td class="n" data-label="What MD5 tries in 1 s">53 days</td></tr><tr><th scope="row">bcrypt</th><td class="n" data-label="Guesses per second">317</td><td class="n" data-label="Slower than MD5">35.8 million×</td><td class="n" data-label="What MD5 tries in 1 s">414 days</td></tr></tbody></table></div>
         <div class="viz" role="figure" aria-label="What MD5 tries in one second. bcrypt needs 414 days to try the same. Each grey square is one day.">
           <h3>What MD5 tries in one second</h3>
@@ -770,15 +880,31 @@
           <div class="one"><i></i><span>1 second with MD5</span></div>
           <div class="days" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
         </div>
-        <h3 style="margin-top:40px">Why the speeds come out like this</h3>
+        <h3 class="sub">Why the speeds come out like this</h3>
         <ul class="list"><li><strong>MD5 and SHA-256 are short sums.</strong> A graphics card has thousands of small cores doing the same operation at once, and these formulas barely touch memory. That is how the RTX 4060 manages billions a second. SHA-256 runs about 3.9 times slower because its sum is longer.</li><li><strong>bcrypt is expensive on purpose.</strong> At cost 12 it repeats its setup 4,096 times and, all the way through, keeps reading and writing a 4 KB table. Graphics cards handle that kind of memory access badly: many of their cores sit waiting.</li><li><strong>Argon2id demands memory.</strong> Every guess needs 46 MiB. The laptop RTX 4060 has 8 GB, so at most about 170 guesses fit at once (a calculation). But with a single pass, each guess walks that memory once, and moving memory is exactly what a graphics card does fast.</li></ul>
         <p class="note">Speeds measured during the attack, not taken from the tool benchmark. For MD5 and SHA-256 the top speed comes from the brute-force phase: in the dictionary phase the limit was reading the list from disk, about 500 million guesses a second. For bcrypt and Argon2id the hash itself is the limit in every phase. A machine with more or better cards would be faster; this test does not measure by how much.</p>
       </div>
     </section>
 
+    <section id="attack">
+      <div class="wrap">
+        <p class="section-label">/ 04 · The attack</p>
+        <h2>What it was attacked with: rockyou and more</h2>
+        <p class="prose">A real attacker does not guess at random. They start with what people actually use and only try character by character at the end. The test did the same, in this order and with the same pieces against all four methods:</p>
+        <ol class="pipe">
+          <li><span class="ph">Phase 1 · Dictionary</span><h3>rockyou</h3><p><strong>14,344,391</strong> real passwords from a 2009 breach, public ever since. The base of almost any attack.</p></li>
+          <li><span class="ph">Phase 1 · Dictionary</span><h3>best66 rules</h3><p>The usual tweaks to every rockyou word: capital first letter, letters for digits, suffixes.</p></li>
+          <li><span class="ph">Phase 2 · Combinations</span><h3>354 custom pieces</h3><p>One Piece names, common English words, the years 1990 to 2026 and suffixes such as <code>!</code>, <code>123</code>, <code>@</code> or <code>404</code>.</p></li>
+          <li><span class="ph">Phase 2 · Combinations</span><h3>princeprocessor</h3><p>Joins those pieces in twos and threes. <strong>It is what built CrazyCatLady.</strong></p></li>
+          <li><span class="ph">Phase 3 · Brute force</span><h3>Mask</h3><p>Character by character, about 20 minutes. Only against MD5 and SHA-256: bcrypt, at 317 a second, would not cover even 4 characters (a calculation).</p></li>
+        </ol>
+        <p class="note"><strong>None of the 20 passwords was in the list of 354 pieces</strong>, checked in code. The common ones could be in rockyou naturally, and that was exactly what I wanted to measure. CrazyCatLady fell because the machine assembled it from words anyone uses, not because I handed it the answer.</p>
+      </div>
+    </section>
+
     <section id="passwords">
       <div class="wrap">
-        <p class="section-label">/ 03 · The 20</p>
+        <p class="section-label">/ 05 · The 20</p>
         <h2>The 20 passwords, by group</h2>
         <p class="prose">None belongs to anyone. I picked them to test one idea per group. <strong>The ones in red fell.</strong> All 20 were stored all four ways.</p>
         <div class="tbl stack" tabindex="0" role="region" aria-label="The passwords"><table><thead><tr><th scope="col">Group</th><th scope="col">Why</th><th scope="col">The passwords</th><th scope="col">Fell to MD5 and SHA-256</th></tr></thead><tbody><tr><th scope="row">Common</th><td data-label="Why">I expected them to fall at once.</td><td data-label="The passwords"><span class="pws"><span class="pw fell">ineedapassword</span><span class="pw fell">iforgot</span><span class="pw">PleaseUseMe</span></span></td><td class="n" data-label="Fell to MD5 and SHA-256">2 / 3</td></tr><tr><th scope="row">Look strong</th><td data-label="Why">Capitals, symbols and numbers, all in a pattern.</td><td data-label="The passwords"><span class="pws"><span class="pw">ZoroGotLostAg@in!404</span><span class="pw">SuuuuperRRRrr!77</span><span class="pw">SniperKing=Usopp?100%</span></span></td><td class="n" data-label="Fell to MD5 and SHA-256">0 / 3</td></tr><tr><th scope="row">Internet jokes</th><td data-label="Why">I had no idea which way they would go.</td><td data-label="The passwords"><span class="pws"><span class="pw">FBISurveillanceVan</span><span class="pw fell">CrazyCatLady</span><span class="pw">EarlyAlzheimers</span><span class="pw">PorqueFi</span></span></td><td class="n" data-label="Fell to MD5 and SHA-256">1 / 4</td></tr><tr><th scope="row">Word phrases</th><td data-label="Why">I expected length to carry them.</td><td data-label="The passwords"><span class="pws"><span class="pw">memorysucks</span><span class="pw">whydoialwaysforget</span><span class="pw">NoOneHasntDoneXGopu</span><span class="pw">LongHairedFreakyPeopleNeedNotApply</span><span class="pw">DiarrheaIsHereditary.ItRunsN1sJeans.</span></span></td><td class="n" data-label="Fell to MD5 and SHA-256">0 / 5</td></tr><tr><th scope="row">The absurdly long one</th><td data-label="Why">68 characters.</td><td data-label="The passwords"><span class="pws"><span class="pw">IndianMilitaryCyberIntelligenceWing<wbr>CommanderMajorSheeKumarPaPaPa@123</span></span></td><td class="n" data-label="Fell to MD5 and SHA-256">0 / 1</td></tr><tr><th scope="row">Random</th><td data-label="Why">From a cryptographic generator: 8, 12, 16 and 20 characters.</td><td data-label="The passwords"><span class="pws"><span class="pw">nGA295h{</span><span class="pw">xsor{lR=^yu=</span><span class="pw">jR4(QY5GWgTS^Bm7</span><span class="pw">j%=bQHxw{NTC0GE^^y1=</span></span></td><td class="n" data-label="Fell to MD5 and SHA-256">0 / 4</td></tr></tbody></table></div>
@@ -787,40 +913,83 @@
 
     <section id="fell">
       <div class="wrap">
-        <p class="section-label">/ 04 · What fell</p>
+        <p class="section-label">/ 06 · What fell</p>
         <h2>What fell, and why</h2>
-        <p class="prose">MD5 and SHA-256 lost the same three. bcrypt and Argon2id lost none, <strong>including the two that were in the leaked list.</strong></p>
+        <p class="prose">MD5 and SHA-256 lost the same three. bcrypt and Argon2id lost none, <strong>including the two that were in rockyou.</strong></p>
         <div class="tbl stack" tabindex="0" role="region" aria-label="What fell, and why"><table><thead><tr><th scope="col">Password</th><th scope="col">How it fell</th><th scope="col">MD5, at most</th><th scope="col">SHA-256, at most</th><th scope="col">bcrypt and Argon2id</th></tr></thead><tbody><tr><th scope="row"><span class="pw fell">ineedapassword</span></th><td data-label="How it fell">It was in rockyou as is, a public list of 14.3 million leaked passwords.</td><td class="n" data-label="MD5, at most">7.2 s</td><td class="n" data-label="SHA-256, at most">24.1 s</td><td class="n" data-label="bcrypt and Argon2id">Held</td></tr><tr><th scope="row"><span class="pw fell">iforgot</span></th><td data-label="How it fell">Also in rockyou.</td><td class="n" data-label="MD5, at most">7.2 s</td><td class="n" data-label="SHA-256, at most">24.1 s</td><td class="n" data-label="bcrypt and Argon2id">Held</td></tr><tr><th scope="row"><span class="pw fell">CrazyCatLady</span></th><td data-label="How it fell">Not in rockyou. A program built it by combining common words from a list: crazy, cat and lady.</td><td class="n" data-label="MD5, at most">27.6 s</td><td class="n" data-label="SHA-256, at most">45.1 s</td><td class="n" data-label="bcrypt and Argon2id">Held</td></tr></tbody></table></div>
         <p class="prose">Each time is the end of the phase in which the password fell, counted from the start of the attack: it fell within that time. With bcrypt and Argon2id <strong>the dictionary did not even finish</strong> within the 10 minutes per phase. At 317 guesses a second, going through rockyou and its variations would take up to about 35 days; at 2,478, about 4.</p>
-        <h3 style="margin-top:40px">Three things I did not expect</h3>
+        <h3 class="sub">Three things I did not expect</h3>
         <ul class="list"><li><strong><span class="pw">ZoroGotLostAg@in!404</span> held, even with MD5.</strong> It has capitals, symbols and numbers. What sinks a password is being built from pieces everyone uses, which is what happened to CrazyCatLady.</li><li><strong><span class="pw">PleaseUseMe</span> looked common and held.</strong> It was not in rockyou, and the dictionary variations never reached it.</li><li><strong><span class="pw">PorqueFi</span> held, and it is still weak.</strong> It has 8 characters, letters only. The test brute force reached 6 or 7 characters; trying letters only, MD5 would find it in about 1.3 hours (a calculation). Surviving the test window does not make it strong.</li></ul>
       </div>
     </section>
 
     <section id="parameters">
       <div class="wrap">
-        <p class="section-label">/ 05 · Parameters</p>
-        <h2>Why did the newer Argon2id hold for less time?</h2>
-        <p class="prose">With the test settings, <strong>bcrypt held about 8 times longer</strong>: it was attacked at 317 guesses a second, against 2,478 for Argon2id. The reason is the configuration. <strong>Argon2id ran at the minimum OWASP recommends</strong> (46 MiB and one pass, the first option on its list). <strong>bcrypt ran above its own</strong>: cost 12, where the minimum is 10. What the test compared is two configurations. Argon2id with more memory or more passes would be slower to attack, and bcrypt at cost 10 about 4 times faster (a calculation: each step of cost doubles the work). Raising the parameters has a price: the server takes longer on every login.</p>
+        <p class="section-label">/ 07 · Configuration</p>
+        <h2>The configuration matters, not the algorithm's name</h2>
+        <div class="quote"><p><strong>Saying "this site uses bcrypt" or "it uses MD5" is not enough.</strong> What sets the price of each guess is the parameters it runs with: the cost, the memory, the passes, the salt.</p></div>
+        <h3 class="sub">Argon2id, the newer one, held less than bcrypt</h3>
+        <p class="prose">With the test settings, <strong>bcrypt held about 8 times longer</strong>: 317 guesses a second, against 2,478 for Argon2id. <strong>Argon2id ran at the minimum OWASP recommends</strong> (46 MiB and one pass, the first option on its list). <strong>bcrypt ran above its own</strong>: cost 12, where the minimum is 10. Argon2id with more memory or more passes would be slower to attack, and bcrypt at cost 10 about 4 times faster (a calculation: each step of cost doubles the work). Raising the parameters has a price: the server takes longer on every login.</p>
+        <h3 class="sub">Not every "MD5" is the MD5 in this test</h3>
+        <p class="prose">Up to version 6.7, WordPress used a scheme called phpass. Inside it is MD5, but <strong>salted and repeated 8,192 times.</strong> Same name, roughly 8,000 times fewer guesses. And still thousands of times faster to attack than bcrypt at cost 12.</p>
+        <div class="figs three"><div><b>11,350 M</b><span>guesses per second: the test's unsalted MD5 (measured)</span></div><div><b>≈ 1.4 M</b><span>guesses per second: WordPress phpass up to 6.7 (a calculation, not measured)</span></div><div><b>317</b><span>guesses per second: bcrypt at cost 12 (measured)</span></div></div>
+        <p class="note"><strong>One bcrypt limit:</strong> it only uses the first 72 bytes of a password. The 68-character one in the test just fits. That is why WordPress 6.8 first condenses the password with SHA-384 and hands that to bcrypt.</p>
+      </div>
+    </section>
+
+    <section id="cms">
+      <div class="wrap">
+        <p class="section-label">/ 08 · In CMSs</p>
+        <h2>How WordPress, Drupal and the rest store passwords</h2>
+        <p class="prose">Most websites do not write this code: they inherit it from their content management system. This is how it has changed in the most used ones.</p>
+        <div class="tbl stack" tabindex="0" role="region" aria-label="How CMSs store passwords"><table><thead><tr><th scope="col">CMS</th><th scope="col">Before</th><th scope="col">Now</th><th scope="col">Watch out for</th></tr></thead><tbody>
+          <tr><th scope="row">WordPress</th><td data-label="Before">phpass (salted, repeated MD5), prefix <code>$P$</code>, up to 6.7.</td><td data-label="Now">Since 6.8 (April 2025), bcrypt after condensing with SHA-384, prefix <code>$wp$2y$</code>. Argon2id is opt-in.</td><td data-label="Watch out for">Old hashes are redone on the next login. Users who never come back stay on <code>$P$</code>.</td></tr>
+          <tr><th scope="row">Drupal</th><td data-label="Before">MD5; from Drupal 7, phpass with SHA-512 (<code>$S$</code>).</td><td data-label="Now">bcrypt since Drupal 10. Argon2id is announced from Drupal 12.</td><td data-label="Watch out for">Drupal 12 is an announced change, not something already in production.</td></tr>
+          <tr><th scope="row">Joomla</th><td data-label="Before">Salted MD5.</td><td data-label="Now">bcrypt since Joomla 3.2 (2013).</td><td data-label="Watch out for">Sites not updated in years.</td></tr>
+          <tr><th scope="row">Magento</th><td data-label="Before">Magento 1: salted MD5.</td><td data-label="Now">Argon2id when the server has the Sodium extension (PHP 7.3 or later).</td><td data-label="Watch out for">Without Sodium it falls back to SHA-256 with a per-customer salt: a fast hash.</td></tr>
+          <tr><th scope="row">PrestaShop</th><td data-label="Before"><code>md5(_COOKIE_KEY_ . password)</code>: one key for the whole shop.</td><td data-label="Now">1.7 stores new passwords with bcrypt, but still accepts the old MD5.</td><td data-label="Watch out for">Which one a given shop uses is only known by looking.</td></tr>
+        </tbody></table></div>
+        <p class="prose"><strong>How to tell what your site uses:</strong> look at a user's password column in the database. The beginning gives it away.</p>
+        <dl class="prefixes"><div><dt><code>$P$</code></dt><dd>phpass, older WordPress</dd></div><div><dt><code>$wp$2y$</code></dt><dd>WordPress 6.8 or later, bcrypt</dd></div><div><dt><code>$2y$</code> · <code>$2b$</code></dt><dd>bcrypt; the next number is the cost</dd></div><div><dt><code>$argon2id$</code></dt><dd>Argon2id, with memory (<code>m</code>) and passes (<code>t</code>) written out</dd></div><div><dt><code>$S$</code></dt><dd>Drupal 7</dd></div><div><dt>32 / 64 hex</dt><dd>Hexadecimal and nothing else: MD5 or, at 64, probably SHA-256</dd></div></dl>
+        <p class="note"><strong>On my own site</strong>, devilfruittcg.com, running WordPress: I checked, and it stores passwords with bcrypt.</p>
+        <p class="prose">The hash is the last line of defence, the one left when everything else has failed. The others come first: <strong>keeping the CMS and plugins updated</strong>, since that is how databases usually get stolen; <strong>limiting login attempts</strong>, which WordPress does not do out of the box (a plugin or the proxy adds it); and <strong>a second factor</strong> on admin accounts.</p>
+      </div>
+    </section>
+
+    <section id="lastpass">
+      <div class="wrap">
+        <p class="section-label">/ 09 · The LastPass case</p>
+        <h2>The same problem, in a password manager</h2>
+        <p class="prose">In 2022, attackers stole backups of LastPass users' vaults. It was not a website with a table of hashes, but the failure sits on the same axis as this test: <strong>how much work each guess costs.</strong></p>
+        <ul class="list">
+          <li><strong>Each vault key comes from the master password</strong> through PBKDF2, which repeats a fast hash from the SHA family. The repetitions, which LastPass calls iterations, act as the cost.</li>
+          <li><strong>The default went up, but older accounts were not updated automatically.</strong> Some sat at 5,000, at 500 and even at 1.</li>
+          <li><strong>The saved website addresses were not encrypted.</strong> Passwords and notes were. The attacker could see which sites each entry belonged to and choose which vaults to attack first.</li>
+          <li><strong>LastPass spoke of "millions of years"</strong> to crack a master password. Analyst Wladimir Palant replied that this confuses pure brute force with a password a person chooses: on a single graphics card, a master password with 40 bits of entropy would fall in about two months, by his estimate.</li>
+        </ul>
+        <h3 class="sub">LastPass default iterations</h3>
+        <ol class="tl five"><li class="tl-step"><b>At first</b><p><strong>1</strong> iteration</p></li><li class="tl-step"><b>June 2012</b><p><strong>500</strong></p></li><li class="tl-step"><b>February 2013</b><p><strong>5,000</strong></p></li><li class="tl-step"><b>February 2018</b><p><strong>100,100</strong>without migrating old accounts</p></li><li class="tl-step now"><b>OWASP, 2022</b><p><strong>310,000</strong> recommended</p></li></ol>
+        <p class="note"><strong>The nuance:</strong> this was not bcrypt against MD5 on a website. It was PBKDF2 with few iterations in a password manager. Same family of problem, a fast formula with little work per guess, in a different setting. And it carries another lesson WordPress shows too: raising the cost only protects the accounts that get migrated.</p>
       </div>
     </section>
 
     <section id="what-to-do">
       <div class="wrap">
-        <p class="section-label">/ 06 · What to do</p>
-        <h2>How to protect yourself</h2>
-        <ul class="list"><li><strong>A different password for every site.</strong> If one site stores it with MD5 and gets breached, that password falls in seconds. If you reuse it, every account using it goes with it.</li><li><strong>A password manager to keep them.</strong> It lets you have a different random password per site without remembering any of them.</li><li><strong>For the ones you memorise, a long phrase</strong> of your own, rather than something like P@ssw0rd!. Keep it away from pieces everyone uses.</li></ul>
-        <h3 style="margin-top:40px">If you build websites</h3>
-        <p class="prose">Store passwords with bcrypt or Argon2id and <strong>check the parameters</strong>, because they set what each guess costs. The OWASP guide gives minimum values for each algorithm. Plain MD5 or SHA-256 is not fit for passwords.</p>
+        <p class="section-label">/ 10 · What to do</p>
+        <h2>How to protect yourself better</h2>
+        <div class="cols2"><div><h3>If you have accounts on websites</h3>
+        <ul class="list"><li><strong>A different password for every site.</strong> If a site stores it with MD5 and gets breached, that password falls in seconds. If you use it elsewhere, every account falls with it.</li><li><strong>A password manager to keep them.</strong> That way each site gets its own random password and you do not have to memorise any. Make the master password long and unique: LastPass shows that even a manager depends on how it derives its key.</li><li><strong>For the ones you memorise, a long phrase</strong> of your own, rather than something like P@ssw0rd!. Not built from pieces everyone uses.</li><li><strong>A second factor wherever you can.</strong> It does not save a stolen password, but it stops anyone logging in with the password alone.</li></ul></div>
+        <div><h3>If you build websites</h3>
+        <ul class="list"><li><strong>bcrypt or Argon2id, and check the parameters</strong>: they decide what each guess costs. The OWASP guide gives minimum values for each algorithm. MD5 and SHA-256 on their own are not fit for passwords.</li><li><strong>Rehash old hashes at login</strong>, as WordPress 6.8 does, and decide what happens to accounts that never come back.</li><li><strong>Limit login attempts</strong> and offer a second factor. That covers the other scenario, the sign-in screen.</li><li><strong>Look at the password column</strong> of your database at least once. It takes a minute.</li></ul></div></div>
       </div>
     </section>
 
     <section id="method">
       <div class="wrap">
-        <p class="section-label">/ 07 · Method</p>
+        <p class="section-label">/ 11 · Method</p>
         <h2>How it was measured, and its limits</h2>
-        <ul class="list"><li><strong>20 passwords are not a sample.</strong> They were picked by hand to test ideas; the results describe these 20, not passwords in general.</li><li><strong>The same 20, stored all four ways</strong> with Python (hashlib, bcrypt and argon2-cffi): unsalted MD5 and SHA-256, bcrypt at cost 12 and Argon2id with 46 MiB, 1 pass and 1 lane.</li><li><strong>A laptop with an RTX 4060</strong> and hashcat 7.0.0. Speeds are the ones measured during the attack.</li><li><strong>Three phases per storage method</strong>: a public leaked list with variations, combinations from a list of 354 word pieces (checked in code that none of the 20 was in it), and brute force for MD5 and SHA-256 only.</li><li><strong>Time was capped</strong>: about 20 minutes of brute force for MD5 and SHA-256 (21 and 25 minutes in practice), 10 minutes per phase for bcrypt and Argon2id. Held means it did not fall within that time.</li><li><strong>The 35 and 4 days are calculations</strong>, not measurements: how long the list with variations would take at the measured speed.</li></ul>
-        <p class="prose"><strong>Sources:</strong> <a href="https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html">OWASP: Password Storage Cheat Sheet</a> · <a href="https://hashcat.net/hashcat/">hashcat</a></p>
+        <ul class="list"><li><strong>20 passwords are not a sample.</strong> They were picked by hand to test ideas; the results describe these 20, not passwords in general.</li><li><strong>The same 20, stored all four ways</strong> with Python (hashlib, bcrypt and argon2-cffi): MD5 and SHA-256 unsalted, bcrypt at cost 12 and Argon2id with 46 MiB, 1 pass and 1 thread.</li><li><strong>A laptop with an RTX 4060</strong> and hashcat 7.0.0. Speeds are the ones measured during the attack.</li><li><strong>Three phases per storage method</strong>: rockyou with the best66 rules; combinations from the 354-piece list with princeprocessor (none of the 20 was in it, checked in code); and mask brute force for MD5 and SHA-256 only.</li><li><strong>Limited time</strong>: about 20 minutes of brute force on MD5 and SHA-256 (21 and 25 minutes in practice), 10 minutes per phase on bcrypt and Argon2id. A password that did not fall means it did not fall in that time.</li><li><strong>The 35 and 4 days, the 1.4 million for phpass and the brute-force times are calculations</strong>, not measurements.</li><li><strong>The CMS and LastPass details</strong> come from the sources below and from Joomla's and PrestaShop's published code, not from this test.</li></ul>
+        <p class="prose"><strong>Sources:</strong> <a href="https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html">OWASP: Password Storage Cheat Sheet</a> · <a href="https://hashcat.net/hashcat/">hashcat</a> · <a href="https://make.wordpress.org/core/2025/02/17/wordpress-6-8-will-use-bcrypt-for-password-hashing/">WordPress 6.8 and bcrypt</a> · <a href="https://dri.es/node/6151">Dries Buytaert on Drupal</a> · <a href="https://www.thedroptimes.com/node/67297">The Drop Times</a> · <a href="https://medium.com/drmax-dev-blog/comparison-of-password-hashing-algorithms-in-common-open-source-php-based-e-commerce-solutions-96909a04649e">Dr. Max: hashing in Magento and PrestaShop</a> · <a href="https://github.com/PrestaShop/PrestaShop/blob/1.7.8.0/src/Core/Crypto/Hashing.php">PrestaShop 1.7.8.0: Hashing.php</a> · <a href="https://palant.info/2022/12/26/whats-in-a-pr-statement-lastpass-breach-explained/">Wladimir Palant on LastPass</a> · <a href="https://palant.info/2022/12/28/lastpass-breach-the-significance-of-these-password-iterations/">Palant: the iterations</a></p>
       </div>
     </section>
 

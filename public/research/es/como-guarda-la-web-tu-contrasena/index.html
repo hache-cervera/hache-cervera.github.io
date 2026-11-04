@@ -4,12 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>¿Cuánto tardaría en robar tu contraseña? · Investigación · Hache Cervera</title>
-  <meta name="description" content="Las mismas 20 contraseñas, guardadas de 4 formas y atacadas desde un portátil. En MD5 cayeron 3 en segundos; en bcrypt y Argon2id, ninguna. Lo que cambia es cómo las guarda la web." />
+  <meta name="description" content="Cuando roban la base de datos de una web, ¿qué decide si tu contraseña cae en segundos o no cae nunca? Las mismas 20, guardadas de 4 formas: en MD5 cayeron 3; en bcrypt y Argon2id, ninguna. Manda la configuración." />
   <link rel="canonical" href="https://hache-cervera.github.io/research/es/como-guarda-la-web-tu-contrasena/" />
   <link rel="alternate" hreflang="es" href="https://hache-cervera.github.io/research/es/como-guarda-la-web-tu-contrasena/" />
   <link rel="alternate" hreflang="en" href="https://hache-cervera.github.io/research/how-websites-store-your-password/" />
   <meta property="og:title" content="¿Cuánto tardaría en robar tu contraseña?" />
-  <meta property="og:description" content="Las mismas 20 contraseñas, guardadas de 4 formas y atacadas desde un portátil. En MD5 cayeron 3 en segundos; en bcrypt y Argon2id, ninguna. Lo que cambia es cómo las guarda la web." />
+  <meta property="og:description" content="Cuando roban la base de datos de una web, ¿qué decide si tu contraseña cae en segundos o no cae nunca? Las mismas 20, guardadas de 4 formas: en MD5 cayeron 3; en bcrypt y Argon2id, ninguna. Manda la configuración." />
   <meta property="og:image" content="https://hache-cervera.github.io/og-home.jpg" />
   <meta property="og:url" content="https://hache-cervera.github.io/research/es/como-guarda-la-web-tu-contrasena/" />
   <meta property="og:type" content="article" />
@@ -23,7 +23,7 @@
     @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400 500; font-display: swap; src: url('/fonts/inter-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
   </style>
   <script>(function () { try { document.documentElement.dataset.theme = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light'; } catch (e) {} })();</script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"¿Cuánto tardaría en robar tu contraseña?","description":"Las mismas 20 contraseñas, guardadas de 4 formas y atacadas desde un portátil. En MD5 cayeron 3 en segundos; en bcrypt y Argon2id, ninguna. Lo que cambia es cómo las guarda la web.","inLanguage":"es","datePublished":"2026-11-03","dateModified":"2026-11-03","url":"https://hache-cervera.github.io/research/es/como-guarda-la-web-tu-contrasena/","author":{"@type":"Person","name":"Ada (hache) Cervera","url":"https://hache-cervera.github.io/"}},{"@type":"Dataset","name":"Resultados del ataque a 20 contraseñas guardadas de 4 formas (noviembre 2026)","description":"Las mismas 20 contraseñas, guardadas de 4 formas y atacadas desde un portátil. En MD5 cayeron 3 en segundos; en bcrypt y Argon2id, ninguna. Lo que cambia es cómo las guarda la web.","inLanguage":"es","creator":{"@type":"Person","name":"Ada (hache) Cervera"},"temporalCoverage":"2026-11-02","license":"https://creativecommons.org/licenses/by/4.0/","isAccessibleForFree":true,"distribution":[{"@type":"DataDownload","encodingFormat":"text/csv","contentUrl":"https://hache-cervera.github.io/research/data/contrasenas-2026-11.csv"},{"@type":"DataDownload","encodingFormat":"application/json","contentUrl":"https://hache-cervera.github.io/research/data/contrasenas-2026-11.json"}]}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"¿Cuánto tardaría en robar tu contraseña?","description":"Cuando roban la base de datos de una web, ¿qué decide si tu contraseña cae en segundos o no cae nunca? Las mismas 20, guardadas de 4 formas: en MD5 cayeron 3; en bcrypt y Argon2id, ninguna. Manda la configuración.","inLanguage":"es","datePublished":"2026-11-03","dateModified":"2026-11-04","url":"https://hache-cervera.github.io/research/es/como-guarda-la-web-tu-contrasena/","author":{"@type":"Person","name":"Ada (hache) Cervera","url":"https://hache-cervera.github.io/"}},{"@type":"Dataset","name":"Resultados del ataque a 20 contraseñas guardadas de 4 formas (noviembre 2026)","description":"Cuando roban la base de datos de una web, ¿qué decide si tu contraseña cae en segundos o no cae nunca? Las mismas 20, guardadas de 4 formas: en MD5 cayeron 3; en bcrypt y Argon2id, ninguna. Manda la configuración.","inLanguage":"es","creator":{"@type":"Person","name":"Ada (hache) Cervera"},"temporalCoverage":"2026-11-02","license":"https://creativecommons.org/licenses/by/4.0/","isAccessibleForFree":true,"distribution":[{"@type":"DataDownload","encodingFormat":"text/csv","contentUrl":"https://hache-cervera.github.io/research/data/contrasenas-2026-11.csv"},{"@type":"DataDownload","encodingFormat":"application/json","contentUrl":"https://hache-cervera.github.io/research/data/contrasenas-2026-11.json"}]}]}</script>
   <style>
     :root {
       --bg: #ffffff;
@@ -714,6 +714,79 @@
     .pws .pw { white-space: normal; overflow-wrap: anywhere; }
     th .pw { font-size: 0.8125rem; }
 </style>
+  <style>
+    /* article v2: hierarchy, components, tables */
+    .prose, .list li { color: color-mix(in srgb, var(--ink) 80%, var(--bg)); }
+    .prose strong, .list li strong { color: var(--ink); }
+    section h2 { max-width: 44rem; }
+    h3.sub { margin-top: 56px; font-family: var(--font-display); font-weight: 700; font-size: 1.375rem; letter-spacing: -0.02em; line-height: 1.25; max-width: 46rem; }
+    h3.sub + .prose { margin-top: 12px; }
+    .toc { margin-top: 40px; display: grid; grid-template-columns: 1fr; list-style: none; border-top: 1px solid var(--line); }
+    @media (min-width: 640px) { .toc { grid-template-columns: 1fr 1fr; column-gap: 32px; } }
+    @media (min-width: 1000px) { .toc { grid-template-columns: repeat(3, 1fr); } }
+    .toc li { border-bottom: 1px solid var(--line); }
+    .toc a { display: flex; gap: 12px; align-items: baseline; padding: 12px 0; text-decoration: none; font-family: var(--font-display); font-weight: 600; font-size: 1rem; color: var(--ink) !important; transition: color 0.2s ease; }
+    .toc a span { min-width: 1.75rem; font-size: 0.75rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+    .toc a:hover { color: var(--accent) !important; }
+    .steps { list-style: none; margin-top: 40px; display: grid; gap: 28px 24px; grid-template-columns: 1fr; }
+    @media (min-width: 640px) { .steps { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 1100px) { .steps { grid-template-columns: repeat(5, 1fr); gap: 20px; } }
+    .steps li { border-top: 2px solid var(--line); padding-top: 16px; min-width: 0; }
+    .steps li.key { border-top-color: var(--accent); }
+    .steps b { display: block; font-family: var(--font-display); font-weight: 800; font-size: 2.5rem; line-height: 1; letter-spacing: -0.04em; color: var(--muted); }
+    .steps li.key b { color: var(--accent); }
+    .steps h3 { margin-top: 12px; font-family: var(--font-display); font-weight: 700; font-size: 1.0625rem; line-height: 1.3; }
+    .steps p { margin-top: 8px; font-size: 1rem; line-height: 1.55; color: var(--muted); }
+    .steps p strong { color: var(--ink); }
+    .steps code { overflow-wrap: anywhere; word-break: break-all; }
+    .ba > div.hot { border-color: var(--accent); border-top: 3px solid var(--accent); }
+    .ba > div:not(.hot) ul li { color: var(--muted); }
+    .ba .chip { margin-bottom: 12px; }
+    .pipe { list-style: none; margin-top: 40px; display: grid; gap: 12px; grid-template-columns: 1fr; }
+    @media (min-width: 700px) { .pipe { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 1100px) { .pipe { grid-template-columns: repeat(5, 1fr); } }
+    .pipe li { border: 1px solid var(--line); padding: 20px; min-width: 0; }
+    .pipe li:last-child { background: var(--surface); }
+    .pipe .ph { display: block; font-family: var(--font-display); font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+    html:not([data-theme='dark']) .pipe .ph { color: #c22e00; }
+    .pipe h3 { margin-top: 10px; font-family: var(--font-display); font-size: 1.125rem; font-weight: 700; letter-spacing: -0.01em; }
+    .pipe p { margin-top: 8px; font-size: 0.9375rem; line-height: 1.5; color: var(--muted); }
+    .pipe p strong { color: var(--ink); }
+    .figs.three { grid-template-columns: 1fr; }
+    @media (min-width: 760px) { .figs.three { grid-template-columns: repeat(3, 1fr); } }
+    .figs.three div:first-child b { color: var(--accent); }
+    .prefixes { margin-top: 20px; display: grid; grid-template-columns: 1fr; border-top: 1px solid var(--line); }
+    @media (min-width: 760px) { .prefixes { grid-template-columns: 1fr 1fr; column-gap: 32px; } }
+    .prefixes > div { display: grid; grid-template-columns: 9.5rem minmax(0, 1fr); gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+    .prefixes dt { font-family: var(--font-display); font-weight: 600; font-size: 0.875rem; }
+    .prefixes dd { font-size: 1rem; color: var(--muted); }
+    .tl.five { margin-top: 24px; }
+    @media (min-width: 900px) { .tl.five { grid-template-columns: repeat(5, 1fr); } }
+    .tl-step p strong { display: block; font-family: var(--font-display); font-size: 1.75rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; color: var(--ink); }
+    .tl-step.now p strong { color: var(--accent); }
+    .cols2 { margin-top: 32px; display: grid; gap: 16px; grid-template-columns: 1fr; }
+    @media (min-width: 900px) { .cols2 { grid-template-columns: 1fr 1fr; } }
+    .cols2 > div { border: 1px solid var(--line); padding: 28px; min-width: 0; }
+    .cols2 > div:first-child { border-top: 3px solid var(--accent); }
+    .cols2 h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.25rem; letter-spacing: -0.02em; }
+    .cols2 .list { margin-top: 8px; }
+    .cols2 .list li { font-size: 1rem; }
+    @media (max-width: 640px) { .cols2 > div { padding: 20px; } }
+    /* tables: dark header, readable row labels, zebra rows */
+    .tbl { margin-top: 32px; }
+    .tbl thead th { background: var(--panel); color: #f2f2f2; padding: 14px 18px; border-bottom: 0; letter-spacing: 0.08em; }
+    :root[data-theme='dark'] .tbl thead th { background: var(--surface); color: var(--ink); }
+    .tbl tbody th[scope='row'] { text-transform: none; letter-spacing: -0.01em; font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--ink); background: transparent; padding: 16px 18px; border-bottom: 1px solid var(--line); vertical-align: top; text-align: left; }
+    .tbl td { color: var(--ink); padding: 16px 18px; }
+    .tbl tbody tr:nth-child(even) > * { background: var(--surface); }
+    .tbl tbody tr:last-child > * { border-bottom: 0; }
+    .tbl td.n { font-family: var(--font-display); font-weight: 600; }
+    @media (max-width: 699px) {
+      .tbl.stack tbody tr:nth-child(even) > * { background: transparent; }
+      .tbl.stack tr { border-left: 3px solid var(--ink); }
+      .tbl.stack th[scope='row'] { font-size: 1.0625rem; }
+    }
+  </style>
 </head>
 <body>
   <div class="grain" aria-hidden="true"></div>
@@ -735,9 +808,9 @@
     <div class="hero wrap">
       <p class="kicker">/ Investigación · Seguridad web · Noviembre 2026</p>
       <h1>¿Cuánto tardaría en robar tu <em>contraseña?</em></h1>
-      <p class="lede">Guardé las mismas 20 contraseñas de las cuatro formas que usan las webs y las ataqué desde un portátil. Lo que aguanta una contraseña depende de dos cosas: <strong>la contraseña y cómo la guarda la web.</strong> La segunda no la elige quien se registra.</p>
+      <p class="lede">Cuando a una web le roban la base de datos, ¿qué decide si tu contraseña se rompe en segundos o no se rompe nunca? Guardé las mismas 20 contraseñas de las cuatro formas que usan las webs y las ataqué desde un portátil. Depende de dos cosas: <strong>la contraseña y cómo la guarda la web.</strong> La segunda no la elige quien se registra.</p>
       <dl class="meta"><div><dt>Contraseñas</dt><dd>20, elegidas a mano en 6 grupos</dd></div><div><dt>Formas de guardarlas</dt><dd>MD5, SHA-256, bcrypt (coste 12) y Argon2id (46 MiB, 1 pasada)</dd></div><div><dt>Equipo</dt><dd>Un portátil con una RTX 4060</dd></div><div><dt>Herramienta</dt><dd>hashcat 7.0.0, de código abierto</dd></div><div><dt>Medido</dt><dd>2 nov 2026</dd></div><div><dt>Datos</dt><dd><a href="../../data/contrasenas-2026-11.csv">CSV</a> · <a href="../../data/contrasenas-2026-11.json">JSON</a></dd></div></dl>
-      <p class="note"><strong>Lo que no está aquí:</strong> los comandos ni la configuración del ataque, ni los hashes. La página cuenta qué pasó y qué hacer.</p>
+      <p class="note"><strong>Esto es con la base de datos ya robada.</strong> El atacante tiene los hashes en su equipo y prueba sin límite. En un login normal la web puede frenar los intentos, y es otro escenario: aquí no digo que alguien adivine tu Instagram desde la pantalla de inicio de sesión. Tampoco están aquí los comandos exactos ni los hashes.</p>
     </div>
 
     <section id="highlights">
@@ -745,24 +818,61 @@
         <p class="section-label">/ En resumen</p>
         <h2>Los números</h2>
         <div class="figs"><div><b>11.350 M</b><span>intentos por segundo contra MD5</span></div><div><b>317</b><span>intentos por segundo contra bcrypt</span></div><div><b>3 / 20</b><span>cayeron con MD5 y con SHA-256</span></div><div><b>0 / 20</b><span>cayeron con bcrypt y con Argon2id</span></div><div><b>7,2 s</b><span>o menos tardó ineedapassword en caer con MD5</span></div></div>
+        <nav aria-label="Índice"><ol class="toc"><li><a href="#signup"><span>01</span>Al registrarte</a></li><li><a href="#methods"><span>02</span>Las cuatro formas</a></li><li><a href="#speed"><span>03</span>Velocidad</a></li><li><a href="#attack"><span>04</span>El ataque</a></li><li><a href="#passwords"><span>05</span>Las 20</a></li><li><a href="#fell"><span>06</span>Qué cayó</a></li><li><a href="#parameters"><span>07</span>La configuración</a></li><li><a href="#cms"><span>08</span>En los CMS</a></li><li><a href="#lastpass"><span>09</span>El caso LastPass</a></li><li><a href="#what-to-do"><span>10</span>Qué hacer</a></li><li><a href="#method"><span>11</span>Método</a></li></ol></nav>
+      </div>
+    </section>
+
+    <section id="signup">
+      <div class="wrap">
+        <p class="section-label">/ 01 · Al registrarte</p>
+        <h2>Qué le pasa a tu contraseña cuando te registras</h2>
+        <p class="prose">Una web bien hecha no guarda tu contraseña. Guarda un <strong>hash</strong>: el resultado de pasarla por una fórmula de la que no se puede volver atrás. Son cinco pasos.</p>
+        <ol class="steps">
+          <li><b aria-hidden="true">1</b><h3>Escribes la contraseña</h3><p>En el formulario. Viaja al servidor cifrada por HTTPS.</p></li>
+          <li><b aria-hidden="true">2</b><h3>El servidor genera una sal</h3><p>Un valor aleatorio, distinto para cada usuario.</p></li>
+          <li class="key"><b aria-hidden="true">3</b><h3>La pasa por la fórmula</h3><p>Contraseña y sal, con el coste que eligió quien hizo la web. <strong>Aquí se decide todo.</strong></p></li>
+          <li><b aria-hidden="true">4</b><h3>Guarda una sola línea</h3><p>Algoritmo, coste, sal y hash juntos. bcrypt con coste 12 empieza por <code>$2y$12$</code>; Argon2id lleva escrita su configuración: <code>$argon2id$v=19$m=47104,t=1,p=1$</code>.</p></li>
+          <li><b aria-hidden="true">5</b><h3>Olvida la contraseña</h3><p>Cuando vuelves, repite la cuenta con la sal guardada y compara. Si sale lo mismo, entras.</p></li>
+        </ol>
+        <p class="prose">Si alguien roba la base de datos, se lleva esas líneas. No ve tu contraseña: tiene que adivinarla, calcular el hash de cada intento y compararlo. <strong>Cuánto le cuesta cada intento lo decidió la web en el paso 3.</strong></p>
+        <div class="ba">
+          <div>
+            <p class="chip">Otro escenario</p>
+            <h3>Login normal</h3>
+            <ul>
+              <li>El atacante prueba en el formulario de la web, de uno en uno.</li>
+              <li>La web puede frenarle: límite de intentos, bloqueo temporal, segundo factor.</li>
+              <li>Lo que decide: esas defensas y que tu contraseña no sea de las más comunes.</li>
+            </ul>
+          </div>
+          <div class="hot">
+            <p class="chip part">Lo que mide este test</p>
+            <h3>Base de datos robada</h3>
+            <ul>
+              <li>El atacante tiene los hashes en su equipo y prueba sin pedir permiso.</li>
+              <li>No hay límite de intentos ni segundo factor que valga.</li>
+              <li>Lo que decide: cómo se guardó la contraseña y cómo de previsible es.</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </section>
 
     <section id="methods">
       <div class="wrap">
-        <p class="section-label">/ 01 · Las cuatro formas</p>
+        <p class="section-label">/ 02 · Las cuatro formas</p>
         <h2>Qué es cada forma de guardar una contraseña</h2>
-        <p class="prose">Una web no debería guardar tu contraseña tal cual. Guarda un <strong>hash</strong>: un resumen que sale de pasar la contraseña por una fórmula y del que no se puede volver atrás. Al iniciar sesión, la web calcula el hash de lo que escribes y lo compara con el guardado. Las cuatro formas del test hacen eso, pero se diseñaron para cosas distintas.</p>
+        <p class="prose">Las cuatro formas del test calculan un hash, pero se diseñaron para cosas distintas.</p>
         <div class="tbl stack" tabindex="0" role="region" aria-label="Qué es cada forma de guardar una contraseña"><table><thead><tr><th scope="col">Forma</th><th scope="col">Qué es</th><th scope="col">Para qué se diseñó</th><th scope="col">¿Sirve para contraseñas?</th></tr></thead><tbody><tr><th scope="row">MD5</th><td data-label="Qué es">Un resumen de 128 bits, de 1992. Muy rápido de calcular.</td><td data-label="Para qué se diseñó">Comprobar que un archivo no ha cambiado, como una huella. Hoy está roto incluso para eso.</td><td data-label="¿Sirve para contraseñas?"><strong>No.</strong> Es rápido a propósito.</td></tr><tr><th scope="row">SHA-256</th><td data-label="Qué es">Un resumen de 256 bits, de la familia SHA-2 (2001). Rápido y seguro como huella.</td><td data-label="Para qué se diseñó">Firmas digitales, certificados TLS, integridad de archivos.</td><td data-label="¿Sirve para contraseñas?"><strong>Solo, no.</strong> También es rápido a propósito.</td></tr><tr><th scope="row">bcrypt</th><td data-label="Qué es">Una fórmula de 1999 hecha para contraseñas. Lleva sal y un coste: cada punto de coste duplica el trabajo. Coste 12 son 4.096 repeticiones.</td><td data-label="Para qué se diseñó">Guardar contraseñas.</td><td data-label="¿Sirve para contraseñas?"><strong>Sí.</strong> OWASP pide coste 10 como mínimo.</td></tr><tr><th scope="row">Argon2id</th><td data-label="Qué es">La fórmula que ganó el concurso de hashes de contraseñas de 2015. Lleva sal y, además de tiempo, exige memoria en cada intento.</td><td data-label="Para qué se diseñó">Guardar contraseñas, también contra tarjetas gráficas.</td><td data-label="¿Sirve para contraseñas?"><strong>Sí.</strong> Es la primera opción de OWASP.</td></tr></tbody></table></div>
-        <p class="note"><strong>La sal</strong> es un valor aleatorio distinto para cada usuario que se mezcla con la contraseña. Hace que dos personas con la misma contraseña tengan hashes distintos. En el test, MD5 y SHA-256 iban sin sal, como en muchas webs antiguas.</p>
+        <p class="note"><strong>La sal</strong> hace que dos personas con la misma contraseña tengan hashes distintos, así que el atacante no puede atacarlas a la vez. En el test, MD5 y SHA-256 iban sin sal, como en muchas webs antiguas.</p>
       </div>
     </section>
 
     <section id="speed">
       <div class="wrap">
-        <p class="section-label">/ 02 · Velocidad</p>
+        <p class="section-label">/ 03 · Velocidad</p>
         <h2>El mismo ataque, a cuatro velocidades</h2>
-        <p class="prose">Quien roba la base de datos no ve las contraseñas, solo los hashes. Tiene que adivinar, calcular el hash de cada intento y compararlo. <strong>Cuántos intentos por segundo puede hacer depende solo de la forma que eligió la web.</strong> Estas son las velocidades máximas medidas en el mismo portátil.</p>
+        <p class="prose"><strong>Cuántos intentos por segundo puede hacer el atacante depende solo de la forma que eligió la web.</strong> Estas son las velocidades máximas medidas en el mismo portátil.</p>
         <div class="tbl stack" tabindex="0" role="region" aria-label="El mismo ataque, a cuatro velocidades"><table><thead><tr><th scope="col">Cómo la guarda la web</th><th scope="col">Intentos por segundo</th><th scope="col">Más lento que MD5</th><th scope="col">Lo que MD5 prueba en 1 s</th></tr></thead><tbody><tr><th scope="row">MD5</th><td class="n" data-label="Intentos por segundo">11.351.300.000</td><td class="n" data-label="Más lento que MD5">Referencia</td><td class="n" data-label="Lo que MD5 prueba en 1 s">1 s</td></tr><tr><th scope="row">SHA-256</th><td class="n" data-label="Intentos por segundo">2.878.100.000</td><td class="n" data-label="Más lento que MD5">3,9 veces</td><td class="n" data-label="Lo que MD5 prueba en 1 s">3,9 s</td></tr><tr><th scope="row">Argon2id</th><td class="n" data-label="Intentos por segundo">2.478</td><td class="n" data-label="Más lento que MD5">4,6 millones de veces</td><td class="n" data-label="Lo que MD5 prueba en 1 s">53 días</td></tr><tr><th scope="row">bcrypt</th><td class="n" data-label="Intentos por segundo">317</td><td class="n" data-label="Más lento que MD5">35,8 millones de veces</td><td class="n" data-label="Lo que MD5 prueba en 1 s">414 días</td></tr></tbody></table></div>
         <div class="viz" role="figure" aria-label="Lo que MD5 prueba en 1 segundo. bcrypt tarda 414 días en probar lo mismo. Cada cuadrado gris es un día.">
           <h3>Lo que MD5 prueba en 1 segundo</h3>
@@ -770,15 +880,31 @@
           <div class="one"><i></i><span>1 segundo con MD5</span></div>
           <div class="days" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
         </div>
-        <h3 style="margin-top:40px">Por qué salen estas velocidades</h3>
+        <h3 class="sub">Por qué salen estas velocidades</h3>
         <ul class="list"><li><strong>MD5 y SHA-256 son cuentas cortas.</strong> Una tarjeta gráfica tiene miles de núcleos pequeños que hacen la misma operación a la vez, y estas fórmulas casi no usan memoria. Por eso la RTX 4060 hace miles de millones por segundo. SHA-256 va unas 3,9 veces más lento porque su cuenta es más larga.</li><li><strong>bcrypt es caro a propósito.</strong> Con coste 12 repite su preparación 4.096 veces y, durante todo el cálculo, lee y escribe sin parar en una tabla de 4 KB. Las tarjetas gráficas llevan mal ese tipo de acceso a memoria: muchos de sus núcleos se quedan esperando.</li><li><strong>Argon2id pide memoria.</strong> Cada intento necesita 46 MiB. La RTX 4060 del portátil tiene 8 GB, así que caben como mucho unos 170 intentos a la vez (cálculo). Pero con una sola pasada, cada intento recorre esa memoria una vez, y mover memoria es justo lo que una tarjeta gráfica hace rápido.</li></ul>
         <p class="note">Velocidades medidas durante el ataque, no en el benchmark de la herramienta. En MD5 y SHA-256 la máxima sale de la fase de fuerza bruta: en la de diccionario el límite era leer la lista del disco, unos 500 millones de intentos por segundo. En bcrypt y Argon2id el límite es el propio hash en todas las fases. Un equipo con más o mejores tarjetas iría más rápido; este test no mide cuánto.</p>
       </div>
     </section>
 
+    <section id="attack">
+      <div class="wrap">
+        <p class="section-label">/ 04 · El ataque</p>
+        <h2>Con qué se atacó: rockyou y algo más</h2>
+        <p class="prose">Un atacante real no prueba al azar. Empieza por lo que la gente usa de verdad y solo al final prueba carácter a carácter. El test hizo lo mismo, en este orden y con las mismas piezas contra las cuatro formas:</p>
+        <ol class="pipe">
+          <li><span class="ph">Fase 1 · Diccionario</span><h3>rockyou</h3><p><strong>14.344.391</strong> contraseñas reales de una filtración de 2009, públicas desde entonces. La base de casi cualquier ataque.</p></li>
+          <li><span class="ph">Fase 1 · Diccionario</span><h3>Reglas best66</h3><p>Las variaciones de siempre sobre cada palabra de rockyou: mayúscula inicial, letras por números, sufijos.</p></li>
+          <li><span class="ph">Fase 2 · Combinaciones</span><h3>354 piezas propias</h3><p>Nombres de One Piece, palabras inglesas comunes, los años de 1990 a 2026 y sufijos como <code>!</code>, <code>123</code>, <code>@</code> o <code>404</code>.</p></li>
+          <li><span class="ph">Fase 2 · Combinaciones</span><h3>princeprocessor</h3><p>Junta esas piezas de dos en dos y de tres en tres. <strong>Es lo que montó CrazyCatLady.</strong></p></li>
+          <li><span class="ph">Fase 3 · Fuerza bruta</span><h3>Máscara</h3><p>Carácter a carácter, unos 20 minutos. Solo contra MD5 y SHA-256: bcrypt, a 317 por segundo, no cubriría ni las de 4 caracteres (cálculo).</p></li>
+        </ol>
+        <p class="note"><strong>Ninguna de las 20 contraseñas estaba en la lista de 354 piezas</strong>, comprobado por código. Las comunes sí podían estar en rockyou de forma natural, y eso era justo lo que quería medir. CrazyCatLady cayó porque la máquina la montó con palabras que usa cualquiera, no porque yo le diera la respuesta.</p>
+      </div>
+    </section>
+
     <section id="passwords">
       <div class="wrap">
-        <p class="section-label">/ 03 · Las 20</p>
+        <p class="section-label">/ 05 · Las 20</p>
         <h2>Las 20 contraseñas, por grupos</h2>
         <p class="prose">Ninguna es de nadie: las elegí a mano para probar una idea por grupo. <strong>En rojo, las que cayeron.</strong> Las mismas 20 se guardaron de las cuatro formas.</p>
         <div class="tbl stack" tabindex="0" role="region" aria-label="Las contraseñas"><table><thead><tr><th scope="col">Grupo</th><th scope="col">Por qué</th><th scope="col">Las contraseñas</th><th scope="col">Cayeron con MD5 y SHA-256</th></tr></thead><tbody><tr><th scope="row">Comunes</th><td data-label="Por qué">Esperaba que cayeran al instante.</td><td data-label="Las contraseñas"><span class="pws"><span class="pw fell">ineedapassword</span><span class="pw fell">iforgot</span><span class="pw">PleaseUseMe</span></span></td><td class="n" data-label="Cayeron con MD5 y SHA-256">2 / 3</td></tr><tr><th scope="row">Parecen fuertes</th><td data-label="Por qué">Mayúsculas, símbolos y números con patrón.</td><td data-label="Las contraseñas"><span class="pws"><span class="pw">ZoroGotLostAg@in!404</span><span class="pw">SuuuuperRRRrr!77</span><span class="pw">SniperKing=Usopp?100%</span></span></td><td class="n" data-label="Cayeron con MD5 y SHA-256">0 / 3</td></tr><tr><th scope="row">Bromas de internet</th><td data-label="Por qué">No sabía de qué lado caerían.</td><td data-label="Las contraseñas"><span class="pws"><span class="pw">FBISurveillanceVan</span><span class="pw fell">CrazyCatLady</span><span class="pw">EarlyAlzheimers</span><span class="pw">PorqueFi</span></span></td><td class="n" data-label="Cayeron con MD5 y SHA-256">1 / 4</td></tr><tr><th scope="row">Frases de palabras</th><td data-label="Por qué">Esperaba que aguantaran por largas.</td><td data-label="Las contraseñas"><span class="pws"><span class="pw">memorysucks</span><span class="pw">whydoialwaysforget</span><span class="pw">NoOneHasntDoneXGopu</span><span class="pw">LongHairedFreakyPeopleNeedNotApply</span><span class="pw">DiarrheaIsHereditary.ItRunsN1sJeans.</span></span></td><td class="n" data-label="Cayeron con MD5 y SHA-256">0 / 5</td></tr><tr><th scope="row">La ridícula larga</th><td data-label="Por qué">68 caracteres.</td><td data-label="Las contraseñas"><span class="pws"><span class="pw">IndianMilitaryCyberIntelligenceWing<wbr>CommanderMajorSheeKumarPaPaPa@123</span></span></td><td class="n" data-label="Cayeron con MD5 y SHA-256">0 / 1</td></tr><tr><th scope="row">Aleatorias</th><td data-label="Por qué">De un generador criptográfico: 8, 12, 16 y 20 caracteres.</td><td data-label="Las contraseñas"><span class="pws"><span class="pw">nGA295h{</span><span class="pw">xsor{lR=^yu=</span><span class="pw">jR4(QY5GWgTS^Bm7</span><span class="pw">j%=bQHxw{NTC0GE^^y1=</span></span></td><td class="n" data-label="Cayeron con MD5 y SHA-256">0 / 4</td></tr></tbody></table></div>
@@ -787,40 +913,83 @@
 
     <section id="fell">
       <div class="wrap">
-        <p class="section-label">/ 04 · Qué cayó</p>
+        <p class="section-label">/ 06 · Qué cayó</p>
         <h2>Qué cayó y por qué</h2>
-        <p class="prose">Con MD5 y con SHA-256 cayeron las mismas tres. Con bcrypt y Argon2id, ninguna, <strong>ni las que estaban en la lista filtrada.</strong></p>
+        <p class="prose">Con MD5 y con SHA-256 cayeron las mismas tres. Con bcrypt y Argon2id, ninguna, <strong>ni las que estaban en rockyou.</strong></p>
         <div class="tbl stack" tabindex="0" role="region" aria-label="Qué cayó y por qué"><table><thead><tr><th scope="col">Contraseña</th><th scope="col">Cómo cayó</th><th scope="col">MD5, como mucho</th><th scope="col">SHA-256, como mucho</th><th scope="col">bcrypt y Argon2id</th></tr></thead><tbody><tr><th scope="row"><span class="pw fell">ineedapassword</span></th><td data-label="Cómo cayó">Estaba tal cual en rockyou, una lista de 14,3 millones de contraseñas filtradas que es pública.</td><td class="n" data-label="MD5, como mucho">7,2 s</td><td class="n" data-label="SHA-256, como mucho">24,1 s</td><td class="n" data-label="bcrypt y Argon2id">No cayó</td></tr><tr><th scope="row"><span class="pw fell">iforgot</span></th><td data-label="Cómo cayó">También en rockyou.</td><td class="n" data-label="MD5, como mucho">7,2 s</td><td class="n" data-label="SHA-256, como mucho">24,1 s</td><td class="n" data-label="bcrypt y Argon2id">No cayó</td></tr><tr><th scope="row"><span class="pw fell">CrazyCatLady</span></th><td data-label="Cómo cayó">No estaba en rockyou. La montó un programa combinando palabras comunes de una lista: crazy, cat y lady.</td><td class="n" data-label="MD5, como mucho">27,6 s</td><td class="n" data-label="SHA-256, como mucho">45,1 s</td><td class="n" data-label="bcrypt y Argon2id">No cayó</td></tr></tbody></table></div>
         <p class="prose">Cada tiempo es el final de la fase en la que cayó la contraseña, contado desde que empieza el ataque: cayó en ese tiempo o antes. Con bcrypt y Argon2id <strong>ni siquiera se terminó de recorrer el diccionario</strong> en los 10 minutos de cada fase: a 317 intentos por segundo, recorrer rockyou con sus variaciones llevaría hasta unos 35 días; a 2.478, unos 4.</p>
-        <h3 style="margin-top:40px">Tres cosas que no esperaba</h3>
+        <h3 class="sub">Tres cosas que no esperaba</h3>
         <ul class="list"><li><strong><span class="pw">ZoroGotLostAg@in!404</span> aguantó, también con MD5.</strong> Tiene mayúsculas, símbolos y números. Lo que hunde una contraseña es estar hecha de piezas que usa cualquiera, como pasó con CrazyCatLady.</li><li><strong><span class="pw">PleaseUseMe</span> parecía común y no cayó.</strong> No estaba en rockyou y las variaciones del diccionario no llegaron a ella.</li><li><strong><span class="pw">PorqueFi</span> no cayó, pero no es segura.</strong> Tiene 8 caracteres, solo letras. La fuerza bruta del test llegó a 6 o 7 caracteres; probando solo letras, MD5 la sacaría en unas 1,3 horas (cálculo). No caer en el tiempo del test no la hace fuerte.</li></ul>
       </div>
     </section>
 
     <section id="parameters">
       <div class="wrap">
-        <p class="section-label">/ 05 · Los parámetros</p>
-        <h2>¿Por qué Argon2id, más moderno, aguantó menos?</h2>
-        <p class="prose">Con los parámetros del test, <strong>bcrypt aguantó unas 8 veces más</strong>: se atacaba a 317 intentos por segundo, frente a 2.478 de Argon2id. La razón está en la configuración. <strong>Argon2id iba en el mínimo que recomienda OWASP</strong> (46 MiB y una pasada, la primera opción de su lista). <strong>bcrypt iba por encima del suyo</strong>: coste 12, cuando el mínimo es 10. Lo que se comparó son dos configuraciones. Argon2id con más memoria o más pasadas sería más lento de atacar, y bcrypt con coste 10, unas 4 veces más rápido (cálculo: cada punto de coste duplica el trabajo). Subir los parámetros tiene un precio: el servidor tarda más en cada inicio de sesión.</p>
+        <p class="section-label">/ 07 · La configuración</p>
+        <h2>Manda la configuración, no la etiqueta del algoritmo</h2>
+        <div class="quote"><p><strong>Decir «esta web usa bcrypt» o «usa MD5» no basta.</strong> Lo que fija el precio de cada intento son los parámetros con los que se usa: el coste, la memoria, las pasadas, la sal.</p></div>
+        <h3 class="sub">Argon2id, más moderno, aguantó menos que bcrypt</h3>
+        <p class="prose">Con los parámetros del test, <strong>bcrypt aguantó unas 8 veces más</strong>: 317 intentos por segundo, frente a 2.478 de Argon2id. <strong>Argon2id iba en el mínimo que recomienda OWASP</strong> (46 MiB y una pasada, la primera opción de su lista). <strong>bcrypt iba por encima del suyo</strong>: coste 12, cuando el mínimo es 10. Argon2id con más memoria o más pasadas sería más lento de atacar, y bcrypt con coste 10, unas 4 veces más rápido (cálculo: cada punto de coste duplica el trabajo). Subir los parámetros tiene un precio: el servidor tarda más en cada inicio de sesión.</p>
+        <h3 class="sub">No todo «MD5» es el MD5 del test</h3>
+        <p class="prose">WordPress usó hasta la versión 6.7 un sistema llamado phpass. Por dentro es MD5, pero <strong>con sal y repetido 8.192 veces.</strong> Misma etiqueta, unas 8.000 veces menos intentos. Y aun así, miles de veces más rápido de atacar que bcrypt con coste 12.</p>
+        <div class="figs three"><div><b>11.350 M</b><span>intentos por segundo: MD5 del test, sin sal (medido)</span></div><div><b>≈ 1,4 M</b><span>intentos por segundo: phpass de WordPress hasta la 6.7 (cálculo, no medido)</span></div><div><b>317</b><span>intentos por segundo: bcrypt con coste 12 (medido)</span></div></div>
+        <p class="note"><strong>Un límite de bcrypt:</strong> solo usa los primeros 72 bytes de la contraseña. La de 68 caracteres del test cabe por poco. Por eso WordPress 6.8 resume antes la contraseña con SHA-384 y pasa ese resumen a bcrypt.</p>
+      </div>
+    </section>
+
+    <section id="cms">
+      <div class="wrap">
+        <p class="section-label">/ 08 · En los CMS</p>
+        <h2>Cómo guardan las contraseñas WordPress, Drupal y compañía</h2>
+        <p class="prose">La mayoría de las webs no programan esto: lo hereda el gestor de contenidos. Así ha ido cambiando en los más usados.</p>
+        <div class="tbl stack" tabindex="0" role="region" aria-label="Cómo guardan las contraseñas los CMS"><table><thead><tr><th scope="col">CMS</th><th scope="col">Antes</th><th scope="col">Ahora</th><th scope="col">Ojo con</th></tr></thead><tbody>
+          <tr><th scope="row">WordPress</th><td data-label="Antes">phpass (MD5 con sal, repetido), prefijo <code>$P$</code>, hasta la 6.7.</td><td data-label="Ahora">Desde la 6.8 (abril 2025), bcrypt tras resumir con SHA-384, prefijo <code>$wp$2y$</code>. Argon2id, opcional.</td><td data-label="Ojo con">Los hashes viejos se rehacen al volver a entrar. Quien no vuelve sigue en <code>$P$</code>.</td></tr>
+          <tr><th scope="row">Drupal</th><td data-label="Antes">MD5; desde Drupal 7, phpass con SHA-512 (<code>$S$</code>).</td><td data-label="Ahora">bcrypt desde Drupal 10. Argon2id está anunciado a partir de Drupal 12.</td><td data-label="Ojo con">Lo de Drupal 12 es un cambio anunciado, no algo ya en producción.</td></tr>
+          <tr><th scope="row">Joomla</th><td data-label="Antes">MD5 con sal.</td><td data-label="Ahora">bcrypt desde Joomla 3.2 (2013).</td><td data-label="Ojo con">Sitios sin actualizar en años.</td></tr>
+          <tr><th scope="row">Magento</th><td data-label="Antes">Magento 1: MD5 con sal.</td><td data-label="Ahora">Argon2id si el servidor tiene la extensión Sodium (PHP 7.3 o superior).</td><td data-label="Ojo con">Sin Sodium cae a SHA-256 con sal por cliente: un hash rápido.</td></tr>
+          <tr><th scope="row">PrestaShop</th><td data-label="Antes"><code>md5(_COOKIE_KEY_ . contraseña)</code>: una sola clave para toda la tienda.</td><td data-label="Ahora">En la 1.7 guarda las nuevas con bcrypt, pero sigue aceptando el MD5 antiguo.</td><td data-label="Ojo con">Cuál usa una tienda concreta solo se sabe mirándola.</td></tr>
+        </tbody></table></div>
+        <p class="prose"><strong>Cómo saber qué usa tu web:</strong> mira la columna de la contraseña de un usuario en la base de datos. El principio lo dice.</p>
+        <dl class="prefixes"><div><dt><code>$P$</code></dt><dd>phpass, WordPress antiguo</dd></div><div><dt><code>$wp$2y$</code></dt><dd>WordPress 6.8 o posterior, bcrypt</dd></div><div><dt><code>$2y$</code> · <code>$2b$</code></dt><dd>bcrypt; el número siguiente es el coste</dd></div><div><dt><code>$argon2id$</code></dt><dd>Argon2id, con la memoria (<code>m</code>) y las pasadas (<code>t</code>) escritas</dd></div><div><dt><code>$S$</code></dt><dd>Drupal 7</dd></div><div><dt>32 / 64 hex</dt><dd>Nada más que hexadecimal: MD5 o, con 64, probablemente SHA-256</dd></div></dl>
+        <p class="note"><strong>En mi propia web</strong>, devilfruittcg.com, con WordPress: lo comprobé y guarda las contraseñas con bcrypt.</p>
+        <p class="prose">El hash es la última línea de defensa, la que queda cuando todo lo demás ha fallado. Antes van las otras: <strong>actualizar el CMS y los plugins</strong>, que es por donde suelen robar las bases de datos; <strong>limitar los intentos de login</strong>, que WordPress no hace de serie (se añade con un plugin o en el proxy), y <strong>el segundo factor</strong> para las cuentas de administración.</p>
+      </div>
+    </section>
+
+    <section id="lastpass">
+      <div class="wrap">
+        <p class="section-label">/ 09 · El caso LastPass</p>
+        <h2>El mismo problema, en un gestor de contraseñas</h2>
+        <p class="prose">En 2022 robaron a LastPass copias de seguridad de las cajas fuertes de sus usuarios. No era una web con una tabla de hashes, pero el fallo cae en el mismo eje que este test: <strong>cuánto trabajo cuesta cada intento.</strong></p>
+        <ul class="list">
+          <li><strong>La llave de cada caja sale de la contraseña maestra</strong> con PBKDF2, que va repitiendo un hash rápido de la familia SHA. Las repeticiones, que LastPass llama iteraciones, hacen de coste.</li>
+          <li><strong>El valor por defecto subió, pero las cuentas antiguas no se actualizaron solas.</strong> Había cuentas en 5.000, en 500 e incluso en 1.</li>
+          <li><strong>Las direcciones de las webs guardadas iban sin cifrar.</strong> Las contraseñas y notas, sí. El atacante podía ver a qué sitios pertenecía cada entrada y elegir qué cajas atacar primero.</li>
+          <li><strong>LastPass habló de «millones de años»</strong> para romper una maestra. El analista Wladimir Palant respondió que eso confunde la fuerza bruta pura con una contraseña que elige una persona: con una sola tarjeta gráfica, una maestra de 40 bits de entropía caería en unos dos meses, según sus cálculos.</li>
+        </ul>
+        <h3 class="sub">Las iteraciones por defecto de LastPass</h3>
+        <ol class="tl five"><li class="tl-step"><b>Al principio</b><p><strong>1</strong> iteración</p></li><li class="tl-step"><b>Junio 2012</b><p><strong>500</strong></p></li><li class="tl-step"><b>Febrero 2013</b><p><strong>5.000</strong></p></li><li class="tl-step"><b>Febrero 2018</b><p><strong>100.100</strong>sin migrar las cuentas viejas</p></li><li class="tl-step now"><b>OWASP, 2022</b><p><strong>310.000</strong> recomendadas</p></li></ol>
+        <p class="note"><strong>El matiz:</strong> no fue bcrypt contra MD5 en una web. Fue PBKDF2 con pocas repeticiones en un gestor. Es la misma familia de problema, una fórmula rápida con poco trabajo por intento, en otro escenario. Y deja otra lección que también se ve en WordPress: subir el coste solo protege a las cuentas que se migran.</p>
       </div>
     </section>
 
     <section id="what-to-do">
       <div class="wrap">
-        <p class="section-label">/ 06 · Qué hacer</p>
+        <p class="section-label">/ 10 · Qué hacer</p>
         <h2>Cómo protegerte mejor</h2>
-        <ul class="list"><li><strong>Una contraseña distinta por sitio.</strong> Si una web la guarda con MD5 y se la roban, esa contraseña cae en segundos. Si es la misma que usas en otros sitios, caen todos.</li><li><strong>Un gestor de contraseñas que las guarde.</strong> Así puedes tener una distinta y aleatoria para cada sitio sin memorizarlas.</li><li><strong>Para las que memorizas, una frase larga</strong> y tuya, mejor que algo tipo P@ssw0rd!. Que no esté hecha de piezas que usa cualquiera.</li></ul>
-        <h3 style="margin-top:40px">Si haces webs</h3>
-        <p class="prose">Guarda las contraseñas con bcrypt o Argon2id y <strong>revisa los parámetros</strong>, porque son los que deciden cuánto cuesta cada intento. La guía de OWASP da valores mínimos para cada algoritmo. MD5 y SHA-256 solos no sirven para contraseñas.</p>
+        <div class="cols2"><div><h3>Si tienes cuentas en webs</h3>
+        <ul class="list"><li><strong>Una contraseña distinta por sitio.</strong> Si una web la guarda con MD5 y se la roban, esa contraseña cae en segundos. Si es la misma que usas en otros sitios, caen todos.</li><li><strong>Un gestor de contraseñas que las guarde.</strong> Así puedes tener una distinta y aleatoria para cada sitio sin memorizarlas. La maestra, larga y que no uses en ningún otro sitio: LastPass enseña que hasta el gestor depende de cómo deriva su llave.</li><li><strong>Para las que memorizas, una frase larga</strong> y tuya, mejor que algo tipo P@ssw0rd!. Que no esté hecha de piezas que usa cualquiera.</li><li><strong>Segundo factor donde se pueda.</strong> No salva la contraseña robada, pero impide entrar solo con ella.</li></ul></div>
+        <div><h3>Si haces webs</h3>
+        <ul class="list"><li><strong>bcrypt o Argon2id, y revisa los parámetros</strong>: son los que deciden cuánto cuesta cada intento. La guía de OWASP da valores mínimos para cada algoritmo. MD5 y SHA-256 solos no sirven para contraseñas.</li><li><strong>Rehaz los hashes antiguos al iniciar sesión</strong>, como hace WordPress 6.8, y decide qué pasa con las cuentas que nunca vuelven.</li><li><strong>Limita los intentos de login</strong> y ofrece segundo factor. Eso protege el otro escenario, el de la pantalla de inicio de sesión.</li><li><strong>Mira la columna de contraseñas</strong> de tu base de datos al menos una vez. Tarda un minuto.</li></ul></div></div>
       </div>
     </section>
 
     <section id="method">
       <div class="wrap">
-        <p class="section-label">/ 07 · Método</p>
+        <p class="section-label">/ 11 · Método</p>
         <h2>Cómo se midió y sus límites</h2>
-        <ul class="list"><li><strong>20 contraseñas no son una muestra.</strong> Están elegidas a mano para probar ideas; los resultados describen estas 20, no a todas.</li><li><strong>Las mismas 20, guardadas de las cuatro formas</strong> con Python (hashlib, bcrypt y argon2-cffi): MD5 y SHA-256 sin sal, bcrypt con coste 12 y Argon2id con 46 MiB, 1 pasada y 1 hilo.</li><li><strong>Un portátil con una RTX 4060</strong> y hashcat 7.0.0. Las velocidades son las medidas durante el ataque.</li><li><strong>Tres fases por forma de guardar</strong>: una lista filtrada pública con variaciones, combinaciones de palabras de una lista de 354 piezas (ninguna de las 20 estaba en ella, comprobado por código) y fuerza bruta solo para MD5 y SHA-256.</li><li><strong>Tiempo limitado</strong>: unos 20 minutos de fuerza bruta en MD5 y SHA-256 (21 y 25 minutos reales), 10 minutos por fase en bcrypt y Argon2id. Que una contraseña no caiga significa que no cayó en ese tiempo.</li><li><strong>Los 35 y 4 días son cálculos</strong>, no mediciones: lo que tardaría recorrer la lista con variaciones a la velocidad medida.</li></ul>
-        <p class="prose"><strong>Fuentes:</strong> <a href="https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html">OWASP: Password Storage Cheat Sheet</a> · <a href="https://hashcat.net/hashcat/">hashcat</a></p>
+        <ul class="list"><li><strong>20 contraseñas no son una muestra.</strong> Están elegidas a mano para probar ideas; los resultados describen estas 20, no a todas.</li><li><strong>Las mismas 20, guardadas de las cuatro formas</strong> con Python (hashlib, bcrypt y argon2-cffi): MD5 y SHA-256 sin sal, bcrypt con coste 12 y Argon2id con 46 MiB, 1 pasada y 1 hilo.</li><li><strong>Un portátil con una RTX 4060</strong> y hashcat 7.0.0. Las velocidades son las medidas durante el ataque.</li><li><strong>Tres fases por forma de guardar</strong>: rockyou con las reglas best66; combinaciones de la lista de 354 piezas con princeprocessor (ninguna de las 20 estaba en ella, comprobado por código); y fuerza bruta por máscara solo para MD5 y SHA-256.</li><li><strong>Tiempo limitado</strong>: unos 20 minutos de fuerza bruta en MD5 y SHA-256 (21 y 25 minutos reales), 10 minutos por fase en bcrypt y Argon2id. Que una contraseña no caiga significa que no cayó en ese tiempo.</li><li><strong>Los 35 y 4 días, el 1,4 millones de phpass y los tiempos de fuerza bruta son cálculos</strong>, no mediciones.</li><li><strong>Los datos de los CMS y de LastPass</strong> salen de las fuentes de abajo y del código publicado de Joomla y PrestaShop, no de este test.</li></ul>
+        <p class="prose"><strong>Fuentes:</strong> <a href="https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html">OWASP: Password Storage Cheat Sheet</a> · <a href="https://hashcat.net/hashcat/">hashcat</a> · <a href="https://make.wordpress.org/core/2025/02/17/wordpress-6-8-will-use-bcrypt-for-password-hashing/">WordPress 6.8 y bcrypt</a> · <a href="https://dri.es/node/6151">Dries Buytaert sobre Drupal</a> · <a href="https://www.thedroptimes.com/node/67297">The Drop Times</a> · <a href="https://medium.com/drmax-dev-blog/comparison-of-password-hashing-algorithms-in-common-open-source-php-based-e-commerce-solutions-96909a04649e">Dr. Max: hashes en Magento y PrestaShop</a> · <a href="https://github.com/PrestaShop/PrestaShop/blob/1.7.8.0/src/Core/Crypto/Hashing.php">PrestaShop 1.7.8.0: Hashing.php</a> · <a href="https://palant.info/2022/12/26/whats-in-a-pr-statement-lastpass-breach-explained/">Wladimir Palant sobre LastPass</a> · <a href="https://palant.info/2022/12/28/lastpass-breach-the-significance-of-these-password-iterations/">Palant: las iteraciones</a></p>
       </div>
     </section>
 
