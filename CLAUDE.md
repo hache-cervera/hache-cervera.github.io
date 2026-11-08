@@ -115,8 +115,13 @@ Application emails link to `/ref-NNNN/` or `/es/ref-NNNN/`. The build
 `scripts/alias-codes.json`; canonical stays on the home. Numbers are random on
 purpose, so a recipient cannot infer how many applications went out. Which company
 got which reference is kept outside the repo. On these pages `stats.js` also sends
-a `leido <path>` event after 10 visible seconds or a scroll, to tell people apart
-from mail scanners. Adding references: append to the JSON, never renumber.
+events, all of them only after a real (trusted) mouse, touch, wheel or key input and
+never when `navigator.webdriver` is set: `leido` (10 visible seconds or a scroll),
+`1-minuto`, `scroll-50`, `scroll-100` and `clic-<cv|linkedin|email|investigacion|proyectos>`,
+each sent as `<name> <path>`. The tracking sheet reads the word before the space.
+Google's link previews (Sheets, Gmail) open these pages from US data centres with Chrome
+on Windows and used to fire `leido` by scrolling; that is why the input is required.
+Adding references: append to the JSON, never renumber.
 
 `count.js` takes the path from `<link rel="canonical">` when it is on the same host,
 and reference pages point their canonical at the home, so `stats.js` overrides the
