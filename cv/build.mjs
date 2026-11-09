@@ -262,34 +262,37 @@ p, li { text-wrap: pretty; }
 .mini b { font: 700 11pt/1 Sora, Arial, sans-serif; }
 .mini b span { color: var(--accent); }
 .mini small { font-size: 6.8pt; color: var(--muted); }
-.card { margin-top: 10pt; background: var(--card); color: #ececec; border-radius: 12pt; padding: 12pt 16pt; }
+.card { margin-top: 8pt; background: var(--card); color: #ececec; border-radius: 12pt; padding: 10pt 16pt; }
 .q { font: 600 9pt/1.35 Sora, Arial, sans-serif; color: #fff; }
 .q::before { content: '\\201C'; display: block; font: 800 20pt/0.8 Sora, Arial, sans-serif; color: var(--accent); margin-bottom: 4pt; }
-.sum { margin-top: 7pt; font-size: 7.1pt; line-height: 1.5; color: #d2d2d2; }
-.contact { margin-top: 9pt; padding-top: 8pt; border-top: 1px solid #383838; font-size: 7.1pt; line-height: 1.6; color: #f1f1f1; }
+.sum { margin-top: 6pt; font-size: 7.1pt; line-height: 1.42; color: #d2d2d2; }
+.contact { margin-top: 7pt; padding-top: 6pt; border-top: 1px solid #383838; font-size: 7.1pt; line-height: 1.6; color: #f1f1f1; }
 .contact i { font-style: normal; color: #777; margin: 0 5pt; }
 .contact .rem { color: #d2d2d2; }
 .contact a.web { color: var(--accent); font-weight: 500; }
 dt { font: 600 5.8pt/1.2 Sora, Arial, sans-serif; letter-spacing: 0.08em; text-transform: uppercase; color: #9a9a9a; }
 dd { font-size: 7.1pt; color: #f1f1f1; }
-main { margin-top: 12pt; flex: 1; }
+main { margin-top: 10pt; flex: 1; }
 .sk { display: grid; grid-template-columns: 112pt 1fr; gap: 10pt; align-items: baseline; font-size: 7.1pt; line-height: 1.45; color: #2a2a2a; }
-.sk + .sk { margin-top: 3pt; }
+.sk + .sk { margin-top: 4pt; }
+/* skills as one line of text with light dots: chips or wide gaps make parsers read them as loose blocks */
+.sk .list { font-size: 7.3pt; line-height: 1.45; color: var(--ink); }
+.sk .list i { font-style: normal; color: #c4c4c4; margin: 0 3pt; }
 .sk b { font: 700 6.3pt/1.2 Sora, Arial, sans-serif; letter-spacing: 0.07em; text-transform: uppercase; color: var(--accent); }
-h2 { display: flex; align-items: center; gap: 6pt; font: 700 8.4pt/1 Sora, Arial, sans-serif; letter-spacing: 0.02em; text-transform: uppercase; margin-bottom: 9pt; }
-h2:not(:first-child) { margin-top: 12pt; }
+h2 { display: flex; align-items: center; gap: 6pt; font: 700 8.4pt/1 Sora, Arial, sans-serif; letter-spacing: 0.02em; text-transform: uppercase; margin-bottom: 7pt; }
+h2:not(:first-child) { margin-top: 10pt; }
 .badge { width: 13pt; height: 13pt; border-radius: 3pt; background: var(--accent); display: grid; place-items: center; flex: none; }
 .badge svg { width: 8.5pt; height: 8.5pt; fill: none; stroke: #fff; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
 h3.g { font: 700 6.3pt/1.2 Sora, Arial, sans-serif; letter-spacing: 0.07em; text-transform: uppercase; color: var(--accent); margin: 8pt 0 4pt; }
 h2 + h3.g { margin-top: 0; }
 .tags { display: flex; flex-wrap: wrap; gap: 3pt; }
-.tags span { border: 1px solid #d4d4d4; border-radius: 99pt; padding: 1.4pt 5pt; font-size: 6.4pt; line-height: 1.25; }
-.item + .item { margin-top: 6pt; }
+.tags span { border: 1px solid #d4d4d4; border-radius: 99pt; padding: 1pt 4.5pt; font-size: 6.4pt; line-height: 1.25; }
+.item + .item { margin-top: 5pt; }
 .year { font: 700 8.2pt/1.2 Sora, Arial, sans-serif; color: var(--accent); }
 .item b { display: block; font: 600 7.4pt/1.3 Sora, Arial, sans-serif; }
 .item small { display: block; font-size: 6.9pt; color: var(--muted); margin-top: 1pt; }
-.item p { font-size: 7.1pt; color: #444; margin-top: 2pt; line-height: 1.45; }
-.job + .job { margin-top: 11pt; }
+.item p { font-size: 7.1pt; color: #444; margin-top: 1pt; line-height: 1.4; }
+.job + .job { margin-top: 8pt; }
 .dates { font: 700 6.4pt/1.2 Sora, Arial, sans-serif; letter-spacing: 0.07em; text-transform: uppercase; color: var(--accent); }
 .job b { display: block; margin-top: 3pt; font: 700 8.6pt/1.25 Sora, Arial, sans-serif; }
 .job small { display: block; font-size: 7.1pt; color: var(--muted); margin-top: 1pt; }
@@ -353,7 +356,7 @@ h2 + h3.g { margin-top: 0; }
     ${head('projects', t.labels.projects)}
     ${t.projects.map(([n, u, d]) => `<div class="item"><b><a href="${u}">${esc(n)}</a></b><p>${esc(d)}</p></div>`).join('')}
     ${head('skills', t.labels.skills)}
-    ${t.skills.map(([g, items]) => `<p class="sk"><b>${esc(g)}</b><span>${esc(items.join(', '))}.</span></p>`).join('\n    ')}
+    ${t.skills.map(([g, items]) => `<div class="sk"><b>${esc(g)}</b><p class="list">${items.map(i => `<span class="nw">${esc(i)}</span>`).join('<i>·</i> ')}</p></div>`).join('\n    ')}
     ${head('education', t.labels.more)}
     <p class="sk"><b>${esc(t.labels.education)}</b><span>${t.education.map(([n, s]) => `${esc(n)}, ${esc(s)}.`).join('<br>')}</span></p>
     <p class="sk"><b>${esc(t.labels.languages)}</b><span>${esc(t.languages)}.</span></p>
