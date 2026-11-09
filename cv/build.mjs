@@ -275,9 +275,9 @@ dd { font-size: 7.1pt; color: #f1f1f1; }
 main { margin-top: 10pt; flex: 1; }
 .sk { display: grid; grid-template-columns: 112pt 1fr; gap: 10pt; align-items: baseline; font-size: 7.1pt; line-height: 1.45; color: #2a2a2a; }
 .sk + .sk { margin-top: 4pt; }
-/* skills as one line of text with light dots: chips or wide gaps make parsers read them as loose blocks */
+/* skills as one line of text with faint commas: chips or wide gaps make parsers read them as loose blocks */
 .sk .list { font-size: 7.3pt; line-height: 1.45; color: var(--ink); }
-.sk .list i { font-style: normal; color: #c4c4c4; margin: 0 3pt; }
+.sk .list i { font-style: normal; color: #b0b0b0; margin-right: 4pt; }
 .sk b { font: 700 6.3pt/1.2 Sora, Arial, sans-serif; letter-spacing: 0.07em; text-transform: uppercase; color: var(--accent); }
 h2 { display: flex; align-items: center; gap: 6pt; font: 700 8.4pt/1 Sora, Arial, sans-serif; letter-spacing: 0.02em; text-transform: uppercase; margin-bottom: 7pt; }
 h2:not(:first-child) { margin-top: 10pt; }
@@ -356,7 +356,7 @@ h2 + h3.g { margin-top: 0; }
     ${head('projects', t.labels.projects)}
     ${t.projects.map(([n, u, d]) => `<div class="item"><b><a href="${u}">${esc(n)}</a></b><p>${esc(d)}</p></div>`).join('')}
     ${head('skills', t.labels.skills)}
-    ${t.skills.map(([g, items]) => `<div class="sk"><b>${esc(g)}</b><p class="list">${items.map(i => `<span class="nw">${esc(i)}</span>`).join('<i>·</i> ')}</p></div>`).join('\n    ')}
+    ${t.skills.map(([g, items]) => `<div class="sk"><b>${esc(g)}</b><p class="list">${items.map(i => `<span class="nw">${esc(i)}</span>`).join('<i>,</i> ')}</p></div>`).join('\n    ')}
     ${head('education', t.labels.more)}
     <p class="sk"><b>${esc(t.labels.education)}</b><span>${t.education.map(([n, s]) => `${esc(n)}, ${esc(s)}.`).join('<br>')}</span></p>
     <p class="sk"><b>${esc(t.labels.languages)}</b><span>${esc(t.languages)}.</span></p>
