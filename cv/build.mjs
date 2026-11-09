@@ -1,5 +1,7 @@
 // Builds the CV in English and Spanish: cv/<lang>.html, then a two-page A4 PDF of each with Chrome.
 // Page 1 is for deciding in a few seconds (pitch, key facts, proof, latest role); page 2 holds the detail.
+// ATS-safe: every block runs in a single column (side-by-side columns get read across and mixed),
+// no rotated text, and static font instances from cv/fonts (variable fonts end up as Type 3 in the PDF).
 // Run: node cv/build.mjs   (needs playwright-core and a local Chrome)
 // Output goes to public/cv/, the files the site links to.
 import { readFileSync, writeFileSync } from 'node:fs';
@@ -8,7 +10,7 @@ import { dirname, join } from 'node:path';
 import { chromium } from 'playwright-core';
 
 const here = dirname(fileURLToPath(import.meta.url));
-const out = join(here, '..', 'public', 'cv');
+const out = process.env.CV_OUT || join(here, '..', 'public', 'cv');
 
 const C = {
   en: {
@@ -19,17 +21,18 @@ const C = {
     quote: "I like solving problems, whether that's a client's web ecosystem or a bouldering wall.",
     summary:
       'I have worked on 20+ websites across WordPress, Shopify, Wix and PrestaShop: hosting, DNS, Cloudflare, SSL, backups, migrations, performance and multilingual sites. I troubleshoot layer by layer, from DNS to database, and look after security headers and cache strategy. Also SEO, GEO and AEO. I started in marketing and design and moved to the technical side; I run my own home server and publish open research on websites.',
-    labels: { contact: 'Contact', linkedin: 'LinkedIn', place: 'Place', languages: 'Languages', skills: 'Skills', certs: 'Certifications', education: 'Education', projects: 'Projects & research', experience: 'Experience', side: 'Resume' },
+    labels: { contact: 'Contact', linkedin: 'LinkedIn', place: 'Place', languages: 'Languages', skills: 'Skills', certs: 'Certifications', education: 'Education', projects: 'Projects & research', experience: 'Experience', more: 'Education, languages & certifications' },
     place: 'Valencia, Spain',
+    remote: 'Remote from anywhere, or hybrid if the office is in Valencia. I travel when the role needs it, about once a month.',
     languages: 'Spanish (native) · Valencian (native) · English: Cambridge B2 on paper; fluent in practice: a year living in Prague speaking English every day, and work with English-speaking clients',
     site: 'hache-cervera.github.io',
     siteUrl: 'https://hache-cervera.github.io/',
     p1: {
       note: 'Dear recruiter: you probably have plenty more CVs to get through, so I have tried to make mine easy to read.',
       pitch: 'I keep websites running, from the server to the search results: hosting, DNS, security and performance.',
-      facts: [['20+', 'websites worked on'], ['4', 'different CMS platforms'], ['Remote', 'or hybrid in Valencia. I can travel when needed, for urgent issues or the needs of the role, about once a month'], ['3', 'languages: Spanish, Valencian and English (fluent)']],
+      facts: [['20+', 'websites worked on'], ['4', 'different CMS platforms'], ['Remote', 'or hybrid if it is in Valencia'], ['3', 'languages, English fluent']],
       best: [
-        ['Infrastructure & hosting', 'DNS, Cloudflare, SSL, backups and migrations, on cPanel and Plesk. I run my own Linux server with Docker and Nginx.'],
+        ['Infrastructure & hosting', 'DNS, Cloudflare, SSL, backups and migrations, on cPanel, Plesk and SSH. I run my own Linux server with Docker and Nginx.'],
         ['Security', 'Security headers, TLS certificates and Cloudflare WAF rules.'],
         ['Performance & technical SEO', 'Core Web Vitals, crawl audits with Screaming Frog and Ahrefs, and structured data.'],
         ['R&D and tools', 'Internal tools that take repetitive work off the team, open‑source tools, and my own research, open to the public.'],
@@ -41,18 +44,19 @@ const C = {
         'Process optimization and internal tools for the team.',
       ],
       stackLabel: 'Main stack',
-      stack: 'WordPress · WooCommerce · WPML · Shopify · PrestaShop · cPanel · Plesk · Cloudflare · GA4 · GTM · Search Console · Screaming Frog',
+      stack: 'WordPress · WooCommerce · WPML · Shopify · PrestaShop · cPanel · Plesk · SSH · MySQL · Cloudflare · Docker · GA4 · Search Console',
       next: 'If this already fits, all the detail is on the next page.',
       pageOf: 'Page 1 of 2',
       closing: 'In years of experience I am not senior yet. I make up for it by learning: part of what is on this CV I taught myself, and I use it every day.',
     },
     skills: [
-      ['Infra & hosting', ['Hosting management', 'cPanel', 'Plesk', 'DNS', 'Cloudflare', 'SSL certificates', 'Backups', 'Site migrations', 'Web security', 'Technical troubleshooting', 'Linux (Ubuntu Server)', 'Docker', 'Nginx']],
+      ['Infra & hosting', ['Hosting management', 'cPanel', 'Plesk', 'SSH', 'DNS', 'Cloudflare', 'SSL certificates', 'Backups', 'Site migrations', 'Web security', 'Technical troubleshooting', 'Linux (Ubuntu Server)', 'Docker', 'Nginx', 'Cloudflare Tunnel', 'Tailscale', 'cron']],
+      ['Databases', ['MySQL', 'phpMyAdmin', 'PostgreSQL', 'Redis']],
       ['Web', ['WordPress', 'Elementor Pro', 'Astra Pro', 'WPML', 'WooCommerce', 'Shopify', 'Wix', 'PrestaShop']],
-      ['Code', ['HTML', 'CSS', 'PHP (child themes, hooks)', 'Python (basic scripting)', 'Git']],
+      ['Code', ['HTML', 'CSS', 'PHP (child themes, hooks)', 'Python (basic scripting)', 'Bash (basic)', 'Git']],
       ['Security & performance', ['Security headers', 'TLS / HTTPS', 'Cloudflare WAF rules', 'Cache strategy', 'Core Web Vitals', 'PageSpeed / Lighthouse', 'CSS & asset optimization']],
       ['Analytics & SEO', ['SE Ranking', 'GA4', 'GTM', 'GSC', 'Screaming Frog', 'Ahrefs', 'Semrush', 'Web accessibility']],
-      ['PM & AI', ['ClickUp', 'Asana', 'Figma', 'AI automation (Claude, ChatGPT)', 'Process optimization', 'Internal tools', 'Async workflows']],
+      ['PM & AI', ['ClickUp', 'Asana', 'Figma', 'AI automation', 'Process optimization', 'Internal tools', 'Async workflows']],
     ],
     certs: [['2026', 'Ahrefs Certification'], ['2025', 'Google Analytics (GA4)'], ['2019', 'Cambridge B2 First (FCE)']],
     education: [
@@ -62,17 +66,17 @@ const C = {
     ],
     projects: [
       ['yogurTLS', 'https://www.npmjs.com/package/yogurtls', 'TLS certificate checker that runs on the server itself: it tells you whether auto-renewal is set up and whether a renewed certificate was never loaded, which online checkers cannot see. Open source.'],
-      ['Research, 2026', 'https://hache-cervera.github.io/research/', 'My own studies with public data on website speed, accessibility, security and AI search, with open data.'],
-      ['Homelab', 'https://hache-cervera.github.io/work/homelab/', 'A niche WordPress site on my own Linux server with Docker and Nginx, behind Cloudflare.'],
+      ['Research', 'https://hache-cervera.github.io/research/', 'My own studies with public data on website speed, accessibility, security and AI search, with open data.'],
+      ['Homelab', 'https://hache-cervera.github.io/work/homelab/', 'My own Linux server (Ubuntu Server): 15+ services in Docker with automatic restarts, Nginx as reverse proxy behind Cloudflare Tunnel, private access over Tailscale, MySQL, PostgreSQL and Redis, monitoring with Uptime Kuma and healthchecks.io, and GPG-encrypted backups on cron. It hosts a niche WordPress site.'],
     ],
     jobs: [
       {
         dates: 'Nov 2024 – Sep 2026', title: 'Web Platform & WordPress Specialist', org: 'Neurona Digital SL, Valencia',
         bullets: [
-          '15+ websites across four different CMS platforms (WordPress, Shopify, Wix and PrestaShop): hosting, DNS, Cloudflare, SSL, backups, migrations and daily troubleshooting.',
+          '15+ websites across four different CMS platforms (WordPress, Shopify, Wix and PrestaShop): hosting, DNS, Cloudflare, SSL, backups, migrations and daily troubleshooting, on cPanel, Plesk and SSH.',
           'Multilingual multi-site operations with WPML and hreflang in Spanish, Valencian, English and more.',
-          'Technical audits with Screaming Frog and Ahrefs: crawl health, Core Web Vitals, redirects and canonicals.',
-          'Security headers (CSP, HSTS and others) and cache strategy; issues isolated layer by layer, from DNS to database.',
+          'Technical audits with Screaming Frog, SE Ranking and Ahrefs: crawl health, Core Web Vitals, redirects and canonicals.',
+          'Security headers (CSP, HSTS and others) and cache strategy; issues isolated layer by layer, from DNS to database (MySQL, phpMyAdmin).',
           'GA4 and GTM set up from scratch with conversion goals; Search Console monitoring and structured data validation.',
           'Process optimization and internal tools that take repetitive work off the team.',
         ],
@@ -94,17 +98,18 @@ const C = {
     quote: 'Me gusta resolver problemas, ya sea en el ecosistema web de un cliente o en la pared de un rocódromo.',
     summary:
       'He trabajado más de 20 webs en WordPress, Shopify, Wix y PrestaShop: hosting, DNS, Cloudflare, SSL, backups, migraciones, rendimiento y webs multiidioma. Resuelvo incidencias capa a capa, del DNS a la base de datos, y me ocupo de las cabeceras de seguridad y la estrategia de caché. También SEO, GEO y AEO. Empecé en marketing y diseño y me pasé al lado técnico; tengo mi propio servidor en casa y publico investigaciones abiertas sobre webs.',
-    labels: { contact: 'Contacto', linkedin: 'LinkedIn', place: 'Ubicación', languages: 'Idiomas', skills: 'Habilidades', certs: 'Certificaciones', education: 'Formación', projects: 'Proyectos e I+D', experience: 'Experiencia', side: 'Currículum' },
+    labels: { contact: 'Contacto', linkedin: 'LinkedIn', place: 'Ubicación', languages: 'Idiomas', skills: 'Habilidades', certs: 'Certificaciones', education: 'Formación', projects: 'Proyectos e I+D', experience: 'Experiencia', more: 'Formación, idiomas y certificaciones' },
     place: 'Valencia, España',
+    remote: 'Remoto desde cualquier lugar, o híbrido si la oficina está en Valencia. Me desplazo cuando el puesto lo requiere, en torno a una vez al mes.',
     languages: 'Castellano (nativo) · Valenciano (nativo) · Inglés: B2 de Cambridge en papel; en la práctica, fluido: un año viviendo en Praga hablando inglés a diario, y trabajo con clientes en inglés',
     site: 'hache-cervera.github.io/es',
     siteUrl: 'https://hache-cervera.github.io/es/',
     p1: {
       note: 'Querido recruiter: seguramente tengas muchos más CV por revisar, así que he intentado ponerte fácil la lectura del mío.',
       pitch: 'Me encargo de que las webs funcionen, del servidor al buscador: hosting, DNS, seguridad y rendimiento.',
-      facts: [['20+', 'webs trabajadas'], ['4', 'CMS distintos'], ['Remoto', 'o híbrido en Valencia. Puedo desplazarme cuando haga falta, por urgencias o necesidades del puesto, en torno a una vez al mes'], ['3', 'idiomas: castellano, valenciano e inglés (fluido)']],
+      facts: [['20+', 'webs trabajadas'], ['4', 'CMS distintos'], ['Remoto', 'o híbrido si es en Valencia'], ['3', 'idiomas, inglés fluido']],
       best: [
-        ['Infraestructura y hosting', 'DNS, Cloudflare, SSL, backups y migraciones, con cPanel y Plesk. Tengo mi propio servidor Linux con Docker y Nginx.'],
+        ['Infraestructura y hosting', 'DNS, Cloudflare, SSL, backups y migraciones, con cPanel, Plesk y SSH. Tengo mi propio servidor Linux con Docker y Nginx.'],
         ['Seguridad', 'Cabeceras de seguridad, certificados TLS y reglas WAF en Cloudflare.'],
         ['Rendimiento y SEO técnico', 'Core Web Vitals, auditorías de rastreo con Screaming Frog y Ahrefs, y datos estructurados.'],
         ['I+D y herramientas', 'Herramientas internas que le quitan trabajo repetitivo al equipo, herramientas open source e investigaciones propias abiertas al público.'],
@@ -116,18 +121,19 @@ const C = {
         'Optimización de procesos y herramientas internas para el equipo.',
       ],
       stackLabel: 'Stack principal',
-      stack: 'WordPress · WooCommerce · WPML · Shopify · PrestaShop · cPanel · Plesk · Cloudflare · GA4 · GTM · Search Console · Screaming Frog',
+      stack: 'WordPress · WooCommerce · WPML · Shopify · PrestaShop · cPanel · Plesk · SSH · MySQL · Cloudflare · Docker · GA4 · Search Console',
       next: 'Si esto ya te encaja, todo el detalle está en la siguiente página.',
       pageOf: 'Página 1 de 2',
       closing: 'En años de experiencia todavía no soy senior. Lo compenso aprendiendo: parte de lo que aparece en este CV lo aprendí por mi cuenta, y lo uso a diario.',
     },
     skills: [
-      ['Infraestructura y hosting', ['Gestión de hosting', 'cPanel', 'Plesk', 'DNS', 'Cloudflare', 'Certificados SSL', 'Backups', 'Migraciones', 'Seguridad web', 'Resolución de incidencias', 'Linux (Ubuntu Server)', 'Docker', 'Nginx']],
+      ['Infraestructura y hosting', ['Gestión de hosting', 'cPanel', 'Plesk', 'SSH', 'DNS', 'Cloudflare', 'Certificados SSL', 'Backups', 'Migraciones', 'Seguridad web', 'Resolución de incidencias', 'Linux (Ubuntu Server)', 'Docker', 'Nginx', 'Cloudflare Tunnel', 'Tailscale', 'cron']],
+      ['Bases de datos', ['MySQL', 'phpMyAdmin', 'PostgreSQL', 'Redis']],
       ['Web', ['WordPress', 'Elementor Pro', 'Astra Pro', 'WPML', 'WooCommerce', 'Shopify', 'Wix', 'PrestaShop']],
-      ['Código', ['HTML', 'CSS', 'PHP (child themes, hooks)', 'Python (scripting básico)', 'Git']],
+      ['Código', ['HTML', 'CSS', 'PHP (child themes, hooks)', 'Python (scripting básico)', 'Bash (básico)', 'Git']],
       ['Seguridad y rendimiento', ['Cabeceras de seguridad', 'TLS / HTTPS', 'Reglas WAF de Cloudflare', 'Estrategia de caché', 'Core Web Vitals', 'PageSpeed / Lighthouse', 'Optimización de CSS y recursos']],
       ['Analítica y SEO', ['SE Ranking', 'GA4', 'GTM', 'GSC', 'Screaming Frog', 'Ahrefs', 'Semrush', 'Accesibilidad web']],
-      ['Gestión e IA', ['ClickUp', 'Asana', 'Figma', 'Automatización con IA (Claude, ChatGPT)', 'Optimización de procesos', 'Herramientas internas', 'Trabajo asíncrono']],
+      ['Gestión e IA', ['ClickUp', 'Asana', 'Figma', 'Automatización con IA', 'Optimización de procesos', 'Herramientas internas', 'Trabajo asíncrono']],
     ],
     certs: [['2026', 'Certificación Ahrefs'], ['2025', 'Google Analytics (GA4)'], ['2019', 'Cambridge B2 First (FCE)']],
     education: [
@@ -137,17 +143,17 @@ const C = {
     ],
     projects: [
       ['yogurTLS', 'https://www.npmjs.com/package/yogurtls', 'Comprobador de certificados TLS que se ejecuta dentro del servidor: dice si la renovación automática está configurada y si un certificado renovado se quedó sin cargar, algo que los comprobadores online no ven. Código abierto, en npm.'],
-      ['Investigaciones, 2026', 'https://hache-cervera.github.io/research/es/', 'Estudios propios con datos públicos sobre velocidad, accesibilidad, seguridad y búsqueda con IA en webs. Método y datos abiertos.'],
-      ['Homelab', 'https://hache-cervera.github.io/work/es/homelab/', 'Una web de nicho en WordPress, en mi propio servidor Linux con Docker y Nginx, tras Cloudflare.'],
+      ['Investigaciones', 'https://hache-cervera.github.io/research/es/', 'Estudios propios con datos públicos sobre velocidad, accesibilidad, seguridad y búsqueda con IA en webs. Método y datos abiertos.'],
+      ['Homelab', 'https://hache-cervera.github.io/work/es/homelab/', 'Mi propio servidor Linux (Ubuntu Server): más de 15 servicios en Docker con reinicio automático, Nginx como proxy inverso tras Cloudflare Tunnel, acceso privado con Tailscale, MySQL, PostgreSQL y Redis, monitorización con Uptime Kuma y healthchecks.io, y copias de seguridad cifradas con GPG programadas con cron. Aloja una web de nicho en WordPress.'],
     ],
     jobs: [
       {
         dates: 'Nov 2024 – Sep 2026', title: 'Especialista en Plataforma Web y WordPress', org: 'Neurona Digital SL, Valencia',
         bullets: [
-          'Más de 15 webs trabajadas en cuatro CMS distintos (WordPress, Shopify, Wix y PrestaShop): hosting, DNS, Cloudflare, SSL, backups, migraciones y resolución técnica diaria.',
+          'Más de 15 webs trabajadas en cuatro CMS distintos (WordPress, Shopify, Wix y PrestaShop): hosting, DNS, Cloudflare, SSL, backups, migraciones y resolución técnica diaria, con cPanel, Plesk y acceso por SSH.',
           'Webs multiidioma y multisite con WPML y hreflang en castellano, valenciano, inglés y otros idiomas.',
-          'Auditorías técnicas con Screaming Frog y Ahrefs: rastreo, Core Web Vitals, redirecciones y canonicals.',
-          'Cabeceras de seguridad (CSP, HSTS y otras) y estrategia de caché; incidencias resueltas capa a capa, del DNS a la base de datos.',
+          'Auditorías técnicas con Screaming Frog, SE Ranking y Ahrefs: rastreo, Core Web Vitals, redirecciones y canonicals.',
+          'Cabeceras de seguridad (CSP, HSTS y otras) y estrategia de caché; incidencias resueltas capa a capa, del DNS a la base de datos (MySQL, phpMyAdmin).',
           'GA4 y GTM montados desde cero con objetivos de conversión; seguimiento en Search Console y validación de datos estructurados.',
           'Optimización de procesos y herramientas internas para quitarle trabajo repetitivo al equipo.',
         ],
@@ -164,7 +170,7 @@ const C = {
 };
 
 const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-const font = f => 'data:font/woff2;base64,' + readFileSync(join(here, '..', 'public', 'fonts', f)).toString('base64');
+const font = f => 'data:font/woff2;base64,' + readFileSync(join(here, 'fonts', f)).toString('base64');
 const photo = 'data:image/jpeg;base64,' + readFileSync(join(here, 'photo.jpg')).toString('base64');
 
 // Small stroke icons for the section badges (no emoji: ATS parsers turn them into junk)
@@ -173,6 +179,7 @@ const icon = {
   certs: '<circle cx="12" cy="9" r="5"/><path d="M9 13.5 7.5 21 12 18.5 16.5 21 15 13.5"/>',
   education: '<path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c3 2 9 2 12 0v-5"/>',
   projects: '<path d="M8 6 3 12l5 6M16 6l5 6-5 6"/>',
+  languages: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/>',
   experience: '<rect x="3" y="7" width="18" height="13" rx="1.5"/><path d="M9 7V4h6v3"/>',
 };
 const head = (k, label) => `<h2><span class="badge"><svg viewBox="0 0 24 24" aria-hidden="true">${icon[k]}</svg></span>${esc(label)}</h2>`;
@@ -189,8 +196,7 @@ function page(lang) {
 <meta charset="utf-8">
 <title>${esc(t.pdfTitle)}</title>
 <style>
-@font-face { font-family: Sora; font-weight: 600 800; src: url(${font('sora-latin.woff2')}) format('woff2'); }
-@font-face { font-family: Inter; font-weight: 400 500; src: url(${font('inter-latin.woff2')}) format('woff2'); }
+${[['Sora', 600], ['Sora', 700], ['Sora', 800], ['Inter', 400], ['Inter', 500]].map(([f, w]) => `@font-face { font-family: ${f}; font-weight: ${w}; src: url(${font(`${f.toLowerCase()}-${w}.woff2`)}) format('woff2'); }`).join('\n')}
 @page { size: A4; margin: 0; }
 :root { --ink: #161616; --muted: #6b6b6b; --line: #e3e3e3; --accent: #e05200; --card: #1c1c1c; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -199,7 +205,6 @@ a { color: inherit; text-decoration: none; }
 .page { width: 210mm; height: 297mm; position: relative; overflow: hidden; break-after: page; }
 .page:last-child { break-after: auto; }
 .wrap { position: absolute; inset: 20pt 24pt 22pt 24pt; display: flex; flex-direction: column; }
-.side { position: absolute; left: 7pt; bottom: 26pt; transform: rotate(-90deg); transform-origin: left bottom; font: 600 5.5pt/1 Sora, Arial, sans-serif; letter-spacing: 0.3em; text-transform: uppercase; color: #b8b8b8; }
 .pn { position: absolute; right: 24pt; bottom: 11pt; font: 700 7pt/1 Sora, Arial, sans-serif; color: #8a8a8a; letter-spacing: 0.06em; }
 
 /* ---------- page 1: decide in a few seconds ---------- */
@@ -223,17 +228,21 @@ h1 span { color: var(--accent); }
 p, li { text-wrap: pretty; }
 .stack { text-wrap: balance; }
 .pitch { margin-top: 16pt; font: 600 13.5pt/1.4 Sora, Arial, sans-serif; letter-spacing: -0.01em; max-width: 470pt; }
-.facts { margin-top: 24pt; display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1.5px solid var(--ink); border-bottom: 1px solid var(--line); }
+.facts { margin-top: 20pt; display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1.5px solid var(--ink); border-bottom: 1px solid var(--line); }
 .facts div { padding: 11pt 10pt 12pt 0; }
 .facts div + div { padding-left: 12pt; border-left: 1px solid var(--line); }
 .facts b { display: block; font: 800 19pt/1 Sora, Arial, sans-serif; color: var(--accent); letter-spacing: -0.01em; }
 .facts span { display: block; margin-top: 5pt; font-size: 7.6pt; color: #444; line-height: 1.35; }
-.k { margin-top: 24pt; font: 700 7pt/1 Sora, Arial, sans-serif; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
-.best { margin-top: 28pt; display: grid; grid-template-columns: 1fr 1fr; gap: 14pt 28pt; }
+.k { margin-top: 20pt; font: 700 7pt/1 Sora, Arial, sans-serif; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.best { margin-top: 20pt; display: grid; gap: 7pt; }
+.best > div { display: grid; grid-template-columns: 150pt 1fr; gap: 26pt; align-items: baseline; }
 .best h3 { font: 700 9.4pt/1.25 Sora, Arial, sans-serif; display: flex; gap: 6pt; align-items: baseline; }
 .best h3::before { content: ''; width: 6pt; height: 6pt; border-radius: 1.5pt; background: var(--accent); flex: none; transform: translateY(-1pt); }
-.best p { margin-top: 5pt; font-size: 8.6pt; line-height: 1.5; color: #333; }
-.last { margin-top: 10pt; display: grid; grid-template-columns: 150pt 1fr; gap: 26pt; padding-top: 12pt; border-top: 1px solid var(--line); }
+.best p { margin-top: 0; font-size: 8.6pt; line-height: 1.5; color: #333; }
+.last { margin-top: 10pt; padding-top: 10pt; border-top: 1px solid var(--line); }
+.last .who { font: 700 9.6pt/1.3 Sora, Arial, sans-serif; }
+.last .who small { display: inline; font: 400 8pt/1.3 Inter, Arial, sans-serif; color: var(--muted); margin-left: 6pt; }
+.last ul { margin-top: 6pt; }
 .last .dates { font: 700 6.6pt/1.2 Sora, Arial, sans-serif; letter-spacing: 0.07em; text-transform: uppercase; color: var(--accent); }
 .last b { display: block; margin-top: 4pt; font: 700 9.6pt/1.3 Sora, Arial, sans-serif; }
 .last small { display: block; margin-top: 2pt; font-size: 7.8pt; color: var(--muted); }
@@ -253,25 +262,29 @@ p, li { text-wrap: pretty; }
 .mini b { font: 700 11pt/1 Sora, Arial, sans-serif; }
 .mini b span { color: var(--accent); }
 .mini small { font-size: 6.8pt; color: var(--muted); }
-.card { margin-top: 10pt; background: var(--card); color: #ececec; border-radius: 12pt; padding: 12pt 15pt 12pt 16pt; display: grid; grid-template-columns: 1fr 210pt; gap: 20pt; }
+.card { margin-top: 10pt; background: var(--card); color: #ececec; border-radius: 12pt; padding: 12pt 16pt; }
 .q { font: 600 9pt/1.35 Sora, Arial, sans-serif; color: #fff; }
 .q::before { content: '\\201C'; display: block; font: 800 20pt/0.8 Sora, Arial, sans-serif; color: var(--accent); margin-bottom: 4pt; }
 .sum { margin-top: 7pt; font-size: 7.1pt; line-height: 1.5; color: #d2d2d2; }
-.contact dl { display: grid; grid-template-columns: 52pt 1fr; row-gap: 6pt; align-items: baseline; }
+.contact { margin-top: 9pt; padding-top: 8pt; border-top: 1px solid #383838; font-size: 7.1pt; line-height: 1.6; color: #f1f1f1; }
+.contact i { font-style: normal; color: #777; margin: 0 5pt; }
+.contact .rem { color: #d2d2d2; }
+.contact a.web { color: var(--accent); font-weight: 500; }
 dt { font: 600 5.8pt/1.2 Sora, Arial, sans-serif; letter-spacing: 0.08em; text-transform: uppercase; color: #9a9a9a; }
 dd { font-size: 7.1pt; color: #f1f1f1; }
-.site { margin-top: 11pt; display: block; text-align: center; background: var(--accent); color: #fff; border-radius: 6pt; padding: 7pt 0; font: 700 7.4pt/1 Sora, Arial, sans-serif; letter-spacing: 0.01em; }
-main { margin-top: 12pt; flex: 1; display: grid; grid-template-columns: 1fr 172pt; gap: 0 20pt; }
-main > section + section { border-left: 1px solid var(--line); padding-left: 20pt; }
+main { margin-top: 12pt; flex: 1; }
+.sk { display: grid; grid-template-columns: 112pt 1fr; gap: 10pt; align-items: baseline; font-size: 7.1pt; line-height: 1.45; color: #2a2a2a; }
+.sk + .sk { margin-top: 3pt; }
+.sk b { font: 700 6.3pt/1.2 Sora, Arial, sans-serif; letter-spacing: 0.07em; text-transform: uppercase; color: var(--accent); }
 h2 { display: flex; align-items: center; gap: 6pt; font: 700 8.4pt/1 Sora, Arial, sans-serif; letter-spacing: 0.02em; text-transform: uppercase; margin-bottom: 9pt; }
-h2:not(:first-child) { margin-top: 14pt; }
+h2:not(:first-child) { margin-top: 12pt; }
 .badge { width: 13pt; height: 13pt; border-radius: 3pt; background: var(--accent); display: grid; place-items: center; flex: none; }
 .badge svg { width: 8.5pt; height: 8.5pt; fill: none; stroke: #fff; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
 h3.g { font: 700 6.3pt/1.2 Sora, Arial, sans-serif; letter-spacing: 0.07em; text-transform: uppercase; color: var(--accent); margin: 8pt 0 4pt; }
 h2 + h3.g { margin-top: 0; }
 .tags { display: flex; flex-wrap: wrap; gap: 3pt; }
 .tags span { border: 1px solid #d4d4d4; border-radius: 99pt; padding: 1.4pt 5pt; font-size: 6.4pt; line-height: 1.25; }
-.item + .item { margin-top: 8pt; }
+.item + .item { margin-top: 6pt; }
 .year { font: 700 8.2pt/1.2 Sora, Arial, sans-serif; color: var(--accent); }
 .item b { display: block; font: 600 7.4pt/1.3 Sora, Arial, sans-serif; }
 .item small { display: block; font-size: 6.9pt; color: var(--muted); margin-top: 1pt; }
@@ -281,7 +294,7 @@ h2 + h3.g { margin-top: 0; }
 .job b { display: block; margin-top: 3pt; font: 700 8.6pt/1.25 Sora, Arial, sans-serif; }
 .job small { display: block; font-size: 7.1pt; color: var(--muted); margin-top: 1pt; }
 .job ul { margin-top: 6pt; padding-left: 9pt; }
-.job li { font-size: 7.3pt; line-height: 1.5; margin-top: 4pt; color: #2a2a2a; }
+.job li { font-size: 7.3pt; line-height: 1.4; margin-top: 2pt; color: #2a2a2a; }
 .job li::marker { color: var(--accent); }
 .line { font-size: 7.2pt; line-height: 1.4; }
 .line + .line { margin-top: 5pt; }
@@ -289,7 +302,7 @@ h2 + h3.g { margin-top: 0; }
 .line small { color: var(--muted); font-size: 7pt; }
 .line b + small::before { content: '· '; color: #bbb; }
 .line .year { font-size: 7.6pt; margin-right: 3pt; }
-.closing { margin-top: 14pt; padding: 11pt 13pt; border-radius: 8pt; background: #f4f4f2; border-left: 3px solid var(--accent); font: 600 8pt/1.5 Sora, Arial, sans-serif; color: #222; }
+.closing { margin-top: 14pt; margin-bottom: 10pt; padding: 11pt 13pt; border-radius: 8pt; background: #f4f4f2; border-left: 3px solid var(--accent); font: 600 8pt/1.5 Sora, Arial, sans-serif; color: #222; }
 .two { margin-top: 18pt; display: grid; grid-template-columns: 1fr 1fr; gap: 0 18pt; }
 </style>
 </head>
@@ -312,14 +325,14 @@ h2 + h3.g { margin-top: 0; }
   <div class="best">${p1.best.map(([h, p]) => `<div><h3>${esc(h)}</h3><p>${esc(p)}</p></div>`).join('')}</div>
   <p class="k">${esc(p1.lastLabel)}</p>
   <div class="last">
-    <div><span class="dates">${esc(job.dates)}</span><b>${esc(job.title)}</b><small>${esc(job.org)}</small></div>
+    <p class="who">${esc(job.title)}<small>${esc(job.org.split(",")[0])}</small></p>
     <ul>${p1.highlights.map(x => `<li>${esc(x)}</li>`).join('')}</ul>
   </div>
   <p class="k">${esc(p1.stackLabel)}</p>
   <p class="stack">${p1.stack.split(" · ").map((x, i, a) => `<span class="nw">${esc(x)}${i < a.length - 1 ? " ·" : ""}</span>`).join(" ")}</p>
+  <p class="closing">${esc(p1.closing)}</p>
   <div class="next"><div><span class="po">${esc(p1.pageOf)}</span><p>${esc(p1.next)}</p></div><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 4v16M5 13l7 7 7-7"/></svg></span></div>
 </div>
-<p class="side">${t.labels.side}</p>
 <p class="pn">1 / 2</p>
 </div>
 
@@ -327,39 +340,26 @@ h2 + h3.g { margin-top: 0; }
 <div class="wrap">
   <div class="mini"><b>Ada <span>(hache)</span> Cervera</b><small>${esc(t.role)}</small></div>
   <div class="card">
-    <div>
-      <p class="q">${esc(t.quote)}</p>
-      <p class="sum">${esc(t.summary)}</p>
-    </div>
+    <p class="q">${esc(t.quote)}</p>
+    <p class="sum">${esc(t.summary)}</p>
     <div class="contact">
-      <dl>
-        <dt>${t.labels.contact}</dt><dd><a href="mailto:hi.hache.cervera@gmail.com">hi.hache.cervera@gmail.com</a></dd>
-        <dt>${t.labels.linkedin}</dt><dd><a href="https://www.linkedin.com/in/hache-cervera">linkedin.com/in/hache-cervera</a></dd>
-        <dt>${t.labels.place}</dt><dd>${esc(t.place)}</dd>
-        <dt>${t.labels.languages}</dt><dd>${esc(t.languages)}</dd>
-      </dl>
-      <a class="site" href="${t.siteUrl}">${esc(t.site)}</a>
+      <p><a href="mailto:hi.hache.cervera@gmail.com">hi.hache.cervera@gmail.com</a>${sep}<a href="https://www.linkedin.com/in/hache-cervera">linkedin.com/in/hache-cervera</a>${sep}<a class="web" href="${t.siteUrl}">${esc(t.site)}</a>${sep}${esc(t.place)}</p>
+      <p class="rem">${esc(t.remote)}</p>
     </div>
   </div>
   <main>
-    <section>
-      ${head('experience', t.labels.experience)}
+    ${head('experience', t.labels.experience)}
       ${t.jobs.map(j => `<div class="job"><span class="dates">${esc(j.dates)}</span><b>${esc(j.title)}</b><small>${esc(j.org)}</small><ul>${j.bullets.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>`).join('')}
-      ${head('projects', t.labels.projects)}
-      ${t.projects.map(([n, u, d]) => `<div class="item"><b><a href="${u}">${esc(n)}</a></b><p>${esc(d)}</p></div>`).join('')}
-      ${head('education', t.labels.education)}
-      ${t.education.map(([n, s]) => `<p class="line"><b>${esc(n)}</b> <small>${esc(s)}</small></p>`).join('')}
-      <p class="closing">${esc(p1.closing)}</p>
-    </section>
-    <section>
-      ${head('skills', t.labels.skills)}
-      ${t.skills.map(([g, items]) => `<h3 class="g">${esc(g)}</h3><div class="tags">${items.map(i => `<span>${esc(i)}</span>`).join('')}</div>`).join('\n      ')}
-      ${head('certs', t.labels.certs)}
-      ${t.certs.map(([y, n]) => `<p class="line"><span class="year">${y}</span> <small>${esc(n)}</small></p>`).join('')}
-    </section>
+    ${head('projects', t.labels.projects)}
+    ${t.projects.map(([n, u, d]) => `<div class="item"><b><a href="${u}">${esc(n)}</a></b><p>${esc(d)}</p></div>`).join('')}
+    ${head('skills', t.labels.skills)}
+    ${t.skills.map(([g, items]) => `<p class="sk"><b>${esc(g)}</b><span>${esc(items.join(', '))}.</span></p>`).join('\n    ')}
+    ${head('education', t.labels.more)}
+    <p class="sk"><b>${esc(t.labels.education)}</b><span>${t.education.map(([n, s]) => `${esc(n)}, ${esc(s)}.`).join('<br>')}</span></p>
+    <p class="sk"><b>${esc(t.labels.languages)}</b><span>${esc(t.languages)}.</span></p>
+    <p class="sk"><b>${esc(t.labels.certs)}</b><span>${t.certs.map(([y, n]) => `${esc(n)}, ${y}.`).join(' ')}</span></p>
   </main>
 </div>
-<p class="side">${t.labels.side}</p>
 <p class="pn">2 / 2</p>
 </div>
 
@@ -367,7 +367,7 @@ h2 + h3.g { margin-top: 0; }
 </html>`;
 }
 
-const browser = await chromium.launch({ channel: 'chrome' });
+const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : { channel: 'chrome' });
 for (const lang of Object.keys(C)) {
   const html = page(lang);
   writeFileSync(join(here, `${lang}.html`), html);
