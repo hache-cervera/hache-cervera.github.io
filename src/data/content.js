@@ -105,20 +105,6 @@ const DISCIPLINES_RAW = [
       { mark: 'Xd', name: L('Adobe XD', 'Adobe XD') },
     ],
   },
-  {
-    id: 'motion',
-    label: L('Motion & AV', 'Motion y Audiovisual'),
-    node: L('Node 06 / Motion', 'Nodo 06 / Motion'),
-    bg: '#ffd9c8',
-    bgDark: '#2c1509',
-    tools: [
-      { mark: 'Ae', name: L('After Effects', 'After Effects') },
-      { mark: 'Pr', name: L('Premiere Pro', 'Premiere Pro') },
-      { mark: 'Dr', name: L('DaVinci Resolve', 'DaVinci Resolve') },
-      { mark: 'Bl', name: L('Blender', 'Blender') },
-      { mark: 'Lp', name: L('Logic Pro X', 'Logic Pro X') },
-    ],
-  },
 ];
 
 export function getDisciplines(lang) {

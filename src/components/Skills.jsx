@@ -56,11 +56,11 @@ export default function Skills() {
         scrollTrigger: {
           trigger: section,
           start: 'top top',
-          end: () => '+=' + window.innerHeight * 4.8,
+          end: () => '+=' + window.innerHeight * 0.8 * DISCIPLINES.length,
           pin: true,
           scrub: 0.6,
           onUpdate: (self) => {
-            // chip: 3 turns across the section, one node lights per sixth
+            // chip: 3 turns across the section, nodes light up as the disciplines advance
             lastP = self.progress;
             scene.state.ryExtra = self.progress * Math.PI * 6;
             scene.state.activation = self.progress * 6;
@@ -68,7 +68,7 @@ export default function Skills() {
             const fill = section.querySelector('[data-progress]');
             if (fill) fill.style.width = `${self.progress * 100}%`;
             const idx = section.querySelector('[data-index]');
-            if (idx) idx.textContent = String(Math.min(5, Math.floor(self.progress * 6)) + 1).padStart(2, '0');
+            if (idx) idx.textContent = String(Math.min(DISCIPLINES.length - 1, Math.floor(self.progress * DISCIPLINES.length)) + 1).padStart(2, '0');
           },
         },
       });
@@ -120,7 +120,7 @@ export default function Skills() {
         <span className="relative h-px w-40 bg-line">
           <span data-progress className="absolute left-0 top-0 h-full bg-accent" style={{ width: '0%' }} />
         </span>
-        <span className="font-display text-xs text-muted-strong">06</span>
+        <span className="font-display text-xs text-muted-strong">{String(DISCIPLINES.length).padStart(2, '0')}</span>
       </div>
     </section>
   );
